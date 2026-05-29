@@ -1,0 +1,44 @@
+---
+title: Scoring & Assessment Rules
+---
+
+import { Callout } from 'nextra/components'
+
+# Scoring & Assessment Rules
+
+"Scoring" means different things by quiz type: Quiz focuses on **right/wrong and totals**, while Assessment focuses on **multi-dimensional analysis and reports**.
+
+## Quiz: scoring and judgment
+
+In a **Quiz** you can:
+
+- **Set points**: Assign points to questions or correct options.
+- **Judge right/wrong**: Mark correct answers; the system judges each question automatically.
+- **Sum totals**: Points are added up automatically.
+- **Passing score**: Set a pass threshold and show a pass/fail result.
+- **Answer feedback**: Show respondents the correctness and explanation per question.
+
+<Callout type="info">
+  Scoring-related settings are mainly available in the Quiz type.
+</Callout>
+
+## Assessment: dimensional analysis and AI evaluation
+
+In an **Assessment**, scoring is more about "profiling" than right/wrong:
+
+- **Multi-dimensional scoring**: Map questions to several dimensions; after submission, each dimension gets a score, often shown as a **radar chart**.
+- **Result profile**: Produce personality/ability conclusions based on dimension scores.
+- **AI evaluation**: Use AI to evaluate text answers for deeper insight.
+
+### About AI evaluation quota
+
+<Callout type="warning">
+  AI evaluation consumes your team's **AI quota**. Quota is counted per cycle; once exceeded, AI evaluation is skipped for that cycle (basic scoring is still generated). Quota management belongs to account & billing and will be covered later.
+</Callout>
+
+## Report generation
+
+- **Synchronous**: Basic scoring is calculated immediately after submission.
+- **Asynchronous**: Heavier computation such as dimensional analysis and AI evaluation is generated asynchronously; reports go through a "generating → completed" state, and the system retries automatically on failure.
+
+For viewing, exporting, and delivering reports, see [Reports & AI Evaluation](/en/results/reports).

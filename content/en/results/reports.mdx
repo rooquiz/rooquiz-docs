@@ -1,0 +1,37 @@
+---
+title: Reports & AI Evaluation
+---
+
+import { Callout } from 'nextra/components'
+
+# Reports & AI Evaluation
+
+For the **Assessment** type, each response can generate a **report** presenting dimension scores, profile conclusions, and (optionally) AI evaluation.
+
+## What's in a report
+
+- **Dimension scores**: Scores per dimension, often shown as a **radar chart**.
+- **Profile conclusions**: Personality/ability conclusions derived from dimension scores.
+- **AI evaluation**: AI analysis of text answers (subject to quota).
+
+## How a report is generated
+
+- **Basic scoring** is calculated **immediately** after submission.
+- **Heavier computation** such as dimensional analysis and AI evaluation is generated **asynchronously**; the report goes through a "generating → completed" state.
+- If generation fails, the system **retries automatically** within a certain window.
+
+<Callout type="info">
+  If a report stays in "generating" for a long time, refresh later; if the problem persists, try regenerating or contact support.
+</Callout>
+
+## Viewing and delivery
+
+- **On-screen**: View directly in the dashboard; you can also let respondents view their own report via a share link.
+- **PDF export**: Export the report to PDF for archiving or offline distribution.
+- **Email delivery**: Send the report by email. **Email delivery is a Pro feature.**
+
+## About AI quota
+
+<Callout type="warning">
+  AI evaluation consumes your team's **AI quota**, which resets per cycle. When the quota is exceeded, AI evaluation is skipped for that cycle, but basic scoring and dimensional analysis are still generated normally. Quota limits and upgrades belong to account & billing and will be covered in later documentation.
+</Callout>

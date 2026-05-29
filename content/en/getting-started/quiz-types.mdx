@@ -1,0 +1,46 @@
+---
+title: The Three Quiz Types
+---
+
+import { Callout } from 'nextra/components'
+
+# The Three Quiz Types
+
+RooQuiz offers three quiz types (scenes), each aimed at a different goal. **The type is chosen at creation and cannot be changed afterward.**
+
+## Quiz
+
+For knowledge tests, online exams, and scored practice — scenarios that need **right/wrong judgment and scoring**.
+
+- **Fixed order**: All respondents see the same question order.
+- **Scoring**: Assign points to questions or correct options; totals are summed automatically.
+- **Judgment & feedback**: Mark correct answers, set a passing score, and show respondents their score and feedback.
+
+## Assessment
+
+For personality assessments, ability evaluations, and surveys — scenarios that need **multi-dimensional analysis** rather than simple right/wrong.
+
+- **Multi-dimensional scoring**: Map questions to several dimensions and produce multi-dimensional results, often shown as a **radar chart**.
+- **Conditional logic**: Show or hide later questions based on previous answers, enabling adaptive surveys.
+- **AI evaluation**: Use AI to evaluate text answers and generate richer analysis (subject to AI quota).
+- **Report delivery**: Results can be shown on screen, exported to PDF, or sent by email (email is a Pro feature).
+
+## Random Quiz
+
+For practice drills and randomized testing — scenarios where **each respondent should see different questions**.
+
+- **Random sampling**: Draws questions from a linked question bank by rule on each submission.
+- **Bank filtering**: Control the sampling scope by difficulty, tags, and more.
+- **Recorded selection**: The system records the questions actually drawn each time to keep scoring consistent.
+
+## How to choose
+
+| Your goal | Recommended type |
+| --- | --- |
+| Score respondents and judge right/wrong | **Quiz** |
+| Run a personality/ability assessment or survey with multi-dimensional analysis | **Assessment** |
+| Show each person a different set of random questions | **Random Quiz** |
+
+<Callout type="warning">
+  Available settings differ by type (for example, scoring is available only in Quiz, while conditional logic and multi-dimensional analysis mainly target Assessment). Confirm the capabilities you need before choosing.
+</Callout>

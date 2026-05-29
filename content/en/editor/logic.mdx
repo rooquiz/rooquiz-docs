@@ -1,0 +1,42 @@
+---
+title: Conditional Logic
+---
+
+import { Callout } from 'nextra/components'
+
+# Conditional Logic
+
+Conditional logic makes a quiz **show or hide later questions** based on a respondent's answers, enabling adaptive surveys and assessments tailored to each person.
+
+## When to use it
+
+- **Skip logic**: Skip or reveal related questions when a specific option is chosen.
+- **Branching surveys**: Route different audiences down different question paths.
+- **Leaner experience**: Show only the questions relevant to each respondent, reducing effort.
+
+<Callout type="info">
+  Conditional logic mainly targets the **Assessment** type for building adaptive surveys.
+</Callout>
+
+## Basic concepts
+
+A rule typically consists of:
+
+- **Trigger condition**: Based on the answer to an earlier question (e.g. "Question 1 selected A").
+- **Action**: When the condition is met, **show** or **hide** a specified question.
+
+## How to configure
+
+<Callout type="warning">
+  The following is a general approach; the actual interface may vary.
+</Callout>
+
+1. Build your questions first and identify which are "trigger" questions and which are the "target" questions being controlled.
+2. Set a show/hide rule on the target question, choosing the trigger question and its answer as the condition.
+3. Use **preview** to walk through different answer paths and confirm the display logic behaves as expected.
+
+## Notes
+
+- A trigger condition can only reference questions that come **before** it, to avoid logic loops.
+- Hidden questions are not shown to respondents and are not required.
+- For complex logic, preview each path separately to verify.
