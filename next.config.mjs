@@ -17,7 +17,7 @@ const withNextra = nextra({
 export default withNextra({
   i18n: {
     locales: ['zh', 'en'],
-    defaultLocale: 'zh'
+    defaultLocale: 'en'
   },
   output: 'export',
   images: {
