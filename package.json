@@ -2,13 +2,21 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "postbuild": "pagefind --site out --output-subdir _pagefind",
+    "start": "next start",
+    "preview": "wrangler pages dev out",
+    "deploy": "wrangler pages deploy out"
   },
   "dependencies": {
     "next": "^16.2.6",
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6",
     "nextra": "^4.6.1",
-    "nextra-theme-docs": "^4.6.1"
-  }
+    "nextra-theme-docs": "^4.6.1",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
+  },
+  "devDependencies": {
+    "pagefind": "^1.5.2",
+    "wrangler": "^4.95.0"
+  },
+  "packageManager": "pnpm@11.3.0"
 }

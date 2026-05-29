@@ -1,5 +1,8 @@
 allowBuilds:
+  # esbuild + workerd are wrangler's native deps, needed for local `pnpm preview`.
+  esbuild: true
   sharp: true
+  workerd: true
 overrides:
   # Pin zod below 4.4.0 — 4.4.x regressed z.custom() handling, breaking
   # Nextra's schema validation (https://github.com/colinhacks/zod/issues/5917)
