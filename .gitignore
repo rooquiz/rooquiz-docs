@@ -31,3 +31,6 @@ yarn-error.log*
 # nextra
 .next
 .turbo
+
+# claude
+CLAUDE.md

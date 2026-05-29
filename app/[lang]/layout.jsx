@@ -69,7 +69,7 @@ export default async function RootLayout({ children, params }) {
           navbar={navbar}
           search={search}
           pageMap={await getPageMap(`/${lang}`)}
-          docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
+          docsRepositoryBase="https://github.com/rooquiz/rooquiz-docs/tree/main"
           editLink={t.editLink}
           feedback={{ content: t.feedback }}
           toc={{ title: t.tocTitle, backToTop: t.backToTop }}
