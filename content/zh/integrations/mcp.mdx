@@ -1,0 +1,157 @@
+---
+title: MCP 接入
+---
+
+import { Callout, Tabs } from 'nextra/components'
+
+# MCP 接入
+
+RooQuiz 提供一个 **MCP(Model Context Protocol)server**,让 Claude Desktop、Claude Code、Cursor、Codex 等 AI 客户端能在你的团队下直接操作测验——用自然语言就能创建测验、追加题目、调整顺序、配置报告维度,而不必手动在编辑器里一个个搭。
+
+<Callout type="info">
+  MCP 是面向**进阶用户**的能力,需要你会使用支持 MCP 的 AI 客户端。基础的可视化搭建仍推荐用 [编辑器](/zh/editor)。
+</Callout>
+
+## 工作原理
+
+- AI 客户端通过一个 **个人 API Token** 连接到 RooQuiz 的 MCP 端点(`/api/mcp`)。
+- Token 属于**你的账号**,AI 会**以你的身份**在 Token 当前激活的团队下执行操作。
+- 所有操作都会经过与后台一致的**权限校验**,写操作还会记录到**审计日志**。
+- 所以 AI 能做什么,完全取决于你在该团队里的角色与权限,不会越权。
+
+## 第一步:创建 Token
+
+进入 **设置 → MCP 接入**,点「创建 Token」:
+
+1. 填写一个**名称**(便于识别,例如 `Claude Desktop - 我的 Mac`)。
+2. 选择一个**默认团队**——Token 创建后默认操作这个团队,AI 后续可用 `switch_active_tenant` 工具切换到你所在的其它团队。
+3. 生成后会显示一段以 `rqp_live_` 开头的明文 Token。
+
+<Callout type="warning">
+  **Token 明文只显示这一次**,离开页面后无法再查看。请立刻复制保存;丢失只能吊销后重新生成。
+</Callout>
+
+限制:
+
+- 每个用户最多保有 **5 个 Token**(含已吊销的)。要再建新的,需先**删除**一个释放名额(「吊销」只是停用,不释放名额)。
+- Token 是**个人凭证**,请勿提交到代码仓库或公开分享。
+
+## 第二步:在 AI 客户端中配置
+
+在 **设置 → MCP 接入** 页面可以直接复制各客户端的配置片段和你的 **Endpoint URL**(形如 `https://你的域名/api/mcp`)。把片段里的 `rqp_live_xxx...` 替换成你刚生成的 Token。
+
+<Tabs items={['Claude Code', 'Cursor', 'Codex CLI', 'Claude Desktop']}>
+  <Tabs.Tab>
+    **推荐**。原生支持 HTTP MCP,在终端任意目录执行一行命令即可:
+
+    ```bash
+    claude mcp add --transport http rooquiz https://你的域名/api/mcp \
+      --header "Authorization: Bearer rqp_live_xxx..."
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    原生支持 HTTP MCP。写入项目级 `.cursor/mcp.json` 或全局 `~/.cursor/mcp.json`:
+
+    ```json
+    {
+      "mcpServers": {
+        "rooquiz": {
+          "url": "https://你的域名/api/mcp",
+          "headers": { "Authorization": "Bearer rqp_live_xxx..." }
+        }
+      }
+    }
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    原生支持 HTTP MCP。写入 `~/.codex/config.toml`:
+
+    ```toml
+    [mcp_servers.rooquiz]
+    url = "https://你的域名/api/mcp"
+    bearer_token_env_var = "ROOQUIZ_MCP_TOKEN"
+    ```
+
+    Codex 出于安全考虑只接受**环境变量名**,不能内联明文。请在 shell 中额外 export:
+
+    ```bash
+    export ROOQUIZ_MCP_TOKEN="rqp_live_xxx..."
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    Claude Desktop 当前仅原生支持 stdio 协议,HTTP MCP 需通过 `mcp-remote` 桥接(首次会自动下载,需本机 Node ≥ 18)。写入配置文件后**重启** Claude Desktop:
+
+    - macOS:`~/Library/Application Support/Claude/claude_desktop_config.json`
+    - Windows:`%APPDATA%\Claude\claude_desktop_config.json`
+
+    ```json
+    {
+      "mcpServers": {
+        "rooquiz": {
+          "command": "npx",
+          "args": [
+            "-y", "mcp-remote",
+            "https://你的域名/api/mcp",
+            "--header", "Authorization: Bearer rqp_live_xxx..."
+          ]
+        }
+      }
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## 支持的工具
+
+连接成功后,AI 助手可调用以下工具。它们都作用在 Token **当前激活的团队**下。
+
+### 团队(Tenant)
+
+| 工具 | 作用 |
+| --- | --- |
+| `list_my_tenants` | 列出你所在的所有团队,标记当前激活的那个。 |
+| `get_active_tenant` | 返回 Token 当前激活的团队信息;所有写操作默认作用在该团队。 |
+| `switch_active_tenant` | 切换当前激活团队(持久化、跨会话保留;目标必须是你已加入的团队)。 |
+
+### 测验(Form)
+
+| 工具 | 作用 |
+| --- | --- |
+| `create_form` | 创建测验(`quiz` 考试 或 `assessment` 测评),可一次性传入题目数组和报告配置,减少往返调用。 |
+| `list_forms` | 列出当前团队的测验,支持按 scene 或标题模糊过滤。 |
+| `get_form` | 查看指定测验的完整详情(题目列表 `fields[]`、报告配置等);改题前需先用它拿到每道题的 `code`。 |
+| `update_form` | 更新标题、描述、开启/关闭状态,或按子键合并替换 `report` 配置。**场景(scene)与语言创建后锁定,不可改**。 |
+
+### 题目(Question)
+
+| 工具 | 作用 |
+| --- | --- |
+| `add_question` | 往测验末尾追加一项:题目(单选/多选/判断/填空)或分页符(`Breaker`)。 |
+| `insert_question` | 在指定位置插入一项,用 `after` / `before` 引用一个已存在的 `code`。 |
+| `move_question` | 按 `code` 把已有题目或分页符挪到新位置。 |
+| `update_question` | 按 `code` 更新题干、说明、解析、是否必答、分值、正确答案,或填空题的 AI 智能判分。**不能改题型与选项内容**。 |
+| `delete_question` | 按 `code` 删除一道题目或分页符。 |
+
+### 报告维度
+
+| 工具 | 作用 |
+| --- | --- |
+| `set_dimension_analysis` | 整体设置测验的多维度分析(雷达图维度);quiz 场景每个维度引用题目 `code`,assessment 场景每个维度写公式。传空数组即清空。 |
+
+<Callout type="info">
+  典型流程:`create_form` 创建测验并拿到每道题的 `code` → 用 `update_form` 或 `set_dimension_analysis` 按 `code` 配置报告公式 / 维度。
+</Callout>
+
+## 当前限制
+
+- **随机题库(Random Quiz)不支持**:这类测验的题目存放在题库(QuestionBank)中,请在后台编辑器里管理,MCP 暂不覆盖。
+- **不能直接改题型或选项内容**:需要换题型或改选项时,先 `delete_question` 再 `add_question` 重建。
+- **测评(Assessment)的选项计分**走「选项分值(Option Scoring)」:`update_question` 在 assessment 场景下不接受 `score` / `correctAnswer` / `aiMatch`,改选项分值请在后台编辑,或删了重建。
+- **场景与语言创建后锁定**,无法通过 MCP 修改。
+- **填空 AI 智能判分**(`aiMatch`,仅 quiz 场景、Beta)会消耗团队的 [AI 额度](/zh/account/ai-billing)。
+
+## 安全与频率
+
+- Token 以**你的身份**操作,会触发现有的权限校验与**审计日志**(写操作均会留痕)。
+- 每个 Token 的调用频率限制为 **60 次 / 分钟**,超出会被限流。
+- 不再使用时,在 **设置 → MCP 接入** 中**吊销**(立即失效)或**删除**(并释放名额)。

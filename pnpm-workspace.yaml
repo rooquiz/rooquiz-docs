@@ -7,3 +7,9 @@ overrides:
   # Pin zod below 4.4.0 — 4.4.x regressed z.custom() handling, breaking
   # Nextra's schema validation (https://github.com/colinhacks/zod/issues/5917)
   zod: 4.3.6
+  # style-to-js@1.x ships a CJS build whose default export isn't a function
+  # under raw Node ESM interop (exports.default instead of module.exports = fn),
+  # which crashes nextra/loader.cjs when it parses syntax-highlighted
+  # `<span style>` (any fenced code block). 2.x sets module.exports = fn and
+  # keeps the same (value, { reactCompat }) signature hast-util-to-estree calls.
+  style-to-js: ^2.0.0

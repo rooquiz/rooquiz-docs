@@ -4,9 +4,9 @@ export default {
   editor: 'Editor & Question Types',
   publish: 'Publish & Share',
   results: 'Responses & Analytics',
-  account: 'Account & Billing'
+  account: 'Account & Billing',
+  integrations: 'Integrations & API'
   // —— Reserved for later phases ——
   // teams: 'Teams & Collaboration',
-  // integrations: 'Integrations & API',
   // library: 'Question Banks & Templates'
 }

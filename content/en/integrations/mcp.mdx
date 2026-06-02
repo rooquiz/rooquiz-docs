@@ -1,0 +1,157 @@
+---
+title: MCP Integration
+---
+
+import { Callout, Tabs } from 'nextra/components'
+
+# MCP Integration
+
+RooQuiz ships an **MCP (Model Context Protocol) server** that lets AI clients — Claude Desktop, Claude Code, Cursor, Codex, and others — operate on quizzes inside your team. With natural language you can create quizzes, append questions, reorder items, and configure report dimensions, instead of building everything by hand in the editor.
+
+<Callout type="info">
+  MCP is a feature for **power users** — you'll need an AI client that supports MCP. For basic, visual quiz building we still recommend the [editor](/en/editor).
+</Callout>
+
+## How it works
+
+- An AI client connects to RooQuiz's MCP endpoint (`/api/mcp`) using a **personal API token**.
+- The token belongs to **your account**, and the AI acts **as you** within the team the token is currently active in.
+- Every action goes through the same **access checks** as the admin UI; write operations are also recorded in the **audit log**.
+- So what the AI can do is bounded entirely by your role and permissions in that team — it can't exceed them.
+
+## Step 1: Create a token
+
+Go to **Settings → MCP Integration** and click "Create Token":
+
+1. Give it a **name** (for recognition, e.g. `Claude Desktop - my Mac`).
+2. Pick a **default team** — the token operates on this team by default, and the AI can later switch to any other team you belong to via the `switch_active_tenant` tool.
+3. After creation, a plaintext token starting with `rqp_live_` is shown.
+
+<Callout type="warning">
+  **The plaintext token is shown only once.** It cannot be retrieved after you leave the page. Copy it immediately; if lost, you must revoke it and create a new one.
+</Callout>
+
+Limits:
+
+- Each user can hold at most **5 tokens** (including revoked ones). To create more, **delete** one to free a slot ("revoke" only deactivates — it does not free the slot).
+- A token is a **personal credential** — never commit it to source control or share it publicly.
+
+## Step 2: Configure your AI client
+
+On the **Settings → MCP Integration** page you can copy ready-made config snippets for each client, along with your **Endpoint URL** (looks like `https://your-domain/api/mcp`). Replace `rqp_live_xxx...` in the snippet with the token you just generated.
+
+<Tabs items={['Claude Code', 'Cursor', 'Codex CLI', 'Claude Desktop']}>
+  <Tabs.Tab>
+    **Recommended.** Native HTTP MCP support — run one command anywhere in your terminal:
+
+    ```bash
+    claude mcp add --transport http rooquiz https://your-domain/api/mcp \
+      --header "Authorization: Bearer rqp_live_xxx..."
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    Native HTTP MCP support. Write to project-level `.cursor/mcp.json` or global `~/.cursor/mcp.json`:
+
+    ```json
+    {
+      "mcpServers": {
+        "rooquiz": {
+          "url": "https://your-domain/api/mcp",
+          "headers": { "Authorization": "Bearer rqp_live_xxx..." }
+        }
+      }
+    }
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    Native HTTP MCP support. Write to `~/.codex/config.toml`:
+
+    ```toml
+    [mcp_servers.rooquiz]
+    url = "https://your-domain/api/mcp"
+    bearer_token_env_var = "ROOQUIZ_MCP_TOKEN"
+    ```
+
+    For security Codex only accepts an **env var name**, not an inline plaintext token. Also export it in your shell:
+
+    ```bash
+    export ROOQUIZ_MCP_TOKEN="rqp_live_xxx..."
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    Claude Desktop only speaks stdio natively, so HTTP MCP requires the `mcp-remote` bridge (auto-downloaded on first use; needs local Node ≥ 18). Paste into the config file, then **restart** Claude Desktop:
+
+    - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
+    - Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+
+    ```json
+    {
+      "mcpServers": {
+        "rooquiz": {
+          "command": "npx",
+          "args": [
+            "-y", "mcp-remote",
+            "https://your-domain/api/mcp",
+            "--header", "Authorization: Bearer rqp_live_xxx..."
+          ]
+        }
+      }
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Available tools
+
+Once connected, the AI assistant can call the tools below. They all act on the team the token is **currently active** in.
+
+### Team (Tenant)
+
+| Tool | What it does |
+| --- | --- |
+| `list_my_tenants` | List all teams you belong to, marking the currently active one. |
+| `get_active_tenant` | Return the team the token is currently active in; all writes default to it. |
+| `switch_active_tenant` | Switch the active team (persists across sessions; target must be a team you've joined). |
+
+### Form
+
+| Tool | What it does |
+| --- | --- |
+| `create_form` | Create a quiz (`quiz` exam or `assessment`). Can take a questions array and report config in one call to avoid round trips. |
+| `list_forms` | List the current team's quizzes, with optional scene or title filtering. |
+| `get_form` | View a quiz's full details (the `fields[]` question list, report config, etc.); call this first to get each question's `code` before editing. |
+| `update_form` | Update title, description, open/closed state, or merge-replace the `report` config by sub-key. **Scene and language are locked after creation.** |
+
+### Question
+
+| Tool | What it does |
+| --- | --- |
+| `add_question` | Append an item to the end: a question (SingleCheck/MultiCheck/TrueFalse/FillBlank) or a page break (`Breaker`). |
+| `insert_question` | Insert an item at a specific position, using `after` / `before` to reference an existing `code`. |
+| `move_question` | Move an existing question or page break to a new position by `code`. |
+| `update_question` | Update stem, note, explanation, required flag, score, correct answer, or FillBlank AI grading by `code`. **Cannot change question type or choice content.** |
+| `delete_question` | Delete a question or page break by `code`. |
+
+### Report dimensions
+
+| Tool | What it does |
+| --- | --- |
+| `set_dimension_analysis` | Set a quiz's multi-dimension analysis (radar chart dimensions) as a whole; in `quiz` each dimension references question `code`s, in `assessment` each uses a formula. Pass an empty array to clear. |
+
+<Callout type="info">
+  Typical flow: `create_form` to create the quiz and get each question's `code` → use `update_form` or `set_dimension_analysis` to configure report formulas / dimensions by `code`.
+</Callout>
+
+## Current limitations
+
+- **Random Quiz is not supported**: its questions live in the QuestionBank — manage them in the editor; MCP doesn't cover them yet.
+- **Can't change question type or choices directly**: to switch type or edit choices, `delete_question` then `add_question` to rebuild.
+- **Assessment choice scoring** uses Option Scoring: in the assessment scene `update_question` rejects `score` / `correctAnswer` / `aiMatch`. Edit choice scores in the admin UI, or delete and recreate.
+- **Scene and language are locked** after creation and can't be changed via MCP.
+- **FillBlank AI grading** (`aiMatch`, quiz scene only, Beta) consumes your team's [AI credits](/en/account/ai-billing).
+
+## Security & rate limits
+
+- A token acts **as you**, triggering existing access checks and **audit logs** (every write is recorded).
+- Each token is rate-limited to **60 requests / minute**; exceeding it returns a rate-limit error.
+- When no longer needed, **revoke** (takes effect immediately) or **delete** (also frees a slot) it in **Settings → MCP Integration**.
