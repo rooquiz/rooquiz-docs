@@ -14,16 +14,49 @@ RooQuiz ships an **MCP (Model Context Protocol) server** that lets AI clients �
 
 ## How it works
 
-- An AI client connects to RooQuiz's MCP endpoint (`/api/mcp`) using a **personal API token**.
-- The token belongs to **your account**, and the AI acts **as you** within the team the token is currently active in.
+- An AI client connects to RooQuiz's MCP endpoint (`/api/mcp`) using one of two auth methods: **OAuth authorization** (recommended — supported clients just sign in via the browser) or a **personal API token**.
+- Either way, the AI acts **as you** within the currently active team.
 - Every action goes through the same **access checks** as the admin UI; write operations are also recorded in the **audit log**.
 - So what the AI can do is bounded entirely by your role and permissions in that team — it can't exceed them.
 
-## Step 1: Create a token
+## Option 1: OAuth authorization (recommended)
+
+Clients that support MCP OAuth — claude.ai and Claude Code — **need no manually created token**. Just provide the endpoint URL: the client discovers the authorization server automatically and opens your browser, where you sign in to RooQuiz, pick the team to authorize, and click "Authorize".
+
+<Tabs items={['claude.ai (Web)', 'Claude Code']}>
+  <Tabs.Tab>
+    Open claude.ai's **Settings → Connectors → Add custom connector**:
+
+    1. Name it anything (e.g. `RooQuiz`).
+    2. Use your endpoint (looks like `https://your-domain/api/mcp`) as the remote MCP server URL.
+    3. Save and click "Connect" — your browser is redirected to the RooQuiz authorization page; sign in, pick a team, and click "Authorize".
+  </Tabs.Tab>
+  <Tabs.Tab>
+    Run anywhere in your terminal (**without** a token header):
+
+    ```bash
+    claude mcp add --transport http rooquiz https://your-domain/api/mcp
+    ```
+
+    The first time you connect in Claude Code (e.g. `/mcp`), your browser opens automatically to complete authorization.
+  </Tabs.Tab>
+</Tabs>
+
+About OAuth connections:
+
+- The team you pick during authorization becomes the initially active team; the AI can still switch later via `switch_active_tenant`.
+- The connection shows up in the token list under **Settings → MCP Integration** (tagged **OAuth**); **revoking it disconnects** that client. It does **not** count toward the 5-token limit.
+- Credentials renew automatically (the access token refreshes on a 1-hour rolling basis; the connection itself stays valid for 30 days and extends with use) — nothing to maintain by hand.
+
+## Option 2: Personal token (PAT)
+
+For clients without OAuth support (Cursor, Codex CLI, Claude Desktop) or browserless environments like CI, connect with a personal API token.
+
+### Create a token
 
 Go to **Settings → MCP Integration** and click "Create Token":
 
-1. Give it a **name** (for recognition, e.g. `Claude Desktop - my Mac`).
+1. Give it a **name** (for recognition, e.g. `Cursor - my Mac`).
 2. Pick a **default team** — the token operates on this team by default, and the AI can later switch to any other team you belong to via the `switch_active_tenant` tool.
 3. After creation, a plaintext token starting with `rqp_live_` is shown.
 
@@ -33,16 +66,16 @@ Go to **Settings → MCP Integration** and click "Create Token":
 
 Limits:
 
-- Each user can hold at most **5 tokens** (including revoked ones). To create more, **delete** one to free a slot ("revoke" only deactivates — it does not free the slot).
+- Each user can hold at most **5 tokens** (including revoked ones; OAuth connections don't count). To create more, **delete** one to free a slot ("revoke" only deactivates — it does not free the slot).
 - A token is a **personal credential** — never commit it to source control or share it publicly.
 
-## Step 2: Configure your AI client
+### Configure your AI client
 
 On the **Settings → MCP Integration** page you can copy ready-made config snippets for each client, along with your **Endpoint URL** (looks like `https://your-domain/api/mcp`). Replace `rqp_live_xxx...` in the snippet with the token you just generated.
 
-<Tabs items={['Claude Code', 'Cursor', 'Codex CLI', 'Claude Desktop']}>
+<Tabs items={['Claude Code (CI)', 'Cursor', 'Codex CLI', 'Claude Desktop']}>
   <Tabs.Tab>
-    **Recommended.** Native HTTP MCP support — run one command anywhere in your terminal:
+    For Claude Code, prefer the OAuth flow above; a token header is only needed in browserless environments like CI:
 
     ```bash
     claude mcp add --transport http rooquiz https://your-domain/api/mcp \
@@ -152,6 +185,7 @@ Once connected, the AI assistant can call the tools below. They all act on the t
 
 ## Security & rate limits
 
-- A token acts **as you**, triggering existing access checks and **audit logs** (every write is recorded).
-- Each token is rate-limited to **60 requests / minute**; exceeding it returns a rate-limit error.
-- When no longer needed, **revoke** (takes effect immediately) or **delete** (also frees a slot) it in **Settings → MCP Integration**.
+- OAuth or token, the AI acts **as you**, triggering existing access checks and **audit logs** (every write is recorded).
+- Each connection is rate-limited to **60 requests / minute**; exceeding it returns a rate-limit error.
+- When no longer needed, **revoke** (takes effect immediately; for OAuth connections this disconnects the client) or **delete** (also frees a slot) it in **Settings → MCP Integration**.
+- The OAuth flow enforces **PKCE (S256)**, authorization codes are single-use, and refresh tokens rotate on every renewal — old ones become invalid immediately.

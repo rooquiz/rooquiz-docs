@@ -14,16 +14,49 @@ RooQuiz 提供一个 **MCP(Model Context Protocol)server**,让 Claude Desktop、
 
 ## 工作原理
 
-- AI 客户端通过一个 **个人 API Token** 连接到 RooQuiz 的 MCP 端点(`/api/mcp`)。
-- Token 属于**你的账号**,AI 会**以你的身份**在 Token 当前激活的团队下执行操作。
+- AI 客户端连接到 RooQuiz 的 MCP 端点(`/api/mcp`),认证方式有两种:**OAuth 授权**(推荐,支持的客户端在浏览器里登录授权即可)或 **个人 API Token**。
+- 无论哪种方式,AI 都会**以你的身份**在当前激活的团队下执行操作。
 - 所有操作都会经过与后台一致的**权限校验**,写操作还会记录到**审计日志**。
 - 所以 AI 能做什么,完全取决于你在该团队里的角色与权限,不会越权。
 
-## 第一步:创建 Token
+## 连接方式一:OAuth 授权(推荐)
+
+claude.ai、Claude Code 等支持 MCP OAuth 的客户端**无需手动创建 Token**——只要填入 Endpoint URL,客户端会自动发现授权服务并打开浏览器,你登录 RooQuiz 账号、选择要授权的团队、点「授权」即完成连接。
+
+<Tabs items={['claude.ai 网页版', 'Claude Code']}>
+  <Tabs.Tab>
+    打开 claude.ai 的 **设置 → 连接器(Connectors)→ 添加自定义连接器**:
+
+    1. 名称随意填(例如 `RooQuiz`)。
+    2. 远程 MCP 服务器 URL 填入你的 Endpoint(形如 `https://你的域名/api/mcp`)。
+    3. 保存后点「连接」,浏览器会跳转到 RooQuiz 授权页——登录并选择团队,点「授权」。
+  </Tabs.Tab>
+  <Tabs.Tab>
+    在终端任意目录执行(**不带** token header):
+
+    ```bash
+    claude mcp add --transport http rooquiz https://你的域名/api/mcp
+    ```
+
+    之后在 Claude Code 中首次连接(如 `/mcp`)时会自动打开浏览器完成授权。
+  </Tabs.Tab>
+</Tabs>
+
+关于 OAuth 连接:
+
+- 授权时选择的团队即初始激活团队,AI 后续仍可用 `switch_active_tenant` 切换。
+- 连接会出现在 **设置 → MCP 接入** 的 Token 列表中(标有 **OAuth**),**吊销即断开**对应客户端;它**不占**个人 Token 的 5 个名额。
+- 凭证由客户端自动续期(访问令牌 1 小时滚动刷新,连接本身 30 天有效,期间使用会自动延续),无需手动维护。
+
+## 连接方式二:个人 Token(PAT)
+
+不支持 OAuth 的客户端(Cursor、Codex CLI、Claude Desktop 等),或 CI 等无浏览器环境,使用个人 API Token 连接。
+
+### 创建 Token
 
 进入 **设置 → MCP 接入**,点「创建 Token」:
 
-1. 填写一个**名称**(便于识别,例如 `Claude Desktop - 我的 Mac`)。
+1. 填写一个**名称**(便于识别,例如 `Cursor - 我的 Mac`)。
 2. 选择一个**默认团队**——Token 创建后默认操作这个团队,AI 后续可用 `switch_active_tenant` 工具切换到你所在的其它团队。
 3. 生成后会显示一段以 `rqp_live_` 开头的明文 Token。
 
@@ -33,16 +66,16 @@ RooQuiz 提供一个 **MCP(Model Context Protocol)server**,让 Claude Desktop、
 
 限制:
 
-- 每个用户最多保有 **5 个 Token**(含已吊销的)。要再建新的,需先**删除**一个释放名额(「吊销」只是停用,不释放名额)。
+- 每个用户最多保有 **5 个 Token**(含已吊销的,OAuth 连接不计入)。要再建新的,需先**删除**一个释放名额(「吊销」只是停用,不释放名额)。
 - Token 是**个人凭证**,请勿提交到代码仓库或公开分享。
 
-## 第二步:在 AI 客户端中配置
+### 在 AI 客户端中配置
 
 在 **设置 → MCP 接入** 页面可以直接复制各客户端的配置片段和你的 **Endpoint URL**(形如 `https://你的域名/api/mcp`)。把片段里的 `rqp_live_xxx...` 替换成你刚生成的 Token。
 
-<Tabs items={['Claude Code', 'Cursor', 'Codex CLI', 'Claude Desktop']}>
+<Tabs items={['Claude Code (CI)', 'Cursor', 'Codex CLI', 'Claude Desktop']}>
   <Tabs.Tab>
-    **推荐**。原生支持 HTTP MCP,在终端任意目录执行一行命令即可:
+    Claude Code 推荐走上方的 OAuth 方式;仅在 CI 等无浏览器环境才需要 token header:
 
     ```bash
     claude mcp add --transport http rooquiz https://你的域名/api/mcp \
@@ -152,6 +185,7 @@ RooQuiz 提供一个 **MCP(Model Context Protocol)server**,让 Claude Desktop、
 
 ## 安全与频率
 
-- Token 以**你的身份**操作,会触发现有的权限校验与**审计日志**(写操作均会留痕)。
-- 每个 Token 的调用频率限制为 **60 次 / 分钟**,超出会被限流。
-- 不再使用时,在 **设置 → MCP 接入** 中**吊销**(立即失效)或**删除**(并释放名额)。
+- 无论 OAuth 还是 Token,都以**你的身份**操作,会触发现有的权限校验与**审计日志**(写操作均会留痕)。
+- 每个连接的调用频率限制为 **60 次 / 分钟**,超出会被限流。
+- 不再使用时,在 **设置 → MCP 接入** 中**吊销**(立即失效;对 OAuth 连接即断开对应客户端)或**删除**(并释放名额)。
+- OAuth 流程强制 **PKCE(S256)**,授权码一次性使用,刷新令牌每次续期自动轮换,旧令牌即刻失效。
