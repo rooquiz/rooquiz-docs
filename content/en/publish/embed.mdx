@@ -1,0 +1,75 @@
+---
+title: Embed
+---
+
+import { Callout } from 'nextra/components'
+
+# Embed
+
+Beyond sharing a link, you can **embed a quiz directly into your own website** — visitors complete it on your landing page without leaving.
+
+## Three embed modes
+
+Open **Share** → **Embed** on the target quiz, pick a display mode, then copy the generated code into your site's HTML.
+
+| Mode | Best for | Behavior |
+| --- | --- | --- |
+| **Inline (auto height)** | Blending into the page content flow | Height follows the content automatically. Recommended |
+| **Popup** | A call-to-action button on your page | Opens the quiz in a full-screen overlay |
+| **Plain iframe (fixed height)** | Environments where loading a script is not an option | Simplest; fixed height with inner scrolling |
+
+### Inline (auto height)
+
+```html
+<div data-rooquiz-embed data-rooquiz-token="YOUR_QUIZ_TOKEN"></div>
+<script src="https://YOUR_QUIZ_DOMAIN/embed.js" async></script>
+```
+
+The embed script watches the quiz content height (pagination, navigating to the result page, etc.) and resizes the iframe in real time — no scrollbars, no clipping.
+
+### Popup
+
+```html
+<div data-rooquiz-embed data-rooquiz-token="YOUR_QUIZ_TOKEN" data-rooquiz-mode="popup" data-rooquiz-text="Start the quiz"></div>
+<script src="https://YOUR_QUIZ_DOMAIN/embed.js" async></script>
+```
+
+A button is rendered on your page; clicking it opens the quiz in a full-screen overlay. Close with ESC or by clicking the mask.
+
+### Plain iframe
+
+```html
+<iframe src="https://YOUR_QUIZ_DOMAIN/a/YOUR_QUIZ_TOKEN?embed=1" width="100%" height="600" style="border:0;" title="RooQuiz"></iframe>
+```
+
+## Available attributes
+
+| Attribute | Description |
+| --- | --- |
+| `data-rooquiz-token` | Required. The quiz public token |
+| `data-rooquiz-mode` | `inline` (default) or `popup` |
+| `data-rooquiz-from` | Source tag recorded with every response, used by [Source Tracking](/en/publish/tracking) and the source breakdown in [Insights](/en/results/insights) |
+| `data-rooquiz-height` | Initial height (px) for inline mode, used before auto-resize kicks in |
+| `data-rooquiz-text` | Button label for popup mode |
+
+## JS API
+
+When you need a custom trigger (e.g. your own designed button opening the popup), call the API directly:
+
+```html
+<script src="https://YOUR_QUIZ_DOMAIN/embed.js"></script>
+<script>
+  // Mount an inline embed manually
+  RooQuiz.embed({ el: '#container', token: 'YOUR_QUIZ_TOKEN', from: 'homepage' })
+  // Open the popup from any element
+  document.querySelector('#my-button').onclick = () => RooQuiz.open('YOUR_QUIZ_TOKEN')
+</script>
+```
+
+<Callout type="warning">
+  Quizzes set to **examinees only** are not recommended for embedding: browsers restrict storage and login popups inside third-party iframes, which may degrade the sign-in experience. Share the [public link](/en/publish/link-qrcode) for those instead.
+</Callout>
+
+<Callout type="info">
+  The embedded page automatically hides the footer and background, blending transparently into your site; your theme colors still apply. Responses collected through embeds appear in [Response Records](/en/results/records) as usual.
+</Callout>

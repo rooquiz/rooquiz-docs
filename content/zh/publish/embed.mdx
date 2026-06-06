@@ -1,0 +1,75 @@
+---
+title: 网站嵌入
+---
+
+import { Callout } from 'nextra/components'
+
+# 网站嵌入
+
+除了分享链接,你还可以把测验**直接嵌进自己的网站**——访客无需跳转,在你的落地页里就能完成作答。
+
+## 三种嵌入方式
+
+在目标测验中打开 **分享** → **网站嵌入**,选择展示方式后复制生成的代码,粘贴到你网站的 HTML 中即可。
+
+| 方式 | 适合场景 | 特点 |
+| --- | --- | --- |
+| **内嵌(自适应)** | 融入页面内容流 | 高度随内容自动调整,推荐使用 |
+| **弹窗** | 页面上放一个入口按钮 | 点击后以全屏弹窗打开测验 |
+| **纯 iframe(固定高度)** | 不便加载脚本的环境 | 最简单,高度固定、内容在框内滚动 |
+
+### 内嵌(自适应)
+
+```html
+<div data-rooquiz-embed data-rooquiz-token="你的测验代码"></div>
+<script src="https://你的作答域名/embed.js" async></script>
+```
+
+嵌入脚本会自动监听测验内容的高度变化(翻页、进入结果页等),实时调整 iframe 高度,无滚动条、无截断。
+
+### 弹窗
+
+```html
+<div data-rooquiz-embed data-rooquiz-token="你的测验代码" data-rooquiz-mode="popup" data-rooquiz-text="开始测评"></div>
+<script src="https://你的作答域名/embed.js" async></script>
+```
+
+页面上会渲染一个按钮,点击后以全屏遮罩弹窗打开测验,支持 ESC 或点击遮罩关闭。
+
+### 纯 iframe
+
+```html
+<iframe src="https://你的作答域名/a/你的测验代码?embed=1" width="100%" height="600" style="border:0;" title="RooQuiz"></iframe>
+```
+
+## 可用属性
+
+| 属性 | 说明 |
+| --- | --- |
+| `data-rooquiz-token` | 必填,测验的公开代码 |
+| `data-rooquiz-mode` | `inline`(默认)或 `popup` |
+| `data-rooquiz-from` | 来源标识,会记录到每条作答的来源字段,用于[来源追踪](/zh/publish/tracking)与[数据洞察](/zh/results/insights)的来源分析 |
+| `data-rooquiz-height` | 内嵌模式的初始高度(px),自适应生效前的占位 |
+| `data-rooquiz-text` | 弹窗模式的按钮文案 |
+
+## JS API
+
+需要自定义触发时机(比如用你自己设计的按钮打开弹窗),可以直接调用:
+
+```html
+<script src="https://你的作答域名/embed.js"></script>
+<script>
+  // 手动挂载内嵌
+  RooQuiz.embed({ el: '#container', token: '你的测验代码', from: 'homepage' })
+  // 用任意元素触发弹窗
+  document.querySelector('#my-button').onclick = () => RooQuiz.open('你的测验代码')
+</script>
+```
+
+<Callout type="warning">
+  开启了**仅考生可答**的测验不建议嵌入:浏览器会限制第三方网站 iframe 中的存储与登录弹窗,考生登录体验可能受损。这类测验建议直接分享[公开链接](/zh/publish/link-qrcode)。
+</Callout>
+
+<Callout type="info">
+  嵌入页面会自动隐藏页脚与背景,以透明形态融入你的网站;主题色仍然生效。嵌入带来的作答会照常出现在[答卷记录](/zh/results/records)中。
+</Callout>
