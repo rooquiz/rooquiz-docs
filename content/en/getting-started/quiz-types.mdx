@@ -1,12 +1,12 @@
 ---
-title: The Three Quiz Types
+title: The Four Quiz Types
 ---
 
 import { Callout } from 'nextra/components'
 
-# The Three Quiz Types
+# The Four Quiz Types
 
-RooQuiz offers three quiz types (scenes), each aimed at a different goal. **The type is chosen at creation and cannot be changed afterward.**
+RooQuiz offers four quiz types (scenes), each aimed at a different goal. **The type is chosen at creation and cannot be changed afterward.**
 
 ## Quiz
 
@@ -16,7 +16,7 @@ For knowledge tests, online exams, and scored practice — scenarios that need *
 - **Scoring**: Assign points to questions or correct options; totals are summed automatically.
 - **Judgment & feedback**: Mark correct answers, set a passing score, and show respondents their score and feedback.
 
-## Assessment
+## Scorecard
 
 For personality assessments, ability evaluations, and surveys — scenarios that need **multi-dimensional analysis** rather than simple right/wrong.
 
@@ -24,6 +24,15 @@ For personality assessments, ability evaluations, and surveys — scenarios that
 - **Conditional logic**: Show or hide later questions based on previous answers, enabling adaptive surveys.
 - **AI evaluation**: Use AI to evaluate text answers and generate richer analysis (subject to AI quota).
 - **Report delivery**: Results can be shown on screen, exported to PDF, or sent by email (email is a Pro feature).
+
+## Outcome Quiz
+
+For personality quizzes, "which X are you" fun quizzes, and diagnostic lead magnets — scenarios that produce a **result type** instead of a score.
+
+- **Result types**: Define a set of outcome types up front (e.g. Lion / Owl); each type has its own name, theme color, image, and rich-text result content.
+- **Choice voting**: Every choice votes for one or more types; after submission the type with the **most votes wins** (ties resolved by list order).
+- **Result-page CTAs**: Each type can carry its own CTA button (book a consultation, view a plan…), turning a fun result into action and shares.
+- **Question types**: Voting questions are single choice, multiple choice, dropdown, and true/false, alongside display items like statements and page breaks.
 
 ## Random Quiz
 
@@ -38,9 +47,10 @@ For practice drills and randomized testing — scenarios where **each respondent
 | Your goal | Recommended type |
 | --- | --- |
 | Score respondents and judge right/wrong | **Quiz** |
-| Run a personality/ability assessment or survey with multi-dimensional analysis | **Assessment** |
+| Run a personality/ability assessment or survey with multi-dimensional analysis | **Scorecard** |
+| Give each respondent a "which type are you" result | **Outcome Quiz** |
 | Show each person a different set of random questions | **Random Quiz** |
 
 <Callout type="warning">
-  Available settings differ by type (for example, scoring is available only in Quiz, while conditional logic and multi-dimensional analysis mainly target Assessment). Confirm the capabilities you need before choosing.
+  Available settings differ by type (for example, scoring is available only in Quiz, conditional logic and multi-dimensional analysis mainly target Scorecard, and choice voting exists only in Outcome). Confirm the capabilities you need before choosing.
 </Callout>

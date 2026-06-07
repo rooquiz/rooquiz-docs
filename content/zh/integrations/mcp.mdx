@@ -6,7 +6,7 @@ import { Callout, Tabs } from 'nextra/components'
 
 # MCP 接入
 
-RooQuiz 提供一个 **MCP(Model Context Protocol)server**,让 Claude Desktop、Claude Code、Cursor、Codex 等 AI 客户端能在你的团队下直接操作测验——用自然语言就能创建考试、测评、分型测评,追加题目、调整顺序、配置报告维度与分型结果,而不必手动在编辑器里一个个搭。
+RooQuiz 提供一个 **MCP(Model Context Protocol)server**,让 Claude Desktop、Claude Code、Cursor、Codex 等 AI 客户端能在你的团队下直接操作测验——用自然语言就能创建考试、评分诊断、分型测评,追加题目、调整顺序、配置报告维度与分型结果,而不必手动在编辑器里一个个搭。
 
 <Callout type="info">
   MCP 是面向**进阶用户**的能力,需要你会使用支持 MCP 的 AI 客户端。基础的可视化搭建仍推荐用 [编辑器](/zh/editor)。
@@ -150,7 +150,7 @@ claude.ai、Claude Code 等支持 MCP OAuth 的客户端**无需手动创建 Tok
 
 | 工具 | 作用 |
 | --- | --- |
-| `create_form` | 创建测验(`quiz` 考试、`scorecard` 测评 或 `outcome` 分型测评),可一次性传入题目数组和报告配置,减少往返调用。分型测评**必须**在创建时一并传入 `report.outcomes`(结果类型列表),并让每个选项通过 `outcomes` 给类型投票。 |
+| `create_form` | 创建测验(`quiz` 考试、`scorecard` 评分诊断 或 `outcome` 分型测评),可一次性传入题目数组和报告配置,减少往返调用。分型测评**必须**在创建时一并传入 `report.outcomes`(结果类型列表),并让每个选项通过 `outcomes` 给类型投票。 |
 | `list_forms` | 列出当前团队的测验,支持按 scene 或标题模糊过滤。 |
 | `get_form` | 查看指定测验的完整详情(题目列表 `fields[]`、报告配置等);改题前需先用它拿到每道题的 `code`,分型测验则从 `report.outcomeAnalysis.outcomes` 拿结果类型的 `code`。 |
 | `update_form` | 更新标题、描述、开启/关闭状态,或按子键合并替换 `report` 配置;分型测评传 `report.outcomes` 即按 `code` 合并更新结果类型(名称/描述/CTA,已配置的图片保留;删除仍被题目引用的类型会被拒绝)。**场景(scene)与语言创建后锁定,不可改**。 |
@@ -173,7 +173,7 @@ claude.ai、Claude Code 等支持 MCP OAuth 的客户端**无需手动创建 Tok
 
 <Callout type="info">
   典型流程:
-  - **考试 / 测评**:`create_form` 创建测验并拿到每道题的 `code` → 用 `update_form` 或 `set_dimension_analysis` 按 `code` 配置报告公式 / 维度。
+  - **考试 / 评分诊断**:`create_form` 创建测验并拿到每道题的 `code` → 用 `update_form` 或 `set_dimension_analysis` 按 `code` 配置报告公式 / 维度。
   - **分型测评**:`create_form` 一次传齐 `report.outcomes`(每个类型自定义一个唯一 `code`,如 `lion`)与各题选项的投票映射 → 答题后票数最高的类型胜出(平票按列表顺序),后续用 `update_form` 微调类型文案 / CTA。
 </Callout>
 
@@ -181,7 +181,7 @@ claude.ai、Claude Code 等支持 MCP OAuth 的客户端**无需手动创建 Tok
 
 - **随机题库(Random Quiz)不支持**:这类测验的题目存放在题库(QuestionBank)中,请在后台编辑器里管理,MCP 暂不覆盖。
 - **不能直接改题型或选项内容**:需要换题型或改选项时,先 `delete_question` 再 `add_question` 重建。分型测评的**选项投票映射**同理——要改投票就删题重建。
-- **测评(scorecard)的选项计分**走「选项分值(Option Scoring)」:`update_question` 在 scorecard 场景下不接受 `score` / `correctAnswer` / `aiMatch`,改选项分值请在后台编辑,或删了重建。分型测评(outcome)同样不接受这三个参数(它按票数判型,没有计分概念)。
+- **评分诊断(scorecard)的选项计分**走「选项分值(Option Scoring)」:`update_question` 在 scorecard 场景下不接受 `score` / `correctAnswer` / `aiMatch`,改选项分值请在后台编辑,或删了重建。分型测评(outcome)同样不接受这三个参数(它按票数判型,没有计分概念)。
 - **分型测评的题型范围**:投票题型为单选 / 多选 / 判断(不支持填空);结果类型的**配图**暂不能通过 MCP 上传,请在后台编辑器配置(MCP 更新 `report.outcomes` 时已配置的图片会保留)。
 - **场景与语言创建后锁定**,无法通过 MCP 修改。
 - **填空 AI 智能判分**(`aiMatch`,仅 quiz 场景、Beta)会消耗团队的 [AI 额度](/zh/account/ai-billing)。
