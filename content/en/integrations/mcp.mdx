@@ -6,7 +6,7 @@ import { Callout, Tabs } from 'nextra/components'
 
 # MCP Integration
 
-RooQuiz ships an **MCP (Model Context Protocol) server** that lets AI clients — Claude Desktop, Claude Code, Cursor, Codex, and others — operate on quizzes inside your team. With natural language you can create quizzes, append questions, reorder items, and configure report dimensions, instead of building everything by hand in the editor.
+RooQuiz ships an **MCP (Model Context Protocol) server** that lets AI clients — Claude Desktop, Claude Code, Cursor, Codex, and others — operate on quizzes inside your team. With natural language you can create quizzes, assessments, and outcome quizzes, append questions, reorder items, and configure report dimensions or outcome types, instead of building everything by hand in the editor.
 
 <Callout type="info">
   MCP is a feature for **power users** — you'll need an AI client that supports MCP. For basic, visual quiz building we still recommend the [editor](/en/editor).
@@ -150,16 +150,16 @@ Once connected, the AI assistant can call the tools below. They all act on the t
 
 | Tool | What it does |
 | --- | --- |
-| `create_form` | Create a quiz (`quiz` exam or `assessment`). Can take a questions array and report config in one call to avoid round trips. |
+| `create_form` | Create a quiz (`quiz` exam, `scorecard` assessment, or `outcome` typing quiz). Can take a questions array and report config in one call to avoid round trips. An outcome quiz **must** include `report.outcomes` (the list of result types) at creation, with every choice voting for types via `outcomes`. |
 | `list_forms` | List the current team's quizzes, with optional scene or title filtering. |
-| `get_form` | View a quiz's full details (the `fields[]` question list, report config, etc.); call this first to get each question's `code` before editing. |
-| `update_form` | Update title, description, open/closed state, or merge-replace the `report` config by sub-key. **Scene and language are locked after creation.** |
+| `get_form` | View a quiz's full details (the `fields[]` question list, report config, etc.); call this first to get each question's `code` before editing — for outcome quizzes, the result-type `code`s live in `report.outcomeAnalysis.outcomes`. |
+| `update_form` | Update title, description, open/closed state, or merge-replace the `report` config by sub-key; for outcome quizzes, pass `report.outcomes` to merge-update result types by `code` (name/description/CTA; configured images are kept, and removing a type still referenced by question votes is rejected). **Scene and language are locked after creation.** |
 
 ### Question
 
 | Tool | What it does |
 | --- | --- |
-| `add_question` | Append an item to the end: a question (SingleCheck/MultiCheck/TrueFalse/FillBlank) or a page break (`Breaker`). |
+| `add_question` | Append an item to the end: a question (SingleCheck/MultiCheck/TrueFalse/FillBlank) or a page break (`Breaker`). In an outcome quiz, every choice must declare which result types it votes for (TrueFalse uses `trueOutcomes` / `falseOutcomes`). |
 | `insert_question` | Insert an item at a specific position, using `after` / `before` to reference an existing `code`. |
 | `move_question` | Move an existing question or page break to a new position by `code`. |
 | `update_question` | Update stem, note, explanation, required flag, score, correct answer, or FillBlank AI grading by `code`. **Cannot change question type or choice content.** |
@@ -169,17 +169,20 @@ Once connected, the AI assistant can call the tools below. They all act on the t
 
 | Tool | What it does |
 | --- | --- |
-| `set_dimension_analysis` | Set a quiz's multi-dimension analysis (radar chart dimensions) as a whole; in `quiz` each dimension references question `code`s, in `assessment` each uses a formula. Pass an empty array to clear. |
+| `set_dimension_analysis` | Set a quiz's multi-dimension analysis (radar chart dimensions) as a whole; in `quiz` each dimension references question `code`s, in `scorecard` each uses a formula. Pass an empty array to clear. Not applicable to outcome quizzes (they have no dimensions — configure result types via `report.outcomes` instead). |
 
 <Callout type="info">
-  Typical flow: `create_form` to create the quiz and get each question's `code` → use `update_form` or `set_dimension_analysis` to configure report formulas / dimensions by `code`.
+  Typical flows:
+  - **Exam / assessment**: `create_form` to create the quiz and get each question's `code` → use `update_form` or `set_dimension_analysis` to configure report formulas / dimensions by `code`.
+  - **Outcome quiz**: `create_form` in one call with `report.outcomes` (give each type a unique `code` of your own, e.g. `lion`) plus each choice's votes → after submission the type with the most votes wins (ties resolved by list order); fine-tune type copy / CTAs later via `update_form`.
 </Callout>
 
 ## Current limitations
 
 - **Random Quiz is not supported**: its questions live in the QuestionBank — manage them in the editor; MCP doesn't cover them yet.
-- **Can't change question type or choices directly**: to switch type or edit choices, `delete_question` then `add_question` to rebuild.
-- **Assessment choice scoring** uses Option Scoring: in the assessment scene `update_question` rejects `score` / `correctAnswer` / `aiMatch`. Edit choice scores in the admin UI, or delete and recreate.
+- **Can't change question type or choices directly**: to switch type or edit choices, `delete_question` then `add_question` to rebuild. The same applies to an outcome quiz's **choice-to-type vote mapping** — to change votes, rebuild the question.
+- **Assessment (`scorecard`) choice scoring** uses Option Scoring: in the scorecard scene `update_question` rejects `score` / `correctAnswer` / `aiMatch`. Edit choice scores in the admin UI, or delete and recreate. The outcome scene rejects those three parameters likewise (it decides by votes — there is no scoring).
+- **Outcome quiz question types**: voting questions are SingleCheck / MultiCheck / TrueFalse (FillBlank is not supported); result-type **images** can't be uploaded via MCP yet — configure them in the editor (images already configured are kept when MCP updates `report.outcomes`).
 - **Scene and language are locked** after creation and can't be changed via MCP.
 - **FillBlank AI grading** (`aiMatch`, quiz scene only, Beta) consumes your team's [AI credits](/en/account/ai-billing).
 
