@@ -128,6 +128,106 @@ curl -H "Authorization: Bearer rqp_acct_xxx..." \
 }
 ```
 
+## 提交记录
+
+读取团队表单收集到的作答 —— 线索、答案、得分、报告结果与 UTM 归因。适合 CRM 同步、自建看板、自动化。
+
+<Callout type="warning">
+  提交记录包含作答者 PII（邮箱、姓名、IP），请妥善处理与存储。
+</Callout>
+
+### 列出提交记录
+
+```bash
+GET /api/v1/records
+```
+
+按创建时间倒序列出该账号的全部提交记录。
+
+| 查询参数 | 类型 | 默认 | 说明 |
+| --- | --- | --- | --- |
+| `formId` | string | — | 只看某个表单的提交。 |
+| `status` | string | — | 报告状态：`pending`、`processing`、`completed`、`failed`。 |
+| `since` | ISO 时间 | — | 只看该时间（含）之后创建的提交（增量同步）。 |
+| `until` | ISO 时间 | — | 只看该时间（含）之前创建的提交。 |
+| `limit` | number | `20` | 每页条数（最大 `100`）。 |
+| `page` | number | `1` | 页码。 |
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/records?since=2026-06-01&limit=50"
+```
+
+```json
+{
+  "totalDocs": 1500,
+  "page": 1,
+  "limit": 50,
+  "items": [
+    {
+      "id": "...",
+      "serialNumber": 11,
+      "formId": "d983d8d9-...",
+      "shareToken": "v2hrpv6d",
+      "reportUrl": "https://your-cairo-domain/a/md8682rx/records/v2hrpv6d",
+      "submittedAt": "2026-06-18T12:00:00.000Z",
+      "updatedAt": "2026-06-18T12:00:05.000Z",
+      "examinee": {
+        "id": "...", "examineeId": "TZ4730277148",
+        "email": "lead@example.com", "name": "Jane", "customData": null
+      },
+      "metadata": {
+        "utmSource": "newsletter", "utmMedium": "email",
+        "utmCampaign": null, "utmTerm": null, "utmContent": null,
+        "referrer": "https://..."
+      },
+      "data": { "q_email": "lead@example.com", "q_rating": 5 },
+      "result": {
+        "status": "completed", "score": 2, "maxScore": 4,
+        "level": "良好", "outcomeCode": null, "outcomeName": null
+      }
+    }
+  ]
+}
+```
+
+`data` 以每个表单字段的 `code` 为 key（可通过表单端点的 `fields[]` 查看）。匿名提交时 `examinee` 为 `null`。`result` 是紧凑摘要；完整报告在详情端点。
+
+### 获取单条提交记录
+
+```bash
+GET /api/v1/records/{id}
+```
+
+返回单条提交，含完整报告结果 `reportResult` 以及 `metadata.ip` / `metadata.userAgent`。
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/records/..."
+```
+
+```json
+{
+  "id": "...",
+  "serialNumber": 11,
+  "formId": "d983d8d9-...",
+  "shareToken": "v2hrpv6d",
+  "reportUrl": "https://your-cairo-domain/a/md8682rx/records/v2hrpv6d",
+  "submittedAt": "...",
+  "updatedAt": "...",
+  "examinee": { "id": "...", "email": "lead@example.com", "name": "Jane" },
+  "metadata": { "ip": "203.0.113.4", "userAgent": "...", "utmSource": "newsletter" },
+  "data": { /* 按字段 code 的作答 */ },
+  "reportResult": {
+    "status": "completed",
+    "overallAnalysis": { "score": 2, "maxScore": 4, "level": "良好", "summary": "...", "suggestions": "..." },
+    "dimensionAnalysis": { "title": "...", "radar": [], "items": [] },
+    "outcome": { "code": null, "name": null, "ranking": null },
+    "aiSuggestion": { "status": "completed", "content": "..." }
+  }
+}
+```
+
 ## 错误
 
 错误以 `{ "error": { "code": "...", "message": "..." } }` 的形式返回。

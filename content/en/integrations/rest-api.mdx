@@ -128,6 +128,106 @@ curl -H "Authorization: Bearer rqp_acct_xxx..." \
 }
 ```
 
+## Submissions
+
+Read the responses your team's forms have collected — leads, answers, scores, report results, and UTM attribution. Ideal for CRM sync, custom dashboards, and automations.
+
+<Callout type="warning">
+  Submissions include respondent PII (email, name, IP). Handle and store them responsibly.
+</Callout>
+
+### List submissions
+
+```bash
+GET /api/v1/records
+```
+
+Lists submissions across the team, newest first.
+
+| Query param | Type | Default | Description |
+| --- | --- | --- | --- |
+| `formId` | string | — | Only submissions for this form. |
+| `status` | string | — | Report status: `pending`, `processing`, `completed`, `failed`. |
+| `since` | ISO date | — | Only submissions created at/after this time (incremental sync). |
+| `until` | ISO date | — | Only submissions created at/before this time. |
+| `limit` | number | `20` | Items per page (max `100`). |
+| `page` | number | `1` | Page number. |
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/records?since=2026-06-01&limit=50"
+```
+
+```json
+{
+  "totalDocs": 1500,
+  "page": 1,
+  "limit": 50,
+  "items": [
+    {
+      "id": "...",
+      "serialNumber": 11,
+      "formId": "d983d8d9-...",
+      "shareToken": "v2hrpv6d",
+      "reportUrl": "https://your-cairo-domain/a/md8682rx/records/v2hrpv6d",
+      "submittedAt": "2026-06-18T12:00:00.000Z",
+      "updatedAt": "2026-06-18T12:00:05.000Z",
+      "examinee": {
+        "id": "...", "examineeId": "TZ4730277148",
+        "email": "lead@example.com", "name": "Jane", "customData": null
+      },
+      "metadata": {
+        "utmSource": "newsletter", "utmMedium": "email",
+        "utmCampaign": null, "utmTerm": null, "utmContent": null,
+        "referrer": "https://..."
+      },
+      "data": { "q_email": "lead@example.com", "q_rating": 5 },
+      "result": {
+        "status": "completed", "score": 2, "maxScore": 4,
+        "level": "Good", "outcomeCode": null, "outcomeName": null
+      }
+    }
+  ]
+}
+```
+
+`data` is keyed by each form field's `code` (see a form's `fields[]` via the forms endpoint). `examinee` is `null` for anonymous submissions. `result` is a compact summary; the full report is on the detail endpoint.
+
+### Get a submission
+
+```bash
+GET /api/v1/records/{id}
+```
+
+Returns one submission with its full report result (`reportResult`) plus `metadata.ip` / `metadata.userAgent`.
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/records/..."
+```
+
+```json
+{
+  "id": "...",
+  "serialNumber": 11,
+  "formId": "d983d8d9-...",
+  "shareToken": "v2hrpv6d",
+  "reportUrl": "https://your-cairo-domain/a/md8682rx/records/v2hrpv6d",
+  "submittedAt": "...",
+  "updatedAt": "...",
+  "examinee": { "id": "...", "email": "lead@example.com", "name": "Jane" },
+  "metadata": { "ip": "203.0.113.4", "userAgent": "...", "utmSource": "newsletter" },
+  "data": { /* answers keyed by field code */ },
+  "reportResult": {
+    "status": "completed",
+    "overallAnalysis": { "score": 2, "maxScore": 4, "level": "Good", "summary": "...", "suggestions": "..." },
+    "dimensionAnalysis": { "title": "...", "radar": [], "items": [] },
+    "outcome": { "code": null, "name": null, "ranking": null },
+    "aiSuggestion": { "status": "completed", "content": "..." }
+  }
+}
+```
+
 ## Errors
 
 Errors return a JSON body of the shape `{ "error": { "code": "...", "message": "..." } }`.
