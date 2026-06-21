@@ -1,0 +1,144 @@
+---
+title: REST API
+---
+
+import { Callout } from 'nextra/components'
+
+# REST API
+
+RooQuiz 提供一个轻量的**只读 REST API**，方便你把团队的表单数据拉进脚本、自动化工具（Zapier、Make、n8n）或自建看板。它以纯 JSON 返回表单的**定义信息** —— 标题、字段、设置、报告配置。
+
+<Callout type="info">
+  REST API 是**账号级别**的，以团队（账号）身份认证，而非某个成员。如果你想让 **AI 客户端**用自然语言操作测评，请看 [MCP 接入](/zh/integrations/mcp)。
+</Callout>
+
+## 工作方式
+
+- 用一个归属团队的**账号 API 密钥**（前缀 `rqp_acct_`）进行认证。
+- 该密钥可**读取所在团队的全部表单**。它不绑定个人，成员进出都不影响其使用。
+- 仅**团队所有者**可创建、查看、吊销账号 API 密钥。
+- 接口**只读**，只返回表单定义，不暴露提交记录 / 作答数据。
+
+## 获取 API 密钥
+
+进入 **设置 → API 密钥**（仅**团队所有者**可见），点击「创建 API 密钥」：
+
+1. 起一个**名称**（便于识别，例如 `Zapier - 生产`）。
+2. 创建后会显示一个以 `rqp_acct_` 开头的明文密钥。
+
+<Callout type="warning">
+  **明文密钥只显示这一次。** 离开页面后无法再取回。请立即复制；丢失后只能吊销并重新创建。
+</Callout>
+
+每个团队最多保有 **10 个密钥**（含已吊销）。如需更多，请**删除**一个以腾出名额（「吊销」只是停用，不释放名额）。请像密码一样妥善保管，切勿提交到代码仓库。
+
+## 鉴权
+
+每次请求都以 Bearer 令牌方式带上密钥：
+
+```bash
+Authorization: Bearer rqp_acct_xxx...
+```
+
+<Callout type="info">
+  个人 MCP 令牌（`rqp_live_`）在 REST API 上**无效**，会返回 `401`。请使用账号 API 密钥（`rqp_acct_`）。
+</Callout>
+
+## 端点
+
+基础地址形如 `https://your-domain/api/v1`。
+
+### 列出表单
+
+```bash
+GET /api/v1/forms
+```
+
+按创建时间倒序列出该密钥所属团队的全部表单。
+
+| 查询参数 | 类型 | 默认 | 说明 |
+| --- | --- | --- | --- |
+| `scene` | string | — | 按场景过滤：`quiz`、`random_quiz`、`scorecard`、`outcome`。 |
+| `titleContains` | string | — | 标题模糊匹配。 |
+| `limit` | number | `20` | 每页条数（最大 `100`）。 |
+| `page` | number | `1` | 页码。 |
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/forms?scene=quiz&limit=20"
+```
+
+```json
+{
+  "totalDocs": 12,
+  "page": 1,
+  "limit": 20,
+  "items": [
+    {
+      "id": "d983d8d9-...",
+      "title": "性格测试",
+      "scene": "outcome",
+      "language": "zh_CN",
+      "publicToken": "h7sbps67",
+      "shareUrl": "https://your-cairo-domain/a/h7sbps67",
+      "localization": null,
+      "isActive": true,
+      "createdAt": "2026-06-18T11:35:11.468Z",
+      "updatedAt": "2026-06-18T12:59:42.649Z"
+    }
+  ]
+}
+```
+
+### 获取单个表单
+
+```bash
+GET /api/v1/forms/{id}
+```
+
+返回单个表单的定义。
+
+| 查询参数 | 类型 | 默认 | 说明 |
+| --- | --- | --- | --- |
+| `includeFields` | boolean | `true` | 是否包含 `fields[]`（题目 / 分页符）。大表单可传 `false` 跳过。 |
+| `includeReport` | boolean | `true` | 是否包含报告 / 维度分析配置。 |
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/forms/d983d8d9-..."
+```
+
+```json
+{
+  "id": "d983d8d9-...",
+  "title": "性格测试",
+  "scene": "outcome",
+  "language": "zh_CN",
+  "description": null,
+  "isActive": true,
+  "publicToken": "h7sbps67",
+  "shareUrl": "https://your-cairo-domain/a/h7sbps67",
+  "layout": "card",
+  "localization": null,
+  "systemText": null,
+  "createdAt": "2026-06-18T11:35:11.468Z",
+  "updatedAt": "2026-06-18T12:59:42.649Z",
+  "fields": [ /* 题目与分页符 */ ],
+  "report": { /* 报告 / 维度配置 */ }
+}
+```
+
+## 错误
+
+错误以 `{ "error": { "code": "...", "message": "..." } }` 的形式返回。
+
+| 状态码 | code | 场景 |
+| --- | --- | --- |
+| `401` | `unauthorized` | 缺失 / 无效 / 已过期 / 已吊销的密钥（或传了非账号级令牌）。 |
+| `404` | `not_found` | 表单不存在，或不属于该密钥所在团队。 |
+| `400` | `bad_request` | 参数非法（例如未知的 `scene`）。 |
+| `429` | `rate_limited` | 超过限流。 |
+
+## 限流
+
+每个密钥限制为 **120 次 / 分钟**，超出返回 `429`。不再需要时，请在 **设置 → API 密钥** 吊销密钥 —— 使用它的集成会立即失去访问权限。

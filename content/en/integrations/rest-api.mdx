@@ -1,0 +1,144 @@
+---
+title: REST API
+---
+
+import { Callout } from 'nextra/components'
+
+# REST API
+
+RooQuiz exposes a small, read-only **REST API** so you can pull your team's form data into scripts, automations (Zapier, Make, n8n), or your own dashboards. It returns form **definitions** — title, fields, settings, report config — as plain JSON.
+
+<Callout type="info">
+  The REST API is **account-level** and authenticates as your team, not as an individual member. If you want an **AI client** to operate on your quizzes with natural language instead, see [MCP Integration](/en/integrations/mcp).
+</Callout>
+
+## How it works
+
+- You authenticate with an **account API key** (prefix `rqp_acct_`) that belongs to a team.
+- The key can **read all forms in that team**. It is not tied to a person, so it keeps working when members come and go.
+- Only a **team owner** can create, view, or revoke account API keys.
+- The API is **read-only** and returns form definitions only — it does not expose submissions/responses.
+
+## Get an API key
+
+Go to **Settings → API Keys** (visible to **team owners** only) and click "Create API key":
+
+1. Give it a **name** (for recognition, e.g. `Zapier - Production`).
+2. After creation, a plaintext key starting with `rqp_acct_` is shown.
+
+<Callout type="warning">
+  **The plaintext key is shown only once.** It cannot be retrieved after you leave the page. Copy it immediately; if lost, you must revoke it and create a new one.
+</Callout>
+
+Each team can hold at most **10 keys** (including revoked ones). To create more, **delete** one to free a slot ("revoke" only deactivates — it does not free the slot). Treat a key like a password and never commit it to source control.
+
+## Authentication
+
+Send the key as a Bearer token on every request:
+
+```bash
+Authorization: Bearer rqp_acct_xxx...
+```
+
+<Callout type="info">
+  A personal MCP token (`rqp_live_`) does **not** work on the REST API — it returns `401`. Use an account API key (`rqp_acct_`).
+</Callout>
+
+## Endpoints
+
+The base URL looks like `https://your-domain/api/v1`.
+
+### List forms
+
+```bash
+GET /api/v1/forms
+```
+
+Lists every form in the key's team, newest first.
+
+| Query param | Type | Default | Description |
+| --- | --- | --- | --- |
+| `scene` | string | — | Filter by scene: `quiz`, `random_quiz`, `scorecard`, `outcome`. |
+| `titleContains` | string | — | Fuzzy match on title. |
+| `limit` | number | `20` | Items per page (max `100`). |
+| `page` | number | `1` | Page number. |
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/forms?scene=quiz&limit=20"
+```
+
+```json
+{
+  "totalDocs": 12,
+  "page": 1,
+  "limit": 20,
+  "items": [
+    {
+      "id": "d983d8d9-...",
+      "title": "Personality Quiz",
+      "scene": "outcome",
+      "language": "en_US",
+      "publicToken": "h7sbps67",
+      "shareUrl": "https://your-cairo-domain/a/h7sbps67",
+      "localization": null,
+      "isActive": true,
+      "createdAt": "2026-06-18T11:35:11.468Z",
+      "updatedAt": "2026-06-18T12:59:42.649Z"
+    }
+  ]
+}
+```
+
+### Get a form
+
+```bash
+GET /api/v1/forms/{id}
+```
+
+Returns one form's definition.
+
+| Query param | Type | Default | Description |
+| --- | --- | --- | --- |
+| `includeFields` | boolean | `true` | Include the `fields[]` array (questions / page breaks). Pass `false` to skip for large forms. |
+| `includeReport` | boolean | `true` | Include the report / dimension-analysis config. |
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/forms/d983d8d9-..."
+```
+
+```json
+{
+  "id": "d983d8d9-...",
+  "title": "Personality Quiz",
+  "scene": "outcome",
+  "language": "en_US",
+  "description": null,
+  "isActive": true,
+  "publicToken": "h7sbps67",
+  "shareUrl": "https://your-cairo-domain/a/h7sbps67",
+  "layout": "card",
+  "localization": null,
+  "systemText": null,
+  "createdAt": "2026-06-18T11:35:11.468Z",
+  "updatedAt": "2026-06-18T12:59:42.649Z",
+  "fields": [ /* questions & page breaks */ ],
+  "report": { /* report / dimension config */ }
+}
+```
+
+## Errors
+
+Errors return a JSON body of the shape `{ "error": { "code": "...", "message": "..." } }`.
+
+| Status | Code | When |
+| --- | --- | --- |
+| `401` | `unauthorized` | Missing, invalid, expired, or revoked key (or a non-account token). |
+| `404` | `not_found` | The form does not exist or is not in this key's team. |
+| `400` | `bad_request` | Invalid parameter (e.g. an unknown `scene`). |
+| `429` | `rate_limited` | Rate limit exceeded. |
+
+## Rate limits
+
+Each key is limited to **120 requests / minute**; exceeding it returns `429`. Revoke a key from **Settings → API Keys** whenever it's no longer needed — any integration using it loses access immediately.
