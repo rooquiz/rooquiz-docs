@@ -6,7 +6,7 @@ import { Callout, Tabs } from 'nextra/components'
 
 # MCP 接入
 
-RooQuiz 提供一个 **MCP(Model Context Protocol)server**,让 Claude Desktop、Claude Code、Cursor、Codex 等 AI 客户端能在你的团队下直接操作测验——用自然语言就能创建考试、评分诊断、分型测评,追加题目、调整顺序、配置报告维度与分型结果,而不必手动在编辑器里一个个搭。
+RooQuiz 提供一个 **MCP(Model Context Protocol)server**,让 Claude Desktop、Claude Code、Cursor、Codex 等 AI 客户端能在你的团队下直接操作测验——用自然语言就能创建考试、评分诊断、分型测评,追加题目、调整顺序、配置报告维度与分型结果;还能复制 / 删除测验、做多语言译文、管理考生,以及读取答题记录、统计与转化漏斗——而不必手动在编辑器里一个个搭。
 
 <Callout type="info">
   MCP 是面向**进阶用户**的能力,需要你会使用支持 MCP 的 AI 客户端。基础的可视化搭建仍推荐用 [编辑器](/zh/editor)。
@@ -154,6 +154,9 @@ claude.ai、Claude Code 等支持 MCP OAuth 的客户端**无需手动创建 Tok
 | `list_forms` | 列出当前团队的测验,支持按 scene 或标题模糊过滤。 |
 | `get_form` | 查看指定测验的完整详情(题目列表 `fields[]`、报告配置等);改题前需先用它拿到每道题的 `code`,分型测验则从 `report.outcomeAnalysis.outcomes` 拿结果类型的 `code`。 |
 | `update_form` | 更新标题、描述、开启/关闭状态,或按子键合并替换 `report` 配置;分型测评传 `report.outcomes` 即按 `code` 合并更新结果类型(名称/描述/CTA,已配置的图片保留;删除仍被题目引用的类型会被拒绝)。**场景(scene)与语言创建后锁定,不可改**。 |
+| `delete_form` | 把测验移入回收站(软删):列表中不再显示,5 天内可用 `restore_form` 找回(到期自动彻底清除)。仅测验 owner / 团队 owner 可删;答题记录在彻底清除前保留。 |
+| `restore_form` | 从回收站恢复被 `delete_form` 删除的测验。仅 owner / 团队 owner 可恢复;不在回收站会报错。 |
+| `duplicate_form` | 复制一份测验:克隆题目结构、评分、报告、视觉与设置以及**全部语言译文**,生成归属你的新测验(新链接)。**不复制**答题记录、共享设置、集成与封禁状态。可选传 `newTitle`。 |
 
 ### 题目(Question)
 
@@ -171,6 +174,46 @@ claude.ai、Claude Code 等支持 MCP OAuth 的客户端**无需手动创建 Tok
 | --- | --- |
 | `set_dimension_analysis` | 整体设置测验的多维度分析(雷达图维度);quiz 场景每个维度引用题目 `code`,scorecard 场景每个维度写公式。传空数组即清空。分型测评不适用(它没有维度概念,用 `report.outcomes` 配结果类型)。 |
 
+### 多语言译文(FormTranslation)
+
+为同一测验提供多语言版本:一份源测验(主语言)+ 每个其它语言一份译文(结构与源同构,只译文字,答题记录恒锚定源测验)。
+
+| 工具 | 作用 |
+| --- | --- |
+| `create_form_translation` | 为测验新增一个语言版本,克隆源文案为初稿(同 `code`、源语言文字),并返回克隆内容供直接翻译。语言必须不同于主语言,每种语言至多一份。 |
+| `list_form_translations` | 列出某测验已有的语言版本(语言、启用状态、公开链接等)。 |
+| `get_form_translation` | 读取某语言版本的完整内容(含 `fields[]` 与 `report`),用于就地翻译——所有 `code` 必须与源测验保持一致。 |
+| `update_form_translation` | 保存某语言版本的译文文案(title / description / fields / report / systemText),或用 `isActive` 暂停该语言;结构由源决定,只改文字,未传的字段视为部分翻译。 |
+| `delete_form_translation` | 删除某语言版本。 |
+
+### 考生(Examinee)
+
+测验的答题人。考生强绑定单一团队;工具仅返回安全字段——密码、验证码、重置令牌等敏感字段**绝不外泄**。
+
+| 工具 | 作用 |
+| --- | --- |
+| `list_examinees` | 列出当前团队的考生,支持按邮箱 / 姓名模糊搜索与状态(active / disabled)过滤。 |
+| `get_examinee` | 按业务 ID `examineeId`(如 `AB1234567890`,见列表)查看某考生详情(含自定义字段 customData)。 |
+| `update_examinee` | 按 `examineeId` 编辑考生的姓名 / 状态 / 自定义字段(customData 按团队字段定义校验)。**邮箱与所属团队不可改**。 |
+
+### 数据与分析(Records & Analytics)
+
+读取测验表现、转化漏斗与线索(leads),让 AI 形成「建卷 → 度量 → 迭代」闭环。线索类工具会返回答题人信息(PII)。
+
+| 工具 | 作用 |
+| --- | --- |
+| `get_form_stats` | 读取某测验近 N 天(默认 30,上限 180)的统计:总览 KPI、每日趋势、渠道(utm_source)、登录方式、设备,以及单选类题目的答案分布。 |
+| `get_form_funnel` | 读取某测验近 N 天的转化漏斗:浏览 → 开始 → 提交 → 留资 → 看报告 → 点 CTA → 分享,以及分渠道漏斗与流失点。 |
+| `list_records` | 列出当前团队的答题记录(线索):答题人、作答、报告结果摘要与 UTM;可按测验、报告状态、提交时间筛选。 |
+| `get_record` | 按记录 `id`(`list_records` 返回)查看单条记录详情:完整作答、报告结果与提交元数据。 |
+
+### 图片上传(Image upload)
+
+| 工具 | 作用 |
+| --- | --- |
+| `prepare_image_upload` | 第一步:为封面等图片签发直传地址(把文件 PUT 上去)。 |
+| `finalize_image_upload` | 第二步:校验并把图片落库到团队媒体库,返回 media id;再用 `update_form` 的 `flagImg` / `landingImage` 引用它。 |
+
 <Callout type="info">
   典型流程:
   - **考试 / 评分诊断**:`create_form` 创建测验并拿到每道题的 `code` → 用 `update_form` 或 `set_dimension_analysis` 按 `code` 配置报告公式 / 维度。
@@ -184,6 +227,10 @@ claude.ai、Claude Code 等支持 MCP OAuth 的客户端**无需手动创建 Tok
 - **评分诊断(scorecard)的选项计分**走「选项分值(Option Scoring)」:`update_question` 在 scorecard 场景下不接受 `score` / `correctAnswer` / `aiMatch`,改选项分值请在后台编辑,或删了重建。分型测评(outcome)同样不接受这三个参数(它按票数判型,没有计分概念)。
 - **分型测评的题型范围**:投票题型为单选 / 多选 / 判断(不支持填空);结果类型的**配图**暂不能通过 MCP 上传,请在后台编辑器配置(MCP 更新 `report.outcomes` 时已配置的图片会保留)。
 - **场景与语言创建后锁定**,无法通过 MCP 修改。
+- **删除是软删**:`delete_form` 移入回收站(5 天后自动彻底清除),并非立即永久删除;彻底删除请在后台二次删除。
+- **复制不含数据**:`duplicate_form` 只克隆结构与译文,**不复制**答题记录、共享设置与集成(含密钥),新测验为干净状态。
+- **考生身份字段不可改**:`update_examinee` 不能改邮箱、所属团队与 `examineeId`(它们是认证身份)。
+- **线索含个人信息(PII)**:`list_records` / `get_record` 会返回答题人邮箱、姓名、自定义字段等,请妥善使用。
 - **填空 AI 智能判分**(`aiMatch`,仅 quiz 场景、Beta)会消耗团队的 [AI 额度](/zh/account/ai-billing)。
 
 ## 安全与频率

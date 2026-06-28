@@ -6,7 +6,7 @@ import { Callout, Tabs } from 'nextra/components'
 
 # MCP Integration
 
-RooQuiz ships an **MCP (Model Context Protocol) server** that lets AI clients — Claude Desktop, Claude Code, Cursor, Codex, and others — operate on quizzes inside your team. With natural language you can create quizzes, scorecards, and outcome quizzes, append questions, reorder items, and configure report dimensions or outcome types, instead of building everything by hand in the editor.
+RooQuiz ships an **MCP (Model Context Protocol) server** that lets AI clients — Claude Desktop, Claude Code, Cursor, Codex, and others — operate on quizzes inside your team. With natural language you can create quizzes, scorecards, and outcome quizzes, append questions, reorder items, and configure report dimensions or outcome types; you can also duplicate / delete quizzes, manage translations and examinees, and read submission records, stats and conversion funnels — instead of building everything by hand in the editor.
 
 <Callout type="info">
   MCP is a feature for **power users** — you'll need an AI client that supports MCP. For basic, visual quiz building we still recommend the [editor](/en/editor).
@@ -154,6 +154,9 @@ Once connected, the AI assistant can call the tools below. They all act on the t
 | `list_forms` | List the current team's quizzes, with optional scene or title filtering. |
 | `get_form` | View a quiz's full details (the `fields[]` question list, report config, etc.); call this first to get each question's `code` before editing — for outcome quizzes, the result-type `code`s live in `report.outcomeAnalysis.outcomes`. |
 | `update_form` | Update title, description, open/closed state, or merge-replace the `report` config by sub-key; for outcome quizzes, pass `report.outcomes` to merge-update result types by `code` (name/description/CTA; configured images are kept, and removing a type still referenced by question votes is rejected). **Scene and language are locked after creation.** |
+| `delete_form` | Move a quiz to the trash (soft delete): hidden from `list_forms`, recoverable for 5 days via `restore_form` (then permanently purged). Only the quiz owner / team owner can delete; submission records are kept until permanent purge. |
+| `restore_form` | Restore a quiz deleted by `delete_form` from the trash. Only the owner / team owner can restore; errors if it's not in the trash. |
+| `duplicate_form` | Duplicate a quiz: clones its question structure, scoring, report, visuals and settings plus **all language translations** into a new quiz owned by you (with fresh links). Does **not** copy submission records, sharing, integrations or ban state. Optional `newTitle`. |
 
 ### Question
 
@@ -171,6 +174,46 @@ Once connected, the AI assistant can call the tools below. They all act on the t
 | --- | --- |
 | `set_dimension_analysis` | Set a quiz's multi-dimension analysis (radar chart dimensions) as a whole; in `quiz` each dimension references question `code`s, in `scorecard` each uses a formula. Pass an empty array to clear. Not applicable to outcome quizzes (they have no dimensions — configure result types via `report.outcomes` instead). |
 
+### Translations (FormTranslation)
+
+Offer a quiz in multiple languages: one source quiz (primary language) plus one translation per other language (same structure as the source, only the text is translated; submission records always anchor to the source quiz).
+
+| Tool | What it does |
+| --- | --- |
+| `create_form_translation` | Add a language version to a quiz, cloning the source copy as the initial draft (same `code`s, source-language text), and return that content to translate right away. The language must differ from the primary, at most one per language. |
+| `list_form_translations` | List a quiz's existing language versions (language, active flag, public link, etc.). |
+| `get_form_translation` | Read one language version's full content (including `fields[]` and `report`) to translate in place — every `code` must stay identical to the source. |
+| `update_form_translation` | Save a language version's translated copy (title / description / fields / report / systemText), or pause it via `isActive`; the structure is fixed by the source, you only change text, and omitted fields count as partial translation. |
+| `delete_form_translation` | Delete one language version. |
+
+### Examinees
+
+The people who take a quiz. Each examinee is bound to a single team; the tools return safe fields only — password, verification code, reset token and other sensitive fields are **never** exposed.
+
+| Tool | What it does |
+| --- | --- |
+| `list_examinees` | List the current team's examinees, with optional fuzzy search by email / name and status (active / disabled) filtering. |
+| `get_examinee` | View an examinee's detail (including custom `customData`) by its business ID `examineeId` (e.g. `AB1234567890`, shown in the list). |
+| `update_examinee` | Edit an examinee's name / status / customData by `examineeId` (customData is validated against the team's field definitions). **Email and team cannot be changed.** |
+
+### Records & Analytics
+
+Read quiz performance, conversion funnels and leads so the AI can close the build → measure → iterate loop. The lead tools return respondent info (PII).
+
+| Tool | What it does |
+| --- | --- |
+| `get_form_stats` | Read a quiz's stats over the last N days (default 30, max 180): KPI overview, daily trend, channels (utm_source), login types, devices, and per-question answer distributions. |
+| `get_form_funnel` | Read a quiz's conversion funnel over the last N days: viewed → started → submitted → lead captured → report viewed → CTA clicked → shared, plus per-channel funnel and drop-off points. |
+| `list_records` | List the current team's submission records (leads): examinee, answers, a compact report result and UTM; filter by quiz, report status and submitted time. |
+| `get_record` | View one record's detail by its `id` (returned by `list_records`): full answers, report result and submission metadata. |
+
+### Image upload
+
+| Tool | What it does |
+| --- | --- |
+| `prepare_image_upload` | Step 1: issue a direct-upload URL for a cover/image (PUT the file to it). |
+| `finalize_image_upload` | Step 2: verify and record the image into the team media library, returning a media id; reference it via `update_form`'s `flagImg` / `landingImage`. |
+
 <Callout type="info">
   Typical flows:
   - **Exam / scorecard**: `create_form` to create the quiz and get each question's `code` → use `update_form` or `set_dimension_analysis` to configure report formulas / dimensions by `code`.
@@ -184,6 +227,10 @@ Once connected, the AI assistant can call the tools below. They all act on the t
 - **Scorecard choice scoring** uses Option Scoring: in the scorecard scene `update_question` rejects `score` / `correctAnswer` / `aiMatch`. Edit choice scores in the admin UI, or delete and recreate. The outcome scene rejects those three parameters likewise (it decides by votes — there is no scoring).
 - **Outcome quiz question types**: voting questions are SingleCheck / MultiCheck / TrueFalse (FillBlank is not supported); result-type **images** can't be uploaded via MCP yet — configure them in the editor (images already configured are kept when MCP updates `report.outcomes`).
 - **Scene and language are locked** after creation and can't be changed via MCP.
+- **Delete is a soft delete**: `delete_form` moves to the trash (auto-purged after 5 days), not an immediate permanent delete; for permanent removal, delete again in the admin UI.
+- **Duplicate copies no data**: `duplicate_form` clones structure and translations only — it does **not** copy submission records, sharing settings or integrations (which hold secrets); the new quiz starts clean.
+- **Examinee identity fields are immutable**: `update_examinee` can't change email, team, or `examineeId` (they are the auth identity).
+- **Leads contain PII**: `list_records` / `get_record` return respondent email, name, custom fields, etc. — handle them responsibly.
 - **FillBlank AI grading** (`aiMatch`, quiz scene only, Beta) consumes your team's [AI credits](/en/account/ai-billing).
 
 ## Security & rate limits
