@@ -5,8 +5,8 @@ export default {
   publish: '发布与分享',
   results: '收集结果与分析',
   account: '账户与订阅',
+  teams: '团队与协作',
   integrations: '集成与 API'
   // —— 以下为后续阶段预留 ——
-  // teams: '团队与协作',
   // library: '题库与模板'
 }

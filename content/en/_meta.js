@@ -5,8 +5,8 @@ export default {
   publish: 'Publish & Share',
   results: 'Responses & Analytics',
   account: 'Account & Billing',
+  teams: 'Teams & Collaboration',
   integrations: 'Integrations & API'
   // —— Reserved for later phases ——
-  // teams: 'Teams & Collaboration',
   // library: 'Question Banks & Templates'
 }

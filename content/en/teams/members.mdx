@@ -1,0 +1,36 @@
+---
+title: Members & Roles
+---
+
+import { Callout } from 'nextra/components'
+
+# Members & Roles
+
+## Inviting members
+
+Under **Settings → Members**, enter an email and pick a role to send an invitation. The recipient joins via the link in the invite email (valid for 7 days). Registered users join directly; others are guided to sign up first.
+
+## The four roles
+
+A team has four roles, from most to least privileged:
+
+| Role | What they can do |
+| --- | --- |
+| **Owner** | The team's ultimate owner with full access — billing, deleting the team, transferring ownership, and binding a custom domain. Each team has **exactly one** owner. |
+| **Admin** | Manages all of the team's forms, question banks, members, and team info, and can view audit logs. **Cannot** touch billing, delete the team, transfer ownership, or bind a custom domain — and cannot appoint or manage other admins. |
+| **Member** | Creates forms and views/edits forms they created or that are shared with them. |
+| **Viewer** | Read-only: can only view forms shared with them and their results, with no ability to create or change anything. Ideal for people who need to see data but not build (sales, clients, stakeholders). |
+
+## Who can manage whom
+
+- **Owner** can manage everyone: appoint admins, add/remove/change members, transfer ownership.
+- **Admin** can manage members and viewers only — **not** other admins or the owner, and cannot promote anyone to admin.
+- Only the **owner** can appoint admins, transfer ownership, or delete the team.
+
+<Callout type="info">
+  Want someone to see results without touching the quiz? Invite them as a **Viewer**, then share the relevant forms with them.
+</Callout>
+
+<Callout type="warning">
+  Leaving a team: an owner must transfer ownership first; admins, members, and viewers can leave anytime.
+</Callout>
