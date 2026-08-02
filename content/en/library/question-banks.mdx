@@ -1,0 +1,57 @@
+---
+title: Question Banks
+---
+
+import { Callout, Steps } from 'nextra/components'
+
+# Question Banks
+
+A question bank is a pool of **questions you can draw from repeatedly**. Find it under **Question Banks** in the left sidebar.
+
+<Callout type="warning">
+  Every question in a bank **must have a correct answer** — banks are scored question pools, not a store for data-collection fields.
+</Callout>
+
+![RooQuiz question banks list with question counts and difficulty](/img/en/library/question-banks.webp)
+
+## Creating a bank
+
+<Steps>
+### Click "Create Question Bank"
+
+The subtitle reads "Quiz or Scorecard" — banks serve those two scored scenarios.
+
+### Fill in the basics
+
+**Bank Name** (up to 50 characters), **Description** (up to 200 characters), and **Difficulty Level**.
+
+### Add questions
+
+Open the bank and click **Add Question**. It works like authoring in the editor: pick a type, write the stem and options, set the correct answer.
+</Steps>
+
+## Managing questions
+
+- **Drag to reorder** — rearrange questions directly.
+- **Batch Delete** — tick several and remove them at once. This **cannot be undone**.
+- **Edit Info** — change the bank's name, description and difficulty.
+
+<Callout type="warning">
+  A bank **must be emptied before it can be deleted** — you'll see "Please delete all questions before deleting this question bank". That guard exists so you don't wipe a whole bank by accident.
+</Callout>
+
+## Using a bank in a quiz
+
+When creating a quiz from the dashboard, choose the **random question bank** entry, pick a bank and say how many questions to draw. Each respondent then gets a different combination.
+
+<Callout type="warning">
+  What you get is a **Random Quiz** — a different type from Quiz. **The type cannot be changed after creation**, so switching between fixed and random questions means rebuilding. See [The four quiz types](/en/getting-started/quiz-types).
+</Callout>
+
+## Bulk authoring through an AI client
+
+Banks want a lot of questions and typing them in is slow. If you've connected [MCP](/en/integrations/mcp), an AI client can write questions into a bank in bulk.
+
+<Callout type="warning">
+  Add roughly **30 questions per batch**. Larger batches tend to time out, and retrying after a timeout can leave duplicates behind.
+</Callout>

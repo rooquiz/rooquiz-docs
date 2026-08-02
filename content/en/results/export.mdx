@@ -1,0 +1,59 @@
+---
+title: Exporting Data
+---
+
+import { Callout } from 'nextra/components'
+
+# Exporting Data
+
+Responses, leads and respondents can all be exported as **CSV** (UTF-8, opens directly in Excel).
+
+<Callout type="warning">
+  Export is a **Pro feature** with a weekly cap on the number of exports. Free teams see an upgrade prompt.
+</Callout>
+
+## Two kinds of export
+
+| Method | Notes |
+| --- | --- |
+| **Export selected** | Tick some rows and export just those. Generated in your browser and **does not use your quota** |
+| **Export all** | Exports everything matching your current filters. Generated on the server and **uses one export** |
+
+<Callout type="info">
+  Filter before you export. "Export all" exports the **current filter results**, not the whole table — the tighter the filter, the more useful the file and the less quota you burn.
+</Callout>
+
+## The confirmation dialog
+
+"Export all" opens a confirmation that puts the important facts in front of you first:
+
+- **Data range** — all data, or the current filter results (switchable right here).
+- **Rows** — roughly how many. If the count fails you're told, and you can still proceed.
+- **File format** — CSV (UTF-8, opens in Excel).
+- **This week** — how many exports remain out of your limit, and when it resets.
+
+Confirm and the file is **generated in the background and downloads automatically**; you can leave the page in the meantime.
+
+## Quota and reset
+
+The weekly allowance resets on **Monday UTC**. Both the dialog and the limit-reached message tell you the exact reset time.
+
+<Callout type="info">
+  **Failed exports don't count.** Only an export that actually produced a file uses your quota.
+</Callout>
+
+## When the dataset is too large
+
+There's a row limit per export. Going over it is rejected outright (**without using quota**) and you get a ready-to-copy summary to email technical support, who will export it for you.
+
+<Callout type="info">
+  If an export seems to spin forever, the page stops waiting after five minutes and says so — the job is still running in the background, so come back to the page a little later.
+</Callout>
+
+## What's in the file
+
+Beyond the answers themselves, exports typically include the record number, submitted-at time, respondent email and ID, and level. Lead and respondent exports have their own column sets.
+
+<Callout type="warning">
+  Exported files contain personal information respondents provided. Store and share them according to your organization's privacy and compliance rules.
+</Callout>

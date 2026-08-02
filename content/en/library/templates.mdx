@@ -1,0 +1,45 @@
+---
+title: Template Center
+---
+
+import { Callout } from 'nextra/components'
+
+# Template Center
+
+The **Template Center** holds complete quizzes you can clone — questions, logic, scoring and report configuration all included. Starting from a template is much faster than starting from blank, which is why it's the default path when creating a quiz.
+
+## Picking a template
+
+- Filter by **category**, or tick **Recommended Only** to see just the curated ones.
+- Cards show usage and view counts, which tells you what actually works.
+- Open a template to **preview** it, and switch between **Desktop** and **Mobile** to check it holds up on a small screen.
+
+When it fits, click **Use this template**. You get your own copy of the quiz and can change anything — **your edits never touch the template itself**.
+
+<Callout type="info">
+  A template only decides your **starting point**. The resulting quiz is indistinguishable from one built blank; there is no template lock-in.
+</Callout>
+
+## Publishing your own quiz as a template
+
+A quiz that works well can be published as a template so the rest of your team can clone it. Publishing asks for a **cover image**, a category and a description.
+
+## Unpublishing and republishing
+
+Templates can be **unpublished**:
+
+- It disappears from the Template Center and from the creation dialogs.
+- Quizzes already cloned from it are **completely unaffected**.
+- You can **republish** at any time; while it's down the list shows an **Unpublished** tag.
+
+<Callout type="warning">
+  Unpublishing is not deleting. If you just don't want it used this quarter, unpublish — no need to delete and rebuild later.
+</Callout>
+
+## Creating templates through an AI client
+
+With [MCP](/en/integrations/mcp) connected, an AI client can build a quiz and publish it as a template for you.
+
+<Callout type="warning">
+  The publish call **sometimes times out even though the write succeeded**. After a timeout, check the template list before retrying — otherwise you end up with two copies of the same template.
+</Callout>

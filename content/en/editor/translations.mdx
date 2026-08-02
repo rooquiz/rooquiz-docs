@@ -1,0 +1,58 @@
+---
+title: Multilingual Versions
+---
+
+import { Callout, Steps } from 'nextra/components'
+
+# Multilingual Versions
+
+One quiz can have several **language versions**. They share a single question structure and scoring configuration and differ only in wording — so you edit a question once and every language follows. No more "added a question to the Chinese version and forgot the English one".
+
+<Callout type="info">
+  The model is **one source, many translations**: the quiz itself is the **source** with a **primary language**; each other language is a **translation** layered onto the source structure by question code.
+</Callout>
+
+## Adding a language version
+
+Under the quiz's **Settings → Language versions**:
+
+<Steps>
+### Confirm the primary language
+
+The **primary language** is the language of the source content. Languages already taken by a translation can't be chosen as the primary one.
+
+### Add a language
+
+Click **Add language** and pick a target. The source copy is cloned as your starting draft.
+
+### Edit the translation
+
+Click **Edit translation** to open the translation editor and work through the copy.
+</Steps>
+
+![The RooQuiz translation editor with source copy on the left and translations on the right](/img/en/editor/translations.webp)
+
+*The translation editor is side by side: source copy on the left (read-only), the target language on the right. The toggle at the top controls whether this language version is live.*
+
+## What a translation can change
+
+Only **human-readable copy**: title, description, question stems, option labels, report level names and descriptions, outcome names, and answer-page system text.
+
+You **cannot** change structure in a translation. Adding or removing questions, adjusting scoring and editing conditional logic all happen on the source quiz, and every language picks the change up automatically.
+
+<Callout type="info">
+  Partial translations are allowed. Untranslated questions fall back to the source wording rather than going blank or erroring — so you can ship early and finish later.
+</Callout>
+
+## Which version respondents see
+
+Each language version has its own public link (the share URL with a `?lang=` parameter), and you can **Open public page** straight from the settings to preview it.
+
+## Pausing and deleting
+
+- **Paused** — a language version can be marked **Paused** on its own. It becomes unavailable publicly but the content is kept, independently of the quiz's overall on/off switch.
+- **Deleting** — removing a language version **keeps the submissions**, because responses belong to the source quiz rather than the translation.
+
+<Callout type="warning">
+  Changing the primary language only **re-labels** the source content — it translates nothing. To offer another language, add a translation instead.
+</Callout>

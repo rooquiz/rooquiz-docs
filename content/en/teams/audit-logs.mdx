@@ -1,0 +1,43 @@
+---
+title: Audit Logs
+---
+
+import { Callout } from 'nextra/components'
+
+# Audit Logs
+
+**Audit logs** record the significant operations in your team: who did what, to which object, when, and whether it succeeded. Find them under **Settings → Audit Logs**.
+
+<Callout type="warning">
+  **Only the organization owner can view audit logs.** Admins and members see a notice instead.
+</Callout>
+
+## Columns
+
+| Column | Notes |
+| --- | --- |
+| **Action** | What happened — "Invite member", "Delete quiz", "Export data" |
+| **Status** | Success or Failed |
+| **Actor** | Who did it. Operations started by the platform itself (retention cleanup, moderation bans) show as **System** |
+| **Target** | The object acted on, with an ID prefix |
+| **Time** | When it happened |
+
+Click any row to expand its **Details**. Different actions carry different fields — an export, for instance, also records the data type (responses / leads / respondents) and the row count.
+
+## What's covered
+
+Broadly:
+
+- **Team** — delete team, transfer ownership, plan change.
+- **Members** — invite, remove, leave, role change, disable / enable.
+- **Quizzes** — create, update, trash, restore, permanent delete, ban / unban.
+- **Leads and respondents** — trash, restore, permanent delete.
+- **Connectors** — create, update, delete.
+- **Credentials** — API keys and MCP tokens: create, revoke, restore, delete.
+- **Usage** — AI consumption, email consumption, [data exports](/en/results/export).
+
+Filter by **action** and **status** at the top to answer questions like "who exported data last week".
+
+<Callout type="info">
+  Logs are **read-only** — they can't be edited or deleted. An audit log you can alter isn't worth much.
+</Callout>

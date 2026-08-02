@@ -1,0 +1,48 @@
+---
+title: Custom Domain
+---
+
+import { Callout, Steps } from 'nextra/components'
+
+# Custom Domain
+
+By default, public quiz links live on the platform domain. With a **custom domain**, respondents see your own domain instead — better for brand consistency and trust.
+
+Find it under **Settings → Custom Domain**.
+
+<Callout type="warning">
+  Custom domain is a **Pro plan feature**.
+</Callout>
+
+## Setting it up
+
+<Steps>
+### Enter your domain
+
+Fill in the domain you want to use, e.g. `quiz.yourbrand.com`. A subdomain is recommended over your apex domain.
+
+### Add the DNS record
+
+The **DNS Configuration Guide** on the page gives you one record with three columns — **Type / Name / Value**. Add it verbatim at your DNS provider.
+
+### Wait for verification
+
+Come back and click **Refresh status**. The status moves between **Verifying** and **Verified**, or shows **Verification Failed**.
+</Steps>
+
+<Callout type="info">
+  DNS records take **a few minutes up to 48 hours** to propagate, depending on your provider. Not verifying immediately after setup is normal — refresh again later.
+</Callout>
+
+## Status values
+
+| Status | Meaning |
+| --- | --- |
+| **Verifying** | The record is submitted; waiting on DNS propagation and the check |
+| **Verified** | The domain is live and public links use it |
+| **Verification Failed** | No correct record found — re-check Type / Name / Value against the guide |
+| **Suspended** | The Pro plan has expired |
+
+<Callout type="warning">
+  When Pro expires the domain becomes **Suspended**: there is a **7-day grace period**, after which the custom domain stops resolving. Renewing restores it — you don't need to redo the DNS setup.
+</Callout>
