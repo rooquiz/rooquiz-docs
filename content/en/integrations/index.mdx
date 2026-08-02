@@ -6,12 +6,20 @@ import { Callout, Cards } from 'nextra/components'
 
 # Integrations & API
 
-Beyond building quizzes in the visual editor, RooQuiz lets you connect AI assistants to your team through **MCP (Model Context Protocol)**, so clients like Claude can create, query, and modify quizzes on your behalf.
+This section is for **developers** — how to reach RooQuiz from your own code or an AI client:
 
 <Cards>
+  <Cards.Card title="REST API" href="/en/integrations/rest-api" />
   <Cards.Card title="MCP Integration" href="/en/integrations/mcp" />
 </Cards>
 
+- **REST API** — pull forms and submissions with an account-level API key. Good for your own dashboards or syncing to a warehouse.
+- **MCP integration** — connect an AI client like Claude to your team so it can create, query and modify quizzes directly.
+
+## Integrating without code
+
+If all you want is "tell me when a lead arrives" or "sync leads into my email tool", **you don't need the API**. Use one of the five channels in [Connectors & Automation](/en/connectors): Email, Webhook, Slack, Zapier, Kit.
+
 <Callout type="info">
-  More integration capabilities (open API, webhooks, etc.) will roll out in future releases. This section will be updated accordingly.
+  The difference is **push versus pull**: connectors push to you when an event happens; the REST API lets you pull on your own schedule.
 </Callout>

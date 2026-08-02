@@ -6,12 +6,20 @@ import { Callout, Cards } from 'nextra/components'
 
 # 集成与 API
 
-除了在后台可视化编辑器中搭建测验,RooQuiz 还支持通过 **MCP(Model Context Protocol)** 把 AI 助手接入你的团队,让 Claude 等客户端直接帮你创建、查询和修改测验。
+这一章面向**开发者**,讲怎么用代码或 AI 客户端接入 RooQuiz:
 
 <Cards>
+  <Cards.Card title="REST API" href="/zh/integrations/rest-api" />
   <Cards.Card title="MCP 接入" href="/zh/integrations/mcp" />
 </Cards>
 
+- **REST API** —— 用账号级 API 密钥拉取表单与提交记录,适合自建看板、同步到数据仓库。
+- **MCP 接入** —— 把 Claude 这类 AI 客户端接进你的团队,直接创建、查询和修改测验。
+
+## 不写代码的集成
+
+如果你要的只是「新线索来了通知我」「把线索同步到邮件营销工具」,**不需要碰 API**。用 [连接与自动化](/zh/connectors) 里的五个渠道即可:邮件、Webhook、Slack、Zapier、Kit。
+
 <Callout type="info">
-  更多集成能力(开放 API、Webhook 等)将在后续版本中陆续开放,本章会同步更新。
+  两者的区别是**推还是拉**:连接是事件发生时**推**给你,REST API 是你按自己的节奏来**拉**。
 </Callout>

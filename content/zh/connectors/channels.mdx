@@ -1,0 +1,63 @@
+---
+title: 五个渠道
+---
+
+import { Callout } from 'nextra/components'
+
+# 五个渠道
+
+每个渠道**每个团队只能配一个**。要换掉已有的,先删除再重建。
+
+## 邮件
+
+对免费版开放,受 [邮件额度](/zh/account/ai-billing) 限量。
+
+- **收件人** —— 输入邮箱后回车,**最多 10 个**。也可以加「答题者邮箱」这个动态收件人,把通知直接发给对方。
+- **主题** —— 最长 200 字符,不允许换行和 HTML。
+- **正文** —— 最长 10000 字符,不允许 HTML。
+
+主题和正文都支持**插入变量**,分两组:
+
+- **系统变量** —— 线索名、答题者邮箱、测评名称、记录编号、提交时间、报告链接、线索页链接。
+- **测评题目** —— 直接引用某道题的答案。
+
+## Webhook
+
+把事件以 POST 推到你自己的 URL,必须是 **HTTPS**。
+
+<Callout type="warning">
+  创建时会给一个**签名密钥,只显示这一次**——关掉弹窗就再也看不到了,请当场复制保存。
+</Callout>
+
+每次投递都带 `X-Rooquiz-Signature` 头,值是用该密钥对请求体做的 **HMAC-SHA256**。你的服务端应当校验它,确认请求确实来自 RooQuiz。
+
+## Slack
+
+点 **连接 Slack** 走 OAuth 授权,然后选一个频道。
+
+<Callout type="warning">
+  机器人**不会**被自动拉进频道。选定频道后请先在该频道执行 `/invite @rooquiz`,**私有频道尤其必须**,否则投递会以 `not_in_channel` 失败。
+</Callout>
+
+可以自定义**消息模板**,支持 Slack mrkdwn(`*粗体*`、`_斜体_`、`` `代码` ``、`<url|文字>`)和系统变量。留空则使用默认的 Block Kit 格式。
+
+## Zapier
+
+用 Zapier 把线索接到上千个应用:
+
+1. 在 Zapier 新建 Zap,触发器选 **Webhooks by Zapier**。
+2. 事件选 **Catch Hook**,复制它生成的 Webhook URL。
+3. 回到 RooQuiz 粘贴该 URL 并保存,再用 **发送测试** 验证。
+
+## Kit
+
+Kit(原 ConvertKit)是邮件营销工具。点 **连接 Kit** 走 OAuth 授权后:
+
+- **给每条新线索打的标签** —— 应用到每个订阅者身上,比如 `quiz-lead`。输入一个不存在的名字,保存时会在 Kit 里**新建**这个标签。
+- 需要时点 **刷新标签** 重新拉取 Kit 侧的标签列表。
+
+在 Kit 里用这些标签触发邮件序列,新线索就能自动进入你的培育流程。
+
+<Callout type="info">
+  Webhook / Slack / Zapier / Kit 都是 **Pro 套餐专属**。
+</Callout>

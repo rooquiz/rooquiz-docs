@@ -1,0 +1,58 @@
+---
+title: Overview
+---
+
+import { Callout, Cards } from 'nextra/components'
+
+# Connectors & Automation
+
+**Connectors** push the leads and bookings your quizzes generate into the tools you already use — email, your own backend, Slack, or your email service provider. Find them under **Connectors** in the left sidebar.
+
+<Callout type="info">
+  Connectors are **team-level**: configure one and every quiz uses it. To let only certain quizzes fire a connector, narrow it with [trigger scope](/en/connectors/events#trigger-scope).
+</Callout>
+
+![The RooQuiz connectors page with the channel menu and configured connector cards](/img/en/connectors/connectors-list.webp)
+
+## The five channels
+
+| Channel | What it's for |
+| --- | --- |
+| **Email** | Send a customizable notification to chosen recipients when an event fires |
+| **Webhook** | POST to your own URL with an HMAC signature |
+| **Slack** | Authorize the Slack app and post new leads to a channel |
+| **Zapier** | Paste a Catch Hook URL and reach thousands of apps |
+| **Kit** | Add new leads to Kit (ConvertKit) as subscribers and tag them |
+
+Each connector runs independently — **disabling one does not affect the others**. Per-channel setup is covered in [The five channels](/en/connectors/channels).
+
+## Permissions and plan
+
+<Callout type="warning">
+  Only the **organization owner or an admin** can manage connectors. Other members get a no-permission notice, and the sidebar item isn't shown to them.
+</Callout>
+
+The **Email** channel is available on the free plan (limited by your email quota); the other four are **Pro only**. On a free team, selecting a Pro channel greys out the configuration area and offers an upgrade link.
+
+## What the connector card tells you
+
+Each configured connector shows:
+
+- **Enabled / Disabled** — whether it's working.
+- **Setup incomplete** — OAuth finished but a channel or final step is still missing. These do not deliver.
+- **Last delivery** — when it last fired and how it went (success / failed / quota exceeded).
+
+<Callout type="info">
+  After setting one up, hit **Send test** to confirm the other end really receives it, rather than finding out on your first real lead.
+</Callout>
+
+## In this section
+
+<Cards>
+  <Cards.Card title="The Five Channels" href="/en/connectors/channels" />
+  <Cards.Card title="Trigger Events & Scope" href="/en/connectors/events" />
+</Cards>
+
+<Callout type="info">
+  Want to pull data on your own schedule instead of receiving pushes? See the [REST API](/en/integrations/rest-api) and [MCP integration](/en/integrations/mcp).
+</Callout>

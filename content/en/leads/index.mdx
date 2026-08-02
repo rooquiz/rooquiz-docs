@@ -1,0 +1,46 @@
+---
+title: Overview
+---
+
+import { Callout, Cards } from 'nextra/components'
+
+# Leads & Conversion
+
+A **lead** is the layer that turns quiz results into business. Everyone who leaves their contact details with your team gets one row on the **Leads** page, carrying a follow-up status, an owner, colour tags, a response count, and their next booking.
+
+<Callout type="info">
+  Leads are **cross-quiz**. If the same person takes three of your quizzes, there is still only one lead — with a response count of 3. Deduplication is by respondent, not by submission.
+</Callout>
+
+## Where leads come from
+
+A lead is created automatically when **a signed-in respondent submits a quiz**. Anonymous submissions create no lead — there are no contact details to keep.
+
+So if you want a steady stream of leads, respondents need to sign in first. Two common ways:
+
+- Set the report to be **visible after sign-in** in the quiz settings. People sign in to see their result, and the submission is claimed for them in the process.
+- Turn on the [booking section](/en/bookings/respondent) on the result page. Booking requires a sign-in, which claims the submission along the way.
+
+You can also **add a lead by hand** on the **Leads** page — useful for people you met offline or who came from another channel. See [Lead detail](/en/leads/detail#add-a-lead-manually).
+
+## Leads vs. respondents
+
+These two are easy to confuse:
+
+| | Respondent | Lead |
+| --- | --- | --- |
+| What it is | A person's **account profile**: name, email, avatar, extended fields | That person's **follow-up record**: status, owner, tags, comments |
+| Created when | They submit, sign up, or you create them manually | They submit while signed in, or you add the lead by hand |
+| Where to find it | [Respondents](/en/respondents) | Leads |
+| Can exist without the other | Yes — a respondent can have no lead | No — a lead always belongs to a respondent |
+
+In short: **a respondent is the person; a lead is where that person sits in your pipeline.**
+
+## In this section
+
+<Cards>
+  <Cards.Card title="List & Board" href="/en/leads/list-board" />
+  <Cards.Card title="Statuses, Tags & Owners" href="/en/leads/status-tags" />
+  <Cards.Card title="Filters & Saved Views" href="/en/leads/views" />
+  <Cards.Card title="Lead Detail" href="/en/leads/detail" />
+</Cards>

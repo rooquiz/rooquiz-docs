@@ -1,0 +1,52 @@
+---
+title: Extended Fields & Avatars
+---
+
+import { Callout } from 'nextra/components'
+
+# Extended Fields & Avatars
+
+**Extended fields** are the extra details you want from respondents beyond the standard name and email — student ID, company, city, phone number. Once configured, respondents are asked to fill them in **on first sign-in**.
+
+Both settings live under **Respondents → Respondent Settings**.
+
+## Extended fields
+
+<Callout type="warning">
+  Up to **5 fields**. The limit is deliberate: the more you ask for at first sign-in, the more people you lose.
+</Callout>
+
+### Three field types
+
+| Type | Use for |
+| --- | --- |
+| **Single-line text** | Free input like a student ID or company name; supports a regex check |
+| **Dropdown** | Fixed lists like city or referral source; can allow multiple selections |
+| **Phone number** | A number with a country code, validated automatically |
+
+### Per-field options
+
+- **Required** — they can't continue without it.
+- **Unique** — the value must not repeat **anywhere in the organization**. Good for naturally unique identifiers like a student number.
+- **Placeholder** — the grey hint inside the input.
+- **Regex** (text only) — a JavaScript regex **without the surrounding slashes**, e.g. `^1\d{10}$`.
+- **Allow multiple** (dropdown only) — lets people pick more than one value.
+- **Allowed countries/regions** (phone only) — restricts the country codes on offer; the first one is preselected, and **leaving it empty allows all**.
+
+### Order and deletion
+
+Fields are shown as an accordion; use **Move up / Move down** to reorder them. That order is the order respondents fill them in.
+
+<Callout type="warning">
+  When you delete a field definition, values respondents already submitted **stay in the database** — they're simply no longer displayed. The confirmation dialog tells you how many definitions will go.
+</Callout>
+
+## Avatar theme
+
+When a respondent is created or signs up on their own, an avatar is generated at random from the **avatar theme** you pick, so you don't end up with a page of grey placeholders.
+
+Themes include Adventurer, Emoji, Lorelei, Thumbs, Robot and Notionist; expand the setting to preview all of them.
+
+<Callout type="info">
+  Changing the theme only affects respondents created **afterwards** — existing avatars are not regenerated.
+</Callout>

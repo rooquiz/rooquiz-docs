@@ -1,0 +1,50 @@
+---
+title: Trigger Events & Scope
+---
+
+import { Callout } from 'nextra/components'
+
+# Trigger Events & Scope
+
+Each connector decides **when it fires** (events) and **which quizzes may fire it** (scope). The two are ANDed: the event must match *and* the source quiz must be in scope before anything is delivered.
+
+## Trigger events
+
+Every connector needs at least one event:
+
+| Event | Fires when |
+| --- | --- |
+| **New lead** | Someone leaves their contact details with your team **for the first time** |
+| **Booking created** | Someone books a session |
+| **Booking cancelled** | Either side cancels a booking |
+| **Booking rescheduled** | A booking moves to a different time |
+
+<Callout type="warning">
+  **"New lead" fires once, the first time that person leaves their details.** The same person taking another quiz later does not fire it again, because leads are [deduplicated across quizzes](/en/leads#where-leads-come-from). If you want a notification on every submission, this is not the event you want.
+</Callout>
+
+## Trigger scope
+
+Scope controls which quizzes may fire this connector:
+
+- **All quizzes** — the default. Any event from any quiz in the team is delivered.
+- **Specific quizzes** — only the quizzes you select fire it.
+
+<Callout type="info">
+  Scope is matched against **the quiz the event came from**. For "New lead", that's the quiz where the person **first left their details** — not the most recent one they took.
+</Callout>
+
+A typical use: push your flagship lead-gen quiz to Slack so the team sees it instantly, and keep an internal quiz from bothering anyone.
+
+## Combinations worth copying
+
+| What you want | Events | Scope |
+| --- | --- | --- |
+| Everyone hears about a new client | New lead | All quizzes |
+| Only track the flagship quiz | New lead | Specific quizzes |
+| Get told when your calendar shifts | Booking cancelled + rescheduled | All quizzes |
+| Sync leads into your ESP | New lead | All quizzes |
+
+<Callout type="info">
+  Changing events or scope **only affects events from then on** — nothing is replayed.
+</Callout>

@@ -1,0 +1,58 @@
+---
+title: Statuses, Tags & Owners
+---
+
+import { Callout } from 'nextra/components'
+
+# Statuses, Tags & Owners
+
+A lead carries three independent labels: a **follow-up status** (how far along), **tags** (what kind of person), and an **assignee** (whose job it is).
+
+## Follow-up status
+
+The status is **single-select** and represents where the lead sits in the pipeline. Four are built in:
+
+| Status | Typical meaning |
+| --- | --- |
+| **New** | Just arrived, nobody has touched it |
+| **Contacted** | You've emailed or called |
+| **Converted** | They bought |
+| **Invalid** | Duplicate, test data, or clearly not a fit |
+
+Built-in statuses **can be renamed but not deleted**. On top of those you can add your own and drag to reorder — board columns follow that order.
+
+<Callout type="warning">
+  When you delete a custom status, leads sitting in it are **reset to the default status**. The confirmation dialog tells you how many are affected before you save.
+</Callout>
+
+## Tags
+
+Tags are **multi-select** colour labels for cross-cutting traits that have nothing to do with the stage — "Hot lead", "Follow up", "VIP". A lead can carry several at once.
+
+The division of labour: **status answers "how far along", tags answer "what kind of person"**. Don't use tags to simulate stages, or the two systems will fight each other when you filter.
+
+<Callout type="warning">
+  Deleting a tag **removes it from every lead** that carries it. The confirmation dialog tells you how many references will be cleared.
+</Callout>
+
+## Where to configure them
+
+Both live under **Leads → Lead settings**, in the "Lead Statuses" and "Lead Tags" sections.
+
+<Callout type="info">
+  Only the **organization owner** can edit these. Other members see the settings read-only, with a note saying so. Applying tags and changing statuses day to day is not restricted — any member can do that.
+</Callout>
+
+## Assignee
+
+The assignee hands a lead to a specific team member — it answers "whose job is this".
+
+- You can assign to **active, non-viewer members**. The [viewer role](/en/teams/members) cannot be assigned leads.
+- Change it on a single lead in the "Follow-up" block of the [detail page](/en/leads/detail), or on many at once with [bulk assign](/en/leads/list-board#bulk-actions).
+- Every change is written to the lead's **activity** timeline, and the new owner is notified.
+
+The assignee also matters for [bookings](/en/bookings): with approval turned on, it is the **lead owner** who confirms an incoming booking request.
+
+<Callout type="info">
+  Every status, tag and assignee change is recorded in the [lead's activity](/en/leads/detail#activity), including who changed it and when.
+</Callout>

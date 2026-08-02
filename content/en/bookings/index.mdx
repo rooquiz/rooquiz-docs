@@ -1,0 +1,62 @@
+---
+title: Overview
+---
+
+import { Callout, Cards, Steps } from 'nextra/components'
+
+# 1:1 Bookings
+
+The moment someone finishes a quiz and reads their result is the moment they're most willing to talk to you. **1:1 Bookings** lets them book a session with you right there on the result page — no third-party calendar tool, no email ping-pong about times.
+
+<Callout type="info">
+  Availability is a **team-level** resource: configure it once and every quiz shares it. You don't schedule your week again per quiz.
+</Callout>
+
+## Three steps to get it running
+
+<Steps>
+### Set your availability
+
+On the **1:1 Bookings** page open **Booking availability** and set your timezone, session length and weekly hours. See [Booking availability](/en/bookings/availability).
+
+### Turn on the booking section in a quiz
+
+Go to that quiz's **Share → Booking** and enable **Show booking section on result page**. See [The respondent side](/en/bookings/respondent).
+
+### Handle bookings on the bookings page
+
+New bookings land on the **1:1 Bookings** page. See [Managing bookings](/en/bookings/manage).
+</Steps>
+
+<Callout type="warning">
+  Until availability is configured, the result page shows **no** booking section even with the switch on — the settings page says so explicitly.
+</Callout>
+
+## The three sections of the list
+
+The **1:1 Bookings** page is ordered by what needs your attention:
+
+- **Waiting for you** — pending requests sit at the top when approval is on, because they're blocking someone else.
+- **Upcoming** — confirmed sessions that haven't happened yet; the very next one gets a large card with a countdown.
+- **Past** — history, collapsed by default.
+
+The **1:1 Bookings** item in the sidebar carries a badge with the pending count.
+
+## Statuses at a glance
+
+| Status | Meaning |
+| --- | --- |
+| **Pending** | A request awaiting confirmation by the lead owner (only when approval is on) |
+| **Scheduled** | Confirmed; the attendee has the meeting details |
+| **Completed** | The session happened — you marked it |
+| **No-show** | They didn't turn up — you marked it |
+| **Cancelled** | Called off by either side |
+| **Declined** | You turned the request down |
+
+## In this section
+
+<Cards>
+  <Cards.Card title="Booking Availability" href="/en/bookings/availability" />
+  <Cards.Card title="Managing Bookings" href="/en/bookings/manage" />
+  <Cards.Card title="The Respondent Side" href="/en/bookings/respondent" />
+</Cards>

@@ -1,0 +1,48 @@
+---
+title: Respondent Sign-in & Portal
+---
+
+import { Callout } from 'nextra/components'
+
+# Respondent Sign-in & Portal
+
+Respondents aren't only anonymous visitors who submit and leave — they can sign in, revisit their reports, and manage their own bookings. That self-service layer is also what makes [leads](/en/leads) possible in the first place.
+
+## When sign-in is required
+
+Answering a quiz **never** requires signing in. Two things trigger it:
+
+- **Seeing the full report** — if the quiz makes the report visible only after sign-in, respondents must sign in to see their complete result.
+- **Booking** — the [booking section](/en/bookings/respondent) on the result page requires a sign-in, so the attendee can reschedule or cancel on their own later.
+
+Sign-in is by **email code or Google** — no prior registration, no password to remember.
+
+<Callout type="info">
+  Signing in **claims** the anonymous submission: that response becomes theirs and the matching lead is created. This is exactly why leads only arrive reliably once a sign-in gate is in place.
+</Callout>
+
+## The portal
+
+Once signed in, respondents get their own portal with three tabs:
+
+| Tab | Contents |
+| --- | --- |
+| **Records** | Every response they've submitted to your team, with their reports |
+| **Bookings** | The sessions they've booked, with self-service reschedule and cancel |
+| **Account** | Name, avatar, and any [extended fields](/en/respondents/fields) you configured |
+
+<Callout type="info">
+  The portal is **scoped per team**: in team A a respondent sees only team A's records and bookings.
+</Callout>
+
+## How it maps back to the dashboard
+
+What respondents do in the portal shows up in your dashboard right away:
+
+- They reschedule or cancel → the [1:1 Bookings](/en/bookings/manage) list updates and the lead's activity records it.
+- They fill in an extended field → the matching column in [Respondents](/en/respondents) updates.
+- They sign in and claim a response → "claimed an anonymous response" appears in the lead's activity.
+
+<Callout type="warning">
+  **Disabling** a respondent in the dashboard stops them signing in to the portal, but keeps all their past submissions — you still see everything on your side.
+</Callout>

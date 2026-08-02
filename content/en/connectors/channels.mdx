@@ -1,0 +1,63 @@
+---
+title: The Five Channels
+---
+
+import { Callout } from 'nextra/components'
+
+# The Five Channels
+
+Each channel allows **one connector per team**. To replace an existing one, delete it first.
+
+## Email
+
+Available on the free plan, limited by your [email quota](/en/account/ai-billing).
+
+- **Recipients** — type an address and press Enter, **up to 10**. You can also add the dynamic "Respondent email" recipient to notify the person themselves.
+- **Subject** — up to 200 characters; no line breaks, no HTML.
+- **Body** — up to 10,000 characters; no HTML.
+
+Subject and body both support **inserting variables**, in two groups:
+
+- **System variables** — lead name, respondent email, quiz name, record number, submitted at, report link, lead page link.
+- **Quiz questions** — reference the answer to a specific question.
+
+## Webhook
+
+POSTs each event to your own URL, which must be **HTTPS**.
+
+<Callout type="warning">
+  A **signing secret is shown exactly once** at creation — close the dialog and it's gone. Copy it right away.
+</Callout>
+
+Every delivery carries an `X-Rooquiz-Signature` header: an **HMAC-SHA256** of the request body using that secret. Your server should verify it to confirm the request really came from RooQuiz.
+
+## Slack
+
+Click **Connect Slack** to run the OAuth flow, then pick a channel.
+
+<Callout type="warning">
+  The bot is **not** added to channels automatically. Run `/invite @rooquiz` in the target channel first — **required for private channels** — otherwise delivery fails with `not_in_channel`.
+</Callout>
+
+You can supply a **message template** using Slack mrkdwn (`*bold*`, `_italic_`, `` `code` ``, `<url|text>`) and system variables. Leave it empty for the default Block Kit format.
+
+## Zapier
+
+Use Zapier to reach thousands of apps:
+
+1. In Zapier, create a Zap and choose **Webhooks by Zapier** as the trigger.
+2. Pick the **Catch Hook** event and copy the Webhook URL it generates.
+3. Paste that URL into RooQuiz, save, and verify with **Send test**.
+
+## Kit
+
+Kit (formerly ConvertKit) is an email marketing tool. After **Connect Kit** and the OAuth flow:
+
+- **Tags for every new lead** — applied to every subscriber, e.g. `quiz-lead`. Type a name that doesn't exist yet and it is **created in Kit** on save.
+- Use **Refresh tags** to re-fetch the tag list from Kit when needed.
+
+Trigger email sequences from those tags in Kit and new leads flow straight into your nurture path.
+
+<Callout type="info">
+  Webhook, Slack, Zapier and Kit are all **Pro plan only**.
+</Callout>

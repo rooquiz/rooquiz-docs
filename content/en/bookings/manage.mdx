@@ -1,0 +1,70 @@
+---
+title: Managing Bookings
+---
+
+import { Callout, Steps } from 'nextra/components'
+
+# Managing Bookings
+
+The **1:1 Bookings** page is where you handle every session. Filters at the top narrow by quiz and status.
+
+## Handling pending requests
+
+With [approval](/en/bookings/availability#approval) on, new bookings land in "Waiting for you":
+
+- **Confirm request** — confirms the meeting and releases the address. You can set a meeting link and instructions **for this one session**; leave them empty to fall back to the team-level settings.
+- **Decline request** — you may add a reason, which goes into the email. They're notified and can request another time.
+
+<Callout type="info">
+  Reviewing is done by the **organization owner, an admin, or that lead's owner**. A request whose meeting time has already passed can only be declined, not confirmed.
+</Callout>
+
+## Actions on a confirmed session
+
+| Action | Notes |
+| --- | --- |
+| **Reschedule** | Pick a new time from your available slots; the attendee is emailed and the 24h reminder is re-armed |
+| **Mark completed** | It happened. Internal bookkeeping — the attendee is not contacted |
+| **Mark no-show** | They didn't turn up. Also internal only |
+| **Cancel booking** | Cancels and notifies the attendee by email |
+| **View submission** | Jumps to the response they submitted |
+
+<Callout type="warning">
+  **Completed** and **No-show** can only be set once the meeting has **already started**. Rescheduling only applies to sessions in the Scheduled state.
+</Callout>
+
+## Adding a booking by hand
+
+For sessions agreed over the phone or in a chat, record them directly:
+
+<Steps>
+### Click "Add booking"
+
+Top right of the **1:1 Bookings** page.
+
+### Pick the lead
+
+Search by name or email. **Ordinary members can only add bookings for leads they own**; owners and admins have no such limit.
+
+### Pick a time
+
+**Available times** — choose from the normal slot grid, exactly what a respondent would see.
+
+**Custom time** — enter any date and time, **bypassing the slot grid**. Useful for recording a special arrangement you already agreed.
+
+### Decide about notifying
+
+Tick "Send a confirmation email to the attendee" and they get a confirmation; leave it off and the booking is just a record on your side.
+</Steps>
+
+<Callout type="warning">
+  A lead can have **only one active booking at a time**. Someone who already has one is flagged — cancel or reschedule the existing session first.
+</Callout>
+
+## How it ties into leads
+
+Bookings and [leads](/en/leads) are wired together:
+
+- The "Next up" block on a lead's detail page shows the upcoming session and lets you reschedule or cancel in place.
+- The leads list has a **Next booking** column, and you can [filter](/en/leads/views#available-filters) by whether a lead has one.
+- Every request, confirmation, decline, reschedule and cancellation is written to the lead's **activity**.

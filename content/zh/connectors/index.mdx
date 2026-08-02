@@ -1,0 +1,58 @@
+---
+title: 概览
+---
+
+import { Callout, Cards } from 'nextra/components'
+
+# 连接与自动化
+
+**连接(Connectors)** 负责把测评产生的新线索和预约,推到你已经在用的地方——邮件、你自己的后端、Slack、或者邮件营销工具。入口在左侧栏的 **连接**。
+
+<Callout type="info">
+  连接是**团队级**的:配置一次,所有测评共用,不必给每张测评单独配一遍。想只让某几张测评触发,用 [触发范围](/zh/connectors/events#触发范围) 收窄。
+</Callout>
+
+![RooQuiz 连接页:左侧渠道菜单与已配置的连接卡片](/img/zh/connectors/connectors-list.webp)
+
+## 五个渠道
+
+| 渠道 | 用来做什么 |
+| --- | --- |
+| **邮件** | 事件发生时给指定收件人发一封可自定义的通知邮件 |
+| **Webhook** | 带 HMAC 签名推到你自己的 URL |
+| **Slack** | 授权 Slack 应用,把新线索发成频道消息 |
+| **Zapier** | 粘贴 Catch Hook URL,接到上千个应用 |
+| **Kit** | 把新线索写进 Kit(ConvertKit)成为订阅者并打标签 |
+
+每个渠道独立运行,**禁用其中一个不影响其他**。各渠道的具体配置见 [五个渠道](/zh/connectors/channels)。
+
+## 权限与套餐
+
+<Callout type="warning">
+  只有**团队所有者或管理员**能管理连接。其他成员访问会看到无权限提示,侧边栏也不显示这一项。
+</Callout>
+
+**邮件**渠道对免费版开放(受邮件额度限量),其余四个是 **Pro 套餐专属**。免费团队选中 Pro 渠道时,配置区会置灰并给出升级入口。
+
+## 连接卡片上的状态
+
+每条已配置的连接会显示:
+
+- **已启用 / 已禁用** —— 是否在工作。
+- **未完成配置** —— OAuth 授权完成但还没选频道 / 完成设置,这类连接不会投递。
+- **最近投递** —— 上一次投递的时间与结果(成功 / 失败 / 额度不足)。
+
+<Callout type="info">
+  配好之后建议点一下 **发送测试**,先确认对端真的收得到,再等真实线索。
+</Callout>
+
+## 这一章包含
+
+<Cards>
+  <Cards.Card title="五个渠道" href="/zh/connectors/channels" />
+  <Cards.Card title="触发事件与范围" href="/zh/connectors/events" />
+</Cards>
+
+<Callout type="info">
+  想按自己的节奏拉数据、而不是被动接收推送?看 [REST API](/zh/integrations/rest-api) 与 [MCP 接入](/zh/integrations/mcp)。
+</Callout>

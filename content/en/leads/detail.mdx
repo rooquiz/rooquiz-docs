@@ -1,0 +1,67 @@
+---
+title: Lead Detail
+---
+
+import { Callout, Steps } from 'nextra/components'
+
+# Lead Detail
+
+Click any lead in the list or board to open its **detail page** — everything about one person in one place: who they are, which quizzes they took, what your team has said to them, and when you're meeting next.
+
+## What's on the page
+
+| Block | Contents |
+| --- | --- |
+| **Respondent** | Name, email, avatar, and whether they are "Registered" or "Lead only". Top right jumps to their full profile in [Respondents](/en/respondents) |
+| **Follow-up** | Where you change status, assignee and tags |
+| **Next up** | Their next upcoming [booking](/en/bookings) with a countdown; reschedule or cancel from here |
+| **Responses** | Every submission this person has made; click through to a single report |
+| **Activity** | An automatically recorded timeline of changes |
+| **Comments** | Your team's internal follow-up notes |
+
+<Callout type="info">
+  "Registered" means they set a password and verified their email, so they can sign in to the [respondent portal](/en/respondents/portal). "Lead only" means they just left contact details.
+</Callout>
+
+## Activity
+
+The activity timeline is **written by the system** and cannot be edited by hand. It answers "what has happened to this lead":
+
+- Submitted a response, claimed an anonymous response, regenerated a report
+- Who moved the status, and from which value to which
+- Assigned or unassigned an owner
+- Tags added or removed
+- Booking requested, confirmed, declined, rescheduled, cancelled
+- Lead added manually
+
+## Comments
+
+Comments are **internal** follow-up notes — respondents never see them. You can **reply** to a comment to keep a thread together, and delete comments you wrote.
+
+<Callout type="info">
+  Responses and activity show only the most recent few by default, with a "Show more" toggle at the bottom. That's a display-level fold and does not affect exports.
+</Callout>
+
+## Add a lead manually
+
+For people you met offline or who arrived through another channel, click **Add lead** on the **Leads** page:
+
+<Steps>
+### Choose the source
+
+**Existing respondent** — search your respondents by name or email and pick one. People who are already leads are flagged and can't be added twice.
+
+**New respondent** — enter a name and email to create the respondent profile and the lead together. If you've configured [extended fields](/en/respondents/fields), you can fill those in here too.
+
+### Write a first note
+
+The "First note" is saved as the lead's **first comment** — a good place to record where you met.
+
+### Save
+
+The lead appears in the list, and its activity records that it was added manually.
+</Steps>
+
+<Callout type="warning">
+  Deduplication is by email: if that address is already a lead, you're told it exists and given a link to open it, rather than creating a second one.
+</Callout>

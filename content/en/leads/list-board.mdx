@@ -1,0 +1,52 @@
+---
+title: List & Board
+---
+
+import { Callout } from 'nextra/components'
+
+# List & Board
+
+The **Leads** page has two views, switched with the **List / Board** toggle in the top right. The choice is yours alone — it does not change what teammates see.
+
+![The RooQuiz leads list with respondent, status, tags and owner columns](/img/en/leads/leads-list.webp)
+
+## List view
+
+Best for **working in bulk** and sorting by a field. The table has these columns:
+
+| Column | Meaning |
+| --- | --- |
+| **Respondent** | Name and email; click to open the [lead detail](/en/leads/detail) |
+| **Status** | Where they sit in the pipeline — see [Statuses, Tags & Owners](/en/leads/status-tags) |
+| **Tags** | Colour tags; a lead can carry several at once |
+| **Assignee** | The team member who owns this lead |
+| **Responses** | How many quizzes this person has submitted in total |
+| **Next booking** | Their next upcoming [booking](/en/bookings), blank if none |
+| **Last response** | When they last submitted |
+| **First quiz** | The quiz where they first left their details |
+
+The list uses **infinite scroll** — keep scrolling to load more — and column headers are sortable.
+
+## Board view
+
+Columns are **follow-up statuses**, one per status, and dragging a card to another column changes its status. Good for walking the pipeline once a day and pushing people along.
+
+<Callout type="info">
+  Dragging a card also changes its **position within the column**, and that order is remembered — so you can pull today's calls to the top.
+</Callout>
+
+## Bulk actions
+
+Tick several leads in list view and a bulk action bar appears:
+
+- **Assign owner** — hand the selected leads to a team member; they get a single aggregated notification.
+- **Tag leads** — offered as **Add tag** and **Remove tag**. Use these for batches rather than replacing the whole tag set, which would wipe tags other people added.
+- **Move to trash** — leads go to the trash and can be **restored within 5 days**.
+
+<Callout type="warning">
+  All three bulk actions are capped at **50 leads at a time**. Select more and you'll be told; just work in batches.
+</Callout>
+
+<Callout type="info">
+  Moving to trash removes only the **follow-up record**. The respondent and their submissions are untouched. To remove the person as well, go to [Respondents](/en/respondents).
+</Callout>

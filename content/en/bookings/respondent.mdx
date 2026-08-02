@@ -1,0 +1,52 @@
+---
+title: The Respondent Side
+---
+
+import { Callout } from 'nextra/components'
+
+# The Respondent Side
+
+Respondents see exactly one booking entry point: **the booking section on the result page**. This page covers what it looks like, how to turn it on, and what they can do for themselves afterwards.
+
+## Turning the booking section on
+
+Open the quiz's **Share → Booking** and enable **Show booking section on result page**.
+
+Three pieces of copy are customizable; leave them empty to use the default wording in the quiz language:
+
+- **Section title** — e.g. "Let's talk about your training plan".
+- **Section description** — one line on what the session covers.
+- **Button text** — e.g. "Book a free consultation".
+
+<Callout type="warning">
+  Until [availability](/en/bookings/availability) is configured, nothing shows even with the switch on — the settings page tells you to set it up first.
+</Callout>
+
+## What the respondent does
+
+1. Submits the quiz and reads their result.
+2. Picks a time in the booking section. Times are shown **in their own timezone**, not yours.
+3. Clicks to book, which requires a **sign-in** (email code or Google).
+4. After submitting: with [approval](/en/bookings/availability#approval) on the booking is Pending until you confirm and only then do they get the meeting address; with it off they receive the confirmation and details immediately.
+
+<Callout type="info">
+  Booking **requires sign-in** by design: only an identified person can reschedule and cancel on their own later, and only then can the session be attached to the right [lead](/en/leads).
+</Callout>
+
+## What they can do afterwards
+
+In the **Bookings** tab of their [portal](/en/respondents/portal), a signed-in respondent can:
+
+- See the session time and meeting details.
+- **Reschedule themselves** — pick another time from your current availability.
+- **Cancel**.
+
+Every reschedule or cancellation syncs to your **1:1 Bookings** page and is recorded in the lead's activity.
+
+## One booking per person, across quizzes
+
+A person can have **only one active booking with your team at a time**, and that limit spans quizzes: having booked from quiz A, the result page of quiz B tells them they already have a session rather than offering a second one.
+
+<Callout type="info">
+  The rule is judged by the **signed-in respondent**, not by submission. So the same person taking another quiz never double-books a slot.
+</Callout>
