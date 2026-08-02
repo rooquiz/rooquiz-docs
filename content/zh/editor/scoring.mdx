@@ -19,8 +19,14 @@ import { Callout } from 'nextra/components'
 - **作答反馈**:可向答题者展示每题的对错与解析。
 
 <Callout type="info">
-  计分相关设置主要在 Quiz 类型中可用。
+  分值与对错判定在 Quiz 与 Random Quiz 里可用。Scorecard 用的是维度公式,Outcome 完全不计分。
 </Callout>
+
+## Outcome:票数判型
+
+**Outcome 分型测评** 不算分,它**数票**:每个选项给一个或多个结果类型投票,答完后票数最高的类型胜出,平票按类型列表顺序取靠前的那个。
+
+每个类型可以单独配 CTA 按钮,把"有趣的结果"接到下一步行动上。详见 [四种测验类型](/zh/getting-started/quiz-types#outcome-分型测评)。
 
 ## Scorecard:维度分析与 AI 评测
 
@@ -34,6 +40,14 @@ import { Callout } from 'nextra/components'
 
 <Callout type="warning">
   AI 评测会消耗团队的 **AI 配额**。配额按周期计算,超出后该周期内将跳过 AI 评测(基础评分仍会生成)。配额的计费、按月重置与充值详见 [AI 额度与计费](/zh/account/ai-billing)。
+</Callout>
+
+## 等级与结果页行动
+
+给总分划**等级**(如 0-60 待提升 / 60-80 良好 / 80+ 优秀),每级可配名称、颜色、描述,还能挂一个 **CTA 按钮**——比如低分档引导「预约咨询」。这是把测评接到转化上的关键一步。
+
+<Callout type="info">
+  不想让答题者看到具体分数?可以**隐藏总分**,只保留等级名、等级描述与总结。适合"诊断感"重于"考试感"的测评。
 </Callout>
 
 ## 报告生成

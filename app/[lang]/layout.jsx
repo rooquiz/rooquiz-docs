@@ -3,12 +3,20 @@ import { Head, Search } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import 'nextra-theme-docs/style.css'
 
-export const metadata = {
-  title: {
-    default: 'RooQuiz 文档',
-    template: '%s – RooQuiz 文档'
-  },
-  description: 'RooQuiz 使用文档'
+// Per-locale metadata. A static `metadata` export would apply Chinese titles to the
+// /en tree as well, so this is generated from the [lang] segment instead.
+const meta = {
+  zh: { title: 'RooQuiz 文档', description: 'RooQuiz 使用文档' },
+  en: { title: 'RooQuiz Docs', description: 'RooQuiz product documentation' }
+}
+
+export async function generateMetadata({ params }) {
+  const { lang } = await params
+  const m = meta[lang] ?? meta[DEFAULT_LOCALE]
+  return {
+    title: { default: m.title, template: `%s – ${m.title}` },
+    description: m.description
+  }
 }
 
 // Languages shown in the navbar locale switcher
@@ -16,6 +24,10 @@ const i18n = [
   { locale: 'zh', name: '简体中文' },
   { locale: 'en', name: 'English' }
 ]
+
+// Must match `i18n.defaultLocale` in next.config.mjs — it is the fallback for both
+// the metadata above and the UI strings below.
+const DEFAULT_LOCALE = 'en'
 
 // Localized UI strings for the docs theme chrome (TOC, edit link, feedback, etc.)
 const ui = {
@@ -47,7 +59,7 @@ export async function generateStaticParams() {
 
 export default async function RootLayout({ children, params }) {
   const { lang } = await params
-  const t = ui[lang] ?? ui.zh
+  const t = ui[lang] ?? ui[DEFAULT_LOCALE]
 
   const navbar = <Navbar logo={<b>{t.logo}</b>} />
   const footer = <Footer>{t.footer}</Footer>

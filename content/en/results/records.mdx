@@ -6,29 +6,57 @@ import { Callout } from 'nextra/components'
 
 # Response Records
 
-Response records show **every submission** a quiz has received — the place to view raw data.
+Response records are **every single submission** a quiz received, under the quiz's **Records** tab. This is the raw data — for aggregate trends, go to [Insights](/en/results/insights).
 
-## What you can do
+![The RooQuiz response records list with the filter builder and table](/img/en/results/records-list.webp)
 
-- **View the list**: Browse all submissions in a table/list with submission time, source, and more.
-- **Filter and search**: Narrow down by time, completion status, keyword, and other criteria.
-- **View a single response**: Open any response to see the exact answer to each question.
-- **Export data**: Export responses to CSV / Excel for further processing in external tools.
+## Filters
 
-## Information in a record
+Click **Filters** to open the builder and stack conditions (they're ANDed together):
 
-Besides the answers, a record usually carries:
+| Field | Notes |
+| --- | --- |
+| **By question** | Filter on the answer to a specific question; choice questions support "is any of / is none of / is empty / is not empty" |
+| **Respondent** | Submissions from one person |
+| **UTM source** | Which channel they came from, paired with [UTM tracking](/en/publish/tracking) |
+| **Score** | A numeric range (**is between** a min and max) |
+| **Level** | Which report level they landed in |
+| **Language** | Which [language version](/en/editor/translations) they answered in |
+| **Lead status / Assignee** | Filter by the [lead's](/en/leads) follow-up status or owner |
+| **Submitted at** | A start and end date |
 
-- **Serial number**: A response number that increments within each quiz.
-- **Source info**: If submitted via a [UTM link](/en/publish/tracking), the corresponding source is recorded.
-- **Submission metadata**: Such as submission time.
-
-## Export tips
+Hit **Apply** when the conditions are set, or **Clear all** to start over.
 
 <Callout type="info">
-  Before exporting, use filters to scope the data you need (e.g. a time range or a specific source) to keep the exported file focused and easy to analyze.
+  There's no board view here — the board lives on the [Leads](/en/leads/list-board) page. The two answer different questions: records are **submissions**, leads are **people**.
 </Callout>
 
+## A single record
+
+Open any row and the detail splits in two:
+
+- **Left** — the answers question by question with their scores, plus the report.
+- **Right** — a follow-up sidebar for this person as a [lead](/en/leads): change the status, write **comments**, and read the merged activity timeline.
+
+In other words you can do the follow-up while reading the response, without hopping to the leads page.
+
+<Callout type="info">
+  Comments support **replies**, and you can delete your own. They're the same comments as on the [lead detail page](/en/leads/detail#comments) — both places show one shared thread.
+</Callout>
+
+## What a record contains
+
+Beyond the answers themselves, a record usually carries:
+
+- **Record number** — an incrementing number within the quiz.
+- **Respondent** — only present when they were signed in; blank for anonymous submissions.
+- **Source** — recorded when they arrived through a [UTM link](/en/publish/tracking).
+- **Submitted at**, **language version**, **score and level**.
+
+## Exporting
+
+**Export** on the toolbar handles either the rows you selected or everything matching the current filters. A full export uses your weekly quota — see [Exporting data](/en/results/export).
+
 <Callout type="warning">
-  Exported data may contain personal information provided by respondents. Store and use it in accordance with your organization's privacy and compliance requirements.
+  Exported data may contain personal information respondents provided. Handle it according to your organization's privacy and compliance rules.
 </Callout>

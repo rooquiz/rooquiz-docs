@@ -2,45 +2,55 @@
 title: Create Your First Quiz
 ---
 
-import { Steps, Callout } from 'nextra/components'
+import { Callout, Steps } from 'nextra/components'
 
 # Create Your First Quiz
 
-## Steps to create
+## Steps
 
 <Steps>
-### Click create
+### Pick a creation entry
 
-On the dashboard, click the **Create quiz** button to start the creation flow.
+Three cards sit at the top of the dashboard, one per type:
 
-### Choose a starting point: blank or template
+- **Create Quiz** — answers, scored.
+- **Create Scorecard** — insights, by dimension.
+- **Create Outcome Quiz** — answers, typed.
 
-- **Start from blank**: Create a quiz with no questions, fully customizable.
-- **Start from a template**: Pick an existing structure from the template library, clone it, then modify — great for a quick start.
+The fourth type, **Random Quiz**, is created from the random-draw entry on [Question Banks](/en/library/question-banks).
 
-### Choose a quiz type
+### Template or blank
 
-Pick one of the four types:
+The creation drawer opens on **templates** by design: editing a template is much faster than writing from nothing, and its question structure and report configuration are already tuned.
 
-- **Quiz**: Fixed order, scoring, and right/wrong judgment.
-- **Scorecard**: Multi-dimensional analysis and conditional logic.
-- **Outcome Quiz**: Choices vote for outcome types — produces a "which type are you" result.
-- **Random Quiz**: Pulls random questions from a bank on each submission.
+- **Start from a template** — browse the [Template Center](/en/library/templates), filter by category, preview on desktop and mobile, then clone.
+- **Start from blank** — build the whole thing yourself.
 
-See [The Four Quiz Types](/en/getting-started/quiz-types) for details.
+### Land in the editor
 
-### Enter the editor
-
-After creation you enter the visual editor and start adding questions. See [Editor & Question Types](/en/editor).
+Creation drops you straight into the [editor](/en/editor) to start adding questions.
 </Steps>
 
 <Callout type="warning">
-  Once chosen, the quiz type **cannot be changed**. If you pick the wrong one, you must create a new quiz. Be clear about your use case before creating.
+  **The quiz type cannot be changed once chosen.** It isn't hidden somewhere in the UI — the field is read-only after creation at the data layer. Getting it wrong means rebuilding, so decide up front whether you want a score, a dimensional profile, or a type result.
 </Callout>
 
-## Templates and question banks
+## Which type to pick
 
-- **Templates**: Reusable blueprints that include a full question structure; clone one and modify it.
-- **Question banks**: Reusable collections of questions, commonly used with the "Random Quiz" type.
+| What the respondent should get | Choose |
+| --- | --- |
+| A score, right/wrong judgement | **Quiz** |
+| A multi-dimension profile (radar chart) | **Scorecard** |
+| A "which type are you" conclusion | **Outcome** |
+| Different random questions each time | **Random Quiz** |
 
-Managing templates and question banks in depth is an advanced topic covered in later documentation.
+The full comparison is in [The four quiz types](/en/getting-started/quiz-types).
+
+## Templates vs. question banks
+
+Both are reuse mechanisms, but they reuse different things:
+
+- **Template** — a whole quiz structure. Clone it and edit freely; **your changes never touch the template**.
+- **Question bank** — a pool of questions to draw from, used with Random Quiz.
+
+See [Question Banks & Templates](/en/library).

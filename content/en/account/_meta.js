@@ -1,4 +1,5 @@
 export default {
   index: 'Overview',
-  'ai-billing': 'AI Credits & Billing'
+  'ai-billing': 'AI Credits & Billing',
+  notifications: 'Alert Settings'
 }

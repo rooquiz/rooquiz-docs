@@ -6,30 +6,52 @@ import { Callout } from 'nextra/components'
 
 # Editor Overview
 
-The visual editor is the core workspace for building quizzes. Here you add questions, reorder them, set logic and scoring, and preview exactly what respondents will see in real time.
+The visual editor is where quizzes get built. It has **three panes** — adding questions, previewing live, and configuring details all happen on one screen.
 
-## Interface layout
+![The RooQuiz editor's three panes: question types, preview, and properties](/img/en/editor/editor-overview.webp)
 
-The editor is usually divided into three areas:
+## What each pane does
 
-- **Question type panel**: Choose the type to add; click or drag it into the question list.
-- **Question editing area**: The body of the quiz, showing and editing all questions; supports **drag-to-reorder** and **duplicating questions**.
-- **Settings / properties panel**: Configure details for the selected question or the whole form (options, required toggle, points, etc.).
+| Pane | Purpose |
+| --- | --- |
+| **Left — question types** | Every question type by category; click or drag to add one. For a Random Quiz this pane is the **Question Bank** tab instead |
+| **Middle — preview** | A live render from the respondent's point of view. Switch between **Quiz** and **Report** at the top, and on the report side choose a **Preview Level** or **Preview outcome** to see how different results look |
+| **Right — settings** | Detailed configuration for whatever is currently selected |
+
+## The right pane's three tabs
+
+| Tab | Contents | When it appears |
+| --- | --- | --- |
+| **Properties** | The selected question's stem, options, required flag, score | Always |
+| **Personalized** | Per-question appearance | Always |
+| **Rules** | [Conditional logic](/en/editor/logic) | **Scorecard and Outcome only** |
+
+<Callout type="info">
+  If you can't find the **Rules** tab, it's usually not hidden — this quiz's type doesn't support it. See [The four quiz types](/en/getting-started/quiz-types).
+</Callout>
 
 ## Common actions
 
-- **Add a question**: Pick a type from the panel. See the full list in [Question Types](/en/editor/question-types).
-- **Reorder**: Drag questions to change their order.
-- **Duplicate**: Quickly copy a similar question and adjust it.
-- **Rich text and media**: Question descriptions support rich text and can include images and other media.
-- **Live preview**: Preview the respondent's view at any time.
+- **Add a question** — pick a type from the left pane. Full list in [Question types](/en/editor/question-types).
+- **Drag to reorder** — rearrange questions directly. Remember that [conditional logic](/en/editor/logic) needs the trigger question to sit before its target, so re-check your rules after reordering.
+- **Duplicate a question** — copying and editing beats rebuilding a similar question from scratch.
+- **Page breaks** — insert one to split a long quiz across pages instead of a single wall of questions.
+- **Rich text and images** — question descriptions support rich text, including images.
 
-## Going further
+## What's along the top
 
-- [Conditional Logic](/en/editor/logic): Show/hide questions based on answers.
-- [Scoring & Assessment Rules](/en/editor/scoring): Configure scoring, dimensional analysis, and AI evaluation.
-- [Form Settings](/en/editor/settings): Theme, branding, cover, and languages.
+- **Preview** — open the full respondent-view preview.
+- **More Settings** — go to [Form settings](/en/editor/settings).
+- **Publish as Template** — push this quiz to the [Template Center](/en/library/templates) for your team to reuse.
 
-<Callout type="info">
-  Remember to save while editing. Preview to check logic and presentation before you formally [publish](/en/publish).
+## Where to go next
+
+- [Question types](/en/editor/question-types)
+- [Conditional logic](/en/editor/logic)
+- [Scoring & assessment rules](/en/editor/scoring)
+- [Appearance & personalized templates](/en/editor/design)
+- [Multilingual versions](/en/editor/translations)
+
+<Callout type="warning">
+  Remember to **save** — you'll get a confirmation. Before publishing, walk both the Quiz and Report previews, especially for quizzes with conditional logic or multi-dimension scoring.
 </Callout>

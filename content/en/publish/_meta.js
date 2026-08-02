@@ -3,5 +3,6 @@ export default {
   'link-qrcode': 'Public Link & QR Code',
   embed: 'Embed',
   og: 'Social Share Card',
-  tracking: 'UTM Source Tracking'
+  tracking: 'UTM Source Tracking',
+  promotion: 'Promotion Kit'
 }

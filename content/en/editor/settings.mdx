@@ -6,28 +6,53 @@ import { Callout } from 'nextra/components'
 
 # Form Settings
 
-Beyond questions, you can configure the appearance and global options of the whole quiz so it fits your brand and audience.
+Everything about the quiz that isn't a question lives here, reached via **More Settings** in the top right of the editor.
 
-## Appearance & branding
+## Quiz Information
 
-- **Theme & brand color**: Set the primary color to unify the visual style.
-- **Cover image**: Add a cover to make the quiz feel more polished and recognizable.
-- **Flag color / marker**: Use colors or markers to distinguish quizzes in the list.
+Title, description, **Cover Image** and **Cover Color**. The title identifies the quiz in the dashboard and shows on the landing page; the description feeds [search indexing](/en/publish/promotion#search-engine-indexing), so don't leave it empty.
 
-## Languages
+## Open/Close
 
-- A quiz itself can offer **multiple language versions**, and respondents can switch language on the answer page (when the corresponding localization is enabled).
-- This is different from the docs site's English/Chinese switch: the former is for **respondents**, the latter for **creators reading the docs**.
+A master switch between **Data Collecting** and **Not Collecting**. Once closed the link still resolves but no longer accepts submissions — gentler than deleting the link when a campaign ends.
 
-## Basic information
+## Submission Access
 
-- **Name / title**: Used to identify the quiz in the dashboard and shown on the answer page.
-- **Description**: A short summary of the quiz that can be shown to respondents.
+Answers "**Who can take this quiz?**" — three options, and the choice decides whether you get [leads](/en/leads) at all:
 
-## Sharing settings
-
-Social share cards (OG), public links, and source tracking live in the share area — see [Publish & Share](/en/publish).
+| Option | Meaning | Good for |
+| --- | --- | --- |
+| **Open to everyone** | No sign-in; answer and see results immediately | Maximum reach, lowest friction |
+| **Sign in to view results** | Anyone can answer, but must sign in with an email to see the report | **The main lead-capture option** |
+| **Sign in to take the quiz** | Only signed-in respondents may answer | Invite-only or internal use |
 
 <Callout type="info">
-  After finishing questions and appearance, preview the overall result before moving on to [Publish & Share](/en/publish).
+  Only the latter two produce leads reliably — an anonymous submission leaves no contact details. To spread widely *and* collect leads, choose **Sign in to view results**.
 </Callout>
+
+## The answering experience
+
+- **Index Display** — None / Arabic Numbers (1, 2, 3) / Roman Numerals (I, II, III).
+- **Time limit** — a countdown starts when a respondent enters the quiz; when it runs out they get a modal and their **current answers are submitted automatically**.
+- **Answer sheet** — shows a question navigator in the sidebar so respondents can see progress and jump around. Worth enabling on long quizzes.
+- **System text** — override the built-in button and prompt copy on the answer page.
+
+## Language
+
+Set the **primary language** and manage this quiz's **language versions**. Full details in [Multilingual versions](/en/editor/translations).
+
+<Callout type="warning">
+  Changing the primary language only re-labels the source content — it **translates nothing**. Add a translation to offer another language.
+</Callout>
+
+## Analytics
+
+**Google Analytics** — enter a measurement ID and page views on the public quiz are reported to GA.
+
+<Callout type="warning">
+  Google Analytics is a **Pro plan feature**.
+</Callout>
+
+## Settings that live elsewhere
+
+Share links, QR codes, embedding, social cards, source tracking, the booking section and the promotion kit are all under the quiz's **Share** tab — see [Publish & Share](/en/publish). Theme and personalized templates are in the editor — see [Appearance & personalized templates](/en/editor/design).

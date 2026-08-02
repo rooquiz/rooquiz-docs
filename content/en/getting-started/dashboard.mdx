@@ -8,26 +8,42 @@ import { Callout } from 'nextra/components'
 
 After signing in you land on the **Dashboard**, which brings together all of your and your team's quizzes. It is the starting point for day-to-day management.
 
-## Main areas
+![The RooQuiz dashboard: sidebar navigation and quiz list](/img/en/getting-started/dashboard.webp)
 
-- **Quiz list**: Shows all quizzes in the current team with name, type, status, and more.
-- **Create button**: Click it to start [creating a quiz](/en/getting-started/create-quiz).
-- **Filter and search**: Quickly locate quizzes by type, status, or keyword.
-- **Favorites**: Bookmark frequently used quizzes for quick access.
-- **Trash**: Deleted quizzes are kept in the trash and can be restored within the retention period.
+## The main area
 
-## Feature tabs inside a quiz
+- **Create cards** — the three cards at the top map to [Create Quiz / Create Scorecard / Create Outcome Quiz](/en/getting-started/create-quiz).
+- **Group tabs** — **All**, **My Favorites**, and any groups you created. See [Workspace](/en/getting-started/workspace).
+- **Quiz cards** — each shows a type badge, cover, title, creation date and response count, with edit, records and more actions along the bottom.
 
-Once you open a quiz, you typically see these tabs:
+## The left sidebar
+
+| Item | Purpose |
+| --- | --- |
+| **My Quizzes** | This page |
+| **[Question Banks](/en/library/question-banks)** | Reusable pools of questions |
+| **[Respondents](/en/respondents)** | Profiles of people who took your quizzes |
+| **[Leads](/en/leads)** | The follow-up pipeline for people who left contact details |
+| **[1:1 Bookings](/en/bookings)** | Sessions booked from result pages, badged with the pending count |
+| **[Connectors](/en/connectors)** | Team-level push channels, **visible to owners and admins only** |
+
+The search box at the top looks across quizzes, question banks, respondents and leads; the bottom lets you **collapse the sidebar**.
+
+## Tabs inside a quiz
+
+Open a quiz and you get four tabs:
 
 | Tab | Purpose |
 | --- | --- |
-| **Edit** | Build and modify questions, logic, and scoring |
-| **Records** | View all submitted responses |
-| **Insights** | View charts for completion rate and question-level distribution |
-| **Share** | Generate public links, QR codes, social cards, and source tracking |
-| **Connect** | Configure webhooks and other external integrations (advanced) |
+| **[Edit](/en/editor)** | Build questions, logic, scoring and appearance |
+| **[Share](/en/publish)** | Public link, QR code, embed, social card, source tracking, booking section, promotion kit |
+| **[Records](/en/results/records)** | Every submission |
+| **[Insights](/en/results/insights)** | Completion rate, drop-off points, source conversion |
 
 <Callout type="info">
-  The dashboard shows quizzes for the **current team**. If you belong to multiple teams, the list changes when you switch teams.
+  Quizzes used to have a "Connect" tab of their own. That has moved up to team-level [Connectors](/en/connectors) — configure once and every quiz uses it, instead of repeating the setup per quiz.
+</Callout>
+
+<Callout type="info">
+  The dashboard shows quizzes for the **current team**. If you belong to several, switch with the team switcher in the top left and the list follows.
 </Callout>

@@ -2,5 +2,6 @@ export default {
   index: 'Overview',
   records: 'Response Records',
   insights: 'Insights',
-  reports: 'Reports & AI Evaluation'
+  reports: 'Reports & AI Evaluation',
+  export: 'Exporting Data'
 }

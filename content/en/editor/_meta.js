@@ -3,5 +3,7 @@ export default {
   'question-types': 'Question Types',
   logic: 'Conditional Logic',
   scoring: 'Scoring & Assessment Rules',
-  settings: 'Form Settings'
+  settings: 'Form Settings',
+  design: 'Appearance & Personalized Templates',
+  translations: 'Multilingual Versions'
 }

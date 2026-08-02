@@ -19,8 +19,14 @@ In a **Quiz** you can:
 - **Answer feedback**: Show respondents the correctness and explanation per question.
 
 <Callout type="info">
-  Scoring-related settings are mainly available in the Quiz type.
+  Points and right/wrong judgement are available in Quiz and Random Quiz. Scorecard uses dimension formulas instead, and Outcome doesn't score at all.
 </Callout>
+
+## Outcome: winning by votes
+
+An **Outcome** quiz doesn't score — it **counts votes**. Each option votes for one or more outcome types, and the type with the most votes wins; ties go to whichever comes first in the outcome list.
+
+Every outcome can carry its own CTA button, wiring an entertaining result straight into a next step. See [The four quiz types](/en/getting-started/quiz-types#outcome-quiz).
 
 ## Scorecard: dimensional analysis and AI evaluation
 
@@ -34,6 +40,14 @@ In a **Scorecard**, scoring is more about "profiling" than right/wrong:
 
 <Callout type="warning">
   AI evaluation consumes your team's **AI quota**. Quota is counted per cycle; once exceeded, AI evaluation is skipped for that cycle (basic scoring is still generated). See [AI Credits & Billing](/en/account/ai-billing) for billing, monthly resets, and top-ups.
+</Callout>
+
+## Levels and result-page actions
+
+Split the total score into **levels** (0–60 needs work / 60–80 good / 80+ excellent). Each carries a name, colour and description, and can hold a **CTA button** — the low band might offer "Book a consultation". This is the step that wires an assessment into conversion.
+
+<Callout type="info">
+  Don't want respondents seeing a number? You can **hide the overall score** and keep only the level name, description and summary — better for quizzes that should feel like a diagnosis rather than an exam.
 </Callout>
 
 ## Report generation

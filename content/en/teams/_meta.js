@@ -1,4 +1,6 @@
 export default {
   index: 'Overview',
-  members: 'Members & Roles'
+  members: 'Members & Roles',
+  'custom-domain': 'Custom Domain',
+  'audit-logs': 'Audit Logs'
 }
