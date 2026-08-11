@@ -23,7 +23,7 @@ RooQuiz offers 14+ question types. They are grouped below by purpose to help you
 
 | Type | Description | Common uses |
 | --- | --- | --- |
-| **Fill-in-the-blank** | Text input | Short answers, open-ended responses |
+| **Fill-in-the-blank** | Text input | Short answers, open-ended responses, "Other, please explain" |
 | **Number** | Numeric input (with validation) | Age, amount, quantity |
 | **Date** | Date picker | Birth date, appointment date |
 | **Time** | Time picker | Time slot, moment |
@@ -41,6 +41,26 @@ RooQuiz offers 14+ question types. They are grouped below by purpose to help you
 | --- | --- | --- |
 | **Statement** | Displays text only; collects no answer | Section notes, instructions, disclaimers |
 | **Random question** | Draws a question from a bank | Used with the "Random Knowledge Quiz" type |
+
+## Which quiz type can use which question types
+
+Question types are not interchangeable across quiz types — some have no natural "correct answer", others cannot vote for a result type. The left-hand panel only lists the types available to the current quiz type.
+
+| Type | Knowledge Quiz | Scored Quiz | Outcome Quiz |
+| --- | --- | --- | --- |
+| Single / Multiple choice / Dropdown / True-False | ✅ | ✅ | ✅ |
+| Fill-in-the-blank | ✅ can be graded against a correct answer | ✅ **collected only, never scored** | ❌ |
+| Number | ✅ can be graded against a correct answer | ✅ the submitted number feeds formulas | ❌ |
+| Cascade / Rating | ❌ | ✅ | ❌ |
+| Date / Time | ❌ | ✅ collected only | ❌ |
+| Ordering | ✅ | ❌ | ❌ |
+| Statement / Swiper / Page break | ✅ | ✅ | ✅ |
+
+A **Random Knowledge Quiz** uses only random questions plus display types; the questions themselves come from the linked question bank.
+
+<Callout type="info">
+  In a Scored Quiz, a **fill-in-the-blank question only collects text**: it produces no score and cannot be referenced by a scoring formula. It is the right fit for a closing "anything else we should know?" after the scored questions, so open-ended lead context comes in with the rest.
+</Callout>
 
 <Callout type="info">
   Each type has its own settings in the right-hand panel — commonly the title and description, required toggle, option content, and validation rules. Types that support scoring can also set points (see [Scoring & Assessment Rules](/en/editor/scoring)).

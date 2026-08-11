@@ -34,7 +34,17 @@ In a **Scored Quiz**, scoring is more about "profiling" than right/wrong:
 
 - **Multi-dimensional scoring**: Map questions to several dimensions; after submission, each dimension gets a score, often shown as a **radar chart**.
 - **Result profile**: Produce personality/ability conclusions based on dimension scores.
-- **AI evaluation**: Use AI to evaluate text answers for deeper insight.
+- **AI evaluation**: AI turns the total score, level, and dimension scores into suggestions and commentary (it does not read the raw answer text).
+
+### Which questions are scored
+
+A Scored Quiz total comes **only from the formula**, which references question codes. Only questions that yield a number can be referenced: choice questions (via per-option scores), rating, number, date, time, and cascade.
+
+**Fill-in-the-blank only collects text and is never scored** — free text cannot take part in arithmetic, so it produces no score and does not appear among the insertable fields in the formula editor. That makes it the right way to ask one open-ended question ("anything else we should know?") inside a scored assessment.
+
+<Callout type="warning">
+  With no formula the total score is empty, no level can ever match, and the overall-assessment block disappears from the result page. Whenever you configure levels, configure the formula too.
+</Callout>
 
 ### About AI evaluation quota
 
