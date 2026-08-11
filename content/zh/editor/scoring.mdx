@@ -6,11 +6,11 @@ import { Callout } from 'nextra/components'
 
 # 评分与测评规则
 
-不同测验类型的"评分"含义不同:Quiz 关注**对错与总分**,Scorecard 关注**多维度分析与评测报告**。
+不同测验类型的"评分"含义不同:Quiz 关注**对错与总分**,Scored Quiz 关注**多维度分析与评测报告**。
 
 ## Quiz:计分与判定
 
-在 **Quiz 答题考试** 中,你可以:
+在 **Knowledge Quiz 知识测验** 中,你可以:
 
 - **设置分值**:为题目或正确选项配置分值。
 - **判定对错**:标记正确答案,系统自动判定每题对错。
@@ -19,18 +19,18 @@ import { Callout } from 'nextra/components'
 - **作答反馈**:可向答题者展示每题的对错与解析。
 
 <Callout type="info">
-  分值与对错判定在 Quiz 与 Random Quiz 里可用。Scorecard 用的是维度公式,Outcome 完全不计分。
+  分值与对错判定在 Quiz 与 Random Knowledge Quiz 里可用。Scored Quiz 用的是维度公式,Outcome 完全不计分。
 </Callout>
 
 ## Outcome:票数判型
 
-**Outcome 分型测评** 不算分,它**数票**:每个选项给一个或多个结果类型投票,答完后票数最高的类型胜出,平票按类型列表顺序取靠前的那个。
+**Outcome Quiz 分型测验** 不算分,它**数票**:每个选项给一个或多个结果类型投票,答完后票数最高的类型胜出,平票按类型列表顺序取靠前的那个。
 
-每个类型可以单独配 CTA 按钮,把"有趣的结果"接到下一步行动上。详见 [四种测验类型](/zh/getting-started/quiz-types#outcome-分型测评)。
+每个类型可以单独配 CTA 按钮,把"有趣的结果"接到下一步行动上。详见 [四种测验类型](/zh/getting-started/quiz-types#outcome-分型测验)。
 
-## Scorecard:维度分析与 AI 评测
+## Scored Quiz:维度分析与 AI 评测
 
-在 **Scorecard 评分诊断** 中,评分更偏向"画像"而非对错:
+在 **Scored Quiz 评分测验** 中,评分更偏向"画像"而非对错:
 
 - **多维度评分**:将题目映射到多个维度,提交后生成各维度得分,常以**雷达图**呈现。
 - **结果画像**:基于维度得分输出性格/能力等分析结论。
