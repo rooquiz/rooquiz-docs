@@ -1,45 +1,52 @@
 ---
-title: 产品简介
+title: 快速开始
 ---
 
-import { Callout, Cards } from 'nextra/components'
+import { Steps, Callout, Cards } from 'nextra/components'
 
-# RooQuiz 使用文档
+# 创建你的第一个测验
 
-RooQuiz 是一个用于创建、分发与分析**测验、测评和问卷**的平台。无论是知识考试、能力测评,还是市场调研问卷,你都可以在可视化编辑器中拖拽搭建题目,通过链接或二维码分发,并在后台实时查看答卷与数据分析。
+RooQuiz 是一个创建、分发与分析**测验、测评和问卷**的平台,本套文档面向创建者(在后台搭建与管理测验的用户)。这一页带你在几分钟内走完从创建到收到第一份答卷的完整流程。
 
-<Callout type="info">
-  本套文档面向**创建者**(在后台搭建与管理测验的用户)。答题者侧的使用说明将在后续补充。
-</Callout>
+<Steps>
+### 注册并登录
 
-## RooQuiz 能做什么
+用邮箱创建账号、完成验证后进入控制台。详见 [注册与登录](/zh/getting-started/account)。
 
-- **四种测验类型**:答题考试(Quiz)、评分测验(Scored Quiz)、分型测验(Outcome)、随机题库(Random Knowledge Quiz),覆盖打分、多维分析、分型判定与随机抽题等不同场景。
-- **丰富题型**:单选、多选、下拉、级联、评分、判断、填空、排序等 14 种以上题型。
-- **条件逻辑**:根据已作答内容动态显示或隐藏后续题目。
-- **评分与 AI 评估**:自动计分、多维度雷达分析,并可对文本作答进行 AI 评测(受配额限制)。
-- **多渠道分发**:公开链接、二维码、社交分享卡片(OG)、UTM 来源追踪。
-- **结果分析**:答卷记录管理、数据导出、可视化洞察、测评报告生成。
-- **团队协作**:多人组织、成员角色与权限、自定义域名等(进阶功能,后续文档覆盖)。
+### 选类型,创建测验
 
-## 四种测验类型速览
+![RooQuiz 控制台](/img/zh/getting-started/dashboard.webp)
 
-| 类型 | 适用场景 | 核心能力 |
-| --- | --- | --- |
-| **Knowledge Quiz 知识测验** | 知识测验、在线考试、打分练习 | 固定题序、计分、对错判定与反馈 |
-| **Scored Quiz 评分测验** | 性格/能力测评、问卷调研 | 多维度分析、条件逻辑、AI 评测报告 |
-| **Outcome Quiz 分型测验** | 人格测评、「你是哪种 X」、诊断式获客 | 选项投票判型、类型结果页与 CTA |
-| **Random Knowledge Quiz 随机题库** | 刷题练习、题库抽测 | 每次作答从题库随机抽题 |
+控制台顶部有三张创建卡片,按你想让答题者拿到什么来选:
+
+- 一个分数、对错判定 → **创建测验**
+- 一张多维度画像 → **创建评分测验**
+- 「你是哪种类型」的结论 → **创建分型测验**
+
+每次随机抽题的 Random Knowledge Quiz 则从 [题库](/zh/library/question-banks) 创建。**推荐从模板开始**——创建抽屉默认停在模板上,克隆后随便改。
 
 <Callout type="warning">
-  测验类型在创建时选定,**创建后不可更改**。请在开始前确认场景。详见 [四种测验类型](/zh/getting-started/quiz-types)。
+  测验类型创建后**不可更改**,选错只能重建。四种类型的详细差异见 [四种测验类型](/zh/getting-started/quiz-types)。
 </Callout>
 
-## 从这里开始
+### 加一道题
+
+创建完成后会直接进入编辑器。点击**添加题目**,加一道**单选题**,写好题干与选项;知识测验记得勾选正确答案并设置分值。用**预览**确认手机和电脑上的效果。更多题型见 [题型总览](/zh/editor/question-types)。
+
+### 发布,拿到链接和二维码
+
+切换到**分享**页签,确认测验处于**启用**状态,复制公开链接或下载二维码发给答题者。详见 [公开链接与二维码](/zh/publish/link-qrcode)。
+
+### 看第一份答卷
+
+自己先打开链接答一遍。回到**记录**就能看到第一份答卷,**洞察**里有完成率与来源数据。详见 [答卷记录](/zh/results/records)。
+</Steps>
+
+## 下一步
 
 <Cards>
-  <Cards.Card title="快速上手" href="/zh/getting-started" />
+  <Cards.Card title="基础指南" href="/zh/getting-started" />
   <Cards.Card title="编辑器与题型" href="/zh/editor" />
-  <Cards.Card title="发布与分享" href="/zh/publish" />
+  <Cards.Card title="题库与模板" href="/zh/library" />
   <Cards.Card title="收集结果与分析" href="/zh/results" />
 </Cards>
