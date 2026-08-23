@@ -1,0 +1,112 @@
+---
+title: Email Sending Service (SMTP)
+---
+
+import { Callout, Steps, Tabs } from 'nextra/components'
+
+# Email Sending Service (SMTP)
+
+The [Email connector](/en/connectors/channels#email) sends through **your own SMTP server** — RooQuiz does not relay it. Notifications therefore arrive from your own address, and there is no platform sending limit.
+
+Set it up once per team under **Settings → Organization → Email Sending**. Every email connector in the team uses it.
+
+<Callout type="warning">
+  Without a **verified** sending service, an email connector still saves but never delivers. Its card shows a red "No sending service" tag.
+</Callout>
+
+## What to fill in
+
+| Field | Notes |
+| --- | --- |
+| **SMTP server** | Your provider's hostname, e.g. `smtp.gmail.com` |
+| **Port** | `587` (STARTTLS), `465` (SSL/TLS) or `2525` |
+| **Username** | Usually your full email address; some providers use a fixed literal |
+| **Password** | The SMTP password or API key. When editing later, leave it blank to keep the stored one |
+| **From address** | Must be an address your SMTP server is allowed to send as |
+| **From name** | Display name shown to recipients |
+| **Reply-to** | Optional, if replies should go somewhere else |
+
+<Callout type="info">
+  **Port 25 cannot be used.** Our hosting platform blocks outbound connections on that port. Use 587 or 465.
+</Callout>
+
+## Provider setup
+
+<Tabs items={['Gmail', 'Resend', 'Company mail server']}>
+  <Tabs.Tab>
+    | Field | Value |
+    | --- | --- |
+    | SMTP server | `smtp.gmail.com` |
+    | Port | `587 (STARTTLS)` |
+    | Username | Your full Gmail address |
+    | Password | A **16-character app password** |
+    | From address | The **same** Gmail address, or a verified "Send mail as" alias |
+
+    Create the app password at [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords). It is shown once, in four groups of four — **remove the spaces** before pasting it.
+
+    <Callout type="warning">
+      Your regular account password will not work. Google disabled password sign-in for mail clients, so an app password is required — and app passwords only exist once **2-Step Verification** is switched on.
+    </Callout>
+
+    If that page says *"The setting you are looking for is not available for your account"*, one of these applies: 2-Step Verification is off; it's a Google Workspace account whose admin disabled app passwords; or the account is enrolled in Advanced Protection, which blocks them outright.
+
+    Gmail also caps sending at roughly **500 recipients per day** for personal accounts and **2,000** for Workspace. That is ample for team notifications, but not for bulk mail.
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+    | Field | Value |
+    | --- | --- |
+    | SMTP server | `smtp.resend.com` |
+    | Port | `587 (STARTTLS)` |
+    | Username | `resend` — the literal word |
+    | Password | A Resend API key (`re_…`) |
+    | From address | Any address on a domain you have verified in Resend |
+
+    This is the easiest option if you want notifications to come from **your own brand domain** rather than a personal mailbox, and it has no daily cap of the Gmail kind.
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+    Ask whoever runs your mail for the **SMTP hostname, port and credentials**. Prefer port 587 with STARTTLS; use 465 if that is all they offer.
+
+    Two things trip people up:
+
+    - The username is often the **full mailbox address**, not the part before the `@`.
+    - The **From address must belong to your own domain**. Most corporate servers refuse to relay mail claiming to be from somewhere else.
+  </Tabs.Tab>
+</Tabs>
+
+## Save and verify
+
+<Steps>
+### Fill in the fields and click "Save and verify"
+
+Saving and verifying are one action, so you never end up with a stored-but-untested configuration.
+
+### Check the inbox for the test email
+
+<Callout type="warning">
+  The test email goes to **your own RooQuiz account address** — the one you are signed in with — **not** to the From address you just configured. If nothing arrives, check that inbox and its spam folder before changing anything.
+</Callout>
+
+### Confirm the status reads "Verified"
+</Steps>
+
+**Verified** means your SMTP server accepted the message and returned a success code. That is not the same as delivered: an SMTP server accepts mail first and forwards it afterwards, so a message can still be filtered as spam or bounced later. If verification succeeds but nothing arrives, the problem is on the receiving side — start with the spam folder, then look for a bounce in the mailbox you are sending from.
+
+## When verification fails
+
+The **exact error from your SMTP server** is shown on the page, deliberately unedited, so you can act on it directly. The common ones:
+
+| Error | What it means |
+| --- | --- |
+| `535 Username and Password not accepted` | Wrong credentials. For Gmail: you used the account password instead of an app password, or left spaces in it |
+| `553 Sender address rejected: not owned by user` | The From address isn't one this server may send as. Change it to a mailbox or alias the account actually owns |
+| `550 relay not permitted` | The server won't relay for you at all — usually the wrong username, or SMTP access not enabled on the mailbox |
+| Timeout / connection failed | Wrong hostname or port, or the server doesn't accept connections from outside your network |
+
+## Good to know
+
+- The password is **never displayed again** after saving. Leave the field blank when editing anything else, and it stays untouched.
+- Changing the server, port, username, password or From address puts the status back to **Not verified** until the next successful check.
+- Save and verify are **rate limited** to a handful of attempts per hour per team — each one really connects to your server and really sends a message.
+- If a later delivery fails permanently — the credentials stop working, or the From address is rejected — the status flips to **Verification failed** and email connectors stop delivering until you fix it. A single bad recipient address does **not** do this; it only fails that one message.
