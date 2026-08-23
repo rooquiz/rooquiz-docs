@@ -109,4 +109,5 @@ The **exact error from your SMTP server** is shown on the page, deliberately une
 - The password is **never displayed again** after saving. Leave the field blank when editing anything else, and it stays untouched.
 - Changing the server, port, username, password or From address puts the status back to **Not verified** until the next successful check.
 - Save and verify are **rate limited** to a handful of attempts per hour per team — each one really connects to your server and really sends a message.
+- **Removing** the sending service deletes the stored password. You don't need to remove it to change settings — just save over them. Removal is refused while any email connector is still **enabled**, so you can't silently break your own deliveries.
 - If a later delivery fails permanently — the credentials stop working, or the From address is rejected — the status flips to **Verification failed** and email connectors stop delivering until you fix it. A single bad recipient address does **not** do this; it only fails that one message.
