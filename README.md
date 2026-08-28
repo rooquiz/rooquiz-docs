@@ -34,6 +34,9 @@ Search is powered by [Pagefind](https://pagefind.app) and only exists after a bu
 ```
 app/[lang]/            Next.js App Router shell — layout (navbar, footer, i18n, theme
                        strings) and the catch-all page that renders MDX
+app/robots.js          robots.txt — everything crawlable except the Pagefind index
+app/sitemap.js         sitemap.xml — every page in both locales, with hreflang links
+app/site-url.js        Canonical origin + locale list shared by the two routes above
 content/{en,zh}/       All documentation content, one mirrored tree per locale
 functions/index.js     Cloudflare Pages Function: redirects `/` to `/en` or `/zh`
 public/_redirects      Cloudflare Pages redirect rules (301s for retired URLs)
@@ -96,6 +99,20 @@ Two details follow from that:
 
 - `unstable_shouldAddLocaleToLinks` bakes the locale prefix into every page-map link.
 - The bare root `/` is handled by `functions/index.js`, a Cloudflare Pages Function that picks a locale from the visitor's `Accept-Language` header and redirects. It runs in `pnpm preview` and in production, but not in `pnpm dev`.
+
+## robots.txt and sitemap.xml
+
+Both are Next.js metadata routes exported as static files (`out/robots.txt`, `out/sitemap.xml`).
+
+`app/sitemap.js` builds its entry list from `generateStaticParamsFor('mdxPath')` — the same
+helper the catch-all page route uses — so **a new page needs no sitemap step**: add the MDX
+file and it shows up. Each page is listed once per locale, carrying the full set of hreflang
+alternates plus `x-default` pointing at the default locale. Entries have no `lastmod`: the CI
+checkout resets file mtimes and the shallow clone has no per-file git history, so any date
+here would be fiction.
+
+Adding a locale means updating `LOCALES` in `app/site-url.js` alongside `next.config.mjs`
+and the `i18n` list in `app/[lang]/layout.jsx`.
 
 ## Deployment
 
