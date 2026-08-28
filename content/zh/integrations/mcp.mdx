@@ -134,6 +134,39 @@ claude.ai、Claude Code 等支持 MCP OAuth 的客户端**无需手动创建 Tok
   </Tabs.Tab>
 </Tabs>
 
+## 示例指令
+
+连上之后直接用自然语言说话即可。下面每一条分别调用服务器的不同部分：
+
+**从模板建卷**
+
+> 看一下教练类模板，用其中的 readiness 那个建一份计分测评，然后加两道关于预算的题。
+
+依次调用 `list_templates` → `create_form_from_template` → `add_question`。
+
+**处理线索**
+
+> 列出我的 Wheel of Life 测评这周收到的线索，给得分低于 40 的都打上 follow-up 标签，并指派给我。
+
+依次调用 `list_leads` → `set_lead_tags` → `assign_leads`。
+
+**诊断漏斗**
+
+> 我哪份测评的完成率最差？人具体是在哪一步流失的？
+
+依次调用 `list_forms` → `get_form_stats` → `get_form_funnel`。
+
+**做多语言**
+
+> 把 promotion-readiness 这份测评翻成西班牙语和德语，题目 code 保持不变。
+
+依次调用 `list_form_translations` → `create_form_translation`。
+
+<Callout type="info">
+  答题者的姓名、邮箱和手机号返回时是**脱敏**的（`j***g@example.com`）。脱敏不可逆，所以引用某个
+  答题者请用 id，不要把脱敏后的值再贴回指令里。
+</Callout>
+
 ## 支持的工具
 
 连接成功后,AI 助手可调用以下工具。它们都作用在 Token **当前激活的团队**下。
