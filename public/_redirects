@@ -1,0 +1,9 @@
+# Cloudflare Pages redirects. Copied verbatim from `public/` into `out/` by the
+# static export, and applied only to requests that match no static asset.
+
+# The REST API reference spells its endpoints as bare paths (`GET /api/v1/records`).
+# Search engines pick those strings up as URLs on this host and crawl them, which
+# used to 404 (reported under "Not found (404)" in Search Console). Send the whole
+# endpoint family to the page that documents it. Default locale: /zh visitors reach
+# the same content through the in-page locale switcher.
+/api/v1/*  /en/integrations/rest-api  301

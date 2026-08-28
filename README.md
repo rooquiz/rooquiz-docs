@@ -36,6 +36,7 @@ app/[lang]/            Next.js App Router shell — layout (navbar, footer, i18n
                        strings) and the catch-all page that renders MDX
 content/{en,zh}/       All documentation content, one mirrored tree per locale
 functions/index.js     Cloudflare Pages Function: redirects `/` to `/en` or `/zh`
+public/_redirects      Cloudflare Pages redirect rules (301s for retired URLs)
 public/img/{en,zh}/    Screenshots, one folder per docs section, `.webp`
 mdx-components.js      MDX component overrides on top of nextra-theme-docs
 next.config.mjs        Nextra + `output: 'export'` + locale list
