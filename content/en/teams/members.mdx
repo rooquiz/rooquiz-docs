@@ -14,23 +14,103 @@ Under **Settings → Members**, enter an email and pick a role to send an invita
 
 A team has four roles, from most to least privileged:
 
-| Role | What they can do |
+| Role | In one line |
 | --- | --- |
-| **Owner** | The team's ultimate owner with full access — billing, deleting the team, transferring ownership, and binding a custom domain. Each team has **exactly one** owner. |
-| **Admin** | Manages all of the team's forms, question banks, members, and team info, and can view audit logs. **Cannot** touch billing, delete the team, transfer ownership, or bind a custom domain — and cannot appoint or manage other admins. |
-| **Member** | Creates forms and views/edits forms they created or that are shared with them. |
-| **Viewer** | Read-only: can only view forms shared with them and their results, with no ability to create or change anything. Ideal for people who need to see data but not build (sales, clients, stakeholders). |
+| **Owner** | The team's ultimate owner, with full access. Each team has **exactly one** owner. |
+| **Admin** | Runs the team day to day: forms, question banks, respondents, leads, members, team settings. |
+| **Member** | Builds quizzes and works the leads they generate. |
+| **Viewer** | Reads. Cannot change anything, anywhere. |
+
+The line between owner and admin is deliberate: **an admin runs the team, an owner owns it.** Anything that changes who the team belongs to, or its relationship with us as a paying customer, stays with the owner.
+
+## Permission matrix
+
+✅ full · **text** = allowed but limited · — not allowed
+
+### Quizzes
+
+| | Owner | Admin | Member | Viewer |
+| --- | :---: | :---: | :---: | :---: |
+| Create a quiz | ✅ | ✅ | ✅ | — |
+| See the quiz list | ✅ | ✅ | **own + shared** | **shared only** |
+| Edit quiz content | ✅ | ✅ | **own + shared** | — |
+| Sharing, transfer, translations, duplicate | ✅ | ✅ | **own + shared** | — |
+| Move to trash, restore, delete | ✅ | ✅ | **own only** | — |
+| See responses | ✅ | ✅ | **own + shared** | **shared only** |
+| Delete responses | ✅ | ✅ | **own + shared** | — |
+
+### Question banks
+
+| | Owner | Admin | Member | Viewer |
+| --- | :---: | :---: | :---: | :---: |
+| Browse banks and questions | ✅ | ✅ | ✅ | ✅ |
+| Create, edit, delete a bank | ✅ | ✅ | — | — |
+| Add, edit, delete questions | ✅ | ✅ | — | — |
+
+### Respondents & leads
+
+| | Owner | Admin | Member | Viewer |
+| --- | :---: | :---: | :---: | :---: |
+| See all the team's respondents and leads | ✅ | ✅ | ✅ | ✅ |
+| Work leads — assign, tag, change status, comment | ✅ | ✅ | ✅ | — |
+| Edit respondent details | ✅ | ✅ | ✅ | — |
+| Create or delete a respondent | ✅ | ✅ | — | — |
+| Configure lead statuses and tags | ✅ | ✅ | — | — |
+| Export data | ✅ | ✅ | — | — |
+| Manage bookings | ✅ | ✅ | **own leads only** | — |
+
+<Callout type="info">
+  Respondents and leads are **team-wide** for everyone, including viewers — they are not narrowed by which quizzes you can see. Only *responses* follow quiz visibility.
+</Callout>
+
+### Members
+
+| | Owner | Admin | Member | Viewer |
+| --- | :---: | :---: | :---: | :---: |
+| See the member list | ✅ | ✅ | ✅ | ✅ |
+| Invite members, including as admin | ✅ | ✅ | — | — |
+| Change roles, disable, enable, remove | **anyone but the owner** | **anyone but the owner** | — | — |
+| Transfer ownership | ✅ | — | — | — |
+| Leave the team | **transfer first** | ✅ | ✅ | ✅ |
+
+### Team settings
+
+| | Owner | Admin | Member | Viewer |
+| --- | :---: | :---: | :---: | :---: |
+| Team name, logo, address, AI model tier | ✅ | ✅ | — | — |
+| Booking availability | ✅ | ✅ | — | — |
+| Connectors | ✅ | ✅ | — | — |
+| Audit logs | ✅ | ✅ | — | — |
+| Custom domain | ✅ | — | — | — |
+| API keys | ✅ | — | — | — |
+| Delete the team | ✅ | — | — | — |
+
+### Billing
+
+| | Owner | Admin | Member | Viewer |
+| --- | :---: | :---: | :---: | :---: |
+| Upgrade, payment method, cancel, refund | ✅ | — | — | — |
+| Top up AI credits | ✅ | ✅ | — | — |
+
+Topping up is usage management, not a change to the subscription, so an admin can do it. Everything that alters the subscription itself stays with the owner.
 
 ## Who can manage whom
 
-- **Owner** can manage everyone: appoint admins, add/remove/change members, transfer ownership.
-- **Admin** can manage members and viewers only — **not** other admins or the owner, and cannot promote anyone to admin.
-- Only the **owner** can appoint admins, transfer ownership, or delete the team.
-
-<Callout type="info">
-  Want someone to see results without touching the quiz? Invite them as a **Viewer**, then share the relevant forms with them.
-</Callout>
+- **Owner** and **admin** can both manage everyone else — including each other. An admin can appoint another admin, demote one, disable one, or remove one.
+- The **owner's** own row is untouchable. The owner changes only by [transferring ownership](#transferring-ownership), never by editing a role.
+- **Nobody can change their own role**, not even to step down. Ask another owner or admin to do it. Leaving the team is always your own to do.
+- **Member** and **viewer** cannot manage anyone.
 
 <Callout type="warning">
-  Leaving a team: an owner must transfer ownership first; admins, members, and viewers can leave anytime.
+  Because admins can demote each other, treat admin as a role you grant to people you'd trust with the team. If you want someone to see everything without touching it, that's **Viewer**.
+</Callout>
+
+## Transferring ownership
+
+Only the owner can transfer ownership, from **Settings → Members**. The new owner must already be an active member of the team. After the transfer you become a regular member — the team always has exactly one owner.
+
+An owner cannot leave the team directly; transfer ownership first.
+
+<Callout type="info">
+  Want someone to see results without touching the quiz? Invite them as a **Viewer**, then share the relevant quizzes with them.
 </Callout>
