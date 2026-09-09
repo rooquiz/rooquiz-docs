@@ -2,10 +2,6 @@
 title: MCP 接入
 ---
 
-import { Callout, Tabs } from 'nextra/components'
-
-# MCP 接入
-
 RooQuiz 提供一个 **MCP(Model Context Protocol)server**,让 Claude Desktop、Claude Code、Cursor、Codex 等 AI 客户端能在你的团队下直接操作测验——用自然语言就能创建考试、评分测验、分型测验,追加题目、调整顺序、配置报告维度与分型结果;还能复制 / 删除测验、做多语言译文、管理考生,以及读取答题记录、统计与转化漏斗——而不必手动在编辑器里一个个搭。
 
 <Callout type="info">
@@ -24,14 +20,14 @@ RooQuiz 提供一个 **MCP(Model Context Protocol)server**,让 Claude Desktop、
 claude.ai、Claude Code 等支持 MCP OAuth 的客户端**无需手动创建 Token**——只要填入 Endpoint URL,客户端会自动发现授权服务并打开浏览器,你登录 RooQuiz 账号、选择要授权的团队、点「授权」即完成连接。
 
 <Tabs items={['claude.ai 网页版', 'Claude Code']}>
-  <Tabs.Tab>
+  <Tab value="claude.ai 网页版">
     打开 claude.ai 的 **设置 → 连接器(Connectors)→ 添加自定义连接器**:
 
     1. 名称随意填(例如 `RooQuiz`)。
     2. 远程 MCP 服务器 URL 填入你的 Endpoint(形如 `https://你的域名/api/mcp`)。
     3. 保存后点「连接」,浏览器会跳转到 RooQuiz 授权页——登录并选择团队,点「授权」。
-  </Tabs.Tab>
-  <Tabs.Tab>
+  </Tab>
+  <Tab value="Claude Code">
     在终端任意目录执行(**不带** token header):
 
     ```bash
@@ -39,7 +35,7 @@ claude.ai、Claude Code 等支持 MCP OAuth 的客户端**无需手动创建 Tok
     ```
 
     之后在 Claude Code 中首次连接(如 `/mcp`)时会自动打开浏览器完成授权。
-  </Tabs.Tab>
+  </Tab>
 </Tabs>
 
 关于 OAuth 连接:
@@ -74,15 +70,15 @@ claude.ai、Claude Code 等支持 MCP OAuth 的客户端**无需手动创建 Tok
 在 **设置 → MCP 接入** 页面可以直接复制各客户端的配置片段和你的 **Endpoint URL**(形如 `https://你的域名/api/mcp`)。把片段里的 `rqp_live_xxx...` 替换成你刚生成的 Token。
 
 <Tabs items={['Claude Code (CI)', 'Cursor', 'Codex CLI', 'Claude Desktop']}>
-  <Tabs.Tab>
+  <Tab value="Claude Code (CI)">
     Claude Code 推荐走上方的 OAuth 方式;仅在 CI 等无浏览器环境才需要 token header:
 
     ```bash
     claude mcp add --transport http rooquiz https://你的域名/api/mcp \
       --header "Authorization: Bearer rqp_live_xxx..."
     ```
-  </Tabs.Tab>
-  <Tabs.Tab>
+  </Tab>
+  <Tab value="Cursor">
     原生支持 HTTP MCP。写入项目级 `.cursor/mcp.json` 或全局 `~/.cursor/mcp.json`:
 
     ```json
@@ -95,8 +91,8 @@ claude.ai、Claude Code 等支持 MCP OAuth 的客户端**无需手动创建 Tok
       }
     }
     ```
-  </Tabs.Tab>
-  <Tabs.Tab>
+  </Tab>
+  <Tab value="Codex CLI">
     原生支持 HTTP MCP。写入 `~/.codex/config.toml`:
 
     ```toml
@@ -110,8 +106,8 @@ claude.ai、Claude Code 等支持 MCP OAuth 的客户端**无需手动创建 Tok
     ```bash
     export ROOQUIZ_MCP_TOKEN="rqp_live_xxx..."
     ```
-  </Tabs.Tab>
-  <Tabs.Tab>
+  </Tab>
+  <Tab value="Claude Desktop">
     Claude Desktop 当前仅原生支持 stdio 协议,HTTP MCP 需通过 `mcp-remote` 桥接(首次会自动下载,需本机 Node ≥ 18)。写入配置文件后**重启** Claude Desktop:
 
     - macOS:`~/Library/Application Support/Claude/claude_desktop_config.json`
@@ -131,7 +127,7 @@ claude.ai、Claude Code 等支持 MCP OAuth 的客户端**无需手动创建 Tok
       }
     }
     ```
-  </Tabs.Tab>
+  </Tab>
 </Tabs>
 
 ## 示例指令

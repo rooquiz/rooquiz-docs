@@ -1,9 +1,10 @@
+import type { MetadataRoute } from 'next'
 import { SITE_URL } from './site-url'
 
 // Static export: generated once at build time into `out/robots.txt`.
 export const dynamic = 'force-static'
 
-export default function robots() {
+export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {

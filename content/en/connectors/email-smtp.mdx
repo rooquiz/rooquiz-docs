@@ -2,10 +2,6 @@
 title: Email Sending Service (SMTP)
 ---
 
-import { Callout, Steps, Tabs } from 'nextra/components'
-
-# Email Sending Service (SMTP)
-
 The [Email connector](/en/connectors/channels#email) sends through **your own SMTP server** — RooQuiz does not relay it. Notifications therefore arrive from your own address, and there is no platform sending limit.
 
 Set it up once per team under **Settings → Organization → Email Sending**. Every email connector in the team uses it.
@@ -33,7 +29,7 @@ Set it up once per team under **Settings → Organization → Email Sending**. E
 ## Provider setup
 
 <Tabs items={['Gmail', 'Resend', 'Company mail server']}>
-  <Tabs.Tab>
+  <Tab value="Gmail">
     | Field | Value |
     | --- | --- |
     | SMTP server | `smtp.gmail.com` |
@@ -51,9 +47,9 @@ Set it up once per team under **Settings → Organization → Email Sending**. E
     If that page says *"The setting you are looking for is not available for your account"*, one of these applies: 2-Step Verification is off; it's a Google Workspace account whose admin disabled app passwords; or the account is enrolled in Advanced Protection, which blocks them outright.
 
     Gmail also caps sending at roughly **500 recipients per day** for personal accounts and **2,000** for Workspace. That is ample for team notifications, but not for bulk mail.
-  </Tabs.Tab>
+  </Tab>
 
-  <Tabs.Tab>
+  <Tab value="Resend">
     | Field | Value |
     | --- | --- |
     | SMTP server | `smtp.resend.com` |
@@ -63,16 +59,16 @@ Set it up once per team under **Settings → Organization → Email Sending**. E
     | From address | Any address on a domain you have verified in Resend |
 
     This is the easiest option if you want notifications to come from **your own brand domain** rather than a personal mailbox, and it has no daily cap of the Gmail kind.
-  </Tabs.Tab>
+  </Tab>
 
-  <Tabs.Tab>
+  <Tab value="Company mail server">
     Ask whoever runs your mail for the **SMTP hostname, port and credentials**. Prefer port 587 with STARTTLS; use 465 if that is all they offer.
 
     Two things trip people up:
 
     - The username is often the **full mailbox address**, not the part before the `@`.
     - The **From address must belong to your own domain**. Most corporate servers refuse to relay mail claiming to be from somewhere else.
-  </Tabs.Tab>
+  </Tab>
 </Tabs>
 
 ## Save and verify

@@ -2,10 +2,6 @@
 title: 发信服务(SMTP)
 ---
 
-import { Callout, Steps, Tabs } from 'nextra/components'
-
-# 发信服务(SMTP)
-
 [邮件渠道](/zh/connectors/channels#邮件)通过**你自己的 SMTP 服务器**发信 —— RooQuiz 不代发。所以通知是从你自己的地址发出的,也没有平台层面的发送量限制。
 
 在**设置 → 组织 → 发信服务**里配一次,团队里所有邮件连接器共用这一份。
@@ -33,7 +29,7 @@ import { Callout, Steps, Tabs } from 'nextra/components'
 ## 各服务商怎么填
 
 <Tabs items={['Gmail', 'Resend', '企业自建邮箱']}>
-  <Tabs.Tab>
+  <Tab value="Gmail">
     | 字段 | 值 |
     | --- | --- |
     | SMTP 服务器 | `smtp.gmail.com` |
@@ -51,9 +47,9 @@ import { Callout, Steps, Tabs } from 'nextra/components'
     如果那个页面显示「你要找的设置不适用于你的账号」,原因是三者之一:两步验证没开;这是 Google Workspace 账号且管理员禁用了应用专用密码;或者账号加入了高级保护计划(会直接禁掉这个功能)。
 
     另外 Gmail 有发送上限:个人账号约**每天 500 个收件人**,Workspace 约 **2000**。对团队通知完全够用,但不适合群发。
-  </Tabs.Tab>
+  </Tab>
 
-  <Tabs.Tab>
+  <Tab value="Resend">
     | 字段 | 值 |
     | --- | --- |
     | SMTP 服务器 | `smtp.resend.com` |
@@ -63,16 +59,16 @@ import { Callout, Steps, Tabs } from 'nextra/components'
     | 发件人地址 | 你在 Resend 里已验证域名下的任意地址 |
 
     如果你希望通知从**自己的品牌域名**发出、而不是某个私人邮箱,这是最省事的选择,也没有 Gmail 那种每日上限。
-  </Tabs.Tab>
+  </Tab>
 
-  <Tabs.Tab>
+  <Tab value="企业自建邮箱">
     向管理邮件系统的同事要 **SMTP 主机名、端口和凭据**。优先用 587 + STARTTLS,只有 465 可选时才用 465。
 
     两个常见坑:
 
     - 用户名往往是**完整邮箱地址**,不是 `@` 前面那截。
     - **发件人地址必须属于你自己的域名**。多数企业邮件服务器会拒绝代发声称来自其他域名的信。
-  </Tabs.Tab>
+  </Tab>
 </Tabs>
 
 ## 保存并验证
