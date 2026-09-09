@@ -1,0 +1,8 @@
+{
+  "title": "集成与 API",
+  "pages": [
+    "index",
+    "mcp",
+    "rest-api"
+  ]
+}

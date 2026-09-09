@@ -1,0 +1,11 @@
+{
+  "title": "Basics",
+  "pages": [
+    "index",
+    "account",
+    "dashboard",
+    "quiz-types",
+    "create-quiz",
+    "workspace"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "pages": [
+    "index",
+    "getting-started",
+    "---核心功能---",
+    "editor",
+    "library",
+    "publish",
+    "results",
+    "---进阶功能---",
+    "leads",
+    "respondents",
+    "bookings",
+    "connectors",
+    "---账户与团队---",
+    "account",
+    "teams",
+    "---开发者---",
+    "integrations"
+  ]
+}

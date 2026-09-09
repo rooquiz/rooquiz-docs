@@ -1,0 +1,8 @@
+{
+  "title": "Integrations & API",
+  "pages": [
+    "index",
+    "mcp",
+    "rest-api"
+  ]
+}

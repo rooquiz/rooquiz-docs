@@ -1,0 +1,12 @@
+{
+  "title": "编辑器与题型",
+  "pages": [
+    "index",
+    "question-types",
+    "logic",
+    "scoring",
+    "settings",
+    "design",
+    "translations"
+  ]
+}
