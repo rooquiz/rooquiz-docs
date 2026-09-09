@@ -1,24 +1,17 @@
-import nextra from 'nextra'
+import { createMDX } from 'fumadocs-mdx/next'
 
-const withNextra = nextra({
-  // Bake the locale prefix (/zh, /en) into every page-map link. Without middleware
-  // (static export) there is nothing to rewrite links at request time, so links must
-  // carry the locale themselves — otherwise they 404 (e.g. /getting-started/account
-  // instead of /zh/getting-started/account).
-  unstable_shouldAddLocaleToLinks: true
+// `macro.include` tells the bundler plugin which files call `defineDocs()` from
+// `fumadocs-mdx/macro`. The macro is expanded at build time, so there is no
+// `source.config.ts` and no generated `.source/` directory to keep in sync.
+const withMDX = createMDX({
+  macro: { include: ['./lib/source.ts'] }
 })
 
-// Export the final Next.js config with Nextra included.
 // `output: 'export'` produces a fully static site under `out/` for Cloudflare Pages.
-// The `i18n` block is consumed by Nextra to learn the locale list (zh/en) and is
-// stripped before Next.js sees it, so it does NOT conflict with `output: 'export'`.
-// Locale routing is handled by the `[lang]` segment + generateStaticParams, not by
-// middleware — middleware is unsupported in static export.
-export default withNextra({
-  i18n: {
-    locales: ['zh', 'en'],
-    defaultLocale: 'en'
-  },
+// Locale routing lives in the `[lang]` segment + `generateStaticParams`, not in
+// middleware — static export has no middleware. The bare root `/` is handled at the
+// edge by `functions/index.js`.
+export default withMDX({
   output: 'export',
   images: {
     unoptimized: true

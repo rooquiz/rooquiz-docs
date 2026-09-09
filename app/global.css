@@ -1,0 +1,6 @@
+@import 'tailwindcss';
+@import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/preset.css';
+
+/* No `@source` for fumadocs-ui is needed: its `css/generated/*.css` files already
+   declare every utility it uses via `@source inline(...)`. */
