@@ -36,3 +36,6 @@ yarn-error.log*
 
 # claude
 CLAUDE.md
+
+# typescript incremental build info
+tsconfig.tsbuildinfo
