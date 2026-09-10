@@ -147,6 +147,18 @@ be fiction.
 Adding a locale means updating `LOCALES` in `lib/i18n.ts` (with a `displayName` and, ideally,
 translated UI strings) and the locale list in `functions/index.js`.
 
+## Meta descriptions
+
+Every page needs its own `description` in the frontmatter. Without one it inherits the site-level
+description from `app/[lang]/layout.tsx` ("RooQuiz product documentation"), so a handful of pages
+without one all end up sharing a single meta description — Bing Webmaster Tools reported exactly
+that for 23 pages.
+
+`scripts/check-descriptions.mjs` runs as `prebuild` (and via `pnpm check:descriptions`) and fails
+the build when a description is missing, shorter than 150 characters, or identical to another
+page's. Descriptions are also what the search-result snippet shows, so write them for a reader
+deciding whether to open the page, not as a keyword list.
+
 ## IndexNow
 
 After every deploy the workflow submits the pages whose exported HTML changed to

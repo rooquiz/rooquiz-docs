@@ -1,8 +1,10 @@
 {
   "scripts": {
     "dev": "next",
+    "prebuild": "node scripts/check-descriptions.mjs",
     "build": "next build",
     "postbuild": "pagefind --site out --output-subdir _pagefind",
+    "check:descriptions": "node scripts/check-descriptions.mjs",
     "indexnow": "node scripts/indexnow.mjs out/sitemap.xml out",
     "start": "next start",
     "preview": "wrangler pages dev out",
