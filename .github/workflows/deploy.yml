@@ -43,3 +43,27 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy out --project-name=rooquiz-docs --branch=main
+
+      # IndexNow: tell Bing and friends about the pages that changed instead of waiting to be
+      # crawled. The snapshot holds the per-URL content hash from the last successful submission,
+      # which is what makes this a diff — re-submitting unchanged URLs counts as abuse.
+      - name: Restore IndexNow snapshot
+        uses: actions/cache/restore@v4
+        with:
+          path: .indexnow-state.json
+          key: docs-indexnow-${{ github.run_id }}
+          restore-keys: docs-indexnow-
+
+      # The site is already live; a failed submission should not fail the deploy. The step just
+      # turns yellow, and since the snapshot is only written on success the next run retries.
+      - name: Submit changed URLs to IndexNow
+        continue-on-error: true
+        run: node scripts/indexnow.mjs out/sitemap.xml out --state .indexnow-state.json
+
+      # With no snapshot restored and a failed submission the file does not exist at all
+      - name: Save IndexNow snapshot
+        continue-on-error: true
+        uses: actions/cache/save@v4
+        with:
+          path: .indexnow-state.json
+          key: docs-indexnow-${{ github.run_id }}

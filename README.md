@@ -147,6 +147,23 @@ be fiction.
 Adding a locale means updating `LOCALES` in `lib/i18n.ts` (with a `displayName` and, ideally,
 translated UI strings) and the locale list in `functions/index.js`.
 
+## IndexNow
+
+After every deploy the workflow submits the pages whose exported HTML changed to
+[IndexNow](https://www.indexnow.org), the shared endpoint Bing, Yandex, Seznam and Naver read —
+so an edit is picked up in minutes instead of waiting for the next crawl.
+
+- Ownership is proven by `public/d7f6fee5fbda0ed6d958b64243f50d12.txt`, served at the site root.
+  Its **name and contents are the key**, and `scripts/indexnow.mjs` hardcodes the same value;
+  rotating the key means changing all three together.
+- `scripts/indexnow.mjs` diffs the build against a snapshot of per-URL content hashes carried
+  between runs by `actions/cache`. Re-submitting unchanged URLs counts as abuse, hence the diff.
+  With no snapshot it submits everything once.
+- A failed submission never fails the deploy: the step is `continue-on-error`, and the snapshot
+  is only written after a successful submission, so the next run retries the same URLs.
+- To submit by hand after a build: `node scripts/indexnow.mjs out/sitemap.xml out --all`
+  (add `--dry-run` to only print what would go out).
+
 ## Deployment
 
 Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds the site and deploys `out/` to the `rooquiz-docs` Cloudflare Pages project. The workflow can also be run manually from the Actions tab, and needs these repository secrets:
