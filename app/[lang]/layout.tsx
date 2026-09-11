@@ -5,6 +5,7 @@ import { DocsLayout } from 'fumadocs-ui/layouts/docs'
 import { source } from '@/lib/source'
 import { DEFAULT_LOCALE, LOCALES, provider, type Locale } from '@/lib/i18n'
 import { baseOptions, sidebarFooter } from '@/lib/layout.shared'
+import { SITE_URL } from '@/lib/site-url'
 import PagefindSearchDialog from '@/components/search/search-dialog'
 import '../global.css'
 
@@ -27,6 +28,7 @@ export async function generateMetadata({
   const m = meta[lang as Locale] ?? meta[DEFAULT_LOCALE]
 
   return {
+    metadataBase: new URL(SITE_URL),
     title: { default: m.title, template: `%s – ${m.title}` },
     description: m.description
   }
@@ -55,7 +57,17 @@ export default async function RootLayout({
           <DocsLayout
             {...baseOptions(lang)}
             tree={source.getPageTree(lang)}
-            sidebar={{ footer: sidebarFooter(lang) }}
+            // `defaultOpenLevel: 1` expands every top-level folder. This is an SEO
+            // fix, not a styling preference: the sidebar folders are Radix
+            // collapsibles, which render no children while closed, so a page's
+            // exported HTML linked only to its own folder — 7 of the 54 pages.
+            // The graph stayed connected, but thinly: half the tree sat 3-4 clicks
+            // from the locale index with as few as 3 inbound links, and Google was
+            // leaving those URLs in "Discovered - currently not indexed". Open
+            // folders put the whole tree in every page's static markup (1 click,
+            // 53 inbound links each). The content tree is one level deep, so 1
+            // covers all of it.
+            sidebar={{ defaultOpenLevel: 1, footer: sidebarFooter(lang) }}
           >
             {children}
           </DocsLayout>

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next'
-import { SITE_URL } from './site-url'
+import { SITE_URL } from '@/lib/site-url'
 
 // Static export: generated once at build time into `out/robots.txt`.
 export const dynamic = 'force-static'

@@ -8,6 +8,7 @@ import {
 } from 'fumadocs-ui/layouts/docs/page'
 import { createRelativeLink } from 'fumadocs-ui/mdx'
 import { source } from '@/lib/source'
+import { languagesFor, pageUrl } from '@/lib/alternates'
 import { DOCS_REPOSITORY_BASE } from '@/lib/layout.shared'
 import { getMDXComponents } from '@/components/mdx'
 
@@ -55,8 +56,20 @@ export async function generateMetadata(props: {
   const page = source.getPage(slug, lang)
   if (!page) notFound()
 
+  // The locale index comes back as [] (or ['']) — same normalisation the route map
+  // uses, so `/en` and `/en/editor/logic` both resolve to a real entry.
+  const segments = (slug ?? []).filter(Boolean)
+
   return {
     title: page.data.title,
-    description: page.data.description
+    description: page.data.description,
+    // Self-referencing canonical plus the page's hreflang cluster. Without these
+    // the en and zh trees are two structurally identical sets of URLs with nothing
+    // in the markup tying them together, which invites Google to treat one as a
+    // duplicate of the other and drop it.
+    alternates: {
+      canonical: pageUrl(lang, segments),
+      languages: languagesFor(segments)
+    }
   }
 }
