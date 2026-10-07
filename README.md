@@ -103,13 +103,13 @@ Heading anchors are slugified from the heading text, CJK included (`## 转让所
 
 ### Images
 
-Put screenshots in `public/img/<locale>/<section>/<name>.webp` and reference them absolutely:
+Put screenshots in `public/img/en/<section>/<name>.webp` and reference them absolutely:
 
 ```mdx
 ![RooQuiz dashboard](/img/en/getting-started/dashboard.webp)
 ```
 
-Localized screenshots (UI in the matching language) go in the matching locale folder; only `en` and `zh` have their own today, so the other locales reference `/img/en/` (`zh-TW` uses `/img/zh/`). Fumadocs resolves these against `public/` at build time and emits them as sized, lazy-loaded, content-hashed assets under `_next/static/media`, which is why the originals stay in `public/`.
+Every locale uses the English screenshots — there are no per-locale image folders, so a page in any language references `/img/en/`. Convert new captures to WebP (`cwebp -q 82 in.png -o out.webp`) before committing. Fumadocs resolves these against `public/` at build time and emits them as sized, lazy-loaded, content-hashed assets under `_next/static/media`, which is why the originals stay in `public/`.
 
 ## Locales
 
