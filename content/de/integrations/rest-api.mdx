@@ -1,9 +1,9 @@
 ---
 title: REST API
-description: 'Eine kleine, schreibgeschützte REST API, die die Formulardefinitionen Ihres Teams – Titel, Felder, Einstellungen und Berichtskonfiguration – als JSON liefert, für Skripte, Zapier/Make/n8n oder eigene Dashboards.'
+description: 'Eine kleine, schreibgeschützte REST API, die die Formulardefinitionen Ihres Teams und die gesammelten Einsendungen – Antworten, Punkte, Leads, UTM-Daten – als JSON liefert, für Skripte, Zapier/Make/n8n oder Dashboards.'
 ---
 
-RooQuiz stellt eine kleine, schreibgeschützte **REST API** bereit, mit der Sie die Formulardaten Ihres Teams in Skripte, Automatisierungen (Zapier, Make, n8n) oder eigene Dashboards übernehmen können. Sie liefert Formular-**Definitionen** – Titel, Felder, Einstellungen, Berichtskonfiguration – als einfaches JSON.
+RooQuiz stellt eine kleine, schreibgeschützte **REST API** bereit, mit der Sie die Formulardaten Ihres Teams in Skripte, Automatisierungen (Zapier, Make, n8n) oder eigene Dashboards übernehmen können. Sie liefert Formular-**Definitionen** – Titel, Felder, Einstellungen, Berichtskonfiguration – sowie die **Einsendungen**, die jedes Formular gesammelt hat, als einfaches JSON.
 
 <Callout type="info">
   Die REST API arbeitet auf **Kontoebene** und authentifiziert sich als Ihr Team, nicht als einzelnes Mitglied. Wenn stattdessen ein **KI-Client** Ihre Quizze per natürlicher Sprache bearbeiten soll, siehe [MCP-Integration](/de/integrations/mcp).
@@ -14,7 +14,7 @@ RooQuiz stellt eine kleine, schreibgeschützte **REST API** bereit, mit der Sie 
 - Sie authentifizieren sich mit einem **Konto-API-Schlüssel** (Präfix `rqp_acct_`), der zu einem Team gehört.
 - Der Schlüssel kann **alle Formulare dieses Teams lesen**. Er ist an keine Person gebunden und funktioniert daher weiter, wenn Mitglieder kommen und gehen.
 - Nur ein **Team-Inhaber** kann Konto-API-Schlüssel erstellen, einsehen oder widerrufen.
-- Die API ist **schreibgeschützt** und liefert nur Formulardefinitionen – Einsendungen/Antworten werden darüber nicht bereitgestellt.
+- Die API ist **schreibgeschützt**: Sie liefert Formulardefinitionen und Einsendungen, kann aber nichts anlegen, ändern oder löschen.
 
 ## API-Schlüssel erhalten
 

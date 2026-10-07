@@ -1,9 +1,9 @@
 ---
 title: API REST
-description: "Une petite API REST en lecture seule qui renvoie en JSON les définitions des formulaires de votre équipe (titre, champs, paramètres, rapport) pour vos scripts, automatisations ou tableaux de bord."
+description: "Une petite API REST en lecture seule qui renvoie en JSON les définitions des formulaires de votre équipe et les réponses collectées (scores, leads, UTM) pour vos scripts, automatisations ou tableaux de bord."
 ---
 
-RooQuiz propose une petite **API REST** en lecture seule qui vous permet de récupérer les données des formulaires de votre équipe dans vos scripts, vos automatisations (Zapier, Make, n8n) ou vos propres tableaux de bord. Elle renvoie les **définitions** des formulaires (titre, champs, paramètres, configuration du rapport) au format JSON brut.
+RooQuiz propose une petite **API REST** en lecture seule qui vous permet de récupérer les données des formulaires de votre équipe dans vos scripts, vos automatisations (Zapier, Make, n8n) ou vos propres tableaux de bord. Elle renvoie les **définitions** des formulaires (titre, champs, paramètres, configuration du rapport) et les **réponses** collectées par chaque formulaire, au format JSON brut.
 
 <Callout type="info">
   L'API REST fonctionne **au niveau du compte** et s'authentifie au nom de votre équipe, et non d'un membre en particulier. Si vous préférez qu'un **client IA** agisse sur vos quiz en langage naturel, consultez [Intégration MCP](/fr/integrations/mcp).
@@ -14,7 +14,7 @@ RooQuiz propose une petite **API REST** en lecture seule qui vous permet de réc
 - Vous vous authentifiez avec une **clé API de compte** (préfixe `rqp_acct_`) qui appartient à une équipe.
 - La clé peut **lire tous les formulaires de cette équipe**. Elle n'est liée à aucune personne, elle continue donc de fonctionner lorsque des membres arrivent ou partent.
 - Seul un **propriétaire d'équipe** peut créer, consulter ou révoquer des clés API de compte.
-- L'API est en **lecture seule** et renvoie uniquement les définitions des formulaires : elle n'expose pas les soumissions ni les réponses.
+- L'API est en **lecture seule** : elle renvoie les définitions des formulaires et les réponses, mais ne peut rien créer, modifier ni supprimer.
 
 ## Obtenir une clé API
 

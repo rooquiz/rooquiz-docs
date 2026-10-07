@@ -1,9 +1,9 @@
 ---
 title: API REST
-description: 'Uma pequena API REST somente leitura que retorna as definições dos formulários da sua equipe — título, campos, configurações e relatório — em JSON, para scripts, automações Zapier/Make/n8n ou painéis próprios.'
+description: 'Uma pequena API REST somente leitura que retorna as definições dos formulários da sua equipe e as respostas coletadas — pontuações, leads e UTM — em JSON, para scripts, automações Zapier/Make/n8n ou painéis próprios.'
 ---
 
-O RooQuiz oferece uma pequena **API REST** somente leitura para que você leve os dados dos formulários da sua equipe para scripts, automações (Zapier, Make, n8n) ou seus próprios painéis. Ela retorna as **definições** dos formulários — título, campos, configurações, configuração do relatório — em JSON simples.
+O RooQuiz oferece uma pequena **API REST** somente leitura para que você leve os dados dos formulários da sua equipe para scripts, automações (Zapier, Make, n8n) ou seus próprios painéis. Ela retorna as **definições** dos formulários — título, campos, configurações, configuração do relatório — e as **respostas** que cada formulário coletou, em JSON simples.
 
 <Callout type="info">
   A API REST é **da conta** e se autentica como a sua equipe, não como um membro individual. Se você quer que um **cliente de IA** opere seus quizzes com linguagem natural, consulte [Integração MCP](/pt-BR/integrations/mcp).
@@ -14,7 +14,7 @@ O RooQuiz oferece uma pequena **API REST** somente leitura para que você leve o
 - Você se autentica com uma **chave de API da conta** (prefixo `rqp_acct_`) que pertence a uma equipe.
 - A chave pode **ler todos os formulários dessa equipe**. Ela não está vinculada a uma pessoa, então continua funcionando quando membros entram e saem.
 - Apenas um **proprietário da equipe** pode criar, ver ou revogar chaves de API da conta.
-- A API é **somente leitura** e retorna apenas definições de formulários — ela não expõe envios/respostas.
+- A API é **somente leitura**: retorna definições de formulários e respostas, mas não pode criar, alterar nem excluir nada.
 
 ## Obtenha uma chave de API
 

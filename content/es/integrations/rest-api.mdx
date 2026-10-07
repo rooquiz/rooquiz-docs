@@ -1,9 +1,9 @@
 ---
 title: API REST
-description: 'Una pequeña API REST de solo lectura que devuelve como JSON las definiciones de formularios de tu equipo (título, campos, configuración e informe) para scripts, automatizaciones con Zapier/Make/n8n o paneles.'
+description: 'Una pequeña API REST de solo lectura que devuelve como JSON las definiciones de formularios de tu equipo y las respuestas recopiladas (puntuaciones, leads, UTM) para scripts, automatizaciones con Zapier/Make/n8n o paneles.'
 ---
 
-RooQuiz ofrece una pequeña **API REST** de solo lectura para que puedas llevar los datos de los formularios de tu equipo a scripts, automatizaciones (Zapier, Make, n8n) o tus propios paneles. Devuelve las **definiciones** de los formularios (título, campos, configuración, configuración del informe) como JSON sin más.
+RooQuiz ofrece una pequeña **API REST** de solo lectura para que puedas llevar los datos de los formularios de tu equipo a scripts, automatizaciones (Zapier, Make, n8n) o tus propios paneles. Devuelve las **definiciones** de los formularios (título, campos, configuración, configuración del informe) y las **respuestas** que ha recopilado cada formulario, como JSON sin más.
 
 <Callout type="info">
   La API REST funciona **a nivel de cuenta** y se autentica como tu equipo, no como un miembro concreto. Si prefieres que un **cliente de AI** trabaje con tus quizzes mediante lenguaje natural, consulta [Integración MCP](/es/integrations/mcp).
@@ -14,7 +14,7 @@ RooQuiz ofrece una pequeña **API REST** de solo lectura para que puedas llevar 
 - Te autenticas con una **clave de API de cuenta** (prefijo `rqp_acct_`) que pertenece a un equipo.
 - La clave puede **leer todos los formularios de ese equipo**. No está vinculada a una persona, así que sigue funcionando aunque entren y salgan miembros.
 - Solo el **propietario del equipo** puede crear, ver o revocar claves de API de cuenta.
-- La API es de **solo lectura** y devuelve únicamente definiciones de formularios; no expone las respuestas.
+- La API es de **solo lectura**: devuelve definiciones de formularios y respuestas, pero no puede crear, cambiar ni eliminar nada.
 
 ## Obtener una clave de API
 

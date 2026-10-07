@@ -1,9 +1,9 @@
 ---
 title: REST API
-description: 'A small read-only REST API that returns your team''s form definitions — title, fields, settings and report config — as JSON, for scripts, Zapier/Make/n8n automations or your own dashboards.'
+description: 'A small read-only REST API that returns your team''s form definitions and collected submissions — answers, scores, leads and UTM data — as JSON, for scripts, Zapier/Make/n8n automations or dashboards.'
 ---
 
-RooQuiz exposes a small, read-only **REST API** so you can pull your team's form data into scripts, automations (Zapier, Make, n8n), or your own dashboards. It returns form **definitions** — title, fields, settings, report config — as plain JSON.
+RooQuiz exposes a small, read-only **REST API** so you can pull your team's form data into scripts, automations (Zapier, Make, n8n), or your own dashboards. It returns form **definitions** — title, fields, settings, report config — and the **submissions** each form has collected, as plain JSON.
 
 <Callout type="info">
   The REST API is **account-level** and authenticates as your team, not as an individual member. If you want an **AI client** to operate on your quizzes with natural language instead, see [MCP Integration](/en/integrations/mcp).
@@ -14,7 +14,7 @@ RooQuiz exposes a small, read-only **REST API** so you can pull your team's form
 - You authenticate with an **account API key** (prefix `rqp_acct_`) that belongs to a team.
 - The key can **read all forms in that team**. It is not tied to a person, so it keeps working when members come and go.
 - Only a **team owner** can create, view, or revoke account API keys.
-- The API is **read-only** and returns form definitions only — it does not expose submissions/responses.
+- The API is **read-only**: it returns form definitions and submissions, and cannot create, change or delete anything.
 
 ## Get an API key
 
