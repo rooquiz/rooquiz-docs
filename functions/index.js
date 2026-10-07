@@ -34,8 +34,12 @@ function pickLocale(acceptLanguage) {
     .map((part) => {
       const [tag, ...params] = part.trim().split(';')
       const q = params.find((p) => p.startsWith('q='))
-      return { tag: tag.toLowerCase(), q: q ? parseFloat(q.slice(2)) : 1 }
+      const weight = q ? parseFloat(q.slice(2)) : 1
+      // A malformed q would make the sort comparator inconsistent; treat it as 0.
+      return { tag: tag.toLowerCase(), q: Number.isFinite(weight) ? weight : 0 }
     })
+    // q=0 means "not acceptable" — never redirect to a language the visitor rejected.
+    .filter(({ q }) => q > 0)
     .sort((a, b) => b.q - a.q)
 
   for (const { tag } of ranked) {

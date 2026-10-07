@@ -20,7 +20,10 @@ const SOURCE_LOCALE = 'en'
 function readLocaleList(file, pattern) {
   const match = fs.readFileSync(file, 'utf8').match(pattern)
   if (!match) throw new Error(`Could not find the locale list in ${file}`)
-  return [...match[1].matchAll(/'([^']+)'/g)].map((m) => m[1])
+  const list = [...match[1].matchAll(/['"]([^'"]+)['"]/g)].map((m) => m[1])
+  // An empty list would make every check below pass vacuously.
+  if (list.length === 0) throw new Error(`Parsed an empty locale list from ${file}`)
+  return list
 }
 
 function walk(dir, root = dir, acc = []) {
@@ -43,8 +46,12 @@ if (locales.join() !== edgeLocales.join()) {
 }
 
 const expected = new Set(walk(path.join(CONTENT_DIR, SOURCE_LOCALE)))
-// Matches a markdown link target or an href that starts with a locale segment.
-const linkPattern = new RegExp(`(?:\\]\\(|href=["'])/(${locales.join('|')})(?=[/)"'#])`, 'g')
+// A link target that starts with a locale segment: markdown `](/en/...)`, a reference definition
+// `[x]: /en/...`, a JSX `href="/en..."` or `href={'/en...'}`, or an absolute docs-site URL.
+const linkPattern = new RegExp(
+  `(?:\\]\\(|^\\[[^\\]]+\\]:[ \\t]*|href=\\{?["'\`]|https?://docs\\.rooquiz\\.com)/(${locales.join('|')})(?=[/)"'\`#\\s]|$)`,
+  'gm'
+)
 
 for (const locale of locales) {
   const dir = path.join(CONTENT_DIR, locale)
