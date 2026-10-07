@@ -1,0 +1,113 @@
+---
+title: Miembros y roles
+description: 'Invita a tus compañeros por correo y asigna a cada uno uno de los cuatro roles, de propietario a visualizador. Qué puede hacer cada rol, cuánto dura una invitación y cómo cambiar o quitar a un miembro.'
+---
+
+## Invitar a miembros
+
+En **Ajustes → Miembros del equipo**, introduce un correo electrónico y elige un rol para enviar una invitación. La persona se une mediante el enlace del correo de invitación (válido durante 7 días). Los usuarios registrados se unen directamente; a los demás se les guía para que se registren primero.
+
+## Los cuatro roles
+
+Un equipo tiene cuatro roles, del que tiene más privilegios al que tiene menos:
+
+| Rol | En una línea |
+| --- | --- |
+| **Propietario** | El dueño final del equipo, con acceso total. Cada equipo tiene **exactamente un** propietario. |
+| **Administrador** | Gestiona el equipo en el día a día: formularios, bancos de preguntas, participantes, leads, miembros y ajustes del equipo. |
+| **Miembro** | Crea quizzes y trabaja los leads que generan. |
+| **Visualizador** | Solo lee. No puede cambiar nada, en ningún lugar. |
+
+La línea entre propietario y administrador es deliberada: **un administrador gestiona el equipo; el propietario es su dueño.** Todo lo que cambie a quién pertenece el equipo, o su relación con nosotros como cliente de pago, queda en manos del propietario.
+
+## Matriz de permisos
+
+✅ completo · **texto** = permitido con límites · — no permitido
+
+### Quizzes
+
+| | Propietario | Administrador | Miembro | Visualizador |
+| --- | :---: | :---: | :---: | :---: |
+| Crear un quiz | ✅ | ✅ | ✅ | — |
+| Ver la lista de quizzes | ✅ | ✅ | **propios + compartidos** | **solo compartidos** |
+| Editar el contenido del quiz | ✅ | ✅ | **propios + compartidos** | — |
+| Compartir, transferir, traducir, duplicar | ✅ | ✅ | **propios + compartidos** | — |
+| Mover a la papelera, restaurar, eliminar | ✅ | ✅ | **solo propios** | — |
+| Ver las respuestas | ✅ | ✅ | **propios + compartidos** | **solo compartidos** |
+| Eliminar respuestas | ✅ | ✅ | **propios + compartidos** | — |
+
+### Bancos de preguntas
+
+| | Propietario | Administrador | Miembro | Visualizador |
+| --- | :---: | :---: | :---: | :---: |
+| Explorar bancos y preguntas | ✅ | ✅ | ✅ | ✅ |
+| Crear, editar o eliminar un banco | ✅ | ✅ | — | — |
+| Añadir, editar o eliminar preguntas | ✅ | ✅ | — | — |
+
+### Participantes y leads
+
+| | Propietario | Administrador | Miembro | Visualizador |
+| --- | :---: | :---: | :---: | :---: |
+| Ver todos los participantes y leads del equipo | ✅ | ✅ | ✅ | ✅ |
+| Trabajar leads: asignar, etiquetar, cambiar estado, comentar | ✅ | ✅ | ✅ | — |
+| Editar los datos de un participante | ✅ | ✅ | ✅ | — |
+| Crear o eliminar un participante | ✅ | ✅ | — | — |
+| Configurar los estados y las etiquetas de los leads | ✅ | ✅ | — | — |
+| Exportar datos | ✅ | ✅ | — | — |
+| Gestionar reservas | ✅ | ✅ | **solo sus propios leads** | — |
+
+<Callout type="info">
+  Los participantes y los leads son **de todo el equipo** para todos, incluidos los visualizadores: no se limitan según los quizzes que puedas ver. Solo las *respuestas* siguen la visibilidad de los quizzes.
+</Callout>
+
+### Miembros
+
+| | Propietario | Administrador | Miembro | Visualizador |
+| --- | :---: | :---: | :---: | :---: |
+| Ver la lista de miembros | ✅ | ✅ | ✅ | ✅ |
+| Invitar a miembros, incluso como administradores | ✅ | ✅ | — | — |
+| Cambiar roles, desactivar, activar, quitar | **a cualquiera salvo al propietario** | **a cualquiera salvo al propietario** | — | — |
+| Transferir la propiedad | ✅ | — | — | — |
+| Salir del equipo | **transferir primero** | ✅ | ✅ | ✅ |
+
+### Ajustes del equipo
+
+| | Propietario | Administrador | Miembro | Visualizador |
+| --- | :---: | :---: | :---: | :---: |
+| Nombre del equipo, logotipo, dirección, nivel del modelo de AI | ✅ | ✅ | — | — |
+| Disponibilidad de reservas | ✅ | ✅ | — | — |
+| Conectores | ✅ | ✅ | — | — |
+| Registros de auditoría | ✅ | ✅ | — | — |
+| Dominio personalizado | ✅ | — | — | — |
+| Claves de API | ✅ | — | — | — |
+| Eliminar el equipo | ✅ | — | — | — |
+
+### Facturación
+
+| | Propietario | Administrador | Miembro | Visualizador |
+| --- | :---: | :---: | :---: | :---: |
+| Mejorar el plan, método de pago, cancelar, reembolso | ✅ | — | — | — |
+| Recargar créditos de AI | ✅ | ✅ | — | — |
+
+Recargar es una gestión del uso, no un cambio en la suscripción, así que un administrador puede hacerlo. Todo lo que modifica la suscripción en sí queda en manos del propietario.
+
+## Quién puede gestionar a quién
+
+- El **propietario** y los **administradores** pueden gestionar a todos los demás, incluso entre sí. Un administrador puede nombrar a otro administrador, degradarlo, desactivarlo o quitarlo.
+- La fila del propio **propietario** es intocable. El propietario solo cambia [transfiriendo la propiedad](#transferir-la-propiedad), nunca editando un rol.
+- **Nadie puede cambiar su propio rol**, ni siquiera para renunciar a él. Pide a otro propietario o administrador que lo haga. Salir del equipo siempre depende de ti.
+- Los **miembros** y los **visualizadores** no pueden gestionar a nadie.
+
+<Callout type="warning">
+  Como los administradores pueden degradarse entre sí, trata el rol de administrador como uno que solo concedes a personas a las que confiarías el equipo. Si quieres que alguien lo vea todo sin tocar nada, el rol adecuado es **Visualizador**.
+</Callout>
+
+## Transferir la propiedad
+
+Solo el propietario puede transferir la propiedad, desde **Ajustes → Miembros del equipo**. El nuevo propietario debe ser ya un miembro activo del equipo. Tras la transferencia pasas a ser un miembro normal: el equipo siempre tiene exactamente un propietario.
+
+Un propietario no puede salir del equipo directamente; primero debe transferir la propiedad.
+
+<Callout type="info">
+  ¿Quieres que alguien vea los resultados sin tocar el quiz? Invítalo como **Visualizador** y luego comparte con él los quizzes correspondientes.
+</Callout>

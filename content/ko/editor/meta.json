@@ -1,0 +1,12 @@
+{
+  "title": "편집기 및 문항 유형",
+  "pages": [
+    "index",
+    "question-types",
+    "logic",
+    "scoring",
+    "settings",
+    "design",
+    "translations"
+  ]
+}

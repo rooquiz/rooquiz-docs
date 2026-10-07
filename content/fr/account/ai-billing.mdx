@@ -1,0 +1,71 @@
+---
+title: Crédits IA et facturation
+description: "Fonctionnement des crédits IA dans RooQuiz : fonctionnalités qui les consomment (évaluation IA du Quiz noté, suggestions IA), facturation à l'usage, réinitialisation et crédits épuisés."
+---
+
+Les fonctionnalités IA de vos quiz (évaluation IA, correction automatique par IA, etc.) sont facturées selon l'**utilisation réelle** et consomment les **crédits IA** de votre équipe. Cette page explique ce qui consomme des crédits, comment fonctionne la facturation, quand les crédits sont réinitialisés et ce qui se passe lorsqu'ils sont épuisés.
+
+## Ce qui consomme des crédits IA
+
+- **Évaluation IA du Quiz noté** : analyse par l'IA des réponses textuelles pour produire des rapports plus riches.
+- **Suggestions IA** (bêta) : suggestions d'amélioration ou d'interprétation générées par l'IA dans le rapport.
+- **Correction automatique par IA des questions à compléter** (bêta) dans les Quiz et les Quiz de connaissances aléatoires : lorsqu'une question à compléter active la « correction automatique par IA », c'est l'IA qui détermine si la réponse est correcte.
+
+La notation classique des questions à choix, la notation par dimension et les rapports générés à partir de modèles **ne consomment pas** de crédits IA.
+
+<Callout type="info">
+  Les « Suggestions IA » et la « Correction automatique par IA des questions à compléter » sont actuellement des fonctionnalités en **bêta** ; leur comportement et leur qualité sont encore en cours d'amélioration.
+</Callout>
+
+## Unité de facturation et modèles
+
+- Les crédits IA sont mesurés en **Neurons** (l'unité de facturation de Cloudflare Workers AI).
+- Chaque appel à l'IA est facturé selon le nombre de **tokens** consommés, convertis en Neurons : plus il y a de tokens en entrée et en sortie, plus la consommation est élevée.
+- Vous pouvez choisir un niveau de modèle IA dans **Paramètres → Forfait** : **Standard / Avancé / Flagship**. Les modèles plus puissants consomment davantage de Neurons par appel. Les équipes Free ne peuvent utiliser que « Standard » ; Avancé et Flagship sont **réservés au forfait Pro**.
+- Les frais sont **réglés de manière asynchrone après** la génération du rapport, ils ne ralentissent donc jamais la génération des rapports.
+
+<Callout type="info">
+  Les crédits ne sont déduits que lorsque l'IA **s'exécute réellement avec succès** ; les évaluations vides et les appels échoués ne sont pas facturés.
+</Callout>
+
+## Allocation mensuelle et réinitialisation (date anniversaire de facturation)
+
+- Chaque équipe dispose d'une allocation IA mensuelle dont le montant dépend du forfait : Free inclut une allocation de base, Pro une allocation plus importante. Consultez les chiffres exacts dans **Paramètres → Forfait**.
+- L'allocation est **réinitialisée chaque mois**, à la **date anniversaire de facturation** (et non tous les 30 jours fixes) :
+  - **Pro** : suit la date de facturation de l'abonnement ; un nouveau cycle commence à chaque renouvellement.
+  - **Free** : réinitialisation mensuelle selon le cycle propre à l'équipe.
+- L'allocation mensuelle non utilisée **n'est pas reportée** ; elle est remise à zéro en fin de cycle puis réattribuée au cycle suivant.
+- La date de réinitialisation du cycle en cours est indiquée dans **Paramètres → Forfait → Réinitialisation du cycle**.
+
+## Recharger des crédits (Pro)
+
+- Les équipes Pro peuvent acheter des crédits IA supplémentaires dans **Paramètres → Forfait**.
+- Tarif : **1 unité = 30 000 Neurons = 1 $**, avec un minimum de 5 unités et un maximum de 100 unités par achat.
+- Le solde rechargé **n'expire jamais** et n'est pas remis à zéro par le cycle mensuel.
+- Ordre de consommation : **l'allocation mensuelle est utilisée en premier, puis le solde rechargé**.
+
+## Que se passe-t-il quand les crédits sont épuisés
+
+Le comportement varie selon l'usage de l'IA :
+
+| Scénario | Comportement lorsque les crédits sont épuisés |
+| --- | --- |
+| **Évaluation IA du Quiz noté / Suggestions IA** | **Dégradation progressive** : les parties IA sont ignorées, tandis que le rapport, l'analyse par dimension et la notation de base sont **toujours générés normalement** |
+| **Correction automatique par IA des questions à compléter** dans les Quiz et les Quiz de connaissances aléatoires | Les nouvelles réponses à ces formulaires sont **refusées** (crédits IA épuisés), car la correction dépend de l'IA et ne peut pas être calculée hors ligne |
+
+<Callout type="warning">
+  Si vous collectez des réponses pour un Quiz qui utilise la « correction automatique par IA », surveillez votre solde : s'il est épuisé, les répondants ne pourront plus **soumettre** leurs réponses. Pour rétablir le service, passez au forfait Pro, rechargez des crédits ou attendez la prochaine réinitialisation du cycle.
+</Callout>
+
+## Rappel de solde faible
+
+- Lorsque le **total des crédits disponibles** d'une équipe (allocation mensuelle restante + solde rechargé) passe **sous 20 %** de l'allocation mensuelle du forfait, le système le détecte lors de sa vérification quotidienne et envoie un e-mail de rappel au **propriétaire** de l'équipe.
+- Un **seul rappel par cycle** ; il est réactivé après la réinitialisation de l'allocation ou une recharge réussie.
+
+## Où consulter et gérer
+
+Rendez-vous dans **Paramètres → Forfait** pour voir : l'allocation du cycle en cours et le solde restant, le solde rechargé, la date de réinitialisation du cycle, le choix du niveau de modèle IA et l'accès aux recharges.
+
+<Callout type="info">
+  Voir aussi : [Règles de notation et d'évaluation](/fr/editor/scoring), [Rapports et évaluation IA](/fr/results/reports).
+</Callout>

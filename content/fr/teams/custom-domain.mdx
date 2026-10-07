@@ -1,0 +1,45 @@
+---
+title: Domaine personnalisé
+description: "Diffusez les liens publics de vos quiz depuis votre propre domaine plutôt que celui de la plateforme : configuration DNS, fonctionnement de la vérification et effets pour les répondants. Forfait Pro requis."
+---
+
+Par défaut, les liens publics des quiz se trouvent sur le domaine de la plateforme. Avec un **domaine personnalisé**, les répondants voient votre propre domaine à la place, ce qui renforce la cohérence de votre marque et la confiance.
+
+Vous le trouverez dans **Paramètres → Domaine personnalisé**.
+
+<Callout type="warning">
+  Le domaine personnalisé est une **fonctionnalité du plan Pro**.
+</Callout>
+
+## Configuration
+
+<Steps>
+### Saisissez votre domaine
+
+Renseignez le domaine que vous souhaitez utiliser, par exemple `quiz.yourbrand.com`. Un sous-domaine est préférable à votre domaine racine.
+
+### Ajoutez l'enregistrement DNS
+
+Le **Guide de configuration DNS** de la page vous fournit un enregistrement en trois colonnes : **Type / Nom / Valeur**. Ajoutez-le tel quel chez votre fournisseur DNS.
+
+### Attendez la vérification
+
+Revenez sur la page et cliquez sur **Actualiser le statut**. Le statut passe de **Vérification en cours** à **Vérifié**, ou affiche **Échec de la vérification**.
+</Steps>
+
+<Callout type="info">
+  La propagation des enregistrements DNS prend **de quelques minutes à 48 heures**, selon votre fournisseur. Il est normal que la vérification n'aboutisse pas immédiatement après la configuration : actualisez de nouveau plus tard.
+</Callout>
+
+## Valeurs de statut
+
+| Statut | Signification |
+| --- | --- |
+| **Vérification en cours** | L'enregistrement est soumis ; en attente de la propagation DNS et de la vérification |
+| **Vérifié** | Le domaine est actif et les liens publics l'utilisent |
+| **Échec de la vérification** | Aucun enregistrement correct trouvé : revérifiez Type / Nom / Valeur par rapport au guide |
+| **Suspendu** | Le forfait Pro a expiré |
+
+<Callout type="warning">
+  Lorsque le forfait Pro expire, le domaine passe à l'état **Suspendu** : une **période de grâce de 7 jours** s'applique, après laquelle le domaine personnalisé cesse d'être résolu. Le renouvellement le rétablit, sans qu'il soit nécessaire de refaire la configuration DNS.
+</Callout>

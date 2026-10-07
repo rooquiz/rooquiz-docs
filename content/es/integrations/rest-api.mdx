@@ -1,0 +1,241 @@
+---
+title: API REST
+description: 'Una pequeña API REST de solo lectura que devuelve como JSON las definiciones de formularios de tu equipo (título, campos, configuración e informe) para scripts, automatizaciones con Zapier/Make/n8n o paneles.'
+---
+
+RooQuiz ofrece una pequeña **API REST** de solo lectura para que puedas llevar los datos de los formularios de tu equipo a scripts, automatizaciones (Zapier, Make, n8n) o tus propios paneles. Devuelve las **definiciones** de los formularios (título, campos, configuración, configuración del informe) como JSON sin más.
+
+<Callout type="info">
+  La API REST funciona **a nivel de cuenta** y se autentica como tu equipo, no como un miembro concreto. Si prefieres que un **cliente de AI** trabaje con tus quizzes mediante lenguaje natural, consulta [Integración MCP](/es/integrations/mcp).
+</Callout>
+
+## Cómo funciona
+
+- Te autenticas con una **clave de API de cuenta** (prefijo `rqp_acct_`) que pertenece a un equipo.
+- La clave puede **leer todos los formularios de ese equipo**. No está vinculada a una persona, así que sigue funcionando aunque entren y salgan miembros.
+- Solo el **propietario del equipo** puede crear, ver o revocar claves de API de cuenta.
+- La API es de **solo lectura** y devuelve únicamente definiciones de formularios; no expone las respuestas.
+
+## Obtener una clave de API
+
+Ve a **Ajustes → Claves de API** (visible solo para los **propietarios del equipo**) y haz clic en «Crear clave de API»:
+
+1. Ponle un **nombre** (para reconocerla, p. ej. `Zapier - Production`).
+2. Tras crearla, se muestra una clave en texto plano que empieza por `rqp_acct_`.
+
+<Callout type="warning">
+  **La clave en texto plano solo se muestra una vez.** No se puede recuperar después de salir de la página. Cópiala de inmediato; si la pierdes, tendrás que revocarla y crear una nueva.
+</Callout>
+
+Cada equipo puede tener como máximo **10 claves** (incluidas las revocadas). Para crear más, **elimina** una y así liberarás un hueco («revocar» solo la desactiva, no libera el hueco). Trata la clave como una contraseña y nunca la incluyas en el control de versiones.
+
+## Autenticación
+
+Envía la clave como token Bearer en cada solicitud:
+
+```bash
+Authorization: Bearer rqp_acct_xxx...
+```
+
+<Callout type="info">
+  Un token MCP personal (`rqp_live_`) **no** funciona con la API REST: devuelve `401`. Usa una clave de API de cuenta (`rqp_acct_`).
+</Callout>
+
+## Endpoints
+
+La URL base tiene este aspecto: `https://your-domain/api/v1`.
+
+### Listar formularios
+
+```bash
+GET /api/v1/forms
+```
+
+Lista todos los formularios del equipo de la clave, de más reciente a más antiguo.
+
+| Parámetro de consulta | Tipo | Valor predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `scene` | string | — | Filtra por escenario: `knowledge_quiz`, `random_knowledge_quiz`, `scored_quiz`, `outcome_quiz`. |
+| `titleContains` | string | — | Coincidencia aproximada en el título. |
+| `limit` | number | `20` | Elementos por página (máximo `100`). |
+| `page` | number | `1` | Número de página. |
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/forms?scene=knowledge_quiz&limit=20"
+```
+
+```json
+{
+  "totalDocs": 12,
+  "page": 1,
+  "limit": 20,
+  "items": [
+    {
+      "id": "d983d8d9-...",
+      "title": "Personality Quiz",
+      "scene": "outcome_quiz",
+      "language": "en_US",
+      "publicToken": "h7sbps67",
+      "shareUrl": "https://your-cairo-domain/a/h7sbps67",
+      "localization": null,
+      "isActive": true,
+      "createdAt": "2026-06-18T11:35:11.468Z",
+      "updatedAt": "2026-06-18T12:59:42.649Z"
+    }
+  ]
+}
+```
+
+### Obtener un formulario
+
+```bash
+GET /api/v1/forms/{id}
+```
+
+Devuelve la definición de un formulario.
+
+| Parámetro de consulta | Tipo | Valor predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `includeFields` | boolean | `true` | Incluye el array `fields[]` (preguntas / saltos de página). Pasa `false` para omitirlo en formularios grandes. |
+| `includeReport` | boolean | `true` | Incluye la configuración del informe / análisis por dimensiones. |
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/forms/d983d8d9-..."
+```
+
+```json
+{
+  "id": "d983d8d9-...",
+  "title": "Personality Quiz",
+  "scene": "outcome_quiz",
+  "language": "en_US",
+  "description": null,
+  "isActive": true,
+  "publicToken": "h7sbps67",
+  "shareUrl": "https://your-cairo-domain/a/h7sbps67",
+  "layout": "card",
+  "localization": null,
+  "systemText": null,
+  "createdAt": "2026-06-18T11:35:11.468Z",
+  "updatedAt": "2026-06-18T12:59:42.649Z",
+  "fields": [ /* questions & page breaks */ ],
+  "report": { /* report / dimension config */ }
+}
+```
+
+## Respuestas
+
+Lee las respuestas que han recopilado los formularios de tu equipo: leads, respuestas, puntuaciones, resultados de informes y atribución UTM. Ideal para sincronizar con un CRM, crear paneles personalizados y automatizar procesos.
+
+<Callout type="warning">
+  Las respuestas incluyen datos personales de los participantes (correo electrónico, nombre, IP). Trátalos y almacénalos de forma responsable.
+</Callout>
+
+### Listar respuestas
+
+```bash
+GET /api/v1/records
+```
+
+Lista las respuestas de todo el equipo, de más reciente a más antigua.
+
+| Parámetro de consulta | Tipo | Valor predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `formId` | string | — | Solo las respuestas de este formulario. |
+| `status` | string | — | Estado del informe: `pending`, `processing`, `completed`, `failed`. |
+| `since` | ISO date | — | Solo las respuestas creadas en este momento o después (sincronización incremental). |
+| `until` | ISO date | — | Solo las respuestas creadas en este momento o antes. |
+| `limit` | number | `20` | Elementos por página (máximo `100`). |
+| `page` | number | `1` | Número de página. |
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/records?since=2026-06-01&limit=50"
+```
+
+```json
+{
+  "totalDocs": 1500,
+  "page": 1,
+  "limit": 50,
+  "items": [
+    {
+      "id": "...",
+      "serialNumber": 11,
+      "formId": "d983d8d9-...",
+      "shareToken": "v2hrpv6d",
+      "reportUrl": "https://your-cairo-domain/a/md8682rx/records/v2hrpv6d",
+      "submittedAt": "2026-06-18T12:00:00.000Z",
+      "updatedAt": "2026-06-18T12:00:05.000Z",
+      "examinee": {
+        "id": "...", "examineeId": "TZ4730277148",
+        "email": "lead@example.com", "name": "Jane", "customData": null
+      },
+      "metadata": {
+        "utmSource": "newsletter", "utmMedium": "email",
+        "utmCampaign": null, "utmTerm": null, "utmContent": null,
+        "referrer": "https://..."
+      },
+      "data": { "q_email": "lead@example.com", "q_rating": 5 },
+      "result": {
+        "status": "completed", "score": 2, "maxScore": 4,
+        "level": "Good", "outcomeCode": null, "outcomeName": null
+      }
+    }
+  ]
+}
+```
+
+Las claves de `data` son el `code` de cada campo del formulario (consulta los `fields[]` de un formulario mediante el endpoint de formularios). `examinee` es `null` en las respuestas anónimas. `result` es un resumen compacto; el informe completo está en el endpoint de detalle.
+
+### Obtener una respuesta
+
+```bash
+GET /api/v1/records/{id}
+```
+
+Devuelve una respuesta con el resultado completo de su informe (`reportResult`), además de `metadata.ip` / `metadata.userAgent`.
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/records/..."
+```
+
+```json
+{
+  "id": "...",
+  "serialNumber": 11,
+  "formId": "d983d8d9-...",
+  "shareToken": "v2hrpv6d",
+  "reportUrl": "https://your-cairo-domain/a/md8682rx/records/v2hrpv6d",
+  "submittedAt": "...",
+  "updatedAt": "...",
+  "examinee": { "id": "...", "email": "lead@example.com", "name": "Jane" },
+  "metadata": { "ip": "203.0.113.4", "userAgent": "...", "utmSource": "newsletter" },
+  "data": { /* answers keyed by field code */ },
+  "reportResult": {
+    "status": "completed",
+    "overallAnalysis": { "score": 2, "maxScore": 4, "level": "Good", "summary": "...", "suggestions": "..." },
+    "dimensionAnalysis": { "title": "...", "radar": [], "items": [] },
+    "outcome": { "code": null, "name": null, "ranking": null },
+    "aiSuggestion": { "status": "completed", "content": "..." }
+  }
+}
+```
+
+## Errores
+
+Los errores devuelven un cuerpo JSON con la forma `{ "error": { "code": "...", "message": "..." } }`.
+
+| Estado | Código | Cuándo |
+| --- | --- | --- |
+| `401` | `unauthorized` | Clave ausente, no válida, caducada o revocada (o un token que no es de cuenta). |
+| `404` | `not_found` | El formulario no existe o no pertenece al equipo de esta clave. |
+| `400` | `bad_request` | Parámetro no válido (p. ej., un `scene` desconocido). |
+| `429` | `rate_limited` | Se ha superado el límite de solicitudes. |
+
+## Límites de solicitudes
+
+Cada clave está limitada a **120 solicitudes por minuto**; si se supera, se devuelve `429`. Revoca una clave desde **Ajustes → Claves de API** en cuanto deje de ser necesaria: cualquier integración que la use pierde el acceso al instante.

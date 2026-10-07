@@ -1,0 +1,65 @@
+---
+title: Reglas de puntuación y evaluación
+description: 'La puntuación varía según el tipo de quiz: el Cuestionario de conocimiento juzga aciertos y suma puntos, y el Cuestionario con puntuación genera análisis e informes multidimensionales. Puntos, respuestas y fórmulas.'
+---
+
+"Puntuar" significa cosas distintas según el tipo de quiz: el Cuestionario de conocimiento se centra en **aciertos/errores y totales**, mientras que el Cuestionario con puntuación se centra en el **análisis multidimensional y los informes**.
+
+## Cuestionario de conocimiento: puntuación y corrección
+
+En un **Cuestionario de conocimiento** puedes:
+
+- **Asignar puntos**: asigna puntos a las preguntas o a las opciones correctas.
+- **Juzgar aciertos y errores**: marca las respuestas correctas; el sistema corrige cada pregunta automáticamente.
+- **Sumar totales**: los puntos se suman automáticamente.
+- **Puntuación mínima para aprobar**: define un umbral de aprobado y muestra un resultado de aprobado/suspenso.
+- **Retroalimentación de respuestas**: muestra a los participantes si acertaron y la explicación de cada pregunta.
+
+<Callout type="info">
+  Los puntos y la corrección de aciertos/errores están disponibles en el Cuestionario de conocimiento y en el Cuestionario de conocimiento aleatorio. El Cuestionario con puntuación usa fórmulas por dimensión, y el Cuestionario de resultado no puntúa en absoluto.
+</Callout>
+
+## Cuestionario de resultado: gana el más votado
+
+Un **Cuestionario de resultado** no puntúa: **cuenta votos**. Cada opción vota por uno o varios tipos de resultado, y gana el tipo con más votos; en caso de empate, gana el que aparece primero en la lista de resultados.
+
+Cada resultado puede tener su propio botón de CTA, que conecta un resultado entretenido directamente con un siguiente paso. Consulta [Los cuatro tipos de quiz](/es/getting-started/quiz-types).
+
+## Cuestionario con puntuación: análisis por dimensiones y evaluación con AI
+
+En un **Cuestionario con puntuación**, puntuar consiste más en "elaborar un perfil" que en juzgar aciertos y errores:
+
+- **Puntuación multidimensional**: asigna preguntas a varias dimensiones; tras el envío, cada dimensión obtiene una puntuación, que a menudo se muestra como un **gráfico de radar**.
+- **Perfil de resultado**: genera conclusiones de personalidad o capacidad a partir de las puntuaciones por dimensión.
+- **Evaluación con AI**: la AI convierte la puntuación total, el nivel y las puntuaciones por dimensión en sugerencias y comentarios (no lee el texto de las respuestas originales).
+
+### Qué preguntas se puntúan
+
+El total de un Cuestionario con puntuación proviene **solo de la fórmula**, que referencia códigos de pregunta. Solo se pueden referenciar preguntas que producen un número: preguntas de elección (mediante la puntuación de cada opción), valoración, número, fecha, hora y cascada.
+
+**Completar el espacio solo recopila texto y nunca se puntúa**: el texto libre no puede participar en operaciones aritméticas, así que no genera puntuación y no aparece entre los campos que se pueden insertar en el editor de fórmulas. Por eso es la forma adecuada de hacer una pregunta abierta ("¿algo más que debamos saber?") dentro de una evaluación con puntuación.
+
+<Callout type="warning">
+  Sin fórmula, la puntuación total queda vacía, ningún nivel puede coincidir nunca y el bloque de evaluación general desaparece de la página de resultados. Siempre que configures niveles, configura también la fórmula.
+</Callout>
+
+### Sobre la cuota de evaluación con AI
+
+<Callout type="warning">
+  La evaluación con AI consume la **Cuota de AI** de tu equipo. La cuota se cuenta por ciclo; una vez superada, la evaluación con AI se omite durante ese ciclo (la puntuación básica se sigue generando). Consulta [Créditos de AI y facturación](/es/account/ai-billing) para conocer la facturación, los reinicios mensuales y las recargas.
+</Callout>
+
+## Niveles y acciones en la página de resultados
+
+Divide la puntuación total en **niveles** (0–60 necesita mejorar / 60–80 bien / 80+ excelente). Cada uno tiene un nombre, un color y una descripción, y puede incluir un **Botón de CTA**: el tramo bajo podría ofrecer "Reserva una consulta". Este es el paso que conecta una evaluación con la conversión.
+
+<Callout type="info">
+  ¿No quieres que los participantes vean un número? Puedes **ocultar la puntuación general** y mantener solo el nombre del nivel, la descripción y el resumen; es mejor para quizzes que deben sentirse como un diagnóstico y no como un examen.
+</Callout>
+
+## Generación de informes
+
+- **Síncrona**: la puntuación básica se calcula inmediatamente después del envío.
+- **Asíncrona**: los cálculos más pesados, como el análisis por dimensiones y la evaluación con AI, se generan de forma asíncrona; los informes pasan por un estado "generando → completado", y el sistema reintenta automáticamente si fallan.
+
+Para ver, exportar y entregar informes, consulta [Informes y evaluación con AI](/es/results/reports).

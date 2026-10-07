@@ -3,7 +3,7 @@ import type { ReactNode } from 'react'
 import { RootProvider } from 'fumadocs-ui/provider/next'
 import { DocsLayout } from 'fumadocs-ui/layouts/docs'
 import { source } from '@/lib/source'
-import { DEFAULT_LOCALE, LOCALES, provider, type Locale } from '@/lib/i18n'
+import { DEFAULT_LOCALE, LOCALES, langTag, provider, type Locale } from '@/lib/i18n'
 import { baseOptions, sidebarFooter } from '@/lib/layout.shared'
 import { SITE_URL } from '@/lib/site-url'
 import PagefindSearchDialog from '@/components/search/search-dialog'
@@ -12,11 +12,18 @@ import '../global.css'
 // This layout renders <html>/<body> itself — there is deliberately no
 // `app/layout.tsx`, which would nest a second <html> around it.
 
-// Per-locale metadata. A static `metadata` export would put the Chinese title on
-// the /en tree as well, so it is generated from the [lang] segment instead.
+// Per-locale metadata. A static `metadata` export would put one locale's title on
+// every tree, so it is generated from the [lang] segment instead.
 const meta = {
   en: { title: 'RooQuiz Docs', description: 'RooQuiz product documentation' },
-  zh: { title: 'RooQuiz 文档', description: 'RooQuiz 使用文档' }
+  zh: { title: 'RooQuiz 文档', description: 'RooQuiz 使用文档' },
+  'zh-TW': { title: 'RooQuiz 文件', description: 'RooQuiz 使用說明文件' },
+  de: { title: 'RooQuiz Doku', description: 'RooQuiz Produktdokumentation' },
+  es: { title: 'RooQuiz Docs', description: 'Documentación del producto RooQuiz' },
+  'pt-BR': { title: 'RooQuiz Docs', description: 'Documentação do produto RooQuiz' },
+  fr: { title: 'RooQuiz Docs', description: 'Documentation du produit RooQuiz' },
+  ja: { title: 'RooQuiz ドキュメント', description: 'RooQuiz 製品ドキュメント' },
+  ko: { title: 'RooQuiz 문서', description: 'RooQuiz 제품 문서' }
 } satisfies Record<Locale, { title: string; description: string }>
 
 export async function generateMetadata({
@@ -48,7 +55,7 @@ export default async function RootLayout({
   const { lang } = await params
 
   return (
-    <html lang={lang} dir="ltr" suppressHydrationWarning>
+    <html lang={langTag(lang)} dir="ltr" suppressHydrationWarning>
       <body className="flex min-h-screen flex-col">
         <RootProvider
           i18n={provider(lang as Locale)}

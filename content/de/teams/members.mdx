@@ -1,0 +1,113 @@
+---
+title: Mitglieder & Rollen
+description: 'Laden Sie Teammitglieder per E-Mail ein und geben Sie jedem eine der vier Rollen, vom Inhaber bis zum Betrachter. Was jede Rolle darf, wie lange Einladungen gelten und wie Sie Mitglieder ändern oder entfernen.'
+---
+
+## Mitglieder einladen
+
+Geben Sie unter **Einstellungen → Mitgliederliste** eine E-Mail-Adresse ein und wählen Sie eine Rolle, um eine Einladung zu senden. Die eingeladene Person tritt über den Link in der Einladungs-E-Mail bei (7 Tage gültig). Registrierte Nutzer treten direkt bei; alle anderen werden zuerst zur Registrierung geführt.
+
+## Die vier Rollen
+
+Ein Team hat vier Rollen, von den meisten zu den wenigsten Rechten:
+
+| Rolle | In einem Satz |
+| --- | --- |
+| **Inhaber** | Der endgültige Eigentümer des Teams, mit vollem Zugriff. Jedes Team hat **genau einen** Inhaber. |
+| **Administrator** | Führt das Team im Alltag: Formulare, Fragenpools, Teilnehmer, Leads, Mitglieder, Team-Einstellungen. |
+| **Mitglied** | Erstellt Quizze und bearbeitet die daraus entstehenden Leads. |
+| **Betrachter** | Liest. Kann nirgends etwas ändern. |
+
+Die Grenze zwischen Inhaber und Administrator ist gewollt: **Ein Administrator führt das Team, ein Inhaber besitzt es.** Alles, was ändert, wem das Team gehört, oder seine Beziehung zu uns als zahlendem Kunden betrifft, bleibt beim Inhaber.
+
+## Berechtigungsmatrix
+
+✅ voll · **Text** = erlaubt, aber eingeschränkt · — nicht erlaubt
+
+### Quizze
+
+| | Inhaber | Administrator | Mitglied | Betrachter |
+| --- | :---: | :---: | :---: | :---: |
+| Ein Quiz erstellen | ✅ | ✅ | ✅ | — |
+| Die Quiz-Liste sehen | ✅ | ✅ | **eigene + geteilte** | **nur geteilte** |
+| Quiz-Inhalte bearbeiten | ✅ | ✅ | **eigene + geteilte** | — |
+| Teilen, Übertragen, Übersetzungen, Duplizieren | ✅ | ✅ | **eigene + geteilte** | — |
+| In den Papierkorb verschieben, wiederherstellen, löschen | ✅ | ✅ | **nur eigene** | — |
+| Antworten sehen | ✅ | ✅ | **eigene + geteilte** | **nur geteilte** |
+| Antworten löschen | ✅ | ✅ | **eigene + geteilte** | — |
+
+### Fragenpools
+
+| | Inhaber | Administrator | Mitglied | Betrachter |
+| --- | :---: | :---: | :---: | :---: |
+| Fragenpools und Fragen durchsuchen | ✅ | ✅ | ✅ | ✅ |
+| Einen Fragenpool erstellen, bearbeiten, löschen | ✅ | ✅ | — | — |
+| Fragen hinzufügen, bearbeiten, löschen | ✅ | ✅ | — | — |
+
+### Teilnehmer & Leads
+
+| | Inhaber | Administrator | Mitglied | Betrachter |
+| --- | :---: | :---: | :---: | :---: |
+| Alle Teilnehmer und Leads des Teams sehen | ✅ | ✅ | ✅ | ✅ |
+| Leads bearbeiten – zuweisen, markieren, Status ändern, kommentieren | ✅ | ✅ | ✅ | — |
+| Teilnehmerdaten bearbeiten | ✅ | ✅ | ✅ | — |
+| Einen Teilnehmer anlegen oder löschen | ✅ | ✅ | — | — |
+| Lead-Status und Markierungen konfigurieren | ✅ | ✅ | — | — |
+| Daten exportieren | ✅ | ✅ | — | — |
+| Buchungen verwalten | ✅ | ✅ | **nur eigene Leads** | — |
+
+<Callout type="info">
+  Teilnehmer und Leads gelten für alle **teamweit**, auch für Betrachter – sie werden nicht dadurch eingeschränkt, welche Quizze Sie sehen können. Nur *Antworten* folgen der Sichtbarkeit der Quizze.
+</Callout>
+
+### Mitglieder
+
+| | Inhaber | Administrator | Mitglied | Betrachter |
+| --- | :---: | :---: | :---: | :---: |
+| Die Mitgliederliste sehen | ✅ | ✅ | ✅ | ✅ |
+| Mitglieder einladen, auch als Administrator | ✅ | ✅ | — | — |
+| Rollen ändern, deaktivieren, aktivieren, entfernen | **alle außer dem Inhaber** | **alle außer dem Inhaber** | — | — |
+| Inhaberschaft übertragen | ✅ | — | — | — |
+| Das Team verlassen | **erst übertragen** | ✅ | ✅ | ✅ |
+
+### Team-Einstellungen
+
+| | Inhaber | Administrator | Mitglied | Betrachter |
+| --- | :---: | :---: | :---: | :---: |
+| Teamname, Logo, Adresse, KI-Modellstufe | ✅ | ✅ | — | — |
+| Buchbare Zeiten | ✅ | ✅ | — | — |
+| Connectors | ✅ | ✅ | — | — |
+| Audit-Logs | ✅ | ✅ | — | — |
+| Eigene Domain | ✅ | — | — | — |
+| API-Schlüssel | ✅ | — | — | — |
+| Das Team löschen | ✅ | — | — | — |
+
+### Abrechnung
+
+| | Inhaber | Administrator | Mitglied | Betrachter |
+| --- | :---: | :---: | :---: | :---: |
+| Upgrade, Zahlungsmethode, Kündigung, Rückerstattung | ✅ | — | — | — |
+| KI-Guthaben aufstocken | ✅ | ✅ | — | — |
+
+Das Aufstocken ist Nutzungsverwaltung, keine Änderung des Abonnements, daher darf ein Administrator es tun. Alles, was das Abonnement selbst verändert, bleibt beim Inhaber.
+
+## Wer wen verwalten kann
+
+- **Inhaber** und **Administrator** können beide alle anderen verwalten – auch sich gegenseitig. Ein Administrator kann einen anderen Administrator ernennen, herabstufen, deaktivieren oder entfernen.
+- Die eigene Zeile des **Inhabers** ist unantastbar. Der Inhaber wechselt nur durch [Übertragung der Inhaberschaft](#inhaberschaft-übertragen), nie durch Bearbeiten einer Rolle.
+- **Niemand kann seine eigene Rolle ändern**, nicht einmal, um zurückzutreten. Bitten Sie einen anderen Inhaber oder Administrator darum. Das Team zu verlassen, können Sie dagegen immer selbst.
+- **Mitglied** und **Betrachter** können niemanden verwalten.
+
+<Callout type="warning">
+  Da Administratoren sich gegenseitig herabstufen können, sollten Sie die Administratorrolle nur Personen geben, denen Sie das Team anvertrauen würden. Wenn jemand alles sehen, aber nichts anfassen soll, ist das die Rolle **Betrachter**.
+</Callout>
+
+## Inhaberschaft übertragen
+
+Nur der Inhaber kann die Inhaberschaft übertragen, und zwar unter **Einstellungen → Mitgliederliste**. Der neue Inhaber muss bereits ein aktives Mitglied des Teams sein. Nach der Übertragung werden Sie ein normales Mitglied – das Team hat immer genau einen Inhaber.
+
+Ein Inhaber kann das Team nicht direkt verlassen; übertragen Sie zuerst die Inhaberschaft.
+
+<Callout type="info">
+  Soll jemand Ergebnisse sehen, ohne das Quiz anzufassen? Laden Sie die Person als **Betrachter** ein und teilen Sie anschließend die relevanten Quizze mit ihr.
+</Callout>

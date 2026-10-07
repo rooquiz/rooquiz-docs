@@ -1,0 +1,8 @@
+{
+  "title": "계정 및 결제",
+  "pages": [
+    "index",
+    "ai-billing",
+    "notifications"
+  ]
+}

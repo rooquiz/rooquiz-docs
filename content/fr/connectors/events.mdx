@@ -1,0 +1,47 @@
+---
+title: Événements déclencheurs et portée
+description: "Chaque connecteur se déclenche sur des événements et est limité par une portée, c'est-à-dire les quiz autorisés à le déclencher. Le sens de chaque événement et comment cibler des quiz précis."
+---
+
+Chaque connecteur détermine **quand il se déclenche** (les événements) et **quels quiz peuvent le déclencher** (la portée). Les deux sont combinés par un ET : l'événement doit correspondre *et* le quiz d'origine doit être dans la portée pour que quoi que ce soit soit envoyé.
+
+## Événements déclencheurs
+
+Chaque connecteur a besoin d'au moins un événement :
+
+| Événement | Se déclenche lorsque |
+| --- | --- |
+| **Nouveau lead** | Une personne laisse ses coordonnées à votre équipe **pour la première fois** |
+| **Réservation créée** | Une personne réserve une session |
+| **Réservation annulée** | L'une ou l'autre des parties annule une réservation |
+| **Réservation reprogrammée** | Une réservation est déplacée à un autre horaire |
+
+<Callout type="warning">
+  **« Nouveau lead » ne se déclenche qu'une fois, la première fois que la personne laisse ses coordonnées.** Si la même personne passe un autre quiz plus tard, l'événement ne se redéclenche pas, car les leads sont [dédupliqués entre les quiz](/fr/leads). Si vous voulez une notification à chaque soumission, ce n'est pas l'événement qu'il vous faut.
+</Callout>
+
+## Portée du déclenchement
+
+La portée détermine quels quiz peuvent déclencher ce connecteur :
+
+- **Tous les quiz** : la valeur par défaut. Tout événement provenant de n'importe quel quiz de l'équipe est envoyé.
+- **Quiz spécifiques** : seuls les quiz que vous sélectionnez le déclenchent.
+
+<Callout type="info">
+  La portée est comparée au **quiz dont provient l'événement**. Pour « Nouveau lead », il s'agit du quiz sur lequel la personne a **laissé ses coordonnées pour la première fois**, et non du dernier qu'elle a passé.
+</Callout>
+
+Un usage typique : envoyer votre quiz phare de génération de leads vers Slack pour que l'équipe le voie instantanément, et éviter qu'un quiz interne ne dérange qui que ce soit.
+
+## Combinaisons à reprendre
+
+| Objectif | Événements | Portée |
+| --- | --- | --- |
+| Toute l'équipe est informée d'un nouveau client | Nouveau lead | Tous les quiz |
+| Suivre uniquement le quiz phare | Nouveau lead | Quiz spécifiques |
+| Être prévenu quand votre agenda change | Réservation annulée + reprogrammée | Tous les quiz |
+| Synchroniser les leads avec votre outil d'e-mailing | Nouveau lead | Tous les quiz |
+
+<Callout type="info">
+  Modifier les événements ou la portée **n'affecte que les événements ultérieurs** : rien n'est rejoué.
+</Callout>

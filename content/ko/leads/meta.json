@@ -1,0 +1,10 @@
+{
+  "title": "리드 및 전환",
+  "pages": [
+    "index",
+    "list-board",
+    "status-tags",
+    "views",
+    "detail"
+  ]
+}

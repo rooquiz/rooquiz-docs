@@ -1,0 +1,62 @@
+---
+title: Disponibilidade de agendamento
+description: 'Configure a disponibilidade dos agendamentos 1:1: regras semanais de agendamento, duração e vagas das sessões, os dados da reunião que os respondentes veem e se as solicitações exigem confirmação.'
+---
+
+Na página **Agendamentos 1:1**, clique na engrenagem ao lado do título para abrir **Disponibilidade de agendamento**. Ela tem três seções: regras de agendamento, dados da reunião e confirmação.
+
+<Callout type="warning">
+  Apenas o **proprietário da organização ou um administrador** pode editar a disponibilidade. Todos os demais veem uma página somente leitura.
+</Callout>
+
+![Configurações de disponibilidade de agendamento do RooQuiz com regras de agendamento, horários semanais e vagas](/img/en/bookings/booking-availability.webp)
+
+## Regras de agendamento
+
+| Configuração | O que faz |
+| --- | --- |
+| **Fuso horário** | Todos os períodos são interpretados neste fuso horário. Os respondentes veem os horários convertidos para o **fuso deles** |
+| **Duração da sessão** | Quanto tempo dura uma sessão; a disponibilidade é dividida em horários com essa duração |
+| **Intervalo entre sessões** | Uma folga entre as reuniões para que não fiquem coladas umas nas outras |
+| **Antecedência mínima** | O prazo mínimo, em horas, para alguém agendar — impede que as pessoas agendem para daqui a 10 minutos |
+| **Agendável até** | Com quantos dias de antecedência o calendário fica aberto |
+
+### Horários semanais
+
+Adicione períodos por dia da semana — "Segunda-feira 09:00–12:00", "Quarta-feira 14:00–18:00". Um dia pode ter vários.
+
+<Callout type="warning">
+  Os períodos de um mesmo dia **não podem se sobrepor**; isso é validado ao salvar.
+</Callout>
+
+### Vagas
+
+Cada período tem seu próprio valor de **Vagas** — quantas pessoas podem agendar uma mesma sessão naquele período:
+
+- `1` — individual.
+- `6` — um grupo de seis.
+- Vazio — sem limite.
+- `0` — temporariamente fechado, mas a configuração é mantida para depois.
+
+<Callout type="warning">
+  Para **sessões em grupo, defina o intervalo como 0**. Caso contrário, o primeiro agendamento bloqueia os horários vizinhos e ninguém mais vê as vagas restantes.
+</Callout>
+
+## Dados da reunião
+
+- **Link da reunião** — um endereço fixo do Zoom / Meet enviado na confirmação. Se você usa um link diferente a cada vez, **desative esta opção**: os participantes recebem então apenas suas instruções, ou o link que o responsável pelo lead adicionar ao confirmar.
+- **Instruções para participantes** — como entrar, o que preparar.
+
+## Confirmação
+
+Ative **Confirmar solicitações antes de enviar os dados da reunião** e os novos agendamentos chegam como **solicitações**:
+
+1. A solicitação aparece na seção "Esperando por você" de **Agendamentos 1:1**.
+2. O **responsável pelo lead** confirma ou recusa a solicitação.
+3. Somente após a confirmação o participante recebe o endereço da reunião.
+
+Com a opção desativada, um agendamento é definitivo imediatamente e o participante recebe os dados na hora.
+
+<Callout type="info">
+  Na dúvida, deixe a confirmação ativada. Ela filtra curiosos sem intenção real e solicitações em horários inadequados, e o único custo é um clique a mais da sua parte.
+</Callout>

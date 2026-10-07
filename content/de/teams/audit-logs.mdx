@@ -1,0 +1,40 @@
+---
+title: Audit-Logs
+description: 'Audit-Logs erfassen die wichtigen Vorgänge in einem Team – wer was an welchem Objekt wann getan hat und ob es erfolgreich war. Nur Inhaber und Administratoren können sie öffnen; alle anderen sehen einen Hinweis.'
+---
+
+**Audit-Logs** erfassen die wichtigen Vorgänge in Ihrem Team: wer was an welchem Objekt wann getan hat und ob es erfolgreich war. Sie finden sie unter **Einstellungen → Audit-Logs**.
+
+<Callout type="warning">
+  **Nur Eigentümer und Administratoren des Teams können Audit-Protokolle einsehen.** Mitglieder und Betrachter sehen stattdessen einen Hinweis.
+</Callout>
+
+## Spalten
+
+| Spalte | Hinweise |
+| --- | --- |
+| **Aktion** | Was passiert ist – „Mitglied einladen“, „Quiz löschen“, „Daten exportieren“ |
+| **Status** | Erfolgreich oder Fehlgeschlagen |
+| **Akteur** | Wer es getan hat. Vorgänge, die von der Plattform selbst gestartet wurden (Bereinigung nach Aufbewahrungsfrist, Sperrungen durch Moderation), erscheinen als **System** |
+| **Ziel** | Das betroffene Objekt, mit ID-Präfix |
+| **Zeit** | Wann es passiert ist |
+
+Klicken Sie auf eine beliebige Zeile, um ihre **Details** aufzuklappen. Verschiedene Aktionen enthalten unterschiedliche Felder – ein Export erfasst beispielsweise zusätzlich den Datentyp (Antworten / Leads / Teilnehmer) und die Zeilenanzahl.
+
+## Was erfasst wird
+
+Im Großen und Ganzen:
+
+- **Team** – Team löschen, Inhaberschaft übertragen, Planänderung.
+- **Mitglieder** – einladen, entfernen, austreten, Rollenänderung, deaktivieren / aktivieren.
+- **Quizze** – erstellen, aktualisieren, in den Papierkorb verschieben, wiederherstellen, endgültig löschen, sperren / entsperren.
+- **Leads und Teilnehmer** – in den Papierkorb verschieben, wiederherstellen, endgültig löschen.
+- **Connectors** – erstellen, aktualisieren, löschen.
+- **Zugangsdaten** – API-Schlüssel und MCP-Tokens: erstellen, widerrufen, wiederherstellen, löschen.
+- **Nutzung** – KI-Verbrauch, E-Mail-Verbrauch, [Datenexporte](/de/results/export).
+
+Filtern Sie oben nach **Aktion** und **Status**, um Fragen wie „Wer hat letzte Woche Daten exportiert?“ zu beantworten.
+
+<Callout type="info">
+  Logs sind **schreibgeschützt** – sie können weder bearbeitet noch gelöscht werden. Ein Audit-Log, das sich ändern lässt, ist nicht viel wert.
+</Callout>

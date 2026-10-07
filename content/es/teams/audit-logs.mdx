@@ -1,0 +1,40 @@
+---
+title: Registros de auditoría
+description: 'Los registros de auditoría recogen las operaciones importantes de un equipo: quién hizo qué, sobre qué objeto, cuándo y si tuvo éxito. Solo el propietario y los administradores pueden consultarlos.'
+---
+
+Los **registros de auditoría** recogen las operaciones importantes de tu equipo: quién hizo qué, sobre qué objeto, cuándo y si tuvo éxito. Los encontrarás en **Ajustes → Registros de auditoría**.
+
+<Callout type="warning">
+  **Solo el propietario y los administradores del equipo pueden ver los registros de auditoría.** Los miembros y los visualizadores ven un aviso en su lugar.
+</Callout>
+
+## Columnas
+
+| Columna | Notas |
+| --- | --- |
+| **Acción** | Qué ocurrió: "Invitar miembro", "Eliminar quiz", "Exportar datos" |
+| **Estado** | Éxito o Fallido |
+| **Autor** | Quién lo hizo. Las operaciones iniciadas por la propia plataforma (limpieza por retención, bloqueos por moderación) aparecen como **Sistema** |
+| **Objetivo** | El objeto sobre el que se actuó, con un prefijo de ID |
+| **Hora** | Cuándo ocurrió |
+
+Haz clic en cualquier fila para desplegar sus **Detalles**. Cada acción incluye campos distintos: una exportación, por ejemplo, también registra el tipo de datos (respuestas / leads / participantes) y el número de filas.
+
+## Qué se registra
+
+A grandes rasgos:
+
+- **Equipo**: eliminar el equipo, transferir la propiedad, cambiar de plan.
+- **Miembros**: invitar, quitar, salir, cambiar de rol, desactivar / activar.
+- **Quizzes**: crear, actualizar, mover a la papelera, restaurar, eliminar permanentemente, bloquear / desbloquear.
+- **Leads y participantes**: mover a la papelera, restaurar, eliminar permanentemente.
+- **Conectores**: crear, actualizar, eliminar.
+- **Credenciales**: claves de API y tokens de MCP: crear, revocar, restaurar, eliminar.
+- **Uso**: consumo de AI, consumo de correo, [exportaciones de datos](/es/results/export).
+
+Filtra por **acción** y **estado** en la parte superior para responder preguntas como "¿quién exportó datos la semana pasada?".
+
+<Callout type="info">
+  Los registros son de **solo lectura**: no se pueden editar ni eliminar. Un registro de auditoría que se puede alterar no sirve de mucho.
+</Callout>

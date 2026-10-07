@@ -1,0 +1,45 @@
+---
+title: Eigene Domain
+description: 'Stellen Sie öffentliche Quiz-Links über Ihre eigene Domain statt der Plattform-Domain bereit: DNS einrichten, Ablauf der Verifizierung und was sich für Teilnehmer ändert. Eine Funktion des Pro-Plans.'
+---
+
+Standardmäßig liegen öffentliche Quiz-Links auf der Plattform-Domain. Mit einer **eigenen Domain** sehen Teilnehmer stattdessen Ihre Domain – besser für ein einheitliches Markenbild und mehr Vertrauen.
+
+Sie finden die Einstellung unter **Einstellungen → Eigene Domain**.
+
+<Callout type="warning">
+  Die eigene Domain ist eine **Pro-Plan-Funktion**.
+</Callout>
+
+## Einrichtung
+
+<Steps>
+### Domain eingeben
+
+Tragen Sie die Domain ein, die Sie verwenden möchten, z. B. `quiz.yourbrand.com`. Eine Subdomain wird gegenüber Ihrer Hauptdomain empfohlen.
+
+### DNS-Eintrag hinzufügen
+
+Die **Anleitung zur DNS-Konfiguration** auf der Seite gibt Ihnen einen Eintrag mit drei Spalten – **Typ / Name / Wert**. Fügen Sie ihn wortgetreu bei Ihrem DNS-Anbieter hinzu.
+
+### Auf die Verifizierung warten
+
+Kehren Sie zurück und klicken Sie auf **Status aktualisieren**. Der Status wechselt zwischen **Wird verifiziert** und **Verifiziert** oder zeigt **Verifizierung fehlgeschlagen**.
+</Steps>
+
+<Callout type="info">
+  Je nach Anbieter dauert es **einige Minuten bis zu 48 Stunden**, bis DNS-Einträge verbreitet sind. Es ist normal, dass die Verifizierung nicht sofort nach der Einrichtung gelingt – aktualisieren Sie später erneut.
+</Callout>
+
+## Statuswerte
+
+| Status | Bedeutung |
+| --- | --- |
+| **Wird verifiziert** | Der Eintrag ist übermittelt; es wird auf die DNS-Verbreitung und die Prüfung gewartet |
+| **Verifiziert** | Die Domain ist aktiv, und öffentliche Links verwenden sie |
+| **Verifizierung fehlgeschlagen** | Kein korrekter Eintrag gefunden – prüfen Sie Typ / Name / Wert erneut anhand der Anleitung |
+| **Ausgesetzt** | Der Pro-Plan ist abgelaufen |
+
+<Callout type="warning">
+  Läuft Pro ab, wird die Domain **ausgesetzt**: Es gibt eine **Schonfrist von 7 Tagen**, danach wird die eigene Domain nicht mehr aufgelöst. Eine Verlängerung stellt sie wieder her – Sie müssen die DNS-Einrichtung nicht wiederholen.
+</Callout>

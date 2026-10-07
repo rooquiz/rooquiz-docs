@@ -1,0 +1,72 @@
+---
+title: Einbetten
+description: 'Betten Sie ein Quiz direkt in Ihre eigene Website ein, damit Besucher antworten, ohne die Seite zu verlassen: die verfügbaren Einbettungsmodi, der jeweils erzeugte Code und welcher Modus zu welcher Seite passt.'
+---
+
+Neben dem Teilen eines Links können Sie **ein Quiz direkt in Ihre eigene Website einbetten** – Besucher füllen es auf Ihrer Landingpage aus, ohne sie zu verlassen.
+
+## Drei Einbettungsmodi
+
+Öffnen Sie im gewünschten Quiz **Teilen** → **Einbetten**, wählen Sie einen Anzeigemodus und kopieren Sie den erzeugten Code in das HTML Ihrer Website.
+
+| Modus | Ideal für | Verhalten |
+| --- | --- | --- |
+| **Inline (automatische Höhe)** | Nahtlose Integration in den Inhaltsfluss der Seite | Die Höhe passt sich automatisch dem Inhalt an. Empfohlen |
+| **Popup** | Einen Call-to-Action-Button auf Ihrer Seite | Öffnet das Quiz in einem Vollbild-Overlay |
+| **Einfaches iframe (feste Höhe)** | Umgebungen, in denen kein Skript geladen werden kann | Am einfachsten; feste Höhe mit internem Scrollen |
+
+### Inline (automatische Höhe)
+
+```html
+<div data-rooquiz-embed data-rooquiz-token="YOUR_QUIZ_TOKEN"></div>
+<script src="https://YOUR_QUIZ_DOMAIN/embed.js" async></script>
+```
+
+Das Einbettungsskript beobachtet die Höhe des Quiz-Inhalts (Seitenwechsel, Wechsel zur Ergebnisseite usw.) und passt die Größe des iframes in Echtzeit an – keine Scrollleisten, nichts wird abgeschnitten.
+
+### Popup
+
+```html
+<div data-rooquiz-embed data-rooquiz-token="YOUR_QUIZ_TOKEN" data-rooquiz-mode="popup" data-rooquiz-text="Start the quiz"></div>
+<script src="https://YOUR_QUIZ_DOMAIN/embed.js" async></script>
+```
+
+Auf Ihrer Seite wird ein Button angezeigt; ein Klick darauf öffnet das Quiz in einem Vollbild-Overlay. Geschlossen wird es mit ESC oder per Klick auf den abgedunkelten Hintergrund.
+
+### Einfaches iframe
+
+```html
+<iframe src="https://YOUR_QUIZ_DOMAIN/a/YOUR_QUIZ_TOKEN?embed=1" width="100%" height="600" style="border:0;" title="RooQuiz"></iframe>
+```
+
+## Verfügbare Attribute
+
+| Attribut | Beschreibung |
+| --- | --- |
+| `data-rooquiz-token` | Erforderlich. Der öffentliche Token des Quiz |
+| `data-rooquiz-mode` | `inline` (Standard) oder `popup` |
+| `data-rooquiz-from` | Quellen-Tag, das mit jeder Antwort gespeichert wird; genutzt vom [Quellen-Tracking](/de/publish/tracking) und von der Aufschlüsselung nach Quelle in [Insights](/de/results/insights) |
+| `data-rooquiz-height` | Anfangshöhe (px) im Inline-Modus, bevor die automatische Größenanpassung greift |
+| `data-rooquiz-text` | Beschriftung des Buttons im Popup-Modus |
+
+## JS-API
+
+Wenn Sie einen eigenen Auslöser benötigen (z. B. einen selbst gestalteten Button, der das Popup öffnet), rufen Sie die API direkt auf:
+
+```html
+<script src="https://YOUR_QUIZ_DOMAIN/embed.js"></script>
+<script>
+  // Mount an inline embed manually
+  RooQuiz.embed({ el: '#container', token: 'YOUR_QUIZ_TOKEN', from: 'homepage' })
+  // Open the popup from any element
+  document.querySelector('#my-button').onclick = () => RooQuiz.open('YOUR_QUIZ_TOKEN')
+</script>
+```
+
+<Callout type="warning">
+  Quizze, die auf **nur angemeldete Teilnehmer** eingestellt sind, eignen sich nicht gut zum Einbetten: Browser schränken Speicher und Anmelde-Popups in iframes von Drittanbietern ein, was die Anmeldung beeinträchtigen kann. Teilen Sie für solche Quizze stattdessen den [öffentlichen Link](/de/publish/link-qrcode).
+</Callout>
+
+<Callout type="info">
+  Die eingebettete Seite blendet Fußzeile und Hintergrund automatisch aus und fügt sich transparent in Ihre Website ein; Ihre Theme-Farben gelten weiterhin. Über Einbettungen gesammelte Antworten erscheinen wie gewohnt unter [Einsendungen](/de/results/records).
+</Callout>

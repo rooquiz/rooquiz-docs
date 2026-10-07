@@ -1,0 +1,55 @@
+---
+title: Versiones multilingües
+description: 'Un mismo quiz puede tener varias versiones de idioma que comparten la estructura de preguntas y la puntuación y solo cambian el texto. Cómo funciona el modelo de origen y traducciones y cómo añadir un idioma.'
+---
+
+Un mismo quiz puede tener varias **versiones de idioma**. Comparten una única estructura de preguntas y configuración de puntuación, y solo se diferencian en el texto; así, editas una pregunta una vez y todos los idiomas se actualizan. Se acabó eso de "añadí una pregunta a la versión en chino y olvidé la versión en inglés".
+
+<Callout type="info">
+  El modelo es **un origen, muchas traducciones**: el quiz en sí es el **origen**, con un **idioma principal**; cada uno de los demás idiomas es una **traducción** que se superpone a la estructura del origen mediante el código de pregunta.
+</Callout>
+
+## Añadir una versión de idioma
+
+En **Configuración → Versiones de idioma** del quiz:
+
+<Steps>
+### Confirma el idioma principal
+
+El **idioma principal** es el idioma del contenido de origen. Los idiomas que ya usa una traducción no se pueden elegir como idioma principal.
+
+### Añade un idioma
+
+Haz clic en **Añadir idioma** y elige un idioma de destino. El texto de origen se clona como borrador inicial.
+
+### Edita la traducción
+
+Haz clic en **Editar traducción** para abrir el editor de traducciones y revisar el texto.
+</Steps>
+
+![El editor de traducciones de RooQuiz con el texto de origen a la izquierda y las traducciones a la derecha](/img/en/editor/translations.webp)
+
+*El editor de traducciones muestra ambos lados: el texto de origen a la izquierda (solo lectura) y el idioma de destino a la derecha. El interruptor de la parte superior controla si esta versión de idioma está publicada.*
+
+## Qué puede cambiar una traducción
+
+Solo el **texto legible**: título, descripción, enunciados de las preguntas, etiquetas de las opciones, nombres y descripciones de los niveles del informe, nombres de los resultados y textos del sistema de la página de respuesta.
+
+En una traducción **no puedes** cambiar la estructura. Añadir o quitar preguntas, ajustar la puntuación y editar la lógica condicional se hace en el quiz de origen, y todos los idiomas recogen el cambio automáticamente.
+
+<Callout type="info">
+  Se permiten traducciones parciales. Las preguntas sin traducir recurren al texto de origen en lugar de quedar en blanco o dar error, así que puedes publicar pronto y terminar más adelante.
+</Callout>
+
+## Qué versión ven los participantes
+
+Cada versión de idioma tiene su propio enlace público (la URL para compartir con un parámetro `?lang=`), y puedes usar **Abrir página pública** directamente desde la configuración para previsualizarla.
+
+## Pausar y eliminar
+
+- **En pausa**: una versión de idioma se puede marcar como **En pausa** por separado. Deja de estar disponible públicamente pero el contenido se conserva, independientemente del interruptor general de apertura del quiz.
+- **Eliminar**: al eliminar una versión de idioma **se conservan los envíos**, porque las respuestas pertenecen al quiz de origen y no a la traducción.
+
+<Callout type="warning">
+  Cambiar el idioma principal solo **vuelve a etiquetar** el contenido de origen: no traduce nada. Para ofrecer otro idioma, añade una traducción.
+</Callout>

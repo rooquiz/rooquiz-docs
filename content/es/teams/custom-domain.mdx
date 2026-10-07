@@ -1,0 +1,45 @@
+---
+title: Dominio personalizado
+description: 'Sirve los enlaces públicos de tus quizzes desde tu propio dominio en lugar del de la plataforma: cómo configurar el DNS, cómo funciona la verificación y qué cambia para los participantes. Es una función Pro.'
+---
+
+De forma predeterminada, los enlaces públicos de los quizzes están en el dominio de la plataforma. Con un **dominio personalizado**, los participantes ven tu propio dominio: mejor para la coherencia de marca y la confianza.
+
+Lo encontrarás en **Ajustes → Dominio personalizado**.
+
+<Callout type="warning">
+  El dominio personalizado es una **función del plan Pro**.
+</Callout>
+
+## Configuración
+
+<Steps>
+### Introduce tu dominio
+
+Escribe el dominio que quieres usar, p. ej., `quiz.yourbrand.com`. Se recomienda un subdominio en lugar del dominio raíz.
+
+### Añade el registro DNS
+
+La **Guía de configuración de DNS** de la página te da un registro con tres columnas: **Tipo / Nombre / Valor**. Añádelo tal cual en tu proveedor de DNS.
+
+### Espera la verificación
+
+Vuelve y haz clic en **Actualizar estado**. El estado pasa de **Verificando** a **Verificado**, o muestra **Error de verificación**.
+</Steps>
+
+<Callout type="info">
+  Los registros DNS tardan **desde unos minutos hasta 48 horas** en propagarse, según tu proveedor. Es normal que no se verifique justo después de configurarlo: vuelve a actualizar más tarde.
+</Callout>
+
+## Valores de estado
+
+| Estado | Significado |
+| --- | --- |
+| **Verificando** | El registro se ha enviado; a la espera de la propagación del DNS y de la comprobación |
+| **Verificado** | El dominio está activo y los enlaces públicos lo usan |
+| **Error de verificación** | No se encontró ningún registro correcto: vuelve a comprobar Tipo / Nombre / Valor con la guía |
+| **Suspendido** | El plan Pro ha vencido |
+
+<Callout type="warning">
+  Cuando el plan Pro vence, el dominio pasa a **Suspendido**: hay un **período de gracia de 7 días**, tras el cual el dominio personalizado deja de resolverse. Al renovar se restablece; no necesitas volver a configurar el DNS.
+</Callout>

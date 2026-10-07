@@ -1,0 +1,64 @@
+---
+title: Lógica condicional
+description: 'A lógica condicional mostra ou oculta questões posteriores com base em respostas anteriores, tornando um questionário fixo adaptativo. Como uma regra funciona e por que só existe em dois tipos de quiz.'
+---
+
+A lógica condicional **mostra ou oculta questões posteriores** com base no que a pessoa responde, transformando um questionário fixo em um questionário adaptativo.
+
+<Callout type="warning">
+  A lógica condicional só está disponível em quizzes do tipo **Quiz com pontuação** e **Quiz de resultado**. O painel direito do editor não tem a aba **Regras** para Quiz de conhecimento nem para Quiz de conhecimento aleatório.
+</Callout>
+
+## Como é uma regra
+
+Uma regra se lê como uma frase: **Se … então mostrar / ocultar uma questão.**
+
+Na aba **Regras** do painel direito do editor, clique em **+ Adicionar regra** e preencha:
+
+| Parte | Observações |
+| --- | --- |
+| **Se** | Escolha uma **questão anterior**, um operador e um valor |
+| **e** | Continue com **Adicionar condição**; as condições dentro de uma regra são combinadas com E, então todas precisam ser atendidas |
+| **então** | Escolha **Mostrar** ou **Ocultar** e, em seguida, a **questão de destino** |
+
+Um quiz pode ter várias regras, listadas como **Regra 1 / Regra 2** e assim por diante.
+
+## Operadores disponíveis
+
+| Operador | Usar com |
+| --- | --- |
+| **igual a** | Escolha única, verdadeiro/falso |
+| **contém qualquer um de / não contém nenhum de** | Múltipla escolha — corresponde se qualquer uma das opções escolhidas estiver selecionada |
+| **maior que / maior ou igual a / menor que / menor ou igual a / entre** | Respostas numéricas |
+
+As questões de verdadeiro/falso oferecem **✓ Verdadeiro** e **✗ Falso**.
+
+<Callout type="info">
+  Uma **condição** só pode fazer referência a uma questão com valor definido (tipos de escolha, verdadeiro/falso, avaliação, número). Um **destino** é mais amplo — questões de preencher a lacuna, texto informativo e carrossel de imagens também podem ser mostradas ou ocultadas, e é assim que você cria um acompanhamento do tipo "peça uma explicação apenas quando a pessoa escolher Outro".
+</Callout>
+
+## Como configurar
+
+<Steps>
+### Crie as questões primeiro
+
+As regras fazem referência a questões específicas, então tanto o gatilho quanto o destino já precisam existir.
+
+### Adicione a regra
+
+Escolha a questão → o operador → o valor → mostrar ou ocultar → a questão de destino. Ao salvar uma regra incompleta, você verá a mensagem **Preencha a regra por completo**.
+
+### Percorra tudo na pré-visualização
+
+Teste cada caminho de resposta. Quando você tiver mais do que algumas regras, raciocinar sobre elas de cabeça invariavelmente deixa algum caso de fora.
+</Steps>
+
+## Pontos de atenção
+
+- Faça referência a questões que vêm **antes** do destino. Apontar para uma questão posterior significa que a resposta ainda não existe quando a condição é avaliada.
+- Questões ocultas não são exibidas e **também não passam pela verificação de obrigatoriedade**, então nunca bloqueiam o envio.
+- Excluir uma regra pede confirmação; depois disso, a questão de destino volta a ser exibida por padrão.
+
+<Callout type="info">
+  Ocultar questões afeta a pontuação: uma questão que nunca apareceu não tem resposta e não contribui com pontos. Ao projetar um questionário adaptativo, garanta que suas [regras de pontuação](/pt-BR/editor/scoring) estejam alinhadas com as questões que podem ser ocultadas.
+</Callout>

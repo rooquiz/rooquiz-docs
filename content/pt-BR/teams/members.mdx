@@ -1,0 +1,113 @@
+---
+title: Membros e funções
+description: 'Convide colegas por e-mail e atribua a cada um uma das quatro funções, de proprietário a visualizador. Veja o que cada função pode fazer, quanto tempo vale um convite e como alterar ou remover um membro.'
+---
+
+## Convidar membros
+
+Em **Configurações → Membros**, informe um e-mail e escolha uma função para enviar um convite. O destinatário entra pelo link do e-mail de convite (válido por 7 dias). Usuários já cadastrados entram diretamente; os demais são orientados a criar uma conta primeiro.
+
+## As quatro funções
+
+Uma equipe tem quatro funções, da mais para a menos privilegiada:
+
+| Função | Em uma linha |
+| --- | --- |
+| **Proprietário** | O dono final da equipe, com acesso total. Cada equipe tem **exatamente um** proprietário. |
+| **Administrador** | Conduz a equipe no dia a dia: formulários, bancos de questões, respondentes, leads, membros, configurações da equipe. |
+| **Membro** | Cria quizzes e trabalha os leads que eles geram. |
+| **Visualizador** | Apenas lê. Não pode alterar nada, em lugar nenhum. |
+
+A divisão entre proprietário e administrador é intencional: **o administrador conduz a equipe, o proprietário é dono dela.** Tudo o que muda a quem a equipe pertence, ou a relação dela conosco como cliente pagante, fica com o proprietário.
+
+## Matriz de permissões
+
+✅ total · **texto** = permitido, mas com limites · — não permitido
+
+### Quizzes
+
+| | Proprietário | Administrador | Membro | Visualizador |
+| --- | :---: | :---: | :---: | :---: |
+| Criar um quiz | ✅ | ✅ | ✅ | — |
+| Ver a lista de quizzes | ✅ | ✅ | **próprios + compartilhados** | **só compartilhados** |
+| Editar o conteúdo do quiz | ✅ | ✅ | **próprios + compartilhados** | — |
+| Compartilhamento, transferência, traduções, duplicação | ✅ | ✅ | **próprios + compartilhados** | — |
+| Mover para a lixeira, restaurar, excluir | ✅ | ✅ | **só próprios** | — |
+| Ver respostas | ✅ | ✅ | **próprios + compartilhados** | **só compartilhados** |
+| Excluir respostas | ✅ | ✅ | **próprios + compartilhados** | — |
+
+### Bancos de questões
+
+| | Proprietário | Administrador | Membro | Visualizador |
+| --- | :---: | :---: | :---: | :---: |
+| Navegar por bancos e questões | ✅ | ✅ | ✅ | ✅ |
+| Criar, editar, excluir um banco | ✅ | ✅ | — | — |
+| Adicionar, editar, excluir questões | ✅ | ✅ | — | — |
+
+### Respondentes e leads
+
+| | Proprietário | Administrador | Membro | Visualizador |
+| --- | :---: | :---: | :---: | :---: |
+| Ver todos os respondentes e leads da equipe | ✅ | ✅ | ✅ | ✅ |
+| Trabalhar leads — atribuir, adicionar tags, mudar status, comentar | ✅ | ✅ | ✅ | — |
+| Editar dados de respondentes | ✅ | ✅ | ✅ | — |
+| Criar ou excluir um respondente | ✅ | ✅ | — | — |
+| Configurar status e tags de leads | ✅ | ✅ | — | — |
+| Exportar dados | ✅ | ✅ | — | — |
+| Gerenciar agendamentos | ✅ | ✅ | **só dos próprios leads** | — |
+
+<Callout type="info">
+  Respondentes e leads valem para **toda a equipe**, para todos, inclusive visualizadores — eles não são restringidos pelos quizzes que você pode ver. Apenas as *respostas* seguem a visibilidade dos quizzes.
+</Callout>
+
+### Membros
+
+| | Proprietário | Administrador | Membro | Visualizador |
+| --- | :---: | :---: | :---: | :---: |
+| Ver a lista de membros | ✅ | ✅ | ✅ | ✅ |
+| Convidar membros, inclusive como administrador | ✅ | ✅ | — | — |
+| Alterar funções, desativar, ativar, remover | **qualquer um exceto o proprietário** | **qualquer um exceto o proprietário** | — | — |
+| Transferir a propriedade | ✅ | — | — | — |
+| Sair da equipe | **transferir antes** | ✅ | ✅ | ✅ |
+
+### Configurações da equipe
+
+| | Proprietário | Administrador | Membro | Visualizador |
+| --- | :---: | :---: | :---: | :---: |
+| Nome, logotipo, endereço e nível de modelo de IA da equipe | ✅ | ✅ | — | — |
+| Disponibilidade para agendamentos | ✅ | ✅ | — | — |
+| Conectores | ✅ | ✅ | — | — |
+| Logs de auditoria | ✅ | ✅ | — | — |
+| Domínio personalizado | ✅ | — | — | — |
+| Chaves de API | ✅ | — | — | — |
+| Excluir a equipe | ✅ | — | — | — |
+
+### Faturamento
+
+| | Proprietário | Administrador | Membro | Visualizador |
+| --- | :---: | :---: | :---: | :---: |
+| Fazer upgrade, forma de pagamento, cancelamento, reembolso | ✅ | — | — | — |
+| Recarregar créditos de IA | ✅ | ✅ | — | — |
+
+Recarregar é gestão de uso, não uma alteração da assinatura, por isso um administrador pode fazê-lo. Tudo o que altera a própria assinatura fica com o proprietário.
+
+## Quem pode gerenciar quem
+
+- O **proprietário** e o **administrador** podem gerenciar todos os demais — inclusive um ao outro. Um administrador pode nomear outro administrador, rebaixá-lo, desativá-lo ou removê-lo.
+- A linha do **proprietário** é intocável. O proprietário só muda por meio da [transferência de propriedade](#transferir-a-propriedade), nunca editando uma função.
+- **Ninguém pode alterar a própria função**, nem mesmo para deixar o cargo. Peça a outro proprietário ou administrador que faça isso. Sair da equipe, por outro lado, sempre depende só de você.
+- **Membro** e **visualizador** não podem gerenciar ninguém.
+
+<Callout type="warning">
+  Como os administradores podem rebaixar uns aos outros, trate a função de administrador como algo que você concede a pessoas de confiança para cuidar da equipe. Se quiser que alguém veja tudo sem mexer em nada, use **Visualizador**.
+</Callout>
+
+## Transferir a propriedade
+
+Somente o proprietário pode transferir a propriedade, em **Configurações → Membros**. O novo proprietário precisa já ser um membro ativo da equipe. Após a transferência, você passa a ser um membro comum — a equipe sempre tem exatamente um proprietário.
+
+O proprietário não pode sair da equipe diretamente; transfira a propriedade antes.
+
+<Callout type="info">
+  Quer que alguém veja os resultados sem mexer no quiz? Convide a pessoa como **Visualizador** e depois compartilhe com ela os quizzes relevantes.
+</Callout>

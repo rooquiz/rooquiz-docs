@@ -1,0 +1,71 @@
+---
+title: Créditos de IA e cobrança
+description: 'Como funcionam os créditos de IA no RooQuiz: quais recursos os consomem (avaliação por IA do Scored Quiz, sugestões de IA), como o uso é cobrado, quando a cota da equipe é renovada e o que ocorre ao esgotá-la.'
+---
+
+Os recursos de IA dos seus quizzes (avaliação por IA, correção automática por IA etc.) são cobrados pelo **uso real** e consomem os **créditos de IA** da sua equipe. Esta página explica o que consome créditos, como funciona a cobrança, quando os créditos são renovados e o que acontece quando eles acabam.
+
+## O que consome créditos de IA
+
+- **Avaliação por IA do Scored Quiz**: análise por IA das respostas em texto, que gera insights mais ricos no relatório.
+- **Sugestões de IA** (Beta): sugestões de melhoria/interpretação geradas por IA no relatório.
+- **Correção automática por IA de preenchimento de lacunas** (Beta) em Quiz / Random Knowledge Quiz: quando uma pergunta de preenchimento de lacunas ativa a "correção automática por IA", a IA decide se a resposta está correta.
+
+A pontuação comum de perguntas de escolha, a pontuação por dimensões e os relatórios gerados por modelo **não** consomem créditos de IA.
+
+<Callout type="info">
+  "Sugestões de IA" e "Correção automática por IA de preenchimento de lacunas" são atualmente recursos **Beta**; seu comportamento e qualidade ainda estão sendo aprimorados.
+</Callout>
+
+## Unidade de cobrança e modelos
+
+- Os créditos de IA são medidos em **Neurons** (a unidade de cobrança do Cloudflare Workers AI).
+- Cada chamada de IA é cobrada pelo número de **tokens** consumidos, convertidos em Neurons: mais tokens de entrada/saída significam mais consumo.
+- Você pode escolher um nível de modelo de IA em **Configurações → Informações do plano**: **Standard / Advanced / Flagship**. Modelos mais potentes consomem mais Neurons por chamada. Equipes do plano Free só podem usar o "Standard"; Advanced e Flagship são **exclusivos do Pro**.
+- As cobranças são **liquidadas de forma assíncrona depois** que o relatório é gerado, então nunca atrasam a geração do relatório.
+
+<Callout type="info">
+  Os créditos só são descontados quando a IA **é de fato executada com sucesso**; avaliações vazias ou chamadas com falha não são cobradas.
+</Callout>
+
+## Cota mensal e renovação (aniversário de cobrança)
+
+- Toda equipe recebe uma cota mensal de IA cujo tamanho depende do plano: o Free tem uma cota básica e o Pro tem uma maior. Veja os valores exatos em **Configurações → Informações do plano**.
+- A cota é **renovada mensalmente**, no **aniversário de cobrança** (não a cada 30 dias fixos):
+  - **Pro**: segue a data de cobrança da assinatura; um novo ciclo começa a cada renovação.
+  - **Free**: é renovada mensalmente, no ciclo próprio da equipe.
+- A cota mensal não utilizada **não é acumulada**; ela é zerada no fim do ciclo e reemitida no ciclo seguinte.
+- A data de renovação do ciclo atual aparece em **Configurações → Informações do plano → Renovação do ciclo**.
+
+## Recarga (Pro)
+
+- Equipes Pro podem comprar créditos de IA extras em **Configurações → Informações do plano**.
+- Preço: **1 unidade = 30.000 Neurons = US$ 1**, com mínimo de 5 unidades e máximo de 100 unidades por compra.
+- O saldo de recarga **nunca expira** e não é zerado pelo ciclo mensal.
+- Ordem de consumo: **primeiro é usada a cota mensal, depois o saldo de recarga**.
+
+## O que acontece quando os créditos acabam
+
+O comportamento varia conforme o uso da IA:
+
+| Cenário | Comportamento quando os créditos se esgotam |
+| --- | --- |
+| **Avaliação por IA do Scored Quiz / Sugestões de IA** | **Degradação controlada**: as partes de IA são ignoradas, enquanto o relatório, a análise por dimensões e a pontuação básica **continuam sendo gerados normalmente** |
+| **Correção automática por IA de preenchimento de lacunas** em Quiz / Random Knowledge Quiz | Novas respostas desses formulários são **rejeitadas** (créditos de IA esgotados), porque a correção depende da IA e não pode ser calculada offline |
+
+<Callout type="warning">
+  Se você está coletando respostas para um Quiz que usa "correção automática por IA", fique de olho no seu saldo — se ele acabar, os respondentes não conseguirão **enviar** as respostas. Restabeleça-o fazendo upgrade para o Pro, comprando uma recarga ou aguardando a próxima renovação do ciclo.
+</Callout>
+
+## Lembrete de saldo baixo
+
+- Quando os **créditos totais disponíveis** de uma equipe (cota mensal restante + saldo de recarga) ficam **abaixo de 20%** da cota mensal do plano, o sistema verifica diariamente e envia um e-mail de lembrete ao **proprietário** da equipe.
+- Apenas **um lembrete por ciclo**; ele volta a ficar ativo depois que a cota é renovada ou após uma recarga bem-sucedida.
+
+## Onde ver e gerenciar
+
+Acesse **Configurações → Informações do plano** para ver: a cota do ciclo atual e o restante, o saldo de recarga, a data de renovação do ciclo, a seleção do nível de modelo de IA e a opção de recarga.
+
+<Callout type="info">
+  Relacionados: [Regras de pontuação e avaliação](/pt-BR/editor/scoring), [Relatórios e avaliação por IA](/pt-BR/results/reports).
+</Callout>

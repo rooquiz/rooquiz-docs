@@ -1,0 +1,47 @@
+---
+title: Rapports et évaluation IA
+description: "Pour un Quiz noté, chaque réponse peut générer un rapport avec scores par dimension, graphique radar, conclusions de profil et évaluation IA facultative des réponses textuelles. Production et lecture."
+---
+
+Pour le type **Quiz noté**, chaque réponse peut générer un **rapport** présentant les scores par dimension, les conclusions de profil et, en option, une évaluation IA.
+
+## Contenu d'un rapport
+
+- **Scores par dimension** : les scores de chaque dimension, souvent présentés sous forme de **graphique radar**.
+- **Conclusions de profil** : des conclusions sur la personnalité ou les compétences, déduites des scores par dimension.
+- **Évaluation IA** : une analyse par l'IA des réponses textuelles (soumise au quota).
+
+## Génération d'un rapport
+
+- Le **score de base** est calculé **immédiatement** après la soumission.
+- Les **calculs plus lourds**, comme l'analyse par dimension et l'évaluation IA, sont générés **de manière asynchrone** ; le rapport passe par un état « en cours de génération → terminé ».
+- En cas d'échec de la génération, le système **réessaie automatiquement** pendant un certain délai.
+
+<Callout type="info">
+  Si un rapport reste longtemps « en cours de génération », actualisez plus tard ; si le problème persiste, essayez de le régénérer ou contactez le support.
+</Callout>
+
+## Consultation et diffusion
+
+- **À l'écran** : consultez-le directement dans le tableau de bord ; vous pouvez aussi permettre aux répondants de consulter leur propre rapport via un lien de partage.
+- **Export PDF** : exportez le rapport en PDF pour l'archiver ou le diffuser hors ligne.
+- **Envoi par e-mail** : envoyez le rapport par e-mail. **L'envoi par e-mail est une fonctionnalité Pro.**
+
+## Bouton CTA de la page de résultats
+
+Vous pouvez configurer un bouton d'appel à l'action (CTA) pour **chaque niveau de score** ; les répondants qui atteignent ce niveau le voient en bas de leur rapport. Par exemple, « À améliorer » mène à la réservation d'une consultation, tandis que « Excellent » mène au téléchargement de ressources avancées.
+
+- Dans **Éditeur** → **Paramètres du rapport** → **Niveaux de score**, activez le **Bouton CTA** d'un niveau et renseignez le texte et le lien du bouton ; le texte d'introduction et l'option « ouvrir dans une nouvelle fenêtre » sont facultatifs.
+- Pour utiliser le même bouton sur plusieurs niveaux, configurez-en un et cliquez sur **Appliquer à tous les niveaux**.
+- Les modifications du CTA **s'appliquent immédiatement à tous les rapports existants** : changez de lien de campagne ou de texte sans craindre des boutons obsolètes dans les anciens rapports.
+- Les clics des répondants sur le CTA alimentent l'entonnoir de conversion des [Statistiques](/fr/results/insights).
+
+<Callout type="info">
+  Les liens doivent commencer par `http(s)://`. Le style du bouton suit automatiquement la couleur du thème de votre quiz.
+</Callout>
+
+## À propos du quota IA
+
+<Callout type="warning">
+  L'évaluation IA consomme le **quota IA** de votre équipe, qui se réinitialise à chaque cycle. Lorsque le quota est dépassé, l'évaluation IA est ignorée pour ce cycle, mais le score de base et l'analyse par dimension sont toujours générés normalement. Consultez [Crédits IA et facturation](/fr/account/ai-billing) pour les allocations, les règles de réinitialisation mensuelle, les mises à niveau et les recharges.
+</Callout>

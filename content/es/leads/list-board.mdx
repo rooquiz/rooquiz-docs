@@ -1,0 +1,49 @@
+---
+title: Lista y tablero
+description: 'La página de Leads ofrece una vista de lista para trabajar en bloque y ordenar, y una vista de tablero para arrastrar personas por las etapas de seguimiento. Qué significa cada columna y en qué se diferencian.'
+---
+
+La página de **Leads** tiene dos vistas, que se cambian con el selector **Lista / Tablero** de la esquina superior derecha. La elección es solo tuya: no cambia lo que ven tus compañeros.
+
+![La lista de leads de RooQuiz con las columnas de participante, estado, etiquetas y responsable](/img/en/leads/leads-list.webp)
+
+## Vista de lista
+
+Ideal para **trabajar en bloque** y ordenar por un campo. La tabla tiene estas columnas:
+
+| Columna | Significado |
+| --- | --- |
+| **Participante** | Nombre y correo; haz clic para abrir el [detalle del lead](/es/leads/detail) |
+| **Estado** | En qué punto del embudo se encuentra; consulta [Estados, etiquetas y responsables](/es/leads/status-tags) |
+| **Etiquetas** | Etiquetas de color; un lead puede tener varias a la vez |
+| **Responsable** | El miembro del equipo a cargo de este lead |
+| **Respuestas** | Cuántos quizzes ha enviado esta persona en total |
+| **Próxima cita** | Su próxima [reserva](/es/bookings); en blanco si no tiene ninguna |
+| **Última respuesta** | Cuándo envió por última vez |
+| **Primer cuestionario** | El quiz en el que dejó sus datos por primera vez |
+
+La lista usa **desplazamiento infinito** (sigue desplazándote para cargar más) y los encabezados de columna se pueden ordenar.
+
+## Vista de tablero
+
+Las columnas son los **estados de seguimiento**, una por estado, y al arrastrar una tarjeta a otra columna cambia su estado. Es útil para repasar el embudo una vez al día y hacer avanzar a las personas.
+
+<Callout type="info">
+  Arrastrar una tarjeta también cambia su **posición dentro de la columna**, y ese orden se recuerda, así que puedes subir arriba las llamadas de hoy.
+</Callout>
+
+## Acciones en lote
+
+Marca varios leads en la vista de lista y aparecerá una barra de acciones en lote:
+
+- **Asignar responsable**: entrega los leads seleccionados a un miembro del equipo, que recibe una única notificación agrupada.
+- **Etiquetar en masa**: se ofrece como **Añadir etiqueta** y **Quitar etiqueta**. Úsalas para lotes en lugar de reemplazar todo el conjunto de etiquetas, lo que borraría las etiquetas que añadieron otras personas.
+- **Mover a la papelera**: los leads van a la papelera y se pueden **restaurar en un plazo de 5 días**.
+
+<Callout type="warning">
+  Las tres acciones en lote están limitadas a **50 leads a la vez**. Si seleccionas más, se te avisará; simplemente trabaja por lotes.
+</Callout>
+
+<Callout type="info">
+  Mover a la papelera elimina solo el **registro de seguimiento**. El participante y sus envíos no se tocan. Para eliminar también a la persona, ve a [Participantes](/es/respondents).
+</Callout>

@@ -1,0 +1,56 @@
+---
+title: Répondants
+description: "Le répondant est la personne derrière les réponses : profil, champs étendus et historique des soumissions. Ce qui le distingue d'un lead, d'où il vient et comment le désactiver ou le supprimer."
+sidebarTitle: Vue d'ensemble
+---
+
+Un **répondant** est le profil de compte d'une personne qui a passé vos quiz : nom, e-mail, avatar, les éventuels champs étendus que vous avez définis et son historique de soumissions.
+
+<Callout type="info">
+  Les répondants et les [leads](/fr/leads) sont deux couches distinctes : **le répondant est la personne, le lead est le dossier de suivi de cette personne**. Un répondant peut exister sans lead (quelqu'un qui a répondu anonymement puis est parti), mais un lead appartient toujours à un répondant.
+</Callout>
+
+![The RooQuiz respondents list with ID, name, email, source and status](/img/en/respondents/respondents-list.webp)
+
+## Contenu de la liste
+
+| Colonne | Remarques |
+| --- | --- |
+| **ID du répondant** | Un identifiant métier généré, copiable, pour désigner une personne en externe |
+| **Nom / E-mail** | Cliquez pour ouvrir le panneau de détail |
+| **Source** | La façon dont cette personne est arrivée ; voir ci-dessous |
+| **Statut** | Actif ou Désactivé |
+| **E-mail vérifié** | Indique si la personne a vérifié son adresse |
+| **Créé le** | La date de création du profil |
+
+Si vous avez configuré des [champs étendus](/fr/respondents/fields), ils apparaissent également sous forme de colonnes supplémentaires.
+
+## Les trois sources
+
+La **Source** est enregistrée à la **création** du profil et ne change plus ensuite. Elle répond à la question « comment cette personne est-elle arrivée ici » :
+
+- **Inscription autonome** : la personne s'est connectée ou inscrite elle-même sur la page de réponse.
+- **Depuis une piste** : créée en conséquence de l'[ajout manuel d'un lead](/fr/leads/detail).
+- **Ajouté manuellement** : vous l'avez créée directement avec **Ajouter un répondant**.
+
+## Ajouter et désactiver
+
+- **Ajouter un répondant** : saisissez un nom et un e-mail ; le mot de passe est facultatif. Pratique pour importer d'abord une liste et laisser les personnes définir leur mot de passe plus tard.
+- **Désactiver / Activer** : une personne désactivée ne peut plus se connecter au [portail](/fr/respondents/portal), mais toutes ses soumissions passées sont conservées. Adapté aux anciens clients ou aux remboursements.
+
+## Mettre à la corbeille
+
+La suppression d'un répondant passe par la corbeille, et il peut être **restauré sous 5 jours**.
+
+<Callout type="warning">
+  Supprimer un répondant a plus de conséquences que supprimer un lead : **son lead, ses soumissions et ses réservations sont également masqués**. Si vous souhaitez uniquement effacer le dossier de suivi en conservant les réponses, utilisez plutôt la [mise à la corbeille du lead](/fr/leads/list-board).
+</Callout>
+
+La suppression groupée fonctionne de la même manière : sélectionnez plusieurs lignes et elles partent toutes à la corbeille.
+
+## Dans cette section
+
+<Cards>
+  <Card title="Champs étendus et avatars" href="/fr/respondents/fields" />
+  <Card title="Connexion et portail des répondants" href="/fr/respondents/portal" />
+</Cards>

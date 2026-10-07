@@ -1,0 +1,54 @@
+---
+title: Fragenpools
+description: 'Ein Fragenpool ist ein Bestand an Fragen, aus dem Sie immer wieder ziehen. So erstellen Sie einen Pool, fügen Fragen hinzu, legen den Schwierigkeitsgrad fest – und darum braucht jede Frage eine richtige Antwort.'
+---
+
+Ein Fragenpool ist ein Bestand an **Fragen, aus dem Sie wiederholt ziehen können**. Sie finden ihn unter **Fragenpools** in der linken Seitenleiste.
+
+<Callout type="warning">
+  Jede Frage in einem Pool **muss eine richtige Antwort haben** – Pools sind bewertete Fragenbestände, kein Speicher für Felder zur Datenerfassung.
+</Callout>
+
+![Liste der RooQuiz-Fragenpools mit Fragenanzahl und Schwierigkeitsgrad](/img/en/library/question-banks.webp)
+
+## Einen Pool erstellen
+
+<Steps>
+### Auf „Fragenpool erstellen“ klicken
+
+Der Untertitel lautet „Wissensquiz oder Bewertetes Quiz“ – Pools dienen diesen beiden bewerteten Szenarien.
+
+### Die Grunddaten ausfüllen
+
+**Name des Fragenpools** (bis zu 50 Zeichen), **Beschreibung** (bis zu 200 Zeichen) und **Schwierigkeitsgrad**.
+
+### Fragen hinzufügen
+
+Öffnen Sie den Pool und klicken Sie auf **Frage hinzufügen**. Das funktioniert wie das Erstellen im Editor: Typ wählen, Fragestamm und Optionen schreiben, richtige Antwort festlegen.
+</Steps>
+
+## Fragen verwalten
+
+- **Per Drag-and-drop neu anordnen** – ordnen Sie Fragen direkt um.
+- **Mehrere löschen** – markieren Sie mehrere Fragen und entfernen Sie sie auf einmal. Das **lässt sich nicht rückgängig machen**.
+- **Infos bearbeiten** – ändern Sie Name, Beschreibung und Schwierigkeitsgrad des Pools.
+
+<Callout type="warning">
+  Ein Pool **muss geleert werden, bevor er gelöscht werden kann** – Sie sehen dann den Hinweis, zuerst alle Fragen zu löschen, bevor Sie diesen Fragenpool löschen. Diese Sperre verhindert, dass Sie versehentlich einen ganzen Pool löschen.
+</Callout>
+
+## Einen Pool in einem Quiz verwenden
+
+Wählen Sie beim Erstellen eines Quiz im Dashboard den Einstieg **Zufallsfragen aus Fragenpool**, wählen Sie einen Pool und geben Sie an, wie viele Fragen gezogen werden sollen. Jeder Teilnehmer erhält dann eine andere Kombination.
+
+<Callout type="warning">
+  Was Sie dabei erhalten, ist ein **Zufälliges Wissensquiz** – ein anderer Typ als das Wissensquiz. **Der Typ kann nach dem Erstellen nicht geändert werden**, ein Wechsel zwischen festen und zufälligen Fragen bedeutet also einen Neuaufbau. Siehe [Die vier Quiztypen](/de/getting-started/quiz-types).
+</Callout>
+
+## Massenerstellung über einen KI-Client
+
+Pools brauchen viele Fragen, und das Eintippen ist mühsam. Wenn Sie [MCP](/de/integrations/mcp) verbunden haben, kann ein KI-Client Fragen in großer Zahl in einen Pool schreiben.
+
+<Callout type="warning">
+  Fügen Sie etwa **30 Fragen pro Durchgang** hinzu. Größere Durchgänge laufen häufig in ein Timeout, und ein erneuter Versuch nach einem Timeout kann Duplikate hinterlassen.
+</Callout>

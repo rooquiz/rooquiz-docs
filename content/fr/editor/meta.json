@@ -1,0 +1,12 @@
+{
+  "title": "Éditeur et types de questions",
+  "pages": [
+    "index",
+    "question-types",
+    "logic",
+    "scoring",
+    "settings",
+    "design",
+    "translations"
+  ]
+}

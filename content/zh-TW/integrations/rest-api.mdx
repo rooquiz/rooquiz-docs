@@ -1,0 +1,241 @@
+---
+title: REST API
+description: 'RooQuiz 提供一個輕量的唯讀 REST API，方便把團隊的表單資料拉進腳本、自動化工具（Zapier、Make、n8n）或自建看板，以純 JSON 回傳表單的標題、欄位、設定與報告設定。這一頁講它的工作方式、怎麼取得帳號級 API 金鑰、如何驗證、有哪些端點，以及錯誤與限流規則。介面唯讀，不會修改任何資料；金鑰請當作密碼保管，外洩後可以隨時重置。'
+---
+
+RooQuiz 提供一個輕量的**唯讀 REST API**，方便你把團隊的表單資料拉進腳本、自動化工具（Zapier、Make、n8n）或自建看板。它以純 JSON 回傳表單的**定義資訊** —— 標題、欄位、設定、報告設定。
+
+<Callout type="info">
+  REST API 是**帳號級別**的，以團隊（帳號）身分認證，而非某個成員。如果你想讓 **AI 客戶端**用自然語言操作測評，請看 [MCP 接入](/zh-TW/integrations/mcp)。
+</Callout>
+
+## 工作方式
+
+- 用一個歸屬團隊的**帳號 API 金鑰**（前綴 `rqp_acct_`）進行認證。
+- 該金鑰可**讀取所在團隊的全部表單**。它不綁定個人，成員進出都不影響其使用。
+- 僅**團隊所有者**可建立、檢視、撤銷帳號 API 金鑰。
+- 介面**唯讀**，只回傳表單定義，不暴露提交記錄 / 作答資料。
+
+## 取得 API 金鑰
+
+進入 **設定 → API 金鑰**（僅**團隊所有者**可見），點擊「建立 API 金鑰」：
+
+1. 起一個**名稱**（便於識別，例如 `Zapier - 生产`）。
+2. 建立後會顯示一個以 `rqp_acct_` 開頭的明文金鑰。
+
+<Callout type="warning">
+  **明文金鑰只顯示這一次。** 離開頁面後無法再取回。請立即複製；丟失後只能撤銷並重新建立。
+</Callout>
+
+每個團隊最多保有 **10 個金鑰**（含已撤銷）。如需更多，請**刪除**一個以騰出名額（「撤銷」只是停用，不釋放名額）。請像密碼一樣妥善保管，切勿提交到程式碼儲存庫。
+
+## 驗證
+
+每次請求都以 Bearer 權杖方式帶上金鑰：
+
+```bash
+Authorization: Bearer rqp_acct_xxx...
+```
+
+<Callout type="info">
+  個人 MCP 權杖（`rqp_live_`）在 REST API 上**無效**，會回傳 `401`。請使用帳號 API 金鑰（`rqp_acct_`）。
+</Callout>
+
+## 端點
+
+基礎網址形如 `https://your-domain/api/v1`。
+
+### 列出表單
+
+```bash
+GET /api/v1/forms
+```
+
+按建立時間倒序列出該金鑰所屬團隊的全部表單。
+
+| 查詢參數 | 類型 | 預設 | 說明 |
+| --- | --- | --- | --- |
+| `scene` | string | — | 按場景過濾：`knowledge_quiz`、`random_knowledge_quiz`、`scored_quiz`、`outcome_quiz`。 |
+| `titleContains` | string | — | 標題模糊符合。 |
+| `limit` | number | `20` | 每頁條數（最大 `100`）。 |
+| `page` | number | `1` | 頁碼。 |
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/forms?scene=knowledge_quiz&limit=20"
+```
+
+```json
+{
+  "totalDocs": 12,
+  "page": 1,
+  "limit": 20,
+  "items": [
+    {
+      "id": "d983d8d9-...",
+      "title": "性格测试",
+      "scene": "outcome_quiz",
+      "language": "zh_CN",
+      "publicToken": "h7sbps67",
+      "shareUrl": "https://your-cairo-domain/a/h7sbps67",
+      "localization": null,
+      "isActive": true,
+      "createdAt": "2026-06-18T11:35:11.468Z",
+      "updatedAt": "2026-06-18T12:59:42.649Z"
+    }
+  ]
+}
+```
+
+### 取得單個表單
+
+```bash
+GET /api/v1/forms/{id}
+```
+
+回傳單個表單的定義。
+
+| 查詢參數 | 類型 | 預設 | 說明 |
+| --- | --- | --- | --- |
+| `includeFields` | boolean | `true` | 是否包含 `fields[]`（題目 / 分頁符）。大表單可傳 `false` 跳過。 |
+| `includeReport` | boolean | `true` | 是否包含報告 / 維度分析設定。 |
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/forms/d983d8d9-..."
+```
+
+```json
+{
+  "id": "d983d8d9-...",
+  "title": "性格测试",
+  "scene": "outcome_quiz",
+  "language": "zh_CN",
+  "description": null,
+  "isActive": true,
+  "publicToken": "h7sbps67",
+  "shareUrl": "https://your-cairo-domain/a/h7sbps67",
+  "layout": "card",
+  "localization": null,
+  "systemText": null,
+  "createdAt": "2026-06-18T11:35:11.468Z",
+  "updatedAt": "2026-06-18T12:59:42.649Z",
+  "fields": [ /* 题目与分页符 */ ],
+  "report": { /* 报告 / 维度配置 */ }
+}
+```
+
+## 提交記錄
+
+讀取團隊表單收集到的作答 —— 線索、答案、得分、報告結果與 UTM 歸因。適合 CRM 同步、自建看板、自動化。
+
+<Callout type="warning">
+  提交記錄包含作答者 PII（電子郵件、姓名、IP），請妥善處理與儲存。
+</Callout>
+
+### 列出提交記錄
+
+```bash
+GET /api/v1/records
+```
+
+按建立時間倒序列出該帳號的全部提交記錄。
+
+| 查詢參數 | 類型 | 預設 | 說明 |
+| --- | --- | --- | --- |
+| `formId` | string | — | 只看某個表單的提交。 |
+| `status` | string | — | 報告狀態：`pending`、`processing`、`completed`、`failed`。 |
+| `since` | ISO 時間 | — | 只看該時間（含）之後建立的提交（增量同步）。 |
+| `until` | ISO 時間 | — | 只看該時間（含）之前建立的提交。 |
+| `limit` | number | `20` | 每頁條數（最大 `100`）。 |
+| `page` | number | `1` | 頁碼。 |
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/records?since=2026-06-01&limit=50"
+```
+
+```json
+{
+  "totalDocs": 1500,
+  "page": 1,
+  "limit": 50,
+  "items": [
+    {
+      "id": "...",
+      "serialNumber": 11,
+      "formId": "d983d8d9-...",
+      "shareToken": "v2hrpv6d",
+      "reportUrl": "https://your-cairo-domain/a/md8682rx/records/v2hrpv6d",
+      "submittedAt": "2026-06-18T12:00:00.000Z",
+      "updatedAt": "2026-06-18T12:00:05.000Z",
+      "examinee": {
+        "id": "...", "examineeId": "TZ4730277148",
+        "email": "lead@example.com", "name": "Jane", "customData": null
+      },
+      "metadata": {
+        "utmSource": "newsletter", "utmMedium": "email",
+        "utmCampaign": null, "utmTerm": null, "utmContent": null,
+        "referrer": "https://..."
+      },
+      "data": { "q_email": "lead@example.com", "q_rating": 5 },
+      "result": {
+        "status": "completed", "score": 2, "maxScore": 4,
+        "level": "良好", "outcomeCode": null, "outcomeName": null
+      }
+    }
+  ]
+}
+```
+
+`data` 以每個表單欄位的 `code` 為 key（可透過表單端點的 `fields[]` 檢視）。匿名提交時 `examinee` 為 `null`。`result` 是緊湊摘要；完整報告在詳情端點。
+
+### 取得單條提交記錄
+
+```bash
+GET /api/v1/records/{id}
+```
+
+回傳單條提交，含完整報告結果 `reportResult` 以及 `metadata.ip` / `metadata.userAgent`。
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/records/..."
+```
+
+```json
+{
+  "id": "...",
+  "serialNumber": 11,
+  "formId": "d983d8d9-...",
+  "shareToken": "v2hrpv6d",
+  "reportUrl": "https://your-cairo-domain/a/md8682rx/records/v2hrpv6d",
+  "submittedAt": "...",
+  "updatedAt": "...",
+  "examinee": { "id": "...", "email": "lead@example.com", "name": "Jane" },
+  "metadata": { "ip": "203.0.113.4", "userAgent": "...", "utmSource": "newsletter" },
+  "data": { /* 按字段 code 的作答 */ },
+  "reportResult": {
+    "status": "completed",
+    "overallAnalysis": { "score": 2, "maxScore": 4, "level": "良好", "summary": "...", "suggestions": "..." },
+    "dimensionAnalysis": { "title": "...", "radar": [], "items": [] },
+    "outcome": { "code": null, "name": null, "ranking": null },
+    "aiSuggestion": { "status": "completed", "content": "..." }
+  }
+}
+```
+
+## 錯誤
+
+錯誤以 `{ "error": { "code": "...", "message": "..." } }` 的形式回傳。
+
+| 狀態碼 | code | 場景 |
+| --- | --- | --- |
+| `401` | `unauthorized` | 缺失 / 無效 / 已過期 / 已撤銷的金鑰（或傳了非帳號級權杖）。 |
+| `404` | `not_found` | 表單不存在，或不屬於該金鑰所在團隊。 |
+| `400` | `bad_request` | 參數非法（例如未知的 `scene`）。 |
+| `429` | `rate_limited` | 超過限流。 |
+
+## 限流
+
+每個金鑰限制為 **120 次 / 分鐘**，超出回傳 `429`。不再需要時，請在 **設定 → API 金鑰** 撤銷金鑰 —— 使用它的整合會立即失去存取權限。

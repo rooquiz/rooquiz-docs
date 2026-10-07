@@ -1,0 +1,56 @@
+---
+title: 'Connecteurs et automatisation'
+description: "Les connecteurs transmettent les leads et réservations générés par vos quiz vers les outils que vous utilisez déjà : e-mail, votre propre backend, Slack, Zapier ou Kit. Ils sont partagés par toute l'équipe."
+sidebarTitle: Vue d'ensemble
+---
+
+Les **connecteurs** transmettent les leads et les réservations générés par vos quiz vers les outils que vous utilisez déjà : e-mail, votre propre backend, Slack ou votre fournisseur de services d'e-mailing. Vous les trouverez sous **Connecteurs** dans la barre latérale gauche.
+
+<Callout type="info">
+  Les connecteurs sont définis **au niveau de l'équipe** : configurez-en un et tous les quiz l'utilisent. Pour que seuls certains quiz déclenchent un connecteur, restreignez-le avec la [portée du déclenchement](/fr/connectors/events).
+</Callout>
+
+![The RooQuiz connectors page with the channel menu and configured connector cards](/img/en/connectors/connectors-list.webp)
+
+## Les cinq canaux
+
+| Canal | Usage |
+| --- | --- |
+| **E-mail** | Envoyer une notification personnalisable aux destinataires choisis lorsqu'un événement se produit |
+| **Webhook** | Envoyer un POST vers votre propre URL avec une signature HMAC |
+| **Slack** | Autoriser l'application Slack et publier les nouveaux leads dans un canal |
+| **Zapier** | Coller une URL Catch Hook et atteindre des milliers d'applications |
+| **Kit** | Ajouter les nouveaux leads comme abonnés dans Kit (ConvertKit) et les étiqueter |
+
+Chaque connecteur fonctionne indépendamment : **désactiver l'un n'affecte pas les autres**. La configuration de chaque canal est décrite dans [Les cinq canaux](/fr/connectors/channels).
+
+## Autorisations et forfait
+
+<Callout type="warning">
+  Seuls le **propriétaire de l'organisation ou un administrateur** peuvent gérer les connecteurs. Les autres membres reçoivent un message d'absence d'autorisation, et l'élément de la barre latérale ne leur est pas affiché.
+</Callout>
+
+Le canal **E-mail** est disponible sur tous les forfaits : il envoie via [votre propre serveur SMTP](/fr/connectors/email-smtp) et ne nous coûte donc rien ; les quatre autres sont **réservés au forfait Pro**. Dans une équipe gratuite, sélectionner un canal Pro grise la zone de configuration et propose un lien de mise à niveau.
+
+## Ce qu'indique la carte du connecteur
+
+Chaque connecteur configuré affiche :
+
+- **Activé / Désactivé** : s'il fonctionne.
+- **Configuration incomplète** : le flux OAuth est terminé, mais il manque encore un canal ou une dernière étape. Ces connecteurs n'envoient rien.
+- **Dernier envoi** : la date du dernier déclenchement et son résultat (réussi / échoué / quota dépassé).
+
+<Callout type="info">
+  Après en avoir configuré un, cliquez sur **Envoyer un test** pour confirmer que l'autre extrémité le reçoit bien, plutôt que de le découvrir avec votre premier vrai lead.
+</Callout>
+
+## Dans cette section
+
+<Cards>
+  <Card title="Les cinq canaux" href="/fr/connectors/channels" />
+  <Card title="Événements déclencheurs et portée" href="/fr/connectors/events" />
+</Cards>
+
+<Callout type="info">
+  Vous préférez récupérer les données selon votre propre calendrier plutôt que de recevoir des envois ? Consultez l'[API REST](/fr/integrations/rest-api) et l'[intégration MCP](/fr/integrations/mcp).
+</Callout>

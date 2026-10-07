@@ -1,0 +1,56 @@
+---
+title: Exportar datos
+description: 'Exporta respuestas, leads y participantes como CSV en UTF-8 que se abre directamente en Excel: los dos tipos de exportación, la cuota y su reinicio, qué hacer si los datos son demasiados y qué contiene el archivo.'
+---
+
+Las respuestas, los leads y los participantes se pueden exportar como **CSV** (UTF-8, se abre directamente en Excel).
+
+<Callout type="warning">
+  La exportación es una **función Pro** con un límite semanal de exportaciones. Los equipos con el plan gratuito ven un aviso para actualizar.
+</Callout>
+
+## Dos tipos de exportación
+
+| Método | Notas |
+| --- | --- |
+| **Exportar seleccionados** | Marca algunas filas y exporta solo esas. Se genera en tu navegador y **no consume tu cuota** |
+| **Exportar todo** | Exporta todo lo que coincide con tus filtros actuales. Se genera en el servidor y **consume una exportación** |
+
+<Callout type="info">
+  Filtra antes de exportar. "Exportar todo" exporta el **resultado de los filtros actuales**, no toda la tabla: cuanto más preciso sea el filtro, más útil será el archivo y menos cuota gastarás.
+</Callout>
+
+## El cuadro de confirmación
+
+"Exportar todo" abre una confirmación que te muestra primero los datos importantes:
+
+- **Alcance de los datos**: todos los datos o el resultado de los filtros actuales (puedes cambiarlo aquí mismo).
+- **Filas**: aproximadamente cuántas. Si el recuento falla, se te avisa y aun así puedes continuar.
+- **Formato del archivo**: CSV (UTF-8, se abre en Excel).
+- **Esta semana**: cuántas exportaciones te quedan de tu límite y cuándo se reinicia.
+
+Al confirmar, el archivo se **genera en segundo plano y se descarga automáticamente**; mientras tanto, puedes salir de la página.
+
+## Cuota y reinicio
+
+La asignación semanal se reinicia el **lunes (UTC)**. Tanto el cuadro de diálogo como el mensaje de límite alcanzado te indican la hora exacta del reinicio.
+
+<Callout type="info">
+  **Las exportaciones fallidas no cuentan.** Solo consume cuota una exportación que realmente generó un archivo.
+</Callout>
+
+## Cuando los datos son demasiados
+
+Hay un límite de filas por exportación. Si lo superas, la exportación se rechaza directamente (**sin consumir cuota**) y recibes un resumen listo para copiar y enviar por correo al soporte técnico, que la exportará por ti.
+
+<Callout type="info">
+  Si una exportación parece no terminar nunca, la página deja de esperar a los cinco minutos y te lo indica; el trabajo sigue ejecutándose en segundo plano, así que vuelve a la página un poco más tarde.
+</Callout>
+
+## Qué contiene el archivo
+
+Además de las respuestas en sí, las exportaciones suelen incluir el número de registro, la fecha de envío, el correo y el ID del participante, y el nivel. Las exportaciones de leads y de participantes tienen sus propios conjuntos de columnas.
+
+<Callout type="warning">
+  Los archivos exportados contienen información personal que proporcionaron los participantes. Guárdalos y compártelos según las normas de privacidad y cumplimiento de tu organización.
+</Callout>

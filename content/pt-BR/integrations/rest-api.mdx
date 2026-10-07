@@ -1,0 +1,241 @@
+---
+title: API REST
+description: 'Uma pequena API REST somente leitura que retorna as definições dos formulários da sua equipe — título, campos, configurações e relatório — em JSON, para scripts, automações Zapier/Make/n8n ou painéis próprios.'
+---
+
+O RooQuiz oferece uma pequena **API REST** somente leitura para que você leve os dados dos formulários da sua equipe para scripts, automações (Zapier, Make, n8n) ou seus próprios painéis. Ela retorna as **definições** dos formulários — título, campos, configurações, configuração do relatório — em JSON simples.
+
+<Callout type="info">
+  A API REST é **da conta** e se autentica como a sua equipe, não como um membro individual. Se você quer que um **cliente de IA** opere seus quizzes com linguagem natural, consulte [Integração MCP](/pt-BR/integrations/mcp).
+</Callout>
+
+## Como funciona
+
+- Você se autentica com uma **chave de API da conta** (prefixo `rqp_acct_`) que pertence a uma equipe.
+- A chave pode **ler todos os formulários dessa equipe**. Ela não está vinculada a uma pessoa, então continua funcionando quando membros entram e saem.
+- Apenas um **proprietário da equipe** pode criar, ver ou revogar chaves de API da conta.
+- A API é **somente leitura** e retorna apenas definições de formulários — ela não expõe envios/respostas.
+
+## Obtenha uma chave de API
+
+Acesse **Configurações → Chaves de API** (visível apenas para **proprietários da equipe**) e clique em "Criar chave de API":
+
+1. Dê a ela um **nome** (para identificá-la, por exemplo `Zapier - Production`).
+2. Após a criação, é exibida uma chave em texto simples que começa com `rqp_acct_`.
+
+<Callout type="warning">
+  **A chave em texto simples é exibida apenas uma vez.** Ela não pode ser recuperada depois que você sai da página. Copie-a imediatamente; se perdê-la, será necessário revogá-la e criar uma nova.
+</Callout>
+
+Cada equipe pode ter no máximo **10 chaves** (incluindo as revogadas). Para criar mais, **exclua** uma para liberar espaço ("revogar" apenas desativa — não libera o espaço). Trate a chave como uma senha e nunca a inclua no controle de versão.
+
+## Autenticação
+
+Envie a chave como um token Bearer em todas as requisições:
+
+```bash
+Authorization: Bearer rqp_acct_xxx...
+```
+
+<Callout type="info">
+  Um token pessoal de MCP (`rqp_live_`) **não** funciona na API REST — ele retorna `401`. Use uma chave de API da conta (`rqp_acct_`).
+</Callout>
+
+## Endpoints
+
+A URL base tem o formato `https://your-domain/api/v1`.
+
+### Listar formulários
+
+```bash
+GET /api/v1/forms
+```
+
+Lista todos os formulários da equipe da chave, dos mais recentes para os mais antigos.
+
+| Parâmetro de consulta | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `scene` | string | — | Filtra por cenário: `knowledge_quiz`, `random_knowledge_quiz`, `scored_quiz`, `outcome_quiz`. |
+| `titleContains` | string | — | Correspondência aproximada no título. |
+| `limit` | number | `20` | Itens por página (máx. `100`). |
+| `page` | number | `1` | Número da página. |
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/forms?scene=knowledge_quiz&limit=20"
+```
+
+```json
+{
+  "totalDocs": 12,
+  "page": 1,
+  "limit": 20,
+  "items": [
+    {
+      "id": "d983d8d9-...",
+      "title": "Personality Quiz",
+      "scene": "outcome_quiz",
+      "language": "en_US",
+      "publicToken": "h7sbps67",
+      "shareUrl": "https://your-cairo-domain/a/h7sbps67",
+      "localization": null,
+      "isActive": true,
+      "createdAt": "2026-06-18T11:35:11.468Z",
+      "updatedAt": "2026-06-18T12:59:42.649Z"
+    }
+  ]
+}
+```
+
+### Obter um formulário
+
+```bash
+GET /api/v1/forms/{id}
+```
+
+Retorna a definição de um formulário.
+
+| Parâmetro de consulta | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `includeFields` | boolean | `true` | Inclui o array `fields[]` (perguntas / quebras de página). Passe `false` para omiti-lo em formulários grandes. |
+| `includeReport` | boolean | `true` | Inclui a configuração do relatório / da análise por dimensões. |
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/forms/d983d8d9-..."
+```
+
+```json
+{
+  "id": "d983d8d9-...",
+  "title": "Personality Quiz",
+  "scene": "outcome_quiz",
+  "language": "en_US",
+  "description": null,
+  "isActive": true,
+  "publicToken": "h7sbps67",
+  "shareUrl": "https://your-cairo-domain/a/h7sbps67",
+  "layout": "card",
+  "localization": null,
+  "systemText": null,
+  "createdAt": "2026-06-18T11:35:11.468Z",
+  "updatedAt": "2026-06-18T12:59:42.649Z",
+  "fields": [ /* questions & page breaks */ ],
+  "report": { /* report / dimension config */ }
+}
+```
+
+## Respostas
+
+Leia as respostas que os formulários da sua equipe coletaram — leads, respostas, pontuações, resultados de relatório e atribuição UTM. Ideal para sincronização com CRM, painéis personalizados e automações.
+
+<Callout type="warning">
+  As respostas incluem dados pessoais dos respondentes (e-mail, nome, IP). Manipule-os e armazene-os com responsabilidade.
+</Callout>
+
+### Listar respostas
+
+```bash
+GET /api/v1/records
+```
+
+Lista as respostas de toda a equipe, das mais recentes para as mais antigas.
+
+| Parâmetro de consulta | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `formId` | string | — | Apenas respostas deste formulário. |
+| `status` | string | — | Status do relatório: `pending`, `processing`, `completed`, `failed`. |
+| `since` | ISO date | — | Apenas respostas criadas neste momento ou depois (sincronização incremental). |
+| `until` | ISO date | — | Apenas respostas criadas neste momento ou antes. |
+| `limit` | number | `20` | Itens por página (máx. `100`). |
+| `page` | number | `1` | Número da página. |
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/records?since=2026-06-01&limit=50"
+```
+
+```json
+{
+  "totalDocs": 1500,
+  "page": 1,
+  "limit": 50,
+  "items": [
+    {
+      "id": "...",
+      "serialNumber": 11,
+      "formId": "d983d8d9-...",
+      "shareToken": "v2hrpv6d",
+      "reportUrl": "https://your-cairo-domain/a/md8682rx/records/v2hrpv6d",
+      "submittedAt": "2026-06-18T12:00:00.000Z",
+      "updatedAt": "2026-06-18T12:00:05.000Z",
+      "examinee": {
+        "id": "...", "examineeId": "TZ4730277148",
+        "email": "lead@example.com", "name": "Jane", "customData": null
+      },
+      "metadata": {
+        "utmSource": "newsletter", "utmMedium": "email",
+        "utmCampaign": null, "utmTerm": null, "utmContent": null,
+        "referrer": "https://..."
+      },
+      "data": { "q_email": "lead@example.com", "q_rating": 5 },
+      "result": {
+        "status": "completed", "score": 2, "maxScore": 4,
+        "level": "Good", "outcomeCode": null, "outcomeName": null
+      }
+    }
+  ]
+}
+```
+
+`data` usa como chave o `code` de cada campo do formulário (veja o `fields[]` de um formulário pelo endpoint de formulários). `examinee` é `null` em respostas anônimas. `result` é um resumo compacto; o relatório completo está no endpoint de detalhes.
+
+### Obter uma resposta
+
+```bash
+GET /api/v1/records/{id}
+```
+
+Retorna uma resposta com o resultado completo do relatório (`reportResult`), além de `metadata.ip` / `metadata.userAgent`.
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/records/..."
+```
+
+```json
+{
+  "id": "...",
+  "serialNumber": 11,
+  "formId": "d983d8d9-...",
+  "shareToken": "v2hrpv6d",
+  "reportUrl": "https://your-cairo-domain/a/md8682rx/records/v2hrpv6d",
+  "submittedAt": "...",
+  "updatedAt": "...",
+  "examinee": { "id": "...", "email": "lead@example.com", "name": "Jane" },
+  "metadata": { "ip": "203.0.113.4", "userAgent": "...", "utmSource": "newsletter" },
+  "data": { /* answers keyed by field code */ },
+  "reportResult": {
+    "status": "completed",
+    "overallAnalysis": { "score": 2, "maxScore": 4, "level": "Good", "summary": "...", "suggestions": "..." },
+    "dimensionAnalysis": { "title": "...", "radar": [], "items": [] },
+    "outcome": { "code": null, "name": null, "ranking": null },
+    "aiSuggestion": { "status": "completed", "content": "..." }
+  }
+}
+```
+
+## Erros
+
+Os erros retornam um corpo JSON no formato `{ "error": { "code": "...", "message": "..." } }`.
+
+| Status | Código | Quando |
+| --- | --- | --- |
+| `401` | `unauthorized` | Chave ausente, inválida, expirada ou revogada (ou um token que não é da conta). |
+| `404` | `not_found` | O formulário não existe ou não pertence à equipe desta chave. |
+| `400` | `bad_request` | Parâmetro inválido (por exemplo, um `scene` desconhecido). |
+| `429` | `rate_limited` | Limite de taxa excedido. |
+
+## Limites de taxa
+
+Cada chave está limitada a **120 requisições / minuto**; ao exceder esse limite, retorna `429`. Revogue uma chave em **Configurações → Chaves de API** sempre que ela não for mais necessária — qualquer integração que a utilize perde o acesso imediatamente.

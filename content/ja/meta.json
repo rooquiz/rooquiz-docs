@@ -1,0 +1,21 @@
+{
+  "pages": [
+    "index",
+    "getting-started",
+    "---コア機能---",
+    "editor",
+    "library",
+    "publish",
+    "results",
+    "---応用機能---",
+    "leads",
+    "respondents",
+    "bookings",
+    "connectors",
+    "---アカウントとチーム---",
+    "account",
+    "teams",
+    "---開発者向け---",
+    "integrations"
+  ]
+}

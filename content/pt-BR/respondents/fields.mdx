@@ -1,0 +1,49 @@
+---
+title: Campos estendidos e avatares
+description: 'Campos estendidos coletam dados além de nome e e-mail — matrícula, empresa, cidade, telefone — solicitados no primeiro login. Até cinco campos, e como funcionam os avatares dos respondentes.'
+---
+
+Os **campos estendidos** são os dados extras que você quer dos respondentes além do nome e do e-mail padrão — número de matrícula, empresa, cidade, telefone. Depois de configurados, os respondentes precisam preenchê-los **no primeiro login**.
+
+As duas configurações ficam em **Respondentes → Configurações de respondentes**.
+
+## Campos estendidos
+
+<Callout type="warning">
+  Até **5 campos**. O limite é proposital: quanto mais você pede no primeiro login, mais pessoas você perde.
+</Callout>
+
+### Três tipos de campo
+
+| Tipo | Use para |
+| --- | --- |
+| **Texto de linha única** | Entrada livre, como número de matrícula ou nome da empresa; aceita validação por regex |
+| **Lista suspensa** | Listas fixas, como cidade ou origem da indicação; pode permitir múltiplas seleções |
+| **Telefone** | Um número com código do país, validado automaticamente |
+
+### Opções por campo
+
+- **Obrigatório** — a pessoa não consegue continuar sem preenchê-lo.
+- **Único** — o valor não pode se repetir **em nenhum lugar da organização**. Bom para identificadores naturalmente únicos, como o número de matrícula.
+- **Placeholder** — a dica em cinza dentro do campo.
+- **Regex** (somente texto) — uma regex JavaScript **sem as barras ao redor**, por exemplo `^1\d{10}$`.
+- **Permitir múltiplos** (somente lista suspensa) — permite escolher mais de um valor.
+- **Países/regiões permitidos** (somente telefone) — restringe os códigos de país oferecidos; o primeiro vem pré-selecionado, e **deixar vazio permite todos**.
+
+### Ordem e exclusão
+
+Os campos são exibidos em acordeão; use **Mover para cima / Mover para baixo** para reordená-los. Essa é a ordem em que os respondentes os preenchem.
+
+<Callout type="warning">
+  Ao excluir a definição de um campo, os valores que os respondentes já enviaram **permanecem no banco de dados** — eles apenas deixam de ser exibidos. A caixa de confirmação informa quantas definições serão removidas.
+</Callout>
+
+## Tema de avatar
+
+Quando um respondente é criado ou se cadastra por conta própria, um avatar é gerado aleatoriamente a partir do **tema de avatar** que você escolher, para que você não acabe com uma página cheia de marcadores cinza.
+
+Os temas incluem Adventurer, Emoji, Lorelei, Thumbs, Robot e Notionist; expanda a configuração para pré-visualizar todos.
+
+<Callout type="info">
+  Mudar o tema afeta apenas os respondentes criados **depois disso** — os avatares existentes não são gerados novamente.
+</Callout>

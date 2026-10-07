@@ -1,0 +1,60 @@
+---
+title: Los cinco canales
+description: 'Los cinco canales de conectores (correo electrónico con tu propio SMTP, Webhook, Slack, Zapier y Kit): qué entrega cada uno, los destinatarios y el formato de mensaje que puedes definir, y un conector por canal.'
+---
+
+Cada canal admite **un conector por equipo**. Para sustituir uno existente, elimínalo primero.
+
+## Correo electrónico
+
+Disponible en todos los planes. Envía a través del servidor SMTP propio de tu equipo, que configuras una sola vez en [Servicio de envío de correo](/es/connectors/email-smtp).
+
+- **Destinatarios**: escribe una dirección y pulsa Intro, **hasta 10**. También puedes añadir el destinatario dinámico "Correo del examinado" para notificar a la propia persona.
+- **Asunto**: hasta 200 caracteres; sin saltos de línea ni HTML.
+- **Cuerpo**: hasta 10.000 caracteres; sin HTML.
+
+Tanto el asunto como el cuerpo permiten **insertar variables**, en dos grupos:
+
+- **Variables del sistema**: nombre del lead, correo del participante, nombre del quiz, número de registro, fecha de envío, enlace al informe y enlace a la página del lead.
+- **Preguntas del quiz**: hacen referencia a la respuesta de una pregunta concreta.
+
+## Webhook
+
+Envía cada evento mediante POST a tu propia URL, que debe ser **HTTPS**.
+
+<Callout type="warning">
+  El **secreto de firma se muestra una sola vez** al crearlo: si cierras el cuadro de diálogo, desaparece. Cópialo de inmediato.
+</Callout>
+
+Cada entrega incluye una cabecera `X-Rooquiz-Signature`: un **HMAC-SHA256** del cuerpo de la solicitud calculado con ese secreto. Tu servidor debe verificarlo para confirmar que la solicitud procede realmente de RooQuiz.
+
+## Slack
+
+Haz clic en **Conectar Slack** para completar el flujo OAuth y luego elige un canal.
+
+<Callout type="warning">
+  El bot **no** se añade a los canales automáticamente. Ejecuta primero `/invite @rooquiz` en el canal de destino (**obligatorio en canales privados**); de lo contrario, la entrega falla con `not_in_channel`.
+</Callout>
+
+Puedes indicar una **plantilla de mensaje** con el formato mrkdwn de Slack (`*bold*`, `_italic_`, `` `code` ``, `<url|text>`) y variables del sistema. Déjala vacía para usar el formato Block Kit predeterminado.
+
+## Zapier
+
+Usa Zapier para llegar a miles de aplicaciones:
+
+1. En Zapier, crea un Zap y elige **Webhooks by Zapier** como disparador.
+2. Elige el evento **Catch Hook** y copia la URL de webhook que genera.
+3. Pega esa URL en RooQuiz, guarda y verifica con **Enviar prueba**.
+
+## Kit
+
+Kit (antes ConvertKit) es una herramienta de email marketing. Después de **Conectar Kit** y completar el flujo OAuth:
+
+- **Etiquetas para cada nuevo lead**: se aplican a cada suscriptor, por ejemplo `quiz-lead`. Si escribes un nombre que aún no existe, se **crea en Kit** al guardar.
+- Usa **Actualizar etiquetas** para volver a obtener la lista de etiquetas de Kit cuando lo necesites.
+
+Activa secuencias de correo a partir de esas etiquetas en Kit y los nuevos leads entrarán directamente en tu flujo de nutrición.
+
+<Callout type="info">
+  Webhook, Slack, Zapier y Kit son **exclusivos del plan Pro**.
+</Callout>

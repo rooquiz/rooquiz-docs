@@ -109,16 +109,30 @@ Put screenshots in `public/img/<locale>/<section>/<name>.webp` and reference the
 ![RooQuiz dashboard](/img/en/getting-started/dashboard.webp)
 ```
 
-Localized screenshots (UI in the matching language) go in the matching locale folder. Fumadocs resolves these against `public/` at build time and emits them as sized, lazy-loaded, content-hashed assets under `_next/static/media`, which is why the originals stay in `public/`.
+Localized screenshots (UI in the matching language) go in the matching locale folder; only `en` and `zh` have their own today, so the other locales reference `/img/en/` (`zh-TW` uses `/img/zh/`). Fumadocs resolves these against `public/` at build time and emits them as sized, lazy-loaded, content-hashed assets under `_next/static/media`, which is why the originals stay in `public/`.
 
 ## Locales
 
-Locales are `en` (default) and `zh`, declared once in `lib/i18n.ts` and rendered through the `app/[lang]` segment with `generateStaticParams` — not middleware, which static export does not support. That is also why there is no `proxy.ts`/`middleware.ts`, even though Fumadocs' i18n docs call for one.
+Locales match the languages rooquiz-web ships, declared once in `lib/i18n.ts`:
+
+| URL segment | `<html lang>` / hreflang | rooquiz-web locale |
+| --- | --- | --- |
+| `en` (default) | `en` | `en-US` |
+| `zh` | `zh-CN` | `zh-CN` |
+| `zh-TW` | `zh-TW` | `zh-TW` |
+| `de` | `de` | `de-DE` |
+| `es` | `es` | `es` |
+| `pt-BR` | `pt-BR` | `pt-BR` |
+| `fr` | `fr` | `fr` |
+| `ja` | `ja` | `ja-JP` |
+| `ko` | `ko` | `ko-KR` |
+
+`en` and `zh` keep their original short URLs because they were indexed before the other locales existed; the hreflang tag for `zh` is `zh-CN` so it does not also claim Traditional Chinese readers. Every locale is rendered through the `app/[lang]` segment with `generateStaticParams` — not middleware, which static export does not support. That is also why there is no `proxy.ts`/`middleware.ts`, even though Fumadocs' i18n docs call for one.
 
 Two details follow from that:
 
 - `loader({ i18n })` in `lib/source.ts` bakes the locale prefix into every sidebar, breadcrumb and pagination URL, so nothing needs rewriting at request time.
-- The bare root `/` is handled by `functions/index.js`, a Cloudflare Pages Function that picks a locale from the visitor's `Accept-Language` header and redirects. It runs in `pnpm preview` and in production, but not in `pnpm dev`. It keeps its own copy of the locale list because it runs at the edge, outside the bundle.
+- The bare root `/` is handled by `functions/index.js`, a Cloudflare Pages Function that picks a locale from the visitor's `Accept-Language` header and redirects. It runs in `pnpm preview` and in production, but not in `pnpm dev`. It keeps its own copy of the locale list because it runs at the edge, outside the bundle. It maps regional tags onto the docs locales: `zh-TW`/`zh-HK`/`zh-Hant` go to `zh-TW`, any other `zh` to `zh`, any `pt` to `pt-BR`.
 
 `fallbackLanguage` is `null` on purpose: a page present in only one locale must 404 in the other rather than silently serve the wrong language, because `sitemap.xml` promises hreflang alternates only for the locales a page actually has.
 
@@ -144,8 +158,18 @@ plus `x-default` pointing at the default locale. Entries have no `lastmod`: the 
 resets file mtimes and the shallow clone has no per-file git history, so any date here would
 be fiction.
 
-Adding a locale means updating `LOCALES` in `lib/i18n.ts` (with a `displayName` and, ideally,
-translated UI strings) and the locale list in `functions/index.js`.
+Adding a locale means:
+
+- adding it to `LOCALES`, `LANG_TAGS`, `DISPLAY_NAMES` and the UI strings in `lib/i18n.ts`, to `chrome`
+  in `lib/layout.shared.tsx` and to `meta` in `app/[lang]/layout.tsx` (all typed as `Record<Locale, …>`,
+  so `pnpm typecheck` flags a missing one);
+- adding it to the locale list in `functions/index.js`;
+- creating `content/<locale>/` with every file `content/en/` has, internal links rewritten to `/<locale>/`.
+
+`scripts/check-locales.mjs` runs as `prebuild` (and as `pnpm check:locales`) and fails the build when a
+locale tree is missing a file `content/en` has, has one it doesn't, links into another locale, or when
+`functions/index.js` lists different locales than `lib/i18n.ts`. Changing an English page therefore
+means updating the same file in every locale.
 
 ## Meta descriptions
 

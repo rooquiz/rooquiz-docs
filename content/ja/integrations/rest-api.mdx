@@ -1,0 +1,241 @@
+---
+title: REST API
+description: 'チームのフォーム定義(タイトル、設問、設定、レポートの構成)や回答データを JSON で返す、シンプルな読み取り専用の REST API です。スクリプト、Zapier・Make・n8n による自動化、独自のダッシュボードで利用できます。API キーの取得方法、認証、各エンドポイントのパラメーターとレスポンスの例、エラーコード、レート制限について説明します。'
+---
+
+RooQuiz は、シンプルな読み取り専用の **REST API** を提供しています。これを使うと、チームのフォームデータをスクリプト、自動化ツール(Zapier、Make、n8n)、独自のダッシュボードに取り込めます。フォームの **定義**(タイトル、設問、設定、レポートの構成)をプレーンな JSON で返します。
+
+<Callout type="info">
+  REST API は **アカウント単位** で、個々のメンバーではなくチームとして認証します。代わりに **AI クライアント** から自然言語でクイズを操作したい場合は、[MCP 連携](/ja/integrations/mcp)をご覧ください。
+</Callout>
+
+## 仕組み
+
+- チームに属する **アカウント API キー**(プレフィックス `rqp_acct_`)で認証します。
+- このキーでは **そのチームのすべてのフォームを読み取れます**。特定の人に紐づいていないため、メンバーの入れ替わりがあっても動作し続けます。
+- アカウント API キーの作成、表示、失効を行えるのは **チームのオーナー** だけです。
+- API は **読み取り専用** で、返すのはフォームの定義だけです。回答データは公開されません。
+
+## API キーを取得する
+
+**設定 → API キー**(**チームのオーナー** にのみ表示されます)に移動し、「API キーを作成」をクリックします。
+
+1. **名前** を付けます(識別用。例:`Zapier - Production`)。
+2. 作成後、`rqp_acct_` で始まる平文のキーが表示されます。
+
+<Callout type="warning">
+  **平文のキーは一度だけ表示されます。** ページを離れると取得し直すことはできません。すぐにコピーしてください。紛失した場合は、失効させて新しいキーを作成する必要があります。
+</Callout>
+
+各チームが保持できるキーは **最大 10 個** です(失効済みのものを含む)。さらに作成するには、いずれかを **削除** して枠を空けてください(「失効」は無効化するだけで、枠は空きません)。キーはパスワードと同じように扱い、ソース管理には絶対にコミットしないでください。
+
+## 認証
+
+すべてのリクエストで、キーを Bearer トークンとして送信します。
+
+```bash
+Authorization: Bearer rqp_acct_xxx...
+```
+
+<Callout type="info">
+  個人用の MCP トークン(`rqp_live_`)は REST API では **使えません**。使うと `401` が返されます。アカウント API キー(`rqp_acct_`)を使用してください。
+</Callout>
+
+## エンドポイント
+
+ベース URL は `https://your-domain/api/v1` のような形式です。
+
+### フォームの一覧を取得する
+
+```bash
+GET /api/v1/forms
+```
+
+キーが属するチームのすべてのフォームを、新しい順に一覧表示します。
+
+| クエリパラメーター | 型 | デフォルト | 説明 |
+| --- | --- | --- | --- |
+| `scene` | string | — | シーンで絞り込みます:`knowledge_quiz`、`random_knowledge_quiz`、`scored_quiz`、`outcome_quiz`。 |
+| `titleContains` | string | — | タイトルのあいまい一致。 |
+| `limit` | number | `20` | 1 ページあたりの件数(最大 `100`)。 |
+| `page` | number | `1` | ページ番号。 |
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/forms?scene=knowledge_quiz&limit=20"
+```
+
+```json
+{
+  "totalDocs": 12,
+  "page": 1,
+  "limit": 20,
+  "items": [
+    {
+      "id": "d983d8d9-...",
+      "title": "Personality Quiz",
+      "scene": "outcome_quiz",
+      "language": "en_US",
+      "publicToken": "h7sbps67",
+      "shareUrl": "https://your-cairo-domain/a/h7sbps67",
+      "localization": null,
+      "isActive": true,
+      "createdAt": "2026-06-18T11:35:11.468Z",
+      "updatedAt": "2026-06-18T12:59:42.649Z"
+    }
+  ]
+}
+```
+
+### フォームを取得する
+
+```bash
+GET /api/v1/forms/{id}
+```
+
+1 つのフォームの定義を返します。
+
+| クエリパラメーター | 型 | デフォルト | 説明 |
+| --- | --- | --- | --- |
+| `includeFields` | boolean | `true` | `fields[]` 配列(設問 / 改ページ)を含めます。大きなフォームで省略するには `false` を指定します。 |
+| `includeReport` | boolean | `true` | レポート / 次元分析の構成を含めます。 |
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/forms/d983d8d9-..."
+```
+
+```json
+{
+  "id": "d983d8d9-...",
+  "title": "Personality Quiz",
+  "scene": "outcome_quiz",
+  "language": "en_US",
+  "description": null,
+  "isActive": true,
+  "publicToken": "h7sbps67",
+  "shareUrl": "https://your-cairo-domain/a/h7sbps67",
+  "layout": "card",
+  "localization": null,
+  "systemText": null,
+  "createdAt": "2026-06-18T11:35:11.468Z",
+  "updatedAt": "2026-06-18T12:59:42.649Z",
+  "fields": [ /* questions & page breaks */ ],
+  "report": { /* report / dimension config */ }
+}
+```
+
+## 回答データ
+
+チームのフォームが集めた回答を読み取ります。リード、回答内容、スコア、レポートの結果、UTM による流入元の情報が含まれます。CRM との同期、独自のダッシュボード、自動化に最適です。
+
+<Callout type="warning">
+  回答データには回答者の個人情報(メールアドレス、名前、IP)が含まれます。責任を持って取り扱い、保管してください。
+</Callout>
+
+### 回答の一覧を取得する
+
+```bash
+GET /api/v1/records
+```
+
+チーム全体の回答を、新しい順に一覧表示します。
+
+| クエリパラメーター | 型 | デフォルト | 説明 |
+| --- | --- | --- | --- |
+| `formId` | string | — | このフォームの回答だけを返します。 |
+| `status` | string | — | レポートのステータス:`pending`、`processing`、`completed`、`failed`。 |
+| `since` | ISO date | — | この日時以降に作成された回答だけを返します(差分同期)。 |
+| `until` | ISO date | — | この日時以前に作成された回答だけを返します。 |
+| `limit` | number | `20` | 1 ページあたりの件数(最大 `100`)。 |
+| `page` | number | `1` | ページ番号。 |
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/records?since=2026-06-01&limit=50"
+```
+
+```json
+{
+  "totalDocs": 1500,
+  "page": 1,
+  "limit": 50,
+  "items": [
+    {
+      "id": "...",
+      "serialNumber": 11,
+      "formId": "d983d8d9-...",
+      "shareToken": "v2hrpv6d",
+      "reportUrl": "https://your-cairo-domain/a/md8682rx/records/v2hrpv6d",
+      "submittedAt": "2026-06-18T12:00:00.000Z",
+      "updatedAt": "2026-06-18T12:00:05.000Z",
+      "examinee": {
+        "id": "...", "examineeId": "TZ4730277148",
+        "email": "lead@example.com", "name": "Jane", "customData": null
+      },
+      "metadata": {
+        "utmSource": "newsletter", "utmMedium": "email",
+        "utmCampaign": null, "utmTerm": null, "utmContent": null,
+        "referrer": "https://..."
+      },
+      "data": { "q_email": "lead@example.com", "q_rating": 5 },
+      "result": {
+        "status": "completed", "score": 2, "maxScore": 4,
+        "level": "Good", "outcomeCode": null, "outcomeName": null
+      }
+    }
+  ]
+}
+```
+
+`data` は、各フォームの設問の `code` をキーとしています(フォームの `fields[]` はフォームのエンドポイントで確認できます)。匿名の回答では `examinee` は `null` になります。`result` は簡潔な要約で、完全なレポートは詳細のエンドポイントで取得できます。
+
+### 回答を取得する
+
+```bash
+GET /api/v1/records/{id}
+```
+
+1 件の回答を、完全なレポートの結果(`reportResult`)と `metadata.ip` / `metadata.userAgent` を含めて返します。
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/records/..."
+```
+
+```json
+{
+  "id": "...",
+  "serialNumber": 11,
+  "formId": "d983d8d9-...",
+  "shareToken": "v2hrpv6d",
+  "reportUrl": "https://your-cairo-domain/a/md8682rx/records/v2hrpv6d",
+  "submittedAt": "...",
+  "updatedAt": "...",
+  "examinee": { "id": "...", "email": "lead@example.com", "name": "Jane" },
+  "metadata": { "ip": "203.0.113.4", "userAgent": "...", "utmSource": "newsletter" },
+  "data": { /* answers keyed by field code */ },
+  "reportResult": {
+    "status": "completed",
+    "overallAnalysis": { "score": 2, "maxScore": 4, "level": "Good", "summary": "...", "suggestions": "..." },
+    "dimensionAnalysis": { "title": "...", "radar": [], "items": [] },
+    "outcome": { "code": null, "name": null, "ranking": null },
+    "aiSuggestion": { "status": "completed", "content": "..." }
+  }
+}
+```
+
+## エラー
+
+エラーは `{ "error": { "code": "...", "message": "..." } }` という形式の JSON ボディで返されます。
+
+| ステータス | コード | 発生する状況 |
+| --- | --- | --- |
+| `401` | `unauthorized` | キーがない、無効、期限切れ、または失効済み(あるいはアカウント用ではないトークン)。 |
+| `404` | `not_found` | フォームが存在しないか、このキーのチームに属していません。 |
+| `400` | `bad_request` | パラメーターが無効です(例:不明な `scene`)。 |
+| `429` | `rate_limited` | レート制限を超えました。 |
+
+## レート制限
+
+各キーは **1 分あたり 120 リクエスト** に制限されており、超えると `429` が返されます。不要になったキーは **設定 → API キー** で失効させてください。そのキーを使っている連携は、即座にアクセスできなくなります。

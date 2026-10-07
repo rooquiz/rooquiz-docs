@@ -1,0 +1,49 @@
+---
+title: Zusatzfelder & Avatare
+description: 'Zusatzfelder erfassen Angaben über Name und E-Mail hinaus – Matrikelnummer, Firma, Stadt, Telefon – und werden bei der ersten Anmeldung abgefragt. Bis zu fünf Felder, dazu wie Teilnehmer-Avatare funktionieren.'
+---
+
+**Zusatzfelder** sind die zusätzlichen Angaben, die Sie über den Standardnamen und die E-Mail hinaus von Teilnehmern erhalten möchten – Matrikelnummer, Firma, Stadt, Telefonnummer. Sobald sie konfiguriert sind, werden Teilnehmer **bei der ersten Anmeldung** gebeten, sie auszufüllen.
+
+Beide Einstellungen finden Sie unter **Teilnehmer → Teilnehmer-Einstellungen**.
+
+## Zusatzfelder
+
+<Callout type="warning">
+  Bis zu **5 Felder**. Die Begrenzung ist gewollt: Je mehr Sie bei der ersten Anmeldung abfragen, desto mehr Personen verlieren Sie.
+</Callout>
+
+### Drei Feldtypen
+
+| Typ | Verwendung |
+| --- | --- |
+| **Einzeiliger Text** | Freie Eingabe wie eine Matrikelnummer oder ein Firmenname; unterstützt eine Prüfung per regulärem Ausdruck |
+| **Dropdown** | Feste Listen wie Stadt oder Empfehlungsquelle; kann Mehrfachauswahl erlauben |
+| **Telefonnummer** | Eine Nummer mit Ländervorwahl, wird automatisch geprüft |
+
+### Optionen pro Feld
+
+- **Pflichtfeld** – ohne Angabe geht es nicht weiter.
+- **Eindeutig** – der Wert darf sich **in der gesamten Organisation** nicht wiederholen. Gut für von Natur aus eindeutige Kennungen wie eine Matrikelnummer.
+- **Platzhalter** – der graue Hinweis im Eingabefeld.
+- **Regulärer Ausdruck** (nur Text) – ein JavaScript-Regex **ohne die umschließenden Schrägstriche**, z. B. `^1\d{10}$`.
+- **Mehrfachauswahl erlauben** (nur Dropdown) – erlaubt die Auswahl mehrerer Werte.
+- **Zugelassene Länder/Regionen** (nur Telefon) – schränkt die angebotenen Ländervorwahlen ein; die erste ist vorausgewählt, und **leer gelassen sind alle erlaubt**.
+
+### Reihenfolge und Löschen
+
+Felder werden als Akkordeon angezeigt; mit **Nach oben / Nach unten** ändern Sie die Reihenfolge. In dieser Reihenfolge füllen Teilnehmer sie aus.
+
+<Callout type="warning">
+  Wenn Sie eine Felddefinition löschen, **bleiben bereits übermittelte Werte in der Datenbank** – sie werden lediglich nicht mehr angezeigt. Der Bestätigungsdialog zeigt Ihnen, wie viele Definitionen entfernt werden.
+</Callout>
+
+## Avatar-Stil
+
+Wenn ein Teilnehmer angelegt wird oder sich selbst registriert, wird zufällig ein Avatar aus dem gewählten **Avatar-Stil** erzeugt, damit Sie keine Seite voller grauer Platzhalter haben.
+
+Zu den Stilen gehören Abenteurer, Emoji, Lorelei, Daumen, Roboter und Notionist; klappen Sie die Einstellung auf, um alle in der Vorschau zu sehen.
+
+<Callout type="info">
+  Eine Änderung des Stils wirkt sich nur auf Teilnehmer aus, die **danach** angelegt werden – vorhandene Avatare werden nicht neu erzeugt.
+</Callout>

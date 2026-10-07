@@ -1,0 +1,49 @@
+---
+title: Insights
+description: 'Insights bündeln verstreute Antworten zu Statistiken und Diagrammen – Abschlussrate, Einsendungen im Zeitverlauf, Verteilung pro Frage, Conversion-Funnel –, damit Sie das Gesamtbild ohne Einzelansicht erfassen.'
+---
+
+Insights bündeln verstreute Antworten zu **Statistiken und Diagrammen** und helfen Ihnen, das Gesamtbild zu erfassen, ohne die Einsendungen einzeln durchzuscrollen.
+
+## Gängige Kennzahlen und Diagramme
+
+- **Abschlussrate**: Das Verhältnis von begonnenen zu abgeschlossenen Einsendungen, das die Absprünge widerspiegelt.
+- **Einsendungsvolumen**: Gesamtzahl der Antworten und ihr Verlauf über die Zeit.
+- **Verteilung pro Frage**: Bei Auswahlfragen der Anteil und die Verteilung jeder Option.
+- **Verteilung nach Quelle**: In Kombination mit dem [UTM-Quellen-Tracking](/de/publish/tracking) vergleichen Sie das Antwortvolumen über verschiedene Kanäle.
+
+## Conversion-Funnel
+
+Der Funnel verfolgt **einen Besuch (Sitzung)** durch fünf Stufen: **Angesehen → Begonnen → Eingereicht → Bericht angesehen → CTA geklickt**. So wird jede Stufe gezählt:
+
+| Stufe | Gezählt, wenn |
+| --- | --- |
+| Angesehen | Die Quiz-Seite tatsächlich in einem Browser geöffnet wird (Crawler und Admin-Vorschauen ausgenommen) |
+| Begonnen | Der Teilnehmer zum ersten Mal eine Frage beantwortet (nicht nur auf „Start“ klickt) |
+| Eingereicht | Die Einsendung erfolgreich ist |
+| Bericht angesehen | Der Bericht fertig erstellt ist, während sich der Teilnehmer auf der Ergebnisseite befindet |
+| CTA geklickt | Der Teilnehmer auf den [CTA-Button](/de/results/reports) am Ende des Berichts klickt |
+
+Der Prozentsatz neben jeder Stufe ist die Conversion-Rate **im Verhältnis zur vorherigen Stufe**, sodass Sie genau sehen, wo der Absprung passiert.
+
+### Top 10 Absprungstellen
+
+Unter den Sitzungen, die **nicht abgesendet** haben, aber mindestens eine Frage beantwortet haben, gruppiert nach der **zuletzt beantworteten Frage** – Fragen mit hohen Werten sind die Stellen, an denen Personen aufgeben: zu schwer, zu heikel, oder die nächste Frage hat sie abgeschreckt. Besucher, die gegangen sind, ohne etwas zu beantworten, werden hier nicht aufgeführt; sie zeigen sich im Rückgang von Angesehen → Begonnen.
+
+### Conversion nach Quelle
+
+Gruppiert nach dem Quellen-Tag im Link (`?from=`, erzeugt durch das [Quellen-Tracking](/de/publish/tracking) oder die [Einbettung](/de/publish/embed)); verglichen werden Angesehen/Begonnen/Eingereicht sowie die Abschlussrate pro Quelle. Quellen aus Website-Einbettungen tragen ein **Eingebettet**-Tag.
+
+<Callout type="info">
+  Der Funnel zählt Sitzungen seit Einführung der Funktion; ältere Einsendungen werden nicht nachträglich erfasst, daher kann die Zahl der „Einsendungen insgesamt“ anfangs höher sein als die Eingereicht-Zahl im Funnel. Mit der Zeit gleichen sich beide an.
+</Callout>
+
+## Empfehlungen
+
+- Nutzen Sie den **Conversion-Funnel**, um die Absprungstelle zu finden: Viele Aufrufe, aber wenige Starts deuten auf die Landingpage oder die erste Frage hin; viele Starts, aber wenige Einsendungen – prüfen Sie die Fragen mit den meisten Absprüngen.
+- Nutzen Sie die **Verteilung der Optionen**, um die allgemeinen Tendenzen der Teilnehmer zu verstehen.
+- Kombinieren Sie Zeitverläufe mit der **Conversion nach Quelle**, um die Kampagnen der einzelnen Kanäle zu bewerten.
+
+<Callout type="info">
+  Insights zeigen „Gruppentrends“. Um eine bestimmte Antwort genauer zu untersuchen, gehen Sie zu den [Einsendungen](/de/results/records); für individuelle Auswertungsergebnisse gehen Sie zu den [Berichten](/de/results/reports).
+</Callout>

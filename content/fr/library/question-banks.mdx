@@ -1,0 +1,54 @@
+---
+title: Banques de questions
+description: "Une banque de questions est un ensemble de questions où puiser à volonté. Comment en créer une, ajouter ou importer des questions, régler la difficulté, et pourquoi chaque question doit avoir une bonne réponse."
+---
+
+Une banque de questions est un ensemble de **questions où vous pouvez puiser à volonté**. Vous la trouverez sous **Banques de questions** dans la barre latérale gauche.
+
+<Callout type="warning">
+  Chaque question d'une banque **doit avoir une bonne réponse** : les banques sont des ensembles de questions notées, pas un lieu de stockage pour des champs de collecte de données.
+</Callout>
+
+![Liste des banques de questions RooQuiz avec le nombre de questions et la difficulté](/img/en/library/question-banks.webp)
+
+## Créer une banque
+
+<Steps>
+### Cliquez sur « Créer une banque de questions »
+
+Le sous-titre indique « Quiz de connaissances ou quiz noté » : les banques servent ces deux scénarios notés.
+
+### Renseignez les informations de base
+
+**Nom de la banque** (50 caractères maximum), **Description** (200 caractères maximum) et **Niveau de difficulté**.
+
+### Ajoutez des questions
+
+Ouvrez la banque et cliquez sur **Ajouter une question**. Le fonctionnement est le même que dans l'éditeur : choisissez un type, rédigez l'énoncé et les options, puis définissez la bonne réponse.
+</Steps>
+
+## Gérer les questions
+
+- **Glisser pour réordonner** — réorganisez directement les questions.
+- **Suppression groupée** — cochez plusieurs questions et supprimez-les en une fois. Cette action est **irréversible**.
+- **Modifier les infos** — changez le nom, la description et la difficulté de la banque.
+
+<Callout type="warning">
+  Une banque **doit être vidée avant de pouvoir être supprimée** : le message « Veuillez supprimer toutes les questions avant de supprimer cette banque de questions » s'affiche. Ce garde-fou existe pour éviter d'effacer toute une banque par accident.
+</Callout>
+
+## Utiliser une banque dans un quiz
+
+Lorsque vous créez un quiz depuis le tableau de bord, choisissez l'entrée **banque de questions aléatoires**, sélectionnez une banque et indiquez combien de questions tirer. Chaque répondant reçoit alors une combinaison différente.
+
+<Callout type="warning">
+  Vous obtenez un **Quiz de connaissances aléatoire**, un type différent du Quiz. **Le type ne peut pas être modifié après la création** : passer de questions fixes à des questions aléatoires implique donc de tout reconstruire. Consultez [Les quatre types de quiz](/fr/getting-started/quiz-types).
+</Callout>
+
+## Création en masse via un client IA
+
+Les banques nécessitent beaucoup de questions, et les saisir une à une prend du temps. Si vous avez connecté [MCP](/fr/integrations/mcp), un client IA peut rédiger des questions en masse dans une banque.
+
+<Callout type="warning">
+  Ajoutez environ **30 questions par lot**. Les lots plus volumineux ont tendance à expirer, et relancer après une expiration peut laisser des doublons.
+</Callout>

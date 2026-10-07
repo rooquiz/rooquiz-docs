@@ -1,0 +1,45 @@
+---
+title: Domínio personalizado
+description: 'Publique os links públicos dos quizzes no seu próprio domínio em vez do domínio da plataforma: como configurar o DNS, como funciona a verificação e o que muda para os respondentes. Recurso do plano Pro.'
+---
+
+Por padrão, os links públicos dos quizzes ficam no domínio da plataforma. Com um **domínio personalizado**, os respondentes veem o seu próprio domínio — o que reforça a consistência da marca e a confiança.
+
+Você encontra essa opção em **Configurações → Domínio personalizado**.
+
+<Callout type="warning">
+  O domínio personalizado é um **recurso do plano Pro**.
+</Callout>
+
+## Configuração
+
+<Steps>
+### Informe o seu domínio
+
+Preencha o domínio que deseja usar, por exemplo `quiz.yourbrand.com`. Recomendamos usar um subdomínio em vez do domínio raiz.
+
+### Adicione o registro DNS
+
+O **Guia de configuração de DNS** na página fornece um registro com três colunas — **Tipo / Nome / Valor**. Adicione-o exatamente como mostrado no seu provedor de DNS.
+
+### Aguarde a verificação
+
+Volte à página e clique em **Atualizar status**. O status passa entre **Verificando** e **Verificado**, ou mostra **Falha na verificação**.
+</Steps>
+
+<Callout type="info">
+  Os registros DNS levam **de alguns minutos até 48 horas** para se propagar, dependendo do provedor. É normal que a verificação não aconteça logo após a configuração — atualize novamente mais tarde.
+</Callout>
+
+## Valores de status
+
+| Status | Significado |
+| --- | --- |
+| **Verificando** | O registro foi enviado; aguardando a propagação do DNS e a verificação |
+| **Verificado** | O domínio está ativo e os links públicos já o utilizam |
+| **Falha na verificação** | Nenhum registro correto foi encontrado — confira novamente Tipo / Nome / Valor com o guia |
+| **Suspenso** | O plano Pro expirou |
+
+<Callout type="warning">
+  Quando o Pro expira, o domínio fica **Suspenso**: há um **período de carência de 7 dias**, após o qual o domínio personalizado deixa de funcionar. Renovar o plano o restaura — não é preciso refazer a configuração de DNS.
+</Callout>

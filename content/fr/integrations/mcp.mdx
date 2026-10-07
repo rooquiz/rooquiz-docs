@@ -1,0 +1,276 @@
+---
+title: Intégration MCP
+description: "RooQuiz fournit un serveur MCP pour que Claude, Cursor, Codex et d'autres clients IA gèrent vos quiz en langage naturel : création, ajout de questions, rapports et gestion des traductions."
+---
+
+RooQuiz fournit un **serveur MCP (Model Context Protocol)** qui permet à des clients IA (Claude Desktop, Claude Code, Cursor, Codex et d'autres) d'agir sur les quiz de votre équipe. En langage naturel, vous pouvez créer des quiz, des quiz notés et des quiz de résultat, ajouter des questions, réorganiser les éléments et configurer les dimensions du rapport ou les types de résultat ; vous pouvez aussi dupliquer ou supprimer des quiz, gérer les traductions et les répondants, et consulter les réponses, les statistiques et les entonnoirs de conversion, au lieu de tout construire à la main dans l'éditeur.
+
+<Callout type="info">
+  MCP est une fonctionnalité destinée aux **utilisateurs avancés** : vous aurez besoin d'un client IA compatible MCP. Pour créer des quiz simplement et visuellement, nous recommandons toujours l'[éditeur](/fr/editor).
+</Callout>
+
+## Fonctionnement
+
+- Un client IA se connecte au point de terminaison MCP de RooQuiz (`/api/mcp`) avec l'une des deux méthodes d'authentification : l'**autorisation OAuth** (recommandée : les clients compatibles se connectent simplement via le navigateur) ou un **jeton API personnel**.
+- Dans les deux cas, l'IA agit **en votre nom** au sein de l'équipe actuellement active.
+- Chaque action passe par les mêmes **contrôles d'accès** que l'interface d'administration ; les opérations d'écriture sont en outre enregistrées dans le **journal d'audit**.
+- Ce que l'IA peut faire est donc entièrement limité par votre rôle et vos autorisations dans cette équipe : elle ne peut pas les dépasser.
+
+## Option 1 : autorisation OAuth (recommandée)
+
+Les clients compatibles avec OAuth pour MCP, comme claude.ai et Claude Code, **ne nécessitent aucun jeton créé manuellement**. Il suffit de fournir l'URL du point de terminaison : le client découvre automatiquement le serveur d'autorisation et ouvre votre navigateur, où vous vous connectez à RooQuiz, choisissez l'équipe à autoriser et cliquez sur « Autoriser ».
+
+<Tabs items={['claude.ai (Web)', 'Claude Code']}>
+  <Tab value="claude.ai (Web)">
+    Ouvrez **Settings → Connectors → Add custom connector** dans claude.ai :
+
+    1. Donnez-lui le nom de votre choix (par exemple `RooQuiz`).
+    2. Utilisez votre point de terminaison (de la forme `https://your-domain/api/mcp`) comme URL du serveur MCP distant.
+    3. Enregistrez et cliquez sur « Connect » : votre navigateur est redirigé vers la page d'autorisation de RooQuiz ; connectez-vous, choisissez une équipe et cliquez sur « Autoriser ».
+  </Tab>
+  <Tab value="Claude Code">
+    Exécutez dans votre terminal, depuis n'importe quel dossier (**sans** en-tête de jeton) :
+
+    ```bash
+    claude mcp add --transport http rooquiz https://your-domain/api/mcp
+    ```
+
+    La première fois que vous vous connectez dans Claude Code (par exemple avec `/mcp`), votre navigateur s'ouvre automatiquement pour finaliser l'autorisation.
+  </Tab>
+</Tabs>
+
+À propos des connexions OAuth :
+
+- L'équipe choisie lors de l'autorisation devient l'équipe active initiale ; l'IA peut toujours en changer ensuite via `switch_active_tenant`.
+- La connexion apparaît dans la liste des jetons sous **Paramètres → Intégration MCP** (avec l'étiquette **OAuth**) ; **la révoquer déconnecte** ce client. Elle n'est **pas** comptabilisée dans la limite de 5 jetons.
+- Les identifiants se renouvellent automatiquement (le jeton d'accès est actualisé toutes les heures de manière glissante ; la connexion elle-même reste valable 30 jours et se prolonge à l'usage) : rien à entretenir manuellement.
+
+## Option 2 : jeton personnel (PAT)
+
+Pour les clients non compatibles avec OAuth (Cursor, Codex CLI, Claude Desktop) ou les environnements sans navigateur comme la CI, connectez-vous avec un jeton API personnel.
+
+### Créer un jeton
+
+Rendez-vous dans **Paramètres → Intégration MCP** et cliquez sur « Créer un jeton » :
+
+1. Donnez-lui un **nom** (pour le reconnaître, par exemple `Cursor - my Mac`).
+2. Choisissez une **équipe par défaut** : le jeton agit sur cette équipe par défaut, et l'IA peut ensuite passer à n'importe quelle autre équipe dont vous êtes membre via l'outil `switch_active_tenant`.
+3. Une fois le jeton créé, un jeton en clair commençant par `rqp_live_` s'affiche.
+
+<Callout type="warning">
+  **Le jeton en clair n'est affiché qu'une seule fois.** Il ne peut plus être récupéré une fois la page quittée. Copiez-le immédiatement ; en cas de perte, vous devrez le révoquer et en créer un nouveau.
+</Callout>
+
+Limites :
+
+- Chaque utilisateur peut détenir au maximum **5 jetons** (jetons révoqués compris ; les connexions OAuth ne comptent pas). Pour en créer davantage, **supprimez** un jeton afin de libérer un emplacement (la « révocation » ne fait que désactiver le jeton, elle ne libère pas l'emplacement).
+- Un jeton est un **identifiant personnel** : ne le commitez jamais dans votre gestionnaire de code source et ne le partagez jamais publiquement.
+
+### Configurer votre client IA
+
+Sur la page **Paramètres → Intégration MCP**, vous pouvez copier des extraits de configuration prêts à l'emploi pour chaque client, ainsi que votre **URL du point de terminaison** (de la forme `https://your-domain/api/mcp`). Remplacez `rqp_live_xxx...` dans l'extrait par le jeton que vous venez de générer.
+
+<Tabs items={['Claude Code (CI)', 'Cursor', 'Codex CLI', 'Claude Desktop']}>
+  <Tab value="Claude Code (CI)">
+    Pour Claude Code, privilégiez le flux OAuth décrit ci-dessus ; un en-tête de jeton n'est nécessaire que dans les environnements sans navigateur comme la CI :
+
+    ```bash
+    claude mcp add --transport http rooquiz https://your-domain/api/mcp \
+      --header "Authorization: Bearer rqp_live_xxx..."
+    ```
+  </Tab>
+  <Tab value="Cursor">
+    Prise en charge native de MCP via HTTP. Écrivez dans le fichier `.cursor/mcp.json` du projet ou dans le fichier global `~/.cursor/mcp.json` :
+
+    ```json
+    {
+      "mcpServers": {
+        "rooquiz": {
+          "url": "https://your-domain/api/mcp",
+          "headers": { "Authorization": "Bearer rqp_live_xxx..." }
+        }
+      }
+    }
+    ```
+  </Tab>
+  <Tab value="Codex CLI">
+    Prise en charge native de MCP via HTTP. Écrivez dans `~/.codex/config.toml` :
+
+    ```toml
+    [mcp_servers.rooquiz]
+    url = "https://your-domain/api/mcp"
+    bearer_token_env_var = "ROOQUIZ_MCP_TOKEN"
+    ```
+
+    Pour des raisons de sécurité, Codex n'accepte qu'un **nom de variable d'environnement**, et non un jeton en clair intégré. Exportez-la également dans votre shell :
+
+    ```bash
+    export ROOQUIZ_MCP_TOKEN="rqp_live_xxx..."
+    ```
+  </Tab>
+  <Tab value="Claude Desktop">
+    Claude Desktop ne prend en charge nativement que stdio : MCP via HTTP nécessite donc la passerelle `mcp-remote` (téléchargée automatiquement à la première utilisation ; nécessite Node ≥ 18 en local). Collez ce qui suit dans le fichier de configuration, puis **redémarrez** Claude Desktop :
+
+    - macOS : `~/Library/Application Support/Claude/claude_desktop_config.json`
+    - Windows : `%APPDATA%\Claude\claude_desktop_config.json`
+
+    ```json
+    {
+      "mcpServers": {
+        "rooquiz": {
+          "command": "npx",
+          "args": [
+            "-y", "mcp-remote",
+            "https://your-domain/api/mcp",
+            "--header", "Authorization: Bearer rqp_live_xxx..."
+          ]
+        }
+      }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Exemples de requêtes
+
+Une fois votre client connecté, adressez-vous à lui en langage courant. Chacun de ces exemples sollicite
+une partie différente du serveur :
+
+**Partir d'un modèle**
+
+> Montre-moi les modèles de coaching, crée un quiz noté à partir de celui sur la préparation, puis ajoute deux
+> questions sur le budget.
+
+Sollicite `list_templates` → `create_form_from_template` → `add_question`.
+
+**Traiter les leads**
+
+> Liste les leads capturés cette semaine par mon quiz Roue de la vie, ajoute l'étiquette « à relancer » à tous ceux qui ont obtenu moins de 40
+> et attribue-les-moi.
+
+Sollicite `list_leads` → `set_lead_tags` → `assign_leads`.
+
+**Diagnostiquer l'entonnoir**
+
+> Lequel de mes quiz a le plus faible taux de complétion, et où exactement les gens abandonnent-ils ?
+
+Sollicite `list_forms` → `get_form_stats` → `get_form_funnel`.
+
+**Passer au multilingue**
+
+> Traduis mon quiz de préparation à la promotion en espagnol et en allemand, en conservant les codes des questions.
+
+Sollicite `list_form_translations` → `create_form_translation`.
+
+<Callout type="info">
+  Les noms, adresses e-mail et numéros de téléphone des répondants sont renvoyés **masqués**
+  (`j***g@example.com`). Le masquage est irréversible : désignez donc un répondant par son id plutôt que de
+  recoller une valeur masquée dans une requête.
+</Callout>
+
+## Outils disponibles
+
+Une fois connecté, l'assistant IA peut appeler les outils ci-dessous. Ils agissent tous sur l'équipe dans laquelle le jeton est **actuellement actif**.
+
+### Équipe (Tenant)
+
+| Outil | Rôle |
+| --- | --- |
+| `list_my_tenants` | Liste toutes les équipes dont vous êtes membre, en indiquant celle qui est active. |
+| `get_active_tenant` | Renvoie l'équipe dans laquelle le jeton est actuellement actif ; toutes les écritures s'y appliquent par défaut. |
+| `switch_active_tenant` | Change l'équipe active (persiste d'une session à l'autre ; la cible doit être une équipe que vous avez rejointe). |
+
+### Formulaire
+
+| Outil | Rôle |
+| --- | --- |
+| `create_form` | Crée un quiz (examen `knowledge_quiz`, `scored_quiz` ou quiz de profil `outcome_quiz`). Peut recevoir un tableau de questions et la configuration du rapport en un seul appel pour éviter les allers-retours. Un quiz de résultat **doit** inclure `report.outcomes` (la liste des types de résultat) dès sa création, chaque choix votant pour des types via `outcomes`. |
+| `list_forms` | Liste les quiz de l'équipe actuelle, avec un filtre facultatif par scène ou par titre. |
+| `get_form` | Affiche le détail complet d'un quiz (la liste de questions `fields[]`, la configuration du rapport, etc.) ; appelez-le d'abord pour obtenir le `code` de chaque question avant toute modification. Pour les quiz de résultat, les `code` des types de résultat se trouvent dans `report.outcomeAnalysis.outcomes`. |
+| `update_form` | Met à jour le titre, la description, l'état ouvert/fermé, ou remplace par fusion la configuration `report` par sous-clé ; pour les quiz de résultat, passez `report.outcomes` pour mettre à jour par fusion les types de résultat selon leur `code` (nom/description/CTA ; les images configurées sont conservées, et la suppression d'un type encore référencé par des votes de questions est refusée). **La scène et la langue sont verrouillées après la création.** |
+| `delete_form` | Place un quiz dans la corbeille (suppression réversible) : il est masqué de `list_forms` et récupérable pendant 5 jours via `restore_form` (puis supprimé définitivement). Seul le propriétaire du quiz ou le propriétaire de l'équipe peut le supprimer ; les réponses sont conservées jusqu'à la suppression définitive. |
+| `restore_form` | Restaure depuis la corbeille un quiz supprimé par `delete_form`. Seul le propriétaire ou le propriétaire de l'équipe peut le restaurer ; renvoie une erreur si le quiz n'est pas dans la corbeille. |
+| `duplicate_form` | Duplique un quiz : copie sa structure de questions, sa notation, son rapport, ses éléments visuels et ses paramètres ainsi que **toutes ses traductions** dans un nouveau quiz qui vous appartient (avec de nouveaux liens). Ne copie **pas** les réponses, le partage, les intégrations ni l'état de blocage. `newTitle` facultatif. |
+
+### Question
+
+| Outil | Rôle |
+| --- | --- |
+| `add_question` | Ajoute un élément à la fin : une question (SingleCheck/MultiCheck/TrueFalse/FillBlank) ou un saut de page (`Breaker`). Dans un quiz de résultat, chaque choix doit déclarer les types de résultat pour lesquels il vote (TrueFalse utilise `trueOutcomes` / `falseOutcomes`). |
+| `insert_question` | Insère un élément à une position précise, en utilisant `after` / `before` pour référencer un `code` existant. |
+| `move_question` | Déplace une question ou un saut de page existant vers une nouvelle position, selon son `code`. |
+| `update_question` | Met à jour l'énoncé, la note, l'explication, le caractère obligatoire, le score, la bonne réponse ou la correction IA d'une question FillBlank, selon son `code`. **Ne peut pas modifier le type de question ni le contenu des choix.** |
+| `delete_question` | Supprime une question ou un saut de page selon son `code`. |
+
+### Dimensions du rapport
+
+| Outil | Rôle |
+| --- | --- |
+| `set_dimension_analysis` | Définit en bloc l'analyse multidimensionnelle d'un quiz (dimensions du graphique radar) ; dans `knowledge_quiz`, chaque dimension référence des `code` de questions, dans `scored_quiz` chacune utilise une formule. Passez un tableau vide pour l'effacer. Ne s'applique pas aux quiz de résultat (ils n'ont pas de dimensions : configurez plutôt les types de résultat via `report.outcomes`). |
+
+### Traductions (FormTranslation)
+
+Proposez un quiz en plusieurs langues : un quiz source (langue principale) plus une traduction par langue supplémentaire (même structure que la source, seul le texte est traduit ; les réponses sont toujours rattachées au quiz source).
+
+| Outil | Rôle |
+| --- | --- |
+| `create_form_translation` | Ajoute une version linguistique à un quiz en clonant le contenu source comme brouillon initial (mêmes `code`, texte dans la langue source), et renvoie ce contenu pour le traduire immédiatement. La langue doit être différente de la langue principale, avec au maximum une version par langue. |
+| `list_form_translations` | Liste les versions linguistiques existantes d'un quiz (langue, état actif, lien public, etc.). |
+| `get_form_translation` | Lit le contenu complet d'une version linguistique (y compris `fields[]` et `report`) pour le traduire sur place ; chaque `code` doit rester identique à la source. |
+| `update_form_translation` | Enregistre le texte traduit d'une version linguistique (title / description / fields / report / systemText), ou la met en pause via `isActive` ; la structure est fixée par la source, vous ne modifiez que le texte, et les champs omis sont considérés comme une traduction partielle. |
+| `delete_form_translation` | Supprime une version linguistique. |
+
+### Répondants (Examinees)
+
+Les personnes qui répondent à un quiz. Chaque répondant est rattaché à une seule équipe ; les outils ne renvoient que des champs sûrs : le mot de passe, le code de vérification, le jeton de réinitialisation et les autres champs sensibles ne sont **jamais** exposés.
+
+| Outil | Rôle |
+| --- | --- |
+| `list_examinees` | Liste les répondants de l'équipe actuelle, avec une recherche approximative facultative par e-mail / nom et un filtre par statut (actif / désactivé). |
+| `get_examinee` | Affiche le détail d'un répondant (y compris les données personnalisées `customData`) à partir de son identifiant métier `examineeId` (par exemple `AB1234567890`, affiché dans la liste). |
+| `update_examinee` | Modifie le nom, le statut ou les customData d'un répondant à partir de son `examineeId` (les customData sont validées selon les définitions de champs de l'équipe). **L'e-mail et l'équipe ne peuvent pas être modifiés.** |
+
+### Réponses et analyses
+
+Consultez les performances des quiz, les entonnoirs de conversion et les leads pour que l'IA puisse boucler le cycle création → mesure → itération. Les outils liés aux leads renvoient des informations sur les répondants (données personnelles).
+
+| Outil | Rôle |
+| --- | --- |
+| `get_form_stats` | Lit les statistiques d'un quiz sur les N derniers jours (30 par défaut, 180 au maximum) : vue d'ensemble des KPI, tendance quotidienne, canaux (utm_source), types de connexion, appareils et répartition des réponses par question. |
+| `get_form_funnel` | Lit l'entonnoir de conversion d'un quiz sur les N derniers jours : vu → commencé → soumis → lead capturé → rapport consulté → CTA cliqué → partagé, ainsi que l'entonnoir par canal et les points d'abandon. |
+| `list_records` | Liste les réponses (leads) de l'équipe actuelle : répondant, réponses, résultat compact du rapport et UTM ; filtre par quiz, statut du rapport et date de soumission. |
+| `get_record` | Affiche le détail d'une réponse à partir de son `id` (renvoyé par `list_records`) : réponses complètes, résultat du rapport et métadonnées de soumission. |
+
+### Téléversement d'images
+
+| Outil | Rôle |
+| --- | --- |
+| `prepare_image_upload` | Étape 1 : génère une URL de téléversement direct pour une couverture ou une image (envoyez-y le fichier en PUT). |
+| `finalize_image_upload` | Étape 2 : vérifie et enregistre l'image dans la médiathèque de l'équipe, et renvoie un id de média ; référencez-le via `flagImg` / `landingImage` dans `update_form`. |
+
+<Callout type="info">
+  Parcours types :
+  - **Examen / quiz noté** : `create_form` pour créer le quiz et obtenir le `code` de chaque question → utilisez `update_form` ou `set_dimension_analysis` pour configurer les formules / dimensions du rapport selon les `code`.
+  - **Quiz de résultat** : `create_form` en un seul appel avec `report.outcomes` (attribuez à chaque type un `code` unique de votre choix, par exemple `lion`) ainsi que les votes de chaque choix → après la soumission, le type ayant obtenu le plus de votes l'emporte (en cas d'égalité, l'ordre de la liste prévaut) ; ajustez ensuite les textes et CTA des types via `update_form`.
+</Callout>
+
+## Limites actuelles
+
+- **Le Quiz de connaissances aléatoire n'est pas pris en charge** : ses questions se trouvent dans la banque de questions (QuestionBank) ; gérez-les dans l'éditeur, MCP ne les couvre pas encore.
+- **Impossible de modifier directement le type de question ou les choix** : pour changer de type ou modifier les choix, utilisez `delete_question` puis `add_question` pour reconstruire la question. Il en va de même pour la **correspondance des votes entre choix et types** d'un quiz de résultat : pour modifier les votes, reconstruisez la question.
+- **La notation des choix du Quiz noté** utilise la notation par option : dans la scène du quiz noté, `update_question` refuse `score` / `correctAnswer` / `aiMatch`. Modifiez les scores des choix dans l'interface d'administration, ou supprimez et recréez la question. La scène du quiz de résultat refuse également ces trois paramètres (elle décide par votes, il n'y a pas de notation).
+- **Types de questions du quiz de résultat** : les questions de vote sont SingleCheck / MultiCheck / TrueFalse (FillBlank n'est pas pris en charge) ; les **images** des types de résultat ne peuvent pas encore être téléversées via MCP : configurez-les dans l'éditeur (les images déjà configurées sont conservées lorsque MCP met à jour `report.outcomes`).
+- **La scène et la langue sont verrouillées** après la création et ne peuvent pas être modifiées via MCP.
+- **La suppression est réversible** : `delete_form` place le quiz dans la corbeille (purgée automatiquement après 5 jours), il ne s'agit pas d'une suppression définitive immédiate ; pour une suppression définitive, supprimez-le à nouveau dans l'interface d'administration.
+- **Limite de questions** : avec le forfait Free, un quiz contient au maximum **50 questions** (les sauts de page, les textes d'information et les carrousels d'images ne comptent pas) ; au-delà, `create_form`, `add_question` et `insert_question` sont refusés. `duplicate_form` et `create_form_from_template` ne sont pas limités. Le forfait Pro est illimité : consultez [Limite de questions](/fr/editor).
+- **La duplication ne copie aucune donnée** : `duplicate_form` ne clone que la structure et les traductions ; elle ne copie **pas** les réponses, les paramètres de partage ni les intégrations (qui contiennent des secrets). Le nouveau quiz démarre vierge.
+- **Les champs d'identité des répondants sont immuables** : `update_examinee` ne peut pas modifier l'e-mail, l'équipe ni l'`examineeId` (ils constituent l'identité d'authentification).
+- **Les leads contiennent des données personnelles** : `list_records` / `get_record` renvoient l'e-mail, le nom, les champs personnalisés, etc. des répondants ; traitez-les de manière responsable.
+- **La correction IA des questions FillBlank** (`aiMatch`, scène quiz uniquement, bêta) consomme les [crédits IA](/fr/account/ai-billing) de votre équipe.
+
+## Sécurité et limites de débit
+
+- Via OAuth comme via jeton, l'IA agit **en votre nom**, ce qui déclenche les contrôles d'accès existants et les **journaux d'audit** (chaque écriture est enregistrée).
+- Chaque connexion est limitée à **60 requêtes par minute** ; au-delà, une erreur de limite de débit est renvoyée.
+- Lorsque vous n'en avez plus besoin, **révoquez**-la (effet immédiat ; pour les connexions OAuth, cela déconnecte le client) ou **supprimez**-la (ce qui libère aussi un emplacement) dans **Paramètres → Intégration MCP**.
+- Le flux OAuth impose **PKCE (S256)**, les codes d'autorisation sont à usage unique et les jetons d'actualisation changent à chaque renouvellement : les anciens deviennent immédiatement invalides.

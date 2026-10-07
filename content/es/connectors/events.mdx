@@ -1,0 +1,47 @@
+---
+title: Eventos desencadenantes y alcance
+description: 'Cada conector se activa con eventos desencadenantes y está limitado por su alcance, es decir, qué quizzes pueden activarlo. Ambos se combinan con Y: descubre qué significa cada evento y cómo acotar un conector.'
+---
+
+Cada conector decide **cuándo se activa** (eventos) y **qué quizzes pueden activarlo** (alcance). Ambos se combinan con Y: el evento debe coincidir *y* el quiz de origen debe estar dentro del alcance para que se entregue algo.
+
+## Eventos desencadenantes
+
+Todo conector necesita al menos un evento:
+
+| Evento | Se activa cuando |
+| --- | --- |
+| **Nuevo lead** | Alguien deja sus datos de contacto a tu equipo **por primera vez** |
+| **Reserva creada** | Alguien reserva una sesión |
+| **Reserva cancelada** | Cualquiera de las dos partes cancela una reserva |
+| **Reserva reprogramada** | Una reserva se mueve a otra hora |
+
+<Callout type="warning">
+  **"Nuevo lead" se activa una sola vez, la primera vez que esa persona deja sus datos.** Si la misma persona hace otro quiz más adelante, no se vuelve a activar, porque los leads se [deduplican entre quizzes](/es/leads). Si quieres una notificación con cada envío, este no es el evento que buscas.
+</Callout>
+
+## Alcance de activación
+
+El alcance controla qué quizzes pueden activar este conector:
+
+- **Todos los quizzes**: la opción predeterminada. Se entrega cualquier evento de cualquier quiz del equipo.
+- **Cuestionarios específicos**: solo lo activan los quizzes que selecciones.
+
+<Callout type="info">
+  El alcance se compara con **el quiz del que procede el evento**. En "Nuevo lead", es el quiz en el que la persona **dejó sus datos por primera vez**, no el más reciente que hizo.
+</Callout>
+
+Un uso típico: enviar tu quiz principal de captación de leads a Slack para que el equipo lo vea al instante, y evitar que un quiz interno moleste a nadie.
+
+## Combinaciones que vale la pena copiar
+
+| Lo que quieres | Eventos | Alcance |
+| --- | --- | --- |
+| Que todos se enteren de un nuevo cliente | Nuevo lead | Todos los quizzes |
+| Seguir solo el quiz principal | Nuevo lead | Cuestionarios específicos |
+| Enterarte cuando cambia tu agenda | Reserva cancelada + reprogramada | Todos los quizzes |
+| Sincronizar los leads con tu ESP | Nuevo lead | Todos los quizzes |
+
+<Callout type="info">
+  Cambiar los eventos o el alcance **solo afecta a los eventos a partir de ese momento**: no se reenvía nada anterior.
+</Callout>

@@ -1,0 +1,65 @@
+---
+title: Bewertungs- und Auswertungsregeln
+description: 'Bewertung hängt vom Quiztyp ab: Das Wissensquiz prüft richtig und falsch und summiert Punkte, das Bewertete Quiz liefert mehrdimensionale Analysen und Berichte. So legen Sie Punkte, Antworten und Formeln fest.'
+---
+
+„Bewertung“ bedeutet je nach Quiztyp etwas anderes: Das Wissensquiz konzentriert sich auf **richtig/falsch und Gesamtpunktzahl**, das Bewertete Quiz auf **mehrdimensionale Analysen und Berichte**.
+
+## Wissensquiz: Bewertung und Beurteilung
+
+In einem **Quiz** können Sie:
+
+- **Punkte vergeben**: Fragen oder richtigen Optionen Punkte zuweisen.
+- **Richtig/falsch beurteilen**: Richtige Antworten markieren; das System beurteilt jede Frage automatisch.
+- **Gesamtpunktzahl bilden**: Punkte werden automatisch addiert.
+- **Bestehensgrenze**: Eine Mindestpunktzahl festlegen und ein Ergebnis „bestanden/nicht bestanden“ anzeigen.
+- **Antwort-Feedback**: Teilnehmern pro Frage anzeigen, ob sie richtig lagen, samt Erklärung.
+
+<Callout type="info">
+  Punkte und die Richtig/Falsch-Beurteilung sind im Wissensquiz und im Zufälligen Wissensquiz verfügbar. Das Bewertete Quiz verwendet stattdessen Dimensionsformeln, und das Ergebnisquiz vergibt überhaupt keine Punkte.
+</Callout>
+
+## Ergebnisquiz: Gewinnen durch Stimmen
+
+Ein **Ergebnisquiz** vergibt keine Punkte – es **zählt Stimmen**. Jede Option stimmt für einen oder mehrere Ergebnistypen, und der Typ mit den meisten Stimmen gewinnt; bei Gleichstand entscheidet die Reihenfolge in der Ergebnisliste.
+
+Jedes Ergebnis kann einen eigenen CTA-Button tragen, der ein unterhaltsames Ergebnis direkt mit einem nächsten Schritt verbindet. Siehe [Die vier Quiztypen](/de/getting-started/quiz-types).
+
+## Bewertetes Quiz: Dimensionsanalyse und KI-Auswertung
+
+In einem **Bewerteten Quiz** geht es bei der Bewertung eher um ein „Profil“ als um richtig oder falsch:
+
+- **Mehrdimensionale Bewertung**: Ordnen Sie Fragen mehreren Dimensionen zu; nach dem Absenden erhält jede Dimension eine Punktzahl, oft als **Netzdiagramm** dargestellt.
+- **Ergebnisprofil**: Leiten Sie aus den Dimensionspunkten Aussagen zu Persönlichkeit oder Fähigkeiten ab.
+- **KI-Auswertung**: Die KI macht aus Gesamtpunktzahl, Stufe und Dimensionspunkten Empfehlungen und Kommentare (den Rohtext der Antworten liest sie nicht).
+
+### Welche Fragen bewertet werden
+
+Die Gesamtpunktzahl eines Bewerteten Quiz ergibt sich **ausschließlich aus der Formel**, die auf Fragecodes verweist. Referenziert werden können nur Fragen, die eine Zahl liefern: Auswahlfragen (über Punkte pro Option), Bewertung, Zahl, Datum, Uhrzeit und Kaskadenauswahl.
+
+**Lückentext erfasst nur Text und wird nie bewertet** – freier Text kann nicht in Berechnungen einfließen, erzeugt daher keine Punkte und erscheint nicht unter den einfügbaren Feldern im Formeleditor. Damit ist er genau richtig, um innerhalb einer bewerteten Auswertung eine offene Frage zu stellen („Gibt es sonst noch etwas, das wir wissen sollten?“).
+
+<Callout type="warning">
+  Ohne Formel bleibt die Gesamtpunktzahl leer, keine Stufe kann je zutreffen, und der Block mit der Gesamtbewertung verschwindet von der Ergebnisseite. Wenn Sie Stufen konfigurieren, konfigurieren Sie immer auch die Formel.
+</Callout>
+
+### Zum KI-Kontingent für Auswertungen
+
+<Callout type="warning">
+  Die KI-Auswertung verbraucht das **KI-Kontingent** Ihres Teams. Das Kontingent wird pro Zeitraum gezählt; ist es ausgeschöpft, wird die KI-Auswertung für diesen Zeitraum übersprungen (die Basisbewertung wird weiterhin erstellt). Abrechnung, monatliche Zurücksetzung und Aufstockungen finden Sie unter [KI-Guthaben & Abrechnung](/de/account/ai-billing).
+</Callout>
+
+## Stufen und Aktionen auf der Ergebnisseite
+
+Teilen Sie die Gesamtpunktzahl in **Stufen** auf (0–60 ausbaufähig / 60–80 gut / ab 80 ausgezeichnet). Jede Stufe hat einen Namen, eine Farbe und eine Beschreibung und kann einen **CTA-Button** enthalten – die niedrige Stufe könnte etwa „Beratung buchen“ anbieten. Mit diesem Schritt verbinden Sie eine Auswertung mit der Conversion.
+
+<Callout type="info">
+  Teilnehmer sollen keine Zahl sehen? Sie können die **Gesamtpunktzahl ausblenden** und nur Stufenname, Beschreibung und Zusammenfassung anzeigen – besser für Quizze, die sich wie eine Diagnose und nicht wie eine Prüfung anfühlen sollen.
+</Callout>
+
+## Berichtserstellung
+
+- **Synchron**: Die Basisbewertung wird unmittelbar nach dem Absenden berechnet.
+- **Asynchron**: Aufwendigere Berechnungen wie Dimensionsanalyse und KI-Auswertung werden asynchron erstellt; Berichte durchlaufen den Status „wird erstellt → abgeschlossen“, und bei Fehlern versucht es das System automatisch erneut.
+
+Zum Anzeigen, Exportieren und Zustellen von Berichten siehe [Berichte & KI-Auswertung](/de/results/reports).

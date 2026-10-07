@@ -1,0 +1,49 @@
+---
+title: Campos extendidos y avatares
+description: 'Los campos extendidos recopilan los datos adicionales que necesitas además del nombre y el correo (número de estudiante, empresa, ciudad, teléfono) en el primer inicio de sesión. Hasta cinco campos, más los avatares.'
+---
+
+Los **campos extendidos** son los datos adicionales que quieres obtener de los participantes además del nombre y el correo estándar: número de estudiante, empresa, ciudad, número de teléfono. Una vez configurados, se pide a los participantes que los rellenen **en su primer inicio de sesión**.
+
+Ambos ajustes se encuentran en **Participantes → Configuración de participantes**.
+
+## Campos extendidos
+
+<Callout type="warning">
+  Hasta **5 campos**. El límite es intencionado: cuanto más pides en el primer inicio de sesión, más personas pierdes.
+</Callout>
+
+### Tres tipos de campo
+
+| Tipo | Para qué usarlo |
+| --- | --- |
+| **Texto de una línea** | Entrada libre, como un número de estudiante o el nombre de una empresa; admite validación con regex |
+| **Lista desplegable** | Listas fijas, como la ciudad o la fuente de referencia; puede permitir selecciones múltiples |
+| **Teléfono** | Un número con prefijo de país, validado automáticamente |
+
+### Opciones de cada campo
+
+- **Obligatorio**: no se puede continuar sin rellenarlo.
+- **Único**: el valor no puede repetirse **en ningún lugar de la organización**. Ideal para identificadores únicos por naturaleza, como un número de estudiante.
+- **Texto de ejemplo**: la indicación en gris dentro del campo.
+- **Regex** (solo texto): una expresión regular de JavaScript **sin las barras que la delimitan**, por ejemplo `^1\d{10}$`.
+- **Permitir varios** (solo lista desplegable): permite elegir más de un valor.
+- **Países o regiones permitidos** (solo teléfono): restringe los prefijos de país disponibles; el primero aparece preseleccionado y **dejarlo vacío permite todos**.
+
+### Orden y eliminación
+
+Los campos se muestran como un acordeón; usa **Subir / Bajar** para reordenarlos. Ese orden es el orden en que los participantes los rellenan.
+
+<Callout type="warning">
+  Cuando eliminas la definición de un campo, los valores que los participantes ya enviaron **permanecen en la base de datos**; simplemente dejan de mostrarse. El cuadro de confirmación te indica cuántas definiciones se eliminarán.
+</Callout>
+
+## Tema de avatar
+
+Cuando se crea un participante o se registra por su cuenta, se genera un avatar aleatorio a partir del **tema de avatar** que elijas, para que no acabes con una página llena de marcadores grises.
+
+Entre los temas están Aventurero, Emoji, Lorelei, Thumbs, Robot y Notionist; despliega el ajuste para ver la vista previa de todos.
+
+<Callout type="info">
+  Cambiar el tema solo afecta a los participantes creados **a partir de ese momento**; los avatares existentes no se regeneran.
+</Callout>

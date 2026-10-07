@@ -1,0 +1,72 @@
+---
+title: 埋め込み
+description: 'クイズを自分のウェブサイトに直接埋め込めば、訪問者はページを離れずにその場で回答できます。高さ自動のインライン、ポップアップ、高さ固定のプレーン iframe という 3 つの埋め込みモード、それぞれが生成するコード、使える属性と JS API、そしてどのようなページにどのモードが向いているかを説明します。'
+---
+
+リンクを共有するだけでなく、**クイズを自分のウェブサイトに直接埋め込む** こともできます。訪問者はランディングページから離れることなく回答を完了できます。
+
+## 3 つの埋め込みモード
+
+対象のクイズで **共有** → **埋め込み** を開き、表示モードを選んで、生成されたコードをサイトの HTML にコピーします。
+
+| モード | 向いている用途 | 動作 |
+| --- | --- | --- |
+| **インライン(高さ自動)** | ページのコンテンツの流れに溶け込ませたい場合 | 高さがコンテンツに合わせて自動で調整されます。おすすめです |
+| **ポップアップ** | ページ上の行動喚起ボタンとして使う場合 | クイズを全画面のオーバーレイで開きます |
+| **プレーンiframe(高さ固定)** | スクリプトを読み込めない環境 | 最もシンプルです。高さは固定で、内部でスクロールします |
+
+### インライン(高さ自動)
+
+```html
+<div data-rooquiz-embed data-rooquiz-token="YOUR_QUIZ_TOKEN"></div>
+<script src="https://YOUR_QUIZ_DOMAIN/embed.js" async></script>
+```
+
+埋め込みスクリプトがクイズのコンテンツの高さ(ページ送りや結果ページへの移動など)を監視し、iframe のサイズをリアルタイムに調整します。スクロールバーが出たり、表示が途切れたりすることはありません。
+
+### ポップアップ
+
+```html
+<div data-rooquiz-embed data-rooquiz-token="YOUR_QUIZ_TOKEN" data-rooquiz-mode="popup" data-rooquiz-text="Start the quiz"></div>
+<script src="https://YOUR_QUIZ_DOMAIN/embed.js" async></script>
+```
+
+ページ上にボタンが表示され、クリックするとクイズが全画面のオーバーレイで開きます。ESC キーを押すか、背景のマスクをクリックすると閉じます。
+
+### プレーン iframe
+
+```html
+<iframe src="https://YOUR_QUIZ_DOMAIN/a/YOUR_QUIZ_TOKEN?embed=1" width="100%" height="600" style="border:0;" title="RooQuiz"></iframe>
+```
+
+## 使える属性
+
+| 属性 | 説明 |
+| --- | --- |
+| `data-rooquiz-token` | 必須。クイズの公開トークン |
+| `data-rooquiz-mode` | `inline`(デフォルト)または `popup` |
+| `data-rooquiz-from` | すべての回答と一緒に記録される流入元タグ。[流入元トラッキング](/ja/publish/tracking)や[インサイト](/ja/results/insights)の流入元別の内訳で使われます |
+| `data-rooquiz-height` | インラインモードの初期の高さ(px)。自動調整が始まるまでの間に使われます |
+| `data-rooquiz-text` | ポップアップモードのボタンのラベル |
+
+## JS API
+
+独自のトリガーが必要な場合(自分でデザインしたボタンでポップアップを開くなど)は、API を直接呼び出します。
+
+```html
+<script src="https://YOUR_QUIZ_DOMAIN/embed.js"></script>
+<script>
+  // Mount an inline embed manually
+  RooQuiz.embed({ el: '#container', token: 'YOUR_QUIZ_TOKEN', from: 'homepage' })
+  // Open the popup from any element
+  document.querySelector('#my-button').onclick = () => RooQuiz.open('YOUR_QUIZ_TOKEN')
+</script>
+```
+
+<Callout type="warning">
+  **回答者のみ**(回答にサインインが必要)に設定したクイズは、埋め込みにはおすすめしません。ブラウザはサードパーティの iframe 内でのストレージやログインのポップアップを制限しているため、サインインの体験が損なわれる可能性があります。このようなクイズは、代わりに[公開リンク](/ja/publish/link-qrcode)を共有してください。
+</Callout>
+
+<Callout type="info">
+  埋め込まれたページではフッターと背景が自動的に非表示になり、サイトに透過的に溶け込みます。テーマカラーはそのまま適用されます。埋め込み経由で集めた回答も、通常どおり[回答記録](/ja/results/records)に表示されます。
+</Callout>

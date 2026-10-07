@@ -1,0 +1,276 @@
+---
+title: Integração MCP
+description: 'O servidor MCP do RooQuiz permite que Claude, Cursor, Codex e outros clientes de IA trabalhem nos quizzes da sua equipe em linguagem natural: criar quizzes, adicionar perguntas, relatórios e traduções.'
+---
+
+O RooQuiz oferece um **servidor MCP (Model Context Protocol)** que permite que clientes de IA — Claude Desktop, Claude Code, Cursor, Codex e outros — operem os quizzes da sua equipe. Com linguagem natural, você pode criar quizzes de conhecimento, quizzes com pontuação e quizzes de resultado, adicionar perguntas, reordenar itens e configurar dimensões do relatório ou tipos de resultado; também pode duplicar / excluir quizzes, gerenciar traduções e examinandos e ler registros de respostas, estatísticas e funis de conversão — em vez de montar tudo manualmente no editor.
+
+<Callout type="info">
+  O MCP é um recurso para **usuários avançados** — você precisará de um cliente de IA compatível com MCP. Para criar quizzes de forma básica e visual, continuamos recomendando o [editor](/pt-BR/editor).
+</Callout>
+
+## Como funciona
+
+- Um cliente de IA se conecta ao endpoint MCP do RooQuiz (`/api/mcp`) usando um de dois métodos de autenticação: **autorização OAuth** (recomendada — nos clientes compatíveis, basta entrar pelo navegador) ou um **token de API pessoal**.
+- Em ambos os casos, a IA age **como você** na equipe ativa no momento.
+- Cada ação passa pelas mesmas **verificações de acesso** do painel administrativo; as operações de escrita também são registradas no **log de auditoria**.
+- Assim, o que a IA pode fazer é totalmente limitado pela sua função e pelas suas permissões nessa equipe — ela não pode ultrapassá-las.
+
+## Opção 1: autorização OAuth (recomendada)
+
+Clientes compatíveis com OAuth do MCP — claude.ai e Claude Code — **não precisam de um token criado manualmente**. Basta informar a URL do endpoint: o cliente descobre o servidor de autorização automaticamente e abre o navegador, onde você entra no RooQuiz, escolhe a equipe a autorizar e clica em "Autorizar".
+
+<Tabs items={['claude.ai (Web)', 'Claude Code']}>
+  <Tab value="claude.ai (Web)">
+    Abra **Settings → Connectors → Add custom connector** no claude.ai:
+
+    1. Dê qualquer nome (por exemplo, `RooQuiz`).
+    2. Use o seu endpoint (algo como `https://your-domain/api/mcp`) como URL do servidor MCP remoto.
+    3. Salve e clique em "Connect" — o navegador é redirecionado para a página de autorização do RooQuiz; entre, escolha uma equipe e clique em "Autorizar".
+  </Tab>
+  <Tab value="Claude Code">
+    Execute em qualquer lugar do terminal (**sem** cabeçalho de token):
+
+    ```bash
+    claude mcp add --transport http rooquiz https://your-domain/api/mcp
+    ```
+
+    Na primeira vez que você se conectar no Claude Code (por exemplo, com `/mcp`), o navegador abrirá automaticamente para concluir a autorização.
+  </Tab>
+</Tabs>
+
+Sobre as conexões OAuth:
+
+- A equipe escolhida durante a autorização passa a ser a equipe ativa inicial; a IA ainda pode trocar depois com `switch_active_tenant`.
+- A conexão aparece na lista de tokens em **Configurações → Integração MCP** (com a marcação **OAuth**); **revogá-la desconecta** esse cliente. Ela **não** conta para o limite de 5 tokens.
+- As credenciais são renovadas automaticamente (o token de acesso é atualizado a cada 1 hora de forma contínua; a conexão em si é válida por 30 dias e se estende com o uso) — não há nada para manter manualmente.
+
+## Opção 2: token pessoal (PAT)
+
+Para clientes sem suporte a OAuth (Cursor, Codex CLI, Claude Desktop) ou ambientes sem navegador, como CI, conecte-se com um token de API pessoal.
+
+### Crie um token
+
+Acesse **Configurações → Integração MCP** e clique em "Criar token":
+
+1. Dê a ele um **nome** (para identificá-lo, por exemplo `Cursor - my Mac`).
+2. Escolha uma **equipe padrão** — o token opera nessa equipe por padrão, e a IA pode depois trocar para qualquer outra equipe de que você faça parte pela ferramenta `switch_active_tenant`.
+3. Após a criação, é exibido um token em texto simples que começa com `rqp_live_`.
+
+<Callout type="warning">
+  **O token em texto simples é exibido apenas uma vez.** Ele não pode ser recuperado depois que você sai da página. Copie-o imediatamente; se perdê-lo, será necessário revogá-lo e criar um novo.
+</Callout>
+
+Limites:
+
+- Cada usuário pode ter no máximo **5 tokens** (incluindo os revogados; conexões OAuth não contam). Para criar mais, **exclua** um para liberar espaço ("revogar" apenas desativa — não libera o espaço).
+- Um token é uma **credencial pessoal** — nunca o inclua no controle de versão nem o compartilhe publicamente.
+
+### Configure seu cliente de IA
+
+Na página **Configurações → Integração MCP**, você pode copiar trechos de configuração prontos para cada cliente, junto com a sua **URL do endpoint** (algo como `https://your-domain/api/mcp`). Substitua `rqp_live_xxx...` no trecho pelo token que você acabou de gerar.
+
+<Tabs items={['Claude Code (CI)', 'Cursor', 'Codex CLI', 'Claude Desktop']}>
+  <Tab value="Claude Code (CI)">
+    No Claude Code, prefira o fluxo OAuth acima; o cabeçalho de token só é necessário em ambientes sem navegador, como CI:
+
+    ```bash
+    claude mcp add --transport http rooquiz https://your-domain/api/mcp \
+      --header "Authorization: Bearer rqp_live_xxx..."
+    ```
+  </Tab>
+  <Tab value="Cursor">
+    Suporte nativo a MCP via HTTP. Grave em `.cursor/mcp.json` no nível do projeto ou no global `~/.cursor/mcp.json`:
+
+    ```json
+    {
+      "mcpServers": {
+        "rooquiz": {
+          "url": "https://your-domain/api/mcp",
+          "headers": { "Authorization": "Bearer rqp_live_xxx..." }
+        }
+      }
+    }
+    ```
+  </Tab>
+  <Tab value="Codex CLI">
+    Suporte nativo a MCP via HTTP. Grave em `~/.codex/config.toml`:
+
+    ```toml
+    [mcp_servers.rooquiz]
+    url = "https://your-domain/api/mcp"
+    bearer_token_env_var = "ROOQUIZ_MCP_TOKEN"
+    ```
+
+    Por segurança, o Codex aceita apenas o **nome de uma variável de ambiente**, não um token em texto simples embutido. Exporte-a também no seu shell:
+
+    ```bash
+    export ROOQUIZ_MCP_TOKEN="rqp_live_xxx..."
+    ```
+  </Tab>
+  <Tab value="Claude Desktop">
+    O Claude Desktop só suporta stdio nativamente, então o MCP via HTTP exige a ponte `mcp-remote` (baixada automaticamente no primeiro uso; requer Node ≥ 18 local). Cole no arquivo de configuração e **reinicie** o Claude Desktop:
+
+    - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
+    - Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+
+    ```json
+    {
+      "mcpServers": {
+        "rooquiz": {
+          "command": "npx",
+          "args": [
+            "-y", "mcp-remote",
+            "https://your-domain/api/mcp",
+            "--header", "Authorization: Bearer rqp_live_xxx..."
+          ]
+        }
+      }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Exemplos de prompts
+
+Depois de conectar o cliente, converse com ele em linguagem simples. Cada um destes exemplos usa
+uma parte diferente do servidor:
+
+**Criar a partir de um modelo**
+
+> Mostre os modelos de coaching, crie um quiz com pontuação a partir do modelo de prontidão e depois
+> adicione duas perguntas sobre orçamento.
+
+Usa `list_templates` → `create_form_from_template` → `add_question`.
+
+**Trabalhar os leads**
+
+> Liste os leads que meu quiz Roda da Vida captou nesta semana, marque todos que pontuaram abaixo de 40
+> com a tag follow-up e atribua-os a mim.
+
+Usa `list_leads` → `set_lead_tags` → `assign_leads`.
+
+**Diagnosticar o funil**
+
+> Qual dos meus quizzes tem a pior taxa de conclusão e em que ponto exatamente as pessoas desistem?
+
+Usa `list_forms` → `get_form_stats` → `get_form_funnel`.
+
+**Tornar multilíngue**
+
+> Traduza meu quiz de prontidão para promoção para espanhol e alemão, mantendo os códigos das perguntas.
+
+Usa `list_form_translations` → `create_form_translation`.
+
+<Callout type="info">
+  Nomes, endereços de e-mail e números de telefone dos respondentes retornam **mascarados**
+  (`j***g@example.com`). O mascaramento é irreversível, então faça referência a um respondente pelo id em vez de
+  colar um valor mascarado de volta em um prompt.
+</Callout>
+
+## Ferramentas disponíveis
+
+Depois de conectado, o assistente de IA pode chamar as ferramentas abaixo. Todas atuam na equipe em que o token está **ativo no momento**.
+
+### Equipe (Tenant)
+
+| Ferramenta | O que faz |
+| --- | --- |
+| `list_my_tenants` | Lista todas as equipes de que você faz parte, marcando a ativa no momento. |
+| `get_active_tenant` | Retorna a equipe em que o token está ativo no momento; todas as escritas usam essa equipe por padrão. |
+| `switch_active_tenant` | Troca a equipe ativa (persiste entre sessões; o destino deve ser uma equipe de que você participa). |
+
+### Formulário
+
+| Ferramenta | O que faz |
+| --- | --- |
+| `create_form` | Cria um quiz (`knowledge_quiz` de prova, `scored_quiz` ou `outcome_quiz` de perfil). Pode receber um array de perguntas e a configuração do relatório em uma única chamada para evitar idas e voltas. Um quiz de resultado **deve** incluir `report.outcomes` (a lista de tipos de resultado) na criação, com cada opção votando em tipos via `outcomes`. |
+| `list_forms` | Lista os quizzes da equipe atual, com filtro opcional por cenário ou título. |
+| `get_form` | Mostra os detalhes completos de um quiz (a lista de perguntas `fields[]`, a configuração do relatório etc.); chame esta ferramenta primeiro para obter o `code` de cada pergunta antes de editar — nos quizzes de resultado, os `code`s dos tipos de resultado ficam em `report.outcomeAnalysis.outcomes`. |
+| `update_form` | Atualiza título, descrição, estado aberto/fechado ou substitui por mesclagem a configuração `report` por subchave; nos quizzes de resultado, passe `report.outcomes` para atualizar por mesclagem os tipos de resultado por `code` (nome/descrição/CTA; imagens já configuradas são mantidas, e remover um tipo ainda referenciado por votos de perguntas é rejeitado). **Cenário e idioma ficam bloqueados após a criação.** |
+| `delete_form` | Move um quiz para a lixeira (exclusão lógica): fica oculto em `list_forms` e pode ser recuperado por 5 dias via `restore_form` (depois é removido permanentemente). Apenas o proprietário do quiz / da equipe pode excluir; os registros de respostas são mantidos até a remoção permanente. |
+| `restore_form` | Restaura da lixeira um quiz excluído por `delete_form`. Apenas o proprietário / proprietário da equipe pode restaurar; retorna erro se o quiz não estiver na lixeira. |
+| `duplicate_form` | Duplica um quiz: clona a estrutura de perguntas, a pontuação, o relatório, o visual e as configurações, além de **todas as traduções**, em um novo quiz de sua propriedade (com links novos). **Não** copia registros de respostas, compartilhamento, integrações nem estado de bloqueio. `newTitle` opcional. |
+
+### Pergunta
+
+| Ferramenta | O que faz |
+| --- | --- |
+| `add_question` | Adiciona um item ao final: uma pergunta (SingleCheck/MultiCheck/TrueFalse/FillBlank) ou uma quebra de página (`Breaker`). Em um quiz de resultado, cada opção deve declarar em quais tipos de resultado vota (TrueFalse usa `trueOutcomes` / `falseOutcomes`). |
+| `insert_question` | Insere um item em uma posição específica, usando `after` / `before` para referenciar um `code` existente. |
+| `move_question` | Move uma pergunta ou quebra de página existente para uma nova posição por `code`. |
+| `update_question` | Atualiza enunciado, nota, explicação, obrigatoriedade, pontuação, resposta correta ou correção por IA de FillBlank por `code`. **Não pode alterar o tipo da pergunta nem o conteúdo das opções.** |
+| `delete_question` | Exclui uma pergunta ou quebra de página por `code`. |
+
+### Dimensões do relatório
+
+| Ferramenta | O que faz |
+| --- | --- |
+| `set_dimension_analysis` | Define de uma vez a análise multidimensional de um quiz (as dimensões do gráfico de radar); em `knowledge_quiz` cada dimensão referencia `code`s de perguntas, em `scored_quiz` cada uma usa uma fórmula. Passe um array vazio para limpar. Não se aplica a quizzes de resultado (eles não têm dimensões — configure os tipos de resultado via `report.outcomes`). |
+
+### Traduções (FormTranslation)
+
+Ofereça um quiz em vários idiomas: um quiz de origem (idioma principal) mais uma tradução para cada outro idioma (mesma estrutura da origem, apenas o texto é traduzido; os registros de respostas sempre ficam vinculados ao quiz de origem).
+
+| Ferramenta | O que faz |
+| --- | --- |
+| `create_form_translation` | Adiciona uma versão de idioma a um quiz, clonando o texto de origem como rascunho inicial (mesmos `code`s, texto no idioma de origem), e retorna esse conteúdo para traduzir imediatamente. O idioma deve ser diferente do principal, no máximo uma versão por idioma. |
+| `list_form_translations` | Lista as versões de idioma existentes de um quiz (idioma, indicador de ativo, link público etc.). |
+| `get_form_translation` | Lê o conteúdo completo de uma versão de idioma (incluindo `fields[]` e `report`) para traduzir no lugar — cada `code` deve permanecer idêntico ao da origem. |
+| `update_form_translation` | Salva o texto traduzido de uma versão de idioma (title / description / fields / report / systemText) ou a pausa via `isActive`; a estrutura é definida pela origem, você só altera o texto, e campos omitidos contam como tradução parcial. |
+| `delete_form_translation` | Exclui uma versão de idioma. |
+
+### Examinandos
+
+As pessoas que fazem um quiz. Cada examinando está vinculado a uma única equipe; as ferramentas retornam apenas campos seguros — senha, código de verificação, token de redefinição e outros campos sensíveis **nunca** são expostos.
+
+| Ferramenta | O que faz |
+| --- | --- |
+| `list_examinees` | Lista os examinandos da equipe atual, com busca aproximada opcional por e-mail / nome e filtro por status (ativo / desativado). |
+| `get_examinee` | Mostra os detalhes de um examinando (incluindo `customData` personalizados) pelo ID de negócio `examineeId` (por exemplo, `AB1234567890`, exibido na lista). |
+| `update_examinee` | Edita nome / status / customData de um examinando por `examineeId` (customData é validado com base nas definições de campos da equipe). **E-mail e equipe não podem ser alterados.** |
+
+### Registros e análises
+
+Leia o desempenho dos quizzes, os funis de conversão e os leads para que a IA feche o ciclo criar → medir → iterar. As ferramentas de leads retornam informações dos respondentes (dados pessoais).
+
+| Ferramenta | O que faz |
+| --- | --- |
+| `get_form_stats` | Lê as estatísticas de um quiz nos últimos N dias (padrão 30, máx. 180): visão geral dos KPIs, tendência diária, canais (utm_source), tipos de login, dispositivos e distribuição de respostas por pergunta. |
+| `get_form_funnel` | Lê o funil de conversão de um quiz nos últimos N dias: visualizado → iniciado → enviado → lead captado → relatório visualizado → CTA clicado → compartilhado, além do funil por canal e dos pontos de abandono. |
+| `list_records` | Lista os registros de respostas (leads) da equipe atual: examinando, respostas, um resultado compacto do relatório e UTM; filtre por quiz, status do relatório e data de envio. |
+| `get_record` | Mostra os detalhes de um registro pelo seu `id` (retornado por `list_records`): respostas completas, resultado do relatório e metadados do envio. |
+
+### Upload de imagens
+
+| Ferramenta | O que faz |
+| --- | --- |
+| `prepare_image_upload` | Etapa 1: gera uma URL de upload direto para uma capa/imagem (envie o arquivo para ela com PUT). |
+| `finalize_image_upload` | Etapa 2: verifica e registra a imagem na biblioteca de mídia da equipe, retornando um id de mídia; referencie-o via `flagImg` / `landingImage` de `update_form`. |
+
+<Callout type="info">
+  Fluxos típicos:
+  - **Prova / quiz com pontuação**: `create_form` para criar o quiz e obter o `code` de cada pergunta → use `update_form` ou `set_dimension_analysis` para configurar fórmulas / dimensões do relatório por `code`.
+  - **Outcome quiz**: `create_form` em uma única chamada com `report.outcomes` (dê a cada tipo um `code` único definido por você, por exemplo `lion`) mais os votos de cada opção → após o envio, vence o tipo com mais votos (empates resolvidos pela ordem da lista); ajuste depois os textos / CTAs dos tipos via `update_form`.
+</Callout>
+
+## Limitações atuais
+
+- **O Quiz de conhecimento aleatório não é suportado**: suas perguntas ficam no QuestionBank — gerencie-as no editor; o MCP ainda não as cobre.
+- **Não é possível alterar diretamente o tipo da pergunta ou as opções**: para trocar o tipo ou editar opções, use `delete_question` e depois `add_question` para recriar. O mesmo vale para o **mapeamento de votos opção-tipo** de um quiz de resultado — para mudar os votos, recrie a pergunta.
+- **A pontuação das opções do Quiz com pontuação** usa Pontuação por opção: no cenário de quiz com pontuação, `update_question` rejeita `score` / `correctAnswer` / `aiMatch`. Edite as pontuações das opções no painel administrativo ou exclua e recrie. O cenário de quiz de resultado também rejeita esses três parâmetros (ele decide por votos — não há pontuação).
+- **Tipos de pergunta do quiz de resultado**: as perguntas de votação são SingleCheck / MultiCheck / TrueFalse (FillBlank não é suportado); as **imagens** dos tipos de resultado ainda não podem ser enviadas via MCP — configure-as no editor (imagens já configuradas são mantidas quando o MCP atualiza `report.outcomes`).
+- **Cenário e idioma ficam bloqueados** após a criação e não podem ser alterados via MCP.
+- **A exclusão é lógica**: `delete_form` move para a lixeira (removido automaticamente após 5 dias), não é uma exclusão permanente imediata; para remoção permanente, exclua novamente no painel administrativo.
+- **Limite de perguntas**: no plano Free, um quiz comporta no máximo **50 perguntas** (quebras de página, declarações e carrosséis de imagens não contam); `create_form`, `add_question` e `insert_question` são rejeitados acima disso. `duplicate_form` e `create_form_from_template` não têm limite. O Pro é ilimitado — consulte [Limite de perguntas](/pt-BR/editor).
+- **A duplicação não copia dados**: `duplicate_form` clona apenas a estrutura e as traduções — **não** copia registros de respostas, configurações de compartilhamento nem integrações (que contêm segredos); o novo quiz começa limpo.
+- **Os campos de identidade do examinando são imutáveis**: `update_examinee` não pode alterar e-mail, equipe ou `examineeId` (eles são a identidade de autenticação).
+- **Leads contêm dados pessoais**: `list_records` / `get_record` retornam e-mail, nome, campos personalizados etc. dos respondentes — manipule-os com responsabilidade.
+- **A correção por IA de FillBlank** (`aiMatch`, apenas no cenário de quiz, Beta) consome os [créditos de IA](/pt-BR/account/ai-billing) da sua equipe.
+
+## Segurança e limites de taxa
+
+- Com OAuth ou token, a IA age **como você**, acionando as verificações de acesso existentes e os **logs de auditoria** (toda escrita é registrada).
+- Cada conexão está limitada a **60 requisições / minuto**; ao exceder esse limite, é retornado um erro de limite de taxa.
+- Quando não for mais necessário, **revogue** (tem efeito imediato; nas conexões OAuth, isso desconecta o cliente) ou **exclua** (também libera espaço) em **Configurações → Integração MCP**.
+- O fluxo OAuth exige **PKCE (S256)**, os códigos de autorização são de uso único e os refresh tokens são rotacionados a cada renovação — os antigos se tornam inválidos imediatamente.

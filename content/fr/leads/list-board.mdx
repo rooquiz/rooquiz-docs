@@ -1,0 +1,49 @@
+---
+title: Liste et tableau
+description: "La page Pistes propose une vue liste pour les actions groupées et le tri, et une vue tableau pour faire glisser les personnes d'une étape de suivi à l'autre. Le sens de chaque colonne et leurs différences."
+---
+
+La page **Pistes** propose deux vues, que l'on bascule avec le sélecteur **Liste / Tableau** en haut à droite. Ce choix ne concerne que vous : il ne modifie pas ce que voient vos coéquipiers.
+
+![The RooQuiz leads list with respondent, status, tags and owner columns](/img/en/leads/leads-list.webp)
+
+## Vue liste
+
+Idéale pour **travailler en masse** et trier selon un champ. Le tableau comporte les colonnes suivantes :
+
+| Colonne | Signification |
+| --- | --- |
+| **Répondant** | Nom et e-mail ; cliquez pour ouvrir le [détail du lead](/fr/leads/detail) |
+| **Statut** | Sa position dans le pipeline ; voir [Statuts, étiquettes et responsables](/fr/leads/status-tags) |
+| **Étiquettes** | Étiquettes de couleur ; un lead peut en porter plusieurs à la fois |
+| **Responsable** | Le membre de l'équipe en charge de ce lead |
+| **Réponses** | Le nombre total de quiz soumis par cette personne |
+| **Prochaine réservation** | Sa prochaine [réservation](/fr/bookings) à venir, vide s'il n'y en a pas |
+| **Dernière réponse** | La date de sa dernière soumission |
+| **Premier quiz** | Le quiz sur lequel elle a laissé ses coordonnées pour la première fois |
+
+La liste utilise le **défilement infini** (continuez à faire défiler pour charger davantage) et les en-têtes de colonne permettent de trier.
+
+## Vue tableau
+
+Les colonnes correspondent aux **statuts de suivi**, une par statut, et faire glisser une carte vers une autre colonne change son statut. Pratique pour passer le pipeline en revue chaque jour et faire avancer les personnes.
+
+<Callout type="info">
+  Faire glisser une carte modifie aussi sa **position dans la colonne**, et cet ordre est mémorisé : vous pouvez ainsi remonter en haut les appels du jour.
+</Callout>
+
+## Actions groupées
+
+Cochez plusieurs leads dans la vue liste pour faire apparaître une barre d'actions groupées :
+
+- **Attribuer un responsable** : confiez les leads sélectionnés à un membre de l'équipe ; il reçoit une seule notification groupée.
+- **Étiqueter en masse** : proposé sous la forme **Ajouter une étiquette** et **Retirer une étiquette**. Utilisez ces options pour les lots plutôt que de remplacer l'ensemble des étiquettes, ce qui effacerait celles ajoutées par d'autres personnes.
+- **Mettre à la corbeille** : les leads vont à la corbeille et peuvent être **restaurés sous 5 jours**.
+
+<Callout type="warning">
+  Les trois actions groupées sont limitées à **50 leads à la fois**. Si vous en sélectionnez davantage, vous en serez averti ; procédez simplement par lots.
+</Callout>
+
+<Callout type="info">
+  La mise à la corbeille ne supprime que le **dossier de suivi**. Le répondant et ses soumissions restent intacts. Pour supprimer également la personne, rendez-vous dans [Répondants](/fr/respondents).
+</Callout>

@@ -1,0 +1,21 @@
+{
+  "pages": [
+    "index",
+    "getting-started",
+    "---핵심 기능---",
+    "editor",
+    "library",
+    "publish",
+    "results",
+    "---고급 기능---",
+    "leads",
+    "respondents",
+    "bookings",
+    "connectors",
+    "---계정 및 팀---",
+    "account",
+    "teams",
+    "---개발자---",
+    "integrations"
+  ]
+}

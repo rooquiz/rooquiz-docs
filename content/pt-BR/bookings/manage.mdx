@@ -1,0 +1,67 @@
+---
+title: Gerenciar agendamentos
+description: 'Gerencie as sessões na página Agendamentos 1:1: confirme ou recuse solicitações pendentes, anexe um link de reunião e instruções a uma sessão específica e filtre a lista por quiz e por status.'
+---
+
+A página **Agendamentos 1:1** é onde você gerencia todas as sessões. Os filtros no topo restringem por quiz e por status.
+
+## Gerenciar solicitações pendentes
+
+Com a [confirmação](/pt-BR/bookings/availability) ativada, os novos agendamentos chegam em "Esperando por você":
+
+- **Confirmar solicitação** — confirma a reunião e libera o endereço. Você pode definir um link de reunião e instruções **para esta sessão específica**; deixe em branco para usar as configurações no nível da equipe.
+- **Recusar solicitação** — você pode adicionar um motivo, que vai no e-mail. A pessoa é notificada e pode solicitar outro horário.
+
+<Callout type="info">
+  A análise é feita pelo **proprietário da organização, por um administrador ou pelo responsável por aquele lead**. Uma solicitação cujo horário de reunião já passou só pode ser recusada, não confirmada.
+</Callout>
+
+## Ações em uma sessão confirmada
+
+| Ação | Observações |
+| --- | --- |
+| **Reagendar** | Escolha um novo horário entre os seus horários disponíveis; o participante recebe um e-mail e o lembrete de 24h é reprogramado |
+| **Marcar como concluído** | A sessão aconteceu. Controle interno — o participante não é contatado |
+| **Marcar não comparecimento** | A pessoa não apareceu. Também apenas interno |
+| **Cancelar agendamento** | Cancela e notifica o participante por e-mail |
+| **Ver resposta** | Leva à resposta que a pessoa enviou |
+
+<Callout type="warning">
+  **Concluído** e **Não compareceu** só podem ser definidos depois que a reunião **já começou**. O reagendamento só se aplica a sessões no status Agendado.
+</Callout>
+
+## Adicionar um agendamento manualmente
+
+Para sessões combinadas por telefone ou em uma conversa, registre-as diretamente:
+
+<Steps>
+### Clique em "Adicionar agendamento"
+
+No canto superior direito da página **Agendamentos 1:1**.
+
+### Escolha o lead
+
+Pesquise por nome ou e-mail. **Membros comuns só podem adicionar agendamentos para os leads sob sua responsabilidade**; proprietários e administradores não têm essa limitação.
+
+### Escolha um horário
+
+**Horários disponíveis** — escolha na grade normal de horários, exatamente o que um respondente veria.
+
+**Horário personalizado** — informe qualquer data e hora, **ignorando a grade de horários**. Útil para registrar um combinado especial já acertado.
+
+### Decida sobre a notificação
+
+Marque "Enviar e-mail de confirmação ao participante" para que a pessoa receba uma confirmação; deixe desmarcado e o agendamento fica apenas como um registro do seu lado.
+</Steps>
+
+<Callout type="warning">
+  Um lead pode ter **apenas um agendamento ativo por vez**. Quem já tem um é sinalizado — cancele ou reagende a sessão existente primeiro.
+</Callout>
+
+## Como isso se conecta aos leads
+
+Agendamentos e [leads](/pt-BR/leads) estão interligados:
+
+- O bloco "Próximo agendamento" na página de detalhes de um lead mostra a próxima sessão e permite reagendar ou cancelar ali mesmo.
+- A lista de leads tem uma coluna **Próximo agendamento**, e você pode [filtrar](/pt-BR/leads/views) conforme o lead tenha ou não um agendamento.
+- Cada solicitação, confirmação, recusa, reagendamento e cancelamento é registrado na **atividade** do lead.

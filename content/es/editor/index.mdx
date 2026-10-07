@@ -1,0 +1,63 @@
+---
+title: Descripción general del editor
+description: 'Recorrido por el editor visual de tres paneles: elige tipos de preguntas a la izquierda, previsualiza en directo en el centro y configura preguntas, reglas e informes a la derecha, todo en una sola pantalla.'
+---
+
+El editor visual es donde se crean los quizzes. Tiene **tres paneles**: añadir preguntas, previsualizar en directo y configurar los detalles ocurre en una sola pantalla.
+
+![Los tres paneles del editor de RooQuiz: tipos de preguntas, vista previa y propiedades](/img/en/editor/editor-overview.webp)
+
+## Qué hace cada panel
+
+| Panel | Finalidad |
+| --- | --- |
+| **Izquierda: tipos de preguntas** | Todos los tipos de preguntas por categoría; haz clic o arrastra para añadir uno. En un Cuestionario de conocimiento aleatorio, este panel es la pestaña **Banco de preguntas** |
+| **Centro: vista previa** | Una representación en directo desde el punto de vista del participante. Cambia entre **Quiz** e **Informe** en la parte superior y, en el lado del informe, elige un **Nivel de vista previa** o una **Vista previa de resultado** para ver cómo se ven los distintos resultados |
+| **Derecha: configuración** | Configuración detallada de lo que esté seleccionado en ese momento |
+
+## Las tres pestañas del panel derecho
+
+| Pestaña | Contenido | Cuándo aparece |
+| --- | --- | --- |
+| **Propiedades** | El enunciado, las opciones, el indicador de obligatorio y la puntuación de la pregunta seleccionada | Siempre |
+| **Personalizado** | La apariencia de cada pregunta | Siempre |
+| **Reglas** | [Lógica condicional](/es/editor/logic) | **Solo en el Cuestionario con puntuación y el Cuestionario de resultado** |
+
+<Callout type="info">
+  Si no encuentras la pestaña **Reglas**, normalmente no es que esté oculta: el tipo de este quiz no la admite. Consulta [Los cuatro tipos de quiz](/es/getting-started/quiz-types).
+</Callout>
+
+## Acciones habituales
+
+- **Añadir una pregunta**: elige un tipo en el panel izquierdo. La lista completa está en [Tipos de preguntas](/es/editor/question-types).
+- **Arrastrar para reordenar**: reorganiza las preguntas directamente. Recuerda que la [lógica condicional](/es/editor/logic) necesita que la pregunta que activa la regla esté antes que la pregunta objetivo, así que revisa tus reglas después de reordenar.
+- **Duplicar una pregunta**: copiar y editar es mejor que crear desde cero una pregunta parecida.
+- **Saltos de página**: inserta uno para dividir un quiz largo en varias páginas en lugar de mostrar un muro de preguntas.
+- **Texto enriquecido e imágenes**: las descripciones de las preguntas admiten texto enriquecido, incluidas imágenes.
+
+## Límite de preguntas
+
+En el **plan Free**, un quiz puede tener hasta **50 preguntas**; en **Pro** no hay límite.
+
+- Solo cuentan las preguntas que se pueden responder: los saltos de página, las declaraciones y los carruseles de imágenes no cuentan. Un espacio de pregunta aleatoria cuenta como el número de preguntas que extrae.
+- La cabecera del editor muestra cuántas has usado (por ejemplo, **48/50 preguntas**). Al alcanzar el límite, añadir o duplicar una pregunta abre el aviso para mejorar el plan.
+- **Crear desde una plantilla** o **duplicar un quiz** nunca se bloquea, aunque supere las 50 preguntas. El nuevo quiz sigue la misma regla que cualquier otro: puedes editar y eliminar sus preguntas, pero no añadir más en el plan Free.
+- Si tu plan Pro termina, los quizzes con más de 50 preguntas siguen funcionando y se pueden editar; simplemente no podrás añadir preguntas hasta que vuelvas a estar por debajo del límite o mejores tu plan.
+
+## Qué hay en la parte superior
+
+- **Vista previa**: abre la vista previa completa desde el punto de vista del participante.
+- **Más configuración**: ve a [Configuración del formulario](/es/editor/settings).
+- **Publicar como plantilla**: envía este quiz al [Centro de plantillas](/es/library/templates) para que tu equipo lo reutilice.
+
+## Siguientes pasos
+
+- [Tipos de preguntas](/es/editor/question-types)
+- [Lógica condicional](/es/editor/logic)
+- [Reglas de puntuación y evaluación](/es/editor/scoring)
+- [Apariencia y plantillas personalizadas](/es/editor/design)
+- [Versiones multilingües](/es/editor/translations)
+
+<Callout type="warning">
+  Recuerda **guardar**: recibirás una confirmación. Antes de publicar, recorre las vistas previas del quiz y del informe, sobre todo en quizzes con lógica condicional o puntuación multidimensional.
+</Callout>

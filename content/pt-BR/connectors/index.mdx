@@ -1,0 +1,56 @@
+---
+title: 'Conectores e automação'
+description: 'Os conectores enviam os leads e agendamentos gerados pelos seus quizzes para as ferramentas que você já usa — e-mail, seu próprio backend, Slack, Zapier ou Kit. Valem para a equipe toda.'
+sidebarTitle: Visão geral
+---
+
+Os **conectores** enviam os leads e agendamentos gerados pelos seus quizzes para as ferramentas que você já usa — e-mail, seu próprio backend, Slack ou seu provedor de e-mail marketing. Você os encontra em **Conectores** na barra lateral esquerda.
+
+<Callout type="info">
+  Os conectores são **da equipe**: configure um e todos os quizzes passam a usá-lo. Para que apenas alguns quizzes acionem um conector, restrinja-o com o [escopo de acionamento](/pt-BR/connectors/events).
+</Callout>
+
+![A página de conectores do RooQuiz com o menu de canais e os cartões dos conectores configurados](/img/en/connectors/connectors-list.webp)
+
+## Os cinco canais
+
+| Canal | Para que serve |
+| --- | --- |
+| **E-mail** | Envia uma notificação personalizável aos destinatários escolhidos quando um evento ocorre |
+| **Webhook** | Faz um POST para a sua própria URL com uma assinatura HMAC |
+| **Slack** | Autorize o app do Slack e publique novos leads em um canal |
+| **Zapier** | Cole uma URL de Catch Hook e alcance milhares de apps |
+| **Kit** | Adiciona novos leads ao Kit (ConvertKit) como inscritos e aplica tags a eles |
+
+Cada conector funciona de forma independente — **desativar um não afeta os outros**. A configuração de cada canal é explicada em [Os cinco canais](/pt-BR/connectors/channels).
+
+## Permissões e plano
+
+<Callout type="warning">
+  Somente o **proprietário da organização ou um administrador** pode gerenciar conectores. Os demais membros veem um aviso de falta de permissão, e o item não aparece na barra lateral para eles.
+</Callout>
+
+O canal de **E-mail** está disponível em todos os planos — ele envia pelo [seu próprio servidor SMTP](/pt-BR/connectors/email-smtp), então não tem custo para nós; os outros quatro são **exclusivos do Pro**. Em uma equipe gratuita, ao selecionar um canal Pro a área de configuração fica acinzentada e é oferecido um link para fazer upgrade.
+
+## O que o cartão do conector informa
+
+Cada conector configurado mostra:
+
+- **Ativada / Desativada** — se ele está funcionando.
+- **Configuração incompleta** — o OAuth foi concluído, mas ainda falta escolher um canal ou concluir uma última etapa. Esses conectores não fazem entregas.
+- **Última entrega** — quando foi acionado pela última vez e qual foi o resultado (sucesso / falha / cota excedida).
+
+<Callout type="info">
+  Depois de configurar um conector, clique em **Enviar teste** para confirmar que o outro lado realmente recebe os dados, em vez de descobrir isso no seu primeiro lead real.
+</Callout>
+
+## Nesta seção
+
+<Cards>
+  <Card title="Os cinco canais" href="/pt-BR/connectors/channels" />
+  <Card title="Eventos de gatilho e escopo" href="/pt-BR/connectors/events" />
+</Cards>
+
+<Callout type="info">
+  Prefere buscar os dados no seu próprio ritmo em vez de recebê-los por push? Veja a [REST API](/pt-BR/integrations/rest-api) e a [integração MCP](/pt-BR/integrations/mcp).
+</Callout>

@@ -1,0 +1,59 @@
+---
+title: Réponses
+description: "Les réponses regroupent chaque soumission reçue par un quiz : le générateur de filtres, les colonnes du tableau, l'ouverture d'une soumission et la différence entre réponses brutes et statistiques."
+---
+
+Les réponses correspondent à **chaque soumission** reçue par un quiz, dans l'onglet **Réponses** du quiz. Ce sont les données brutes ; pour les tendances agrégées, consultez les [Statistiques](/fr/results/insights).
+
+![The RooQuiz response records list with the filter builder and table](/img/en/results/records-list.webp)
+
+## Filtres
+
+Cliquez sur **Filtres** pour ouvrir le générateur et cumuler des conditions (elles sont combinées par un ET) :
+
+| Champ | Remarques |
+| --- | --- |
+| **Par question** | Filtre selon la réponse à une question précise ; les questions à choix prennent en charge « est l'un de / n'est aucun de / est vide / n'est pas vide » |
+| **Répondant** | Les soumissions d'une personne |
+| **Source UTM** | Le canal d'origine, en lien avec le [suivi UTM](/fr/publish/tracking) |
+| **Score** | Une plage numérique (**Est compris entre** un minimum et un maximum) |
+| **Niveau** | Le niveau de rapport atteint |
+| **Langue** | La [version linguistique](/fr/editor/translations) dans laquelle la personne a répondu |
+| **Statut du lead / Responsable** | Filtre selon le statut de suivi ou le responsable du [lead](/fr/leads) |
+| **Date de soumission** | Une date de début et une date de fin |
+
+Cliquez sur **Appliquer** une fois les conditions définies, ou sur **Tout effacer** pour recommencer.
+
+<Callout type="info">
+  Il n'y a pas de vue tableau ici : elle se trouve sur la page [Pistes](/fr/leads/list-board). Les deux répondent à des questions différentes : les réponses sont des **soumissions**, les leads sont des **personnes**.
+</Callout>
+
+## Une réponse individuelle
+
+Ouvrez n'importe quelle ligne et le détail se divise en deux :
+
+- **À gauche** : les réponses question par question avec leurs scores, ainsi que le rapport.
+- **À droite** : un panneau de suivi de cette personne en tant que [lead](/fr/leads) : modifiez le statut, rédigez des **commentaires** et consultez la chronologie d'activité fusionnée.
+
+Autrement dit, vous pouvez assurer le suivi tout en lisant la réponse, sans passer par la page des leads.
+
+<Callout type="info">
+  Les commentaires acceptent les **réponses**, et vous pouvez supprimer les vôtres. Ce sont les mêmes commentaires que sur la [page de détail du lead](/fr/leads/detail) : les deux emplacements affichent un seul fil partagé.
+</Callout>
+
+## Contenu d'une réponse
+
+Outre les réponses elles-mêmes, une réponse comporte généralement :
+
+- **Numéro d'enregistrement** : un numéro incrémental propre au quiz.
+- **Répondant** : présent uniquement si la personne était connectée ; vide pour les soumissions anonymes.
+- **Source** : enregistrée lorsque la personne est arrivée par un [lien UTM](/fr/publish/tracking).
+- **Date de soumission**, **version linguistique**, **score et niveau**.
+
+## Exporter
+
+Le bouton **Exporter** de la barre d'outils traite soit les lignes sélectionnées, soit tout ce qui correspond aux filtres actuels. Un export complet consomme votre quota hebdomadaire ; voir [Exporter les données](/fr/results/export).
+
+<Callout type="warning">
+  Les données exportées peuvent contenir des informations personnelles fournies par les répondants. Traitez-les conformément aux règles de confidentialité et de conformité de votre organisation.
+</Callout>

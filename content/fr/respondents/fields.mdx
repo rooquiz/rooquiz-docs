@@ -1,0 +1,49 @@
+---
+title: Champs étendus et avatars
+description: "Les champs étendus recueillent les informations souhaitées au-delà du nom et de l'e-mail (matricule, entreprise, ville, téléphone), demandées à la première connexion. Jusqu'à cinq champs, plus les avatars."
+---
+
+Les **champs étendus** sont les informations supplémentaires que vous souhaitez obtenir des répondants au-delà du nom et de l'e-mail standard : matricule étudiant, entreprise, ville, numéro de téléphone. Une fois configurés, les répondants sont invités à les remplir **lors de leur première connexion**.
+
+Les deux réglages se trouvent dans **Répondants → Paramètres des répondants**.
+
+## Champs étendus
+
+<Callout type="warning">
+  **5 champs** au maximum. Cette limite est volontaire : plus vous en demandez à la première connexion, plus vous perdez de personnes.
+</Callout>
+
+### Trois types de champs
+
+| Type | Usage |
+| --- | --- |
+| **Texte sur une ligne** | Saisie libre, comme un matricule étudiant ou un nom d'entreprise ; prend en charge une vérification par expression régulière |
+| **Liste déroulante** | Listes fixes, comme la ville ou la source de recommandation ; peut autoriser plusieurs sélections |
+| **Téléphone** | Un numéro avec indicatif pays, validé automatiquement |
+
+### Options par champ
+
+- **Obligatoire** : la personne ne peut pas continuer sans le remplir.
+- **Unique** : la valeur ne doit se répéter **nulle part dans l'organisation**. Idéal pour les identifiants naturellement uniques, comme un numéro d'étudiant.
+- **Texte indicatif** : l'indication grisée affichée dans le champ de saisie.
+- **Expression régulière** (texte uniquement) : une expression régulière JavaScript **sans les barres obliques qui l'entourent**, par exemple `^1\d{10}$`.
+- **Autoriser les choix multiples** (liste déroulante uniquement) : permet de choisir plusieurs valeurs.
+- **Pays/régions autorisés** (téléphone uniquement) : restreint les indicatifs pays proposés ; le premier est présélectionné, et **laisser vide les autorise tous**.
+
+### Ordre et suppression
+
+Les champs s'affichent sous forme d'accordéon ; utilisez **Monter / Descendre** pour les réordonner. Cet ordre est celui dans lequel les répondants les remplissent.
+
+<Callout type="warning">
+  Lorsque vous supprimez la définition d'un champ, les valeurs déjà soumises par les répondants **restent dans la base de données** : elles ne sont simplement plus affichées. La boîte de dialogue de confirmation indique combien de définitions seront supprimées.
+</Callout>
+
+## Thème d'avatar
+
+Lorsqu'un répondant est créé ou s'inscrit de lui-même, un avatar est généré aléatoirement à partir du **thème d'avatar** que vous choisissez, pour éviter une page remplie de silhouettes grises.
+
+Les thèmes comprennent Adventurer, Emoji, Lorelei, Thumbs, Robot et Notionist ; développez le réglage pour tous les prévisualiser.
+
+<Callout type="info">
+  Changer de thème n'affecte que les répondants créés **ensuite** : les avatars existants ne sont pas régénérés.
+</Callout>

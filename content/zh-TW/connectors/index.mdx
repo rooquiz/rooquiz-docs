@@ -1,0 +1,56 @@
+---
+title: 連接與自動化
+description: '連接（Connectors）負責把測評產生的新線索和預約推到你已經在用的地方——郵件、你自己的後端、Slack、Zapier 或 Kit，入口在左側欄的連接。連接是團隊級的，設定一次全部測評共用；想只讓部分測評觸發，用觸發範圍收斂。這一章還講權限、方案與卡片狀態。頁面還說明連接卡片上的狀態標記分別代表什麼，以及投遞異常時該從哪裡排查。'
+sidebarTitle: 概覽
+---
+
+**連接(Connectors)** 負責把測評產生的新線索和預約,推到你已經在用的地方——郵件、你自己的後端、Slack、或者電子郵件行銷工具。入口在左側欄的 **連接**。
+
+<Callout type="info">
+  連接是**團隊級**的:設定一次,所有測評共用,不必給每張測評單獨配一遍。想只讓某幾張測評觸發,用 [觸發範圍](/zh-TW/connectors/events) 收窄。
+</Callout>
+
+![RooQuiz 連接頁:左側管道選單與已設定的連接卡片](/img/zh/connectors/connectors-list.webp)
+
+## 五個管道
+
+| 管道 | 用來做什麼 |
+| --- | --- |
+| **郵件** | 事件發生時給指定收件人發一封可自訂的通知郵件 |
+| **Webhook** | 帶 HMAC 簽名推到你自己的 URL |
+| **Slack** | 授權 Slack 應用,把新線索發成頻道訊息 |
+| **Zapier** | 貼上 Catch Hook URL,接到上千個應用 |
+| **Kit** | 把新線索寫進 Kit(ConvertKit)成為訂閱者並打標籤 |
+
+每個管道獨立執行,**停用其中一個不影響其他**。各管道的具體設定見 [五個管道](/zh-TW/connectors/channels)。
+
+## 權限與方案
+
+<Callout type="warning">
+  只有**團隊所有者或管理員**能管理連接。其他成員進入會看到無權限提示,側邊欄也不顯示這一項。
+</Callout>
+
+**郵件**管道所有方案都可用 —— 它走[你自己的 SMTP 伺服器](/zh-TW/connectors/email-smtp),平台不承擔寄信成本;其餘四個是 **Pro 方案專屬**。免費團隊選中 Pro 管道時,設定區會變成灰色並給出升級入口。
+
+## 連接卡片上的狀態
+
+每條已設定的連接會顯示:
+
+- **已啟用 / 已停用** —— 是否在工作。
+- **未完成設定** —— OAuth 授權完成但還沒選頻道 / 完成設定,這類連接不會投遞。
+- **最近投遞** —— 上一次投遞的時間與結果(成功 / 失敗 / 額度不足)。
+
+<Callout type="info">
+  配好之後建議點一下 **發送測試**,先確認接收端真的收得到,再等真實線索。
+</Callout>
+
+## 這一章包含
+
+<Cards>
+  <Card title="五個管道" href="/zh-TW/connectors/channels" />
+  <Card title="觸發事件與範圍" href="/zh-TW/connectors/events" />
+</Cards>
+
+<Callout type="info">
+  想按自己的節奏拉資料、而不是被動接收推送?看 [REST API](/zh-TW/integrations/rest-api) 與 [MCP 接入](/zh-TW/integrations/mcp)。
+</Callout>

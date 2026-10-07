@@ -1,0 +1,72 @@
+---
+title: Intégration
+description: "Intégrez un quiz directement à votre site pour que les visiteurs répondent sans quitter la page : modes d'intégration disponibles, code généré par chacun et mode adapté à chaque type de page."
+---
+
+Au-delà du partage d'un lien, vous pouvez **intégrer un quiz directement à votre propre site web** : les visiteurs y répondent sur votre page d'atterrissage sans la quitter.
+
+## Trois modes d'intégration
+
+Ouvrez **Partager** → **Intégrer** sur le quiz concerné, choisissez un mode d'affichage, puis copiez le code généré dans le HTML de votre site.
+
+| Mode | Idéal pour | Comportement |
+| --- | --- | --- |
+| **En ligne (hauteur automatique)** | S'insérer dans le flux de contenu de la page | La hauteur s'adapte automatiquement au contenu. Recommandé |
+| **Pop-up** | Un bouton d'appel à l'action sur votre page | Ouvre le quiz dans une surcouche plein écran |
+| **Iframe simple (hauteur fixe)** | Les environnements où il est impossible de charger un script | Le plus simple ; hauteur fixe avec défilement interne |
+
+### En ligne (hauteur automatique)
+
+```html
+<div data-rooquiz-embed data-rooquiz-token="YOUR_QUIZ_TOKEN"></div>
+<script src="https://YOUR_QUIZ_DOMAIN/embed.js" async></script>
+```
+
+Le script d'intégration surveille la hauteur du contenu du quiz (pagination, passage à la page de résultat, etc.) et redimensionne l'iframe en temps réel : ni barres de défilement, ni contenu tronqué.
+
+### Pop-up
+
+```html
+<div data-rooquiz-embed data-rooquiz-token="YOUR_QUIZ_TOKEN" data-rooquiz-mode="popup" data-rooquiz-text="Start the quiz"></div>
+<script src="https://YOUR_QUIZ_DOMAIN/embed.js" async></script>
+```
+
+Un bouton s'affiche sur votre page ; un clic ouvre le quiz dans une surcouche plein écran. Fermez-la avec Échap ou en cliquant sur le masque.
+
+### Iframe simple
+
+```html
+<iframe src="https://YOUR_QUIZ_DOMAIN/a/YOUR_QUIZ_TOKEN?embed=1" width="100%" height="600" style="border:0;" title="RooQuiz"></iframe>
+```
+
+## Attributs disponibles
+
+| Attribut | Description |
+| --- | --- |
+| `data-rooquiz-token` | Obligatoire. Le jeton public du quiz |
+| `data-rooquiz-mode` | `inline` (par défaut) ou `popup` |
+| `data-rooquiz-from` | Étiquette de source enregistrée avec chaque réponse, utilisée par le [Suivi des sources](/fr/publish/tracking) et par la répartition par source dans les [Statistiques](/fr/results/insights) |
+| `data-rooquiz-height` | Hauteur initiale (px) en mode en ligne, utilisée avant que le redimensionnement automatique ne prenne le relais |
+| `data-rooquiz-text` | Libellé du bouton en mode pop-up |
+
+## API JS
+
+Si vous avez besoin d'un déclencheur personnalisé (par exemple votre propre bouton qui ouvre la pop-up), appelez directement l'API :
+
+```html
+<script src="https://YOUR_QUIZ_DOMAIN/embed.js"></script>
+<script>
+  // Mount an inline embed manually
+  RooQuiz.embed({ el: '#container', token: 'YOUR_QUIZ_TOKEN', from: 'homepage' })
+  // Open the popup from any element
+  document.querySelector('#my-button').onclick = () => RooQuiz.open('YOUR_QUIZ_TOKEN')
+</script>
+```
+
+<Callout type="warning">
+  Il est déconseillé d'intégrer les quiz réservés aux **répondants enregistrés** : les navigateurs limitent le stockage et les fenêtres de connexion dans les iframes tierces, ce qui peut dégrader l'expérience de connexion. Pour ces quiz, partagez plutôt le [lien public](/fr/publish/link-qrcode).
+</Callout>
+
+<Callout type="info">
+  La page intégrée masque automatiquement le pied de page et l'arrière-plan pour se fondre de manière transparente dans votre site ; les couleurs de votre thème s'appliquent toujours. Les réponses recueillies via une intégration apparaissent normalement dans les [Réponses](/fr/results/records).
+</Callout>

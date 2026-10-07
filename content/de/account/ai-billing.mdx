@@ -1,0 +1,71 @@
+---
+title: KI-Guthaben & Abrechnung
+description: 'So funktioniert KI-Guthaben in RooQuiz: welche Funktionen es verbrauchen (KI-Auswertung, KI-Empfehlungen), wie abgerechnet wird, wann das Kontingent zurückgesetzt wird und was bei leerem Guthaben passiert.'
+---
+
+KI-Funktionen in Ihren Quizzen (KI-Auswertung, automatische KI-Bewertung usw.) werden nach **tatsächlicher Nutzung** abgerechnet und verbrauchen das **KI-Guthaben** Ihres Teams. Diese Seite erklärt, was Guthaben verbraucht, wie abgerechnet wird, wann das Guthaben zurückgesetzt wird und was passiert, wenn es aufgebraucht ist.
+
+## Was KI-Guthaben verbraucht
+
+- **KI-Auswertung im Bewerteten Quiz**: KI-Analyse von Textantworten, die zusätzliche Erkenntnisse für den Bericht liefert.
+- **KI-Empfehlungen** (Beta): von der KI erzeugte Verbesserungs- bzw. Interpretationsvorschläge im Bericht.
+- **Automatische KI-Bewertung von Lückentexten** (Beta) im Wissensquiz / Zufälligen Wissensquiz: Wenn bei einer Lückentextfrage die „automatische KI-Bewertung“ aktiviert ist, entscheidet die KI, ob die Antwort richtig ist.
+
+Die normale Bewertung von Auswahlfragen, die Bewertung nach Dimensionen und aus Vorlagen erzeugte Berichte verbrauchen **kein** KI-Guthaben.
+
+<Callout type="info">
+  „KI-Empfehlungen“ und „Automatische KI-Bewertung von Lückentexten“ sind derzeit **Beta**-Funktionen; ihr Verhalten und ihre Qualität werden noch verfeinert.
+</Callout>
+
+## Abrechnungseinheit & Modelle
+
+- KI-Guthaben wird in **Neurons** gemessen (der Abrechnungseinheit von Cloudflare Workers AI).
+- Jeder KI-Aufruf wird nach der Anzahl verbrauchter **Tokens** berechnet und in Neurons umgerechnet: Mehr Eingabe-/Ausgabe-Tokens bedeuten mehr Verbrauch.
+- Unter **Einstellungen → Tarifinformationen** können Sie eine KI-Modellstufe wählen: **Standard / Advanced / Flagship**. Stärkere Modelle verbrauchen pro Aufruf mehr Neurons. Free-Teams können nur „Standard“ nutzen; Advanced und Flagship sind **nur mit Pro** verfügbar.
+- Die Kosten werden **asynchron nach** der Erstellung des Berichts verrechnet und verlangsamen die Berichtserstellung daher nie.
+
+<Callout type="info">
+  Guthaben wird nur abgezogen, wenn die KI **tatsächlich erfolgreich ausgeführt wird**; leere Auswertungen oder fehlgeschlagene Aufrufe werden nicht berechnet.
+</Callout>
+
+## Monatliches Kontingent & Zurücksetzung (Abrechnungsstichtag)
+
+- Jedes Team erhält ein monatliches KI-Kontingent, dessen Größe vom Tarif abhängt: Free hat ein Basiskontingent, Pro ein größeres. Die genauen Werte finden Sie unter **Einstellungen → Tarifinformationen**.
+- Das Kontingent wird **monatlich zurückgesetzt**, und zwar zum **Abrechnungsstichtag** (nicht nach festen 30 Tagen):
+  - **Pro**: richtet sich nach dem Abrechnungsdatum des Abonnements; mit jeder Verlängerung beginnt ein neuer Zyklus.
+  - **Free**: wird monatlich im teameigenen Zyklus zurückgesetzt.
+- Nicht genutztes Monatskontingent **wird nicht übertragen**; es verfällt am Ende des Zyklus und wird im nächsten Zyklus neu vergeben.
+- Das Rücksetzdatum des aktuellen Zyklus wird unter **Einstellungen → Tarifinformationen → Zyklus wird zurückgesetzt** angezeigt.
+
+## Aufladen (Pro)
+
+- Pro-Teams können unter **Einstellungen → Tarifinformationen** zusätzliches KI-Guthaben kaufen.
+- Preis: **1 Einheit = 30.000 Neurons = 1 $**, mit mindestens 5 und höchstens 100 Einheiten pro Kauf.
+- Aufgeladenes Guthaben **verfällt nie** und wird vom monatlichen Zyklus nicht gelöscht.
+- Verbrauchsreihenfolge: **Zuerst wird das Monatskontingent genutzt, dann das aufgeladene Guthaben**.
+
+## Was passiert, wenn das Guthaben aufgebraucht ist
+
+Das Verhalten hängt davon ab, wie die KI eingesetzt wird:
+
+| Szenario | Verhalten bei aufgebrauchtem Guthaben |
+| --- | --- |
+| **KI-Auswertung im Bewerteten Quiz / KI-Empfehlungen** | **Kontrollierte Einschränkung**: Die KI-Teile werden übersprungen, während Bericht, Dimensionsanalyse und Grundbewertung **weiterhin normal erstellt** werden |
+| **Automatische KI-Bewertung von Lückentexten** im Wissensquiz / Zufälligen Wissensquiz | Neue Einsendungen für diese Formulare werden **abgelehnt** (KI-Guthaben aufgebraucht), da die Bewertung von der KI abhängt und nicht offline berechnet werden kann |
+
+<Callout type="warning">
+  Wenn Sie Antworten für ein Wissensquiz mit „automatischer KI-Bewertung“ sammeln, behalten Sie Ihr Guthaben im Blick – ist es aufgebraucht, können Teilnehmer **nicht mehr absenden**. Stellen Sie es wieder her, indem Sie auf Pro upgraden, Guthaben aufladen oder die nächste Zyklus-Zurücksetzung abwarten.
+</Callout>
+
+## Erinnerung bei niedrigem Guthaben
+
+- Wenn das **insgesamt verfügbare Guthaben** eines Teams (verbleibendes Monatskontingent + aufgeladenes Guthaben) **unter 20 %** des monatlichen Kontingents des Tarifs fällt, prüft das System dies täglich und sendet eine Erinnerungs-E-Mail an den **Inhaber** des Teams.
+- Es gibt **nur eine Erinnerung pro Zyklus**; sie wird nach der Zurücksetzung des Kontingents oder nach einer erfolgreichen Aufladung wieder aktiviert.
+
+## Wo Sie es einsehen und verwalten
+
+Unter **Einstellungen → Tarifinformationen** sehen Sie: Kontingent und Restguthaben des aktuellen Zyklus, aufgeladenes Guthaben, Rücksetzdatum des Zyklus, die Auswahl der KI-Modellstufe und den Einstieg zum Aufladen.
+
+<Callout type="info">
+  Verwandte Themen: [Bewertungs- & Auswertungsregeln](/de/editor/scoring), [Berichte & KI-Auswertung](/de/results/reports).
+</Callout>

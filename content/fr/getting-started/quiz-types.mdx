@@ -1,0 +1,57 @@
+---
+title: Les quatre types de quiz
+description: "Les quatre types de quiz RooQuiz et leur usage (tests de connaissances, évaluations multidimensionnelles, quiz de résultat et quiz de connaissances aléatoires), et pourquoi le type est figé à la création."
+---
+
+RooQuiz propose quatre types de quiz (scénarios), chacun conçu pour un objectif différent.
+
+<Callout type="warning">
+  **Le type est choisi à la création et ne peut plus être modifié ensuite.** Il s'agit d'une contrainte au niveau des données, et non d'une option absente de l'interface. Une erreur oblige à tout reconstruire.
+</Callout>
+
+## Quiz de connaissances
+
+Pour les tests de connaissances, les examens en ligne et les entraînements notés : les situations qui exigent un **jugement juste/faux et une notation**.
+
+- **Ordre fixe** : tous les répondants voient les questions dans le même ordre.
+- **Notation** : attribuez des points aux questions ou aux bonnes options ; les totaux sont calculés automatiquement.
+- **Correction et retour** : indiquez les bonnes réponses, définissez un score de réussite et montrez aux répondants leur score et un retour.
+
+## Quiz noté
+
+Pour les tests de personnalité, les évaluations de compétences et les enquêtes : les situations qui exigent une **analyse multidimensionnelle** plutôt qu'un simple juste/faux.
+
+- **Notation multidimensionnelle** : associez les questions à plusieurs dimensions et produisez des résultats multidimensionnels, souvent présentés sous forme de **graphique radar**.
+- **Logique conditionnelle** : affichez ou masquez les questions suivantes selon les réponses précédentes, pour des enquêtes adaptatives.
+- **Évaluation IA** : utilisez l'IA pour évaluer les réponses textuelles et générer une analyse plus riche (soumise au quota IA).
+- **Diffusion du rapport** : les résultats peuvent être affichés à l'écran, exportés en PDF ou envoyés par e-mail (l'e-mail est une fonctionnalité Pro).
+
+## Quiz de résultat
+
+Pour les tests de personnalité, les quiz ludiques du type « quel X êtes-vous » et les aimants à leads de diagnostic : les situations qui produisent un **type de résultat** plutôt qu'un score.
+
+- **Types de résultat** : définissez à l'avance un ensemble de types de résultat (par exemple Lion / Hibou) ; chaque type possède son propre nom, sa couleur de thème, son image et un contenu de résultat en texte enrichi.
+- **Vote par choix** : chaque choix vote pour un ou plusieurs types ; après la soumission, le type ayant obtenu **le plus de votes l'emporte** (en cas d'égalité, l'ordre de la liste départage).
+- **CTA de la page de résultats** : chaque type peut porter son propre bouton CTA (réserver une consultation, voir une offre…), pour transformer un résultat ludique en action et en partages.
+- **Types de questions** : les questions de vote sont le choix unique, le choix multiple, la liste déroulante et le vrai/faux, aux côtés d'éléments d'affichage comme les textes d'information et les sauts de page.
+
+## Quiz de connaissances aléatoire
+
+Pour les exercices d'entraînement et les tests aléatoires : les situations où **chaque répondant doit voir des questions différentes**.
+
+- **Tirage aléatoire** : tire des questions d'une banque de questions associée selon une règle, à chaque soumission.
+- **Filtrage de la banque** : contrôlez le périmètre du tirage par difficulté, étiquettes, etc.
+- **Sélection enregistrée** : le système enregistre les questions effectivement tirées à chaque fois, pour garantir une notation cohérente.
+
+## Comment choisir
+
+| Votre objectif | Type recommandé |
+| --- | --- |
+| Noter les répondants et juger juste/faux | **Quiz de connaissances** |
+| Mener un test de personnalité/de compétences ou une enquête avec analyse multidimensionnelle | **Quiz noté** |
+| Donner à chaque répondant un résultat du type « quel type êtes-vous » | **Quiz de résultat** |
+| Montrer à chaque personne une série différente de questions aléatoires | **Quiz de connaissances aléatoire** |
+
+<Callout type="warning">
+  Les paramètres disponibles diffèrent selon le type (par exemple, la notation n'est disponible que dans le Quiz de connaissances, la logique conditionnelle et l'analyse multidimensionnelle visent principalement le Quiz noté, et le vote par choix n'existe que dans le Quiz de résultat). Vérifiez les fonctionnalités dont vous avez besoin avant de choisir.
+</Callout>

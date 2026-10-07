@@ -1,0 +1,276 @@
+---
+title: MCP-Integration
+description: 'RooQuiz bietet einen MCP-Server, über den Claude, Cursor, Codex und andere KI-Clients per natürlicher Sprache mit Quizzen in Ihrem Team arbeiten: erstellen, Fragen ergänzen, Berichte und Übersetzungen verwalten.'
+---
+
+RooQuiz bietet einen **MCP-Server (Model Context Protocol)**, über den KI-Clients – Claude Desktop, Claude Code, Cursor, Codex und andere – mit Quizzen in Ihrem Team arbeiten können. Per natürlicher Sprache können Sie Wissensquizze, Bewertete Quizze und Ergebnisquizze erstellen, Fragen anhängen, Elemente neu anordnen und Berichtsdimensionen oder Ergebnistypen konfigurieren; außerdem können Sie Quizze duplizieren / löschen, Übersetzungen und Teilnehmer verwalten sowie Einsendungen, Statistiken und Conversion-Funnels lesen – statt alles von Hand im Editor aufzubauen.
+
+<Callout type="info">
+  MCP ist eine Funktion für **erfahrene Nutzer** – Sie benötigen einen KI-Client, der MCP unterstützt. Für das einfache, visuelle Erstellen von Quizzen empfehlen wir weiterhin den [Editor](/de/editor).
+</Callout>
+
+## Funktionsweise
+
+- Ein KI-Client verbindet sich mit dem MCP-Endpunkt von RooQuiz (`/api/mcp`) über eine von zwei Authentifizierungsmethoden: **OAuth-Autorisierung** (empfohlen – unterstützte Clients melden sich einfach über den Browser an) oder ein **persönliches API-Token**.
+- In beiden Fällen handelt die KI **als Sie** innerhalb des gerade aktiven Teams.
+- Jede Aktion durchläuft dieselben **Zugriffsprüfungen** wie die Admin-Oberfläche; Schreibvorgänge werden außerdem im **Audit-Log** erfasst.
+- Was die KI tun kann, ist also vollständig durch Ihre Rolle und Berechtigungen in diesem Team begrenzt – sie kann diese nicht überschreiten.
+
+## Option 1: OAuth-Autorisierung (empfohlen)
+
+Clients, die MCP-OAuth unterstützen – claude.ai und Claude Code –, **benötigen kein manuell erstelltes Token**. Geben Sie einfach die Endpunkt-URL an: Der Client erkennt den Autorisierungsserver automatisch und öffnet Ihren Browser, wo Sie sich bei RooQuiz anmelden, das zu autorisierende Team auswählen und auf „Autorisieren“ klicken.
+
+<Tabs items={['claude.ai (Web)', 'Claude Code']}>
+  <Tab value="claude.ai (Web)">
+    Öffnen Sie in claude.ai **Settings → Connectors → Add custom connector**:
+
+    1. Vergeben Sie einen beliebigen Namen (z. B. `RooQuiz`).
+    2. Verwenden Sie Ihren Endpunkt (sieht aus wie `https://your-domain/api/mcp`) als URL des Remote-MCP-Servers.
+    3. Speichern Sie und klicken Sie auf „Connect“ – Ihr Browser wird zur Autorisierungsseite von RooQuiz weitergeleitet; melden Sie sich an, wählen Sie ein Team und klicken Sie auf „Autorisieren“.
+  </Tab>
+  <Tab value="Claude Code">
+    Führen Sie an beliebiger Stelle im Terminal aus (**ohne** Token-Header):
+
+    ```bash
+    claude mcp add --transport http rooquiz https://your-domain/api/mcp
+    ```
+
+    Wenn Sie sich in Claude Code zum ersten Mal verbinden (z. B. mit `/mcp`), öffnet sich Ihr Browser automatisch, um die Autorisierung abzuschließen.
+  </Tab>
+</Tabs>
+
+Zu OAuth-Verbindungen:
+
+- Das Team, das Sie bei der Autorisierung auswählen, wird zum anfänglich aktiven Team; die KI kann später über `switch_active_tenant` trotzdem wechseln.
+- Die Verbindung erscheint in der Token-Liste unter **Einstellungen → MCP-Integration** (markiert mit **OAuth**); **Widerrufen trennt** diesen Client. Sie zählt **nicht** zum Limit von 5 Tokens.
+- Die Anmeldedaten werden automatisch erneuert (das Access-Token wird fortlaufend stündlich aktualisiert; die Verbindung selbst bleibt 30 Tage gültig und verlängert sich bei Nutzung) – Sie müssen nichts von Hand pflegen.
+
+## Option 2: Persönliches Token (PAT)
+
+Für Clients ohne OAuth-Unterstützung (Cursor, Codex CLI, Claude Desktop) oder Umgebungen ohne Browser wie CI verbinden Sie sich mit einem persönlichen API-Token.
+
+### Token erstellen
+
+Öffnen Sie **Einstellungen → MCP-Integration** und klicken Sie auf „Token erstellen“:
+
+1. Vergeben Sie einen **Namen** (zur Wiedererkennung, z. B. `Cursor - my Mac`).
+2. Wählen Sie ein **Standardteam** – das Token arbeitet standardmäßig mit diesem Team, und die KI kann später über das Tool `switch_active_tenant` zu jedem anderen Team wechseln, dem Sie angehören.
+3. Nach dem Erstellen wird ein Klartext-Token angezeigt, das mit `rqp_live_` beginnt.
+
+<Callout type="warning">
+  **Das Klartext-Token wird nur ein einziges Mal angezeigt.** Nachdem Sie die Seite verlassen haben, kann es nicht mehr abgerufen werden. Kopieren Sie es sofort; geht es verloren, müssen Sie es widerrufen und ein neues erstellen.
+</Callout>
+
+Limits:
+
+- Jeder Nutzer kann höchstens **5 Tokens** besitzen (einschließlich widerrufener; OAuth-Verbindungen zählen nicht). Um weitere zu erstellen, **löschen** Sie eines, um einen Platz freizugeben („Widerrufen“ deaktiviert nur – der Platz wird dadurch nicht frei).
+- Ein Token ist eine **persönliche Zugangsberechtigung** – committen Sie es niemals in die Versionsverwaltung und teilen Sie es nicht öffentlich.
+
+### KI-Client konfigurieren
+
+Auf der Seite **Einstellungen → MCP-Integration** können Sie fertige Konfigurations-Snippets für jeden Client kopieren, zusammen mit Ihrer **Endpunkt-URL** (sieht aus wie `https://your-domain/api/mcp`). Ersetzen Sie `rqp_live_xxx...` im Snippet durch das soeben erzeugte Token.
+
+<Tabs items={['Claude Code (CI)', 'Cursor', 'Codex CLI', 'Claude Desktop']}>
+  <Tab value="Claude Code (CI)">
+    Für Claude Code ist der oben beschriebene OAuth-Ablauf vorzuziehen; ein Token-Header wird nur in Umgebungen ohne Browser wie CI benötigt:
+
+    ```bash
+    claude mcp add --transport http rooquiz https://your-domain/api/mcp \
+      --header "Authorization: Bearer rqp_live_xxx..."
+    ```
+  </Tab>
+  <Tab value="Cursor">
+    Native Unterstützung für HTTP-MCP. Schreiben Sie in die projektbezogene `.cursor/mcp.json` oder die globale `~/.cursor/mcp.json`:
+
+    ```json
+    {
+      "mcpServers": {
+        "rooquiz": {
+          "url": "https://your-domain/api/mcp",
+          "headers": { "Authorization": "Bearer rqp_live_xxx..." }
+        }
+      }
+    }
+    ```
+  </Tab>
+  <Tab value="Codex CLI">
+    Native Unterstützung für HTTP-MCP. Schreiben Sie in `~/.codex/config.toml`:
+
+    ```toml
+    [mcp_servers.rooquiz]
+    url = "https://your-domain/api/mcp"
+    bearer_token_env_var = "ROOQUIZ_MCP_TOKEN"
+    ```
+
+    Aus Sicherheitsgründen akzeptiert Codex nur den **Namen einer Umgebungsvariablen**, kein direkt eingetragenes Klartext-Token. Exportieren Sie es zusätzlich in Ihrer Shell:
+
+    ```bash
+    export ROOQUIZ_MCP_TOKEN="rqp_live_xxx..."
+    ```
+  </Tab>
+  <Tab value="Claude Desktop">
+    Claude Desktop unterstützt nativ nur stdio, daher erfordert HTTP-MCP die Brücke `mcp-remote` (wird bei der ersten Nutzung automatisch heruntergeladen; benötigt lokal Node ≥ 18). Fügen Sie Folgendes in die Konfigurationsdatei ein und **starten** Sie Claude Desktop dann **neu**:
+
+    - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
+    - Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+
+    ```json
+    {
+      "mcpServers": {
+        "rooquiz": {
+          "command": "npx",
+          "args": [
+            "-y", "mcp-remote",
+            "https://your-domain/api/mcp",
+            "--header", "Authorization: Bearer rqp_live_xxx..."
+          ]
+        }
+      }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Beispiel-Prompts
+
+Sobald Ihr Client verbunden ist, sprechen Sie in normaler Sprache mit ihm. Jedes dieser Beispiele
+nutzt einen anderen Teil des Servers:
+
+**Aus einer Vorlage erstellen**
+
+> Zeig mir die Coaching-Vorlagen, erstelle aus der Readiness-Vorlage ein bewertetes Quiz und füge
+> dann zwei Fragen zum Budget hinzu.
+
+Nutzt `list_templates` → `create_form_from_template` → `add_question`.
+
+**Leads bearbeiten**
+
+> Liste die Leads auf, die mein Wheel-of-Life-Quiz diese Woche erfasst hat, tagge alle mit einer
+> Punktzahl unter 40 als Follow-up und weise sie mir zu.
+
+Nutzt `list_leads` → `set_lead_tags` → `assign_leads`.
+
+**Den Funnel analysieren**
+
+> Welches meiner Quizze hat die schlechteste Abschlussrate, und wo genau springen die Leute ab?
+
+Nutzt `list_forms` → `get_form_stats` → `get_form_funnel`.
+
+**Mehrsprachig werden**
+
+> Übersetze mein Quiz zur Beförderungsreife ins Spanische und Deutsche und behalte die Fragecodes bei.
+
+Nutzt `list_form_translations` → `create_form_translation`.
+
+<Callout type="info">
+  Namen, E-Mail-Adressen und Telefonnummern von Teilnehmern werden **maskiert** zurückgegeben
+  (`j***g@example.com`). Die Maskierung ist nicht umkehrbar – verweisen Sie daher über die ID auf
+  einen Teilnehmer, statt einen maskierten Wert in einen Prompt zurückzukopieren.
+</Callout>
+
+## Verfügbare Tools
+
+Nach dem Verbinden kann der KI-Assistent die folgenden Tools aufrufen. Sie wirken alle auf das Team, in dem das Token **gerade aktiv** ist.
+
+### Team (Tenant)
+
+| Tool | Funktion |
+| --- | --- |
+| `list_my_tenants` | Listet alle Teams auf, denen Sie angehören, und markiert das gerade aktive. |
+| `get_active_tenant` | Gibt das Team zurück, in dem das Token gerade aktiv ist; alle Schreibvorgänge beziehen sich standardmäßig darauf. |
+| `switch_active_tenant` | Wechselt das aktive Team (bleibt sitzungsübergreifend erhalten; das Ziel muss ein Team sein, dem Sie beigetreten sind). |
+
+### Formular
+
+| Tool | Funktion |
+| --- | --- |
+| `create_form` | Erstellt ein Quiz (`knowledge_quiz` als Prüfung, `scored_quiz` oder `outcome_quiz` als Typen-Quiz). Kann in einem Aufruf ein Fragen-Array und die Berichtskonfiguration entgegennehmen, um Hin- und Her-Aufrufe zu vermeiden. Ein Ergebnisquiz **muss** beim Erstellen `report.outcomes` (die Liste der Ergebnistypen) enthalten, wobei jede Auswahloption über `outcomes` für Typen stimmt. |
+| `list_forms` | Listet die Quizze des aktuellen Teams auf, optional gefiltert nach Szene oder Titel. |
+| `get_form` | Zeigt alle Details eines Quiz an (die Fragenliste `fields[]`, die Berichtskonfiguration usw.); rufen Sie dies vor dem Bearbeiten zuerst auf, um den `code` jeder Frage zu erhalten – bei Ergebnisquizzen liegen die `code`s der Ergebnistypen in `report.outcomeAnalysis.outcomes`. |
+| `update_form` | Aktualisiert Titel, Beschreibung, Status geöffnet/geschlossen oder ersetzt die `report`-Konfiguration zusammenführend pro Unterschlüssel; bei Ergebnisquizzen übergeben Sie `report.outcomes`, um Ergebnistypen per `code` zusammenführend zu aktualisieren (Name/Beschreibung/CTA; konfigurierte Bilder bleiben erhalten, und das Entfernen eines Typs, auf den noch Stimmen von Fragen verweisen, wird abgelehnt). **Szene und Sprache sind nach dem Erstellen gesperrt.** |
+| `delete_form` | Verschiebt ein Quiz in den Papierkorb (Soft Delete): ausgeblendet in `list_forms`, 5 Tage lang über `restore_form` wiederherstellbar (danach endgültig gelöscht). Nur der Quiz-Inhaber / Team-Inhaber kann löschen; Einsendungen bleiben bis zur endgültigen Löschung erhalten. |
+| `restore_form` | Stellt ein mit `delete_form` gelöschtes Quiz aus dem Papierkorb wieder her. Nur der Inhaber / Team-Inhaber kann wiederherstellen; liefert einen Fehler, wenn es sich nicht im Papierkorb befindet. |
+| `duplicate_form` | Dupliziert ein Quiz: klont Fragenstruktur, Bewertung, Bericht, Gestaltung und Einstellungen sowie **alle Sprachübersetzungen** in ein neues Quiz in Ihrem Besitz (mit neuen Links). Kopiert **keine** Einsendungen, Freigaben, Integrationen oder Sperrstatus. Optional `newTitle`. |
+
+### Frage
+
+| Tool | Funktion |
+| --- | --- |
+| `add_question` | Hängt ein Element am Ende an: eine Frage (SingleCheck/MultiCheck/TrueFalse/FillBlank) oder einen Seitenumbruch (`Breaker`). In einem Ergebnisquiz muss jede Auswahloption angeben, für welche Ergebnistypen sie stimmt (TrueFalse verwendet `trueOutcomes` / `falseOutcomes`). |
+| `insert_question` | Fügt ein Element an einer bestimmten Position ein und verweist mit `after` / `before` auf einen vorhandenen `code`. |
+| `move_question` | Verschiebt eine vorhandene Frage oder einen Seitenumbruch per `code` an eine neue Position. |
+| `update_question` | Aktualisiert per `code` Fragetext, Hinweis, Erklärung, Pflichtfeld-Status, Punktzahl, richtige Antwort oder die KI-Bewertung bei FillBlank. **Fragetyp und Inhalt der Auswahloptionen können nicht geändert werden.** |
+| `delete_question` | Löscht eine Frage oder einen Seitenumbruch per `code`. |
+
+### Berichtsdimensionen
+
+| Tool | Funktion |
+| --- | --- |
+| `set_dimension_analysis` | Legt die Mehrdimensionsanalyse eines Quiz (Dimensionen des Netzdiagramms) als Ganzes fest; in `knowledge_quiz` verweist jede Dimension auf Fragen-`code`s, in `scored_quiz` nutzt jede eine Formel. Übergeben Sie ein leeres Array zum Leeren. Nicht für Ergebnisquizze anwendbar (sie haben keine Dimensionen – konfigurieren Sie Ergebnistypen stattdessen über `report.outcomes`). |
+
+### Übersetzungen (FormTranslation)
+
+Bieten Sie ein Quiz in mehreren Sprachen an: ein Quell-Quiz (Hauptsprache) plus eine Übersetzung pro weiterer Sprache (gleiche Struktur wie die Quelle, nur der Text wird übersetzt; Einsendungen sind immer dem Quell-Quiz zugeordnet).
+
+| Tool | Funktion |
+| --- | --- |
+| `create_form_translation` | Fügt einem Quiz eine Sprachversion hinzu, klont die Quelltexte als ersten Entwurf (gleiche `code`s, Text in der Quellsprache) und gibt diesen Inhalt zur sofortigen Übersetzung zurück. Die Sprache muss sich von der Hauptsprache unterscheiden, höchstens eine pro Sprache. |
+| `list_form_translations` | Listet die vorhandenen Sprachversionen eines Quiz auf (Sprache, Aktiv-Status, öffentlicher Link usw.). |
+| `get_form_translation` | Liest den vollständigen Inhalt einer Sprachversion (einschließlich `fields[]` und `report`), um ihn direkt zu übersetzen – jeder `code` muss mit der Quelle identisch bleiben. |
+| `update_form_translation` | Speichert die übersetzten Texte einer Sprachversion (title / description / fields / report / systemText) oder pausiert sie über `isActive`; die Struktur ist durch die Quelle festgelegt, Sie ändern nur Text, und ausgelassene Felder gelten als teilweise Übersetzung. |
+| `delete_form_translation` | Löscht eine Sprachversion. |
+
+### Teilnehmer (Examinees)
+
+Die Personen, die ein Quiz absolvieren. Jeder Teilnehmer ist an genau ein Team gebunden; die Tools geben nur unbedenkliche Felder zurück – Passwort, Bestätigungscode, Reset-Token und andere sensible Felder werden **niemals** offengelegt.
+
+| Tool | Funktion |
+| --- | --- |
+| `list_examinees` | Listet die Teilnehmer des aktuellen Teams auf, optional mit unscharfer Suche nach E-Mail / Name und Filterung nach Status (aktiv / deaktiviert). |
+| `get_examinee` | Zeigt die Details eines Teilnehmers (einschließlich benutzerdefinierter `customData`) anhand seiner Geschäfts-ID `examineeId` an (z. B. `AB1234567890`, in der Liste angezeigt). |
+| `update_examinee` | Bearbeitet Name / Status / customData eines Teilnehmers per `examineeId` (customData wird gegen die Felddefinitionen des Teams validiert). **E-Mail und Team können nicht geändert werden.** |
+
+### Einsendungen & Analysen
+
+Lesen Sie Quiz-Performance, Conversion-Funnels und Leads, damit die KI den Kreislauf aus Erstellen → Messen → Verbessern schließen kann. Die Lead-Tools geben Teilnehmerdaten (personenbezogene Daten) zurück.
+
+| Tool | Funktion |
+| --- | --- |
+| `get_form_stats` | Liest die Statistiken eines Quiz über die letzten N Tage (Standard 30, max. 180): KPI-Übersicht, täglicher Verlauf, Kanäle (utm_source), Anmeldearten, Geräte und Antwortverteilungen pro Frage. |
+| `get_form_funnel` | Liest den Conversion-Funnel eines Quiz über die letzten N Tage: angesehen → begonnen → abgesendet → Lead erfasst → Bericht angesehen → CTA geklickt → geteilt, dazu Funnel pro Kanal und Abbruchpunkte. |
+| `list_records` | Listet die Einsendungen (Leads) des aktuellen Teams auf: Teilnehmer, Antworten, ein kompaktes Berichtsergebnis und UTM; filterbar nach Quiz, Berichtsstatus und Einsendezeit. |
+| `get_record` | Zeigt die Details einer Einsendung anhand ihrer `id` (von `list_records` zurückgegeben) an: vollständige Antworten, Berichtsergebnis und Einsendungs-Metadaten. |
+
+### Bild-Upload
+
+| Tool | Funktion |
+| --- | --- |
+| `prepare_image_upload` | Schritt 1: stellt eine Direkt-Upload-URL für ein Titelbild/Bild aus (die Datei per PUT dorthin senden). |
+| `finalize_image_upload` | Schritt 2: prüft das Bild, übernimmt es in die Medienbibliothek des Teams und gibt eine Medien-ID zurück; referenzieren Sie es über `flagImg` / `landingImage` von `update_form`. |
+
+<Callout type="info">
+  Typische Abläufe:
+  - **Prüfung / bewertetes Quiz**: Mit `create_form` das Quiz erstellen und den `code` jeder Frage erhalten → mit `update_form` oder `set_dimension_analysis` Berichtsformeln / Dimensionen per `code` konfigurieren.
+  - **Ergebnisquiz**: `create_form` in einem Aufruf mit `report.outcomes` (geben Sie jedem Typ einen eigenen eindeutigen `code`, z. B. `lion`) plus den Stimmen jeder Auswahloption → nach dem Absenden gewinnt der Typ mit den meisten Stimmen (bei Gleichstand entscheidet die Reihenfolge in der Liste); Texte / CTAs der Typen später über `update_form` feinjustieren.
+</Callout>
+
+## Aktuelle Einschränkungen
+
+- **Das Zufällige Wissensquiz wird nicht unterstützt**: Seine Fragen liegen im Fragenpool (QuestionBank) – verwalten Sie sie im Editor; MCP deckt sie noch nicht ab.
+- **Fragetyp oder Auswahloptionen lassen sich nicht direkt ändern**: Um den Typ zu wechseln oder Optionen zu bearbeiten, verwenden Sie `delete_question` und dann `add_question`, um die Frage neu aufzubauen. Dasselbe gilt für die **Zuordnung der Auswahloptionen zu Typ-Stimmen** in einem Ergebnisquiz – um Stimmen zu ändern, bauen Sie die Frage neu auf.
+- **Die Bewertung von Auswahloptionen im Bewerteten Quiz** verwendet Option Scoring: In der Scored-Quiz-Szene lehnt `update_question` die Parameter `score` / `correctAnswer` / `aiMatch` ab. Bearbeiten Sie die Punktwerte der Optionen in der Admin-Oberfläche oder löschen und erstellen Sie die Frage neu. Die Outcome-Szene lehnt diese drei Parameter ebenfalls ab (sie entscheidet per Stimmen – es gibt keine Bewertung).
+- **Fragetypen im Ergebnisquiz**: Abstimmungsfragen sind SingleCheck / MultiCheck / TrueFalse (FillBlank wird nicht unterstützt); **Bilder** von Ergebnistypen können noch nicht über MCP hochgeladen werden – konfigurieren Sie sie im Editor (bereits konfigurierte Bilder bleiben erhalten, wenn MCP `report.outcomes` aktualisiert).
+- **Szene und Sprache sind nach dem Erstellen gesperrt** und können nicht über MCP geändert werden.
+- **Löschen ist ein Soft Delete**: `delete_form` verschiebt in den Papierkorb (nach 5 Tagen automatisch endgültig gelöscht), es löscht nicht sofort endgültig; für die endgültige Entfernung löschen Sie erneut in der Admin-Oberfläche.
+- **Fragenlimit**: Im Free-Tarif enthält ein Quiz höchstens **50 Fragen** (Seitenumbrüche, Textblöcke und Bildkarussells zählen nicht); `create_form`, `add_question` und `insert_question` werden darüber hinaus abgelehnt. `duplicate_form` und `create_form_from_template` sind nicht begrenzt. Pro ist unbegrenzt – siehe [Fragenlimit](/de/editor).
+- **Duplizieren kopiert keine Daten**: `duplicate_form` klont nur Struktur und Übersetzungen – es kopiert **keine** Einsendungen, Freigabeeinstellungen oder Integrationen (die Geheimnisse enthalten); das neue Quiz startet leer.
+- **Identitätsfelder von Teilnehmern sind unveränderlich**: `update_examinee` kann E-Mail, Team oder `examineeId` nicht ändern (sie bilden die Authentifizierungsidentität).
+- **Leads enthalten personenbezogene Daten**: `list_records` / `get_record` geben E-Mail, Name, benutzerdefinierte Felder usw. der Teilnehmer zurück – gehen Sie verantwortungsvoll damit um.
+- **KI-Bewertung bei FillBlank** (`aiMatch`, nur Quiz-Szene, Beta) verbraucht das [KI-Guthaben](/de/account/ai-billing) Ihres Teams.
+
+## Sicherheit & Ratenlimits
+
+- Ob OAuth oder Token: Die KI handelt **als Sie** und löst die bestehenden Zugriffsprüfungen und **Audit-Logs** aus (jeder Schreibvorgang wird erfasst).
+- Jede Verbindung ist auf **60 Anfragen / Minute** begrenzt; bei Überschreitung wird ein Ratenlimit-Fehler zurückgegeben.
+- Wenn sie nicht mehr benötigt wird, **widerrufen** Sie sie (wirkt sofort; bei OAuth-Verbindungen wird der Client getrennt) oder **löschen** Sie sie (gibt zusätzlich einen Platz frei) unter **Einstellungen → MCP-Integration**.
+- Der OAuth-Ablauf erzwingt **PKCE (S256)**, Autorisierungscodes sind nur einmal verwendbar, und Refresh-Tokens werden bei jeder Erneuerung rotiert – alte werden sofort ungültig.

@@ -1,0 +1,110 @@
+---
+title: Servicio de envío de correo (SMTP)
+description: 'Configura el servicio de envío SMTP propio de tu equipo para que los conectores de correo envíen desde tu dirección sin límite de la plataforma: dónde configurarlo, cómo funciona la verificación y qué falla sin él.'
+---
+
+El [conector de correo](/es/connectors/channels) envía a través de **tu propio servidor SMTP**: RooQuiz no hace de intermediario. Por eso las notificaciones llegan desde tu propia dirección y no hay límite de envío de la plataforma.
+
+Configúralo una vez por equipo en **Ajustes → Organización → Envío de correo**. Todos los conectores de correo del equipo lo usan.
+
+<Callout type="warning">
+  Sin un servicio de envío **verificado**, un conector de correo se guarda igualmente, pero nunca entrega. Su tarjeta muestra una etiqueta roja "Sin servicio de envío".
+</Callout>
+
+## Qué rellenar
+
+| Campo | Notas |
+| --- | --- |
+| **Servidor SMTP** | El nombre de host de tu proveedor, por ejemplo `smtp.gmail.com` |
+| **Puerto** | `587` (STARTTLS), `465` (SSL/TLS) o `2525` |
+| **Nombre de usuario** | Normalmente tu dirección de correo completa; algunos proveedores usan un valor literal fijo |
+| **Contraseña** | La contraseña SMTP o la clave de API. Al editar más adelante, déjala en blanco para conservar la guardada |
+| **Dirección del remitente** | Debe ser una dirección desde la que tu servidor SMTP tenga permiso para enviar |
+| **Nombre del remitente** | Nombre visible para los destinatarios |
+| **Dirección de respuesta** | Opcional, si las respuestas deben ir a otro lugar |
+
+<Callout type="info">
+  **No se puede usar el puerto 25.** Nuestra plataforma de alojamiento bloquea las conexiones salientes por ese puerto. Usa 587 o 465.
+</Callout>
+
+## Configuración por proveedor
+
+<Tabs items={['Gmail', 'Resend', 'Servidor de correo de la empresa']}>
+  <Tab value="Gmail">
+    | Campo | Valor |
+    | --- | --- |
+    | Servidor SMTP | `smtp.gmail.com` |
+    | Puerto | `587 (STARTTLS)` |
+    | Nombre de usuario | Tu dirección de Gmail completa |
+    | Contraseña | Una **contraseña de aplicación de 16 caracteres** |
+    | Dirección del remitente | La **misma** dirección de Gmail, o un alias verificado de "Enviar como" |
+
+    Crea la contraseña de aplicación en [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords). Se muestra una sola vez, en cuatro grupos de cuatro: **quita los espacios** antes de pegarla.
+
+    <Callout type="warning">
+      La contraseña normal de tu cuenta no funcionará. Google desactivó el inicio de sesión con contraseña para clientes de correo, así que se necesita una contraseña de aplicación, y estas solo existen si la **verificación en dos pasos** está activada.
+    </Callout>
+
+    Si esa página dice *"The setting you are looking for is not available for your account"*, se da uno de estos casos: la verificación en dos pasos está desactivada; es una cuenta de Google Workspace cuyo administrador desactivó las contraseñas de aplicación; o la cuenta está inscrita en la Protección Avanzada, que las bloquea por completo.
+
+    Gmail también limita el envío a unos **500 destinatarios al día** en cuentas personales y **2.000** en Workspace. Es más que suficiente para notificaciones del equipo, pero no para envíos masivos.
+  </Tab>
+
+  <Tab value="Resend">
+    | Campo | Valor |
+    | --- | --- |
+    | Servidor SMTP | `smtp.resend.com` |
+    | Puerto | `587 (STARTTLS)` |
+    | Nombre de usuario | `resend`, la palabra literal |
+    | Contraseña | Una clave de API de Resend (`re_…`) |
+    | Dirección del remitente | Cualquier dirección de un dominio que hayas verificado en Resend |
+
+    Es la opción más sencilla si quieres que las notificaciones lleguen desde **tu propio dominio de marca** en lugar de un buzón personal, y no tiene un límite diario como el de Gmail.
+  </Tab>
+
+  <Tab value="Servidor de correo de la empresa">
+    Pide a quien gestione vuestro correo el **nombre de host SMTP, el puerto y las credenciales**. Prefiere el puerto 587 con STARTTLS; usa el 465 si es lo único que ofrecen.
+
+    Dos cosas suelen causar problemas:
+
+    - El nombre de usuario suele ser la **dirección completa del buzón**, no la parte anterior a la `@`.
+    - La **dirección del remitente debe pertenecer a tu propio dominio**. La mayoría de los servidores corporativos se niegan a reenviar correo que dice proceder de otro sitio.
+  </Tab>
+</Tabs>
+
+## Guardar y verificar
+
+<Steps>
+### Rellena los campos y haz clic en "Guardar y verificar"
+
+Guardar y verificar son una sola acción, así que nunca te quedas con una configuración guardada pero sin probar.
+
+### Busca el correo de prueba en la bandeja de entrada
+
+<Callout type="warning">
+  El correo de prueba se envía a **la dirección de tu propia cuenta de RooQuiz**, con la que has iniciado sesión, **no** a la dirección del remitente que acabas de configurar. Si no llega nada, revisa esa bandeja de entrada y su carpeta de spam antes de cambiar nada.
+</Callout>
+
+### Confirma que el estado indica "Verificado"
+</Steps>
+
+**Verificado** significa que tu servidor SMTP aceptó el mensaje y devolvió un código de éxito. Eso no equivale a entregado: un servidor SMTP primero acepta el correo y después lo reenvía, así que un mensaje aún puede filtrarse como spam o rebotar más tarde. Si la verificación se completa pero no llega nada, el problema está en el lado del receptor: empieza por la carpeta de spam y luego busca un rebote en el buzón desde el que envías.
+
+## Cuando la verificación falla
+
+En la página se muestra el **error exacto de tu servidor SMTP**, deliberadamente sin modificar, para que puedas actuar directamente. Los más habituales:
+
+| Error | Qué significa |
+| --- | --- |
+| `535 Username and Password not accepted` | Credenciales incorrectas. En Gmail: usaste la contraseña de la cuenta en lugar de una contraseña de aplicación, o dejaste espacios en ella |
+| `553 Sender address rejected: not owned by user` | La dirección del remitente no es una desde la que este servidor pueda enviar. Cámbiala por un buzón o alias que la cuenta posea realmente |
+| `550 relay not permitted` | El servidor no reenvía nada en tu nombre; normalmente se debe a un nombre de usuario incorrecto o a que el acceso SMTP no está habilitado en el buzón |
+| Tiempo de espera agotado / conexión fallida | Nombre de host o puerto incorrectos, o el servidor no acepta conexiones desde fuera de tu red |
+
+## Conviene saber
+
+- La contraseña **no vuelve a mostrarse** después de guardarla. Deja el campo en blanco cuando edites cualquier otra cosa y se mantendrá intacta.
+- Cambiar el servidor, el puerto, el nombre de usuario, la contraseña o la dirección del remitente devuelve el estado a **Sin verificar** hasta la siguiente comprobación correcta.
+- Guardar y verificar tiene un **límite de frecuencia** de unos pocos intentos por hora y equipo: cada intento se conecta realmente a tu servidor y envía de verdad un mensaje.
+- **Quitar** el servicio de envío elimina la contraseña guardada. No necesitas quitarlo para cambiar la configuración: basta con guardar encima. No se permite quitarlo mientras algún conector de correo siga **habilitado**, para que no rompas tus propias entregas sin darte cuenta.
+- Si una entrega posterior falla de forma permanente (las credenciales dejan de funcionar o se rechaza la dirección del remitente), el estado pasa a **Verificación fallida** y los conectores de correo dejan de entregar hasta que lo corrijas. Una sola dirección de destinatario incorrecta **no** provoca esto; solo hace fallar ese mensaje.

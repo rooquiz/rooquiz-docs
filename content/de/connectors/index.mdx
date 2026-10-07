@@ -1,0 +1,56 @@
+---
+title: 'Connectors & Automatisierung'
+description: 'Connectors übertragen die Leads und Buchungen Ihrer Quizze in die Tools, die Sie bereits nutzen – E-Mail, Ihr eigenes Backend, Slack, Zapier oder Kit. Sie gelten teamweit für jedes Quiz.'
+sidebarTitle: Überblick
+---
+
+**Connectors** übertragen die Leads und Buchungen, die Ihre Quizze erzeugen, in die Tools, die Sie bereits nutzen – E-Mail, Ihr eigenes Backend, Slack oder Ihren E-Mail-Marketing-Dienst. Sie finden sie unter **Connectors** in der linken Seitenleiste.
+
+<Callout type="info">
+  Connectors gelten **auf Teamebene**: Richten Sie einen ein, nutzt ihn jedes Quiz. Wenn nur bestimmte Quizze einen Connector auslösen sollen, schränken Sie ihn über den [Auslösebereich](/de/connectors/events) ein.
+</Callout>
+
+![Die Connectors-Seite von RooQuiz mit dem Kanalmenü und den eingerichteten Connector-Karten](/img/en/connectors/connectors-list.webp)
+
+## Die fünf Kanäle
+
+| Kanal | Wofür er gedacht ist |
+| --- | --- |
+| **E-Mail** | Sendet eine anpassbare Benachrichtigung an ausgewählte Empfänger, wenn ein Ereignis eintritt |
+| **Webhook** | Sendet einen POST mit HMAC-Signatur an Ihre eigene URL |
+| **Slack** | Autorisiert die Slack-App und postet neue Leads in einen Channel |
+| **Zapier** | Fügen Sie eine Catch-Hook-URL ein und erreichen Sie Tausende von Apps |
+| **Kit** | Fügt neue Leads als Abonnenten zu Kit (ConvertKit) hinzu und versieht sie mit Tags |
+
+Jeder Connector arbeitet unabhängig – **das Deaktivieren eines Connectors wirkt sich nicht auf die anderen aus**. Die Einrichtung der einzelnen Kanäle wird unter [Die fünf Kanäle](/de/connectors/channels) beschrieben.
+
+## Berechtigungen und Tarif
+
+<Callout type="warning">
+  Nur der **Inhaber der Organisation oder ein Administrator** kann Connectors verwalten. Andere Mitglieder erhalten einen Hinweis auf fehlende Berechtigung, und der Eintrag in der Seitenleiste wird ihnen nicht angezeigt.
+</Callout>
+
+Der Kanal **E-Mail** ist in jedem Tarif verfügbar – er versendet über [Ihren eigenen SMTP-Server](/de/connectors/email-smtp) und verursacht uns daher keine Kosten; die anderen vier sind **nur im Pro-Tarif** verfügbar. In einem kostenlosen Team wird bei Auswahl eines Pro-Kanals der Konfigurationsbereich ausgegraut und ein Upgrade-Link angeboten.
+
+## Was Ihnen die Connector-Karte verrät
+
+Jeder eingerichtete Connector zeigt:
+
+- **Aktiviert / Deaktiviert** – ob er in Betrieb ist.
+- **Einrichtung unvollständig** – OAuth ist abgeschlossen, aber ein Channel oder ein letzter Schritt fehlt noch. Solche Connectors stellen nichts zu.
+- **Letzte Zustellung** – wann er zuletzt ausgelöst wurde und mit welchem Ergebnis (erfolgreich / fehlgeschlagen / Kontingent überschritten).
+
+<Callout type="info">
+  Klicken Sie nach der Einrichtung auf **Test senden**, um zu bestätigen, dass die Gegenseite die Daten wirklich empfängt – statt es erst bei Ihrem ersten echten Lead herauszufinden.
+</Callout>
+
+## In diesem Abschnitt
+
+<Cards>
+  <Card title="Die fünf Kanäle" href="/de/connectors/channels" />
+  <Card title="Auslöseereignisse & Bereich" href="/de/connectors/events" />
+</Cards>
+
+<Callout type="info">
+  Sie möchten Daten lieber nach Ihrem eigenen Zeitplan abrufen, statt sie zugestellt zu bekommen? Siehe [REST-API](/de/integrations/rest-api) und [MCP-Integration](/de/integrations/mcp).
+</Callout>

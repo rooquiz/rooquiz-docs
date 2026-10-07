@@ -11,6 +11,34 @@ const chrome = {
   zh: {
     logo: 'RooQuiz 文档',
     footer: 'RooQuiz · 让测验、测评与问卷更简单'
+  },
+  'zh-TW': {
+    logo: 'RooQuiz 文件',
+    footer: 'RooQuiz · 讓測驗、測評與問卷更簡單'
+  },
+  de: {
+    logo: 'RooQuiz Doku',
+    footer: 'RooQuiz · Quizze, Tests und Umfragen ganz einfach'
+  },
+  es: {
+    logo: 'RooQuiz Docs',
+    footer: 'RooQuiz · Cuestionarios, evaluaciones y encuestas sin complicaciones'
+  },
+  'pt-BR': {
+    logo: 'RooQuiz Docs',
+    footer: 'RooQuiz · Quizzes, avaliações e pesquisas sem complicação'
+  },
+  fr: {
+    logo: 'RooQuiz Docs',
+    footer: 'RooQuiz · Quiz, évaluations et sondages en toute simplicité'
+  },
+  ja: {
+    logo: 'RooQuiz ドキュメント',
+    footer: 'RooQuiz · クイズ・アセスメント・アンケートをもっと手軽に'
+  },
+  ko: {
+    logo: 'RooQuiz 문서',
+    footer: 'RooQuiz · 퀴즈, 평가, 설문을 더 쉽게'
   }
 } satisfies Record<Locale, { logo: string; footer: string }>
 

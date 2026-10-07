@@ -1,0 +1,65 @@
+---
+title: Règles de notation et d'évaluation
+description: "La notation dépend du type de quiz : le Quiz juge juste ou faux et additionne les points, le Quiz noté produit analyse multidimensionnelle et rapports. Points, réponses et formules expliqués."
+---
+
+La « notation » n'a pas le même sens selon le type de quiz : le Quiz se concentre sur **le juste/faux et les totaux**, tandis que le Quiz noté se concentre sur **l'analyse multidimensionnelle et les rapports**.
+
+## Quiz : notation et correction
+
+Dans un **Quiz**, vous pouvez :
+
+- **Définir des points** : attribuez des points aux questions ou aux options correctes.
+- **Juger juste/faux** : indiquez les bonnes réponses ; le système corrige automatiquement chaque question.
+- **Additionner les totaux** : les points sont additionnés automatiquement.
+- **Score de réussite** : définissez un seuil de réussite et affichez un résultat réussi/échoué.
+- **Retour sur les réponses** : montrez aux répondants si chaque réponse est correcte, avec son explication.
+
+<Callout type="info">
+  Les points et la correction juste/faux sont disponibles dans le Quiz et le Quiz de connaissances aléatoire. Le Quiz noté utilise à la place des formules par dimension, et le Quiz de résultat n'attribue aucun score.
+</Callout>
+
+## Quiz de résultat : la majorité des votes l'emporte
+
+Un **Quiz de résultat** n'attribue pas de score : il **compte des votes**. Chaque option vote pour un ou plusieurs types de résultat, et le type qui recueille le plus de votes l'emporte ; en cas d'égalité, c'est celui qui apparaît en premier dans la liste des résultats qui gagne.
+
+Chaque résultat peut avoir son propre bouton CTA, ce qui relie directement un résultat ludique à une étape suivante. Consultez [Les quatre types de quiz](/fr/getting-started/quiz-types).
+
+## Quiz noté : analyse par dimension et évaluation IA
+
+Dans un **Quiz noté**, la notation sert davantage à « dresser un profil » qu'à juger juste ou faux :
+
+- **Notation multidimensionnelle** : associez les questions à plusieurs dimensions ; après l'envoi, chaque dimension obtient un score, souvent affiché sous forme de **graphique radar**.
+- **Profil de résultat** : produisez des conclusions sur la personnalité ou les compétences à partir des scores par dimension.
+- **Évaluation IA** : l'IA transforme le score total, le niveau et les scores par dimension en suggestions et commentaires (elle ne lit pas le texte brut des réponses).
+
+### Quelles questions sont notées
+
+Le total d'un Quiz noté provient **uniquement de la formule**, qui référence des codes de question. Seules les questions qui produisent un nombre peuvent être référencées : les questions à choix (via le score de chaque option), la notation, le nombre, la date, l'heure et la cascade.
+
+**Le Texte à trous ne fait que recueillir du texte et n'est jamais noté** : un texte libre ne peut pas entrer dans un calcul, il ne produit donc aucun score et n'apparaît pas parmi les champs insérables dans l'éditeur de formules. C'est donc la bonne façon de poser une question ouverte (« Autre chose à nous dire ? ») au sein d'une évaluation notée.
+
+<Callout type="warning">
+  Sans formule, le score total est vide, aucun niveau ne peut jamais correspondre et le bloc d'évaluation globale disparaît de la page de résultat. Dès que vous configurez des niveaux, configurez aussi la formule.
+</Callout>
+
+### À propos du quota d'évaluation IA
+
+<Callout type="warning">
+  L'évaluation IA consomme le **quota IA** de votre équipe. Le quota est décompté par cycle ; une fois dépassé, l'évaluation IA est ignorée pour ce cycle (la notation de base est toujours générée). Consultez [Crédits IA et facturation](/fr/account/ai-billing) pour la facturation, la réinitialisation mensuelle et les recharges.
+</Callout>
+
+## Niveaux et actions de la page de résultat
+
+Découpez le score total en **niveaux** (0–60 à améliorer / 60–80 bien / 80+ excellent). Chacun possède un nom, une couleur et une description, et peut comporter un **bouton CTA** : la tranche la plus basse peut par exemple proposer « Réserver une consultation ». C'est cette étape qui relie une évaluation à la conversion.
+
+<Callout type="info">
+  Vous ne voulez pas que les répondants voient un chiffre ? Vous pouvez **masquer le score global** et ne conserver que le nom du niveau, sa description et la synthèse : idéal pour les quiz qui doivent ressembler à un diagnostic plutôt qu'à un examen.
+</Callout>
+
+## Génération du rapport
+
+- **Synchrone** : la notation de base est calculée immédiatement après l'envoi.
+- **Asynchrone** : les calculs plus lourds, comme l'analyse par dimension et l'évaluation IA, sont générés de façon asynchrone ; les rapports passent par un état « en cours de génération → terminé », et le système réessaie automatiquement en cas d'échec.
+
+Pour consulter, exporter et diffuser les rapports, consultez [Rapports et évaluation IA](/fr/results/reports).

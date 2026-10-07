@@ -1,0 +1,9 @@
+{
+  "title": "Connectors & Automatisierung",
+  "pages": [
+    "index",
+    "channels",
+    "email-smtp",
+    "events"
+  ]
+}

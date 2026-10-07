@@ -1,0 +1,56 @@
+---
+title: Daten exportieren
+description: 'Exportieren Sie Antworten, Leads und Teilnehmer als UTF-8-CSV, die sich direkt in Excel öffnet: die zwei Exportarten, Kontingent und Zurücksetzung, was bei zu großen Datenmengen zu tun ist und was die Datei enthält.'
+---
+
+Antworten, Leads und Teilnehmer lassen sich alle als **CSV** exportieren (UTF-8, öffnet sich direkt in Excel).
+
+<Callout type="warning">
+  Der Export ist eine **Pro-Funktion** mit einer wöchentlichen Obergrenze für die Anzahl der Exporte. Teams im kostenlosen Tarif sehen einen Upgrade-Hinweis.
+</Callout>
+
+## Zwei Exportarten
+
+| Methode | Hinweise |
+| --- | --- |
+| **Ausgewählte exportieren** | Markieren Sie einige Zeilen und exportieren Sie nur diese. Wird in Ihrem Browser erzeugt und **verbraucht kein Kontingent** |
+| **Alle exportieren** | Exportiert alles, was Ihren aktuellen Filtern entspricht. Wird auf dem Server erzeugt und **verbraucht einen Export** |
+
+<Callout type="info">
+  Filtern Sie vor dem Export. „Alle exportieren“ exportiert das **aktuelle Filterergebnis**, nicht die ganze Tabelle – je enger der Filter, desto nützlicher die Datei und desto weniger Kontingent verbrauchen Sie.
+</Callout>
+
+## Der Bestätigungsdialog
+
+„Alle exportieren“ öffnet eine Bestätigung, die Ihnen zuerst die wichtigsten Fakten zeigt:
+
+- **Datenumfang** – alle Daten oder das aktuelle Filterergebnis (direkt hier umschaltbar).
+- **Datenmenge** – ungefähr wie viele Zeilen. Schlägt die Zählung fehl, erhalten Sie einen Hinweis und können trotzdem fortfahren.
+- **Dateiformat** – CSV (UTF-8, öffnet sich in Excel).
+- **Diese Woche** – wie viele Exporte von Ihrem Limit noch übrig sind und wann es zurückgesetzt wird.
+
+Nach der Bestätigung wird die Datei **im Hintergrund erzeugt und automatisch heruntergeladen**; Sie können die Seite in der Zwischenzeit verlassen.
+
+## Kontingent und Zurücksetzung
+
+Das wöchentliche Kontingent wird am **Montag (UTC)** zurückgesetzt. Sowohl der Dialog als auch die Meldung bei erreichtem Limit nennen Ihnen den genauen Zeitpunkt.
+
+<Callout type="info">
+  **Fehlgeschlagene Exporte zählen nicht.** Nur ein Export, der tatsächlich eine Datei erzeugt hat, verbraucht Ihr Kontingent.
+</Callout>
+
+## Wenn die Datenmenge zu groß ist
+
+Pro Export gibt es ein Zeilenlimit. Wird es überschritten, wird der Export direkt abgelehnt (**ohne Kontingent zu verbrauchen**), und Sie erhalten eine fertig kopierbare Zusammenfassung, die Sie per E-Mail an den technischen Support senden können, der den Export für Sie durchführt.
+
+<Callout type="info">
+  Wenn ein Export endlos zu laden scheint, hört die Seite nach fünf Minuten auf zu warten und weist darauf hin – der Auftrag läuft im Hintergrund weiter, kehren Sie also etwas später auf die Seite zurück.
+</Callout>
+
+## Was die Datei enthält
+
+Neben den eigentlichen Antworten enthalten Exporte in der Regel die Datensatznummer, den Zeitpunkt der Einsendung, E-Mail und ID des Teilnehmers sowie die Stufe. Exporte von Leads und Teilnehmern haben jeweils eigene Spalten.
+
+<Callout type="warning">
+  Exportierte Dateien enthalten personenbezogene Informationen, die Teilnehmer angegeben haben. Speichern und teilen Sie sie gemäß den Datenschutz- und Compliance-Richtlinien Ihrer Organisation.
+</Callout>

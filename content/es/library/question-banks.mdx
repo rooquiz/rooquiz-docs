@@ -1,0 +1,54 @@
+---
+title: Bancos de preguntas
+description: 'Un banco de preguntas es un conjunto de preguntas del que extraes una y otra vez. Aprende a crearlo, añadir o importar preguntas, fijar la dificultad y por qué cada pregunta debe tener respuesta correcta.'
+---
+
+Un banco de preguntas es un conjunto de **preguntas del que puedes extraer una y otra vez**. Lo encontrarás en **Bancos de preguntas**, en la barra lateral izquierda.
+
+<Callout type="warning">
+  Cada pregunta de un banco **debe tener una respuesta correcta**: los bancos son conjuntos de preguntas puntuadas, no un almacén de campos para recopilar datos.
+</Callout>
+
+![Lista de bancos de preguntas de RooQuiz con el número de preguntas y la dificultad](/img/en/library/question-banks.webp)
+
+## Crear un banco
+
+<Steps>
+### Haz clic en "Crear banco de preguntas"
+
+El subtítulo indica "Cuestionario de conocimiento o con puntuación": los bancos sirven para esos dos escenarios con puntuación.
+
+### Completa los datos básicos
+
+**Nombre del banco** (hasta 50 caracteres), **Descripción** (hasta 200 caracteres) y **Nivel de dificultad**.
+
+### Añade preguntas
+
+Abre el banco y haz clic en **Agregar pregunta**. Funciona igual que en el editor: elige un tipo, escribe el enunciado y las opciones, y marca la respuesta correcta.
+</Steps>
+
+## Gestionar las preguntas
+
+- **Arrastrar para reordenar**: reorganiza las preguntas directamente.
+- **Eliminar en lote**: marca varias y elimínalas a la vez. Esta acción **no se puede deshacer**.
+- **Editar información**: cambia el nombre, la descripción y la dificultad del banco.
+
+<Callout type="warning">
+  Un banco **debe vaciarse antes de poder eliminarlo**: verás el mensaje "Elimine todas las preguntas antes de eliminar este banco de preguntas". Esta protección existe para que no borres un banco entero por accidente.
+</Callout>
+
+## Usar un banco en un quiz
+
+Al crear un quiz desde el panel, elige la opción de **banco de preguntas aleatorio**, selecciona un banco e indica cuántas preguntas extraer. Así, cada participante recibe una combinación distinta.
+
+<Callout type="warning">
+  Lo que obtienes es un **Cuestionario de conocimiento aleatorio**, un tipo distinto del cuestionario de conocimiento. **El tipo no se puede cambiar después de crearlo**, así que pasar de preguntas fijas a aleatorias implica reconstruirlo. Consulta [Los cuatro tipos de quiz](/es/getting-started/quiz-types).
+</Callout>
+
+## Creación masiva a través de un cliente de AI
+
+Los bancos necesitan muchas preguntas y escribirlas a mano es lento. Si has conectado [MCP](/es/integrations/mcp), un cliente de AI puede escribir preguntas en un banco de forma masiva.
+
+<Callout type="warning">
+  Añade unas **30 preguntas por lote**. Los lotes más grandes suelen agotar el tiempo de espera, y reintentar después de un tiempo de espera agotado puede dejar duplicados.
+</Callout>

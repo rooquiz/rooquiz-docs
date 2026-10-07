@@ -1,0 +1,68 @@
+---
+title: Types de questions
+description: "Plus de 14 types de questions RooQuiz classés par usage (choix, texte, notation, date…) : ce que chacun recueille, où l'utiliser habituellement et à quel format de quiz il convient le mieux."
+---
+
+RooQuiz propose plus de 14 types de questions. Ils sont regroupés ci-dessous par usage pour vous aider à choisir le bon format pour chaque question.
+
+## Choix
+
+| Type | Description | Usages courants |
+| --- | --- | --- |
+| **Choix unique** | Sélectionner exactement une option | Questions de connaissances à réponse unique, satisfaction |
+| **Choix multiple** | Sélectionner plusieurs options | Questions à réponses multiples, centres d'intérêt/préférences |
+| **Liste déroulante** | Choix unique présenté sous forme de liste déroulante | Gain de place lorsque les options sont nombreuses |
+| **Cascade** | Sélection liée sur plusieurs niveaux (par ex. région–département–commune) | Sélection d'une zone géographique ou d'une catégorie hiérarchique |
+| **Vrai / Faux** | Choisir vrai ou faux | Questions fermées oui/non |
+| **Carrousel d'images** | Choisir via un carrousel d'images | Préférence visuelle, options illustrées |
+
+## Saisie
+
+| Type | Description | Usages courants |
+| --- | --- | --- |
+| **Texte à trous** | Saisie de texte | Réponses courtes, réponses ouvertes, « Autre, veuillez préciser » |
+| **Nombre** | Saisie numérique (avec validation) | Âge, montant, quantité |
+| **Date** | Sélecteur de date | Date de naissance, date de rendez-vous |
+| **Heure** | Sélecteur d'heure | Créneau horaire, moment |
+
+## Notation et classement
+
+| Type | Description | Usages courants |
+| --- | --- | --- |
+| **Notation** | Note sur une échelle (par ex. 1–5 / 1–10) | Satisfaction, importance |
+| **Classement** | Faire glisser les éléments dans l'ordre | Priorités, classement de préférences |
+
+## Contenu et types spéciaux
+
+| Type | Description | Usages courants |
+| --- | --- | --- |
+| **Texte d'information** | Affiche uniquement du texte ; ne recueille aucune réponse | Notes de section, instructions, avertissements |
+| **Question aléatoire** | Tire une question d'une banque | S'utilise avec le type « Quiz de connaissances aléatoire » |
+
+## Quels types de questions pour quel type de quiz
+
+Les types de questions ne sont pas interchangeables d'un type de quiz à l'autre : certains n'ont pas de « bonne réponse » naturelle, d'autres ne peuvent pas voter pour un type de résultat. Le volet de gauche ne liste que les types disponibles pour le type de quiz en cours.
+
+| Type | Quiz de connaissances | Quiz noté | Quiz de résultat |
+| --- | --- | --- | --- |
+| Choix unique / multiple / Liste déroulante / Vrai-Faux | ✅ | ✅ | ✅ |
+| Texte à trous | ✅ peut être corrigé par rapport à une bonne réponse | ✅ **recueilli uniquement, jamais noté** | ❌ |
+| Nombre | ✅ peut être corrigé par rapport à une bonne réponse | ✅ le nombre saisi alimente les formules | ❌ |
+| Cascade / Notation | ❌ | ✅ | ❌ |
+| Date / Heure | ❌ | ✅ recueilli uniquement | ❌ |
+| Classement | ✅ | ❌ | ❌ |
+| Texte d'information / Carrousel d'images / Saut de page | ✅ | ✅ | ✅ |
+
+Un **Quiz de connaissances aléatoire** n'utilise que des questions aléatoires et des types d'affichage ; les questions elles-mêmes proviennent de la banque de questions associée.
+
+<Callout type="info">
+  Dans un Quiz noté, une **question Texte à trous ne fait que recueillir du texte** : elle ne produit aucun score et ne peut pas être référencée par une formule de notation. Elle convient parfaitement à une question de clôture du type « Autre chose à nous dire ? » après les questions notées, afin que le contexte ouvert sur le lead arrive avec le reste.
+</Callout>
+
+<Callout type="info">
+  Chaque type dispose de ses propres paramètres dans le volet de droite : le plus souvent le titre et la description, l'option obligatoire, le contenu des options et les règles de validation. Les types qui prennent en charge la notation permettent aussi de définir des points (voir [Règles de notation et d'évaluation](/fr/editor/scoring)).
+</Callout>
+
+<Callout type="warning">
+  La **Question aléatoire** s'utilise généralement avec le type « Quiz de connaissances aléatoire » et nécessite une banque de questions associée ; elle peut ne pas s'appliquer aux autres types.
+</Callout>

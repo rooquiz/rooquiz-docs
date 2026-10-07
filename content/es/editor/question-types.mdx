@@ -1,0 +1,68 @@
+---
+title: Tipos de preguntas
+description: 'Los más de 14 tipos de preguntas de RooQuiz agrupados por finalidad (elección, texto, valoración, fecha y más): qué recopila cada uno, dónde se suele usar y con qué tipo de quiz encaja mejor.'
+---
+
+RooQuiz ofrece más de 14 tipos de preguntas. A continuación se agrupan por finalidad para ayudarte a elegir el formato adecuado para cada pregunta.
+
+## Elección
+
+| Tipo | Descripción | Usos habituales |
+| --- | --- | --- |
+| **Opción única** | Se elige exactamente una opción | Preguntas de conocimiento con una sola respuesta, satisfacción |
+| **Opción múltiple** | Se eligen varias opciones | Preguntas con varias respuestas, intereses y preferencias |
+| **Lista desplegable** | Opción única mostrada como lista desplegable | Ahorra espacio cuando hay muchas opciones |
+| **Cascada** | Selección enlazada en varios niveles (p. ej., provincia–ciudad–distrito) | Selección de región o de categorías jerárquicas |
+| **Verdadero / Falso** | Se elige verdadero o falso | Preguntas de sí o no |
+| **Carrusel de imágenes** | Se elige mediante un carrusel de imágenes | Preferencia de imágenes, opciones visuales |
+
+## Entrada
+
+| Tipo | Descripción | Usos habituales |
+| --- | --- | --- |
+| **Completar el espacio** | Entrada de texto | Respuestas breves, respuestas abiertas, "Otro, especifica" |
+| **Número** | Entrada numérica (con validación) | Edad, importe, cantidad |
+| **Fecha** | Selector de fecha | Fecha de nacimiento, fecha de la cita |
+| **Hora** | Selector de hora | Franja horaria, momento |
+
+## Valoración y orden
+
+| Tipo | Descripción | Usos habituales |
+| --- | --- | --- |
+| **Valoración** | Puntuación en una escala (p. ej., 1–5 / 1–10) | Satisfacción, importancia |
+| **Ordenar** | Arrastrar elementos para ordenarlos | Prioridad, clasificación de preferencias |
+
+## Contenido y especiales
+
+| Tipo | Descripción | Usos habituales |
+| --- | --- | --- |
+| **Declaración** | Solo muestra texto; no recopila respuesta | Notas de sección, instrucciones, avisos legales |
+| **Pregunta aleatoria** | Extrae una pregunta de un banco | Se usa con el tipo "Cuestionario de conocimiento aleatorio" |
+
+## Qué tipos de preguntas admite cada tipo de quiz
+
+Los tipos de preguntas no son intercambiables entre tipos de quiz: algunos no tienen una "respuesta correcta" natural y otros no pueden votar por un tipo de resultado. El panel izquierdo solo muestra los tipos disponibles para el tipo de quiz actual.
+
+| Tipo | Cuestionario de conocimiento | Cuestionario con puntuación | Cuestionario de resultado |
+| --- | --- | --- | --- |
+| Opción única / Opción múltiple / Lista desplegable / Verdadero-Falso | ✅ | ✅ | ✅ |
+| Completar el espacio | ✅ se puede calificar con una respuesta correcta | ✅ **solo se recopila, nunca se puntúa** | ❌ |
+| Número | ✅ se puede calificar con una respuesta correcta | ✅ el número enviado alimenta las fórmulas | ❌ |
+| Cascada / Valoración | ❌ | ✅ | ❌ |
+| Fecha / Hora | ❌ | ✅ solo se recopila | ❌ |
+| Ordenar | ✅ | ❌ | ❌ |
+| Declaración / Carrusel de imágenes / Salto de página | ✅ | ✅ | ✅ |
+
+Un **Cuestionario de conocimiento aleatorio** usa solo preguntas aleatorias y tipos de visualización; las preguntas en sí provienen del banco de preguntas vinculado.
+
+<Callout type="info">
+  En un Cuestionario con puntuación, una **pregunta de completar el espacio solo recopila texto**: no genera puntuación y no se puede referenciar en una fórmula de puntuación. Es ideal como cierre tipo "¿algo más que debamos saber?" después de las preguntas puntuadas, para que el contexto abierto del lead llegue junto con lo demás.
+</Callout>
+
+<Callout type="info">
+  Cada tipo tiene su propia configuración en el panel derecho; lo habitual es el título y la descripción, el interruptor de obligatorio, el contenido de las opciones y las reglas de validación. Los tipos que admiten puntuación también permiten asignar puntos (consulta [Reglas de puntuación y evaluación](/es/editor/scoring)).
+</Callout>
+
+<Callout type="warning">
+  La **Pregunta aleatoria** se usa normalmente con el tipo "Cuestionario de conocimiento aleatorio" y requiere un banco de preguntas vinculado; puede que no se aplique a otros tipos.
+</Callout>

@@ -1,0 +1,56 @@
+---
+title: 'Conectores y automatización'
+description: 'Los conectores envían los leads y las reservas que generan tus quizzes a las herramientas que ya usas: correo, tu propio backend, Slack, Zapier o Kit. Son de nivel de equipo y los comparten todos los quizzes.'
+sidebarTitle: Descripción general
+---
+
+Los **Conectores** envían los leads y las reservas que generan tus quizzes a las herramientas que ya usas: correo electrónico, tu propio backend, Slack o tu proveedor de servicios de email. Los encontrarás en **Conectores**, en la barra lateral izquierda.
+
+<Callout type="info">
+  Los conectores son **de nivel de equipo**: configuras uno y todos los quizzes lo usan. Para que solo ciertos quizzes activen un conector, acótalo con el [alcance de activación](/es/connectors/events).
+</Callout>
+
+![La página de conectores de RooQuiz con el menú de canales y las tarjetas de los conectores configurados](/img/en/connectors/connectors-list.webp)
+
+## Los cinco canales
+
+| Canal | Para qué sirve |
+| --- | --- |
+| **Correo electrónico** | Envía una notificación personalizable a los destinatarios elegidos cuando se produce un evento |
+| **Webhook** | Hace un POST a tu propia URL con una firma HMAC |
+| **Slack** | Autoriza la aplicación de Slack y publica los nuevos leads en un canal |
+| **Zapier** | Pega una URL de Catch Hook y llega a miles de aplicaciones |
+| **Kit** | Añade los nuevos leads a Kit (ConvertKit) como suscriptores y los etiqueta |
+
+Cada conector funciona de forma independiente: **deshabilitar uno no afecta a los demás**. La configuración de cada canal se explica en [Los cinco canales](/es/connectors/channels).
+
+## Permisos y plan
+
+<Callout type="warning">
+  Solo el **propietario de la organización o un administrador** puede gestionar los conectores. Los demás miembros ven un aviso de falta de permisos y el elemento de la barra lateral no se les muestra.
+</Callout>
+
+El canal de **Correo electrónico** está disponible en todos los planes, porque envía a través de [tu propio servidor SMTP](/es/connectors/email-smtp) y no nos supone ningún coste; los otros cuatro son **solo Pro**. En un equipo gratuito, al seleccionar un canal Pro el área de configuración aparece atenuada y se ofrece un enlace para mejorar el plan.
+
+## Qué te indica la tarjeta del conector
+
+Cada conector configurado muestra:
+
+- **Habilitada / Deshabilitada**: si está funcionando.
+- **Configuración incompleta**: el flujo OAuth terminó, pero aún falta un canal o el último paso. Estos conectores no entregan.
+- **Última entrega**: cuándo se activó por última vez y cómo fue (éxito / fallo / cuota excedida).
+
+<Callout type="info">
+  Después de configurar uno, pulsa **Enviar prueba** para confirmar que el otro extremo lo recibe de verdad, en lugar de descubrirlo con tu primer lead real.
+</Callout>
+
+## En esta sección
+
+<Cards>
+  <Card title="Los cinco canales" href="/es/connectors/channels" />
+  <Card title="Eventos desencadenantes y alcance" href="/es/connectors/events" />
+</Cards>
+
+<Callout type="info">
+  ¿Prefieres obtener los datos según tu propio calendario en lugar de recibir envíos? Consulta la [API REST](/es/integrations/rest-api) y la [integración MCP](/es/integrations/mcp).
+</Callout>

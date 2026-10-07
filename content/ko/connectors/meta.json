@@ -1,0 +1,9 @@
+{
+  "title": "커넥터 및 자동화",
+  "pages": [
+    "index",
+    "channels",
+    "email-smtp",
+    "events"
+  ]
+}

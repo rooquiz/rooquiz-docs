@@ -1,0 +1,71 @@
+---
+title: Créditos de AI y facturación
+description: 'Cómo funcionan los créditos de AI en RooQuiz: qué funciones los consumen (evaluación con AI, sugerencias de AI), cómo se factura el uso, cuándo se renueva la asignación del equipo y qué pasa si se agotan.'
+---
+
+Las funciones de AI de tus quizzes (evaluación con AI, corrección automática con AI, etc.) se facturan según el **uso real** y consumen los **créditos de AI** de tu equipo. Esta página explica qué consume créditos, cómo funciona la facturación, cuándo se renuevan los créditos y qué ocurre cuando se agotan.
+
+## Qué consume créditos de AI
+
+- **Evaluación con AI del Cuestionario con puntuación**: análisis con AI de las respuestas de texto que genera conclusiones más completas en el informe.
+- **Sugerencias de AI** (Beta): sugerencias de mejora o interpretación generadas por la AI en el informe.
+- **Corrección automática con AI de preguntas para completar** (Beta) en Quiz / Cuestionario de conocimiento aleatorio: cuando una pregunta para completar tiene activada la «corrección automática con AI», la AI decide si la respuesta es correcta.
+
+La puntuación habitual de preguntas de opción, la puntuación por dimensiones y los informes generados a partir de plantillas **no** consumen créditos de AI.
+
+<Callout type="info">
+  Las «Sugerencias de AI» y la «Corrección automática con AI de preguntas para completar» son actualmente funciones **Beta**; su comportamiento y su calidad todavía se están perfeccionando.
+</Callout>
+
+## Unidad de facturación y modelos
+
+- Los créditos de AI se miden en **Neurons** (la unidad de facturación de Cloudflare Workers AI).
+- Cada llamada a la AI se cobra según el número de **tokens** consumidos, convertidos a Neurons: cuantos más tokens de entrada y salida, mayor es el consumo.
+- Puedes elegir un nivel de modelo de AI en **Ajustes → Información del plan**: **Estándar / Avanzado / Insignia**. Los modelos más potentes consumen más Neurons por llamada. Los equipos Free solo pueden usar «Estándar»; Avanzado e Insignia son **exclusivos de Pro**.
+- Los cargos se **liquidan de forma asíncrona después** de generar el informe, así que nunca ralentizan su generación.
+
+<Callout type="info">
+  Los créditos solo se descuentan cuando la AI **se ejecuta correctamente**; las evaluaciones vacías o las llamadas fallidas no se cobran.
+</Callout>
+
+## Asignación mensual y renovación (aniversario de facturación)
+
+- Cada equipo recibe una asignación mensual de AI cuyo tamaño depende del plan: Free tiene una asignación básica y Pro, una mayor. Consulta las cifras exactas en **Ajustes → Información del plan**.
+- La asignación **se renueva cada mes**, en el **aniversario de facturación** (no cada 30 días fijos):
+  - **Pro**: sigue la fecha de facturación de la suscripción; con cada renovación empieza un nuevo ciclo.
+  - **Free**: se renueva cada mes según el ciclo propio del equipo.
+- La asignación mensual no utilizada **no se acumula**: se borra al final del ciclo y se vuelve a emitir en el siguiente.
+- La fecha de renovación del ciclo actual se muestra en **Ajustes → Información del plan → El ciclo se reinicia**.
+
+## Recargas (Pro)
+
+- Los equipos Pro pueden comprar créditos de AI adicionales en **Ajustes → Información del plan**.
+- Precio: **1 unidad = 30 000 Neurons = 1 $**, con un mínimo de 5 unidades y un máximo de 100 unidades por compra.
+- El saldo recargado **nunca caduca** y no se borra con el ciclo mensual.
+- Orden de consumo: **primero se usa la asignación mensual y después el saldo recargado**.
+
+## Qué ocurre cuando se agotan los créditos
+
+El comportamiento depende de cómo se use la AI:
+
+| Escenario | Comportamiento cuando se agotan los créditos |
+| --- | --- |
+| **Evaluación con AI del Cuestionario con puntuación / Sugerencias de AI** | **Degradación controlada**: se omiten las partes de AI, mientras que el informe, el análisis por dimensiones y la puntuación básica **se siguen generando con normalidad** |
+| **Corrección automática con AI de preguntas para completar** en Quiz / Cuestionario de conocimiento aleatorio | Las nuevas respuestas de esos formularios **se rechazan** (créditos de AI agotados), porque la corrección depende de la AI y no puede calcularse sin ella |
+
+<Callout type="warning">
+  Si estás recopilando respuestas para un Quiz que usa la «corrección automática con AI», vigila tu saldo: si se agota, los participantes no podrán **enviar** sus respuestas. Puedes restablecerlo pasándote a Pro, haciendo una recarga o esperando a la siguiente renovación del ciclo.
+</Callout>
+
+## Aviso de saldo bajo
+
+- Cuando los **créditos disponibles totales** de un equipo (asignación mensual restante + saldo recargado) caen **por debajo del 20 %** de la asignación mensual del plan, el sistema lo comprueba a diario y envía un correo de aviso al **propietario** del equipo.
+- Solo se envía **un aviso por ciclo**; se reactiva cuando la asignación se renueva o tras una recarga correcta.
+
+## Dónde consultarlo y gestionarlo
+
+Ve a **Ajustes → Información del plan** para ver: la asignación del ciclo actual y lo que queda, el saldo recargado, la fecha de renovación del ciclo, la selección del nivel de modelo de AI y el acceso a las recargas.
+
+<Callout type="info">
+  Relacionado: [Reglas de puntuación y evaluación](/es/editor/scoring), [Informes y evaluación con AI](/es/results/reports).
+</Callout>

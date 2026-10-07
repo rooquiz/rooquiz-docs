@@ -1,0 +1,110 @@
+---
+title: Service d'envoi d'e-mails (SMTP)
+description: "Configurez le service d'envoi SMTP de votre équipe pour que les connecteurs e-mail envoient depuis votre adresse, sans limite de la plateforme : où le configurer, la vérification et ce qui échoue sans lui."
+---
+
+Le [connecteur E-mail](/fr/connectors/channels) envoie via **votre propre serveur SMTP** : RooQuiz ne sert pas de relais. Les notifications arrivent donc depuis votre propre adresse, et la plateforme n'impose aucune limite d'envoi.
+
+Configurez-le une fois par équipe dans **Paramètres → Équipe → Envoi d'e-mails**. Tous les connecteurs e-mail de l'équipe l'utilisent.
+
+<Callout type="warning">
+  Sans service d'envoi **vérifié**, un connecteur e-mail peut toujours être enregistré mais n'envoie jamais rien. Sa carte affiche une étiquette rouge « Aucun service d'envoi ».
+</Callout>
+
+## Champs à renseigner
+
+| Champ | Remarques |
+| --- | --- |
+| **Serveur SMTP** | Le nom d'hôte de votre fournisseur, par exemple `smtp.gmail.com` |
+| **Port** | `587` (STARTTLS), `465` (SSL/TLS) ou `2525` |
+| **Nom d'utilisateur** | Généralement votre adresse e-mail complète ; certains fournisseurs utilisent une valeur fixe |
+| **Mot de passe** | Le mot de passe SMTP ou la clé API. Lors d'une modification ultérieure, laissez-le vide pour conserver celui déjà enregistré |
+| **Adresse d'expédition** | Doit être une adresse au nom de laquelle votre serveur SMTP est autorisé à envoyer |
+| **Nom d'expéditeur** | Le nom affiché aux destinataires |
+| **Adresse de réponse** | Facultative, si les réponses doivent aller ailleurs |
+
+<Callout type="info">
+  **Le port 25 ne peut pas être utilisé.** Notre plateforme d'hébergement bloque les connexions sortantes sur ce port. Utilisez 587 ou 465.
+</Callout>
+
+## Configuration par fournisseur
+
+<Tabs items={['Gmail', 'Resend', 'Serveur de messagerie d’entreprise']}>
+  <Tab value="Gmail">
+    | Champ | Valeur |
+    | --- | --- |
+    | Serveur SMTP | `smtp.gmail.com` |
+    | Port | `587 (STARTTLS)` |
+    | Nom d'utilisateur | Votre adresse Gmail complète |
+    | Mot de passe | Un **mot de passe d'application de 16 caractères** |
+    | Adresse d'expédition | La **même** adresse Gmail, ou un alias « Envoyer des e-mails en tant que » vérifié |
+
+    Créez le mot de passe d'application sur [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords). Il n'est affiché qu'une fois, en quatre groupes de quatre caractères : **supprimez les espaces** avant de le coller.
+
+    <Callout type="warning">
+      Le mot de passe habituel de votre compte ne fonctionnera pas. Google a désactivé la connexion par mot de passe pour les clients de messagerie : un mot de passe d'application est donc obligatoire, et les mots de passe d'application n'existent qu'une fois la **validation en deux étapes** activée.
+    </Callout>
+
+    Si cette page indique *« The setting you are looking for is not available for your account »*, l'un des cas suivants s'applique : la validation en deux étapes est désactivée ; il s'agit d'un compte Google Workspace dont l'administrateur a désactivé les mots de passe d'application ; ou le compte est inscrit au Programme Protection Avancée, qui les bloque purement et simplement.
+
+    Gmail limite aussi les envois à environ **500 destinataires par jour** pour les comptes personnels et **2 000** pour Workspace. C'est largement suffisant pour des notifications d'équipe, mais pas pour des envois en masse.
+  </Tab>
+
+  <Tab value="Resend">
+    | Champ | Valeur |
+    | --- | --- |
+    | Serveur SMTP | `smtp.resend.com` |
+    | Port | `587 (STARTTLS)` |
+    | Nom d'utilisateur | `resend`, littéralement |
+    | Mot de passe | Une clé API Resend (`re_…`) |
+    | Adresse d'expédition | N'importe quelle adresse d'un domaine que vous avez vérifié dans Resend |
+
+    C'est l'option la plus simple si vous voulez que les notifications proviennent de **votre propre domaine de marque** plutôt que d'une boîte personnelle, et elle n'a pas de plafond quotidien comme celui de Gmail.
+  </Tab>
+
+  <Tab value="Serveur de messagerie d’entreprise">
+    Demandez à la personne qui gère votre messagerie le **nom d'hôte SMTP, le port et les identifiants**. Privilégiez le port 587 avec STARTTLS ; utilisez 465 si c'est le seul proposé.
+
+    Deux points posent souvent problème :
+
+    - Le nom d'utilisateur est souvent l'**adresse complète de la boîte**, et non la partie située avant le `@`.
+    - L'**adresse d'expédition doit appartenir à votre propre domaine**. La plupart des serveurs d'entreprise refusent de relayer un e-mail prétendant venir d'ailleurs.
+  </Tab>
+</Tabs>
+
+## Enregistrer et vérifier
+
+<Steps>
+### Remplissez les champs et cliquez sur « Enregistrer et vérifier »
+
+L'enregistrement et la vérification forment une seule action : vous ne vous retrouvez donc jamais avec une configuration enregistrée mais non testée.
+
+### Consultez votre boîte de réception pour l'e-mail de test
+
+<Callout type="warning">
+  L'e-mail de test est envoyé à **l'adresse de votre propre compte RooQuiz** (celle avec laquelle vous êtes connecté), **et non** à l'adresse d'expédition que vous venez de configurer. Si rien n'arrive, vérifiez cette boîte et son dossier de spam avant de modifier quoi que ce soit.
+</Callout>
+
+### Vérifiez que le statut indique « Vérifié »
+</Steps>
+
+**Vérifié** signifie que votre serveur SMTP a accepté le message et renvoyé un code de réussite. Ce n'est pas la même chose que « distribué » : un serveur SMTP accepte d'abord le message puis le transmet ensuite, si bien qu'un message peut encore être classé comme spam ou rejeté plus tard. Si la vérification réussit mais que rien n'arrive, le problème se situe du côté de la réception : commencez par le dossier de spam, puis cherchez un message de rejet dans la boîte depuis laquelle vous envoyez.
+
+## Lorsque la vérification échoue
+
+L'**erreur exacte renvoyée par votre serveur SMTP** est affichée sur la page, volontairement sans modification, pour que vous puissiez agir directement. Les plus courantes :
+
+| Erreur | Signification |
+| --- | --- |
+| `535 Username and Password not accepted` | Identifiants incorrects. Pour Gmail : vous avez utilisé le mot de passe du compte au lieu d'un mot de passe d'application, ou laissé des espaces |
+| `553 Sender address rejected: not owned by user` | L'adresse d'expédition n'est pas une adresse au nom de laquelle ce serveur peut envoyer. Remplacez-la par une boîte ou un alias appartenant réellement au compte |
+| `550 relay not permitted` | Le serveur refuse tout relais pour vous : généralement un mauvais nom d'utilisateur, ou l'accès SMTP non activé sur la boîte |
+| Délai dépassé / échec de connexion | Nom d'hôte ou port incorrect, ou le serveur n'accepte pas les connexions provenant de l'extérieur de votre réseau |
+
+## Bon à savoir
+
+- Le mot de passe n'est **plus jamais affiché** après l'enregistrement. Laissez le champ vide lorsque vous modifiez autre chose, et il reste inchangé.
+- Modifier le serveur, le port, le nom d'utilisateur, le mot de passe ou l'adresse d'expédition repasse le statut à **Non vérifié** jusqu'à la prochaine vérification réussie.
+- L'enregistrement et la vérification sont **limités** à quelques tentatives par heure et par équipe : chacune se connecte réellement à votre serveur et envoie réellement un message.
+- **Supprimer** le service d'envoi efface le mot de passe enregistré. Inutile de le supprimer pour modifier les paramètres : il suffit d'enregistrer par-dessus. La suppression est refusée tant qu'un connecteur e-mail est encore **activé**, pour que vous ne puissiez pas interrompre vos propres envois sans vous en rendre compte.
+- Si un envoi ultérieur échoue définitivement (les identifiants ne fonctionnent plus ou l'adresse d'expédition est refusée), le statut passe à **Échec de la vérification** et les connecteurs e-mail cessent d'envoyer jusqu'à ce que vous corrigiez le problème. Une seule adresse de destinataire invalide n'a **pas** cet effet : seul ce message échoue.

@@ -1,0 +1,241 @@
+---
+title: API REST
+description: "Une petite API REST en lecture seule qui renvoie en JSON les définitions des formulaires de votre équipe (titre, champs, paramètres, rapport) pour vos scripts, automatisations ou tableaux de bord."
+---
+
+RooQuiz propose une petite **API REST** en lecture seule qui vous permet de récupérer les données des formulaires de votre équipe dans vos scripts, vos automatisations (Zapier, Make, n8n) ou vos propres tableaux de bord. Elle renvoie les **définitions** des formulaires (titre, champs, paramètres, configuration du rapport) au format JSON brut.
+
+<Callout type="info">
+  L'API REST fonctionne **au niveau du compte** et s'authentifie au nom de votre équipe, et non d'un membre en particulier. Si vous préférez qu'un **client IA** agisse sur vos quiz en langage naturel, consultez [Intégration MCP](/fr/integrations/mcp).
+</Callout>
+
+## Fonctionnement
+
+- Vous vous authentifiez avec une **clé API de compte** (préfixe `rqp_acct_`) qui appartient à une équipe.
+- La clé peut **lire tous les formulaires de cette équipe**. Elle n'est liée à aucune personne, elle continue donc de fonctionner lorsque des membres arrivent ou partent.
+- Seul un **propriétaire d'équipe** peut créer, consulter ou révoquer des clés API de compte.
+- L'API est en **lecture seule** et renvoie uniquement les définitions des formulaires : elle n'expose pas les soumissions ni les réponses.
+
+## Obtenir une clé API
+
+Rendez-vous dans **Paramètres → Clés API** (visible uniquement par les **propriétaires d'équipe**) et cliquez sur « Créer une clé API » :
+
+1. Donnez-lui un **nom** (pour la reconnaître, par exemple `Zapier - Production`).
+2. Une fois la clé créée, une clé en clair commençant par `rqp_acct_` s'affiche.
+
+<Callout type="warning">
+  **La clé en clair n'est affichée qu'une seule fois.** Elle ne peut plus être récupérée une fois la page quittée. Copiez-la immédiatement ; en cas de perte, vous devrez la révoquer et en créer une nouvelle.
+</Callout>
+
+Chaque équipe peut détenir au maximum **10 clés** (clés révoquées comprises). Pour en créer davantage, **supprimez** une clé afin de libérer un emplacement (la « révocation » ne fait que désactiver la clé, elle ne libère pas l'emplacement). Traitez une clé comme un mot de passe et ne la commitez jamais dans votre gestionnaire de code source.
+
+## Authentification
+
+Envoyez la clé comme jeton Bearer dans chaque requête :
+
+```bash
+Authorization: Bearer rqp_acct_xxx...
+```
+
+<Callout type="info">
+  Un jeton MCP personnel (`rqp_live_`) ne fonctionne **pas** avec l'API REST : il renvoie `401`. Utilisez une clé API de compte (`rqp_acct_`).
+</Callout>
+
+## Points de terminaison
+
+L'URL de base ressemble à `https://your-domain/api/v1`.
+
+### Lister les formulaires
+
+```bash
+GET /api/v1/forms
+```
+
+Liste tous les formulaires de l'équipe de la clé, du plus récent au plus ancien.
+
+| Paramètre de requête | Type | Par défaut | Description |
+| --- | --- | --- | --- |
+| `scene` | string | — | Filtrer par scène : `knowledge_quiz`, `random_knowledge_quiz`, `scored_quiz`, `outcome_quiz`. |
+| `titleContains` | string | — | Correspondance approximative sur le titre. |
+| `limit` | number | `20` | Éléments par page (maximum `100`). |
+| `page` | number | `1` | Numéro de page. |
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/forms?scene=knowledge_quiz&limit=20"
+```
+
+```json
+{
+  "totalDocs": 12,
+  "page": 1,
+  "limit": 20,
+  "items": [
+    {
+      "id": "d983d8d9-...",
+      "title": "Personality Quiz",
+      "scene": "outcome_quiz",
+      "language": "en_US",
+      "publicToken": "h7sbps67",
+      "shareUrl": "https://your-cairo-domain/a/h7sbps67",
+      "localization": null,
+      "isActive": true,
+      "createdAt": "2026-06-18T11:35:11.468Z",
+      "updatedAt": "2026-06-18T12:59:42.649Z"
+    }
+  ]
+}
+```
+
+### Obtenir un formulaire
+
+```bash
+GET /api/v1/forms/{id}
+```
+
+Renvoie la définition d'un formulaire.
+
+| Paramètre de requête | Type | Par défaut | Description |
+| --- | --- | --- | --- |
+| `includeFields` | boolean | `true` | Inclure le tableau `fields[]` (questions / sauts de page). Passez `false` pour l'omettre sur les formulaires volumineux. |
+| `includeReport` | boolean | `true` | Inclure la configuration du rapport / de l'analyse par dimension. |
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/forms/d983d8d9-..."
+```
+
+```json
+{
+  "id": "d983d8d9-...",
+  "title": "Personality Quiz",
+  "scene": "outcome_quiz",
+  "language": "en_US",
+  "description": null,
+  "isActive": true,
+  "publicToken": "h7sbps67",
+  "shareUrl": "https://your-cairo-domain/a/h7sbps67",
+  "layout": "card",
+  "localization": null,
+  "systemText": null,
+  "createdAt": "2026-06-18T11:35:11.468Z",
+  "updatedAt": "2026-06-18T12:59:42.649Z",
+  "fields": [ /* questions & page breaks */ ],
+  "report": { /* report / dimension config */ }
+}
+```
+
+## Soumissions
+
+Lisez les réponses collectées par les formulaires de votre équipe : leads, réponses, scores, résultats de rapport et attribution UTM. Idéal pour la synchronisation avec un CRM, les tableaux de bord personnalisés et les automatisations.
+
+<Callout type="warning">
+  Les soumissions contiennent des données personnelles des répondants (e-mail, nom, IP). Traitez-les et stockez-les de manière responsable.
+</Callout>
+
+### Lister les soumissions
+
+```bash
+GET /api/v1/records
+```
+
+Liste les soumissions de toute l'équipe, de la plus récente à la plus ancienne.
+
+| Paramètre de requête | Type | Par défaut | Description |
+| --- | --- | --- | --- |
+| `formId` | string | — | Uniquement les soumissions de ce formulaire. |
+| `status` | string | — | Statut du rapport : `pending`, `processing`, `completed`, `failed`. |
+| `since` | ISO date | — | Uniquement les soumissions créées à partir de cette date (synchronisation incrémentale). |
+| `until` | ISO date | — | Uniquement les soumissions créées jusqu'à cette date. |
+| `limit` | number | `20` | Éléments par page (maximum `100`). |
+| `page` | number | `1` | Numéro de page. |
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/records?since=2026-06-01&limit=50"
+```
+
+```json
+{
+  "totalDocs": 1500,
+  "page": 1,
+  "limit": 50,
+  "items": [
+    {
+      "id": "...",
+      "serialNumber": 11,
+      "formId": "d983d8d9-...",
+      "shareToken": "v2hrpv6d",
+      "reportUrl": "https://your-cairo-domain/a/md8682rx/records/v2hrpv6d",
+      "submittedAt": "2026-06-18T12:00:00.000Z",
+      "updatedAt": "2026-06-18T12:00:05.000Z",
+      "examinee": {
+        "id": "...", "examineeId": "TZ4730277148",
+        "email": "lead@example.com", "name": "Jane", "customData": null
+      },
+      "metadata": {
+        "utmSource": "newsletter", "utmMedium": "email",
+        "utmCampaign": null, "utmTerm": null, "utmContent": null,
+        "referrer": "https://..."
+      },
+      "data": { "q_email": "lead@example.com", "q_rating": 5 },
+      "result": {
+        "status": "completed", "score": 2, "maxScore": 4,
+        "level": "Good", "outcomeCode": null, "outcomeName": null
+      }
+    }
+  ]
+}
+```
+
+Les clés de `data` correspondent au `code` de chaque champ du formulaire (consultez le `fields[]` d'un formulaire via le point de terminaison des formulaires). `examinee` vaut `null` pour les soumissions anonymes. `result` est un résumé compact ; le rapport complet est disponible sur le point de terminaison de détail.
+
+### Obtenir une soumission
+
+```bash
+GET /api/v1/records/{id}
+```
+
+Renvoie une soumission avec son résultat de rapport complet (`reportResult`), ainsi que `metadata.ip` / `metadata.userAgent`.
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/records/..."
+```
+
+```json
+{
+  "id": "...",
+  "serialNumber": 11,
+  "formId": "d983d8d9-...",
+  "shareToken": "v2hrpv6d",
+  "reportUrl": "https://your-cairo-domain/a/md8682rx/records/v2hrpv6d",
+  "submittedAt": "...",
+  "updatedAt": "...",
+  "examinee": { "id": "...", "email": "lead@example.com", "name": "Jane" },
+  "metadata": { "ip": "203.0.113.4", "userAgent": "...", "utmSource": "newsletter" },
+  "data": { /* answers keyed by field code */ },
+  "reportResult": {
+    "status": "completed",
+    "overallAnalysis": { "score": 2, "maxScore": 4, "level": "Good", "summary": "...", "suggestions": "..." },
+    "dimensionAnalysis": { "title": "...", "radar": [], "items": [] },
+    "outcome": { "code": null, "name": null, "ranking": null },
+    "aiSuggestion": { "status": "completed", "content": "..." }
+  }
+}
+```
+
+## Erreurs
+
+Les erreurs renvoient un corps JSON de la forme `{ "error": { "code": "...", "message": "..." } }`.
+
+| Statut | Code | Quand |
+| --- | --- | --- |
+| `401` | `unauthorized` | Clé manquante, invalide, expirée ou révoquée (ou jeton qui n'est pas un jeton de compte). |
+| `404` | `not_found` | Le formulaire n'existe pas ou n'appartient pas à l'équipe de cette clé. |
+| `400` | `bad_request` | Paramètre invalide (par exemple une `scene` inconnue). |
+| `429` | `rate_limited` | Limite de débit dépassée. |
+
+## Limites de débit
+
+Chaque clé est limitée à **120 requêtes par minute** ; au-delà, l'API renvoie `429`. Révoquez une clé depuis **Paramètres → Clés API** dès qu'elle n'est plus nécessaire : toute intégration qui l'utilise perd immédiatement l'accès.

@@ -1,0 +1,57 @@
+---
+title: Los cuatro tipos de quiz
+description: 'Los cuatro tipos de quiz de RooQuiz y para qué sirve cada uno: pruebas de conocimiento, evaluaciones multidimensionales, quizzes de resultado y quizzes aleatorios, y por qué el tipo se fija al crearlo.'
+---
+
+RooQuiz ofrece cuatro tipos de quiz (escenarios), cada uno orientado a un objetivo distinto.
+
+<Callout type="warning">
+  **El tipo se elige al crear el quiz y no se puede cambiar después.** Es una restricción a nivel de datos, no un control que falte en la interfaz. Equivocarte implica volver a crearlo.
+</Callout>
+
+## Cuestionario de conocimiento
+
+Para pruebas de conocimiento, exámenes en línea y prácticas con puntuación: escenarios que necesitan **evaluar respuestas correctas/incorrectas y puntuar**.
+
+- **Orden fijo**: todos los participantes ven las preguntas en el mismo orden.
+- **Puntuación**: asigna puntos a las preguntas o a las opciones correctas; los totales se suman automáticamente.
+- **Evaluación y retroalimentación**: marca las respuestas correctas, define una puntuación mínima para aprobar y muestra a los participantes su puntuación y comentarios.
+
+## Cuestionario con puntuación
+
+Para evaluaciones de personalidad, evaluaciones de aptitudes y encuestas: escenarios que necesitan un **análisis multidimensional** en lugar de un simple correcto/incorrecto.
+
+- **Puntuación multidimensional**: asigna preguntas a varias dimensiones y genera resultados multidimensionales, que suelen mostrarse en un **gráfico de radar**.
+- **Lógica condicional**: muestra u oculta preguntas posteriores según las respuestas anteriores, lo que permite encuestas adaptativas.
+- **Evaluación con AI**: usa AI para evaluar respuestas de texto y generar análisis más completos (sujeto a la cuota de AI).
+- **Entrega del informe**: los resultados pueden mostrarse en pantalla, exportarse a PDF o enviarse por correo electrónico (el correo es una función Pro).
+
+## Cuestionario de resultado
+
+Para quizzes de personalidad, quizzes divertidos del tipo "¿qué X eres?" y diagnósticos para captar leads: escenarios que producen un **tipo de resultado** en lugar de una puntuación.
+
+- **Tipos de resultado**: define de antemano un conjunto de tipos de resultado (p. ej., León / Búho); cada tipo tiene su propio nombre, color de tema, imagen y contenido de resultado en texto enriquecido.
+- **Votación por opciones**: cada opción vota por uno o varios tipos; tras el envío, **gana el tipo con más votos** (los empates se resuelven por el orden de la lista).
+- **CTA en la página de resultados**: cada tipo puede tener su propio botón de CTA (reservar una consulta, ver un plan…), lo que convierte un resultado divertido en acción y en contenido para compartir.
+- **Tipos de preguntas**: las preguntas de votación son de opción única, opción múltiple, lista desplegable y verdadero/falso, junto con elementos de presentación como declaraciones y saltos de página.
+
+## Cuestionario de conocimiento aleatorio
+
+Para prácticas y pruebas aleatorias: escenarios en los que **cada participante debe ver preguntas diferentes**.
+
+- **Muestreo aleatorio**: extrae preguntas de un banco de preguntas vinculado según una regla en cada envío.
+- **Filtrado del banco**: controla el alcance del muestreo por dificultad, etiquetas y más.
+- **Selección registrada**: el sistema registra las preguntas realmente extraídas cada vez para mantener la coherencia de la puntuación.
+
+## Cómo elegir
+
+| Tu objetivo | Tipo recomendado |
+| --- | --- |
+| Puntuar a los participantes y evaluar respuestas correctas/incorrectas | **Cuestionario de conocimiento** |
+| Realizar una evaluación de personalidad/aptitudes o una encuesta con análisis multidimensional | **Cuestionario con puntuación** |
+| Dar a cada participante un resultado del tipo "¿qué tipo eres?" | **Cuestionario de resultado** |
+| Mostrar a cada persona un conjunto distinto de preguntas aleatorias | **Cuestionario de conocimiento aleatorio** |
+
+<Callout type="warning">
+  Los ajustes disponibles varían según el tipo (por ejemplo, la puntuación solo está disponible en el Cuestionario de conocimiento, la lógica condicional y el análisis multidimensional se orientan principalmente al Cuestionario con puntuación, y la votación por opciones solo existe en el Cuestionario de resultado). Confirma las funciones que necesitas antes de elegir.
+</Callout>

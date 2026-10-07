@@ -1,0 +1,40 @@
+---
+title: Logs de auditoria
+description: 'Os logs de auditoria registram as operações importantes de uma equipe: quem fez o quê, em qual objeto, quando e se deu certo. Só o proprietário e os administradores da equipe podem abri-los.'
+---
+
+Os **logs de auditoria** registram as operações importantes da sua equipe: quem fez o quê, em qual objeto, quando e se a operação foi bem-sucedida. Você os encontra em **Configurações → Logs de auditoria**.
+
+<Callout type="warning">
+  **Somente o proprietário e os administradores da equipe podem ver os logs de auditoria.** Membros e visualizadores veem um aviso no lugar deles.
+</Callout>
+
+## Colunas
+
+| Coluna | Observações |
+| --- | --- |
+| **Ação** | O que aconteceu — "Convidar membro", "Excluir quiz", "Exportar dados" |
+| **Status** | Sucesso ou Falha |
+| **Autor** | Quem fez. Operações iniciadas pela própria plataforma (limpeza por retenção, bloqueios por moderação) aparecem como **Sistema** |
+| **Alvo** | O objeto afetado, com um prefixo de ID |
+| **Horário** | Quando aconteceu |
+
+Clique em qualquer linha para expandir os **Detalhes**. Cada ação traz campos diferentes — uma exportação, por exemplo, também registra o tipo de dado (respostas / leads / respondentes) e a quantidade de linhas.
+
+## O que é registrado
+
+Em linhas gerais:
+
+- **Equipe** — excluir equipe, transferir a propriedade, mudança de plano.
+- **Membros** — convidar, remover, sair, mudar função, desativar / ativar.
+- **Quizzes** — criar, atualizar, mover para a lixeira, restaurar, excluir permanentemente, bloquear / desbloquear.
+- **Leads e respondentes** — mover para a lixeira, restaurar, excluir permanentemente.
+- **Conectores** — criar, atualizar, excluir.
+- **Credenciais** — chaves de API e tokens MCP: criar, revogar, restaurar, excluir.
+- **Uso** — consumo de IA, consumo de e-mails, [exportações de dados](/pt-BR/results/export).
+
+Filtre por **ação** e **status** no topo para responder a perguntas como "quem exportou dados na semana passada".
+
+<Callout type="info">
+  Os logs são **somente leitura** — não podem ser editados nem excluídos. Um log de auditoria que pode ser alterado não vale muita coisa.
+</Callout>

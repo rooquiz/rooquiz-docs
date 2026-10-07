@@ -1,0 +1,23 @@
+---
+title: 整合與 API
+description: '這一章面向開發者，講怎麼用程式碼或 AI 客戶端接入 RooQuiz：唯讀的 REST API 用帳號級金鑰拉取表單定義與提交記錄，適合自建看板或同步到資料倉儲；MCP 接入讓 Claude、Cursor 等 AI 客戶端直接在你的團隊下操作測驗。也介紹不寫程式碼時的替代做法。兩條路徑都不需要改動測評本身，也不會影響答題者在作答頁上看到的體驗。'
+sidebarTitle: 概覽
+---
+
+這一章面向**開發者**,講怎麼用程式碼或 AI 客戶端接入 RooQuiz:
+
+<Cards>
+  <Card title="REST API" href="/zh-TW/integrations/rest-api" />
+  <Card title="MCP 接入" href="/zh-TW/integrations/mcp" />
+</Cards>
+
+- **REST API** —— 用帳號級 API 金鑰拉取表單與提交記錄,適合自建看板、同步到資料倉儲。
+- **MCP 接入** —— 把 Claude 這類 AI 客戶端接進你的團隊,直接建立、查詢和修改測驗。
+
+## 不寫程式碼的整合
+
+如果你要的只是「新線索來了通知我」「把線索同步到電子郵件行銷工具」,**不需要碰 API**。用 [連接與自動化](/zh-TW/connectors) 裡的五個管道即可:郵件、Webhook、Slack、Zapier、Kit。
+
+<Callout type="info">
+  兩者的區別是**推還是拉**:連接是事件發生時**推**給你,REST API 是你按自己的節奏來**拉**。
+</Callout>

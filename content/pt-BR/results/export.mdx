@@ -1,0 +1,56 @@
+---
+title: Exportação de dados
+description: 'Exporte respostas, leads e respondentes em CSV UTF-8 que abre no Excel: os dois tipos de exportação, a cota semanal e sua renovação, o que fazer com volumes grandes e o que o arquivo contém.'
+---
+
+Respostas, leads e respondentes podem ser exportados em **CSV** (UTF-8, abre diretamente no Excel).
+
+<Callout type="warning">
+  A exportação é um **recurso Pro** com um limite semanal de exportações. Equipes no plano gratuito veem um aviso de upgrade.
+</Callout>
+
+## Dois tipos de exportação
+
+| Método | Observações |
+| --- | --- |
+| **Exportar selecionados** | Marque algumas linhas e exporte só elas. O arquivo é gerado no seu navegador e **não consome sua cota** |
+| **Exportar tudo** | Exporta tudo o que corresponde aos filtros atuais. O arquivo é gerado no servidor e **consome uma exportação** |
+
+<Callout type="info">
+  Filtre antes de exportar. "Exportar tudo" exporta o **resultado dos filtros atuais**, não a tabela inteira — quanto mais preciso o filtro, mais útil o arquivo e menos cota você gasta.
+</Callout>
+
+## A caixa de confirmação
+
+"Exportar tudo" abre uma confirmação que coloca as informações importantes à sua frente primeiro:
+
+- **Intervalo de dados** — todos os dados ou o resultado dos filtros atuais (dá para alternar ali mesmo).
+- **Volume de dados** — aproximadamente quantas linhas. Se a contagem falhar, você é avisado e ainda pode prosseguir.
+- **Formato do arquivo** — CSV (UTF-8, abre no Excel).
+- **Esta semana** — quantas exportações ainda restam do seu limite e quando ele é renovado.
+
+Confirme e o arquivo é **gerado em segundo plano e baixado automaticamente**; enquanto isso, você pode sair da página.
+
+## Cota e renovação
+
+A cota semanal é renovada na **segunda-feira (UTC)**. Tanto a caixa de confirmação quanto a mensagem de limite atingido informam o horário exato da renovação.
+
+<Callout type="info">
+  **Exportações com falha não contam.** Só uma exportação que de fato gerou um arquivo consome sua cota.
+</Callout>
+
+## Quando o volume de dados é grande demais
+
+Há um limite de linhas por exportação. Ultrapassá-lo faz a exportação ser recusada na hora (**sem consumir cota**), e você recebe um resumo pronto para copiar e enviar por e-mail ao suporte técnico, que fará a exportação para você.
+
+<Callout type="info">
+  Se uma exportação parecer não terminar nunca, a página para de esperar após cinco minutos e avisa — o processo continua rodando em segundo plano, então volte à página um pouco mais tarde.
+</Callout>
+
+## O que há no arquivo
+
+Além das respostas em si, as exportações normalmente incluem o número do registro, a data e hora de envio, o e-mail e o ID do respondente e o nível. As exportações de leads e de respondentes têm seus próprios conjuntos de colunas.
+
+<Callout type="warning">
+  Os arquivos exportados contêm informações pessoais fornecidas pelos respondentes. Armazene-os e compartilhe-os de acordo com as regras de privacidade e conformidade da sua organização.
+</Callout>

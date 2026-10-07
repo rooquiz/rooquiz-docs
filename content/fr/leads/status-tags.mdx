@@ -1,0 +1,55 @@
+---
+title: Statuts, étiquettes et responsables
+description: "Un lead porte trois indicateurs indépendants : un statut de suivi (où il en est), des étiquettes (quel type de personne) et un responsable (qui s'en charge). Leur rôle et comment les modifier en masse."
+---
+
+Un lead porte trois indicateurs indépendants : un **statut de suivi** (où il en est), des **étiquettes** (quel type de personne) et un **responsable** (qui s'en charge).
+
+## Statut de suivi
+
+Le statut est à **sélection unique** et représente la position du lead dans le pipeline. Quatre statuts sont intégrés :
+
+| Statut | Signification habituelle |
+| --- | --- |
+| **Nouveau** | Vient d'arriver, personne ne s'en est encore occupé |
+| **Contacté** | Vous avez envoyé un e-mail ou appelé |
+| **Converti** | La personne a acheté |
+| **Non valide** | Doublon, données de test ou profil manifestement inadapté |
+
+Les statuts intégrés **peuvent être renommés mais pas supprimés**. Vous pouvez en ajouter d'autres et les faire glisser pour les réordonner : les colonnes du tableau suivent cet ordre.
+
+<Callout type="warning">
+  Lorsque vous supprimez un statut personnalisé, les leads qui s'y trouvent sont **réinitialisés au statut par défaut**. La boîte de dialogue de confirmation indique combien de leads sont concernés avant l'enregistrement.
+</Callout>
+
+## Étiquettes
+
+Les étiquettes sont des libellés de couleur à **sélection multiple**, destinés aux caractéristiques transversales sans lien avec l'étape : « Piste chaude », « À rappeler », « VIP ». Un lead peut en porter plusieurs à la fois.
+
+La répartition des rôles : **le statut répond à « où en est-il », les étiquettes à « quel type de personne »**. N'utilisez pas les étiquettes pour simuler des étapes, sinon les deux systèmes se contrediront lors du filtrage.
+
+<Callout type="warning">
+  Supprimer une étiquette **la retire de tous les leads** qui la portent. La boîte de dialogue de confirmation indique combien de références seront supprimées.
+</Callout>
+
+## Où les configurer
+
+Les deux se trouvent dans **Pistes → Paramètres des leads**, dans les sections « Statuts de lead » et « Étiquettes de lead ».
+
+<Callout type="info">
+  Seuls le **propriétaire de l'équipe et les administrateurs** peuvent les modifier. Les autres voient ces paramètres en lecture seule, avec une mention qui le précise. L'application d'étiquettes et le changement de statut au quotidien ne sont pas restreints : tout membre peut le faire, à l'exception des lecteurs.
+</Callout>
+
+## Responsable
+
+Le responsable confie un lead à un membre précis de l'équipe : il répond à la question « qui s'en charge ».
+
+- Vous pouvez attribuer un lead aux **membres actifs qui ne sont pas lecteurs**. Le [rôle Lecteur](/fr/teams/members) ne peut pas se voir attribuer de leads.
+- Modifiez-le pour un seul lead dans le bloc « Suivi » de la [page de détail](/fr/leads/detail), ou pour plusieurs à la fois avec l'[attribution groupée](/fr/leads/list-board).
+- Chaque modification est inscrite dans la chronologie d'**activité** du lead, et le nouveau responsable est notifié.
+
+Le responsable compte aussi pour les [réservations](/fr/bookings) : lorsque l'approbation est activée, c'est le **responsable du lead** qui confirme une demande de réservation entrante.
+
+<Callout type="info">
+  Chaque modification de statut, d'étiquette et de responsable est enregistrée dans l'[activité du lead](/fr/leads/detail), avec l'auteur et la date de la modification.
+</Callout>

@@ -1,0 +1,272 @@
+---
+title: MCP 接入
+description: 'RooQuiz 提供 MCP（Model Context Protocol）server，讓 Claude Desktop、Claude Code、Cursor、Codex 等 AI 客戶端在你的團隊下直接操作測驗：用自然語言建立各類測驗、追加題目、調整順序、設定報告維度與分型，還能複製刪除測驗、管理譯文與答題者。含兩種連接方式與限制說明。'
+---
+
+RooQuiz 提供一個 **MCP(Model Context Protocol)server**,讓 Claude Desktop、Claude Code、Cursor、Codex 等 AI 客戶端能在你的團隊下直接操作測驗——用自然語言就能建立考試、評分測驗、分型測驗,追加題目、調整順序、設定報告維度與分型結果;還能複製 / 刪除測驗、做多語言譯文、管理考生,以及讀取答題記錄、統計與轉化漏斗——而不必手動在編輯器裡一個個搭。
+
+<Callout type="info">
+  MCP 是面向**進階使用者**的能力,需要你會使用支援 MCP 的 AI 客戶端。基礎的視覺化搭建仍推薦用 [編輯器](/zh-TW/editor)。
+</Callout>
+
+## 工作原理
+
+- AI 客戶端連接到 RooQuiz 的 MCP 端點(`/api/mcp`),認證方式有兩種:**OAuth 授權**(推薦,支援的客戶端在瀏覽器裡登入授權即可)或 **個人 API Token**。
+- 無論哪種方式,AI 都會**以你的身分**在目前啟用的團隊下執行操作。
+- 所有操作都會經過與後台一致的**權限校驗**,寫操作還會記錄到**稽核日誌**。
+- 所以 AI 能做什麼,完全取決於你在該團隊裡的角色與權限,不會越權。
+
+## 連接方式一:OAuth 授權(推薦)
+
+claude.ai、Claude Code 等支援 MCP OAuth 的客戶端**無需手動建立 Token**——只要填入 Endpoint URL,客戶端會自動發現授權服務並開啟瀏覽器,你登入 RooQuiz 帳號、選擇要授權的團隊、點「授權」即完成連接。
+
+<Tabs items={['claude.ai 網頁版', 'Claude Code']}>
+  <Tab value="claude.ai 網頁版">
+    開啟 claude.ai 的 **設定 → 連接器(Connectors)→ 新增自訂連接器**:
+
+    1. 名稱隨意填(例如 `RooQuiz`)。
+    2. 遠端 MCP 伺服器 URL 填入你的 Endpoint(形如 `https://你的域名/api/mcp`)。
+    3. 儲存後點「連接」,瀏覽器會跳轉到 RooQuiz 授權頁——登入並選擇團隊,點「授權」。
+  </Tab>
+  <Tab value="Claude Code">
+    在終端任意目錄執行(**不帶** token header):
+
+    ```bash
+    claude mcp add --transport http rooquiz https://你的域名/api/mcp
+    ```
+
+    之後在 Claude Code 中首次連接(如 `/mcp`)時會自動開啟瀏覽器完成授權。
+  </Tab>
+</Tabs>
+
+關於 OAuth 連接:
+
+- 授權時選擇的團隊即初始啟用團隊,AI 後續仍可用 `switch_active_tenant` 切換。
+- 連接會出現在 **設定 → MCP 接入** 的 Token 列表中(標有 **OAuth**),**撤銷即斷開**對應客戶端;它**不佔**個人 Token 的 5 個名額。
+- 憑證由客戶端自動續期(存取權杖 1 小時捲動重新整理,連接本身 30 天有效,期間使用會自動延續),無需手動維護。
+
+## 連接方式二:個人 Token(PAT)
+
+不支援 OAuth 的客戶端(Cursor、Codex CLI、Claude Desktop 等),或 CI 等無瀏覽器環境,使用個人 API Token 連接。
+
+### 建立 Token
+
+進入 **設定 → MCP 接入**,點「建立 Token」:
+
+1. 填寫一個**名稱**(便於識別,例如 `Cursor - 我的 Mac`)。
+2. 選擇一個**預設團隊**——Token 建立後預設操作這個團隊,AI 後續可用 `switch_active_tenant` 工具切換到你所在的其他團隊。
+3. 生成後會顯示一段以 `rqp_live_` 開頭的明文 Token。
+
+<Callout type="warning">
+  **Token 明文只顯示這一次**,離開頁面後無法再檢視。請立刻複製儲存;丟失只能撤銷後重新生成。
+</Callout>
+
+限制:
+
+- 每個使用者最多保有 **5 個 Token**(含已撤銷的,OAuth 連接不計入)。要再建新的,需先**刪除**一個釋放名額(「撤銷」只是停用,不釋放名額)。
+- Token 是**個人憑證**,請勿提交到程式碼儲存庫或公開分享。
+
+### 在 AI 客戶端中設定
+
+在 **設定 → MCP 接入** 頁面可以直接複製各客戶端的設定片段和你的 **Endpoint URL**(形如 `https://你的域名/api/mcp`)。把片段裡的 `rqp_live_xxx...` 替換成你剛生成的 Token。
+
+<Tabs items={['Claude Code (CI)', 'Cursor', 'Codex CLI', 'Claude Desktop']}>
+  <Tab value="Claude Code (CI)">
+    Claude Code 推薦走上方的 OAuth 方式;僅在 CI 等無瀏覽器環境才需要 token header:
+
+    ```bash
+    claude mcp add --transport http rooquiz https://你的域名/api/mcp \
+      --header "Authorization: Bearer rqp_live_xxx..."
+    ```
+  </Tab>
+  <Tab value="Cursor">
+    原生支援 HTTP MCP。寫入專案級 `.cursor/mcp.json` 或全域 `~/.cursor/mcp.json`:
+
+    ```json
+    {
+      "mcpServers": {
+        "rooquiz": {
+          "url": "https://你的域名/api/mcp",
+          "headers": { "Authorization": "Bearer rqp_live_xxx..." }
+        }
+      }
+    }
+    ```
+  </Tab>
+  <Tab value="Codex CLI">
+    原生支援 HTTP MCP。寫入 `~/.codex/config.toml`:
+
+    ```toml
+    [mcp_servers.rooquiz]
+    url = "https://你的域名/api/mcp"
+    bearer_token_env_var = "ROOQUIZ_MCP_TOKEN"
+    ```
+
+    Codex 出於安全考慮只接受**環境變數名**,不能內聯明文。請在 shell 中額外 export:
+
+    ```bash
+    export ROOQUIZ_MCP_TOKEN="rqp_live_xxx..."
+    ```
+  </Tab>
+  <Tab value="Claude Desktop">
+    Claude Desktop 目前僅原生支援 stdio 協定,HTTP MCP 需透過 `mcp-remote` 橋接(首次會自動下載,需本機 Node ≥ 18)。寫入設定檔案後**重新啟動** Claude Desktop:
+
+    - macOS:`~/Library/Application Support/Claude/claude_desktop_config.json`
+    - Windows:`%APPDATA%\Claude\claude_desktop_config.json`
+
+    ```json
+    {
+      "mcpServers": {
+        "rooquiz": {
+          "command": "npx",
+          "args": [
+            "-y", "mcp-remote",
+            "https://你的域名/api/mcp",
+            "--header", "Authorization: Bearer rqp_live_xxx..."
+          ]
+        }
+      }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## 範例指令
+
+連上之後直接用自然語言說話即可。下面每一條分別呼叫伺服器的不同部分：
+
+**從範本建卷**
+
+> 看一下教練類範本，用其中的 readiness 那個建一份計分測評，然後加兩道關於預算的題。
+
+依次呼叫 `list_templates` → `create_form_from_template` → `add_question`。
+
+**處理線索**
+
+> 列出我的 Wheel of Life 測評這週收到的線索，給得分低於 40 的都打上 follow-up 標籤，並指派給我。
+
+依次呼叫 `list_leads` → `set_lead_tags` → `assign_leads`。
+
+**診斷漏斗**
+
+> 我哪份測評的完成率最差？人具體是在哪一步流失的？
+
+依次呼叫 `list_forms` → `get_form_stats` → `get_form_funnel`。
+
+**做多語言**
+
+> 把 promotion-readiness 這份測評翻成西班牙語和德語，題目 code 保持不變。
+
+依次呼叫 `list_form_translations` → `create_form_translation`。
+
+<Callout type="info">
+  答題者的姓名、電子郵件和手機號回傳時是**脫敏**的（`j***g@example.com`）。脫敏不可逆，所以引用某個
+  答題者請用 id，不要把脫敏後的值再貼回指令裡。
+</Callout>
+
+## 支援的工具
+
+連接成功後,AI 助手可呼叫以下工具。它們都作用在 Token **目前啟用的團隊**下。
+
+### 團隊(Tenant)
+
+| 工具 | 作用 |
+| --- | --- |
+| `list_my_tenants` | 列出你所在的所有團隊,標記目前啟用的那個。 |
+| `get_active_tenant` | 回傳 Token 目前啟用的團隊資訊;所有寫操作預設作用在該團隊。 |
+| `switch_active_tenant` | 切換目前啟用團隊(持久化、跨工作階段保留;目標必須是你已加入的團隊)。 |
+
+### 測驗(Form)
+
+| 工具 | 作用 |
+| --- | --- |
+| `create_form` | 建立測驗(`knowledge_quiz` 考試、`scored_quiz` 評分測驗 或 `outcome_quiz` 分型測驗),可一次性傳入題目陣列和報告設定,減少往返呼叫。分型測驗**必須**在建立時一併傳入 `report.outcomes`(結果類型列表),並讓每個選項透過 `outcomes` 給類型投票。 |
+| `list_forms` | 列出目前團隊的測驗,支援按 scene 或標題模糊過濾。 |
+| `get_form` | 檢視指定測驗的完整詳情(題目列表 `fields[]`、報告設定等);改題前需先用它拿到每道題的 `code`,分型測驗則從 `report.outcomeAnalysis.outcomes` 拿結果類型的 `code`。 |
+| `update_form` | 更新標題、描述、開啟/關閉狀態,或按子鍵合併替換 `report` 設定;分型測驗傳 `report.outcomes` 即按 `code` 合併更新結果類型(名稱/描述/CTA,已設定的圖片保留;刪除仍被題目引用的類型會被拒絕)。**場景(scene)與語言建立後鎖定,不可改**。 |
+| `delete_form` | 把測驗移入回收站(軟刪):列表中不再顯示,5 天內可用 `restore_form` 找回(到期自動徹底清除)。僅測驗 owner / 團隊 owner 可刪;答題記錄在徹底清除前保留。 |
+| `restore_form` | 從回收站恢復被 `delete_form` 刪除的測驗。僅 owner / 團隊 owner 可恢復;不在回收站會報錯。 |
+| `duplicate_form` | 複製一份測驗:克隆題目結構、評分、報告、視覺與設定以及**全部語言譯文**,生成歸屬你的新測驗(新連結)。**不複製**答題記錄、共享設定、整合與封禁狀態。可選傳 `newTitle`。 |
+
+### 題目(Question)
+
+| 工具 | 作用 |
+| --- | --- |
+| `add_question` | 往測驗末尾追加一項:題目(單選/多選/判斷/填空)或分頁符(`Breaker`)。分型測驗的選擇題需為每個選項指明投給哪些結果類型(判斷題用 `trueOutcomes` / `falseOutcomes`)。 |
+| `insert_question` | 在指定位置插入一項,用 `after` / `before` 引用一個已存在的 `code`。 |
+| `move_question` | 按 `code` 把已有題目或分頁符挪到新位置。 |
+| `update_question` | 按 `code` 更新題幹、說明、解析、是否必答、分值、正確答案,或填空題的 AI 智慧判分。**不能改題型與選項內容**。 |
+| `delete_question` | 按 `code` 刪除一道題目或分頁符。 |
+
+### 報告維度
+
+| 工具 | 作用 |
+| --- | --- |
+| `set_dimension_analysis` | 整體設定測驗的多維度分析(雷達圖維度);quiz 場景每個維度引用題目 `code`,scored quiz 場景每個維度寫公式。傳空陣列即清空。分型測驗不適用(它沒有維度概念,用 `report.outcomes` 配結果類型)。 |
+
+### 多語言譯文(FormTranslation)
+
+為同一測驗提供多語言版本:一份原始測驗(主語言)+ 每個其他語言一份譯文(結構與源同構,只譯文字,答題記錄恆錨定原始測驗)。
+
+| 工具 | 作用 |
+| --- | --- |
+| `create_form_translation` | 為測驗新增一個語言版本,克隆原始文案為初稿(同 `code`、原始語言文字),並回傳克隆內容供直接翻譯。語言必須不同於主語言,每種語言至多一份。 |
+| `list_form_translations` | 列出某測驗已有的語言版本(語言、啟用狀態、公開連結等)。 |
+| `get_form_translation` | 讀取某語言版本的完整內容(含 `fields[]` 與 `report`),用於就地翻譯——所有 `code` 必須與原始測驗保持一致。 |
+| `update_form_translation` | 儲存某語言版本的譯文文案(title / description / fields / report / systemText),或用 `isActive` 暫停該語言;結構由源決定,只改文字,未傳的欄位視為部分翻譯。 |
+| `delete_form_translation` | 刪除某語言版本。 |
+
+### 考生(Examinee)
+
+測驗的答題人。考生固定綁定單一團隊;工具僅回傳安全欄位——密碼、驗證碼、重置權杖等敏感欄位**絕不外洩**。
+
+| 工具 | 作用 |
+| --- | --- |
+| `list_examinees` | 列出目前團隊的考生,支援按電子郵件 / 姓名模糊搜尋與狀態(active / disabled)過濾。 |
+| `get_examinee` | 按業務 ID `examineeId`(如 `AB1234567890`,見列表)檢視某考生詳情(含自訂欄位 customData)。 |
+| `update_examinee` | 按 `examineeId` 編輯考生的姓名 / 狀態 / 自訂欄位(customData 按團隊欄位定義校驗)。**電子郵件與所屬團隊不可改**。 |
+
+### 資料與分析(Records & Analytics)
+
+讀取測驗表現、轉化漏斗與線索(leads),讓 AI 形成「建卷 → 度量 → 迭代」閉環。線索類工具會回傳答題人資訊(PII)。
+
+| 工具 | 作用 |
+| --- | --- |
+| `get_form_stats` | 讀取某測驗近 N 天(預設 30,上限 180)的統計:總覽 KPI、每日趨勢、管道(utm_source)、登入方式、裝置,以及單選類題目的答案分佈。 |
+| `get_form_funnel` | 讀取某測驗近 N 天的轉化漏斗:瀏覽 → 開始 → 提交 → 留資 → 看報告 → 點 CTA → 分享,以及分管道漏斗與流失點。 |
+| `list_records` | 列出目前團隊的答題記錄(線索):答題人、作答、報告結果摘要與 UTM;可按測驗、報告狀態、提交時間篩選。 |
+| `get_record` | 按記錄 `id`(`list_records` 回傳)檢視單條記錄詳情:完整作答、報告結果與提交的後設資料。 |
+
+### 圖片上傳(Image upload)
+
+| 工具 | 作用 |
+| --- | --- |
+| `prepare_image_upload` | 第一步:為封面等圖片簽發直接上傳網址(把檔案 PUT 上去)。 |
+| `finalize_image_upload` | 第二步:校驗並把圖片存入團隊媒體庫,回傳 media id;再用 `update_form` 的 `flagImg` / `landingImage` 引用它。 |
+
+<Callout type="info">
+  典型流程:
+  - **考試 / 評分測驗**:`create_form` 建立測驗並拿到每道題的 `code` → 用 `update_form` 或 `set_dimension_analysis` 按 `code` 設定報告公式 / 維度。
+  - **分型測驗**:`create_form` 一次傳齊 `report.outcomes`(每個類型自訂一個唯一 `code`,如 `lion`)與各題選項的投票對應 → 答題後票數最高的類型勝出(平票按列表順序),後續用 `update_form` 微調類型文案 / CTA。
+</Callout>
+
+## 目前限制
+
+- **隨機題庫(Random Knowledge Quiz)不支援**:這類測驗的題目存放在題庫(QuestionBank)中,請在後台編輯器裡管理,MCP 暫不覆蓋。
+- **不能直接改題型或選項內容**:需要換題型或改選項時,先 `delete_question` 再 `add_question` 重建。分型測驗的**選項投票對應**同理——要改投票就刪題重建。
+- **評分測驗(scored quiz)的選項計分**走「選項分值(Option Scoring)」:`update_question` 在 scored quiz 場景下不接受 `score` / `correctAnswer` / `aiMatch`,改選項分值請在後台編輯,或刪了重建。分型測驗(outcome)同樣不接受這三個參數(它按票數判型,沒有計分概念)。
+- **分型測驗的題型範圍**:投票題型為單選 / 多選 / 判斷(不支援填空);結果類型的**配圖**暫不能透過 MCP 上傳,請在後台編輯器設定(MCP 更新 `report.outcomes` 時已設定的圖片會保留)。
+- **場景與語言建立後鎖定**,無法透過 MCP 修改。
+- **刪除是軟刪**:`delete_form` 移入回收站(5 天後自動徹底清除),並非立即永久刪除;徹底刪除請在後台二次刪除。
+- **題數上限**:免費版每份測評最多 **50 道題**(分頁符、說明文字、圖片輪播不計入),超過後 `create_form`、`add_question`、`insert_question` 會被拒絕;`duplicate_form`、`create_form_from_template` 不受限制。Pro 不限,詳見 [題數上限](/zh-TW/editor)。
+- **複製不含資料**:`duplicate_form` 只克隆結構與譯文,**不複製**答題記錄、共享設定與整合(含金鑰),新測驗為乾淨狀態。
+- **考生身分欄位不可改**:`update_examinee` 不能改電子郵件、所屬團隊與 `examineeId`(它們是認證身分)。
+- **線索含個人資訊(PII)**:`list_records` / `get_record` 會回傳答題人電子郵件、姓名、自訂欄位等,請妥善使用。
+- **填空 AI 智慧判分**(`aiMatch`,僅 quiz 場景、Beta)會消耗團隊的 [AI 額度](/zh-TW/account/ai-billing)。
+
+## 安全與頻率
+
+- 無論 OAuth 還是 Token,都以**你的身分**操作,會觸發現有的權限校驗與**稽核日誌**(寫操作均會留痕)。
+- 每個連接的呼叫頻率限制為 **60 次 / 分鐘**,超出會被限流。
+- 不再使用時,在 **設定 → MCP 接入** 中**撤銷**(立即失效;對 OAuth 連接即斷開對應客戶端)或**刪除**(並釋放名額)。
+- OAuth 流程強制 **PKCE(S256)**,授權碼一次性使用,重新整理權杖每次續期自動輪換,舊權杖即刻失效。

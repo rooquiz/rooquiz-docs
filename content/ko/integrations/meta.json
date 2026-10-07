@@ -1,0 +1,8 @@
+{
+  "title": "연동 및 API",
+  "pages": [
+    "index",
+    "mcp",
+    "rest-api"
+  ]
+}

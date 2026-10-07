@@ -1,0 +1,55 @@
+---
+title: Mehrsprachige Versionen
+description: 'Ein Quiz kann mehrere Sprachversionen haben, die Fragenstruktur und Bewertung teilen und sich nur im Wortlaut unterscheiden. So funktioniert das Modell aus Quelle und Übersetzung und so fügen Sie Sprachen hinzu.'
+---
+
+Ein Quiz kann mehrere **Sprachversionen** haben. Sie teilen sich eine gemeinsame Fragenstruktur und Bewertungskonfiguration und unterscheiden sich nur im Wortlaut – Sie bearbeiten eine Frage also einmal, und jede Sprache folgt. Schluss mit „Frage zur chinesischen Version hinzugefügt und die englische vergessen“.
+
+<Callout type="info">
+  Das Modell lautet **eine Quelle, viele Übersetzungen**: Das Quiz selbst ist die **Quelle** mit einer **Hauptsprache**; jede weitere Sprache ist eine **Übersetzung**, die über die Fragecodes auf die Struktur der Quelle gelegt wird.
+</Callout>
+
+## Eine Sprachversion hinzufügen
+
+Unter **Einstellungen → Sprachversionen** des Quiz:
+
+<Steps>
+### Hauptsprache bestätigen
+
+Die **Hauptsprache** ist die Sprache des Quellinhalts. Sprachen, die bereits von einer Übersetzung belegt sind, können nicht als Hauptsprache gewählt werden.
+
+### Sprache hinzufügen
+
+Klicken Sie auf **Sprache hinzufügen** und wählen Sie eine Zielsprache. Die Quelltexte werden als Ausgangsentwurf kopiert.
+
+### Übersetzung bearbeiten
+
+Klicken Sie auf **Übersetzung bearbeiten**, um den Übersetzungseditor zu öffnen und die Texte zu bearbeiten.
+</Steps>
+
+![Der RooQuiz-Übersetzungseditor mit dem Quelltext links und den Übersetzungen rechts](/img/en/editor/translations.webp)
+
+*Der Übersetzungseditor ist zweispaltig aufgebaut: links der Quelltext (schreibgeschützt), rechts die Zielsprache. Der Schalter oben legt fest, ob diese Sprachversion live ist.*
+
+## Was eine Übersetzung ändern kann
+
+Nur **lesbare Texte**: Titel, Beschreibung, Fragestämme, Optionsbeschriftungen, Namen und Beschreibungen der Berichtsstufen, Ergebnisnamen und Systemtexte der Antwortseite.
+
+Die Struktur können Sie in einer Übersetzung **nicht** ändern. Fragen hinzufügen oder entfernen, die Bewertung anpassen und die bedingte Logik bearbeiten – all das geschieht im Quell-Quiz, und jede Sprache übernimmt die Änderung automatisch.
+
+<Callout type="info">
+  Teilübersetzungen sind erlaubt. Nicht übersetzte Fragen fallen auf den Quelltext zurück, statt leer zu bleiben oder einen Fehler auszulösen – Sie können also früh veröffentlichen und später fertig übersetzen.
+</Callout>
+
+## Welche Version Teilnehmer sehen
+
+Jede Sprachversion hat einen eigenen öffentlichen Link (die Freigabe-URL mit einem `?lang=`-Parameter), und Sie können direkt in den Einstellungen über **Öffentliche Seite öffnen** eine Vorschau aufrufen.
+
+## Pausieren und Löschen
+
+- **Pausiert** – eine Sprachversion kann einzeln als **Pausiert** markiert werden. Sie ist dann öffentlich nicht mehr verfügbar, der Inhalt bleibt aber erhalten – unabhängig vom allgemeinen Ein/Aus-Schalter des Quiz.
+- **Löschen** – beim Entfernen einer Sprachversion **bleiben die Einsendungen erhalten**, da Antworten zum Quell-Quiz gehören und nicht zur Übersetzung.
+
+<Callout type="warning">
+  Das Ändern der Hauptsprache **kennzeichnet** den Quellinhalt nur **neu** – es übersetzt nichts. Um eine weitere Sprache anzubieten, fügen Sie stattdessen eine Übersetzung hinzu.
+</Callout>

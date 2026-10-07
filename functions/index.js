@@ -8,8 +8,23 @@
 // Localized paths (`/zh/...`, `/en/...`) are plain static assets and are not
 // touched by this function.
 
-const LOCALES = ['en', 'zh']
+// Mirrors `LOCALES` in `lib/i18n.ts` — `scripts/check-locales.mjs` fails the
+// build if the two drift.
+const LOCALES = ['en', 'zh', 'zh-TW', 'de', 'es', 'pt-BR', 'fr', 'ja', 'ko']
 const DEFAULT_LOCALE = 'en'
+
+// Map one lowercased language tag to a docs locale, or null.
+function matchLocale(tag) {
+  const [base, ...subtags] = tag.split('-')
+  if (base === 'zh') {
+    // Traditional script or a Traditional-Chinese region -> zh-TW, else Simplified.
+    const traditional = subtags.some((s) => s === 'hant' || s === 'tw' || s === 'hk' || s === 'mo')
+    return traditional ? 'zh-TW' : 'zh'
+  }
+  // Only Brazilian Portuguese is translated; it is still closer than English.
+  if (base === 'pt') return 'pt-BR'
+  return LOCALES.includes(base) ? base : null
+}
 
 function pickLocale(acceptLanguage) {
   if (!acceptLanguage) return DEFAULT_LOCALE
@@ -24,9 +39,8 @@ function pickLocale(acceptLanguage) {
     .sort((a, b) => b.q - a.q)
 
   for (const { tag } of ranked) {
-    // Match by primary subtag, e.g. `zh-CN` / `zh-Hant` -> `zh`.
-    const base = tag.split('-')[0]
-    if (LOCALES.includes(base)) return base
+    const locale = matchLocale(tag)
+    if (locale) return locale
   }
   return DEFAULT_LOCALE
 }

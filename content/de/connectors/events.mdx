@@ -1,0 +1,47 @@
+---
+title: Auslöseereignisse & Bereich
+description: 'Jeder Connector wird durch Auslöseereignisse aktiviert und durch den Bereich begrenzt, also welche Quizze ihn auslösen dürfen. Beides gilt gemeinsam: Was jedes Ereignis bedeutet und wie Sie eingrenzen.'
+---
+
+Jeder Connector legt fest, **wann er ausgelöst wird** (Ereignisse) und **welche Quizze ihn auslösen dürfen** (Bereich). Beides ist UND-verknüpft: Das Ereignis muss passen *und* das Quiz, aus dem es stammt, muss im Bereich liegen, bevor etwas zugestellt wird.
+
+## Auslöseereignisse
+
+Jeder Connector benötigt mindestens ein Ereignis:
+
+| Ereignis | Wird ausgelöst, wenn |
+| --- | --- |
+| **Neuer Lead** | Jemand Ihrem Team **zum ersten Mal** seine Kontaktdaten hinterlässt |
+| **Buchung erstellt** | Jemand einen Termin bucht |
+| **Buchung storniert** | Eine der beiden Seiten eine Buchung storniert |
+| **Buchung umgebucht** | Eine Buchung auf einen anderen Zeitpunkt verschoben wird |
+
+<Callout type="warning">
+  **„Neuer Lead" wird einmal ausgelöst – beim ersten Mal, wenn diese Person ihre Daten hinterlässt.** Nimmt dieselbe Person später an einem weiteren Quiz teil, wird das Ereignis nicht erneut ausgelöst, da Leads [quizübergreifend dedupliziert](/de/leads) werden. Wenn Sie bei jeder Einsendung benachrichtigt werden möchten, ist dies nicht das richtige Ereignis.
+</Callout>
+
+## Auslösebereich
+
+Der Bereich legt fest, welche Quizze diesen Connector auslösen dürfen:
+
+- **Alle Quiz** – die Standardeinstellung. Jedes Ereignis aus jedem Quiz des Teams wird zugestellt.
+- **Bestimmte Quiz** – nur die von Ihnen ausgewählten Quizze lösen ihn aus.
+
+<Callout type="info">
+  Der Bereich wird mit **dem Quiz abgeglichen, aus dem das Ereignis stammt**. Bei „Neuer Lead" ist das das Quiz, in dem die Person **ihre Daten zum ersten Mal hinterlassen hat** – nicht das zuletzt absolvierte.
+</Callout>
+
+Ein typischer Anwendungsfall: Leiten Sie Ihr wichtigstes Lead-Generierungs-Quiz an Slack weiter, damit das Team neue Leads sofort sieht, und verhindern Sie, dass ein internes Quiz jemanden stört.
+
+## Kombinationen zum Übernehmen
+
+| Ihr Ziel | Ereignisse | Bereich |
+| --- | --- | --- |
+| Alle erfahren von einem neuen Kunden | Neuer Lead | Alle Quiz |
+| Nur das wichtigste Quiz verfolgen | Neuer Lead | Bestimmte Quiz |
+| Benachrichtigt werden, wenn sich Ihr Kalender ändert | Buchung storniert + umgebucht | Alle Quiz |
+| Leads mit Ihrem E-Mail-Marketing-Dienst synchronisieren | Neuer Lead | Alle Quiz |
+
+<Callout type="info">
+  Änderungen an Ereignissen oder Bereich **wirken sich nur auf künftige Ereignisse aus** – nichts wird nachträglich erneut zugestellt.
+</Callout>

@@ -1,0 +1,56 @@
+---
+title: Exporter les données
+description: "Exportez réponses, leads et répondants en CSV UTF-8 lisible directement dans Excel : les deux modes d'export, le quota et sa réinitialisation, les jeux de données trop volumineux et le contenu du fichier."
+---
+
+Les réponses, les leads et les répondants peuvent tous être exportés au format **CSV** (UTF-8, s'ouvre directement dans Excel).
+
+<Callout type="warning">
+  L'export est une **fonctionnalité Pro**, avec un plafond hebdomadaire sur le nombre d'exports. Les équipes du forfait Free voient une invitation à passer à la version supérieure.
+</Callout>
+
+## Deux modes d'export
+
+| Méthode | Remarques |
+| --- | --- |
+| **Exporter la sélection** | Cochez quelques lignes et exportez uniquement celles-ci. Le fichier est généré dans votre navigateur et **ne consomme pas votre quota** |
+| **Tout exporter** | Exporte tout ce qui correspond à vos filtres actuels. Le fichier est généré sur le serveur et **consomme un export** |
+
+<Callout type="info">
+  Filtrez avant d'exporter. « Tout exporter » exporte le **résultat des filtres actuels**, et non le tableau entier : plus le filtre est précis, plus le fichier est utile et moins vous consommez de quota.
+</Callout>
+
+## La boîte de dialogue de confirmation
+
+« Tout exporter » ouvre une confirmation qui présente d'abord les informations importantes :
+
+- **Périmètre des données** : toutes les données, ou le résultat des filtres actuels (modifiable directement ici).
+- **Lignes** : leur nombre approximatif. Si le comptage échoue, vous en êtes informé et pouvez tout de même continuer.
+- **Format du fichier** : CSV (UTF-8, s'ouvre dans Excel).
+- **Cette semaine** : le nombre d'exports restants par rapport à votre limite, et la date de réinitialisation.
+
+Après confirmation, le fichier est **généré en arrière-plan et téléchargé automatiquement** ; vous pouvez quitter la page entre-temps.
+
+## Quota et réinitialisation
+
+Le quota hebdomadaire est réinitialisé le **lundi (UTC)**. La boîte de dialogue comme le message de limite atteinte indiquent l'heure exacte de réinitialisation.
+
+<Callout type="info">
+  **Les exports échoués ne sont pas comptabilisés.** Seul un export ayant réellement produit un fichier consomme votre quota.
+</Callout>
+
+## Lorsque le jeu de données est trop volumineux
+
+Chaque export est soumis à une limite de lignes. Un export qui la dépasse est refusé d'emblée (**sans consommer de quota**) et vous obtenez un récapitulatif prêt à copier pour écrire au support technique, qui réalisera l'export pour vous.
+
+<Callout type="info">
+  Si un export semble tourner indéfiniment, la page cesse d'attendre au bout de cinq minutes et vous le signale : la tâche continue de s'exécuter en arrière-plan, revenez donc sur la page un peu plus tard.
+</Callout>
+
+## Contenu du fichier
+
+Outre les réponses elles-mêmes, les exports comprennent généralement le numéro d'enregistrement, la date de soumission, l'e-mail et l'ID du répondant, ainsi que le niveau. Les exports de leads et de répondants disposent de leurs propres jeux de colonnes.
+
+<Callout type="warning">
+  Les fichiers exportés contiennent des informations personnelles fournies par les répondants. Conservez-les et partagez-les conformément aux règles de confidentialité et de conformité de votre organisation.
+</Callout>

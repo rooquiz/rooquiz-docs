@@ -1,0 +1,21 @@
+{
+  "pages": [
+    "index",
+    "getting-started",
+    "---Kernfunktionen---",
+    "editor",
+    "library",
+    "publish",
+    "results",
+    "---Erweitert---",
+    "leads",
+    "respondents",
+    "bookings",
+    "connectors",
+    "---Konto & Team---",
+    "account",
+    "teams",
+    "---Entwickler---",
+    "integrations"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "title": "1:1 預約",
+  "pages": [
+    "index",
+    "availability",
+    "manage",
+    "respondent"
+  ]
+}

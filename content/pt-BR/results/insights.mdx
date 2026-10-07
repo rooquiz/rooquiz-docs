@@ -1,0 +1,49 @@
+---
+title: Insights
+description: 'Os Insights agregam respostas em estatísticas e gráficos — taxa de conclusão, volume de envios, distribuição por pergunta e funil de conversão — para ver o panorama geral sem abrir registros.'
+---
+
+Os Insights agregam respostas dispersas em **estatísticas e gráficos**, ajudando você a entender o panorama geral sem percorrer os registros um a um.
+
+## Métricas e gráficos comuns
+
+- **Taxa de conclusão**: a proporção entre envios iniciados e concluídos, refletindo o abandono.
+- **Volume de envios**: o total de respostas e sua tendência ao longo do tempo.
+- **Distribuição por pergunta**: para perguntas de escolha, a participação e a distribuição de cada opção.
+- **Distribuição por origem**: em conjunto com o [Rastreamento de origem UTM](/pt-BR/publish/tracking), compare o volume de respostas entre canais.
+
+## Funil de conversão
+
+O funil acompanha **uma visita (sessão)** por cinco etapas: **Visualizou → Começou → Enviou → Relatório visualizado → CTA clicado**. Como cada etapa é contada:
+
+| Etapa | Contada quando |
+| --- | --- |
+| Visualizou | A página do quiz é de fato aberta em um navegador (crawlers e pré-visualizações de administradores são excluídos) |
+| Começou | O respondente responde a qualquer pergunta pela primeira vez (não basta clicar em "começar") |
+| Enviou | O envio é concluído com sucesso |
+| Relatório visualizado | O relatório termina de ser gerado enquanto o respondente está na página de resultado |
+| CTA clicado | O respondente clica no [botão de CTA](/pt-BR/results/reports) no fim do relatório |
+
+A porcentagem ao lado de cada etapa é a taxa de conversão **em relação à etapa anterior**, para que você veja exatamente onde ocorre a perda.
+
+### Top 10 pontos de abandono
+
+Considera as sessões que **não enviaram**, mas responderam a pelo menos uma pergunta, agrupadas pela **última pergunta respondida** — perguntas com contagens altas são onde as pessoas desistem: difíceis demais, sensíveis demais, ou a pergunta seguinte as afastou. Visitantes que saíram sem responder nada não aparecem aqui; eles aparecem na queda de Visualizou → Começou.
+
+### Conversão por origem
+
+Agrupada pela tag de origem do link (`?from=`, gerada pelo [Rastreamento de origem](/pt-BR/publish/tracking) ou pela [Incorporação](/pt-BR/publish/embed)), comparando as contagens de visualizações/inícios/envios e a taxa de conclusão por origem; origens vindas de incorporações em sites recebem a tag **Incorporado**.
+
+<Callout type="info">
+  O funil conta sessões desde o lançamento do recurso; envios históricos anteriores não são retroativamente incluídos, então o "total de envios" pode inicialmente superar a contagem de envios do funil. Os números convergem com o tempo.
+</Callout>
+
+## Sugestões
+
+- Use o **funil de conversão** para localizar onde ocorre a perda: muitas visualizações e poucos inícios apontam para a página de entrada ou para a primeira pergunta; muitos inícios e poucos envios — verifique as perguntas com mais abandono.
+- Use a **distribuição de opções** para entender as tendências gerais dos respondentes.
+- Combine as tendências ao longo do tempo com a **conversão por origem** para avaliar as campanhas de cada canal.
+
+<Callout type="info">
+  Os Insights mostram "tendências do grupo". Para analisar uma resposta específica, vá para [Registros de respostas](/pt-BR/results/records); para conclusões de avaliações individuais, vá para [Relatórios](/pt-BR/results/reports).
+</Callout>

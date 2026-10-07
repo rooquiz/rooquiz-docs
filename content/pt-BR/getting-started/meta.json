@@ -1,0 +1,11 @@
+{
+  "title": "Noções básicas",
+  "pages": [
+    "index",
+    "account",
+    "dashboard",
+    "quiz-types",
+    "create-quiz",
+    "workspace"
+  ]
+}

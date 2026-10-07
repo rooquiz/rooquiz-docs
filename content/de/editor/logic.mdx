@@ -1,0 +1,64 @@
+---
+title: Bedingte Logik
+description: 'Bedingte Logik blendet spätere Fragen abhängig von früheren Antworten ein oder aus und macht einen starren Fragebogen adaptiv. So ist eine Regel aufgebaut – verfügbar nur im Bewerteten Quiz und Ergebnisquiz.'
+---
+
+Bedingte Logik **blendet spätere Fragen ein oder aus**, je nachdem, wie jemand antwortet, und macht so aus einem starren Fragebogen einen adaptiven.
+
+<Callout type="warning">
+  Bedingte Logik ist nur in **Bewertetes Quiz** und **Ergebnisquiz** verfügbar. Für ein Wissensquiz oder ein Zufälliges Wissensquiz gibt es im rechten Bereich des Editors keinen Tab **Regeln**.
+</Callout>
+
+## So sieht eine Regel aus
+
+Eine Regel liest sich wie ein Satz: **Wenn … dann eine Frage anzeigen / ausblenden.**
+
+Klicken Sie im Tab **Regeln** im rechten Bereich des Editors auf **Regel hinzufügen** und füllen Sie Folgendes aus:
+
+| Teil | Hinweise |
+| --- | --- |
+| **Wenn** | Wählen Sie eine **frühere Frage**, einen Operator und einen Wert |
+| **und** | Mit **Bedingung hinzufügen** können Sie weitere Bedingungen ergänzen; Bedingungen innerhalb einer Regel werden UND-verknüpft, alle müssen also zutreffen |
+| **dann** | Wählen Sie **Anzeigen** oder **Ausblenden** und dann die **Zielfrage** |
+
+Ein Quiz kann mehrere Regeln enthalten, die als **Regel 1 / Regel 2** usw. aufgeführt werden.
+
+## Verfügbare Operatoren
+
+| Operator | Verwendung mit |
+| --- | --- |
+| **ist gleich** | Einfachauswahl, Richtig/Falsch |
+| **enthält eines von / enthält keines von** | Mehrfachauswahl – trifft zu, wenn eine der gewählten Optionen ausgewählt ist |
+| **größer als / größer oder gleich / kleiner als / kleiner oder gleich / zwischen** | Numerische Antworten |
+
+Richtig/Falsch-Fragen bieten **✓ Richtig** und **✗ Falsch**.
+
+<Callout type="info">
+  Eine **Bedingung** kann nur auf eine Frage mit eindeutigem Wert verweisen (Auswahltypen, Richtig/Falsch, Bewertung, Zahl). Ein **Ziel** ist breiter gefasst – auch Lückentext-, Textblock- und Bildkarussell-Fragen lassen sich ein- und ausblenden. So bauen Sie etwa eine Nachfrage „Bitte erläutern“, die nur erscheint, wenn „Sonstiges“ gewählt wurde.
+</Callout>
+
+## Eine Regel einrichten
+
+<Steps>
+### Zuerst die Fragen anlegen
+
+Regeln verweisen auf bestimmte Fragen, daher müssen sowohl die auslösende Frage als auch die Zielfrage bereits existieren.
+
+### Die Regel hinzufügen
+
+Wählen Sie die Frage → den Operator → den Wert → anzeigen oder ausblenden → die Zielfrage. Wenn Sie eine unvollständige Regel speichern, werden Sie aufgefordert, **die Regel vollständig auszufüllen**.
+
+### In der Vorschau durchspielen
+
+Probieren Sie jeden Antwortpfad aus. Sobald Sie mehr als ein paar Regeln haben, übersieht man beim reinen Durchdenken zuverlässig einen Fall.
+</Steps>
+
+## Worauf Sie achten sollten
+
+- Verweisen Sie auf Fragen, die **vor** der Zielfrage stehen. Zeigt eine Bedingung auf eine spätere Frage, existiert deren Antwort bei der Auswertung der Bedingung noch nicht.
+- Ausgeblendete Fragen werden nicht angezeigt und **auch nicht auf Pflichtangaben geprüft**, sie blockieren das Absenden also nie.
+- Das Löschen einer Regel erfordert eine Bestätigung; danach wird die Zielfrage wieder standardmäßig angezeigt.
+
+<Callout type="info">
+  Das Ausblenden von Fragen wirkt sich auf die Bewertung aus: Eine Frage, die nie angezeigt wurde, hat keine Antwort und trägt keine Punkte bei. Achten Sie beim Entwurf eines adaptiven Fragebogens darauf, dass Ihre [Bewertungsregeln](/de/editor/scoring) zu den möglicherweise ausgeblendeten Fragen passen.
+</Callout>

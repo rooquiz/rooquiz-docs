@@ -1,0 +1,59 @@
+---
+title: Einsendungen
+description: 'Einsendungen sind alle einzelnen Antworten, die ein Quiz erhalten hat: der Filter-Editor, die Tabellenspalten, wie Sie eine einzelne Einsendung öffnen und wie sich Rohdaten von aggregierten Insights unterscheiden.'
+---
+
+Einsendungen sind **alle einzelnen Antworten**, die ein Quiz erhalten hat, zu finden im Tab **Einsendungen** des Quiz. Das sind die Rohdaten – für aggregierte Trends gehen Sie zu [Insights](/de/results/insights).
+
+![Die RooQuiz-Liste der Einsendungen mit Filter-Editor und Tabelle](/img/en/results/records-list.webp)
+
+## Filter
+
+Klicken Sie auf **Filter**, um den Editor zu öffnen, und kombinieren Sie Bedingungen (sie werden mit UND verknüpft):
+
+| Feld | Hinweise |
+| --- | --- |
+| **Nach Frage** | Filtert nach der Antwort auf eine bestimmte Frage; Auswahlfragen unterstützen „Ist eines von / Ist keines von / Ist leer / Ist nicht leer“ |
+| **Teilnehmer** | Einsendungen einer bestimmten Person |
+| **UTM-Quelle** | Über welchen Kanal die Person kam, in Verbindung mit [UTM-Tracking](/de/publish/tracking) |
+| **Punktzahl** | Ein Zahlenbereich (**Liegt zwischen** einem Minimum und Maximum) |
+| **Stufe** | In welcher Berichtsstufe die Person gelandet ist |
+| **Sprache** | In welcher [Sprachversion](/de/editor/translations) geantwortet wurde |
+| **Lead-Status / Zuständig** | Filtert nach dem Nachfass-Status oder Zuständigen des [Leads](/de/leads) |
+| **Eingereicht am** | Ein Start- und Enddatum |
+
+Klicken Sie auf **Anwenden**, wenn die Bedingungen gesetzt sind, oder auf **Alle entfernen**, um neu zu beginnen.
+
+<Callout type="info">
+  Hier gibt es keine Board-Ansicht – das Board finden Sie auf der Seite [Leads](/de/leads/list-board). Die beiden beantworten unterschiedliche Fragen: Einsendungen sind **Antworten**, Leads sind **Personen**.
+</Callout>
+
+## Eine einzelne Einsendung
+
+Öffnen Sie eine beliebige Zeile, und die Detailansicht teilt sich in zwei Bereiche:
+
+- **Links** – die Antworten Frage für Frage mit ihren Punktzahlen sowie der Bericht.
+- **Rechts** – eine Nachfass-Seitenleiste für diese Person als [Lead](/de/leads): Ändern Sie den Status, schreiben Sie **Kommentare** und lesen Sie die zusammengeführte Aktivitäts-Zeitleiste.
+
+Sie können also nachfassen, während Sie die Antwort lesen, ohne zur Leads-Seite zu wechseln.
+
+<Callout type="info">
+  Kommentare unterstützen **Antworten**, und Sie können Ihre eigenen löschen. Es sind dieselben Kommentare wie auf der [Lead-Detailseite](/de/leads/detail) – beide Stellen zeigen einen gemeinsamen Verlauf.
+</Callout>
+
+## Was eine Einsendung enthält
+
+Neben den eigentlichen Antworten enthält eine Einsendung in der Regel:
+
+- **Datensatznummer** – eine fortlaufende Nummer innerhalb des Quiz.
+- **Teilnehmer** – nur vorhanden, wenn die Person angemeldet war; bei anonymen Einsendungen leer.
+- **Quelle** – wird erfasst, wenn die Person über einen [UTM-Link](/de/publish/tracking) kam.
+- **Eingereicht am**, **Sprachversion**, **Punktzahl und Stufe**.
+
+## Exportieren
+
+**Exportieren** in der Symbolleiste verarbeitet entweder die ausgewählten Zeilen oder alles, was den aktuellen Filtern entspricht. Ein vollständiger Export verbraucht Ihr wöchentliches Kontingent – siehe [Daten exportieren](/de/results/export).
+
+<Callout type="warning">
+  Exportierte Daten können personenbezogene Informationen enthalten, die Teilnehmer angegeben haben. Gehen Sie damit gemäß den Datenschutz- und Compliance-Richtlinien Ihrer Organisation um.
+</Callout>

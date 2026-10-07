@@ -1,0 +1,40 @@
+---
+title: Journaux d'audit
+description: "Les journaux d'audit enregistrent les opérations importantes d'une équipe : qui a fait quoi, sur quel objet, quand et avec quel résultat. Seuls le propriétaire et les administrateurs peuvent les consulter."
+---
+
+Les **journaux d'audit** enregistrent les opérations importantes de votre équipe : qui a fait quoi, sur quel objet, quand, et si l'opération a réussi. Vous les trouverez dans **Paramètres → Journaux d'audit**.
+
+<Callout type="warning">
+  **Seuls le propriétaire de l'équipe et les administrateurs peuvent consulter les journaux d'audit.** Les membres et les lecteurs voient un message à la place.
+</Callout>
+
+## Colonnes
+
+| Colonne | Remarques |
+| --- | --- |
+| **Action** | Ce qui s'est passé : « Inviter un membre », « Supprimer un quiz », « Exporter des données » |
+| **Statut** | Succès ou Échec |
+| **Auteur** | Qui l'a fait. Les opérations lancées par la plateforme elle-même (nettoyage lié à la durée de conservation, blocages pour modération) apparaissent comme **Système** |
+| **Cible** | L'objet concerné, avec un préfixe d'ID |
+| **Heure** | Le moment où l'opération a eu lieu |
+
+Cliquez sur une ligne pour en afficher les **Détails**. Chaque action comporte ses propres champs : un export, par exemple, enregistre aussi le type de données (réponses / leads / répondants) et le nombre de lignes.
+
+## Ce qui est couvert
+
+Dans les grandes lignes :
+
+- **Équipe** : suppression de l'équipe, transfert de propriété, changement de forfait.
+- **Membres** : invitation, retrait, départ, changement de rôle, désactivation / activation.
+- **Quiz** : création, modification, mise à la corbeille, restauration, suppression définitive, blocage / déblocage.
+- **Leads et répondants** : mise à la corbeille, restauration, suppression définitive.
+- **Connecteurs** : création, modification, suppression.
+- **Identifiants** : clés API et jetons MCP : création, révocation, restauration, suppression.
+- **Utilisation** : consommation IA, consommation d'e-mails, [exports de données](/fr/results/export).
+
+Filtrez par **action** et par **statut** en haut de la page pour répondre à des questions comme « qui a exporté des données la semaine dernière ».
+
+<Callout type="info">
+  Les journaux sont en **lecture seule** : ils ne peuvent être ni modifiés ni supprimés. Un journal d'audit modifiable n'aurait guère de valeur.
+</Callout>

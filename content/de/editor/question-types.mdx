@@ -1,0 +1,68 @@
+---
+title: Fragetypen
+description: 'Alle über 14 Fragetypen von RooQuiz nach Zweck gruppiert – Auswahl, Text, Bewertung, Datum und mehr: was jeder Typ erfasst, wofür er typischerweise eingesetzt wird und zu welchem Quizformat er passt.'
+---
+
+RooQuiz bietet über 14 Fragetypen. Sie sind unten nach Zweck gruppiert, damit Sie für jede Frage das passende Format wählen können.
+
+## Auswahl
+
+| Typ | Beschreibung | Typische Einsatzzwecke |
+| --- | --- | --- |
+| **Einfachauswahl** | Genau eine Option wählen | Wissensfragen mit einer Antwort, Zufriedenheit |
+| **Mehrfachauswahl** | Mehrere Optionen wählen | Fragen mit mehreren Antworten, Interessen/Vorlieben |
+| **Dropdown** | Einfachauswahl als Dropdown-Liste | Spart Platz bei vielen Optionen |
+| **Kaskadenauswahl** | Mehrstufig verknüpfte Auswahl (z. B. Bundesland–Stadt–Bezirk) | Auswahl von Regionen oder hierarchischen Kategorien |
+| **Richtig / Falsch** | Richtig oder falsch wählen | Ja/Nein-Fragen |
+| **Bildkarussell** | Auswahl über ein Bildkarussell | Bildpräferenzen, visuelle Optionen |
+
+## Eingabe
+
+| Typ | Beschreibung | Typische Einsatzzwecke |
+| --- | --- | --- |
+| **Lückentext** | Texteingabe | Kurzantworten, offene Antworten, „Sonstiges, bitte erläutern“ |
+| **Zahl** | Zahleneingabe (mit Validierung) | Alter, Betrag, Menge |
+| **Datum** | Datumsauswahl | Geburtsdatum, Termindatum |
+| **Uhrzeit** | Zeitauswahl | Zeitfenster, Zeitpunkt |
+
+## Bewertung & Reihenfolge
+
+| Typ | Beschreibung | Typische Einsatzzwecke |
+| --- | --- | --- |
+| **Bewertung** | Bewertung auf einer Skala (z. B. 1–5 / 1–10) | Zufriedenheit, Wichtigkeit |
+| **Reihenfolge** | Elemente per Drag-and-drop sortieren | Prioritäten, Präferenz-Ranking |
+
+## Inhalt & Spezielles
+
+| Typ | Beschreibung | Typische Einsatzzwecke |
+| --- | --- | --- |
+| **Textblock** | Zeigt nur Text an; erfasst keine Antwort | Abschnittshinweise, Anleitungen, Haftungsausschlüsse |
+| **Zufallsfrage** | Zieht eine Frage aus einem Fragenpool | Wird mit dem Typ „Zufälliges Wissensquiz“ verwendet |
+
+## Welcher Quiztyp welche Fragetypen nutzen kann
+
+Fragetypen sind nicht zwischen allen Quiztypen austauschbar – manche haben keine natürliche „richtige Antwort“, andere können nicht für einen Ergebnistyp stimmen. Der linke Bereich listet nur die Typen auf, die für den aktuellen Quiztyp verfügbar sind.
+
+| Typ | Wissensquiz | Bewertetes Quiz | Ergebnisquiz |
+| --- | --- | --- | --- |
+| Einfach-/Mehrfachauswahl / Dropdown / Richtig-Falsch | ✅ | ✅ | ✅ |
+| Lückentext | ✅ kann anhand einer richtigen Antwort bewertet werden | ✅ **wird nur erfasst, nie bewertet** | ❌ |
+| Zahl | ✅ kann anhand einer richtigen Antwort bewertet werden | ✅ die eingegebene Zahl fließt in Formeln ein | ❌ |
+| Kaskadenauswahl / Bewertung | ❌ | ✅ | ❌ |
+| Datum / Uhrzeit | ❌ | ✅ wird nur erfasst | ❌ |
+| Reihenfolge | ✅ | ❌ | ❌ |
+| Textblock / Bildkarussell / Seitenumbruch | ✅ | ✅ | ✅ |
+
+Ein **Zufälliges Wissensquiz** verwendet nur Zufallsfragen sowie Anzeigetypen; die Fragen selbst stammen aus dem verknüpften Fragenpool.
+
+<Callout type="info">
+  In einem Bewerteten Quiz **erfasst eine Lückentext-Frage nur Text**: Sie erzeugt keine Punkte und kann in keiner Bewertungsformel referenziert werden. Sie eignet sich ideal für ein abschließendes „Gibt es sonst noch etwas, das wir wissen sollten?“ nach den bewerteten Fragen, damit offener Lead-Kontext zusammen mit allem anderen eingeht.
+</Callout>
+
+<Callout type="info">
+  Jeder Typ hat im rechten Bereich eigene Einstellungen – üblicherweise Titel und Beschreibung, Pflichtfeld-Schalter, Optionsinhalte und Validierungsregeln. Typen mit Bewertungsunterstützung können zusätzlich Punkte festlegen (siehe [Bewertungs- und Auswertungsregeln](/de/editor/scoring)).
+</Callout>
+
+<Callout type="warning">
+  Die **Zufallsfrage** wird typischerweise mit dem Typ „Zufälliges Wissensquiz“ verwendet und erfordert einen verknüpften Fragenpool; für andere Typen ist sie unter Umständen nicht verfügbar.
+</Callout>

@@ -1,0 +1,11 @@
+{
+  "title": "게시 및 공유",
+  "pages": [
+    "index",
+    "link-qrcode",
+    "embed",
+    "og",
+    "tracking",
+    "promotion"
+  ]
+}

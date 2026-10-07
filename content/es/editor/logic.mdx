@@ -1,0 +1,64 @@
+---
+title: Lógica condicional
+description: 'La lógica condicional muestra u oculta preguntas posteriores según las respuestas anteriores y convierte un cuestionario fijo en uno adaptativo. Cómo se lee una regla y por qué solo existe en dos tipos.'
+---
+
+La lógica condicional **muestra u oculta preguntas posteriores** según cómo responda alguien, y convierte un cuestionario fijo en uno adaptativo.
+
+<Callout type="warning">
+  La lógica condicional solo está disponible en el **Cuestionario con puntuación** y el **Cuestionario de resultado**. El panel derecho del editor no tiene la pestaña **Reglas** en el Cuestionario de conocimiento ni en el Cuestionario de conocimiento aleatorio.
+</Callout>
+
+## Cómo es una regla
+
+Una regla se lee como una frase: **Si … entonces mostrar / ocultar una pregunta.**
+
+En la pestaña **Reglas** del panel derecho del editor, haz clic en **+ Agregar regla** y completa:
+
+| Parte | Notas |
+| --- | --- |
+| **Si** | Elige una **pregunta anterior**, un operador y un valor |
+| **y** | Continúa con **Agregar condición**; las condiciones de una misma regla se combinan con Y, así que deben cumplirse todas |
+| **entonces** | Elige **Mostrar** u **Ocultar** y luego la **pregunta objetivo** |
+
+Un quiz puede tener varias reglas, que aparecen como **Regla 1 / Regla 2**, etc.
+
+## Operadores disponibles
+
+| Operador | Se usa con |
+| --- | --- |
+| **es igual a** | Opción única, verdadero/falso |
+| **contiene alguno de / no contiene ninguno de** | Opción múltiple: coincide si se ha seleccionado cualquiera de las opciones elegidas |
+| **mayor que / mayor o igual que / menor que / menor o igual que / entre** | Respuestas numéricas |
+
+Las preguntas de verdadero/falso ofrecen **✓ Verdadero** y **✗ Falso**.
+
+<Callout type="info">
+  Una **condición** solo puede referenciar una pregunta con un valor definido (tipos de elección, verdadero/falso, valoración, número). Un **objetivo** es más amplio: las preguntas de completar el espacio, declaración y carrusel de imágenes también se pueden mostrar u ocultar, y así es como se crea un seguimiento del tipo "pide una explicación solo si eligió Otro".
+</Callout>
+
+## Configurar una regla
+
+<Steps>
+### Crea primero las preguntas
+
+Las reglas referencian preguntas concretas, así que tanto la pregunta que activa la regla como la pregunta objetivo deben existir ya.
+
+### Añade la regla
+
+Elige la pregunta → el operador → el valor → mostrar u ocultar → la pregunta objetivo. Si guardas una regla incompleta, se te pedirá que **completes la regla por completo**.
+
+### Recórrela en la vista previa
+
+Prueba cada camino de respuesta. En cuanto tienes más de un par de reglas, razonarlas de cabeza siempre deja algún caso fuera.
+</Steps>
+
+## Aspectos a tener en cuenta
+
+- Referencia preguntas que estén **antes** de la pregunta objetivo. Si apuntas a una pregunta posterior, la respuesta aún no existe cuando se evalúa la condición.
+- Las preguntas ocultas no se muestran y **tampoco se comprueba si son obligatorias**, así que nunca bloquean el envío.
+- Eliminar una regla pide confirmación; después, la pregunta objetivo vuelve a mostrarse de forma predeterminada.
+
+<Callout type="info">
+  Ocultar preguntas afecta a la puntuación: una pregunta que nunca apareció no tiene respuesta y no aporta puntos. Al diseñar un cuestionario adaptativo, asegúrate de que tus [reglas de puntuación](/es/editor/scoring) tengan en cuenta las preguntas que pueden quedar ocultas.
+</Callout>

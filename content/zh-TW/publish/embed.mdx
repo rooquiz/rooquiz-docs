@@ -1,0 +1,72 @@
+---
+title: 網站嵌入
+description: '除了分享連結，你還可以把測驗直接嵌進自己的網站——訪客無需跳轉，在你的到達頁裡就能完成作答。這一頁介紹三種嵌入方式各自適合什麼位置與表現差異、生成的程式碼怎麼貼、可用的屬性有哪些，以及 JS API 能做什麼，方便你按頁面結構挑一種。嵌入後的作答與直接開啟連結算同一份資料，不同來源可以用 UTM 參數區分開。'
+---
+
+除了分享連結,你還可以把測驗**直接嵌進自己的網站**——訪客無需跳轉,在你的到達頁裡就能完成作答。
+
+## 三種嵌入方式
+
+在目標測驗中開啟 **分享** → **網站嵌入**,選擇展示方式後複製生成的程式碼,貼上到你網站的 HTML 中即可。
+
+| 方式 | 適合場景 | 特點 |
+| --- | --- | --- |
+| **內嵌(自適應)** | 融入頁面內容流 | 高度隨內容自動調整,推薦使用 |
+| **彈出視窗** | 頁面上放一個入口按鈕 | 點擊後以全螢幕彈出視窗開啟測驗 |
+| **純 iframe(固定高度)** | 不便載入腳本的環境 | 最簡單,高度固定、內容在框內捲動 |
+
+### 內嵌(自適應)
+
+```html
+<div data-rooquiz-embed data-rooquiz-token="你的测验代码"></div>
+<script src="https://你的作答域名/embed.js" async></script>
+```
+
+嵌入腳本會自動監聽測驗內容的高度變化(翻頁、進入結果頁等),即時調整 iframe 高度,無捲軸、無截斷。
+
+### 彈出視窗
+
+```html
+<div data-rooquiz-embed data-rooquiz-token="你的测验代码" data-rooquiz-mode="popup" data-rooquiz-text="开始测评"></div>
+<script src="https://你的作答域名/embed.js" async></script>
+```
+
+頁面上會渲染一個按鈕,點擊後以全螢幕遮罩彈出視窗開啟測驗,支援 ESC 或點擊遮罩關閉。
+
+### 純 iframe
+
+```html
+<iframe src="https://你的作答域名/a/你的测验代码?embed=1" width="100%" height="600" style="border:0;" title="RooQuiz"></iframe>
+```
+
+## 可用屬性
+
+| 屬性 | 說明 |
+| --- | --- |
+| `data-rooquiz-token` | 必填,測驗的公開程式碼 |
+| `data-rooquiz-mode` | `inline`(預設)或 `popup` |
+| `data-rooquiz-from` | 來源識別碼,會記錄到每條作答的來源欄位,用於[來源追蹤](/zh-TW/publish/tracking)與[數據洞察](/zh-TW/results/insights)的來源分析 |
+| `data-rooquiz-height` | 內嵌模式的初始高度(px),自適應生效前的佔位 |
+| `data-rooquiz-text` | 彈出視窗模式的按鈕文案 |
+
+## JS API
+
+需要自訂觸發時機(比如用你自己設計的按鈕開啟彈出視窗),可以直接呼叫:
+
+```html
+<script src="https://你的作答域名/embed.js"></script>
+<script>
+  // 手动挂载内嵌
+  RooQuiz.embed({ el: '#container', token: '你的测验代码', from: 'homepage' })
+  // 用任意元素触发弹窗
+  document.querySelector('#my-button').onclick = () => RooQuiz.open('你的测验代码')
+</script>
+```
+
+<Callout type="warning">
+  開啟了**僅考生可答**的測驗不建議嵌入:瀏覽器會限制第三方網站 iframe 中的儲存與登入彈出視窗,考生登入體驗可能受損。這類測驗建議直接分享[公開連結](/zh-TW/publish/link-qrcode)。
+</Callout>
+
+<Callout type="info">
+  嵌入頁面會自動隱藏頁尾與背景,以透明形態融入你的網站;主題色仍然生效。嵌入帶來的作答會照常出現在[答卷記錄](/zh-TW/results/records)中。
+</Callout>

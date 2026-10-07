@@ -1,0 +1,64 @@
+---
+title: Logique conditionnelle
+description: "La logique conditionnelle affiche ou masque des questions selon les réponses précédentes pour un questionnaire adaptatif. Lecture d'une règle, réservée au Quiz noté et au Quiz de résultat."
+---
+
+La logique conditionnelle **affiche ou masque les questions suivantes** en fonction des réponses données, transformant un questionnaire figé en questionnaire adaptatif.
+
+<Callout type="warning">
+  La logique conditionnelle n'est disponible que dans les quiz de type **Quiz noté** et **Quiz de résultat**. Le volet de droite de l'éditeur ne comporte pas d'onglet **Règles** pour le Quiz ou le Quiz de connaissances aléatoire.
+</Callout>
+
+## À quoi ressemble une règle
+
+Une règle se lit comme une phrase : **Si … alors afficher / masquer une question.**
+
+Dans l'onglet **Règles** du volet de droite de l'éditeur, cliquez sur **+ Ajouter une règle** et renseignez :
+
+| Partie | Remarques |
+| --- | --- |
+| **Si** | Choisissez une **question précédente**, un opérateur et une valeur |
+| **et** | Continuez avec **Ajouter une condition** ; les conditions d'une même règle sont combinées par un ET, elles doivent donc toutes être remplies |
+| **alors** | Choisissez **Afficher** ou **Masquer**, puis sélectionnez la **question cible** |
+
+Un quiz peut contenir plusieurs règles, listées sous la forme **Règle 1 / Règle 2**, etc.
+
+## Opérateurs disponibles
+
+| Opérateur | À utiliser avec |
+| --- | --- |
+| **est égal à** | Choix unique, vrai/faux |
+| **contient l'un de / ne contient aucun de** | Choix multiple : la condition est remplie si l'une des options choisies est sélectionnée |
+| **supérieur à / supérieur ou égal à / inférieur à / inférieur ou égal à / entre** | Réponses numériques |
+
+Les questions vrai/faux proposent **✓ Vrai** et **✗ Faux**.
+
+<Callout type="info">
+  Une **condition** ne peut référencer qu'une question ayant une valeur précise (types à choix, vrai/faux, notation, nombre). Une **cible** est plus large : les questions Texte à trous, Texte d'information et Carrousel d'images peuvent aussi être affichées ou masquées. C'est ainsi que l'on crée une question de suivi du type « demandez-leur de préciser uniquement s'ils ont choisi Autre ».
+</Callout>
+
+## Mise en place
+
+<Steps>
+### Créez d'abord les questions
+
+Les règles référencent des questions précises : la question déclencheuse comme la question cible doivent donc déjà exister.
+
+### Ajoutez la règle
+
+Choisissez la question → l'opérateur → la valeur → afficher ou masquer → la question cible. Si vous enregistrez une règle incomplète, un message vous demande de **remplir entièrement la règle**.
+
+### Vérifiez-la dans l'aperçu
+
+Essayez chaque parcours de réponse. Dès que vous avez plus de deux ou trois règles, raisonner de tête finit toujours par oublier un cas.
+</Steps>
+
+## Points de vigilance
+
+- Référencez des questions situées **avant** la cible. Pointer vers une question ultérieure signifie que la réponse n'existe pas encore au moment où la condition est évaluée.
+- Les questions masquées ne sont pas affichées et **ne sont pas non plus soumises à la vérification du caractère obligatoire** : elles ne bloquent donc jamais l'envoi.
+- La suppression d'une règle demande une confirmation ; ensuite, la question cible redevient affichée par défaut.
+
+<Callout type="info">
+  Masquer des questions influe sur la notation : une question qui n'est jamais apparue n'a pas de réponse et ne rapporte aucun point. Lorsque vous concevez un questionnaire adaptatif, assurez-vous que vos [règles de notation](/fr/editor/scoring) tiennent compte des questions susceptibles d'être masquées.
+</Callout>

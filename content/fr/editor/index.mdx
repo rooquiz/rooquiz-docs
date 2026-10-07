@@ -1,0 +1,63 @@
+---
+title: Présentation de l'éditeur
+description: "Découvrez l'éditeur visuel à trois volets : choisissez les types de questions à gauche, prévisualisez en direct au centre et configurez questions, règles et rapports à droite."
+---
+
+L'éditeur visuel est l'endroit où se construisent les quiz. Il comporte **trois volets** : ajout des questions, aperçu en direct et configuration détaillée se font sur un seul et même écran.
+
+![Les trois volets de l'éditeur RooQuiz : types de questions, aperçu et propriétés](/img/en/editor/editor-overview.webp)
+
+## Rôle de chaque volet
+
+| Volet | Rôle |
+| --- | --- |
+| **Gauche — types de questions** | Tous les types de questions classés par catégorie ; cliquez ou faites glisser pour en ajouter un. Pour un Quiz de connaissances aléatoire, ce volet affiche à la place l'onglet **Banque de questions** |
+| **Centre — aperçu** | Un rendu en direct du point de vue du répondant. Basculez entre **Quiz** et **Rapport** en haut, et côté rapport choisissez un **Niveau d'aperçu** ou un **Aperçu du résultat** pour voir l'affichage des différents résultats |
+| **Droite — paramètres** | La configuration détaillée de l'élément actuellement sélectionné |
+
+## Les trois onglets du volet de droite
+
+| Onglet | Contenu | Quand il apparaît |
+| --- | --- | --- |
+| **Propriétés** | L'énoncé de la question sélectionnée, ses options, son caractère obligatoire, son score | Toujours |
+| **Personnalisé** | L'apparence propre à chaque question | Toujours |
+| **Règles** | [Logique conditionnelle](/fr/editor/logic) | **Quiz noté et Quiz de résultat uniquement** |
+
+<Callout type="info">
+  Si vous ne trouvez pas l'onglet **Règles**, ce n'est généralement pas qu'il est masqué : le type de ce quiz ne le prend pas en charge. Consultez [Les quatre types de quiz](/fr/getting-started/quiz-types).
+</Callout>
+
+## Actions courantes
+
+- **Ajouter une question** — choisissez un type dans le volet de gauche. Liste complète dans [Types de questions](/fr/editor/question-types).
+- **Glisser pour réordonner** — réorganisez directement les questions. N'oubliez pas que la [logique conditionnelle](/fr/editor/logic) exige que la question déclencheuse se trouve avant sa cible : revérifiez donc vos règles après chaque réorganisation.
+- **Dupliquer une question** — copier puis modifier est plus rapide que de recréer de zéro une question similaire.
+- **Sauts de page** — insérez-en un pour répartir un long quiz sur plusieurs pages plutôt que d'afficher un bloc compact de questions.
+- **Texte enrichi et images** — les descriptions des questions prennent en charge le texte enrichi, images comprises.
+
+## Limite de questions
+
+Avec le **forfait Free**, un quiz peut contenir jusqu'à **50 questions** ; avec **Pro**, c'est illimité.
+
+- Seules les questions auxquelles on peut répondre sont comptées : les sauts de page, textes d'information et carrousels d'images ne le sont pas. Un emplacement de question aléatoire compte pour le nombre de questions qu'il tire.
+- L'en-tête de l'éditeur indique combien vous en avez utilisé (par exemple **48/50 questions**). Une fois la limite atteinte, ajouter ou dupliquer une question ouvre l'invitation à passer au forfait supérieur.
+- **Créer à partir d'un modèle** ou **dupliquer un quiz** n'est jamais bloqué, même au-delà de 50 questions. Le nouveau quiz suit ensuite la même règle que les autres : vous pouvez modifier et supprimer ses questions, mais pas en ajouter avec le forfait Free.
+- Si votre forfait Pro prend fin, les quiz de plus de 50 questions continuent de fonctionner et restent modifiables ; vous ne pouvez simplement plus ajouter de questions tant que vous n'êtes pas repassé sous la limite ou que vous n'avez pas mis à niveau votre forfait.
+
+## En haut de l'écran
+
+- **Aperçu** — ouvre l'aperçu complet, du point de vue du répondant.
+- **Plus de paramètres** — accède aux [paramètres du formulaire](/fr/editor/settings).
+- **Publier comme modèle** — envoie ce quiz dans le [Centre de modèles](/fr/library/templates) pour que votre équipe puisse le réutiliser.
+
+## Pour aller plus loin
+
+- [Types de questions](/fr/editor/question-types)
+- [Logique conditionnelle](/fr/editor/logic)
+- [Règles de notation et d'évaluation](/fr/editor/scoring)
+- [Apparence et modèles personnalisés](/fr/editor/design)
+- [Versions multilingues](/fr/editor/translations)
+
+<Callout type="warning">
+  Pensez à **enregistrer** : une confirmation s'affiche. Avant de publier, parcourez les aperçus Quiz et Rapport, en particulier pour les quiz avec logique conditionnelle ou notation multidimensionnelle.
+</Callout>

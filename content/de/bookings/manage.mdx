@@ -1,0 +1,67 @@
+---
+title: Buchungen verwalten
+description: 'Bearbeiten Sie Termine auf der Seite 1:1-Buchungen: ausstehende Anfragen bestätigen oder ablehnen, einem einzelnen Termin Meeting-Link und Hinweise hinzufügen und die Liste nach Quiz und Status filtern.'
+---
+
+Auf der Seite **1:1-Buchungen** bearbeiten Sie alle Termine. Filter oben auf der Seite grenzen nach Quiz und Status ein.
+
+## Ausstehende Anfragen bearbeiten
+
+Ist die [Bestätigung](/de/bookings/availability) aktiviert, landen neue Buchungen unter „Wartet auf dich":
+
+- **Anfrage bestätigen** – bestätigt das Meeting und gibt die Adresse frei. Sie können einen Meeting-Link und Hinweise **nur für diesen einen Termin** festlegen; lassen Sie die Felder leer, gelten die Einstellungen auf Teamebene.
+- **Anfrage ablehnen** – Sie können einen Grund angeben, der in die E-Mail übernommen wird. Die Person wird benachrichtigt und kann einen anderen Zeitpunkt anfragen.
+
+<Callout type="info">
+  Geprüft wird vom **Inhaber der Organisation, einem Administrator oder dem für diesen Lead Zuständigen**. Eine Anfrage, deren Meeting-Zeitpunkt bereits verstrichen ist, kann nur abgelehnt, nicht bestätigt werden.
+</Callout>
+
+## Aktionen für einen bestätigten Termin
+
+| Aktion | Hinweise |
+| --- | --- |
+| **Umbuchen** | Wählen Sie einen neuen Zeitpunkt aus Ihren verfügbaren Zeitfenstern; der Teilnehmer erhält eine E-Mail, und die 24-Stunden-Erinnerung wird neu geplant |
+| **Als abgeschlossen markieren** | Der Termin hat stattgefunden. Interne Dokumentation – der Teilnehmer wird nicht kontaktiert |
+| **Als nicht erschienen markieren** | Die Person ist nicht erschienen. Ebenfalls rein intern |
+| **Buchung stornieren** | Storniert den Termin und benachrichtigt den Teilnehmer per E-Mail |
+| **Antwort ansehen** | Springt zu der Antwort, die die Person eingereicht hat |
+
+<Callout type="warning">
+  **Abgeschlossen** und **Nicht erschienen** können erst gesetzt werden, wenn das Meeting **bereits begonnen hat**. Umbuchen ist nur für Termine im Status „Gebucht" möglich.
+</Callout>
+
+## Eine Buchung manuell hinzufügen
+
+Termine, die telefonisch oder im Chat vereinbart wurden, können Sie direkt erfassen:
+
+<Steps>
+### Auf „Buchung hinzufügen" klicken
+
+Oben rechts auf der Seite **1:1-Buchungen**.
+
+### Lead auswählen
+
+Suchen Sie nach Name oder E-Mail. **Normale Mitglieder können nur Buchungen für Leads hinzufügen, für die sie zuständig sind**; Inhaber und Administratoren unterliegen keiner solchen Einschränkung.
+
+### Zeitpunkt auswählen
+
+**Verfügbare Zeiten** – wählen Sie aus dem normalen Raster der Zeitfenster, genau so, wie es ein Teilnehmer sehen würde.
+
+**Eigene Zeit** – geben Sie ein beliebiges Datum und eine beliebige Uhrzeit ein und **umgehen dabei das Raster**. Nützlich, um eine bereits vereinbarte Sonderregelung festzuhalten.
+
+### Über die Benachrichtigung entscheiden
+
+Aktivieren Sie „Bestätigungs-E-Mail an den Teilnehmer senden", erhält die Person eine Bestätigung; lassen Sie es deaktiviert, ist die Buchung nur ein Eintrag auf Ihrer Seite.
+</Steps>
+
+<Callout type="warning">
+  Ein Lead kann **jeweils nur eine aktive Buchung** haben. Wer bereits eine hat, wird gekennzeichnet – stornieren oder verschieben Sie zuerst den bestehenden Termin.
+</Callout>
+
+## Verknüpfung mit Leads
+
+Buchungen und [Leads](/de/leads) sind miteinander verbunden:
+
+- Der Block „Als Nächstes" auf der Detailseite eines Leads zeigt den anstehenden Termin und ermöglicht es, ihn direkt dort zu verschieben oder zu stornieren.
+- Die Lead-Liste hat eine Spalte **Nächster Termin**, und Sie können danach [filtern](/de/leads/views), ob ein Lead einen hat.
+- Jede Anfrage, Bestätigung, Ablehnung, Umbuchung und Stornierung wird in der **Aktivität** des Leads festgehalten.

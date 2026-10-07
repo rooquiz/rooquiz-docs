@@ -1,0 +1,62 @@
+---
+title: Disponibilités de réservation
+description: "Configurez les disponibilités des réservations 1:1 : règles hebdomadaires, durée et places des sessions, détails de réunion visibles par les répondants et confirmation des demandes. Réservé aux administrateurs."
+---
+
+Sur la page **Réservations 1:1**, cliquez sur l'engrenage à côté du titre pour ouvrir **Disponibilités de réservation**. Elle comporte trois sections : les règles de planification, les détails de la réunion et la confirmation.
+
+<Callout type="warning">
+  Seuls le **propriétaire de l'organisation ou un administrateur** peuvent modifier les disponibilités. Les autres voient une page en lecture seule.
+</Callout>
+
+![RooQuiz booking availability settings with scheduling rules, weekly hours and seats](/img/en/bookings/booking-availability.webp)
+
+## Règles de planification
+
+| Paramètre | Effet |
+| --- | --- |
+| **Fuseau horaire** | Toutes les plages sont interprétées dans ce fuseau horaire. Les répondants voient les heures converties dans **leur propre** fuseau |
+| **Durée de la session** | La durée d'une session ; les disponibilités sont découpées en créneaux de cette durée |
+| **Pause entre les sessions** | Une marge entre les réunions pour qu'elles ne s'enchaînent pas |
+| **Préavis minimum** | Le délai minimal avant une réservation, en heures : empêche de réserver 10 minutes à l'avance |
+| **Réservable jusqu'à** | Le nombre de jours à l'avance couverts par le calendrier |
+
+### Horaires hebdomadaires
+
+Ajoutez des plages pour chaque jour de la semaine, par exemple « Lundi 09:00–12:00 » ou « Mercredi 14:00–18:00 ». Un jour peut en comporter plusieurs.
+
+<Callout type="warning">
+  Les plages d'une même journée **ne doivent pas se chevaucher** ; ce point est vérifié à l'enregistrement.
+</Callout>
+
+### Places
+
+Chaque plage possède sa propre valeur **Places**, soit le nombre de personnes pouvant réserver une même session dans cette plage :
+
+- `1` : en tête-à-tête.
+- `6` : un groupe de six.
+- Vide : aucune limite.
+- `0` : fermée temporairement, mais la configuration est conservée pour plus tard.
+
+<Callout type="warning">
+  Pour les **sessions de groupe, réglez la pause sur 0**. Sinon, la première réservation bloque les créneaux voisins et personne d'autre ne voit les places restantes.
+</Callout>
+
+## Détails de la réunion
+
+- **Lien de la réunion** : une adresse Zoom / Meet fixe envoyée lors de la confirmation. Si vous utilisez un lien différent à chaque fois, **désactivez cette option** : les participants reçoivent alors uniquement vos instructions, ou le lien que le responsable du lead ajoute lors de la confirmation.
+- **Instructions pour les participants** : comment rejoindre la réunion, ce qu'il faut préparer.
+
+## Confirmation
+
+Activez **Confirmer les demandes avant d'envoyer les détails de la réunion** et les nouvelles réservations arrivent sous forme de **demandes** :
+
+1. La demande arrive dans la section « En attente de vous » de **Réservations 1:1**.
+2. Le **responsable du lead** la confirme ou la refuse.
+3. Ce n'est qu'après confirmation que le participant reçoit l'adresse de la réunion.
+
+Lorsque l'option est désactivée, une réservation est immédiatement définitive et le participant reçoit les détails tout de suite.
+
+<Callout type="info">
+  En cas de doute, laissez la confirmation activée. Elle filtre les curieux sans réelle intention et les demandes à des horaires inadaptés, pour le simple coût d'un clic supplémentaire de votre part.
+</Callout>

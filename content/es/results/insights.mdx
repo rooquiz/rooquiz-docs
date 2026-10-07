@@ -1,0 +1,49 @@
+---
+title: Insights
+description: 'Insights agrupa las respuestas dispersas en estadísticas y gráficos (tasa de finalización, volumen de envíos en el tiempo, distribución por pregunta) para que veas el panorama general sin abrir registros.'
+---
+
+Insights agrupa las respuestas dispersas en **estadísticas y gráficos**, para ayudarte a captar el panorama general sin revisar los registros uno por uno.
+
+## Métricas y gráficos habituales
+
+- **Tasa de finalización**: la proporción entre envíos iniciados y completados, que refleja el abandono.
+- **Volumen de envíos**: el total de respuestas y su tendencia a lo largo del tiempo.
+- **Distribución por pregunta**: en las preguntas de opción, la proporción y distribución de cada opción.
+- **Distribución por fuente**: junto con el [seguimiento de fuentes UTM](/es/publish/tracking), compara el volumen de respuestas entre canales.
+
+## Embudo de conversión
+
+El embudo sigue **una visita (sesión)** a lo largo de cinco etapas: **Vista → Iniciada → Enviada → Informe visto → Clic en CTA**. Así se cuenta cada etapa:
+
+| Etapa | Se cuenta cuando |
+| --- | --- |
+| Vista | La página del quiz se abre realmente en un navegador (se excluyen rastreadores y vistas previas de administradores) |
+| Iniciada | El participante responde cualquier pregunta por primera vez (no basta con hacer clic en "empezar") |
+| Enviada | El envío se completa correctamente |
+| Informe visto | El informe termina de generarse mientras el participante está en la página de resultados |
+| Clic en CTA | El participante hace clic en el [botón de CTA](/es/results/reports) al final del informe |
+
+El porcentaje junto a cada etapa es la tasa de conversión **respecto a la etapa anterior**, para que veas exactamente dónde se produce la caída.
+
+### Los 10 principales puntos de abandono
+
+Entre las sesiones que **no enviaron** pero respondieron al menos una pregunta, agrupadas por la **última pregunta respondida**: las preguntas con recuentos altos son donde la gente se rinde, porque son demasiado difíciles, demasiado delicadas o porque la siguiente los ahuyentó. Los visitantes que se fueron sin responder nada no aparecen aquí; se reflejan en la caída de Vista → Iniciada.
+
+### Conversión por fuente
+
+Agrupada por la etiqueta de origen del enlace (`?from=`, generada por el [seguimiento de fuentes](/es/publish/tracking) o por la [inserción](/es/publish/embed)), compara los recuentos de vistas, inicios y envíos y la tasa de finalización de cada fuente; las fuentes que proceden de inserciones en sitios web llevan una etiqueta **Embed**.
+
+<Callout type="info">
+  El embudo cuenta las sesiones desde que se lanzó la función; los envíos históricos anteriores no se incorporan retroactivamente, así que al principio el "total de envíos" puede superar el número de envíos del embudo. Con el tiempo, ambas cifras convergen.
+</Callout>
+
+## Sugerencias
+
+- Usa el **embudo de conversión** para localizar dónde se produce la caída: muchas vistas pero pocos inicios apuntan a la página de entrada o a la primera pregunta; muchos inicios pero pocos envíos, revisa las preguntas con más abandono.
+- Usa la **distribución de opciones** para entender las tendencias generales de los participantes.
+- Combina las tendencias temporales con la **conversión por fuente** para evaluar las campañas de cada canal.
+
+<Callout type="info">
+  Insights muestra "tendencias de grupo". Para analizar una respuesta concreta, ve a [Registros de respuestas](/es/results/records); para las conclusiones de evaluación individuales, ve a [Informes](/es/results/reports).
+</Callout>

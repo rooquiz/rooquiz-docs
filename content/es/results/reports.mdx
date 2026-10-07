@@ -1,0 +1,47 @@
+---
+title: Informes y evaluación por AI
+description: 'En el Cuestionario con puntuación, cada respuesta puede generar un informe con puntuaciones por dimensión, gráfico de radar, conclusiones de perfil y evaluación por AI opcional de textos. Cómo se generan y leen.'
+---
+
+En el tipo **Cuestionario con puntuación**, cada respuesta puede generar un **informe** que presenta las puntuaciones por dimensión, las conclusiones de perfil y, opcionalmente, una evaluación por AI.
+
+## Qué contiene un informe
+
+- **Puntuaciones por dimensión**: la puntuación de cada dimensión, a menudo mostrada en un **gráfico de radar**.
+- **Conclusiones de perfil**: conclusiones de personalidad o de capacidad derivadas de las puntuaciones por dimensión.
+- **Evaluación por AI**: análisis por AI de las respuestas de texto (sujeto a cuota).
+
+## Cómo se genera un informe
+
+- La **puntuación básica** se calcula **inmediatamente** después del envío.
+- Los **cálculos más pesados**, como el análisis por dimensiones y la evaluación por AI, se generan de forma **asíncrona**; el informe pasa por un estado "generando → completado".
+- Si la generación falla, el sistema **lo reintenta automáticamente** dentro de un plazo determinado.
+
+<Callout type="info">
+  Si un informe permanece mucho tiempo en "generando", actualiza la página más tarde; si el problema persiste, intenta regenerarlo o contacta con el soporte.
+</Callout>
+
+## Visualización y entrega
+
+- **En pantalla**: consúltalo directamente en el panel; también puedes permitir que los participantes vean su propio informe mediante un enlace para compartir.
+- **Exportación a PDF**: exporta el informe a PDF para archivarlo o distribuirlo sin conexión.
+- **Envío por correo**: envía el informe por correo electrónico. **El envío por correo es una función Pro.**
+
+## Botón de CTA en la página de resultados
+
+Puedes configurar un botón de llamada a la acción (CTA) para **cada nivel de puntuación**; los participantes que quedan en ese nivel lo ven al final de su informe. Por ejemplo, "Necesita mejorar" lleva a reservar una consulta, mientras que "Excelente" lleva a descargar material avanzado.
+
+- En **Editor** → **Configuración del informe** → **Niveles de puntuación**, activa el **Botón de CTA** de un nivel y rellena el texto y el enlace del botón; el texto introductorio y "abrir en una ventana nueva" son opcionales.
+- Para usar el mismo botón en todos los niveles, configura uno y haz clic en **Aplicar a todos los niveles**.
+- Los cambios en el CTA **se aplican inmediatamente a todos los informes históricos**: cambia los enlaces de campaña o el texto sin preocuparte por botones obsoletos en informes antiguos.
+- Los clics de los participantes en el CTA alimentan el embudo de conversión de [Insights](/es/results/insights).
+
+<Callout type="info">
+  Los enlaces deben empezar por `http(s)://`. El estilo del botón sigue automáticamente el color del tema de tu quiz.
+</Callout>
+
+## Sobre la cuota de AI
+
+<Callout type="warning">
+  La evaluación por AI consume la **Cuota de AI** de tu equipo, que se reinicia en cada ciclo. Cuando se supera la cuota, la evaluación por AI se omite durante ese ciclo, pero la puntuación básica y el análisis por dimensiones se siguen generando con normalidad. Consulta [Créditos de AI y facturación](/es/account/ai-billing) para conocer las asignaciones, las reglas de reinicio mensual, las mejoras de plan y las recargas.
+</Callout>

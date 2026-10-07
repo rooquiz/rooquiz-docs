@@ -1,5 +1,5 @@
 import { source } from './source'
-import { DEFAULT_LOCALE, LOCALES } from './i18n'
+import { DEFAULT_LOCALE, LOCALES, langTag } from './i18n'
 import { SITE_URL } from './site-url'
 
 export function pageUrl(locale: string, segments: string[]) {
@@ -16,11 +16,11 @@ let cached: Map<string, Route> | null = null
  *
  * Built from the exact helper the MDX catch-all route uses for its static params,
  * so neither the sitemap nor a page's hreflang set can drift from the pages that
- * really get exported. The en and zh trees are meant to mirror each other, but a
+ * really get exported. The locale trees are meant to mirror each other, but a
  * page can legitimately live in only one of them, and an hreflang link must never
  * point at a URL that 404s.
  *
- * Memoised: every one of the ~108 pages asks for its own alternates at build time.
+ * Memoised: every one of the ~486 pages asks for its own alternates at build time.
  */
 export function routes(): Map<string, Route> {
   if (cached) return cached
@@ -53,11 +53,13 @@ export function languagesFor(segments: string[]): Record<string, string> {
 
   const languages: Record<string, string> = {}
   for (const locale of LOCALES) {
-    if (route.locales.has(locale)) languages[locale] = pageUrl(locale, route.segments)
+    // Keyed by BCP 47 tag (`zh` -> `zh-CN`), not the URL segment.
+    if (route.locales.has(locale)) languages[langTag(locale)] = pageUrl(locale, route.segments)
   }
   // `/` picks a locale from Accept-Language (functions/index.js), so the default
   // locale is what a visitor with no language match ends up on.
-  if (languages[DEFAULT_LOCALE]) languages['x-default'] = languages[DEFAULT_LOCALE]
+  const fallback = languages[langTag(DEFAULT_LOCALE)]
+  if (fallback) languages['x-default'] = fallback
 
   return languages
 }

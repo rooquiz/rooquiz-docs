@@ -1,0 +1,47 @@
+---
+title: Relatórios e avaliação por IA
+description: 'No Quiz com pontuação, cada resposta pode gerar um relatório com pontuações por dimensão, gráfico de radar, conclusões de perfil e avaliação opcional por IA. Veja como é gerado e lido.'
+---
+
+No tipo **Quiz com pontuação**, cada resposta pode gerar um **relatório** que apresenta pontuações por dimensão, conclusões de perfil e (opcionalmente) avaliação por IA.
+
+## O que há em um relatório
+
+- **Pontuações por dimensão**: pontuações de cada dimensão, geralmente exibidas em um **gráfico de radar**.
+- **Conclusões de perfil**: conclusões de personalidade/habilidade derivadas das pontuações por dimensão.
+- **Avaliação por IA**: análise por IA das respostas em texto (sujeita à cota).
+
+## Como um relatório é gerado
+
+- A **pontuação básica** é calculada **imediatamente** após o envio.
+- **Cálculos mais pesados**, como a análise por dimensão e a avaliação por IA, são gerados de forma **assíncrona**; o relatório passa por um estado "gerando → concluído".
+- Se a geração falhar, o sistema **tenta novamente de forma automática** dentro de um determinado intervalo.
+
+<Callout type="info">
+  Se um relatório ficar em "gerando" por muito tempo, atualize a página mais tarde; se o problema persistir, tente gerar novamente ou entre em contato com o suporte.
+</Callout>
+
+## Visualização e entrega
+
+- **Na tela**: veja diretamente no painel; você também pode permitir que os respondentes vejam o próprio relatório por um link de compartilhamento.
+- **Exportação em PDF**: exporte o relatório em PDF para arquivamento ou distribuição offline.
+- **Envio por e-mail**: envie o relatório por e-mail. **O envio por e-mail é um recurso Pro.**
+
+## Botão de CTA da página de resultado
+
+Você pode configurar um botão de chamada para ação (CTA) para **cada nível de pontuação**; os respondentes que ficam naquele nível o veem no fim do relatório — por exemplo, "Precisa melhorar" leva ao agendamento de uma consultoria, enquanto "Excelente" leva ao download de material avançado.
+
+- Em **Editor** → **Configurações do relatório** → **Níveis de pontuação**, ative o **Botão de CTA** de um nível e preencha o texto e o link do botão; o texto introdutório e "abrir em nova janela" são opcionais.
+- Para usar o mesmo botão em vários níveis, configure um e clique em **Aplicar a todos os níveis**.
+- As edições do CTA **passam a valer imediatamente em todos os relatórios históricos** — troque links ou textos de campanha sem se preocupar com botões desatualizados em relatórios antigos.
+- Os cliques dos respondentes no CTA alimentam o funil de conversão em [Insights](/pt-BR/results/insights).
+
+<Callout type="info">
+  Os links precisam começar com `http(s)://`. O estilo do botão acompanha automaticamente a cor do tema do seu quiz.
+</Callout>
+
+## Sobre a cota de IA
+
+<Callout type="warning">
+  A avaliação por IA consome a **cota de IA** da sua equipe, que é renovada a cada ciclo. Quando a cota é excedida, a avaliação por IA é ignorada naquele ciclo, mas a pontuação básica e a análise por dimensão continuam sendo geradas normalmente. Veja [Créditos de IA e cobrança](/pt-BR/account/ai-billing) para conhecer as franquias, as regras de renovação mensal, os upgrades e as recargas.
+</Callout>

@@ -1,0 +1,47 @@
+---
+title: Eventos de gatilho e escopo
+description: 'Cada conector é acionado por eventos de gatilho e limitado por um escopo — quais quizzes podem acioná-lo. As duas valem juntas: veja o que significa cada evento e como restringir a quizzes específicos.'
+---
+
+Cada conector define **quando é acionado** (eventos) e **quais quizzes podem acioná-lo** (escopo). As duas condições se combinam com E: o evento precisa corresponder *e* o quiz de origem precisa estar no escopo para que algo seja entregue.
+
+## Eventos de gatilho
+
+Todo conector precisa de pelo menos um evento:
+
+| Evento | É acionado quando |
+| --- | --- |
+| **Novo lead** | Alguém deixa os dados de contato com a sua equipe **pela primeira vez** |
+| **Agendamento criado** | Alguém agenda uma sessão |
+| **Agendamento cancelado** | Qualquer uma das partes cancela um agendamento |
+| **Agendamento reagendado** | Um agendamento é movido para outro horário |
+
+<Callout type="warning">
+  **"Novo lead" é acionado uma única vez, na primeira vez que a pessoa deixa os dados.** Se a mesma pessoa fizer outro quiz depois, ele não é acionado de novo, porque os leads são [deduplicados entre quizzes](/pt-BR/leads). Se você quer uma notificação a cada envio, este não é o evento certo.
+</Callout>
+
+## Escopo de acionamento
+
+O escopo controla quais quizzes podem acionar este conector:
+
+- **Todos os quizzes** — o padrão. Qualquer evento de qualquer quiz da equipe é entregue.
+- **Quizzes específicos** — somente os quizzes que você selecionar o acionam.
+
+<Callout type="info">
+  O escopo é comparado com **o quiz de onde veio o evento**. Para "Novo lead", é o quiz em que a pessoa **deixou os dados pela primeira vez** — não o mais recente que ela fez.
+</Callout>
+
+Um uso típico: enviar o seu principal quiz de geração de leads para o Slack, para que a equipe veja na hora, e evitar que um quiz interno incomode alguém.
+
+## Combinações que vale copiar
+
+| O que você quer | Eventos | Escopo |
+| --- | --- | --- |
+| Todos ficam sabendo de um novo cliente | Novo lead | Todos os quizzes |
+| Acompanhar só o quiz principal | Novo lead | Quizzes específicos |
+| Ser avisado quando a agenda muda | Agendamento cancelado + reagendado | Todos os quizzes |
+| Sincronizar leads com seu ESP | Novo lead | Todos os quizzes |
+
+<Callout type="info">
+  Alterar eventos ou escopo **só afeta os eventos dali em diante** — nada é reenviado.
+</Callout>

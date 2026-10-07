@@ -1,0 +1,11 @@
+{
+  "title": "基礎指南",
+  "pages": [
+    "index",
+    "account",
+    "dashboard",
+    "quiz-types",
+    "create-quiz",
+    "workspace"
+  ]
+}

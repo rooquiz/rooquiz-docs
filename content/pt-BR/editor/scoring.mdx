@@ -1,0 +1,65 @@
+---
+title: Pontuação e regras de avaliação
+description: 'A pontuação varia por tipo de quiz: o Quiz de conhecimento avalia certo e errado e soma pontos, e o Quiz com pontuação gera análises multidimensionais e relatórios. Defina pontos, respostas e fórmulas.'
+---
+
+"Pontuação" significa coisas diferentes dependendo do tipo de quiz: o Quiz de conhecimento foca em **certo/errado e totais**, enquanto o Quiz com pontuação foca em **análise multidimensional e relatórios**.
+
+## Quiz de conhecimento: pontuação e correção
+
+Em um **Quiz de conhecimento**, você pode:
+
+- **Definir pontos**: atribua pontos às questões ou às opções corretas.
+- **Corrigir certo/errado**: marque as respostas corretas; o sistema corrige cada questão automaticamente.
+- **Somar totais**: os pontos são somados automaticamente.
+- **Nota de aprovação**: defina um limite de aprovação e exiba um resultado de aprovado/reprovado.
+- **Feedback das respostas**: mostre aos respondentes se acertaram e a explicação de cada questão.
+
+<Callout type="info">
+  Pontos e correção de certo/errado estão disponíveis no Quiz de conhecimento e no Quiz de conhecimento aleatório. O Quiz com pontuação usa fórmulas por dimensão, e o Quiz de resultado não pontua nada.
+</Callout>
+
+## Quiz de resultado: vence quem tem mais votos
+
+Um **Quiz de resultado** não pontua — ele **conta votos**. Cada opção vota em um ou mais tipos de resultado, e o tipo com mais votos vence; empates ficam com o que aparece primeiro na lista de resultados.
+
+Cada resultado pode ter seu próprio botão de CTA, conectando um resultado divertido diretamente a um próximo passo. Veja [Os quatro tipos de quiz](/pt-BR/getting-started/quiz-types).
+
+## Quiz com pontuação: análise por dimensões e avaliação por IA
+
+Em um **Quiz com pontuação**, a pontuação tem mais a ver com "traçar um perfil" do que com certo/errado:
+
+- **Pontuação multidimensional**: associe as questões a várias dimensões; após o envio, cada dimensão recebe uma pontuação, geralmente exibida em um **gráfico de radar**.
+- **Perfil de resultado**: gere conclusões de personalidade/habilidade com base nas pontuações das dimensões.
+- **Avaliação por IA**: a IA transforma a pontuação total, o nível e as pontuações das dimensões em sugestões e comentários (ela não lê o texto bruto das respostas).
+
+### Quais questões são pontuadas
+
+O total de um Quiz com pontuação vem **apenas da fórmula**, que faz referência aos códigos das questões. Só podem ser referenciadas as questões que geram um número: questões de escolha (por meio da pontuação de cada opção), avaliação, número, data, hora e em cascata.
+
+**Preencher a lacuna apenas coleta texto e nunca é pontuada** — texto livre não pode entrar em cálculos, então não gera pontuação e não aparece entre os campos que podem ser inseridos no editor de fórmulas. Isso a torna a forma certa de fazer uma pergunta aberta ("há algo mais que devemos saber?") dentro de uma avaliação pontuada.
+
+<Callout type="warning">
+  Sem fórmula, a pontuação total fica vazia, nenhum nível pode ser atingido e o bloco de avaliação geral desaparece da página de resultado. Sempre que configurar níveis, configure também a fórmula.
+</Callout>
+
+### Sobre a cota de avaliação por IA
+
+<Callout type="warning">
+  A avaliação por IA consome a **cota de IA** da sua equipe. A cota é contabilizada por ciclo; quando ultrapassada, a avaliação por IA é ignorada naquele ciclo (a pontuação básica continua sendo gerada). Veja [Créditos de IA e cobrança](/pt-BR/account/ai-billing) para cobrança, renovações mensais e recargas.
+</Callout>
+
+## Níveis e ações na página de resultado
+
+Divida a pontuação total em **níveis** (0–60 precisa melhorar / 60–80 bom / 80+ excelente). Cada um tem nome, cor e descrição, e pode ter um **botão de CTA** — a faixa mais baixa pode oferecer "Agende uma consultoria". É essa etapa que conecta uma avaliação à conversão.
+
+<Callout type="info">
+  Não quer que os respondentes vejam um número? Você pode **ocultar a pontuação geral** e manter apenas o nome do nível, a descrição e o resumo — melhor para quizzes que devem parecer um diagnóstico, e não uma prova.
+</Callout>
+
+## Geração do relatório
+
+- **Síncrona**: a pontuação básica é calculada imediatamente após o envio.
+- **Assíncrona**: cálculos mais pesados, como a análise por dimensões e a avaliação por IA, são gerados de forma assíncrona; os relatórios passam pelo estado "gerando → concluído", e o sistema tenta novamente de forma automática em caso de falha.
+
+Para visualizar, exportar e entregar relatórios, veja [Relatórios e avaliação por IA](/pt-BR/results/reports).

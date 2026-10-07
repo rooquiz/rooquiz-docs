@@ -1,0 +1,9 @@
+{
+  "title": "1:1 예약",
+  "pages": [
+    "index",
+    "availability",
+    "manage",
+    "respondent"
+  ]
+}

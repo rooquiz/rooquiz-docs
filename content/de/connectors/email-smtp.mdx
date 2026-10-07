@@ -1,0 +1,110 @@
+---
+title: E-Mail-Versand (SMTP)
+description: 'Richten Sie den eigenen SMTP-Versanddienst Ihres Teams ein, damit E-Mail-Connectors ohne Plattformlimit von Ihrer Adresse senden: wo Sie ihn konfigurieren, wie die Prüfung abläuft und was ohne ihn ausfällt.'
+---
+
+Der [E-Mail-Connector](/de/connectors/channels) versendet über **Ihren eigenen SMTP-Server** – RooQuiz leitet die Mails nicht selbst weiter. Benachrichtigungen kommen daher von Ihrer eigenen Adresse, und es gibt kein Versandlimit seitens der Plattform.
+
+Richten Sie ihn einmal pro Team unter **Einstellungen → Organisation → E-Mail-Versand** ein. Jeder E-Mail-Connector im Team nutzt ihn.
+
+<Callout type="warning">
+  Ohne einen **verifizierten** Versanddienst lässt sich ein E-Mail-Connector zwar speichern, stellt aber nie etwas zu. Seine Karte zeigt dann den roten Tag „Kein Versanddienst".
+</Callout>
+
+## Was Sie ausfüllen
+
+| Feld | Hinweise |
+| --- | --- |
+| **SMTP-Server** | Der Hostname Ihres Anbieters, z. B. `smtp.gmail.com` |
+| **Port** | `587` (STARTTLS), `465` (SSL/TLS) oder `2525` |
+| **Benutzername** | Meist Ihre vollständige E-Mail-Adresse; manche Anbieter verwenden einen festen Wert |
+| **Passwort** | Das SMTP-Passwort oder ein API-Schlüssel. Lassen Sie das Feld bei späteren Änderungen leer, um das gespeicherte beizubehalten |
+| **Absenderadresse** | Muss eine Adresse sein, unter der Ihr SMTP-Server senden darf |
+| **Absendername** | Anzeigename, der den Empfängern angezeigt wird |
+| **Antwortadresse** | Optional, falls Antworten an eine andere Adresse gehen sollen |
+
+<Callout type="info">
+  **Port 25 kann nicht verwendet werden.** Unsere Hosting-Plattform blockiert ausgehende Verbindungen auf diesem Port. Verwenden Sie 587 oder 465.
+</Callout>
+
+## Einrichtung nach Anbieter
+
+<Tabs items={['Gmail', 'Resend', 'Firmen-Mailserver']}>
+  <Tab value="Gmail">
+    | Feld | Wert |
+    | --- | --- |
+    | SMTP-Server | `smtp.gmail.com` |
+    | Port | `587 (STARTTLS)` |
+    | Benutzername | Ihre vollständige Gmail-Adresse |
+    | Passwort | Ein **16-stelliges App-Passwort** |
+    | Absenderadresse | **Dieselbe** Gmail-Adresse oder ein verifizierter „Senden als"-Alias |
+
+    Erstellen Sie das App-Passwort unter [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords). Es wird einmalig in vier Vierergruppen angezeigt – **entfernen Sie die Leerzeichen**, bevor Sie es einfügen.
+
+    <Callout type="warning">
+      Ihr normales Kontopasswort funktioniert nicht. Google hat die Passwortanmeldung für Mail-Clients deaktiviert, daher ist ein App-Passwort erforderlich – und App-Passwörter gibt es erst, wenn die **Bestätigung in zwei Schritten** aktiviert ist.
+    </Callout>
+
+    Wenn auf der Seite *„Die gesuchte Einstellung ist für Ihr Konto nicht verfügbar"* steht, trifft einer dieser Fälle zu: Die Bestätigung in zwei Schritten ist deaktiviert; es handelt sich um ein Google-Workspace-Konto, dessen Administrator App-Passwörter deaktiviert hat; oder das Konto ist im Erweiterten Sicherheitsprogramm registriert, das sie grundsätzlich blockiert.
+
+    Gmail begrenzt den Versand außerdem auf etwa **500 Empfänger pro Tag** bei privaten Konten und **2.000** bei Workspace. Für Team-Benachrichtigungen reicht das völlig, für Massenmails jedoch nicht.
+  </Tab>
+
+  <Tab value="Resend">
+    | Feld | Wert |
+    | --- | --- |
+    | SMTP-Server | `smtp.resend.com` |
+    | Port | `587 (STARTTLS)` |
+    | Benutzername | `resend` – genau dieses Wort |
+    | Passwort | Ein Resend-API-Schlüssel (`re_…`) |
+    | Absenderadresse | Eine beliebige Adresse auf einer Domain, die Sie in Resend verifiziert haben |
+
+    Dies ist die einfachste Option, wenn Benachrichtigungen von **Ihrer eigenen Marken-Domain** statt von einem persönlichen Postfach kommen sollen, und es gibt kein Tageslimit wie bei Gmail.
+  </Tab>
+
+  <Tab value="Firmen-Mailserver">
+    Fragen Sie die Person, die Ihren Mailserver betreut, nach **SMTP-Hostname, Port und Zugangsdaten**. Bevorzugen Sie Port 587 mit STARTTLS; verwenden Sie 465, wenn nur dieser angeboten wird.
+
+    Zwei Dinge führen häufig zu Problemen:
+
+    - Der Benutzername ist oft die **vollständige Postfachadresse**, nicht nur der Teil vor dem `@`.
+    - Die **Absenderadresse muss zu Ihrer eigenen Domain gehören**. Die meisten Unternehmensserver lehnen es ab, Mails weiterzuleiten, die vorgeben, von woanders zu stammen.
+  </Tab>
+</Tabs>
+
+## Speichern und überprüfen
+
+<Steps>
+### Felder ausfüllen und auf „Speichern und überprüfen" klicken
+
+Speichern und Überprüfen sind eine einzige Aktion, sodass Sie nie eine gespeicherte, aber ungetestete Konfiguration haben.
+
+### Im Posteingang nach der Test-E-Mail sehen
+
+<Callout type="warning">
+  Die Test-E-Mail geht an **die Adresse Ihres eigenen RooQuiz-Kontos** – die, mit der Sie angemeldet sind – und **nicht** an die soeben konfigurierte Absenderadresse. Wenn nichts ankommt, prüfen Sie diesen Posteingang und dessen Spam-Ordner, bevor Sie etwas ändern.
+</Callout>
+
+### Bestätigen, dass der Status „Verifiziert" lautet
+</Steps>
+
+**Verifiziert** bedeutet, dass Ihr SMTP-Server die Nachricht angenommen und einen Erfolgscode zurückgegeben hat. Das ist nicht dasselbe wie zugestellt: Ein SMTP-Server nimmt Mails zuerst an und leitet sie danach weiter, sodass eine Nachricht später noch als Spam gefiltert oder zurückgewiesen werden kann. Wenn die Überprüfung erfolgreich ist, aber nichts ankommt, liegt das Problem auf der Empfängerseite – beginnen Sie mit dem Spam-Ordner und suchen Sie dann im Absenderpostfach nach einer Unzustellbarkeitsnachricht.
+
+## Wenn die Überprüfung fehlschlägt
+
+Der **genaue Fehler Ihres SMTP-Servers** wird auf der Seite angezeigt – bewusst unverändert, damit Sie direkt darauf reagieren können. Die häufigsten:
+
+| Fehler | Bedeutung |
+| --- | --- |
+| `535 Username and Password not accepted` | Falsche Zugangsdaten. Bei Gmail: Sie haben das Kontopasswort statt eines App-Passworts verwendet oder Leerzeichen darin gelassen |
+| `553 Sender address rejected: not owned by user` | Unter dieser Absenderadresse darf der Server nicht senden. Ändern Sie sie in ein Postfach oder einen Alias, der dem Konto tatsächlich gehört |
+| `550 relay not permitted` | Der Server leitet für Sie überhaupt nicht weiter – meist ein falscher Benutzername oder SMTP-Zugriff ist für das Postfach nicht aktiviert |
+| Zeitüberschreitung / Verbindung fehlgeschlagen | Falscher Hostname oder Port, oder der Server akzeptiert keine Verbindungen von außerhalb Ihres Netzwerks |
+
+## Gut zu wissen
+
+- Das Passwort wird nach dem Speichern **nie wieder angezeigt**. Lassen Sie das Feld leer, wenn Sie etwas anderes bearbeiten, dann bleibt es unverändert.
+- Eine Änderung von Server, Port, Benutzername, Passwort oder Absenderadresse setzt den Status bis zur nächsten erfolgreichen Prüfung auf **Nicht verifiziert** zurück.
+- Speichern und Überprüfen sind auf wenige Versuche pro Stunde und Team **begrenzt** – jeder Versuch verbindet sich tatsächlich mit Ihrem Server und sendet tatsächlich eine Nachricht.
+- Das **Entfernen** des Versanddienstes löscht das gespeicherte Passwort. Um Einstellungen zu ändern, müssen Sie ihn nicht entfernen – speichern Sie die neuen Werte einfach darüber. Das Entfernen wird verweigert, solange noch ein E-Mail-Connector **aktiviert** ist, damit Sie Ihre eigenen Zustellungen nicht unbemerkt unterbrechen.
+- Schlägt eine spätere Zustellung dauerhaft fehl – die Zugangsdaten funktionieren nicht mehr oder die Absenderadresse wird abgelehnt –, wechselt der Status auf **Überprüfung fehlgeschlagen**, und E-Mail-Connectors stellen nichts mehr zu, bis Sie das Problem beheben. Eine einzelne fehlerhafte Empfängeradresse bewirkt das **nicht**; sie lässt nur diese eine Nachricht fehlschlagen.

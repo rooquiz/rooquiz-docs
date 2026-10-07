@@ -1,0 +1,62 @@
+---
+title: Disponibilidad de reservas
+description: 'Configura la disponibilidad de las reservas 1:1: reglas de programación semanales, duración y plazas de cada sesión, los datos de la reunión que ven los participantes y si las solicitudes requieren confirmación.'
+---
+
+En la página **Reservas 1:1**, haz clic en el engranaje junto al título para abrir **Disponibilidad de reservas**. Tiene tres secciones: reglas de programación, datos de la reunión y confirmación.
+
+<Callout type="warning">
+  Solo el **propietario de la organización o un administrador** puede editar la disponibilidad. Los demás ven una página de solo lectura.
+</Callout>
+
+![Configuración de disponibilidad de reservas de RooQuiz con reglas de programación, horario semanal y plazas](/img/en/bookings/booking-availability.webp)
+
+## Reglas de programación
+
+| Ajuste | Qué hace |
+| --- | --- |
+| **Zona horaria** | Todos los periodos se interpretan en esta zona horaria. Los participantes ven los horarios convertidos a **la suya propia** |
+| **Duración de la sesión** | Cuánto dura una sesión; la disponibilidad se divide en franjas de esta duración |
+| **Margen entre sesiones** | Un respiro entre reuniones para que no queden una detrás de otra |
+| **Antelación mínima** | Con cuántas horas de antelación como mínimo se puede reservar; evita que alguien reserve con 10 minutos de aviso |
+| **Reservable hasta** | Cuántos días hacia adelante abarca el calendario |
+
+### Horario semanal
+
+Añade periodos por día de la semana: "lunes 09:00–12:00", "miércoles 14:00–18:00". Un día puede tener varios.
+
+<Callout type="warning">
+  Los periodos del mismo día **no deben solaparse**; esto se valida al guardar.
+</Callout>
+
+### Plazas
+
+Cada periodo tiene su propio valor de **Plazas**, es decir, cuántas personas pueden reservar una misma sesión en ese periodo:
+
+- `1`: sesión individual.
+- `6`: un grupo de seis.
+- Vacío: sin límite.
+- `0`: cerrado temporalmente, pero la configuración se conserva para más adelante.
+
+<Callout type="warning">
+  En las **sesiones de grupo, pon el margen en 0**. De lo contrario, la primera reserva bloquea las franjas contiguas y nadie más ve las plazas restantes.
+</Callout>
+
+## Datos de la reunión
+
+- **Enlace de la reunión**: una dirección fija de Zoom / Meet que se envía al confirmar. Si usas un enlace distinto cada vez, **desactívalo**: los asistentes recibirán solo tus instrucciones o el enlace que añada el responsable del lead al confirmar.
+- **Instrucciones para asistentes**: cómo unirse y qué preparar.
+
+## Confirmación
+
+Activa **Confirmar las solicitudes antes de enviar los datos de la reunión** y las nuevas reservas llegarán como **solicitudes**:
+
+1. La solicitud aparece en la sección "Esperan tu respuesta" de **Reservas 1:1**.
+2. El **responsable del lead** la confirma o la rechaza.
+3. Solo después de la confirmación recibe el asistente la dirección de la reunión.
+
+Con el interruptor desactivado, la reserva es definitiva de inmediato y el asistente recibe los datos al instante.
+
+<Callout type="info">
+  Si tienes dudas, deja la confirmación activada. Filtra a los curiosos sin interés real y las solicitudes en horarios inadecuados, y solo te cuesta un clic más.
+</Callout>

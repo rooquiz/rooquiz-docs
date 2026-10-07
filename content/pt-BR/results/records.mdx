@@ -1,0 +1,59 @@
+---
+title: Registros de respostas
+description: 'Os registros de respostas são cada envio individual que um quiz recebeu: o construtor de filtros, as colunas da tabela, como abrir um envio e como os registros brutos diferem dos Insights agregados.'
+---
+
+Os registros de respostas são **cada envio individual** que um quiz recebeu, na aba **Respostas** do quiz. São os dados brutos — para tendências agregadas, vá para [Insights](/pt-BR/results/insights).
+
+![The RooQuiz response records list with the filter builder and table](/img/en/results/records-list.webp)
+
+## Filtros
+
+Clique em **Filtros** para abrir o construtor e empilhar condições (elas são combinadas com E):
+
+| Campo | Observações |
+| --- | --- |
+| **Por pergunta** | Filtra pela resposta a uma pergunta específica; perguntas de escolha aceitam "é qualquer um de / não é nenhum de / está vazio / não está vazio" |
+| **Respondente** | Envios de uma pessoa |
+| **Origem UTM** | De qual canal a pessoa veio, em conjunto com o [rastreamento UTM](/pt-BR/publish/tracking) |
+| **Pontuação** | Um intervalo numérico (**Está entre** um mínimo e um máximo) |
+| **Nível** | Em qual nível do relatório a pessoa ficou |
+| **Idioma** | Em qual [versão de idioma](/pt-BR/editor/translations) a pessoa respondeu |
+| **Status do lead / Responsável** | Filtra pelo status de acompanhamento ou pelo responsável do [lead](/pt-BR/leads) |
+| **Enviado em** | Uma data inicial e uma data final |
+
+Clique em **Aplicar** quando as condições estiverem definidas, ou em **Limpar tudo** para recomeçar.
+
+<Callout type="info">
+  Não há visualização em quadro aqui — o quadro fica na página de [Leads](/pt-BR/leads/list-board). Os dois respondem a perguntas diferentes: registros são **envios**, leads são **pessoas**.
+</Callout>
+
+## Um único registro
+
+Abra qualquer linha e o detalhe se divide em dois:
+
+- **Esquerda** — as respostas pergunta por pergunta com suas pontuações, além do relatório.
+- **Direita** — uma barra lateral de acompanhamento dessa pessoa como [lead](/pt-BR/leads): altere o status, escreva **comentários** e leia a linha do tempo de atividades consolidada.
+
+Ou seja, você pode fazer o acompanhamento enquanto lê a resposta, sem pular para a página de leads.
+
+<Callout type="info">
+  Os comentários aceitam **respostas**, e você pode excluir os seus. São os mesmos comentários da [página de detalhes do lead](/pt-BR/leads/detail) — os dois lugares mostram uma única conversa compartilhada.
+</Callout>
+
+## O que um registro contém
+
+Além das respostas em si, um registro geralmente traz:
+
+- **Número do registro** — um número sequencial dentro do quiz.
+- **Respondente** — presente apenas quando a pessoa estava conectada; em branco para envios anônimos.
+- **Origem** — registrada quando a pessoa chegou por um [link UTM](/pt-BR/publish/tracking).
+- **Enviado em**, **versão de idioma**, **pontuação e nível**.
+
+## Exportação
+
+**Exportar**, na barra de ferramentas, exporta as linhas selecionadas ou tudo o que corresponde aos filtros atuais. Uma exportação completa consome sua cota semanal — veja [Exportação de dados](/pt-BR/results/export).
+
+<Callout type="warning">
+  Os dados exportados podem conter informações pessoais fornecidas pelos respondentes. Trate-os de acordo com as regras de privacidade e conformidade da sua organização.
+</Callout>

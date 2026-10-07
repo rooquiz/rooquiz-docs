@@ -1,0 +1,241 @@
+---
+title: REST API
+description: 'Eine kleine, schreibgeschützte REST API, die die Formulardefinitionen Ihres Teams – Titel, Felder, Einstellungen und Berichtskonfiguration – als JSON liefert, für Skripte, Zapier/Make/n8n oder eigene Dashboards.'
+---
+
+RooQuiz stellt eine kleine, schreibgeschützte **REST API** bereit, mit der Sie die Formulardaten Ihres Teams in Skripte, Automatisierungen (Zapier, Make, n8n) oder eigene Dashboards übernehmen können. Sie liefert Formular-**Definitionen** – Titel, Felder, Einstellungen, Berichtskonfiguration – als einfaches JSON.
+
+<Callout type="info">
+  Die REST API arbeitet auf **Kontoebene** und authentifiziert sich als Ihr Team, nicht als einzelnes Mitglied. Wenn stattdessen ein **KI-Client** Ihre Quizze per natürlicher Sprache bearbeiten soll, siehe [MCP-Integration](/de/integrations/mcp).
+</Callout>
+
+## Funktionsweise
+
+- Sie authentifizieren sich mit einem **Konto-API-Schlüssel** (Präfix `rqp_acct_`), der zu einem Team gehört.
+- Der Schlüssel kann **alle Formulare dieses Teams lesen**. Er ist an keine Person gebunden und funktioniert daher weiter, wenn Mitglieder kommen und gehen.
+- Nur ein **Team-Inhaber** kann Konto-API-Schlüssel erstellen, einsehen oder widerrufen.
+- Die API ist **schreibgeschützt** und liefert nur Formulardefinitionen – Einsendungen/Antworten werden darüber nicht bereitgestellt.
+
+## API-Schlüssel erhalten
+
+Öffnen Sie **Einstellungen → API-Schlüssel** (nur für **Team-Inhaber** sichtbar) und klicken Sie auf „API-Schlüssel erstellen“:
+
+1. Vergeben Sie einen **Namen** (zur Wiedererkennung, z. B. `Zapier - Production`).
+2. Nach dem Erstellen wird ein Klartext-Schlüssel angezeigt, der mit `rqp_acct_` beginnt.
+
+<Callout type="warning">
+  **Der Klartext-Schlüssel wird nur ein einziges Mal angezeigt.** Nachdem Sie die Seite verlassen haben, kann er nicht mehr abgerufen werden. Kopieren Sie ihn sofort; geht er verloren, müssen Sie ihn widerrufen und einen neuen erstellen.
+</Callout>
+
+Jedes Team kann höchstens **10 Schlüssel** besitzen (einschließlich widerrufener). Um weitere zu erstellen, **löschen** Sie einen, um einen Platz freizugeben („Widerrufen“ deaktiviert ihn nur – der Platz wird dadurch nicht frei). Behandeln Sie einen Schlüssel wie ein Passwort und committen Sie ihn niemals in die Versionsverwaltung.
+
+## Authentifizierung
+
+Senden Sie den Schlüssel bei jeder Anfrage als Bearer-Token:
+
+```bash
+Authorization: Bearer rqp_acct_xxx...
+```
+
+<Callout type="info">
+  Ein persönliches MCP-Token (`rqp_live_`) funktioniert mit der REST API **nicht** – es liefert `401`. Verwenden Sie einen Konto-API-Schlüssel (`rqp_acct_`).
+</Callout>
+
+## Endpunkte
+
+Die Basis-URL sieht so aus: `https://your-domain/api/v1`.
+
+### Formulare auflisten
+
+```bash
+GET /api/v1/forms
+```
+
+Listet alle Formulare im Team des Schlüssels auf, die neuesten zuerst.
+
+| Query-Parameter | Typ | Standard | Beschreibung |
+| --- | --- | --- | --- |
+| `scene` | string | — | Nach Szene filtern: `knowledge_quiz`, `random_knowledge_quiz`, `scored_quiz`, `outcome_quiz`. |
+| `titleContains` | string | — | Unscharfe Suche im Titel. |
+| `limit` | number | `20` | Einträge pro Seite (max. `100`). |
+| `page` | number | `1` | Seitennummer. |
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/forms?scene=knowledge_quiz&limit=20"
+```
+
+```json
+{
+  "totalDocs": 12,
+  "page": 1,
+  "limit": 20,
+  "items": [
+    {
+      "id": "d983d8d9-...",
+      "title": "Personality Quiz",
+      "scene": "outcome_quiz",
+      "language": "en_US",
+      "publicToken": "h7sbps67",
+      "shareUrl": "https://your-cairo-domain/a/h7sbps67",
+      "localization": null,
+      "isActive": true,
+      "createdAt": "2026-06-18T11:35:11.468Z",
+      "updatedAt": "2026-06-18T12:59:42.649Z"
+    }
+  ]
+}
+```
+
+### Ein Formular abrufen
+
+```bash
+GET /api/v1/forms/{id}
+```
+
+Liefert die Definition eines Formulars.
+
+| Query-Parameter | Typ | Standard | Beschreibung |
+| --- | --- | --- | --- |
+| `includeFields` | boolean | `true` | Das Array `fields[]` (Fragen / Seitenumbrüche) einschließen. Übergeben Sie `false`, um es bei großen Formularen auszulassen. |
+| `includeReport` | boolean | `true` | Die Konfiguration von Bericht / Dimensionsanalyse einschließen. |
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/forms/d983d8d9-..."
+```
+
+```json
+{
+  "id": "d983d8d9-...",
+  "title": "Personality Quiz",
+  "scene": "outcome_quiz",
+  "language": "en_US",
+  "description": null,
+  "isActive": true,
+  "publicToken": "h7sbps67",
+  "shareUrl": "https://your-cairo-domain/a/h7sbps67",
+  "layout": "card",
+  "localization": null,
+  "systemText": null,
+  "createdAt": "2026-06-18T11:35:11.468Z",
+  "updatedAt": "2026-06-18T12:59:42.649Z",
+  "fields": [ /* questions & page breaks */ ],
+  "report": { /* report / dimension config */ }
+}
+```
+
+## Einsendungen
+
+Lesen Sie die Antworten, die die Formulare Ihres Teams gesammelt haben – Leads, Antworten, Punktzahlen, Berichtsergebnisse und UTM-Zuordnung. Ideal für CRM-Synchronisierung, eigene Dashboards und Automatisierungen.
+
+<Callout type="warning">
+  Einsendungen enthalten personenbezogene Daten der Teilnehmer (E-Mail, Name, IP). Verarbeiten und speichern Sie sie verantwortungsvoll.
+</Callout>
+
+### Einsendungen auflisten
+
+```bash
+GET /api/v1/records
+```
+
+Listet die Einsendungen des gesamten Teams auf, die neuesten zuerst.
+
+| Query-Parameter | Typ | Standard | Beschreibung |
+| --- | --- | --- | --- |
+| `formId` | string | — | Nur Einsendungen für dieses Formular. |
+| `status` | string | — | Berichtsstatus: `pending`, `processing`, `completed`, `failed`. |
+| `since` | ISO date | — | Nur Einsendungen, die zu oder nach diesem Zeitpunkt erstellt wurden (inkrementelle Synchronisierung). |
+| `until` | ISO date | — | Nur Einsendungen, die zu oder vor diesem Zeitpunkt erstellt wurden. |
+| `limit` | number | `20` | Einträge pro Seite (max. `100`). |
+| `page` | number | `1` | Seitennummer. |
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/records?since=2026-06-01&limit=50"
+```
+
+```json
+{
+  "totalDocs": 1500,
+  "page": 1,
+  "limit": 50,
+  "items": [
+    {
+      "id": "...",
+      "serialNumber": 11,
+      "formId": "d983d8d9-...",
+      "shareToken": "v2hrpv6d",
+      "reportUrl": "https://your-cairo-domain/a/md8682rx/records/v2hrpv6d",
+      "submittedAt": "2026-06-18T12:00:00.000Z",
+      "updatedAt": "2026-06-18T12:00:05.000Z",
+      "examinee": {
+        "id": "...", "examineeId": "TZ4730277148",
+        "email": "lead@example.com", "name": "Jane", "customData": null
+      },
+      "metadata": {
+        "utmSource": "newsletter", "utmMedium": "email",
+        "utmCampaign": null, "utmTerm": null, "utmContent": null,
+        "referrer": "https://..."
+      },
+      "data": { "q_email": "lead@example.com", "q_rating": 5 },
+      "result": {
+        "status": "completed", "score": 2, "maxScore": 4,
+        "level": "Good", "outcomeCode": null, "outcomeName": null
+      }
+    }
+  ]
+}
+```
+
+`data` ist nach dem `code` jedes Formularfelds geschlüsselt (siehe `fields[]` eines Formulars über den Formular-Endpunkt). `examinee` ist bei anonymen Einsendungen `null`. `result` ist eine kompakte Zusammenfassung; den vollständigen Bericht liefert der Detail-Endpunkt.
+
+### Eine Einsendung abrufen
+
+```bash
+GET /api/v1/records/{id}
+```
+
+Liefert eine Einsendung mit ihrem vollständigen Berichtsergebnis (`reportResult`) sowie `metadata.ip` / `metadata.userAgent`.
+
+```bash
+curl -H "Authorization: Bearer rqp_acct_xxx..." \
+  "https://your-domain/api/v1/records/..."
+```
+
+```json
+{
+  "id": "...",
+  "serialNumber": 11,
+  "formId": "d983d8d9-...",
+  "shareToken": "v2hrpv6d",
+  "reportUrl": "https://your-cairo-domain/a/md8682rx/records/v2hrpv6d",
+  "submittedAt": "...",
+  "updatedAt": "...",
+  "examinee": { "id": "...", "email": "lead@example.com", "name": "Jane" },
+  "metadata": { "ip": "203.0.113.4", "userAgent": "...", "utmSource": "newsletter" },
+  "data": { /* answers keyed by field code */ },
+  "reportResult": {
+    "status": "completed",
+    "overallAnalysis": { "score": 2, "maxScore": 4, "level": "Good", "summary": "...", "suggestions": "..." },
+    "dimensionAnalysis": { "title": "...", "radar": [], "items": [] },
+    "outcome": { "code": null, "name": null, "ranking": null },
+    "aiSuggestion": { "status": "completed", "content": "..." }
+  }
+}
+```
+
+## Fehler
+
+Fehler liefern einen JSON-Body der Form `{ "error": { "code": "...", "message": "..." } }`.
+
+| Status | Code | Wann |
+| --- | --- | --- |
+| `401` | `unauthorized` | Fehlender, ungültiger, abgelaufener oder widerrufener Schlüssel (oder ein Token, das kein Konto-Token ist). |
+| `404` | `not_found` | Das Formular existiert nicht oder gehört nicht zum Team dieses Schlüssels. |
+| `400` | `bad_request` | Ungültiger Parameter (z. B. eine unbekannte `scene`). |
+| `429` | `rate_limited` | Ratenlimit überschritten. |
+
+## Ratenlimits
+
+Jeder Schlüssel ist auf **120 Anfragen / Minute** begrenzt; bei Überschreitung wird `429` zurückgegeben. Widerrufen Sie einen Schlüssel unter **Einstellungen → API-Schlüssel**, sobald er nicht mehr benötigt wird – jede Integration, die ihn verwendet, verliert sofort den Zugriff.

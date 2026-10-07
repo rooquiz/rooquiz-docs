@@ -1,0 +1,62 @@
+---
+title: Buchbare Zeiten
+description: 'Konfigurieren Sie die Verfügbarkeit für 1:1-Buchungen: wöchentliche Planungsregeln, Sitzungsdauer und Plätze, die Meeting-Details für Teilnehmer und ob Anfragen bestätigt werden müssen. Nur für Inhaber und Admins.'
+---
+
+Klicken Sie auf der Seite **1:1-Buchungen** auf das Zahnrad neben dem Titel, um die **Buchbaren Zeiten** zu öffnen. Sie bestehen aus drei Abschnitten: Planungsregeln, Meeting-Details und Bestätigung.
+
+<Callout type="warning">
+  Nur der **Inhaber der Organisation oder ein Administrator** kann die Verfügbarkeit bearbeiten. Alle anderen sehen eine schreibgeschützte Seite.
+</Callout>
+
+![Einstellungen für buchbare Zeiten in RooQuiz mit Planungsregeln, wöchentlichen Zeiten und Plätzen](/img/en/bookings/booking-availability.webp)
+
+## Planungsregeln
+
+| Einstellung | Funktion |
+| --- | --- |
+| **Zeitzone** | Alle Zeiträume werden in dieser Zeitzone interpretiert. Teilnehmer sehen die Zeiten in **ihre eigene** Zeitzone umgerechnet |
+| **Sitzungsdauer** | Wie lange eine Sitzung dauert; die Verfügbarkeit wird in Zeitfenster dieser Länge aufgeteilt |
+| **Puffer zwischen Sitzungen** | Luft zwischen Meetings, damit sie nicht direkt aufeinanderfolgen |
+| **Mindestvorlauf** | Der früheste Buchungszeitpunkt in Stunden – verhindert, dass jemand für in 10 Minuten bucht |
+| **Buchbar bis** | Wie viele Tage im Voraus der Kalender reicht |
+
+### Wöchentliche Zeiten
+
+Fügen Sie pro Wochentag Zeiträume hinzu – „Montag 09:00–12:00", „Mittwoch 14:00–18:00". Ein Tag kann mehrere haben.
+
+<Callout type="warning">
+  Zeiträume am selben Tag **dürfen sich nicht überschneiden**; dies wird beim Speichern geprüft.
+</Callout>
+
+### Plätze
+
+Jeder Zeitraum hat einen eigenen Wert für **Plätze** – wie viele Personen eine Sitzung in diesem Zeitraum buchen können:
+
+- `1` – Einzelgespräch.
+- `6` – eine Gruppe von sechs Personen.
+- Leer – keine Begrenzung.
+- `0` – vorübergehend geschlossen, die Konfiguration bleibt aber für später erhalten.
+
+<Callout type="warning">
+  Setzen Sie bei **Gruppensitzungen den Puffer auf 0**. Andernfalls blockiert die erste Buchung die benachbarten Zeitfenster, und niemand sonst sieht die verbleibenden Plätze.
+</Callout>
+
+## Meeting-Details
+
+- **Meeting-Link** – eine feste Zoom- / Meet-Adresse, die bei der Bestätigung verschickt wird. Wenn Sie jedes Mal einen anderen Link verwenden, **deaktivieren Sie diese Option**: Teilnehmer erhalten dann nur Ihre Hinweise oder den Link, den der zuständige Lead-Betreuer bei der Bestätigung hinzufügt.
+- **Hinweise für Teilnehmer** – wie man teilnimmt und was vorzubereiten ist.
+
+## Bestätigung
+
+Aktivieren Sie **Anfragen erst bestätigen, dann Meeting-Details senden**, und eingehende Buchungen kommen als **Anfragen** an:
+
+1. Die Anfrage erscheint im Abschnitt „Wartet auf dich" unter **1:1-Buchungen**.
+2. Der **zuständige Lead-Betreuer** bestätigt oder lehnt sie ab.
+3. Erst nach der Bestätigung erhält der Teilnehmer die Meeting-Adresse.
+
+Ist der Schalter deaktiviert, ist eine Buchung sofort verbindlich, und der Teilnehmer erhält die Details unmittelbar.
+
+<Callout type="info">
+  Lassen Sie die Bestätigung im Zweifel aktiviert. Sie filtert unverbindliche Interessenten und unpassend getimte Anfragen heraus und kostet Sie nur einen zusätzlichen Klick.
+</Callout>

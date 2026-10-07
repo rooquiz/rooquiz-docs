@@ -1,0 +1,63 @@
+---
+title: Visão geral do editor
+description: 'Um tour pelo editor visual de três painéis: escolha tipos de questão à esquerda, pré-visualize em tempo real no centro e configure questões, regras e relatórios à direita, tudo em uma só tela.'
+---
+
+O editor visual é onde os quizzes são construídos. Ele tem **três painéis** — adicionar questões, pré-visualizar em tempo real e configurar detalhes acontecem todos em uma única tela.
+
+![Os três painéis do editor do RooQuiz: tipos de questão, pré-visualização e propriedades](/img/en/editor/editor-overview.webp)
+
+## O que cada painel faz
+
+| Painel | Finalidade |
+| --- | --- |
+| **Esquerda — tipos de questão** | Todos os tipos de questão por categoria; clique ou arraste para adicionar um. Em um Quiz de conhecimento aleatório, este painel é a aba **Banco de questões** |
+| **Centro — pré-visualização** | Uma renderização em tempo real do ponto de vista do respondente. Alterne entre **Quiz** e **Relatório** no topo e, no lado do relatório, escolha um **Nível de visualização** ou **Pré-visualizar resultado** para ver como ficam os diferentes resultados |
+| **Direita — configurações** | Configuração detalhada do que estiver selecionado no momento |
+
+## As três abas do painel direito
+
+| Aba | Conteúdo | Quando aparece |
+| --- | --- | --- |
+| **Propriedades** | Enunciado, opções, obrigatoriedade e pontuação da questão selecionada | Sempre |
+| **Personalizado** | Aparência de cada questão | Sempre |
+| **Regras** | [Lógica condicional](/pt-BR/editor/logic) | **Apenas em Quiz com pontuação e Quiz de resultado** |
+
+<Callout type="info">
+  Se você não encontra a aba **Regras**, normalmente ela não está oculta — o tipo deste quiz é que não a suporta. Veja [Os quatro tipos de quiz](/pt-BR/getting-started/quiz-types).
+</Callout>
+
+## Ações comuns
+
+- **Adicionar uma questão** — escolha um tipo no painel esquerdo. Lista completa em [Tipos de questão](/pt-BR/editor/question-types).
+- **Arrastar para reordenar** — reorganize as questões diretamente. Lembre-se de que a [lógica condicional](/pt-BR/editor/logic) exige que a questão de gatilho fique antes da questão de destino, então revise suas regras depois de reordenar.
+- **Duplicar uma questão** — copiar e editar é melhor do que recriar do zero uma questão parecida.
+- **Quebras de página** — insira uma para dividir um quiz longo em várias páginas, em vez de um único paredão de questões.
+- **Rich text e imagens** — as descrições das questões aceitam rich text, incluindo imagens.
+
+## Limite de questões
+
+No **plano Free**, um quiz pode ter até **50 questões**; no **Pro**, é ilimitado.
+
+- Só contam as questões que podem ser respondidas — quebras de página, textos informativos e carrosséis de imagens não contam. Um espaço de questão aleatória conta como o número de questões que ele sorteia.
+- O cabeçalho do editor mostra quantas você já usou (por exemplo, **48/50 questões**). Ao atingir o limite, adicionar ou duplicar uma questão abre o aviso de upgrade.
+- **Criar a partir de um modelo** ou **duplicar um quiz** nunca é bloqueado, mesmo acima de 50 questões. O novo quiz segue a mesma regra de qualquer outro: você pode editar e excluir as questões dele, mas não adicionar mais no Free.
+- Se o seu plano Pro terminar, os quizzes com mais de 50 questões continuam funcionando e editáveis — você só não pode adicionar questões até voltar a ficar abaixo do limite ou fazer upgrade.
+
+## O que fica na parte superior
+
+- **Visualizar** — abre a pré-visualização completa na visão do respondente.
+- **Mais configurações** — vai para [Configurações do formulário](/pt-BR/editor/settings).
+- **Publicar como modelo** — envia este quiz para a [Central de modelos](/pt-BR/library/templates) para que sua equipe o reutilize.
+
+## Próximos passos
+
+- [Tipos de questão](/pt-BR/editor/question-types)
+- [Lógica condicional](/pt-BR/editor/logic)
+- [Pontuação e regras de avaliação](/pt-BR/editor/scoring)
+- [Aparência e modelos personalizados](/pt-BR/editor/design)
+- [Versões multilíngues](/pt-BR/editor/translations)
+
+<Callout type="warning">
+  Lembre-se de **salvar** — você receberá uma confirmação. Antes de publicar, percorra as pré-visualizações de Quiz e de Relatório, especialmente em quizzes com lógica condicional ou pontuação multidimensional.
+</Callout>

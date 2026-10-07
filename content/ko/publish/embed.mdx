@@ -1,0 +1,72 @@
+---
+title: 임베드
+description: '퀴즈를 내 웹사이트에 직접 임베드해 방문자가 페이지를 떠나지 않고 응답하게 하는 방법을 설명합니다. 인라인, 팝업, 기본 iframe 세 가지 임베드 모드와 각 모드가 생성하는 코드, 사용할 수 있는 속성과 JS API, 페이지 유형별로 어떤 모드가 적합한지 안내합니다.'
+---
+
+링크 공유 외에도 **퀴즈를 내 웹사이트에 직접 임베드**할 수 있습니다. 방문자는 랜딩 페이지를 떠나지 않고 퀴즈를 완료합니다.
+
+## 세 가지 임베드 모드
+
+대상 퀴즈에서 **공유** → **임베드**를 열고 표시 모드를 선택한 뒤, 생성된 코드를 사이트의 HTML에 복사해 넣습니다.
+
+| 모드 | 적합한 용도 | 동작 |
+| --- | --- | --- |
+| **인라인 (높이 자동)** | 페이지 콘텐츠 흐름에 자연스럽게 녹이기 | 높이가 콘텐츠에 맞춰 자동 조정됩니다. 권장 |
+| **팝업** | 페이지의 행동 유도 버튼 | 퀴즈를 전체 화면 오버레이로 엽니다 |
+| **기본 iframe (고정 높이)** | 스크립트를 로드할 수 없는 환경 | 가장 단순함. 높이가 고정되고 내부 스크롤 |
+
+### 인라인 (높이 자동)
+
+```html
+<div data-rooquiz-embed data-rooquiz-token="YOUR_QUIZ_TOKEN"></div>
+<script src="https://YOUR_QUIZ_DOMAIN/embed.js" async></script>
+```
+
+임베드 스크립트는 퀴즈 콘텐츠의 높이 변화(페이지 넘김, 결과 페이지로 이동 등)를 감지해 iframe 크기를 실시간으로 조정합니다. 스크롤바도, 잘림도 없습니다.
+
+### 팝업
+
+```html
+<div data-rooquiz-embed data-rooquiz-token="YOUR_QUIZ_TOKEN" data-rooquiz-mode="popup" data-rooquiz-text="Start the quiz"></div>
+<script src="https://YOUR_QUIZ_DOMAIN/embed.js" async></script>
+```
+
+페이지에 버튼이 표시되고, 클릭하면 퀴즈가 전체 화면 오버레이로 열립니다. ESC 키를 누르거나 바깥 영역을 클릭하면 닫힙니다.
+
+### 기본 iframe
+
+```html
+<iframe src="https://YOUR_QUIZ_DOMAIN/a/YOUR_QUIZ_TOKEN?embed=1" width="100%" height="600" style="border:0;" title="RooQuiz"></iframe>
+```
+
+## 사용할 수 있는 속성
+
+| 속성 | 설명 |
+| --- | --- |
+| `data-rooquiz-token` | 필수. 퀴즈 공개 토큰 |
+| `data-rooquiz-mode` | `inline`(기본값) 또는 `popup` |
+| `data-rooquiz-from` | 모든 응답과 함께 기록되는 유입 경로 태그. [유입 경로 추적](/ko/publish/tracking)과 [인사이트](/ko/results/insights)의 유입 경로별 분석에 사용됩니다 |
+| `data-rooquiz-height` | 인라인 모드의 초기 높이(px). 자동 크기 조정이 시작되기 전에 사용됩니다 |
+| `data-rooquiz-text` | 팝업 모드의 버튼 텍스트 |
+
+## JS API
+
+직접 디자인한 버튼으로 팝업을 여는 것처럼 사용자 지정 트리거가 필요하다면 API를 직접 호출하세요.
+
+```html
+<script src="https://YOUR_QUIZ_DOMAIN/embed.js"></script>
+<script>
+  // Mount an inline embed manually
+  RooQuiz.embed({ el: '#container', token: 'YOUR_QUIZ_TOKEN', from: 'homepage' })
+  // Open the popup from any element
+  document.querySelector('#my-button').onclick = () => RooQuiz.open('YOUR_QUIZ_TOKEN')
+</script>
+```
+
+<Callout type="warning">
+  **응답하려면 로그인**으로 설정된 퀴즈는 임베드를 권장하지 않습니다. 브라우저가 서드파티 iframe 안의 저장소와 로그인 팝업을 제한하므로 로그인 경험이 나빠질 수 있습니다. 이런 퀴즈는 [공개 링크](/ko/publish/link-qrcode)로 공유하세요.
+</Callout>
+
+<Callout type="info">
+  임베드된 페이지는 푸터와 배경을 자동으로 숨겨 사이트에 투명하게 어우러지며, 테마 색상은 그대로 적용됩니다. 임베드로 수집한 응답도 평소처럼 [응답 기록](/ko/results/records)에 표시됩니다.
+</Callout>

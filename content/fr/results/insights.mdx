@@ -1,0 +1,49 @@
+---
+title: Statistiques
+description: "Les statistiques agrègent les réponses éparses en chiffres et graphiques (taux de complétion, volume de soumissions dans le temps, répartition par question) pour une vue d'ensemble sans ouvrir chaque réponse."
+---
+
+Les statistiques agrègent les réponses éparses en **chiffres et graphiques**, pour vous aider à saisir la vue d'ensemble sans parcourir les réponses une à une.
+
+## Indicateurs et graphiques courants
+
+- **Taux de complétion** : le rapport entre les soumissions commencées et terminées, qui reflète les abandons.
+- **Volume de soumissions** : le total des réponses et son évolution dans le temps.
+- **Répartition par question** : pour les questions à choix, la part et la répartition de chaque option.
+- **Répartition par source** : combinée au [suivi des sources UTM](/fr/publish/tracking), elle compare le volume de réponses entre les canaux.
+
+## Entonnoir de conversion
+
+L'entonnoir suit **une visite (session)** à travers cinq étapes : **Vu → Commencé → Soumis → Rapport consulté → CTA cliqué**. Voici comment chaque étape est comptabilisée :
+
+| Étape | Comptabilisée lorsque |
+| --- | --- |
+| Vu | La page du quiz s'ouvre réellement dans un navigateur (robots d'indexation et aperçus administrateur exclus) |
+| Commencé | Le répondant répond à une question pour la première fois (un simple clic sur « commencer » ne suffit pas) |
+| Soumis | La soumission réussit |
+| Rapport consulté | Le rapport termine sa génération pendant que le répondant se trouve sur la page de résultats |
+| CTA cliqué | Le répondant clique sur le [bouton CTA](/fr/results/reports) en bas du rapport |
+
+Le pourcentage affiché à côté de chaque étape est le taux de conversion **par rapport à l'étape précédente**, ce qui vous permet de voir précisément où se produit la perte.
+
+### Top 10 des points d'abandon
+
+Parmi les sessions qui **n'ont pas été soumises** mais ont répondu à au moins une question, regroupées selon la **dernière question répondue** : les questions avec un nombre élevé sont celles où les gens abandonnent, parce qu'elles sont trop difficiles, trop sensibles, ou que la suivante les a découragés. Les visiteurs partis sans répondre à rien n'apparaissent pas ici ; ils se retrouvent dans la baisse entre Vu et Commencé.
+
+### Conversion par source
+
+Regroupée selon la balise de source du lien (`?from=`, générée par le [suivi des sources](/fr/publish/tracking) ou l'[intégration](/fr/publish/embed)), elle compare par source le nombre de vues, de démarrages et de soumissions ainsi que le taux de complétion ; les sources provenant d'intégrations sur un site web portent une balise **Intégration**.
+
+<Callout type="info">
+  L'entonnoir comptabilise les sessions depuis le lancement de la fonctionnalité ; les soumissions antérieures ne sont pas rattrapées, si bien que le « total des soumissions » peut au départ dépasser le nombre de soumissions de l'entonnoir. Les deux convergent avec le temps.
+</Callout>
+
+## Suggestions
+
+- Utilisez l'**entonnoir de conversion** pour localiser la perte : beaucoup de vues mais peu de démarrages désignent la page d'accueil ou la première question ; beaucoup de démarrages mais peu de soumissions, examinez les principaux points d'abandon.
+- Utilisez la **répartition des options** pour comprendre les tendances globales des répondants.
+- Combinez les tendances dans le temps avec la **conversion par source** pour évaluer les campagnes de chaque canal.
+
+<Callout type="info">
+  Les statistiques montrent les « tendances de groupe ». Pour examiner une réponse précise, allez dans [Réponses](/fr/results/records) ; pour les conclusions d'évaluation individuelles, allez dans [Rapports](/fr/results/reports).
+</Callout>

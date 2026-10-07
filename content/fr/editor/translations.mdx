@@ -1,0 +1,55 @@
+---
+title: Versions multilingues
+description: "Un même quiz peut avoir plusieurs versions linguistiques partageant la structure des questions et la notation, seul le texte change. Fonctionnement du modèle source/traduction et ajout d'une langue."
+---
+
+Un même quiz peut avoir plusieurs **versions linguistiques**. Elles partagent une seule structure de questions et une seule configuration de notation, et ne diffèrent que par leur texte : vous modifiez une question une fois et toutes les langues suivent. Fini le « j'ai ajouté une question à la version chinoise et oublié la version anglaise ».
+
+<Callout type="info">
+  Le modèle est **une source, plusieurs traductions** : le quiz lui-même est la **source**, avec une **langue principale** ; chaque autre langue est une **traduction** superposée à la structure source, question par question grâce au code de question.
+</Callout>
+
+## Ajouter une version linguistique
+
+Dans **Paramètres → Versions linguistiques** du quiz :
+
+<Steps>
+### Confirmez la langue principale
+
+La **langue principale** est la langue du contenu source. Les langues déjà utilisées par une traduction ne peuvent pas être choisies comme langue principale.
+
+### Ajoutez une langue
+
+Cliquez sur **Ajouter une langue** et choisissez une langue cible. Le texte source est copié pour servir de brouillon de départ.
+
+### Modifiez la traduction
+
+Cliquez sur **Modifier la traduction** pour ouvrir l'éditeur de traduction et travailler le texte.
+</Steps>
+
+![L'éditeur de traduction RooQuiz avec le texte source à gauche et les traductions à droite](/img/en/editor/translations.webp)
+
+*L'éditeur de traduction présente les textes côte à côte : le texte source à gauche (en lecture seule), la langue cible à droite. L'interrupteur en haut détermine si cette version linguistique est en ligne.*
+
+## Ce qu'une traduction peut modifier
+
+Uniquement le **texte lisible par les humains** : titre, description, énoncés des questions, libellés des options, noms et descriptions des niveaux du rapport, noms des résultats et textes système de la page de réponse.
+
+Vous **ne pouvez pas** modifier la structure dans une traduction. Ajouter ou supprimer des questions, ajuster la notation et modifier la logique conditionnelle se font tous sur le quiz source, et chaque langue reprend automatiquement la modification.
+
+<Callout type="info">
+  Les traductions partielles sont autorisées. Les questions non traduites retombent sur le texte source au lieu de s'afficher vides ou de provoquer une erreur : vous pouvez donc publier tôt et terminer plus tard.
+</Callout>
+
+## Quelle version voient les répondants
+
+Chaque version linguistique dispose de son propre lien public (l'URL de partage avec un paramètre `?lang=`), et vous pouvez cliquer sur **Ouvrir la page publique** directement depuis les paramètres pour la prévisualiser.
+
+## Mise en pause et suppression
+
+- **En pause** — une version linguistique peut être marquée **En pause** à elle seule. Elle n'est alors plus accessible publiquement, mais son contenu est conservé, indépendamment de l'interrupteur général d'ouverture du quiz.
+- **Suppression** — supprimer une version linguistique **conserve les réponses**, car celles-ci appartiennent au quiz source et non à la traduction.
+
+<Callout type="warning">
+  Changer la langue principale ne fait que **réétiqueter** le contenu source : cela ne traduit rien. Pour proposer une autre langue, ajoutez plutôt une traduction.
+</Callout>

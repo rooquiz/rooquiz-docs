@@ -1,0 +1,23 @@
+---
+title: Integrationen & API
+description: 'Für Entwickler: So greifen Sie aus eigenem Code oder einem KI-Client auf RooQuiz zu. Die schreibgeschützte REST-API liefert Formulardefinitionen, der MCP-Server lässt KI-Clients Quizze im Team erstellen.'
+sidebarTitle: Überblick
+---
+
+Dieser Abschnitt richtet sich an **Entwickler** – so greifen Sie aus Ihrem eigenen Code oder einem KI-Client auf RooQuiz zu:
+
+<Cards>
+  <Card title="REST API" href="/de/integrations/rest-api" />
+  <Card title="MCP-Integration" href="/de/integrations/mcp" />
+</Cards>
+
+- **REST API** – rufen Sie Formulare und Einsendungen mit einem API-Schlüssel auf Kontoebene ab. Ideal für eigene Dashboards oder die Synchronisierung in ein Data Warehouse.
+- **MCP-Integration** – verbinden Sie einen KI-Client wie Claude mit Ihrem Team, damit er Quizze direkt erstellen, abfragen und ändern kann.
+
+## Integration ohne Code
+
+Wenn Sie nur „Benachrichtige mich, wenn ein Lead eingeht“ oder „Synchronisiere Leads in mein E-Mail-Tool“ brauchen, **benötigen Sie die API nicht**. Nutzen Sie einen der fünf Kanäle unter [Connectors & Automatisierung](/de/connectors): E-Mail, Webhook, Slack, Zapier, Kit.
+
+<Callout type="info">
+  Der Unterschied ist **Push versus Pull**: Connectors senden Ihnen Daten, sobald ein Ereignis eintritt; mit der REST API rufen Sie Daten nach Ihrem eigenen Zeitplan ab.
+</Callout>
