@@ -258,6 +258,7 @@ claude.ai、Claude Code 等支持 MCP OAuth 的客户端**无需手动创建 Tok
 - **分型测验的题型范围**:投票题型为单选 / 多选 / 判断(不支持填空);结果类型的**配图**暂不能通过 MCP 上传,请在后台编辑器配置(MCP 更新 `report.outcomes` 时已配置的图片会保留)。
 - **场景与语言创建后锁定**,无法通过 MCP 修改。
 - **删除是软删**:`delete_form` 移入回收站(5 天后自动彻底清除),并非立即永久删除;彻底删除请在后台二次删除。
+- **题数上限**:免费版每份测评最多 **50 道题**(分页符、说明文字、图片轮播不计入),超过后 `create_form`、`add_question`、`insert_question` 会被拒绝;`duplicate_form`、`create_form_from_template` 不受限制。Pro 不限,详见 [题数上限](/zh/editor#题数上限)。
 - **复制不含数据**:`duplicate_form` 只克隆结构与译文,**不复制**答题记录、共享设置与集成(含密钥),新测验为干净状态。
 - **考生身份字段不可改**:`update_examinee` 不能改邮箱、所属团队与 `examineeId`(它们是认证身份)。
 - **线索含个人信息(PII)**:`list_records` / `get_record` 会返回答题人邮箱、姓名、自定义字段等,请妥善使用。

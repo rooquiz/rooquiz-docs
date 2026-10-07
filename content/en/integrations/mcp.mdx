@@ -262,6 +262,7 @@ Read quiz performance, conversion funnels and leads so the AI can close the buil
 - **Outcome quiz question types**: voting questions are SingleCheck / MultiCheck / TrueFalse (FillBlank is not supported); result-type **images** can't be uploaded via MCP yet — configure them in the editor (images already configured are kept when MCP updates `report.outcomes`).
 - **Scene and language are locked** after creation and can't be changed via MCP.
 - **Delete is a soft delete**: `delete_form` moves to the trash (auto-purged after 5 days), not an immediate permanent delete; for permanent removal, delete again in the admin UI.
+- **Question limit**: on the Free plan a quiz holds at most **50 questions** (page breaks, statements and image carousels don't count); `create_form`, `add_question` and `insert_question` are rejected past that. `duplicate_form` and `create_form_from_template` are not limited. Pro is unlimited — see [Question limit](/en/editor#question-limit).
 - **Duplicate copies no data**: `duplicate_form` clones structure and translations only — it does **not** copy submission records, sharing settings or integrations (which hold secrets); the new quiz starts clean.
 - **Examinee identity fields are immutable**: `update_examinee` can't change email, team, or `examineeId` (they are the auth identity).
 - **Leads contain PII**: `list_records` / `get_record` return respondent email, name, custom fields, etc. — handle them responsibly.
