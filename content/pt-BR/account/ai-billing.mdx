@@ -1,6 +1,6 @@
 ---
 title: Créditos de IA e cobrança
-description: 'Como funcionam os créditos de IA no RooQuiz: quais recursos os consomem (avaliação por IA do Scored Quiz, sugestões de IA), como o uso é cobrado, quando a cota da equipe é renovada e o que ocorre ao esgotá-la.'
+description: 'Como funcionam os créditos de IA no RooQuiz: quais recursos os consomem (avaliação por IA do Scored Quiz, correção automática por IA de lacunas), como o uso é cobrado, quando a cota da equipe é renovada e o que ocorre ao esgotá-la.'
 ---
 
 Os recursos de IA dos seus quizzes (avaliação por IA, correção automática por IA etc.) são cobrados pelo **uso real** e consomem os **créditos de IA** da sua equipe. Esta página explica o que consome créditos, como funciona a cobrança, quando os créditos são renovados e o que acontece quando eles acabam.
@@ -8,20 +8,18 @@ Os recursos de IA dos seus quizzes (avaliação por IA, correção automática p
 ## O que consome créditos de IA
 
 - **Avaliação por IA do Scored Quiz**: análise por IA das respostas em texto, que gera insights mais ricos no relatório.
-- **Sugestões de IA** (Beta): sugestões de melhoria/interpretação geradas por IA no relatório.
 - **Correção automática por IA de preenchimento de lacunas** (Beta) em Quiz / Random Knowledge Quiz: quando uma pergunta de preenchimento de lacunas ativa a "correção automática por IA", a IA decide se a resposta está correta.
 
 A pontuação comum de perguntas de escolha, a pontuação por dimensões e os relatórios gerados por modelo **não** consomem créditos de IA.
 
 <Callout type="info">
-  "Sugestões de IA" e "Correção automática por IA de preenchimento de lacunas" são atualmente recursos **Beta**; seu comportamento e qualidade ainda estão sendo aprimorados.
+  A "Correção automática por IA de preenchimento de lacunas" é atualmente um recurso **Beta**; seu comportamento e qualidade ainda estão sendo aprimorados.
 </Callout>
 
-## Unidade de cobrança e modelos
+## Unidade de cobrança
 
 - Os créditos de IA são medidos em **Neurons** (a unidade de cobrança do Cloudflare Workers AI).
 - Cada chamada de IA é cobrada pelo número de **tokens** consumidos, convertidos em Neurons: mais tokens de entrada/saída significam mais consumo.
-- Você pode escolher um nível de modelo de IA em **Configurações → Informações do plano**: **Standard / Advanced / Flagship**. Modelos mais potentes consomem mais Neurons por chamada. Equipes do plano Free só podem usar o "Standard"; Advanced e Flagship são **exclusivos do Pro**.
 - As cobranças são **liquidadas de forma assíncrona depois** que o relatório é gerado, então nunca atrasam a geração do relatório.
 
 <Callout type="info">
@@ -50,7 +48,7 @@ O comportamento varia conforme o uso da IA:
 
 | Cenário | Comportamento quando os créditos se esgotam |
 | --- | --- |
-| **Avaliação por IA do Scored Quiz / Sugestões de IA** | **Degradação controlada**: as partes de IA são ignoradas, enquanto o relatório, a análise por dimensões e a pontuação básica **continuam sendo gerados normalmente** |
+| **Avaliação por IA do Scored Quiz** | **Degradação controlada**: as partes de IA são ignoradas, enquanto o relatório, a análise por dimensões e a pontuação básica **continuam sendo gerados normalmente** |
 | **Correção automática por IA de preenchimento de lacunas** em Quiz / Random Knowledge Quiz | Novas respostas desses formulários são **rejeitadas** (créditos de IA esgotados), porque a correção depende da IA e não pode ser calculada offline |
 
 <Callout type="warning">
@@ -64,7 +62,7 @@ O comportamento varia conforme o uso da IA:
 
 ## Onde ver e gerenciar
 
-Acesse **Configurações → Informações do plano** para ver: a cota do ciclo atual e o restante, o saldo de recarga, a data de renovação do ciclo, a seleção do nível de modelo de IA e a opção de recarga.
+Acesse **Configurações → Informações do plano** para ver: a cota do ciclo atual e o restante, o saldo de recarga, a data de renovação do ciclo e a opção de recarga.
 
 <Callout type="info">
   Relacionados: [Regras de pontuação e avaliação](/pt-BR/editor/scoring), [Relatórios e avaliação por IA](/pt-BR/results/reports).

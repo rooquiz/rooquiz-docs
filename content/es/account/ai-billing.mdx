@@ -1,6 +1,6 @@
 ---
 title: Créditos de AI y facturación
-description: 'Cómo funcionan los créditos de AI en RooQuiz: qué funciones los consumen (evaluación con AI, sugerencias de AI), cómo se factura el uso, cuándo se renueva la asignación del equipo y qué pasa si se agotan.'
+description: 'Cómo funcionan los créditos de AI en RooQuiz: qué funciones los consumen (evaluación con AI, corrección automática con AI), cómo se factura el uso, cuándo se renueva la asignación del equipo y qué pasa si se agotan.'
 ---
 
 Las funciones de AI de tus quizzes (evaluación con AI, corrección automática con AI, etc.) se facturan según el **uso real** y consumen los **créditos de AI** de tu equipo. Esta página explica qué consume créditos, cómo funciona la facturación, cuándo se renuevan los créditos y qué ocurre cuando se agotan.
@@ -8,20 +8,18 @@ Las funciones de AI de tus quizzes (evaluación con AI, corrección automática 
 ## Qué consume créditos de AI
 
 - **Evaluación con AI del Cuestionario con puntuación**: análisis con AI de las respuestas de texto que genera conclusiones más completas en el informe.
-- **Sugerencias de AI** (Beta): sugerencias de mejora o interpretación generadas por la AI en el informe.
 - **Corrección automática con AI de preguntas para completar** (Beta) en Quiz / Cuestionario de conocimiento aleatorio: cuando una pregunta para completar tiene activada la «corrección automática con AI», la AI decide si la respuesta es correcta.
 
 La puntuación habitual de preguntas de opción, la puntuación por dimensiones y los informes generados a partir de plantillas **no** consumen créditos de AI.
 
 <Callout type="info">
-  Las «Sugerencias de AI» y la «Corrección automática con AI de preguntas para completar» son actualmente funciones **Beta**; su comportamiento y su calidad todavía se están perfeccionando.
+  La «Corrección automática con AI de preguntas para completar» es actualmente una función **Beta**; su comportamiento y su calidad todavía se están perfeccionando.
 </Callout>
 
-## Unidad de facturación y modelos
+## Unidad de facturación
 
 - Los créditos de AI se miden en **Neurons** (la unidad de facturación de Cloudflare Workers AI).
 - Cada llamada a la AI se cobra según el número de **tokens** consumidos, convertidos a Neurons: cuantos más tokens de entrada y salida, mayor es el consumo.
-- Puedes elegir un nivel de modelo de AI en **Ajustes → Información del plan**: **Estándar / Avanzado / Insignia**. Los modelos más potentes consumen más Neurons por llamada. Los equipos Free solo pueden usar «Estándar»; Avanzado e Insignia son **exclusivos de Pro**.
 - Los cargos se **liquidan de forma asíncrona después** de generar el informe, así que nunca ralentizan su generación.
 
 <Callout type="info">
@@ -50,7 +48,7 @@ El comportamiento depende de cómo se use la AI:
 
 | Escenario | Comportamiento cuando se agotan los créditos |
 | --- | --- |
-| **Evaluación con AI del Cuestionario con puntuación / Sugerencias de AI** | **Degradación controlada**: se omiten las partes de AI, mientras que el informe, el análisis por dimensiones y la puntuación básica **se siguen generando con normalidad** |
+| **Evaluación con AI del Cuestionario con puntuación** | **Degradación controlada**: se omiten las partes de AI, mientras que el informe, el análisis por dimensiones y la puntuación básica **se siguen generando con normalidad** |
 | **Corrección automática con AI de preguntas para completar** en Quiz / Cuestionario de conocimiento aleatorio | Las nuevas respuestas de esos formularios **se rechazan** (créditos de AI agotados), porque la corrección depende de la AI y no puede calcularse sin ella |
 
 <Callout type="warning">
@@ -64,7 +62,7 @@ El comportamiento depende de cómo se use la AI:
 
 ## Dónde consultarlo y gestionarlo
 
-Ve a **Ajustes → Información del plan** para ver: la asignación del ciclo actual y lo que queda, el saldo recargado, la fecha de renovación del ciclo, la selección del nivel de modelo de AI y el acceso a las recargas.
+Ve a **Ajustes → Información del plan** para ver: la asignación del ciclo actual y lo que queda, el saldo recargado, la fecha de renovación del ciclo y el acceso a las recargas.
 
 <Callout type="info">
   Relacionado: [Reglas de puntuación y evaluación](/es/editor/scoring), [Informes y evaluación con AI](/es/results/reports).
