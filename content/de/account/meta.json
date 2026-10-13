@@ -2,7 +2,6 @@
   "title": "Konto & Abrechnung",
   "pages": [
     "index",
-    "ai-billing",
     "notifications"
   ]
 }

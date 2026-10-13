@@ -266,7 +266,6 @@ Leia o desempenho dos quizzes, os funis de conversão e os leads para que a IA f
 - **A duplicação não copia dados**: `duplicate_form` clona apenas a estrutura e as traduções — **não** copia registros de respostas, configurações de compartilhamento nem integrações (que contêm segredos); o novo quiz começa limpo.
 - **Os campos de identidade do examinando são imutáveis**: `update_examinee` não pode alterar e-mail, equipe ou `examineeId` (eles são a identidade de autenticação).
 - **Leads contêm dados pessoais**: `list_records` / `get_record` retornam e-mail, nome, campos personalizados etc. dos respondentes — manipule-os com responsabilidade.
-- **A correção por IA de FillBlank** (`aiMatch`, apenas no cenário de quiz, Beta) consome os [créditos de IA](/pt-BR/account/ai-billing) da sua equipe.
 
 ## Segurança e limites de taxa
 

@@ -266,7 +266,6 @@ Read quiz performance, conversion funnels and leads so the AI can close the buil
 - **Duplicate copies no data**: `duplicate_form` clones structure and translations only — it does **not** copy submission records, sharing settings or integrations (which hold secrets); the new quiz starts clean.
 - **Examinee identity fields are immutable**: `update_examinee` can't change email, team, or `examineeId` (they are the auth identity).
 - **Leads contain PII**: `list_records` / `get_record` return respondent email, name, custom fields, etc. — handle them responsibly.
-- **FillBlank AI grading** (`aiMatch`, quiz scene only, Beta) consumes your team's [AI credits](/en/account/ai-billing).
 
 ## Security & rate limits
 

@@ -7,3 +7,7 @@
 # endpoint family to the page that documents it. Default locale: /zh visitors reach
 # the same content through the in-page locale switcher.
 /api/v1/*  /en/integrations/rest-api  301
+
+# The "AI Credits & Billing" page was removed when AI usage became unlimited (no more credits,
+# allowances or top-ups). Keep its indexed URLs alive by sending them to the account overview.
+/:lang/account/ai-billing  /:lang/account  301

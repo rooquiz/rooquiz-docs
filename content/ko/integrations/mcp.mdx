@@ -265,7 +265,6 @@ OAuth를 지원하지 않는 클라이언트(Cursor, Codex CLI, Claude Desktop)�
 - **복제는 데이터를 복사하지 않습니다.** `duplicate_form`은 구조와 번역만 복제하며, 제출 기록, 공유 설정, 연동(시크릿 포함)은 복사하지 **않습니다**. 새 퀴즈는 깨끗한 상태로 시작합니다.
 - **응답자 신원 필드는 변경할 수 없습니다.** `update_examinee`로는 이메일, 팀, `examineeId`(인증 신원)를 바꿀 수 없습니다.
 - **리드에는 개인 식별 정보가 포함됩니다.** `list_records` / `get_record`는 응답자 이메일, 이름, 사용자 정의 필드 등을 반환하므로 책임감 있게 다루세요.
-- **FillBlank AI 채점**(`aiMatch`, 지식 퀴즈 시나리오 전용, Beta)은 팀의 [AI 크레딧](/ko/account/ai-billing)을 소모합니다.
 
 ## 보안 및 요청 속도 제한
 

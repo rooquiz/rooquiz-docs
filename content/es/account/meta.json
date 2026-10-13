@@ -2,7 +2,6 @@
   "title": "Cuenta y facturación",
   "pages": [
     "index",
-    "ai-billing",
     "notifications"
   ]
 }
