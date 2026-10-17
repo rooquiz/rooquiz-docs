@@ -17,26 +17,10 @@ S'il vous convient, cliquez sur **Utiliser ce modèle**. Vous obtenez votre prop
   Un modèle ne détermine que votre **point de départ**. Le quiz obtenu ne se distingue en rien d'un quiz créé à partir de zéro ; vous n'êtes lié à aucun modèle.
 </Callout>
 
-## Publier votre propre quiz comme modèle
-
-Un quiz qui fonctionne bien peut être publié comme modèle pour que le reste de votre équipe puisse le cloner. La publication demande une **image de couverture**, une catégorie et une description.
-
-## Dépublier et republier
-
-Les modèles peuvent être **dépubliés** :
-
-- Le modèle disparaît du Centre de modèles et des fenêtres de création.
-- Les quiz déjà clonés à partir de lui ne sont **absolument pas affectés**.
-- Vous pouvez le **republier** à tout moment ; tant qu'il est hors ligne, la liste affiche une étiquette **Dépublié**.
-
-<Callout type="warning">
-  Dépublier n'est pas supprimer. Si vous ne voulez simplement pas qu'il soit utilisé ce trimestre, dépubliez-le : inutile de le supprimer pour le reconstruire plus tard.
+<Callout type="info">
+  Les modèles du Centre de modèles sont sélectionnés et publiés par RooQuiz. Vous ne pouvez pas publier vos propres quiz comme modèles : pour réutiliser l'un des vôtres, dupliquez-le.
 </Callout>
 
-## Créer des modèles via un client IA
+## Partir d'un modèle via un client IA
 
-Une fois [MCP](/fr/integrations/mcp) connecté, un client IA peut créer un quiz et le publier comme modèle pour vous.
-
-<Callout type="warning">
-  L'appel de publication **expire parfois alors que l'écriture a réussi**. Après une expiration, vérifiez la liste des modèles avant de réessayer ; sinon, vous vous retrouverez avec deux copies du même modèle.
-</Callout>
+Une fois [MCP](/fr/integrations/mcp) connecté, un client IA peut parcourir le Centre de modèles avec `list_templates` et transformer l'un d'eux en nouveau quiz dans votre équipe avec `create_form_from_template`. Comme avec **Utiliser ce modèle**, vous obtenez votre propre copie : modifiez-la librement, à la main ou via le client IA.

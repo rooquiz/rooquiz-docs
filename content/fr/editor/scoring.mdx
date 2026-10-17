@@ -12,8 +12,9 @@ Dans un **Quiz**, vous pouvez :
 - **Définir des points** : attribuez des points aux questions ou aux options correctes.
 - **Juger juste/faux** : indiquez les bonnes réponses ; le système corrige automatiquement chaque question.
 - **Additionner les totaux** : les points sont additionnés automatiquement.
-- **Score de réussite** : définissez un seuil de réussite et affichez un résultat réussi/échoué.
+- **Niveaux** : découpez le total en tranches de score (voir [Niveaux](#niveaux-et-actions-de-la-page-de-résultat)) ; chaque tranche affiche son propre résultat plutôt qu'un simple chiffre.
 - **Retour sur les réponses** : montrez aux répondants si chaque réponse est correcte, avec son explication.
+- **Correspondance IA** : corrigez les réponses aux questions Texte à trous par similarité sémantique plutôt que par correspondance exacte ou partielle, avec un seuil de précision que vous définissez. La correction par IA est illimitée.
 
 <Callout type="info">
   Les points et la correction juste/faux sont disponibles dans le Quiz et le Quiz de connaissances aléatoire. Le Quiz noté utilise à la place des formules par dimension, et le Quiz de résultat n'attribue aucun score.
@@ -25,13 +26,12 @@ Un **Quiz de résultat** n'attribue pas de score : il **compte des votes**. Chaq
 
 Chaque résultat peut avoir son propre bouton CTA, ce qui relie directement un résultat ludique à une étape suivante. Consultez [Les quatre types de quiz](/fr/getting-started/quiz-types).
 
-## Quiz noté : analyse par dimension et évaluation IA
+## Quiz noté : analyse par dimension
 
 Dans un **Quiz noté**, la notation sert davantage à « dresser un profil » qu'à juger juste ou faux :
 
 - **Notation multidimensionnelle** : associez les questions à plusieurs dimensions ; après l'envoi, chaque dimension obtient un score, souvent affiché sous forme de **graphique radar**.
 - **Profil de résultat** : produisez des conclusions sur la personnalité ou les compétences à partir des scores par dimension.
-- **Évaluation IA** : l'IA transforme le score total, le niveau et les scores par dimension en suggestions et commentaires (elle ne lit pas le texte brut des réponses).
 
 ### Quelles questions sont notées
 
@@ -54,6 +54,6 @@ Découpez le score total en **niveaux** (0–60 à améliorer / 60–80 bien / 8
 ## Génération du rapport
 
 - **Synchrone** : la notation de base est calculée immédiatement après l'envoi.
-- **Asynchrone** : les calculs plus lourds, comme l'analyse par dimension et l'évaluation IA, sont générés de façon asynchrone ; les rapports passent par un état « en cours de génération → terminé », et le système réessaie automatiquement en cas d'échec.
+- **Asynchrone** : les calculs plus lourds, comme l'analyse par dimension, sont générés de façon asynchrone ; les rapports passent par un état « en cours de génération → terminé », et le système réessaie automatiquement en cas d'échec.
 
-Pour consulter, exporter et diffuser les rapports, consultez [Rapports et évaluation IA](/fr/results/reports).
+Pour consulter, exporter et diffuser les rapports, consultez [Rapports](/fr/results/reports).

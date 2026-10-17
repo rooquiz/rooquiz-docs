@@ -15,11 +15,15 @@ UTM is a set of parameters appended to a link to label its traffic source. Commo
 
 ## How to use it
 
-In the target quiz, open **Share** → **Source tracking**, generate UTM-tagged links for different channels, then distribute each link to its channel.
+In the target quiz, open **Share** → **Distribution plan**. Every built-in channel card already has its own UTM-tagged link. For any other channel, click **Add a channel** and fill in **utm_source** (required), **utm_medium** and **utm_campaign** (both optional); the new card gets its own tracked link. See [Distribution Plan](/en/publish/promotion).
+
+UTM values may only contain letters, digits, underscores and hyphens.
+
+Website embeds can carry UTM tags too — see the `data-rooquiz-utm-*` attributes in [Embed](/en/publish/embed#available-attributes).
 
 ## Viewing source data
 
-When respondents submit via a UTM-tagged link, the source is recorded with the response. You can distinguish and analyze by source in [Response Records](/en/results/records) and [Insights](/en/results/insights).
+When respondents submit via a UTM-tagged link, the source is recorded with the response. UTM parameters on any link (`utm_source`, `utm_medium`, `utm_campaign`) are saved this way, whether the link came from the Distribution plan or you built it by hand. You can distinguish and analyze by source in [Response Records](/en/results/records) and [Insights](/en/results/insights).
 
 <Callout type="info">
   Using **clear, consistent naming** for each channel (e.g. all lowercase, hyphen-separated) keeps your later analysis tidy.

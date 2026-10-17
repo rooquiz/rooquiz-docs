@@ -45,9 +45,13 @@ description: '除了分享連結，你還可以把測驗直接嵌進自己的網
 | --- | --- |
 | `data-rooquiz-token` | 必填,測驗的公開程式碼 |
 | `data-rooquiz-mode` | `inline`(預設)或 `popup` |
-| `data-rooquiz-from` | 來源識別碼,會記錄到每條作答的來源欄位,用於[來源追蹤](/zh-TW/publish/tracking)與[數據洞察](/zh-TW/results/insights)的來源分析 |
+| `data-rooquiz-utm-source` | UTM 來源,會隨每條作答一併記錄,用於[UTM 來源追蹤](/zh-TW/publish/tracking)與[數據洞察](/zh-TW/results/insights)的來源分析 |
+| `data-rooquiz-utm-medium` | UTM 媒介(可選) |
+| `data-rooquiz-utm-campaign` | UTM 活動(可選) |
 | `data-rooquiz-height` | 內嵌模式的初始高度(px),自適應生效前的佔位 |
 | `data-rooquiz-text` | 彈出視窗模式的按鈕文案 |
+
+如果沒有設定 UTM 屬性,宿主頁面網址上的 `utm_*` 參數會自動透傳。
 
 ## JS API
 
@@ -57,9 +61,9 @@ description: '除了分享連結，你還可以把測驗直接嵌進自己的網
 <script src="https://你的作答域名/embed.js"></script>
 <script>
   // 手动挂载内嵌
-  RooQuiz.embed({ el: '#container', token: '你的测验代码', from: 'homepage' })
+  RooQuiz.embed({ el: '#container', token: '你的测验代码', utmSource: 'homepage' })
   // 用任意元素触发弹窗
-  document.querySelector('#my-button').onclick = () => RooQuiz.open('你的测验代码')
+  document.querySelector('#my-button').onclick = () => RooQuiz.open('你的测验代码', { utmSource: 'homepage' })
 </script>
 ```
 

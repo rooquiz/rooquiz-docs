@@ -1,20 +1,23 @@
 ---
-title: Berichte & KI-Auswertung
-description: 'Beim Bewerteten Quiz kann jede Antwort einen Bericht erzeugen – mit Dimensionswerten, Netzdiagramm, Profilaussagen und optionaler KI-Auswertung von Textantworten. So entstehen und lesen Sie Berichte.'
+title: Berichte
+description: 'Jede Antwort kann einen Bericht mit Punktzahl, Stufe, Dimensionswerten und Netzdiagramm erzeugen. So entstehen Berichte, so bewertet der KI-Abgleich Lückentext-Antworten, und so sehen Teilnehmer sie an oder laden sie herunter.'
 ---
 
-Beim Typ **Bewertetes Quiz** kann jede Antwort einen **Bericht** erzeugen, der Dimensionswerte, Profilaussagen und (optional) eine KI-Auswertung darstellt.
+Jede Antwort kann einen **Bericht** erzeugen, der Punktzahl, Stufe, Dimensionswerte und Profilaussagen des Teilnehmers darstellt.
 
 ## Was ein Bericht enthält
 
 - **Dimensionswerte**: Punktzahlen pro Dimension, häufig als **Netzdiagramm** dargestellt.
 - **Profilaussagen**: Aussagen zu Persönlichkeit/Fähigkeiten, abgeleitet aus den Dimensionswerten.
-- **KI-Auswertung**: KI-Analyse von Textantworten.
+
+### Bewertung per KI-Abgleich
+
+In einem **Wissensquiz** kann eine Lückentext-Frage per **KI-Abgleich** bewertet werden: Die KI beurteilt anhand der semantischen Ähnlichkeit statt einer exakten Textübereinstimmung, ob die Antwort richtig ist. Das ist unbegrenzt – es gibt keine KI-Guthaben zu kaufen. In einem Bewerteten Quiz werden Lückentext-Antworten erfasst, aber nicht bewertet.
 
 ## Wie ein Bericht erstellt wird
 
 - Die **Basisbewertung** wird **unmittelbar** nach dem Absenden berechnet.
-- **Aufwendigere Berechnungen** wie Dimensionsanalyse und KI-Auswertung werden **asynchron** erstellt; der Bericht durchläuft dabei den Zustand „wird erstellt → abgeschlossen“.
+- **Aufwendigere Berechnungen** wie Dimensionsanalyse und Bewertung per KI-Abgleich werden **asynchron** erstellt; der Bericht durchläuft dabei den Zustand „wird erstellt → abgeschlossen“.
 - Schlägt die Erstellung fehl, **wiederholt das System sie automatisch** innerhalb eines bestimmten Zeitfensters.
 
 <Callout type="info">
@@ -24,14 +27,14 @@ Beim Typ **Bewertetes Quiz** kann jede Antwort einen **Bericht** erzeugen, der D
 ## Ansehen und Zustellung
 
 - **Am Bildschirm**: Direkt im Dashboard ansehen; Sie können Teilnehmern auch über einen Freigabelink ihren eigenen Bericht zeigen.
-- **PDF-Export**: Exportieren Sie den Bericht als PDF zur Archivierung oder Offline-Weitergabe.
-- **Zustellung per E-Mail**: Senden Sie den Bericht per E-Mail. **Die Zustellung per E-Mail ist eine Pro-Funktion.**
+- **PDF-Download (Pro)**: Aktivieren Sie **Teilnehmenden erlauben, den vollständigen Bericht (PDF) herunterzuladen**, damit Teilnehmer ihren Bericht als PDF speichern können. Das gilt nur für Quizze, bei denen Teilnehmer sich anmelden oder ihre Kontaktdaten hinterlassen müssen, um den Bericht zu sehen.
+- **Zustellung per E-Mail**: Senden Sie den Bericht per E-Mail an die Teilnehmer.
 
 ## CTA-Button auf der Ergebnisseite
 
 Sie können für **jede Punktestufe** einen Call-to-Action-Button (CTA) konfigurieren; Teilnehmer, die in dieser Stufe landen, sehen ihn am Ende ihres Berichts – z. B. führt „Verbesserungsbedarf“ zur Buchung einer Beratung, während „Ausgezeichnet“ zum Download weiterführender Materialien führt.
 
-- Aktivieren Sie im **Editor** → **Berichtseinstellungen** → **Punktestufen** den **CTA-Button** für eine Stufe und geben Sie Button-Text und Link ein; Einleitungstext und „in neuem Fenster öffnen“ sind optional.
+- Aktivieren Sie im **Editor** → **Berichtseinstellungen** → **Punktestufen** den **CTA-Button** für eine Stufe und geben Sie Button-Text und Link ein; der Einleitungstext ist optional. CTA-Links öffnen sich immer in einem neuen Fenster.
 - Um denselben Button für alle Stufen zu verwenden, konfigurieren Sie einen und klicken Sie auf **Auf alle Stufen anwenden**.
 - Änderungen am CTA **gelten sofort für alle bisherigen Berichte** – tauschen Sie Kampagnenlinks oder Texte aus, ohne sich um veraltete Buttons in alten Berichten zu sorgen.
 - Die CTA-Klicks der Teilnehmer fließen in den Conversion-Funnel unter [Insights](/de/results/insights) ein.

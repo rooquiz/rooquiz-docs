@@ -45,9 +45,13 @@ A button is rendered on your page; clicking it opens the quiz in a full-screen o
 | --- | --- |
 | `data-rooquiz-token` | Required. The quiz public token |
 | `data-rooquiz-mode` | `inline` (default) or `popup` |
-| `data-rooquiz-from` | Source tag recorded with every response, used by [Source Tracking](/en/publish/tracking) and the source breakdown in [Insights](/en/results/insights) |
+| `data-rooquiz-utm-source` | UTM source recorded with every response, used by [UTM Source Tracking](/en/publish/tracking) and the source breakdown in [Insights](/en/results/insights) |
+| `data-rooquiz-utm-medium` | UTM medium (optional) |
+| `data-rooquiz-utm-campaign` | UTM campaign (optional) |
 | `data-rooquiz-height` | Initial height (px) for inline mode, used before auto-resize kicks in |
 | `data-rooquiz-text` | Button label for popup mode |
+
+If you don't set the UTM attributes, any `utm_*` parameters on the host page's URL are passed through automatically.
 
 ## JS API
 
@@ -57,9 +61,9 @@ When you need a custom trigger (e.g. your own designed button opening the popup)
 <script src="https://YOUR_QUIZ_DOMAIN/embed.js"></script>
 <script>
   // Mount an inline embed manually
-  RooQuiz.embed({ el: '#container', token: 'YOUR_QUIZ_TOKEN', from: 'homepage' })
+  RooQuiz.embed({ el: '#container', token: 'YOUR_QUIZ_TOKEN', utmSource: 'homepage' })
   // Open the popup from any element
-  document.querySelector('#my-button').onclick = () => RooQuiz.open('YOUR_QUIZ_TOKEN')
+  document.querySelector('#my-button').onclick = () => RooQuiz.open('YOUR_QUIZ_TOKEN', { utmSource: 'homepage' })
 </script>
 ```
 

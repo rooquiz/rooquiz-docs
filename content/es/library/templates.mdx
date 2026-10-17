@@ -17,26 +17,10 @@ Cuando encaje, haz clic en **Usar esta plantilla**. Obtienes tu propia copia del
   Una plantilla solo determina tu **punto de partida**. El quiz resultante es idéntico a uno creado desde cero; no quedas atado a la plantilla.
 </Callout>
 
-## Publicar tu propio quiz como plantilla
-
-Un quiz que funciona bien puede publicarse como plantilla para que el resto de tu equipo lo clone. Al publicarlo se te pide una **Imagen de portada**, una categoría y una descripción.
-
-## Retirar y volver a publicar
-
-Las plantillas se pueden **retirar de publicación**:
-
-- Desaparece del Centro de plantillas y de los cuadros de diálogo de creación.
-- Los quizzes ya clonados a partir de ella **no se ven afectados en absoluto**.
-- Puedes **volver a publicar** en cualquier momento; mientras está retirada, la lista muestra la etiqueta **Sin publicar**.
-
-<Callout type="warning">
-  Retirar una plantilla no es eliminarla. Si simplemente no quieres que se use este trimestre, retírala: no hace falta eliminarla y reconstruirla más adelante.
+<Callout type="info">
+  Las plantillas del Centro de plantillas las selecciona y publica RooQuiz. No puedes publicar tus propios quizzes como plantillas: para reutilizar uno de los tuyos, duplícalo.
 </Callout>
 
-## Crear plantillas a través de un cliente de AI
+## Empezar desde una plantilla a través de un cliente de AI
 
-Con [MCP](/es/integrations/mcp) conectado, un cliente de AI puede crear un quiz y publicarlo como plantilla por ti.
-
-<Callout type="warning">
-  La llamada de publicación **a veces agota el tiempo de espera aunque la escritura se haya completado**. Tras un tiempo de espera agotado, revisa la lista de plantillas antes de reintentar; de lo contrario, acabarás con dos copias de la misma plantilla.
-</Callout>
+Con [MCP](/es/integrations/mcp) conectado, un cliente de AI puede explorar el Centro de plantillas con `list_templates` y convertir una plantilla en un nuevo quiz de tu equipo con `create_form_from_template`. Igual que con **Usar esta plantilla**, el resultado es tu propia copia: edítala con total libertad, a mano o a través del cliente de AI.

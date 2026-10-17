@@ -15,11 +15,15 @@ UTM é um conjunto de parâmetros adicionados a um link para identificar a orige
 
 ## Como usar
 
-No quiz desejado, abra **Compartilhar** → **Rastreamento de origem**, gere links com tags UTM para os diferentes canais e distribua cada link no seu respectivo canal.
+No quiz desejado, abra **Compartilhar** → **Plano de divulgação**. Cada cartão de canal incluído já tem o seu próprio link com tags UTM. Para qualquer outro canal, clique em **Adicionar canal** e preencha **utm_source** (obrigatório), **utm_medium** e **utm_campaign** (ambos opcionais); o novo cartão recebe o seu próprio link rastreado. Veja [Plano de divulgação](/pt-BR/publish/promotion).
+
+Os valores UTM só podem conter letras, números, sublinhados e hifens.
+
+Incorporações em sites também podem levar tags UTM — veja os atributos `data-rooquiz-utm-*` em [Incorporar](/pt-BR/publish/embed#atributos-disponíveis).
 
 ## Ver os dados de origem
 
-Quando os respondentes enviam respostas por um link com tags UTM, a origem é registrada junto com a resposta. Você pode distinguir e analisar por origem em [Registros de respostas](/pt-BR/results/records) e em [Insights](/pt-BR/results/insights).
+Quando os respondentes enviam respostas por um link com tags UTM, a origem é registrada junto com a resposta. Os parâmetros UTM de qualquer link (`utm_source`, `utm_medium`, `utm_campaign`) são salvos dessa forma, quer o link tenha vindo do Plano de divulgação, quer você o tenha montado manualmente. Você pode distinguir e analisar por origem em [Registros de respostas](/pt-BR/results/records) e em [Insights](/pt-BR/results/insights).
 
 <Callout type="info">
   Usar uma **nomenclatura clara e consistente** para cada canal (por exemplo, tudo em minúsculas, separado por hífens) mantém a sua análise posterior organizada.

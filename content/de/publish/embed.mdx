@@ -45,9 +45,13 @@ Auf Ihrer Seite wird ein Button angezeigt; ein Klick darauf öffnet das Quiz in 
 | --- | --- |
 | `data-rooquiz-token` | Erforderlich. Der öffentliche Token des Quiz |
 | `data-rooquiz-mode` | `inline` (Standard) oder `popup` |
-| `data-rooquiz-from` | Quellen-Tag, das mit jeder Antwort gespeichert wird; genutzt vom [Quellen-Tracking](/de/publish/tracking) und von der Aufschlüsselung nach Quelle in [Insights](/de/results/insights) |
+| `data-rooquiz-utm-source` | UTM-Quelle, die mit jeder Antwort gespeichert wird; genutzt vom [UTM-Quellen-Tracking](/de/publish/tracking) und von der Aufschlüsselung nach Quelle in [Insights](/de/results/insights) |
+| `data-rooquiz-utm-medium` | UTM-Medium (optional) |
+| `data-rooquiz-utm-campaign` | UTM-Kampagne (optional) |
 | `data-rooquiz-height` | Anfangshöhe (px) im Inline-Modus, bevor die automatische Größenanpassung greift |
 | `data-rooquiz-text` | Beschriftung des Buttons im Popup-Modus |
+
+Wenn Sie die UTM-Attribute nicht setzen, werden alle `utm_*`-Parameter aus der URL der einbettenden Seite automatisch übernommen.
 
 ## JS-API
 
@@ -57,9 +61,9 @@ Wenn Sie einen eigenen Auslöser benötigen (z. B. einen selbst gestalteten Butt
 <script src="https://YOUR_QUIZ_DOMAIN/embed.js"></script>
 <script>
   // Mount an inline embed manually
-  RooQuiz.embed({ el: '#container', token: 'YOUR_QUIZ_TOKEN', from: 'homepage' })
+  RooQuiz.embed({ el: '#container', token: 'YOUR_QUIZ_TOKEN', utmSource: 'homepage' })
   // Open the popup from any element
-  document.querySelector('#my-button').onclick = () => RooQuiz.open('YOUR_QUIZ_TOKEN')
+  document.querySelector('#my-button').onclick = () => RooQuiz.open('YOUR_QUIZ_TOKEN', { utmSource: 'homepage' })
 </script>
 ```
 

@@ -45,9 +45,13 @@ Se muestra un botón en tu página; al hacer clic, el quiz se abre en una superp
 | --- | --- |
 | `data-rooquiz-token` | Obligatorio. El token público del quiz |
 | `data-rooquiz-mode` | `inline` (predeterminado) o `popup` |
-| `data-rooquiz-from` | Etiqueta de origen registrada con cada respuesta, utilizada por el [seguimiento de origen](/es/publish/tracking) y el desglose por origen en [Insights](/es/results/insights) |
+| `data-rooquiz-utm-source` | Fuente UTM registrada con cada respuesta, utilizada por el [seguimiento de origen con UTM](/es/publish/tracking) y el desglose por origen en [Insights](/es/results/insights) |
+| `data-rooquiz-utm-medium` | Medio UTM (opcional) |
+| `data-rooquiz-utm-campaign` | Campaña UTM (opcional) |
 | `data-rooquiz-height` | Altura inicial (px) para el modo en línea, usada antes de que se active el ajuste automático |
 | `data-rooquiz-text` | Texto del botón para el modo de ventana emergente |
+
+Si no defines los atributos UTM, los parámetros `utm_*` que haya en la URL de la página que aloja el quiz se transmiten automáticamente.
 
 ## API de JS
 
@@ -57,9 +61,9 @@ Cuando necesites un disparador personalizado (p. ej., un botón con tu propio di
 <script src="https://YOUR_QUIZ_DOMAIN/embed.js"></script>
 <script>
   // Mount an inline embed manually
-  RooQuiz.embed({ el: '#container', token: 'YOUR_QUIZ_TOKEN', from: 'homepage' })
+  RooQuiz.embed({ el: '#container', token: 'YOUR_QUIZ_TOKEN', utmSource: 'homepage' })
   // Open the popup from any element
-  document.querySelector('#my-button').onclick = () => RooQuiz.open('YOUR_QUIZ_TOKEN')
+  document.querySelector('#my-button').onclick = () => RooQuiz.open('YOUR_QUIZ_TOKEN', { utmSource: 'homepage' })
 </script>
 ```
 

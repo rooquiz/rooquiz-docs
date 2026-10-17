@@ -1,20 +1,23 @@
 ---
-title: Relatórios e avaliação por IA
-description: 'No Quiz com pontuação, cada resposta pode gerar um relatório com pontuações por dimensão, gráfico de radar, conclusões de perfil e avaliação opcional por IA. Veja como é gerado e lido.'
+title: Relatórios
+description: 'Cada resposta pode gerar um relatório com pontuação, nível, pontuações por dimensão e gráfico de radar. Veja como os relatórios são gerados, como a Correspondência por IA corrige respostas de preencher a lacuna e como os respondentes os veem ou baixam.'
 ---
 
-No tipo **Quiz com pontuação**, cada resposta pode gerar um **relatório** que apresenta pontuações por dimensão, conclusões de perfil e (opcionalmente) avaliação por IA.
+Cada resposta pode gerar um **relatório** que apresenta a pontuação, o nível, as pontuações por dimensão e as conclusões de perfil do respondente.
 
 ## O que há em um relatório
 
 - **Pontuações por dimensão**: pontuações de cada dimensão, geralmente exibidas em um **gráfico de radar**.
 - **Conclusões de perfil**: conclusões de personalidade/habilidade derivadas das pontuações por dimensão.
-- **Avaliação por IA**: análise por IA das respostas em texto.
+
+### Correção por Correspondência por IA
+
+Em um **Quiz de conhecimento**, uma questão de preencher a lacuna pode ser corrigida com a **Correspondência por IA**: a IA avalia se a resposta está correta por similaridade semântica, em vez de exigir uma correspondência exata do texto. É ilimitada — não há créditos de IA para comprar. Em um Quiz com pontuação, as respostas de preencher a lacuna são coletadas, mas não pontuadas.
 
 ## Como um relatório é gerado
 
 - A **pontuação básica** é calculada **imediatamente** após o envio.
-- **Cálculos mais pesados**, como a análise por dimensão e a avaliação por IA, são gerados de forma **assíncrona**; o relatório passa por um estado "gerando → concluído".
+- **Cálculos mais pesados**, como a análise por dimensão e a correção por Correspondência por IA, são gerados de forma **assíncrona**; o relatório passa por um estado "gerando → concluído".
 - Se a geração falhar, o sistema **tenta novamente de forma automática** dentro de um determinado intervalo.
 
 <Callout type="info">
@@ -24,14 +27,14 @@ No tipo **Quiz com pontuação**, cada resposta pode gerar um **relatório** que
 ## Visualização e entrega
 
 - **Na tela**: veja diretamente no painel; você também pode permitir que os respondentes vejam o próprio relatório por um link de compartilhamento.
-- **Exportação em PDF**: exporte o relatório em PDF para arquivamento ou distribuição offline.
-- **Envio por e-mail**: envie o relatório por e-mail. **O envio por e-mail é um recurso Pro.**
+- **Download em PDF (Pro)**: ative **Permitir que os respondentes baixem o relatório completo (PDF)** para que os respondentes possam salvar o relatório em PDF. Isso só se aplica a quizzes que exigem que os respondentes entrem ou deixem seus dados para ver o relatório.
+- **Envio por e-mail**: envie o relatório aos respondentes por e-mail.
 
 ## Botão de CTA da página de resultado
 
 Você pode configurar um botão de chamada para ação (CTA) para **cada nível de pontuação**; os respondentes que ficam naquele nível o veem no fim do relatório — por exemplo, "Precisa melhorar" leva ao agendamento de uma consultoria, enquanto "Excelente" leva ao download de material avançado.
 
-- Em **Editor** → **Configurações do relatório** → **Níveis de pontuação**, ative o **Botão de CTA** de um nível e preencha o texto e o link do botão; o texto introdutório e "abrir em nova janela" são opcionais.
+- Em **Editor** → **Configurações do relatório** → **Níveis de pontuação**, ative o **Botão de CTA** de um nível e preencha o texto e o link do botão; o texto introdutório é opcional. Os links de CTA sempre abrem em uma nova janela.
 - Para usar o mesmo botão em vários níveis, configure um e clique em **Aplicar a todos os níveis**.
 - As edições do CTA **passam a valer imediatamente em todos os relatórios históricos** — troque links ou textos de campanha sem se preocupar com botões desatualizados em relatórios antigos.
 - Os cliques dos respondentes no CTA alimentam o funil de conversão em [Insights](/pt-BR/results/insights).

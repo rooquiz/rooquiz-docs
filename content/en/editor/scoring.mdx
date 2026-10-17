@@ -12,8 +12,9 @@ In a **Quiz** you can:
 - **Set points**: Assign points to questions or correct options.
 - **Judge right/wrong**: Mark correct answers; the system judges each question automatically.
 - **Sum totals**: Points are added up automatically.
-- **Passing score**: Set a pass threshold and show a pass/fail result.
+- **Levels**: Split the total into score bands (see [Levels](#levels-and-result-page-actions)) — each band shows its own result instead of a bare number.
 - **Answer feedback**: Show respondents the correctness and explanation per question.
+- **AI Match**: Grade fill-in-the-blank answers by semantic similarity instead of exact or contains matching, with an accuracy threshold you set. AI grading is unlimited.
 
 <Callout type="info">
   Points and right/wrong judgement are available in Quiz and Random Knowledge Quiz. Scored Quiz uses dimension formulas instead, and Outcome doesn't score at all.
@@ -25,13 +26,12 @@ An **Outcome** quiz doesn't score — it **counts votes**. Each option votes for
 
 Every outcome can carry its own CTA button, wiring an entertaining result straight into a next step. See [The four quiz types](/en/getting-started/quiz-types#outcome-quiz).
 
-## Scored Quiz: dimensional analysis and AI evaluation
+## Scored Quiz: dimensional analysis
 
 In a **Scored Quiz**, scoring is more about "profiling" than right/wrong:
 
 - **Multi-dimensional scoring**: Map questions to several dimensions; after submission, each dimension gets a score, often shown as a **radar chart**.
 - **Result profile**: Produce personality/ability conclusions based on dimension scores.
-- **AI evaluation**: AI turns the total score, level, and dimension scores into suggestions and commentary (it does not read the raw answer text).
 
 ### Which questions are scored
 
@@ -54,6 +54,6 @@ Split the total score into **levels** (0–60 needs work / 60–80 good / 80+ ex
 ## Report generation
 
 - **Synchronous**: Basic scoring is calculated immediately after submission.
-- **Asynchronous**: Heavier computation such as dimensional analysis and AI evaluation is generated asynchronously; reports go through a "generating → completed" state, and the system retries automatically on failure.
+- **Asynchronous**: Heavier computation such as dimensional analysis is generated asynchronously; reports go through a "generating → completed" state, and the system retries automatically on failure.
 
-For viewing, exporting, and delivering reports, see [Reports & AI Evaluation](/en/results/reports).
+For viewing, exporting, and delivering reports, see [Reports](/en/results/reports).

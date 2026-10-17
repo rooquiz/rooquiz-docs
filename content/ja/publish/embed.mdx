@@ -45,9 +45,13 @@ description: 'クイズを自分のウェブサイトに直接埋め込めば、
 | --- | --- |
 | `data-rooquiz-token` | 必須。クイズの公開トークン |
 | `data-rooquiz-mode` | `inline`(デフォルト)または `popup` |
-| `data-rooquiz-from` | すべての回答と一緒に記録される流入元タグ。[流入元トラッキング](/ja/publish/tracking)や[インサイト](/ja/results/insights)の流入元別の内訳で使われます |
+| `data-rooquiz-utm-source` | すべての回答と一緒に記録される UTM ソース。[UTM による流入元トラッキング](/ja/publish/tracking)や[インサイト](/ja/results/insights)の流入元別の内訳で使われます |
+| `data-rooquiz-utm-medium` | UTM メディア(任意) |
+| `data-rooquiz-utm-campaign` | UTM キャンペーン(任意) |
 | `data-rooquiz-height` | インラインモードの初期の高さ(px)。自動調整が始まるまでの間に使われます |
 | `data-rooquiz-text` | ポップアップモードのボタンのラベル |
+
+UTM 属性を設定しない場合は、埋め込み先ページの URL に付いている `utm_*` パラメーターが自動的に引き継がれます。
 
 ## JS API
 
@@ -57,9 +61,9 @@ description: 'クイズを自分のウェブサイトに直接埋め込めば、
 <script src="https://YOUR_QUIZ_DOMAIN/embed.js"></script>
 <script>
   // Mount an inline embed manually
-  RooQuiz.embed({ el: '#container', token: 'YOUR_QUIZ_TOKEN', from: 'homepage' })
+  RooQuiz.embed({ el: '#container', token: 'YOUR_QUIZ_TOKEN', utmSource: 'homepage' })
   // Open the popup from any element
-  document.querySelector('#my-button').onclick = () => RooQuiz.open('YOUR_QUIZ_TOKEN')
+  document.querySelector('#my-button').onclick = () => RooQuiz.open('YOUR_QUIZ_TOKEN', { utmSource: 'homepage' })
 </script>
 ```
 

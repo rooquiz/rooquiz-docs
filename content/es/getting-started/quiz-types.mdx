@@ -15,7 +15,8 @@ Para pruebas de conocimiento, exámenes en línea y prácticas con puntuación: 
 
 - **Orden fijo**: todos los participantes ven las preguntas en el mismo orden.
 - **Puntuación**: asigna puntos a las preguntas o a las opciones correctas; los totales se suman automáticamente.
-- **Evaluación y retroalimentación**: marca las respuestas correctas, define una puntuación mínima para aprobar y muestra a los participantes su puntuación y comentarios.
+- **Evaluación y retroalimentación**: marca las respuestas correctas, muestra a los participantes su puntuación y la explicación de cada pregunta, y divide el total en **niveles** por tramos de puntuación (p. ej., 0–60 / 60–80 / 80+), cada uno con su propio texto de resultado.
+- **Coincidencia con AI en completar el espacio**: además de la coincidencia exacta y la parcial, una respuesta de completar el espacio puede corregirse con **Coincidencia con AI**, que juzga la similitud semántica con tu respuesta. La corrección con AI es ilimitada.
 
 ## Cuestionario con puntuación
 
@@ -23,8 +24,8 @@ Para evaluaciones de personalidad, evaluaciones de aptitudes y encuestas: escena
 
 - **Puntuación multidimensional**: asigna preguntas a varias dimensiones y genera resultados multidimensionales, que suelen mostrarse en un **gráfico de radar**.
 - **Lógica condicional**: muestra u oculta preguntas posteriores según las respuestas anteriores, lo que permite encuestas adaptativas.
-- **Evaluación con AI**: usa AI para evaluar respuestas de texto y generar análisis más completos.
-- **Entrega del informe**: los resultados pueden mostrarse en pantalla, exportarse a PDF o enviarse por correo electrónico (el correo es una función Pro).
+- **Contexto abierto**: las preguntas de completar el espacio solo recopilan texto (nunca se puntúan), lo que encaja con un cierre del tipo "¿algo más que debamos saber?".
+- **Entrega del informe**: los resultados pueden mostrarse en pantalla, exportarse a PDF o enviarse por correo electrónico.
 
 ## Cuestionario de resultado
 
@@ -39,8 +40,9 @@ Para quizzes de personalidad, quizzes divertidos del tipo "¿qué X eres?" y dia
 
 Para prácticas y pruebas aleatorias: escenarios en los que **cada participante debe ver preguntas diferentes**.
 
-- **Muestreo aleatorio**: extrae preguntas de un banco de preguntas vinculado según una regla en cada envío.
-- **Filtrado del banco**: controla el alcance del muestreo por dificultad, etiquetas y más.
+- **Muestreo aleatorio**: extrae preguntas de un banco de preguntas vinculado para cada participante.
+- **Reglas de extracción**: para cada tipo de pregunta, define cuántas preguntas extraer y cuántos puntos vale cada una.
+- **Duración del bloqueo de preguntas**: mantén el mismo conjunto para un participante que recarga la página o vuelve más tarde (de 30 minutos a 24 horas), o vuelve a extraer en cada recarga.
 - **Selección registrada**: el sistema registra las preguntas realmente extraídas cada vez para mantener la coherencia de la puntuación.
 
 ## Cómo elegir
@@ -53,5 +55,5 @@ Para prácticas y pruebas aleatorias: escenarios en los que **cada participante 
 | Mostrar a cada persona un conjunto distinto de preguntas aleatorias | **Cuestionario de conocimiento aleatorio** |
 
 <Callout type="warning">
-  Los ajustes disponibles varían según el tipo (por ejemplo, la puntuación solo está disponible en el Cuestionario de conocimiento, la lógica condicional y el análisis multidimensional se orientan principalmente al Cuestionario con puntuación, y la votación por opciones solo existe en el Cuestionario de resultado). Confirma las funciones que necesitas antes de elegir.
+  Los ajustes disponibles varían según el tipo (por ejemplo, la puntuación de aciertos/errores solo existe en el Cuestionario de conocimiento y en el Cuestionario de conocimiento aleatorio, la lógica condicional y las dimensiones basadas en fórmulas solo existen en el Cuestionario con puntuación, y la votación por opciones solo existe en el Cuestionario de resultado). Confirma las funciones que necesitas antes de elegir.
 </Callout>

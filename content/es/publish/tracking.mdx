@@ -15,11 +15,15 @@ UTM es un conjunto de parámetros que se añaden a un enlace para etiquetar el o
 
 ## Cómo usarlo
 
-En el quiz que quieras, abre **Compartir** → **Seguimiento de origen**, genera enlaces con etiquetas UTM para los distintos canales y distribuye cada enlace en su canal.
+En el quiz que quieras, abre **Compartir** → **Plan de difusión**. Cada tarjeta de canal integrado ya tiene su propio enlace con etiquetas UTM. Para cualquier otro canal, haz clic en **Añadir canal** y rellena **utm_source** (obligatorio), **utm_medium** y **utm_campaign** (ambos opcionales); la nueva tarjeta obtiene su propio enlace con seguimiento. Consulta [Plan de difusión](/es/publish/promotion).
+
+Los valores UTM solo pueden contener letras, dígitos, guiones bajos y guiones.
+
+Las inserciones en sitios web también pueden llevar etiquetas UTM: consulta los atributos `data-rooquiz-utm-*` en [Inserción](/es/publish/embed).
 
 ## Ver los datos de origen
 
-Cuando los participantes envían a través de un enlace con etiquetas UTM, el origen se registra junto con la respuesta. Puedes distinguir y analizar por origen en [Registros de respuestas](/es/results/records) e [Insights](/es/results/insights).
+Cuando los participantes envían a través de un enlace con etiquetas UTM, el origen se registra junto con la respuesta. Los parámetros UTM de cualquier enlace (`utm_source`, `utm_medium`, `utm_campaign`) se guardan de esta forma, tanto si el enlace procede del Plan de difusión como si lo creaste a mano. Puedes distinguir y analizar por origen en [Registros de respuestas](/es/results/records) e [Insights](/es/results/insights).
 
 <Callout type="info">
   Usar una **nomenclatura clara y coherente** para cada canal (p. ej., todo en minúsculas y separado por guiones) mantiene ordenado tu análisis posterior.

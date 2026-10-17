@@ -15,11 +15,15 @@ UTM ist eine Reihe von Parametern, die an einen Link angehängt werden, um seine
 
 ## So verwenden Sie es
 
-Öffnen Sie im gewünschten Quiz **Teilen** → **Quellen-Tracking**, erzeugen Sie UTM-markierte Links für verschiedene Kanäle und verteilen Sie jeden Link über seinen Kanal.
+Öffnen Sie im gewünschten Quiz **Teilen** → **Verteilungsplan**. Jede integrierte Kanalkarte hat bereits ihren eigenen UTM-markierten Link. Für jeden anderen Kanal klicken Sie auf **Kanal hinzufügen** und füllen **utm_source** (erforderlich) sowie **utm_medium** und **utm_campaign** (beide optional) aus; die neue Karte erhält ihren eigenen nachverfolgbaren Link. Siehe [Verteilungsplan](/de/publish/promotion).
+
+UTM-Werte dürfen nur Buchstaben, Ziffern, Unterstriche und Bindestriche enthalten.
+
+Auch Website-Einbettungen können UTM-Tags tragen – siehe die Attribute `data-rooquiz-utm-*` unter [Einbetten](/de/publish/embed#verfügbare-attribute).
 
 ## Quelldaten ansehen
 
-Wenn Teilnehmer über einen UTM-markierten Link einsenden, wird die Quelle mit der Antwort gespeichert. Unter [Einsendungen](/de/results/records) und [Insights](/de/results/insights) können Sie nach Quelle unterscheiden und auswerten.
+Wenn Teilnehmer über einen UTM-markierten Link einsenden, wird die Quelle mit der Antwort gespeichert. UTM-Parameter in jedem Link (`utm_source`, `utm_medium`, `utm_campaign`) werden auf diese Weise gespeichert – egal, ob der Link aus dem Verteilungsplan stammt oder von Hand erstellt wurde. Unter [Einsendungen](/de/results/records) und [Insights](/de/results/insights) können Sie nach Quelle unterscheiden und auswerten.
 
 <Callout type="info">
   Eine **klare, einheitliche Benennung** für jeden Kanal (z. B. durchgehend Kleinbuchstaben, mit Bindestrichen getrennt) hält Ihre spätere Auswertung übersichtlich.

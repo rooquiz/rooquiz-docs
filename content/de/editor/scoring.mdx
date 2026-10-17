@@ -12,8 +12,9 @@ In einem **Quiz** können Sie:
 - **Punkte vergeben**: Fragen oder richtigen Optionen Punkte zuweisen.
 - **Richtig/falsch beurteilen**: Richtige Antworten markieren; das System beurteilt jede Frage automatisch.
 - **Gesamtpunktzahl bilden**: Punkte werden automatisch addiert.
-- **Bestehensgrenze**: Eine Mindestpunktzahl festlegen und ein Ergebnis „bestanden/nicht bestanden“ anzeigen.
+- **Stufen**: Die Gesamtpunktzahl in Punktebereiche aufteilen (siehe [Stufen](#stufen-und-aktionen-auf-der-ergebnisseite)) – jeder Bereich zeigt ein eigenes Ergebnis statt einer bloßen Zahl.
 - **Antwort-Feedback**: Teilnehmern pro Frage anzeigen, ob sie richtig lagen, samt Erklärung.
+- **KI-Abgleich**: Lückentext-Antworten nach semantischer Ähnlichkeit statt per exakter oder Enthält-Übereinstimmung bewerten, mit einer von Ihnen festgelegten Genauigkeitsschwelle. Die KI-Bewertung ist unbegrenzt.
 
 <Callout type="info">
   Punkte und die Richtig/Falsch-Beurteilung sind im Wissensquiz und im Zufälligen Wissensquiz verfügbar. Das Bewertete Quiz verwendet stattdessen Dimensionsformeln, und das Ergebnisquiz vergibt überhaupt keine Punkte.
@@ -25,13 +26,12 @@ Ein **Ergebnisquiz** vergibt keine Punkte – es **zählt Stimmen**. Jede Option
 
 Jedes Ergebnis kann einen eigenen CTA-Button tragen, der ein unterhaltsames Ergebnis direkt mit einem nächsten Schritt verbindet. Siehe [Die vier Quiztypen](/de/getting-started/quiz-types).
 
-## Bewertetes Quiz: Dimensionsanalyse und KI-Auswertung
+## Bewertetes Quiz: Dimensionsanalyse
 
 In einem **Bewerteten Quiz** geht es bei der Bewertung eher um ein „Profil“ als um richtig oder falsch:
 
 - **Mehrdimensionale Bewertung**: Ordnen Sie Fragen mehreren Dimensionen zu; nach dem Absenden erhält jede Dimension eine Punktzahl, oft als **Netzdiagramm** dargestellt.
 - **Ergebnisprofil**: Leiten Sie aus den Dimensionspunkten Aussagen zu Persönlichkeit oder Fähigkeiten ab.
-- **KI-Auswertung**: Die KI macht aus Gesamtpunktzahl, Stufe und Dimensionspunkten Empfehlungen und Kommentare (den Rohtext der Antworten liest sie nicht).
 
 ### Welche Fragen bewertet werden
 
@@ -54,6 +54,6 @@ Teilen Sie die Gesamtpunktzahl in **Stufen** auf (0–60 ausbaufähig / 60–80 
 ## Berichtserstellung
 
 - **Synchron**: Die Basisbewertung wird unmittelbar nach dem Absenden berechnet.
-- **Asynchron**: Aufwendigere Berechnungen wie Dimensionsanalyse und KI-Auswertung werden asynchron erstellt; Berichte durchlaufen den Status „wird erstellt → abgeschlossen“, und bei Fehlern versucht es das System automatisch erneut.
+- **Asynchron**: Aufwendigere Berechnungen wie die Dimensionsanalyse werden asynchron erstellt; Berichte durchlaufen den Status „wird erstellt → abgeschlossen“, und bei Fehlern versucht es das System automatisch erneut.
 
-Zum Anzeigen, Exportieren und Zustellen von Berichten siehe [Berichte & KI-Auswertung](/de/results/reports).
+Zum Anzeigen, Exportieren und Zustellen von Berichten siehe [Berichte](/de/results/reports).

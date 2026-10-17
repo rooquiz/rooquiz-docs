@@ -15,7 +15,8 @@ Para testes de conhecimento, provas online e exercícios com pontuação — cen
 
 - **Ordem fixa**: todos os respondentes veem as questões na mesma ordem.
 - **Pontuação**: atribua pontos às questões ou às opções corretas; os totais são somados automaticamente.
-- **Julgamento e feedback**: marque as respostas corretas, defina uma nota de aprovação e mostre aos respondentes a pontuação e o feedback.
+- **Julgamento e feedback**: marque as respostas corretas, mostre aos respondentes a pontuação e a explicação de cada questão e divida o total em **níveis** por faixa de pontuação (por exemplo, 0–60 / 60–80 / 80+), cada um com seu próprio texto de resultado.
+- **Correspondência por IA em preencher a lacuna**: além da correspondência exata e por "contém", uma resposta de preencher a lacuna pode ser corrigida pela **Correspondência por IA**, que avalia a similaridade semântica com a sua resposta. A correção por IA é ilimitada.
 
 ## Quiz com pontuação
 
@@ -23,8 +24,8 @@ Para avaliações de personalidade, avaliações de competências e pesquisas �
 
 - **Pontuação multidimensional**: associe as questões a várias dimensões e gere resultados multidimensionais, geralmente exibidos em um **gráfico de radar**.
 - **Lógica condicional**: mostre ou oculte questões seguintes com base nas respostas anteriores, criando pesquisas adaptativas.
-- **Avaliação com IA**: use IA para avaliar respostas de texto e gerar análises mais ricas.
-- **Entrega do relatório**: os resultados podem ser exibidos na tela, exportados em PDF ou enviados por e-mail (o e-mail é um recurso Pro).
+- **Contexto aberto**: questões de preencher a lacuna apenas coletam texto — nunca são pontuadas —, o que é ideal para um "há algo mais que devemos saber?" no final.
+- **Entrega do relatório**: os resultados podem ser exibidos na tela, exportados em PDF ou enviados por e-mail.
 
 ## Quiz de resultado
 
@@ -39,8 +40,9 @@ Para quizzes de personalidade, quizzes divertidos do tipo "qual X você é" e is
 
 Para exercícios de prática e testes aleatórios — cenários em que **cada respondente deve ver questões diferentes**.
 
-- **Amostragem aleatória**: sorteia questões de um banco de questões vinculado, conforme regras, a cada envio.
-- **Filtragem do banco**: controle o escopo da amostragem por dificuldade, tags e mais.
+- **Amostragem aleatória**: sorteia questões de um banco de questões vinculado para cada respondente.
+- **Regras de sorteio**: para cada tipo de questão, defina quantas questões sortear e os pontos por questão.
+- **Duração do bloqueio das questões**: mantenha o mesmo conjunto para o respondente que atualizar a página ou voltar (de 30 minutos a 24 horas), ou sorteie de novo a cada atualização.
 - **Seleção registrada**: o sistema registra as questões efetivamente sorteadas a cada vez para manter a pontuação consistente.
 
 ## Como escolher
@@ -53,5 +55,5 @@ Para exercícios de prática e testes aleatórios — cenários em que **cada re
 | Mostrar a cada pessoa um conjunto diferente de questões aleatórias | **Quiz de conhecimento aleatório** |
 
 <Callout type="warning">
-  As configurações disponíveis variam conforme o tipo (por exemplo, a pontuação está disponível apenas no Quiz de conhecimento, a lógica condicional e a análise multidimensional são voltadas principalmente ao Quiz com pontuação, e a votação por opção existe apenas no Quiz de resultado). Confirme os recursos de que você precisa antes de escolher.
+  As configurações disponíveis variam conforme o tipo (por exemplo, a pontuação de certo/errado existe apenas no Quiz de conhecimento e no Quiz de conhecimento aleatório, a lógica condicional e as dimensões baseadas em fórmulas existem apenas no Quiz com pontuação, e a votação por opção existe apenas no Quiz de resultado). Confirme os recursos de que você precisa antes de escolher.
 </Callout>

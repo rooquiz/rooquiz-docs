@@ -12,8 +12,9 @@ En un **Cuestionario de conocimiento** puedes:
 - **Asignar puntos**: asigna puntos a las preguntas o a las opciones correctas.
 - **Juzgar aciertos y errores**: marca las respuestas correctas; el sistema corrige cada pregunta automáticamente.
 - **Sumar totales**: los puntos se suman automáticamente.
-- **Puntuación mínima para aprobar**: define un umbral de aprobado y muestra un resultado de aprobado/suspenso.
+- **Niveles**: divide el total en tramos de puntuación (consulta la sección de niveles más abajo); cada tramo muestra su propio resultado en lugar de un número a secas.
 - **Retroalimentación de respuestas**: muestra a los participantes si acertaron y la explicación de cada pregunta.
+- **Coincidencia con AI**: corrige las respuestas de completar el espacio por similitud semántica, en lugar de por coincidencia exacta o parcial, con el umbral de precisión que tú definas. La corrección con AI es ilimitada.
 
 <Callout type="info">
   Los puntos y la corrección de aciertos/errores están disponibles en el Cuestionario de conocimiento y en el Cuestionario de conocimiento aleatorio. El Cuestionario con puntuación usa fórmulas por dimensión, y el Cuestionario de resultado no puntúa en absoluto.
@@ -25,13 +26,12 @@ Un **Cuestionario de resultado** no puntúa: **cuenta votos**. Cada opción vota
 
 Cada resultado puede tener su propio botón de CTA, que conecta un resultado entretenido directamente con un siguiente paso. Consulta [Los cuatro tipos de quiz](/es/getting-started/quiz-types).
 
-## Cuestionario con puntuación: análisis por dimensiones y evaluación con AI
+## Cuestionario con puntuación: análisis por dimensiones
 
 En un **Cuestionario con puntuación**, puntuar consiste más en "elaborar un perfil" que en juzgar aciertos y errores:
 
 - **Puntuación multidimensional**: asigna preguntas a varias dimensiones; tras el envío, cada dimensión obtiene una puntuación, que a menudo se muestra como un **gráfico de radar**.
 - **Perfil de resultado**: genera conclusiones de personalidad o capacidad a partir de las puntuaciones por dimensión.
-- **Evaluación con AI**: la AI convierte la puntuación total, el nivel y las puntuaciones por dimensión en sugerencias y comentarios (no lee el texto de las respuestas originales).
 
 ### Qué preguntas se puntúan
 
@@ -54,6 +54,6 @@ Divide la puntuación total en **niveles** (0–60 necesita mejorar / 60–80 bi
 ## Generación de informes
 
 - **Síncrona**: la puntuación básica se calcula inmediatamente después del envío.
-- **Asíncrona**: los cálculos más pesados, como el análisis por dimensiones y la evaluación con AI, se generan de forma asíncrona; los informes pasan por un estado "generando → completado", y el sistema reintenta automáticamente si fallan.
+- **Asíncrona**: los cálculos más pesados, como el análisis por dimensiones, se generan de forma asíncrona; los informes pasan por un estado "generando → completado", y el sistema reintenta automáticamente si fallan.
 
-Para ver, exportar y entregar informes, consulta [Informes y evaluación con AI](/es/results/reports).
+Para ver, exportar y entregar informes, consulta [Informes](/es/results/reports).

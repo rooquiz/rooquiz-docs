@@ -1,20 +1,23 @@
 ---
-title: Reports & AI Evaluation
-description: 'For Scored Quiz, each response can generate a report with dimension scores, a radar chart, profile conclusions and optional AI evaluation of text answers. How reports are produced and read.'
+title: Reports
+description: 'Each response can generate a report with scores, levels, dimension scores and a radar chart. How reports are produced, how AI Match grades fill-in-the-blank answers, and how respondents view or download them.'
 ---
 
-For the **Scored Quiz** type, each response can generate a **report** presenting dimension scores, profile conclusions, and (optionally) AI evaluation.
+Each response can generate a **report** presenting the respondent's score, level, dimension scores and profile conclusions.
 
 ## What's in a report
 
 - **Dimension scores**: Scores per dimension, often shown as a **radar chart**.
 - **Profile conclusions**: Personality/ability conclusions derived from dimension scores.
-- **AI evaluation**: AI analysis of text answers.
+
+### AI Match grading
+
+In a **Knowledge Quiz**, a fill-in-the-blank question can be graded with **AI Match**: AI judges whether the answer is correct by semantic similarity instead of an exact text match. It is unlimited — there are no AI credits to buy. In a Scored Quiz, fill-in-the-blank answers are collected but not scored.
 
 ## How a report is generated
 
 - **Basic scoring** is calculated **immediately** after submission.
-- **Heavier computation** such as dimensional analysis and AI evaluation is generated **asynchronously**; the report goes through a "generating → completed" state.
+- **Heavier computation** such as dimensional analysis and AI Match grading is generated **asynchronously**; the report goes through a "generating → completed" state.
 - If generation fails, the system **retries automatically** within a certain window.
 
 <Callout type="info">
@@ -24,14 +27,14 @@ For the **Scored Quiz** type, each response can generate a **report** presenting
 ## Viewing and delivery
 
 - **On-screen**: View directly in the dashboard; you can also let respondents view their own report via a share link.
-- **PDF export**: Export the report to PDF for archiving or offline distribution.
-- **Email delivery**: Send the report by email. **Email delivery is a Pro feature.**
+- **PDF download (Pro)**: Turn on **Let respondents download the full report (PDF)** so respondents can save their report as a PDF. It only applies to quizzes that require respondents to sign in or leave their details to see the report.
+- **Email delivery**: Send the report to respondents by email.
 
 ## Result page CTA button
 
 You can configure a call-to-action (CTA) button for **each score level**; respondents landing in that level see it at the bottom of their report — e.g. "Needs improvement" leads to booking a consultation, while "Excellent" leads to downloading advanced material.
 
-- In **Editor** → **Report settings** → **Score levels**, toggle on the **CTA button** for a level and fill in the button text and link; the lead-in text and "open in new window" are optional.
+- In **Editor** → **Report settings** → **Score levels**, toggle on the **CTA button** for a level and fill in the button text and link; the lead-in text is optional. CTA links always open in a new window.
 - To use the same button across levels, configure one and click **Apply to all levels**.
 - CTA edits **take effect immediately on all historical reports** — swap campaign links or copy without worrying about stale buttons in old reports.
 - Respondents' CTA clicks feed into the conversion funnel in [Insights](/en/results/insights).

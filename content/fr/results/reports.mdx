@@ -1,20 +1,23 @@
 ---
-title: Rapports et évaluation IA
-description: "Pour un Quiz noté, chaque réponse peut générer un rapport avec scores par dimension, graphique radar, conclusions de profil et évaluation IA facultative des réponses textuelles. Production et lecture."
+title: Rapports
+description: "Chaque réponse peut générer un rapport avec score, niveau, scores par dimension et graphique radar. Comment les rapports sont produits, comment la Correspondance IA corrige les Textes à trous et comment les répondants les consultent ou les téléchargent."
 ---
 
-Pour le type **Quiz noté**, chaque réponse peut générer un **rapport** présentant les scores par dimension, les conclusions de profil et, en option, une évaluation IA.
+Chaque réponse peut générer un **rapport** présentant le score du répondant, son niveau, ses scores par dimension et les conclusions de profil.
 
 ## Contenu d'un rapport
 
 - **Scores par dimension** : les scores de chaque dimension, souvent présentés sous forme de **graphique radar**.
 - **Conclusions de profil** : des conclusions sur la personnalité ou les compétences, déduites des scores par dimension.
-- **Évaluation IA** : une analyse par l'IA des réponses textuelles.
+
+### Correction par Correspondance IA
+
+Dans un **Quiz de connaissances**, une question Texte à trous peut être corrigée avec la **Correspondance IA** : l'IA juge si la réponse est correcte selon sa similarité sémantique, plutôt que par une correspondance exacte du texte. C'est illimité : il n'y a aucun crédit IA à acheter. Dans un Quiz noté, les réponses aux Textes à trous sont recueillies mais pas notées.
 
 ## Génération d'un rapport
 
 - Le **score de base** est calculé **immédiatement** après la soumission.
-- Les **calculs plus lourds**, comme l'analyse par dimension et l'évaluation IA, sont générés **de manière asynchrone** ; le rapport passe par un état « en cours de génération → terminé ».
+- Les **calculs plus lourds**, comme l'analyse par dimension et la correction par Correspondance IA, sont générés **de manière asynchrone** ; le rapport passe par un état « en cours de génération → terminé ».
 - En cas d'échec de la génération, le système **réessaie automatiquement** pendant un certain délai.
 
 <Callout type="info">
@@ -24,14 +27,14 @@ Pour le type **Quiz noté**, chaque réponse peut générer un **rapport** prés
 ## Consultation et diffusion
 
 - **À l'écran** : consultez-le directement dans le tableau de bord ; vous pouvez aussi permettre aux répondants de consulter leur propre rapport via un lien de partage.
-- **Export PDF** : exportez le rapport en PDF pour l'archiver ou le diffuser hors ligne.
-- **Envoi par e-mail** : envoyez le rapport par e-mail. **L'envoi par e-mail est une fonctionnalité Pro.**
+- **Téléchargement PDF (Pro)** : activez **Autoriser les répondants à télécharger le rapport complet (PDF)** pour que les répondants puissent enregistrer leur rapport en PDF. Cela ne s'applique qu'aux quiz qui demandent aux répondants de se connecter ou de laisser leurs coordonnées pour voir le rapport.
+- **Envoi par e-mail** : envoyez le rapport aux répondants par e-mail.
 
 ## Bouton CTA de la page de résultats
 
 Vous pouvez configurer un bouton d'appel à l'action (CTA) pour **chaque niveau de score** ; les répondants qui atteignent ce niveau le voient en bas de leur rapport. Par exemple, « À améliorer » mène à la réservation d'une consultation, tandis que « Excellent » mène au téléchargement de ressources avancées.
 
-- Dans **Éditeur** → **Paramètres du rapport** → **Niveaux de score**, activez le **Bouton CTA** d'un niveau et renseignez le texte et le lien du bouton ; le texte d'introduction et l'option « ouvrir dans une nouvelle fenêtre » sont facultatifs.
+- Dans **Éditeur** → **Paramètres du rapport** → **Niveaux de score**, activez le **Bouton CTA** d'un niveau et renseignez le texte et le lien du bouton ; le texte d'introduction est facultatif. Les liens CTA s'ouvrent toujours dans une nouvelle fenêtre.
 - Pour utiliser le même bouton sur plusieurs niveaux, configurez-en un et cliquez sur **Appliquer à tous les niveaux**.
 - Les modifications du CTA **s'appliquent immédiatement à tous les rapports existants** : changez de lien de campagne ou de texte sans craindre des boutons obsolètes dans les anciens rapports.
 - Les clics des répondants sur le CTA alimentent l'entonnoir de conversion des [Statistiques](/fr/results/insights).
