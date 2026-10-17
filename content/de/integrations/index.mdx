@@ -1,6 +1,6 @@
 ---
 title: Integrationen & API
-description: 'Für Entwickler: So greifen Sie aus eigenem Code oder einem KI-Client auf RooQuiz zu. Die schreibgeschützte REST-API liefert Formulare und Einsendungen, der MCP-Server lässt KI-Clients Quizze im Team erstellen.'
+description: 'Für Entwickler: So greifen Sie aus eigenem Code oder einem KI-Client auf RooQuiz zu. Die schreibgeschützte REST-API liefert Formulare und Einsendungen, der MCP-Server lässt Ihre eigene KI Quizze erstellen sowie Leads und Buchungen bearbeiten.'
 sidebarTitle: Überblick
 ---
 
@@ -11,8 +11,12 @@ Dieser Abschnitt richtet sich an **Entwickler** – so greifen Sie aus Ihrem eig
   <Card title="MCP-Integration" href="/de/integrations/mcp" />
 </Cards>
 
-- **REST API** – rufen Sie Formulare und Einsendungen mit einem API-Schlüssel auf Kontoebene ab. Ideal für eigene Dashboards oder die Synchronisierung in ein Data Warehouse.
-- **MCP-Integration** – verbinden Sie einen KI-Client wie Claude mit Ihrem Team, damit er Quizze direkt erstellen, abfragen und ändern kann.
+- **REST API** – rufen Sie Formulare und Einsendungen mit einem API-Schlüssel auf Kontoebene ab. Ideal für eigene Dashboards oder die Synchronisierung in ein Data Warehouse. Eine OpenAPI-Spezifikation ist enthalten.
+- **MCP-Integration** – verbinden Sie einen KI-Client wie ChatGPT oder Claude mit Ihrem Team, damit er Quizze direkt erstellen, abfragen und ändern, Ihre Leads bearbeiten (Status, Zuständiger, Tags, Kommentare) und Buchungen verwalten kann.
+
+<Callout type="info">
+  RooQuiz hat keinen integrierten KI-Quizgenerator. Um ein Quiz mit KI zu erstellen, verbinden Sie **Ihren eigenen KI-Client** über [MCP](/de/integrations/mcp) und beauftragen Sie ihn damit – zum Beispiel, mit einer Vorlage zu beginnen und Fragen hinzuzufügen.
+</Callout>
 
 ## Integration ohne Code
 

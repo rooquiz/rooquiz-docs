@@ -39,6 +39,12 @@ A button is rendered on your page; clicking it opens the quiz in a full-screen o
 <iframe src="https://YOUR_QUIZ_DOMAIN/a/YOUR_QUIZ_TOKEN?embed=1" width="100%" height="600" style="border:0;" title="RooQuiz"></iframe>
 ```
 
+The iframe always points at the quiz's stable `/a/<token>` address, not its custom path, so changing the custom path later never breaks embed code that's already on your site.
+
+## The "Made with RooQuiz" line
+
+On the **Free plan**, embeds keep a small **Made with RooQuiz** credit line. It sits **outside the iframe**, on your page: inline and popup embeds render it automatically through `embed.js`, and the plain iframe code includes it as a `<p>` right below the iframe — keep it there. On **Pro**, the generated code leaves it out.
+
 ## Available attributes
 
 | Attribute | Description |

@@ -39,6 +39,12 @@ Se muestra un botón en tu página; al hacer clic, el quiz se abre en una superp
 <iframe src="https://YOUR_QUIZ_DOMAIN/a/YOUR_QUIZ_TOKEN?embed=1" width="100%" height="600" style="border:0;" title="RooQuiz"></iframe>
 ```
 
+El iframe siempre apunta a la dirección estable `/a/<token>` del quiz, no a su ruta personalizada, así que cambiar la ruta personalizada más adelante nunca rompe el código de inserción que ya está en tu web.
+
+## La línea "Made with RooQuiz"
+
+En el **plan Free**, las inserciones conservan una pequeña línea de crédito **Made with RooQuiz**. Está **fuera del iframe**, en tu página: las inserciones en línea y emergentes la muestran automáticamente mediante `embed.js`, y el código de iframe simple la incluye como un `<p>` justo debajo del iframe; déjala ahí. En **Pro**, el código generado no la incluye.
+
 ## Atributos disponibles
 
 | Atributo | Descripción |

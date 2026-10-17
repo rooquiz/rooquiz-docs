@@ -1,15 +1,66 @@
 ---
 title: Konto & Abrechnung
-description: 'Konto und Abrechnung in RooQuiz: der Tarif und das Abonnement Ihres Teams, wo Sie deren aktuellen Status finden, und die Benachrichtigungs-E-Mails, die Sie erhalten. Benachrichtigungen gelten auf Kontoebene für alle Ihre Teams, nicht pro Team.'
+description: 'Konto und Abrechnung in RooQuiz: Ihre persönlichen Kontoeinstellungen und Anmeldemethoden, das Verknüpfen von Google, das Löschen Ihres Kontos, die Tarife Free und Pro, die 7-tägige Testphase und was bei einer fehlgeschlagenen Zahlung passiert.'
 sidebarTitle: Überblick
 ---
 
-Verwalten Sie den Tarif und die Abrechnung Ihres Teams.
+Ihr **Konto** ist persönlich – es steht für Sie, in allen Teams, denen Sie angehören. Der **Tarif** gehört zu einem Team: Jedes Team nutzt für sich den Free- oder den Pro-Tarif.
 
 <Cards>
   <Card title="Benachrichtigungseinstellungen" href="/de/account/notifications" />
 </Cards>
 
-<Callout type="info">
-  Den aktuellen Status Ihres Tarifs und Abonnements finden Sie unter **Einstellungen → Tarif & Abrechnung**.
+## Kontoeinstellungen
+
+Sie finden sie unter **Einstellungen → Kontoeinstellungen**. Hier verwalten Sie Ihr Profil (Foto, Name, Sprache, Zeitzone), Ihre E-Mail-Adresse und Ihr Passwort.
+
+### Anmeldemethoden
+
+Der Bereich **Anmeldemethoden** zeigt die beiden Wege, auf denen Sie sich anmelden können: **Passwort** und **Google**.
+
+- **Google verknüpfen** – geben Sie zur Bestätigung Ihr aktuelles Passwort ein und wählen Sie dann das Google-Konto aus, das Sie verknüpfen möchten. Danach können Sie sich mit **Mit Google fortfahren** anmelden.
+- Ist die E-Mail-Adresse Ihres Kontos bereits ein Google-Konto, müssen Sie nichts verknüpfen – verwenden Sie einfach **Mit Google fortfahren**.
+- **Trennen** – geben Sie zur Bestätigung Ihr Passwort ein. Nach dem Trennen können Sie sich nicht mehr mit diesem Google-Konto anmelden.
+
+<Callout type="warning">
+  Wenn Google Ihre **einzige** Anmeldemethode ist, können Sie die Verknüpfung noch nicht trennen. **Legen Sie zuerst ein Passwort fest** und trennen Sie dann – sonst würden Sie sich selbst aussperren.
 </Callout>
+
+### Ihr Konto löschen
+
+**Konto löschen** ganz unten in den Kontoeinstellungen löscht Ihr Konto endgültig. Sie werden aus allen Teams entfernt, und alle Ihre Sitzungen werden beendet. Zur Bestätigung geben Sie Ihr Passwort ein und tippen `DELETE`.
+
+- Teams, die Ihnen gehören und in denen **Sie das einzige Mitglied sind**, werden zusammen mit Ihrem Konto gelöscht, und ein etwaiges kostenpflichtiges Abonnement wird sofort gekündigt. Der Dialog listet diese Teams vorab auf.
+- Teams, die Ihnen gehören und **noch weitere Mitglieder haben**, werden nicht gelöscht. [Übertragen Sie die Inhaberschaft](/de/teams/members#inhaberschaft-übertragen) zuerst an ein Teammitglied und kehren Sie dann zurück.
+
+<Callout type="warning">
+  Das Löschen Ihres Kontos **kann nicht rückgängig gemacht werden**.
+</Callout>
+
+## Tarife
+
+Jedes Team hat seinen eigenen Tarif. Den aktuellen Tarif, den Abonnementstatus und den Leistungsumfang von Pro sehen Sie unter **Einstellungen → Tarif & Abrechnung**. Nur der Team-Inhaber kann upgraden, die Zahlungsmethode ändern oder kündigen – siehe [Mitglieder & Rollen](/de/teams/members#abrechnung).
+
+| | Free | Pro |
+| --- | --- | --- |
+| Preis | Kostenlos | **20 $ / Monat** oder **192 $ / Jahr** (20 % Rabatt) |
+| Teammitglieder | Bis zu 3 | Bis zu 50 |
+
+Free und Pro enthalten beide unbegrenzt viele Quizze und unbegrenzt viele Antworten. Pro bietet zusätzlich unter anderem eine [eigene Domain](/de/teams/custom-domain), [Datenexport](/de/results/export), Integrationen und mehr Teamplätze.
+
+### Kostenlose Testphase
+
+Neue Abonnenten erhalten eine **7-tägige kostenlose Testphase** von Pro. Zum Starten ist eine **Zahlungsmethode erforderlich**, während der Testphase wird Ihnen jedoch nichts berechnet, und Sie können jederzeit vor ihrem Ende kündigen. Nach Ablauf der Testphase beginnt das Abonnement im gewählten Abrechnungszeitraum.
+
+### Wenn eine Zahlung fehlschlägt
+
+| Situation | Was passiert |
+| --- | --- |
+| Die erste Abbuchung nach einer Testphase schlägt fehl | Pro wird **sofort entzogen**, und das Team wechselt zu Free |
+| Eine Verlängerung schlägt bei einem zahlenden Kunden fehl | Pro bleibt während einer **7-tägigen Kulanzfrist** aktiv, in der die Zahlung erneut versucht wird; ist sie danach noch offen, wechselt das Team zu Free |
+
+Wenn Sie den offenen Betrag begleichen oder erneut abonnieren, wird Pro wiederhergestellt.
+
+### Gemeinnützige Organisationen
+
+Eingetragene gemeinnützige und dem Gemeinwohl verpflichtete Organisationen können Pro kostenlos beantragen. Siehe das [RooQuiz Nonprofit Program](https://rooquiz.com/nonprofit).

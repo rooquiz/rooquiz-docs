@@ -39,6 +39,12 @@ Auf Ihrer Seite wird ein Button angezeigt; ein Klick darauf öffnet das Quiz in 
 <iframe src="https://YOUR_QUIZ_DOMAIN/a/YOUR_QUIZ_TOKEN?embed=1" width="100%" height="600" style="border:0;" title="RooQuiz"></iframe>
 ```
 
+Das iframe verweist immer auf die stabile Adresse `/a/<token>` des Quiz, nicht auf seinen benutzerdefinierten Pfad. Wenn Sie den benutzerdefinierten Pfad später ändern, funktioniert bereits auf Ihrer Website eingebundener Einbettungscode also weiterhin.
+
+## Die Zeile „Made with RooQuiz“
+
+Im **Free-Tarif** enthalten Einbettungen eine kleine Hinweiszeile **Made with RooQuiz**. Sie steht **außerhalb des iframes** auf Ihrer Seite: Inline- und Popup-Einbettungen rendern sie automatisch über `embed.js`, und der einfache iframe-Code enthält sie als `<p>` direkt unter dem iframe – lassen Sie sie dort stehen. Im **Pro-Tarif** lässt der generierte Code sie weg.
+
 ## Verfügbare Attribute
 
 | Attribut | Beschreibung |

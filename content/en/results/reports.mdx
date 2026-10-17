@@ -10,6 +10,14 @@ Each response can generate a **report** presenting the respondent's score, level
 - **Dimension scores**: Scores per dimension, often shown as a **radar chart**.
 - **Profile conclusions**: Personality/ability conclusions derived from dimension scores.
 
+### Hiding scores
+
+Turn on **Hide scores** in the editor's **Report** section to hide the overall score **and every dimension score** on the result page (score ring/number, percentile, progress bars, score rate), while keeping the levels and analysis. Admins still see the scores in the dashboard. If the summary template inserts the score variable, the score still shows there — remove it to hide scores completely.
+
+### Section order
+
+In the editor's report preview, move result-page sections such as **Dimension Analysis**, the **Booking section** and **Respondent feedback** up or down to set the order respondents see them in.
+
 ### AI Match grading
 
 In a **Knowledge Quiz**, a fill-in-the-blank question can be graded with **AI Match**: AI judges whether the answer is correct by semantic similarity instead of an exact text match. It is unlimited — there are no AI credits to buy. In a Scored Quiz, fill-in-the-blank answers are collected but not scored.
@@ -24,11 +32,20 @@ In a **Knowledge Quiz**, a fill-in-the-blank question can be graded with **AI Ma
   If a report stays in "generating" for a long time, refresh later; if the problem persists, try regenerating or contact support.
 </Callout>
 
+### Regenerating a report
+
+Open a response in [Response Records](/en/results/records) and click **Regenerate report** to rebuild it with the current result settings — for example after you change scoring rules or edit the answers. The activity timeline records who regenerated it.
+
 ## Viewing and delivery
 
 - **On-screen**: View directly in the dashboard; you can also let respondents view their own report via a share link.
 - **PDF download (Pro)**: Turn on **Let respondents download the full report (PDF)** so respondents can save their report as a PDF. It only applies to quizzes that require respondents to sign in or leave their details to see the report.
 - **Email delivery**: Send the report to respondents by email.
+
+## On the result page
+
+- **Respondent feedback**: under **Settings → Result page follow-up**, turn on **Show the feedback block** to ask one question on the result page (1–5 rating, single choice or free text). Answers land on the [lead](/en/leads), so whoever follows up knows what this person wants.
+- **Crowd compare**: under **Settings → Answering experience**, turn on **Show choice percentages** so respondents see what share of people picked the same option, e.g. "62% of people chose the same as you". It's off by default, shows only percentages, waits until the quiz has at least 10 submissions, and isn't available for Knowledge Quizzes.
 
 ## Result page CTA button
 

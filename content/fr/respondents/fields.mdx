@@ -5,7 +5,11 @@ description: "Les champs étendus recueillent les informations souhaitées au-de
 
 Les **champs étendus** sont les informations supplémentaires que vous souhaitez obtenir des répondants au-delà du nom et de l'e-mail standard : matricule étudiant, entreprise, ville, numéro de téléphone. Une fois configurés, les répondants sont invités à les remplir **lors de leur première connexion**.
 
-Les deux réglages se trouvent dans **Répondants → Paramètres des répondants**.
+<Callout type="info">
+  Les champs étendus ne sont recueillis qu'auprès des répondants **connectés à un compte** : quiz réglés sur **Se connecter pour répondre**, ou sur **E-mail requis pour voir le rapport** avec **Vérifier l'e-mail avant d'afficher le rapport** activé.
+</Callout>
+
+Ces réglages se trouvent dans **Répondants → Paramètres des répondants**.
 
 ## Champs étendus
 
@@ -24,7 +28,7 @@ Les deux réglages se trouvent dans **Répondants → Paramètres des répondant
 ### Options par champ
 
 - **Obligatoire** : la personne ne peut pas continuer sans le remplir.
-- **Unique** : la valeur ne doit se répéter **nulle part dans l'organisation**. Idéal pour les identifiants naturellement uniques, comme un numéro d'étudiant.
+- **Unique** : la valeur ne doit se répéter **nulle part dans l'équipe**. Idéal pour les identifiants naturellement uniques, comme un numéro d'étudiant.
 - **Texte indicatif** : l'indication grisée affichée dans le champ de saisie.
 - **Expression régulière** (texte uniquement) : une expression régulière JavaScript **sans les barres obliques qui l'entourent**, par exemple `^1\d{10}$`.
 - **Autoriser les choix multiples** (liste déroulante uniquement) : permet de choisir plusieurs valeurs.
@@ -37,6 +41,10 @@ Les champs s'affichent sous forme d'accordéon ; utilisez **Monter / Descendre**
 <Callout type="warning">
   Lorsque vous supprimez la définition d'un champ, les valeurs déjà soumises par les répondants **restent dans la base de données** : elles ne sont simplement plus affichées. La boîte de dialogue de confirmation indique combien de définitions seront supprimées.
 </Callout>
+
+## Inscription
+
+Activez **Bloquer les nouvelles inscriptions** pour n'autoriser la connexion qu'aux répondants déjà présents dans votre liste. Les nouvelles adresses e-mail ne peuvent ni s'inscrire d'elles-mêmes ni débloquer un rapport par e-mail.
 
 ## Thème d'avatar
 

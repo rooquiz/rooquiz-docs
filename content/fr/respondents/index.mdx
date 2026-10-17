@@ -23,7 +23,14 @@ Un **répondant** est le profil de compte d'une personne qui a passé vos quiz :
 | **E-mail vérifié** | Indique si la personne a vérifié son adresse |
 | **Créé le** | La date de création du profil |
 
+Deux autres colonnes couvrent les autorisations d'envoi d'e-mails :
+
+- **Consentement marketing** — **A consenti** ou **Pas de consentement**, recueilli auprès du répondant. Lorsqu'une personne vous demande directement de ne plus lui écrire, utilisez **Retirer le consentement** : elle est exclue des exports et des connecteurs filtrés sur le consentement, et seul le répondant peut redonner son consentement.
+- **Abonnement e-mail** — **Abonné** ou **Désabonné**.
+
 Si vous avez configuré des [champs étendus](/fr/respondents/fields), ils apparaissent également sous forme de colonnes supplémentaires.
+
+Les **filtres** portent sur Nom, E-mail, ID du répondant, Statut, Source, E-mail vérifié, Consentement marketing, Abonnement e-mail et Créé le. L'**export** fonctionne comme pour les réponses : consultez [Exporter les données](/fr/results/export).
 
 ## Les trois sources
 
@@ -37,6 +44,14 @@ La **Source** est enregistrée à la **création** du profil et ne change plus e
 
 - **Ajouter un répondant** : saisissez un nom et un e-mail ; le mot de passe est facultatif. Pratique pour importer d'abord une liste et laisser les personnes définir leur mot de passe plus tard.
 - **Désactiver / Activer** : une personne désactivée ne peut plus se connecter au [portail](/fr/respondents/portal), mais toutes ses soumissions passées sont conservées. Adapté aux anciens clients ou aux remboursements.
+
+## Changer l'adresse e-mail
+
+Dans **Détails du répondant**, cliquez sur **Modifier** à côté de l'e-mail. Si le répondant avait vérifié son adresse, la modification **efface la vérification et dissocie la connexion Google** : il doit vérifier la nouvelle adresse avant de pouvoir se reconnecter. Ses soumissions, leads et réservations restent rattachés.
+
+## Écrire aux répondants
+
+**Envoyer un e-mail** ouvre **Écrire aux répondants**, qui envoie un e-mail aux répondants correspondant à votre filtre actuel. Il part de votre propre **service d'envoi** (Gmail ou SMTP, configuré dans les [Connecteurs](/fr/connectors)) et ne peut pas être rappelé une fois envoyé. Le forfait Free couvre jusqu'à 100 destinataires par jour et 500 par mois ; Pro permet jusqu'à 5 000 par jour. Les envois passés sont listés dans **Historique des e-mails**.
 
 ## Mettre à la corbeille
 

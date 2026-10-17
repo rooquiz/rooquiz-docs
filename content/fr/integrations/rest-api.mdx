@@ -45,6 +45,16 @@ Authorization: Bearer rqp_acct_xxx...
 
 L'URL de base ressemble à `https://your-domain/api/v1`.
 
+### Spécification OpenAPI
+
+La description complète et lisible par machine de chaque point de terminaison est publiée sous forme de document **OpenAPI 3.1** à l'adresse :
+
+```bash
+GET /api/v1/openapi.json
+```
+
+Elle ne nécessite aucune clé API et ne contient aucun secret : vous pouvez donc la charger directement dans Postman, Insomnia ou un générateur de client. Les propriétaires d'équipe peuvent aussi cliquer sur **Ouvrir le débogueur d'API** sur la page **Clés API** pour tester les points de terminaison dans le navigateur.
+
 ### Lister les formulaires
 
 ```bash

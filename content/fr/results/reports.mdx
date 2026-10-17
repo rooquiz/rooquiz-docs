@@ -10,6 +10,14 @@ Chaque réponse peut générer un **rapport** présentant le score du répondant
 - **Scores par dimension** : les scores de chaque dimension, souvent présentés sous forme de **graphique radar**.
 - **Conclusions de profil** : des conclusions sur la personnalité ou les compétences, déduites des scores par dimension.
 
+### Masquer les scores
+
+Activez **Masquer les scores** dans la section **Rapport** de l'éditeur pour masquer le score global **et chaque score de dimension** sur la page de résultats (anneau/chiffre du score, percentile, barres de progression, taux de réussite), tout en conservant les niveaux et l'analyse. Les administrateurs voient toujours les scores dans le tableau de bord. Si le modèle de synthèse insère la variable du score, le score continue de s'y afficher : retirez-la pour masquer complètement les scores.
+
+### Ordre des sections
+
+Dans l'aperçu du rapport de l'éditeur, déplacez vers le haut ou vers le bas les sections de la page de résultats, comme **Analyse par dimension**, la **Section réservation** et le **Retour du répondant**, pour définir l'ordre dans lequel les répondants les voient.
+
 ### Correction par Correspondance IA
 
 Dans un **Quiz de connaissances**, une question Texte à trous peut être corrigée avec la **Correspondance IA** : l'IA juge si la réponse est correcte selon sa similarité sémantique, plutôt que par une correspondance exacte du texte. C'est illimité : il n'y a aucun crédit IA à acheter. Dans un Quiz noté, les réponses aux Textes à trous sont recueillies mais pas notées.
@@ -24,11 +32,20 @@ Dans un **Quiz de connaissances**, une question Texte à trous peut être corrig
   Si un rapport reste longtemps « en cours de génération », actualisez plus tard ; si le problème persiste, essayez de le régénérer ou contactez le support.
 </Callout>
 
+### Régénérer un rapport
+
+Ouvrez une réponse dans les [Réponses](/fr/results/records) et cliquez sur **Régénérer le rapport** pour la reconstruire avec les paramètres de résultat actuels, par exemple après avoir modifié les règles de notation ou les réponses. La chronologie d'activité indique qui l'a régénéré.
+
 ## Consultation et diffusion
 
 - **À l'écran** : consultez-le directement dans le tableau de bord ; vous pouvez aussi permettre aux répondants de consulter leur propre rapport via un lien de partage.
 - **Téléchargement PDF (Pro)** : activez **Autoriser les répondants à télécharger le rapport complet (PDF)** pour que les répondants puissent enregistrer leur rapport en PDF. Cela ne s'applique qu'aux quiz qui demandent aux répondants de se connecter ou de laisser leurs coordonnées pour voir le rapport.
 - **Envoi par e-mail** : envoyez le rapport aux répondants par e-mail.
+
+## Sur la page de résultats
+
+- **Retour du répondant** : dans **Paramètres → Suivi de la page de résultats**, activez **Afficher le bloc de retour** pour poser une question sur la page de résultats (note de 1 à 5, choix unique ou texte libre). Les réponses arrivent sur le [lead](/fr/leads) : la personne chargée du suivi sait ainsi ce que cette personne veut.
+- **Comparaison avec les autres** : dans **Paramètres → Expérience de réponse**, activez **Afficher les pourcentages par option** pour que les répondants voient la part des personnes ayant choisi la même option, par ex. « 62 % des personnes ont choisi comme vous ». Désactivée par défaut, elle n'affiche que des pourcentages, attend que le quiz ait reçu au moins 10 réponses et n'est pas disponible pour les Quiz de connaissances.
 
 ## Bouton CTA de la page de résultats
 

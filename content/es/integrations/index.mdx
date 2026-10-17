@@ -1,6 +1,6 @@
 ---
 title: Integraciones y API
-description: 'Para desarrolladores: accede a RooQuiz desde tu propio código o desde un cliente de AI. La API REST de solo lectura obtiene formularios y respuestas, y el servidor MCP permite crear y editar quizzes.'
+description: 'Para desarrolladores: accede a RooQuiz desde tu propio código o desde un cliente de AI. La API REST de solo lectura obtiene formularios y respuestas, y el servidor MCP permite que tu propia AI cree quizzes y gestione leads y reservas.'
 sidebarTitle: Descripción general
 ---
 
@@ -11,8 +11,12 @@ Esta sección es para **desarrolladores**: cómo acceder a RooQuiz desde tu prop
   <Card title="Integración MCP" href="/es/integrations/mcp" />
 </Cards>
 
-- **API REST**: obtén formularios y respuestas con una clave de API de cuenta. Ideal para tus propios paneles o para sincronizar con un almacén de datos.
-- **Integración MCP**: conecta un cliente de AI como Claude a tu equipo para que pueda crear, consultar y modificar quizzes directamente.
+- **API REST**: obtén formularios y respuestas con una clave de API de cuenta. Ideal para tus propios paneles o para sincronizar con un almacén de datos. Incluye una especificación OpenAPI.
+- **Integración MCP**: conecta un cliente de AI como ChatGPT o Claude a tu equipo para que pueda crear, consultar y modificar quizzes, trabajar tus leads (estado, responsable, etiquetas, comentarios) y gestionar reservas directamente.
+
+<Callout type="info">
+  RooQuiz no tiene un generador de quizzes con AI integrado. Para crear un quiz con AI, conecta **tu propio cliente de AI** mediante [MCP](/es/integrations/mcp) y pídeselo; por ejemplo, que parta de una plantilla y añada preguntas.
+</Callout>
 
 ## Integrar sin código
 

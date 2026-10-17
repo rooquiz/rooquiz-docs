@@ -23,7 +23,14 @@ Ein **Teilnehmer** ist das Kontoprofil einer Person, die Ihre Quizze absolviert 
 | **E-Mail verifiziert** | Ob die Person ihre Adresse bestätigt hat |
 | **Erstellt am** | Wann das Profil angelegt wurde |
 
+Zwei weitere Spalten betreffen die E-Mail-Berechtigungen:
+
+- **Marketing-Einwilligung** – **Eingewilligt** oder **Keine Einwilligung**, vom Teilnehmer selbst erfasst. Wenn jemand Sie direkt bittet, ihm keine E-Mails mehr zu senden, verwenden Sie **Einwilligung widerrufen**: Die Person wird von nach Einwilligung gefilterten Exporten und Connectors ausgeschlossen, und nur der Teilnehmer selbst kann erneut einwilligen.
+- **E-Mail-Abo** – **Abonniert** oder **Abgemeldet**.
+
 Wenn Sie [Zusatzfelder](/de/respondents/fields) konfiguriert haben, erscheinen diese ebenfalls als zusätzliche Spalten.
+
+**Filter** gibt es für Name, E-Mail, Teilnehmer-ID, Status, Quelle, E-Mail verifiziert, Marketing-Einwilligung, E-Mail-Abo und Erstellt am. **Exportieren** funktioniert genauso wie bei Antworten – siehe [Daten exportieren](/de/results/export).
 
 ## Die drei Quellen
 
@@ -37,6 +44,14 @@ Die **Quelle** wird beim **Anlegen** des Profils geschrieben und ändert sich da
 
 - **Teilnehmer hinzufügen** – geben Sie Name und E-Mail ein; das Passwort ist optional. Praktisch, um zuerst eine Teilnehmerliste zu importieren und die Personen ihr Passwort später selbst festlegen zu lassen.
 - **Deaktivieren / Aktivieren** – eine deaktivierte Person kann sich nicht im [Portal](/de/respondents/portal) anmelden, aber all ihre bisherigen Einsendungen bleiben erhalten. Sinnvoll für ehemalige Kunden oder Rückerstattungen.
+
+## E-Mail-Adresse eines Teilnehmers ändern
+
+Klicken Sie in den **Teilnehmer-Details** neben der E-Mail-Adresse auf **Ändern**. Hatte der Teilnehmer seine Adresse bestätigt, **hebt die Änderung die Bestätigung auf und trennt die Google-Anmeldung** – er muss die neue Adresse bestätigen, bevor er sich wieder anmelden kann. Seine Einsendungen, Leads und Buchungen bleiben zugeordnet.
+
+## Teilnehmern E-Mails senden
+
+**E-Mail senden** öffnet **Teilnehmenden schreiben** und sendet eine E-Mail an die Teilnehmer, die Ihrem aktuellen Filter entsprechen. Sie wird über Ihren eigenen **Versanddienst** verschickt (Gmail oder SMTP, eingerichtet unter [Connectors](/de/connectors)) und kann nach dem Senden nicht zurückgerufen werden. Der Free-Tarif umfasst bis zu 100 Empfänger pro Tag und 500 pro Monat; Pro erlaubt bis zu 5.000 pro Tag. Frühere Sendungen finden Sie unter **E-Mail-Verlauf**.
 
 ## In den Papierkorb verschieben
 

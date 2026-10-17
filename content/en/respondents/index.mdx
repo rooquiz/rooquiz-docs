@@ -23,7 +23,14 @@ A **respondent** is the account profile of someone who has taken your quizzes �
 | **Email Verified** | Whether they verified their address |
 | **Created At** | When the profile was created |
 
+Two more columns cover email permissions:
+
+- **Marketing consent** — **Consented** or **Not consented**, captured from the respondent. When someone asks you directly to stop emailing them, use **Withdraw consent**: they're excluded from consent-filtered exports and connectors, and only the respondent can give consent again.
+- **Email subscription** — **Subscribed** or **Unsubscribed**.
+
 If you've configured [extended fields](/en/respondents/fields), they appear as extra columns too.
+
+**Filters** cover Name, Email, Respondent ID, Status, Source, Email Verified, Marketing consent, Email subscription and Created At. **Export** works the same as for responses — see [Exporting data](/en/results/export).
 
 ## The three sources
 
@@ -37,6 +44,14 @@ If you've configured [extended fields](/en/respondents/fields), they appear as e
 
 - **Add Respondent** — enter a name and email; the password is optional. Useful for importing a roster first and letting people set their own password later.
 - **Disable / Enable** — a disabled person cannot sign in to the [portal](/en/respondents/portal), but all their past submissions are kept. Good for former clients or refunds.
+
+## Changing a respondent's email
+
+In **Respondent Details**, click **Change** next to the email. If the respondent had verified their address, changing it **clears the verification and unlinks Google sign-in** — they must verify the new address before signing in again. Their submissions, leads and bookings stay attached.
+
+## Emailing respondents
+
+**Send email** opens **Email respondents**, which sends one email to the respondents matching your current filter. It goes out from your own **sending service** (Gmail or SMTP, set up under [Connectors](/en/connectors)) and can't be recalled once sent. The Free plan covers up to 100 recipients a day and 500 a month; Pro allows up to 5,000 a day. Past sends are listed under **Email history**.
 
 ## Moving to trash
 

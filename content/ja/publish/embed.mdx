@@ -39,6 +39,12 @@ description: 'クイズを自分のウェブサイトに直接埋め込めば、
 <iframe src="https://YOUR_QUIZ_DOMAIN/a/YOUR_QUIZ_TOKEN?embed=1" width="100%" height="600" style="border:0;" title="RooQuiz"></iframe>
 ```
 
+iframe は常にクイズの固定アドレス `/a/<token>` を指し、カスタムパスは使いません。そのため、後でカスタムパスを変更しても、すでにサイトに貼り付けてある埋め込みコードが壊れることはありません。
+
+## 「Made with RooQuiz」の表記
+
+**Free プラン** では、埋め込みに小さな **Made with RooQuiz** のクレジット行が残ります。この行は **iframe の外側**、つまりあなたのページ上に表示されます。インライン埋め込みとポップアップ埋め込みでは `embed.js` が自動で表示し、プレーン iframe のコードでは iframe のすぐ下に `<p>` として含まれています。そのまま残してください。**Pro** では、生成されるコードにこの行は含まれません。
+
 ## 使える属性
 
 | 属性 | 説明 |

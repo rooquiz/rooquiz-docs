@@ -39,6 +39,12 @@ description: '除了分享链接，你还可以把测验直接嵌进自己的网
 <iframe src="https://你的作答域名/a/你的测验代码?embed=1" width="100%" height="600" style="border:0;" title="RooQuiz"></iframe>
 ```
 
+iframe 始终指向测评稳定的 `/a/<token>` 地址,而不是它的自定义路径,所以之后改了自定义路径,也不会让已经贴在你网站上的嵌入代码失效。
+
+## 「Made with RooQuiz」小字
+
+在**免费版**上,嵌入会保留一行小小的 **Made with RooQuiz** 署名。它位于 **iframe 之外**、在你自己的页面上:内嵌和弹窗方式由 `embed.js` 自动渲染;纯 iframe 代码则在 iframe 正下方附带一个 `<p>`——请保留它。在 **Pro** 上,生成的代码不包含这行字。
+
 ## 可用属性
 
 | 属性 | 说明 |

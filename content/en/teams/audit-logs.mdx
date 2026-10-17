@@ -6,7 +6,7 @@ description: 'Audit logs record the significant operations in a team — who did
 **Audit logs** record the significant operations in your team: who did what, to which object, when, and whether it succeeded. Find them under **Settings → Audit Logs**.
 
 <Callout type="warning">
-  **Only the team owner and admins can view audit logs.** Members and viewers see a notice instead.
+  **Only the team owner and admins can view audit logs.** The **Audit Logs** entry doesn't appear in Settings for members and viewers, and opening the page directly shows a notice instead.
 </Callout>
 
 ## Columns
@@ -25,15 +25,25 @@ Click any row to expand its **Details**. Different actions carry different field
 
 Broadly:
 
-- **Team** — delete team, transfer ownership, plan change.
+- **Team** — team updates, delete team, transfer ownership, plan change.
 - **Members** — invite, remove, leave, role change, disable / enable.
 - **Quizzes** — create, update, trash, restore, permanent delete, ban / unban.
 - **Leads and respondents** — trash, restore, permanent delete.
 - **Connectors** — create, update, delete.
+- **Email** — sending services (update, verify, delete) and bulk email campaigns to respondents (create, cancel).
 - **Credentials** — API keys and MCP tokens: create, revoke, restore, delete.
+- **MCP** — tool calls made by AI clients through [MCP](/en/integrations/mcp).
 - **Usage** — [data exports](/en/results/export).
 
 Filter by **action** and **status** at the top to answer questions like "who exported data last week".
+
+## Retention
+
+| | Free | Pro |
+| --- | --- | --- |
+| Logs kept for | 90 days | 365 days |
+
+Older entries are cleaned up automatically.
 
 <Callout type="info">
   Logs are **read-only** — they can't be edited or deleted. An audit log you can alter isn't worth much.

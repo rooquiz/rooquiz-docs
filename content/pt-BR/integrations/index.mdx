@@ -1,6 +1,6 @@
 ---
 title: Integrações e API
-description: 'Para desenvolvedores: acesse o RooQuiz pelo seu próprio código ou por um cliente de IA. A API REST somente leitura retorna formulários e respostas, e o servidor MCP permite criar e editar quizzes.'
+description: 'Para desenvolvedores: acesse o RooQuiz pelo seu próprio código ou por um cliente de IA. A API REST somente leitura retorna formulários e respostas, e o servidor MCP permite que a sua própria IA crie quizzes e trabalhe leads e agendamentos.'
 sidebarTitle: Visão geral
 ---
 
@@ -11,8 +11,12 @@ Esta seção é para **desenvolvedores** — como acessar o RooQuiz pelo seu pr�
   <Card title="Integração MCP" href="/pt-BR/integrations/mcp" />
 </Cards>
 
-- **API REST** — obtenha formulários e respostas com uma chave de API da conta. Ideal para seus próprios painéis ou para sincronizar com um data warehouse.
-- **Integração MCP** — conecte um cliente de IA como o Claude à sua equipe para que ele crie, consulte e modifique quizzes diretamente.
+- **API REST** — obtenha formulários e respostas com uma chave de API da conta. Ideal para seus próprios painéis ou para sincronizar com um data warehouse. Inclui uma especificação OpenAPI.
+- **Integração MCP** — conecte um cliente de IA como o ChatGPT ou o Claude à sua equipe para que ele crie, consulte e modifique quizzes, trabalhe seus leads (status, responsável, tags, comentários) e cuide dos agendamentos diretamente.
+
+<Callout type="info">
+  O RooQuiz não tem um gerador de quizzes por IA embutido. Para montar um quiz com IA, conecte o **seu próprio cliente de IA** via [MCP](/pt-BR/integrations/mcp) e peça a ele — por exemplo, para partir de um modelo e adicionar questões.
+</Callout>
 
 ## Integração sem código
 

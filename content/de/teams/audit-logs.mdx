@@ -6,7 +6,7 @@ description: 'Audit-Logs erfassen die wichtigen Vorgänge in einem Team – wer 
 **Audit-Logs** erfassen die wichtigen Vorgänge in Ihrem Team: wer was an welchem Objekt wann getan hat und ob es erfolgreich war. Sie finden sie unter **Einstellungen → Audit-Logs**.
 
 <Callout type="warning">
-  **Nur Eigentümer und Administratoren des Teams können Audit-Protokolle einsehen.** Mitglieder und Betrachter sehen stattdessen einen Hinweis.
+  **Nur Eigentümer und Administratoren des Teams können Audit-Protokolle einsehen.** Für Mitglieder und Betrachter erscheint der Eintrag **Audit-Logs** nicht in den Einstellungen, und wer die Seite direkt öffnet, sieht stattdessen einen Hinweis.
 </Callout>
 
 ## Spalten
@@ -25,15 +25,25 @@ Klicken Sie auf eine beliebige Zeile, um ihre **Details** aufzuklappen. Verschie
 
 Im Großen und Ganzen:
 
-- **Team** – Team löschen, Inhaberschaft übertragen, Planänderung.
+- **Team** – Team-Aktualisierungen, Team löschen, Inhaberschaft übertragen, Planänderung.
 - **Mitglieder** – einladen, entfernen, austreten, Rollenänderung, deaktivieren / aktivieren.
 - **Quizze** – erstellen, aktualisieren, in den Papierkorb verschieben, wiederherstellen, endgültig löschen, sperren / entsperren.
 - **Leads und Teilnehmer** – in den Papierkorb verschieben, wiederherstellen, endgültig löschen.
 - **Connectors** – erstellen, aktualisieren, löschen.
+- **E-Mail** – Versanddienste (aktualisieren, verifizieren, löschen) und Massen-E-Mail-Kampagnen an Teilnehmer (erstellen, abbrechen).
 - **Zugangsdaten** – API-Schlüssel und MCP-Tokens: erstellen, widerrufen, wiederherstellen, löschen.
+- **MCP** – Tool-Aufrufe, die KI-Clients über [MCP](/de/integrations/mcp) ausführen.
 - **Nutzung** – [Datenexporte](/de/results/export).
 
 Filtern Sie oben nach **Aktion** und **Status**, um Fragen wie „Wer hat letzte Woche Daten exportiert?“ zu beantworten.
+
+## Aufbewahrung
+
+| | Free | Pro |
+| --- | --- | --- |
+| Aufbewahrungsdauer der Logs | 90 Tage | 365 Tage |
+
+Ältere Einträge werden automatisch bereinigt.
 
 <Callout type="info">
   Logs sind **schreibgeschützt** – sie können weder bearbeitet noch gelöscht werden. Ein Audit-Log, das sich ändern lässt, ist nicht viel wert.

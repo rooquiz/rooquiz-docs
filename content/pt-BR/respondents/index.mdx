@@ -23,7 +23,14 @@ Um **respondente** é o perfil de conta de alguém que fez seus quizzes — nome
 | **E-mail verificado** | Se a pessoa verificou o endereço |
 | **Criado em** | Quando o perfil foi criado |
 
+Mais duas colunas tratam das permissões de e-mail:
+
+- **Consentimento de marketing** — **Consentiu** ou **Sem consentimento**, conforme informado pelo respondente. Quando alguém pedir diretamente para não receber mais seus e-mails, use **Revogar consentimento**: a pessoa é excluída das exportações e dos conectores filtrados por consentimento, e só o próprio respondente pode dar o consentimento de novo.
+- **Inscrição de e-mail** — **Inscrito** ou **Descadastrado**.
+
 Se você configurou [campos estendidos](/pt-BR/respondents/fields), eles também aparecem como colunas extras.
+
+Os **Filtros** cobrem Nome, E-mail, ID do respondente, Status, Origem, E-mail verificado, Consentimento de marketing, Inscrição de e-mail e Criado em. **Exportar** funciona da mesma forma que para as respostas — veja [Exportação de dados](/pt-BR/results/export).
 
 ## As três origens
 
@@ -37,6 +44,14 @@ A **Origem** é gravada quando o perfil é **criado** e nunca muda depois. Ela r
 
 - **Adicionar respondente** — informe um nome e um e-mail; a senha é opcional. Útil para importar uma lista primeiro e deixar que as pessoas definam a própria senha depois.
 - **Desativar / Ativar** — uma pessoa desativada não consegue entrar no [portal](/pt-BR/respondents/portal), mas todos os envios anteriores dela são mantidos. Bom para ex-clientes ou reembolsos.
+
+## Alterar o e-mail de um respondente
+
+Em **Detalhes do respondente**, clique em **Alterar** ao lado do e-mail. Se o respondente tinha verificado o endereço, a alteração **remove a verificação e desvincula o login com o Google** — ele precisa verificar o novo endereço antes de entrar de novo. Os envios, leads e agendamentos dele continuam vinculados.
+
+## Enviar e-mail aos respondentes
+
+**Enviar e-mail** abre **Enviar e-mail aos respondentes**, que envia um e-mail aos respondentes que correspondem ao filtro atual. Ele sai pelo seu próprio **serviço de envio** (Gmail ou SMTP, configurado em [Conectores](/pt-BR/connectors)) e não pode ser cancelado depois de enviado. O plano Free cobre até 100 destinatários por dia e 500 por mês; o Pro permite até 5.000 por dia. Os envios anteriores ficam listados em **Histórico de e-mails**.
 
 ## Mover para a lixeira
 

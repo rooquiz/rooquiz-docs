@@ -5,7 +5,11 @@ description: 'Campos estendidos coletam dados além de nome e e-mail — matríc
 
 Os **campos estendidos** são os dados extras que você quer dos respondentes além do nome e do e-mail padrão — número de matrícula, empresa, cidade, telefone. Depois de configurados, os respondentes precisam preenchê-los **no primeiro login**.
 
-As duas configurações ficam em **Respondentes → Configurações de respondentes**.
+<Callout type="info">
+  Os campos estendidos só são coletados de respondentes **conectados a uma conta**: quizzes configurados como **Entrar para responder**, ou **E-mail obrigatório para ver o relatório** com **Verificar o e-mail antes de mostrar o relatório** ativado.
+</Callout>
+
+Essas configurações ficam em **Respondentes → Configurações de respondentes**.
 
 ## Campos estendidos
 
@@ -24,7 +28,7 @@ As duas configurações ficam em **Respondentes → Configurações de responden
 ### Opções por campo
 
 - **Obrigatório** — a pessoa não consegue continuar sem preenchê-lo.
-- **Único** — o valor não pode se repetir **em nenhum lugar da organização**. Bom para identificadores naturalmente únicos, como o número de matrícula.
+- **Único** — o valor não pode se repetir **em nenhum lugar da equipe**. Bom para identificadores naturalmente únicos, como o número de matrícula.
 - **Placeholder** — a dica em cinza dentro do campo.
 - **Regex** (somente texto) — uma regex JavaScript **sem as barras ao redor**, por exemplo `^1\d{10}$`.
 - **Permitir múltiplos** (somente lista suspensa) — permite escolher mais de um valor.
@@ -37,6 +41,10 @@ Os campos são exibidos em acordeão; use **Mover para cima / Mover para baixo**
 <Callout type="warning">
   Ao excluir a definição de um campo, os valores que os respondentes já enviaram **permanecem no banco de dados** — eles apenas deixam de ser exibidos. A caixa de confirmação informa quantas definições serão removidas.
 </Callout>
+
+## Cadastro
+
+Ative **Bloquear novos cadastros** para permitir que entrem apenas os respondentes que já estão na sua lista. Novos endereços de e-mail não conseguem se cadastrar sozinhos nem desbloquear um relatório por e-mail.
 
 ## Tema de avatar
 

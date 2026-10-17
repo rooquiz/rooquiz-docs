@@ -5,7 +5,11 @@ description: 'Extended fields collect the extra details you want beyond name and
 
 **Extended fields** are the extra details you want from respondents beyond the standard name and email — student ID, company, city, phone number. Once configured, respondents are asked to fill them in **on first sign-in**.
 
-Both settings live under **Respondents → Respondent Settings**.
+<Callout type="info">
+  Extended fields are only collected from respondents **signed in to an account**: quizzes set to **Sign in to answer**, or **Email required to see the report** with **Verify the email before showing the report** turned on.
+</Callout>
+
+These settings live under **Respondents → Respondent Settings**.
 
 ## Extended fields
 
@@ -24,7 +28,7 @@ Both settings live under **Respondents → Respondent Settings**.
 ### Per-field options
 
 - **Required** — they can't continue without it.
-- **Unique** — the value must not repeat **anywhere in the organization**. Good for naturally unique identifiers like a student number.
+- **Unique** — the value must not repeat **anywhere in the team**. Good for naturally unique identifiers like a student number.
 - **Placeholder** — the grey hint inside the input.
 - **Regex** (text only) — a JavaScript regex **without the surrounding slashes**, e.g. `^1\d{10}$`.
 - **Allow multiple** (dropdown only) — lets people pick more than one value.
@@ -37,6 +41,10 @@ Fields are shown as an accordion; use **Move up / Move down** to reorder them. T
 <Callout type="warning">
   When you delete a field definition, values respondents already submitted **stay in the database** — they're simply no longer displayed. The confirmation dialog tells you how many definitions will go.
 </Callout>
+
+## Registration
+
+Turn on **Disable new sign-ups** to allow only respondents already on your list to sign in. New email addresses can't self-register or unlock a report by email.
 
 ## Avatar theme
 

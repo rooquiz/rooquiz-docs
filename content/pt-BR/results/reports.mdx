@@ -10,6 +10,14 @@ Cada resposta pode gerar um **relatório** que apresenta a pontuação, o nível
 - **Pontuações por dimensão**: pontuações de cada dimensão, geralmente exibidas em um **gráfico de radar**.
 - **Conclusões de perfil**: conclusões de personalidade/habilidade derivadas das pontuações por dimensão.
 
+### Ocultar pontuações
+
+Ative **Ocultar pontuações** na seção **Relatório** do editor para ocultar a pontuação geral **e todas as pontuações por dimensão** na página de resultado (anel/número da pontuação, percentil, barras de progresso, taxa de acerto), mantendo os níveis e a análise. Os administradores continuam vendo as pontuações no painel. Se o modelo de resumo insere a variável da pontuação, ela continua aparecendo ali — remova-a para ocultar as pontuações por completo.
+
+### Ordem das seções
+
+Na pré-visualização do relatório no editor, mova para cima ou para baixo as seções da página de resultado, como **Análise por Dimensões**, a **Seção de agendamento** e o **Feedback do respondente**, para definir a ordem em que os respondentes as veem.
+
 ### Correção por Correspondência por IA
 
 Em um **Quiz de conhecimento**, uma questão de preencher a lacuna pode ser corrigida com a **Correspondência por IA**: a IA avalia se a resposta está correta por similaridade semântica, em vez de exigir uma correspondência exata do texto. É ilimitada — não há créditos de IA para comprar. Em um Quiz com pontuação, as respostas de preencher a lacuna são coletadas, mas não pontuadas.
@@ -24,11 +32,20 @@ Em um **Quiz de conhecimento**, uma questão de preencher a lacuna pode ser corr
   Se um relatório ficar em "gerando" por muito tempo, atualize a página mais tarde; se o problema persistir, tente gerar novamente ou entre em contato com o suporte.
 </Callout>
 
+### Gerar o relatório novamente
+
+Abra uma resposta em [Registros de respostas](/pt-BR/results/records) e clique em **Gerar relatório novamente** para refazê-lo com as configurações de resultado atuais — por exemplo, depois de alterar as regras de pontuação ou editar as respostas. A linha do tempo de atividades registra quem gerou o relatório novamente.
+
 ## Visualização e entrega
 
 - **Na tela**: veja diretamente no painel; você também pode permitir que os respondentes vejam o próprio relatório por um link de compartilhamento.
 - **Download em PDF (Pro)**: ative **Permitir que os respondentes baixem o relatório completo (PDF)** para que os respondentes possam salvar o relatório em PDF. Isso só se aplica a quizzes que exigem que os respondentes entrem ou deixem seus dados para ver o relatório.
 - **Envio por e-mail**: envie o relatório aos respondentes por e-mail.
+
+## Na página de resultado
+
+- **Feedback do respondente**: em **Configurações → Acompanhamento da página de resultados**, ative **Mostrar o bloco de feedback** para fazer uma pergunta na página de resultado (nota de 1 a 5, escolha única ou texto livre). As respostas vão para o [lead](/pt-BR/leads), para que quem fizer o acompanhamento saiba o que essa pessoa quer.
+- **Comparação com outros respondentes**: em **Configurações → Experiência de resposta**, ative **Mostrar porcentagens das opções** para que os respondentes vejam qual parcela das pessoas escolheu a mesma opção, por exemplo "62% das pessoas escolheram o mesmo que você". Fica desativada por padrão, mostra apenas porcentagens, espera o quiz ter pelo menos 10 envios e não está disponível para Quizzes de conhecimento.
 
 ## Botão de CTA da página de resultado
 

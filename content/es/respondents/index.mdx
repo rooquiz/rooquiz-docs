@@ -23,7 +23,14 @@ Un **participante** es el perfil de cuenta de alguien que ha respondido a tus qu
 | **Correo verificado** | Si verificó su dirección |
 | **Fecha de creación** | Cuándo se creó el perfil |
 
+Otras dos columnas cubren los permisos de correo:
+
+- **Consentimiento de marketing**: **Consintió** o **Sin consentimiento**, según lo que indicó el participante. Cuando alguien te pida directamente que dejes de escribirle, usa **Revocar consentimiento**: queda excluido de las exportaciones y los conectores filtrados por consentimiento, y solo el propio participante puede volver a dar su consentimiento.
+- **Suscripción de correo**: **Suscrito** o **Dado de baja**.
+
 Si has configurado [campos extendidos](/es/respondents/fields), también aparecen como columnas adicionales.
+
+Los **Filtros** cubren Nombre, Correo electrónico, ID del participante, Estado, Origen, Correo verificado, Consentimiento de marketing, Suscripción de correo y Fecha de creación. **Exportar** funciona igual que con las respuestas; consulta [Exportar datos](/es/results/export).
 
 ## Los tres orígenes
 
@@ -37,6 +44,14 @@ El **Origen** se registra cuando se **crea** el perfil y no cambia nunca despué
 
 - **Agregar participante**: introduce un nombre y un correo; la contraseña es opcional. Útil para importar primero una lista y dejar que cada persona defina su contraseña más adelante.
 - **Desactivar / Activar**: una persona desactivada no puede iniciar sesión en el [portal](/es/respondents/portal), pero se conservan todos sus envíos anteriores. Útil para antiguos clientes o reembolsos.
+
+## Cambiar el correo de un participante
+
+En **Detalles del participante**, haz clic en **Cambiar** junto al correo. Si el participante había verificado su dirección, cambiarla **borra la verificación y desvincula el inicio de sesión con Google**: tendrá que verificar la nueva dirección antes de volver a iniciar sesión. Sus envíos, leads y reservas siguen asociados.
+
+## Escribir a los participantes
+
+**Enviar correo** abre **Escribir a participantes**, que envía un correo a los participantes que coinciden con tu filtro actual. Sale desde tu propio **servicio de envío** (Gmail o SMTP, configurado en [Conectores](/es/connectors)) y no se puede recuperar una vez enviado. El plan Free cubre hasta 100 destinatarios al día y 500 al mes; Pro permite hasta 5000 al día. Los envíos anteriores aparecen en **Historial de correos**.
 
 ## Mover a la papelera
 

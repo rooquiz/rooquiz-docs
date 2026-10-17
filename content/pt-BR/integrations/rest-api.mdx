@@ -45,6 +45,16 @@ Authorization: Bearer rqp_acct_xxx...
 
 A URL base tem o formato `https://your-domain/api/v1`.
 
+### Especificação OpenAPI
+
+A descrição completa e legível por máquina de todos os endpoints é publicada como um documento **OpenAPI 3.1** em:
+
+```bash
+GET /api/v1/openapi.json
+```
+
+Ela não exige chave de API e não contém segredos, então você pode carregá-la diretamente no Postman, no Insomnia ou em um gerador de clientes. Os proprietários da equipe também podem clicar em **Abrir o depurador de API** na página **Chaves de API** para testar os endpoints no navegador.
+
 ### Listar formulários
 
 ```bash

@@ -48,8 +48,14 @@ Le total d'un Quiz noté provient **uniquement de la formule**, qui référence 
 Découpez le score total en **niveaux** (0–60 à améliorer / 60–80 bien / 80+ excellent). Chacun possède un nom, une couleur et une description, et peut comporter un **bouton CTA** : la tranche la plus basse peut par exemple proposer « Réserver une consultation ». C'est cette étape qui relie une évaluation à la conversion.
 
 <Callout type="info">
-  Vous ne voulez pas que les répondants voient un chiffre ? Vous pouvez **masquer le score global** et ne conserver que le nom du niveau, sa description et la synthèse : idéal pour les quiz qui doivent ressembler à un diagnostic plutôt qu'à un examen.
+  Vous ne voulez pas que les répondants voient un chiffre ? Activez **Masquer les scores** : le score global **et chaque score de dimension** (anneau/chiffre du score, percentile, barres de progression, taux de réussite) disparaissent de la page de résultats, tandis que les niveaux et l'analyse restent : idéal pour les quiz qui doivent ressembler à un diagnostic plutôt qu'à un examen. Si votre modèle de synthèse insère encore la variable du score, retirez-la aussi, sinon le score continuera de s'y afficher.
 </Callout>
+
+## Ordre des sections de la page de résultats
+
+Sous le résultat global, la page de résultats peut comporter un bloc **Analyse par dimension**, une **Section réservation** et un bloc **Retour du répondant**. Dans l'aperçu **Rapport** de l'éditeur, sélectionnez un bloc et utilisez **Monter** / **Descendre** pour définir l'ordre dans lequel les répondants les voient ; placez par exemple la réservation en premier lorsque l'appel est l'objectif.
+
+La section réservation et le bloc de retour s'activent dans **Paramètres → Suivi de la page de résultats** : consultez [Paramètres du quiz](/fr/editor/settings#suivi-de-la-page-de-résultats).
 
 ## Génération du rapport
 

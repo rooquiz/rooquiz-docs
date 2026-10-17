@@ -1,6 +1,6 @@
 ---
 title: 整合與 API
-description: '這一章面向開發者，講怎麼用程式碼或 AI 客戶端接入 RooQuiz：唯讀的 REST API 用帳號級金鑰拉取表單定義與提交記錄，適合自建看板或同步到資料倉儲；MCP 接入讓 Claude、Cursor 等 AI 客戶端直接在你的團隊下操作測驗。也介紹不寫程式碼時的替代做法。兩條路徑都不需要改動測評本身，也不會影響答題者在作答頁上看到的體驗。'
+description: '這一章面向開發者，講怎麼用程式碼或 AI 客戶端接入 RooQuiz：唯讀的 REST API 用帳號級金鑰拉取表單定義與提交記錄，適合自建看板或同步到資料倉儲；MCP 接入讓你自己的 AI 客戶端在團隊下建立測驗、跟進線索、處理預約。也介紹不寫程式碼時的替代做法。兩條路徑都不需要改動測評本身，也不會影響答題者在作答頁上看到的體驗。'
 sidebarTitle: 概覽
 ---
 
@@ -11,8 +11,12 @@ sidebarTitle: 概覽
   <Card title="MCP 接入" href="/zh-TW/integrations/mcp" />
 </Cards>
 
-- **REST API** —— 用帳號級 API 金鑰拉取表單與提交記錄,適合自建看板、同步到資料倉儲。
-- **MCP 接入** —— 把 Claude 這類 AI 客戶端接進你的團隊,直接建立、查詢和修改測驗。
+- **REST API** —— 用帳號級 API 金鑰拉取表單與提交記錄，適合自建看板、同步到資料倉儲。附帶 OpenAPI 規格文件。
+- **MCP 接入** —— 把 ChatGPT、Claude 這類 AI 客戶端接進你的團隊，直接建立、查詢和修改測驗，跟進線索（狀態、負責人、標籤、評論），以及處理預約。
+
+<Callout type="info">
+  RooQuiz 沒有內建的 AI 出題功能。想用 AI 建測驗，請透過 [MCP](/zh-TW/integrations/mcp) 接入**你自己的 AI 客戶端**，讓它來做——比如從某個範本開始，再補上題目。
+</Callout>
 
 ## 不寫程式碼的整合
 

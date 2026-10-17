@@ -45,6 +45,16 @@ Authorization: Bearer rqp_acct_xxx...
 
 基础地址形如 `https://your-domain/api/v1`。
 
+### OpenAPI 规范
+
+所有端点的完整机器可读描述以 **OpenAPI 3.1** 文档发布在:
+
+```bash
+GET /api/v1/openapi.json
+```
+
+它不需要 API 密钥、也不包含任何机密,可以直接导入 Postman、Insomnia 或客户端代码生成器。团队所有者还可以在 **API 密钥** 页点 **打开 API 调试器**,在浏览器里直接试调各个端点。
+
 ### 列出表单
 
 ```bash

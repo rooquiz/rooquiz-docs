@@ -1,15 +1,66 @@
 ---
 title: Compte et facturation
-description: "Compte et facturation dans RooQuiz : le forfait et l'abonnement de votre équipe, où consulter leur état en temps réel, et les e-mails d'alerte que vous recevez. Les alertes se règlent au niveau du compte, pour toutes vos équipes."
+description: "Compte et facturation dans RooQuiz : vos paramètres de compte personnels et vos méthodes de connexion, l'association à Google, la suppression du compte, les forfaits Free et Pro, l'essai de 7 jours et ce qui se passe en cas d'échec de paiement."
 sidebarTitle: Vue d'ensemble
 ---
 
-Gérez le forfait et la facturation de votre équipe.
+Votre **compte** est personnel : c'est vous, dans toutes les équipes auxquelles vous appartenez. Le **forfait** appartient à une équipe : chaque équipe est en Free ou en Pro, indépendamment des autres.
 
 <Cards>
   <Card title="Paramètres des alertes" href="/fr/account/notifications" />
 </Cards>
 
-<Callout type="info">
-  L'état en temps réel de votre forfait et de votre abonnement est disponible dans **Paramètres → Forfait et facturation**.
+## Paramètres du compte
+
+Vous les trouverez dans **Paramètres → Paramètres du compte**. Vous y gérez votre profil (photo, nom, langue, fuseau horaire), votre adresse e-mail et votre mot de passe.
+
+### Méthodes de connexion
+
+La section **Méthodes de connexion** indique les deux façons de vous connecter : **Mot de passe** et **Google**.
+
+- **Associer Google** : saisissez votre mot de passe actuel pour confirmer votre identité, puis choisissez le compte Google à associer. Vous pourrez ensuite vous connecter avec **Continuer avec Google**.
+- Si l'e-mail de votre compte est déjà un compte Google, vous n'avez rien à associer : utilisez simplement **Continuer avec Google**.
+- **Dissocier** : saisissez votre mot de passe pour confirmer. Une fois la dissociation faite, vous ne pouvez plus vous connecter avec ce compte Google.
+
+<Callout type="warning">
+  Si Google est votre **seul** moyen de connexion, vous ne pouvez pas encore le dissocier. **Définissez d'abord un mot de passe**, puis dissociez-le : sinon, vous ne pourriez plus accéder à votre compte.
 </Callout>
+
+### Supprimer votre compte
+
+**Supprimer le compte**, en bas des Paramètres du compte, supprime définitivement votre compte. Vous êtes retiré de toutes les équipes et toutes vos sessions prennent fin. Pour confirmer, saisissez votre mot de passe et tapez `DELETE`.
+
+- Les équipes dont vous êtes propriétaire et dont **vous êtes le seul membre** sont supprimées avec votre compte, et tout abonnement payant associé est résilié immédiatement. La boîte de dialogue les liste d'abord.
+- Les équipes dont vous êtes propriétaire et qui **comptent encore d'autres membres** ne sont pas supprimées. [Transférez la propriété](/fr/teams/members#transférer-la-propriété) à un coéquipier, puis revenez.
+
+<Callout type="warning">
+  La suppression du compte est **irréversible**.
+</Callout>
+
+## Forfaits
+
+Chaque équipe a son propre forfait. Consultez le forfait actuel, l'état de l'abonnement et le contenu de Pro dans **Paramètres → Forfait et facturation**. Seul le propriétaire de l'équipe peut passer à un forfait supérieur, changer de moyen de paiement ou résilier : consultez [Membres et rôles](/fr/teams/members#facturation).
+
+| | Free | Pro |
+| --- | --- | --- |
+| Prix | Gratuit | **20 $ / mois**, ou **192 $ / an** (20 % de réduction) |
+| Membres de l'équipe | Jusqu'à 3 | Jusqu'à 50 |
+
+Free et Pro incluent tous deux des quiz et des réponses illimités. Pro ajoute notamment un [domaine personnalisé](/fr/teams/custom-domain), l'[export des données](/fr/results/export), des intégrations et davantage de places dans l'équipe.
+
+### Essai gratuit
+
+Les nouveaux abonnés bénéficient d'un **essai gratuit de 7 jours** de Pro. Un **moyen de paiement est requis** pour le démarrer, mais vous n'êtes pas débité pendant l'essai et pouvez résilier à tout moment avant la fin. À la fin de l'essai, l'abonnement démarre selon le cycle de facturation choisi.
+
+### En cas d'échec de paiement
+
+| Situation | Conséquence |
+| --- | --- |
+| Le premier prélèvement après un essai échoue | Pro est **retiré immédiatement** et l'équipe repasse en Free |
+| Un renouvellement échoue pour un client payant | Pro reste actif pendant un **délai de grâce de 7 jours**, le temps de retenter le paiement ; s'il n'est toujours pas réglé, l'équipe repasse en Free |
+
+Régler le montant dû, ou vous abonner à nouveau, rétablit Pro.
+
+### Associations à but non lucratif
+
+Les associations à but non lucratif enregistrées et les organisations d'intérêt général peuvent demander Pro gratuitement. Consultez le [programme RooQuiz pour les associations](https://rooquiz.com/nonprofit).

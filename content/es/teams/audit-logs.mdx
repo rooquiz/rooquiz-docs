@@ -6,7 +6,7 @@ description: 'Los registros de auditoría recogen las operaciones importantes de
 Los **registros de auditoría** recogen las operaciones importantes de tu equipo: quién hizo qué, sobre qué objeto, cuándo y si tuvo éxito. Los encontrarás en **Ajustes → Registros de auditoría**.
 
 <Callout type="warning">
-  **Solo el propietario y los administradores del equipo pueden ver los registros de auditoría.** Los miembros y los visualizadores ven un aviso en su lugar.
+  **Solo el propietario y los administradores del equipo pueden ver los registros de auditoría.** La entrada **Registros de auditoría** no aparece en los Ajustes para los miembros y los visualizadores, y si abren la página directamente ven un aviso en su lugar.
 </Callout>
 
 ## Columnas
@@ -25,15 +25,25 @@ Haz clic en cualquier fila para desplegar sus **Detalles**. Cada acción incluye
 
 A grandes rasgos:
 
-- **Equipo**: eliminar el equipo, transferir la propiedad, cambiar de plan.
+- **Equipo**: actualizaciones del equipo, eliminar el equipo, transferir la propiedad, cambiar de plan.
 - **Miembros**: invitar, quitar, salir, cambiar de rol, desactivar / activar.
 - **Quizzes**: crear, actualizar, mover a la papelera, restaurar, eliminar permanentemente, bloquear / desbloquear.
 - **Leads y participantes**: mover a la papelera, restaurar, eliminar permanentemente.
 - **Conectores**: crear, actualizar, eliminar.
+- **Correo**: servicios de envío (actualizar, verificar, eliminar) y campañas de correo masivo a participantes (crear, cancelar).
 - **Credenciales**: claves de API y tokens de MCP: crear, revocar, restaurar, eliminar.
+- **MCP**: llamadas a herramientas hechas por clientes de AI mediante [MCP](/es/integrations/mcp).
 - **Uso**: [exportaciones de datos](/es/results/export).
 
 Filtra por **acción** y **estado** en la parte superior para responder preguntas como "¿quién exportó datos la semana pasada?".
+
+## Retención
+
+| | Free | Pro |
+| --- | --- | --- |
+| Tiempo de conservación | 90 días | 365 días |
+
+Las entradas más antiguas se eliminan automáticamente.
 
 <Callout type="info">
   Los registros son de **solo lectura**: no se pueden editar ni eliminar. Un registro de auditoría que se puede alterar no sirve de mucho.

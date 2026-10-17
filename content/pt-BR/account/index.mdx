@@ -1,15 +1,66 @@
 ---
 title: Conta e cobrança
-description: 'Conta e cobrança no RooQuiz: o plano e a assinatura da sua equipe, onde ver o status atualizado deles e os e-mails de alerta que você recebe. Os alertas são configurações da conta que valem para todas as suas equipes, não por equipe.'
+description: 'Conta e cobrança no RooQuiz: as configurações pessoais da sua conta e os métodos de login, como vincular o Google, excluir a conta, os planos Free e Pro, o teste de 7 dias e o que acontece quando um pagamento falha.'
 sidebarTitle: Visão geral
 ---
 
-Gerencie o plano e a cobrança da sua equipe.
+Sua **conta** é pessoal — é você, em todas as equipes de que participa. O **plano** pertence a uma equipe: cada equipe está no Free ou no Pro de forma independente.
 
 <Cards>
   <Card title="Configurações de alertas" href="/pt-BR/account/notifications" />
 </Cards>
 
-<Callout type="info">
-  O status atualizado do seu plano e da sua assinatura está disponível em **Configurações → Plano e cobrança**.
+## Configurações da conta
+
+Elas ficam em **Configurações → Configurações da conta**. Aqui você gerencia seu perfil (foto, nome, idioma, fuso horário), seu endereço de e-mail e sua senha.
+
+### Métodos de login
+
+A seção **Métodos de login** mostra as duas formas de entrar: **Senha** e **Google**.
+
+- **Vincular Google** — informe sua senha atual para confirmar que é você e escolha a conta do Google a vincular. A partir daí, você pode entrar com **Continuar com o Google**.
+- Se o e-mail da sua conta já é uma conta do Google, não é preciso vincular nada — basta usar **Continuar com o Google**.
+- **Desvincular** — informe sua senha para confirmar. Depois de desvincular, você não consegue mais entrar com essa conta do Google.
+
+<Callout type="warning">
+  Se o Google é sua **única** forma de entrar, você ainda não pode desvinculá-lo. **Defina uma senha primeiro** e depois desvincule — caso contrário, você ficaria sem acesso à conta.
 </Callout>
+
+### Excluir sua conta
+
+**Excluir conta**, no fim das Configurações da conta, exclui sua conta permanentemente. Você é removido de todas as equipes e todas as suas sessões são encerradas. Para confirmar, informe sua senha e digite `DELETE`.
+
+- As equipes de que você é proprietário e em que **você é o único membro** são excluídas junto com a conta, e qualquer assinatura paga delas é cancelada imediatamente. A caixa de diálogo as lista antes.
+- As equipes de que você é proprietário e que **ainda têm outros membros** não são excluídas. [Transfira a propriedade](/pt-BR/teams/members#transferir-a-propriedade) para um colega primeiro e depois volte.
+
+<Callout type="warning">
+  A exclusão da conta **não pode ser desfeita**.
+</Callout>
+
+## Planos
+
+Cada equipe tem o próprio plano. Veja o plano atual, o status da assinatura e o que o Pro inclui em **Configurações → Plano e cobrança**. Apenas o proprietário da equipe pode fazer upgrade, alterar a forma de pagamento ou cancelar — veja [Membros e funções](/pt-BR/teams/members#faturamento).
+
+| | Free | Pro |
+| --- | --- | --- |
+| Preço | Gratuito | **US$ 20 / mês** ou **US$ 192 / ano** (20% de desconto) |
+| Membros da equipe | Até 3 | Até 50 |
+
+Free e Pro incluem quizzes e respostas ilimitados. O Pro acrescenta recursos como [domínio personalizado](/pt-BR/teams/custom-domain), [exportação de dados](/pt-BR/results/export), integrações e mais vagas na equipe.
+
+### Teste grátis
+
+Novos assinantes ganham um **teste grátis de 7 dias** do Pro. É **preciso informar uma forma de pagamento** para começar, mas nada é cobrado durante o teste e você pode cancelar a qualquer momento antes de ele terminar. Ao fim do teste, a assinatura começa no ciclo de cobrança que você escolheu.
+
+### Quando um pagamento falha
+
+| Situação | O que acontece |
+| --- | --- |
+| A primeira cobrança após o teste falha | O Pro é **revogado imediatamente** e a equipe passa para o Free |
+| Uma renovação falha para um cliente pagante | O Pro continua ativo por um **período de carência de 7 dias** enquanto o pagamento é tentado novamente; se ainda assim não for pago, a equipe passa para o Free |
+
+Pagar o valor pendente, ou assinar de novo, restaura o Pro.
+
+### Organizações sem fins lucrativos
+
+Organizações sem fins lucrativos registradas e entidades de interesse público podem solicitar o Pro gratuitamente. Veja o [RooQuiz Nonprofit Program](https://rooquiz.com/nonprofit).

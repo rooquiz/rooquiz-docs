@@ -1,15 +1,66 @@
 ---
 title: Account & Billing
-description: 'Account and billing in RooQuiz: your team''s plan and subscription, where to check their live status, and the alert emails you receive. Alert settings are account-level and apply across every team you belong to, not per team.'
+description: 'Account and billing in RooQuiz: your personal account settings and sign-in methods, linking Google, deleting your account, the Free and Pro plans, the 7-day trial, and what happens when a payment fails.'
 sidebarTitle: Overview
 ---
 
-Manage your team's plan and billing.
+Your **account** is personal — it's you, across every team you belong to. The **plan** belongs to a team: each team is on Free or Pro on its own.
 
 <Cards>
   <Card title="Alert Settings" href="/en/account/notifications" />
 </Cards>
 
-<Callout type="info">
-  The live status of your plan and subscription is available under **Settings → Plan & Billing**.
+## Account settings
+
+Find them under **Settings → Account Settings**. Here you manage your profile (photo, name, language, timezone), your email address and your password.
+
+### Sign-in methods
+
+The **Sign-in Methods** section shows the two ways you can sign in: **Password** and **Google**.
+
+- **Link Google** — enter your current password to confirm it's you, then pick the Google account to link. After that you can sign in with **Continue with Google**.
+- If your account email is already a Google account, you don't need to link anything — just use **Continue with Google**.
+- **Unlink** — enter your password to confirm. After unlinking you can no longer sign in with that Google account.
+
+<Callout type="warning">
+  If Google is your **only** way to sign in, you can't unlink it yet. **Set a password first**, then unlink — otherwise you'd lock yourself out.
 </Callout>
+
+### Deleting your account
+
+**Delete Account** at the bottom of Account Settings permanently deletes your account. You're removed from every team and all your sessions end. To confirm, enter your password and type `DELETE`.
+
+- Teams you own where **you are the only member** are deleted with your account, and any paid subscription on them is canceled immediately. The dialog lists them first.
+- Teams you own that **still have other members** are not deleted. [Transfer ownership](/en/teams/members#transferring-ownership) to a teammate first, then come back.
+
+<Callout type="warning">
+  Deleting your account **cannot be undone**.
+</Callout>
+
+## Plans
+
+Each team has its own plan. See the current plan, subscription status and what Pro includes under **Settings → Plan & Billing**. Only the team owner can upgrade, change the payment method or cancel — see [Members & Roles](/en/teams/members#billing).
+
+| | Free | Pro |
+| --- | --- | --- |
+| Price | Free | **$20 / month**, or **$192 / year** (20% off) |
+| Team members | Up to 3 | Up to 50 |
+
+Free and Pro both include unlimited quizzes and unlimited responses. Pro adds things like a [custom domain](/en/teams/custom-domain), [data export](/en/results/export), integrations and more team seats.
+
+### Free trial
+
+New subscribers get a **7-day free trial** of Pro. A **payment method is required** to start it, but you aren't charged during the trial and can cancel anytime before it ends. Once the trial ends, the subscription starts on the billing cycle you picked.
+
+### When a payment fails
+
+| Situation | What happens |
+| --- | --- |
+| The first charge after a trial fails | Pro is **revoked immediately** and the team moves to Free |
+| A renewal fails for a paying customer | Pro stays on for a **7-day grace period** while the payment is retried; if it still isn't paid, the team moves to Free |
+
+Paying the outstanding amount, or subscribing again, restores Pro.
+
+### Nonprofits
+
+Registered nonprofits and public-interest organisations can apply for Pro free of charge. See the [RooQuiz Nonprofit Program](https://rooquiz.com/nonprofit).
