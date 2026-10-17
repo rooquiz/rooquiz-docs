@@ -6,14 +6,14 @@ description: 'Export responses, leads and respondents as UTF-8 CSV that opens st
 Responses, leads and respondents can all be exported as **CSV** (UTF-8, opens directly in Excel).
 
 <Callout type="warning">
-  Export is a **Pro feature** with a weekly cap on the number of exports. Free teams see an upgrade prompt.
+  Export is a **Pro feature** with a weekly cap on the number of exports, and only team **owners and admins** see the **Export** button. On the Free plan the button is still there, but clicking it — for selected rows or for everything — opens an upgrade prompt.
 </Callout>
 
 ## Two kinds of export
 
 | Method | Notes |
 | --- | --- |
-| **Export selected** | Tick some rows and export just those. Generated in your browser and **does not use your quota** |
+| **Export selected** | Tick some rows and export just those. Generated in your browser and **does not use your quota** (still Pro only) |
 | **Export all** | Exports everything matching your current filters. Generated on the server and **uses one export** |
 
 <Callout type="info">
@@ -36,7 +36,7 @@ Confirm and the file is **generated in the background and downloads automaticall
 The weekly allowance resets on **Monday UTC**. Both the dialog and the limit-reached message tell you the exact reset time.
 
 <Callout type="info">
-  **Failed exports don't count.** Only an export that actually produced a file uses your quota.
+  **Only failed exports don't count.** Every other export uses your quota as soon as it starts — including ones still queued or processing.
 </Callout>
 
 ## When the dataset is too large

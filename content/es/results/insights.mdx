@@ -5,24 +5,30 @@ description: 'Insights agrupa las respuestas dispersas en estadísticas y gráfi
 
 Insights agrupa las respuestas dispersas en **estadísticas y gráficos**, para ayudarte a captar el panorama general sin revisar los registros uno por uno.
 
-## Métricas y gráficos habituales
+## Cifras clave
 
-- **Tasa de finalización**: la proporción entre envíos iniciados y completados, que refleja el abandono.
-- **Volumen de envíos**: el total de respuestas y su tendencia a lo largo del tiempo.
-- **Distribución por pregunta**: en las preguntas de opción, la proporción y distribución de cada opción.
-- **Distribución por fuente**: junto con el [seguimiento de fuentes UTM](/es/publish/tracking), compara el volumen de respuestas entre canales.
+La franja superior muestra **Respuestas de hoy** (frente a ayer), **Respuestas totales**, **Participantes únicos** (solo participantes con sesión iniciada), **Puntuación promedio**, **Informes completados** (informes completados / fallidos / pendientes) y **Compartidos**, con la tasa de compartición.
+
+## Gráficos habituales
+
+- **Respuestas de los últimos N días**: el volumen de respuestas a lo largo del tiempo.
+- **Distribución de respuestas**: en las preguntas de opción única, lista desplegable, verdadero/falso y valoración (hasta 10), la proporción de cada opción.
+- **Fuente de tráfico**: compara el volumen de respuestas entre canales, junto con el [seguimiento de fuentes UTM](/es/publish/tracking).
+- **Método de inicio de sesión** y **Tipo de dispositivo**: participantes anónimos frente a registrados, e iOS / Android / escritorio.
 
 ## Embudo de conversión
 
-El embudo sigue **una visita (sesión)** a lo largo de cinco etapas: **Vista → Iniciada → Enviada → Informe visto → Clic en CTA**. Así se cuenta cada etapa:
+El **Embudo de conversión** sigue **una visita (sesión)** a lo largo de **Vista → Iniciada → Enviada → Informe visto → Clic en CTA**. Dos etapas solo aparecen cuando corresponden: **Lead capturado** (después de Enviada) en los quizzes configurados como **Correo obligatorio para ver el informe**, o que ya tienen datos de leads de antes; y **Compartido** (al final) en cuanto se han compartido resultados. Así se cuenta cada etapa:
 
 | Etapa | Se cuenta cuando |
 | --- | --- |
 | Vista | La página del quiz se abre realmente en un navegador (se excluyen rastreadores y vistas previas de administradores) |
 | Iniciada | El participante responde cualquier pregunta por primera vez (no basta con hacer clic en "empezar") |
 | Enviada | El envío se completa correctamente |
+| Lead capturado | El envío queda vinculado a un participante: dejó un correo o inició sesión |
 | Informe visto | El informe termina de generarse mientras el participante está en la página de resultados |
 | Clic en CTA | El participante hace clic en el [botón de CTA](/es/results/reports) al final del informe |
+| Compartido | El participante hace clic en un botón para compartir de la página de resultados (la primera vez, en cualquier canal) |
 
 El porcentaje junto a cada etapa es la tasa de conversión **respecto a la etapa anterior**, para que veas exactamente dónde se produce la caída.
 
@@ -41,7 +47,7 @@ Agrupada por el `utm_source` del enlace (definido por el [plan de difusión](/es
 ## Sugerencias
 
 - Usa el **embudo de conversión** para localizar dónde se produce la caída: muchas vistas pero pocos inicios apuntan a la página de entrada o a la primera pregunta; muchos inicios pero pocos envíos, revisa las preguntas con más abandono.
-- Usa la **distribución de opciones** para entender las tendencias generales de los participantes.
+- Usa la **Distribución de respuestas** para entender las tendencias generales de los participantes.
 - Combina las tendencias temporales con la **conversión por fuente** para evaluar las campañas de cada canal.
 
 <Callout type="info">

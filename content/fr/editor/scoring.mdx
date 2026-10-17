@@ -1,13 +1,13 @@
 ---
 title: Règles de notation et d'évaluation
-description: "La notation dépend du type de quiz : le Quiz juge juste ou faux et additionne les points, le Quiz noté produit analyse multidimensionnelle et rapports. Points, réponses et formules expliqués."
+description: "La notation dépend du type de quiz : le Quiz de connaissances juge juste ou faux et additionne les points, le Quiz noté calcule des scores par dimension à partir de formules. Points, réponses, niveaux et formules."
 ---
 
-La « notation » n'a pas le même sens selon le type de quiz : le Quiz se concentre sur **le juste/faux et les totaux**, tandis que le Quiz noté se concentre sur **l'analyse multidimensionnelle et les rapports**.
+La « notation » n'a pas le même sens selon le type de quiz : le Quiz de connaissances se concentre sur **le juste/faux et les totaux**, tandis que le Quiz noté se concentre sur **l'analyse multidimensionnelle et les rapports**.
 
-## Quiz : notation et correction
+## Quiz de connaissances : notation et correction
 
-Dans un **Quiz**, vous pouvez :
+Dans un **Quiz de connaissances**, vous pouvez :
 
 - **Définir des points** : attribuez des points aux questions ou aux options correctes.
 - **Juger juste/faux** : indiquez les bonnes réponses ; le système corrige automatiquement chaque question.
@@ -17,7 +17,7 @@ Dans un **Quiz**, vous pouvez :
 - **Correspondance IA** : corrigez les réponses aux questions Texte à trous par similarité sémantique plutôt que par correspondance exacte ou partielle, avec un seuil de précision que vous définissez. La correction par IA est illimitée.
 
 <Callout type="info">
-  Les points et la correction juste/faux sont disponibles dans le Quiz et le Quiz de connaissances aléatoire. Le Quiz noté utilise à la place des formules par dimension, et le Quiz de résultat n'attribue aucun score.
+  Les points et la correction juste/faux sont disponibles dans le Quiz de connaissances et le Quiz de connaissances aléatoire. Le Quiz noté utilise à la place des formules, et le Quiz de résultat n'attribue aucun score.
 </Callout>
 
 ## Quiz de résultat : la majorité des votes l'emporte
@@ -30,12 +30,12 @@ Chaque résultat peut avoir son propre bouton CTA, ce qui relie directement un r
 
 Dans un **Quiz noté**, la notation sert davantage à « dresser un profil » qu'à juger juste ou faux :
 
-- **Notation multidimensionnelle** : associez les questions à plusieurs dimensions ; après l'envoi, chaque dimension obtient un score, souvent affiché sous forme de **graphique radar**.
+- **Notation multidimensionnelle** : définissez plusieurs dimensions, chacune avec **sa propre formule** portant sur les codes de question ; après l'envoi, la formule de chaque dimension donne son score, souvent affiché sous forme de **graphique radar**. Une dimension sans formule obtient toujours 0.
 - **Profil de résultat** : produisez des conclusions sur la personnalité ou les compétences à partir des scores par dimension.
 
 ### Quelles questions sont notées
 
-Le total d'un Quiz noté provient **uniquement de la formule**, qui référence des codes de question. Seules les questions qui produisent un nombre peuvent être référencées : les questions à choix (via le score de chaque option), la notation, le nombre, la date, l'heure et la cascade.
+Le total d'un Quiz noté provient **uniquement de la formule**, qui référence des codes de question. Seules les questions qui produisent un nombre peuvent être référencées : choix unique, choix multiple, liste déroulante et vrai/faux (via le score de chaque option), cascade, notation, nombre, date et heure. Une question à choix passée en **Collecter les données uniquement** ne peut pas non plus être référencée.
 
 **Le Texte à trous ne fait que recueillir du texte et n'est jamais noté** : un texte libre ne peut pas entrer dans un calcul, il ne produit donc aucun score et n'apparaît pas parmi les champs insérables dans l'éditeur de formules. C'est donc la bonne façon de poser une question ouverte (« Autre chose à nous dire ? ») au sein d'une évaluation notée.
 

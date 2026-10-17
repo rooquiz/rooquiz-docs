@@ -1,17 +1,41 @@
 ---
-title: Servicio de envío de correo (SMTP)
-description: 'Configura el servicio de envío SMTP propio de tu equipo para que los conectores de correo envíen desde tu dirección sin límite de la plataforma: dónde configurarlo, cómo funciona la verificación y qué falla sin él.'
+title: Servicio de envío de correo
+description: 'Configura los servicios de envío por los que sale el correo de tu equipo (una cuenta de Gmail conectada o tu propio servidor SMTP) para que los conectores y los correos a participantes lleguen desde tu dirección. Límites por plan, configuración y verificación.'
 ---
 
-El [conector de correo](/es/connectors/channels) envía a través de **tu propio servidor SMTP**: RooQuiz no hace de intermediario. Por eso las notificaciones llegan desde tu propia dirección y no hay límite de envío de la plataforma.
+El correo de tu equipo (las notificaciones del [conector de correo](/es/connectors/channels) y los correos que envías a los participantes) sale a través de **tus propios servicios de envío**. RooQuiz no hace de intermediario, así que los mensajes llegan desde tu propia dirección.
 
-Configúralo una vez por equipo en **Ajustes → Organización → Envío de correo**. Todos los conectores de correo del equipo lo usan.
+Configúralos en **Ajustes → Equipo → Envío de correo**. Solo el propietario del equipo y los administradores pueden gestionar los servicios de envío.
+
+| Plan | Servicios de envío por equipo |
+| --- | --- |
+| **Free** | 1 |
+| **Pro** | Hasta 3 |
+
+Las cuentas de Gmail y los servidores SMTP comparten las mismas plazas. Después, cada conector de correo elige uno de ellos en **Servicio de envío**.
 
 <Callout type="warning">
-  Sin un servicio de envío **verificado**, un conector de correo se guarda igualmente, pero nunca entrega. Su tarjeta muestra una etiqueta roja "Sin servicio de envío".
+  Un conector de correo sin un servicio de envío **verificado** se guarda igualmente, pero nunca entrega. Su tarjeta muestra una etiqueta roja "Sin servicio de envío".
 </Callout>
 
-## Qué rellenar
+## Opción 1: Conectar Gmail (recomendada para Gmail)
+
+Haz clic en **Conectar Gmail** y aprueba el acceso en la ventana de Google. No hay que configurar SMTP ni **contraseña de aplicación**: RooQuiz solo obtiene permiso para enviar correo; no puede leer tu bandeja de entrada.
+
+- Cada cuenta de Gmail envía **hasta 500 correos al día** a través de RooQuiz. Los envíos masivos a participantes que superen esa cifra se pausan y **continúan automáticamente al día siguiente**; las notificaciones de conectores que la superen fallan hasta el día siguiente.
+- **Probar** envía un mensaje desde la cuenta de Gmail a tu propia dirección.
+- Si el estado indica **Hay que reconectar**, haz clic en **Reconectar** y vuelve a aprobar el acceso.
+- Para enviar desde otra dirección de Gmail, conecta otra cuenta de Gmail.
+
+<Callout type="info">
+  Desconectar elimina el acceso de RooQuiz a esa cuenta de Gmail. Desactiva antes los conectores de correo que la usan.
+</Callout>
+
+## Opción 2: Añadir servidor SMTP
+
+Haz clic en **Añadir servidor SMTP** para enviar a través del SMTP de tu proveedor: útil para un dominio de marca mediante un servicio como Resend, o para el servidor de correo de tu empresa.
+
+### Qué rellenar
 
 | Campo | Notas |
 | --- | --- |
@@ -27,29 +51,9 @@ Configúralo una vez por equipo en **Ajustes → Organización → Envío de cor
   **No se puede usar el puerto 25.** Nuestra plataforma de alojamiento bloquea las conexiones salientes por ese puerto. Usa 587 o 465.
 </Callout>
 
-## Configuración por proveedor
+### Configuración por proveedor
 
-<Tabs items={['Gmail', 'Resend', 'Servidor de correo de la empresa']}>
-  <Tab value="Gmail">
-    | Campo | Valor |
-    | --- | --- |
-    | Servidor SMTP | `smtp.gmail.com` |
-    | Puerto | `587 (STARTTLS)` |
-    | Nombre de usuario | Tu dirección de Gmail completa |
-    | Contraseña | Una **contraseña de aplicación de 16 caracteres** |
-    | Dirección del remitente | La **misma** dirección de Gmail, o un alias verificado de "Enviar como" |
-
-    Crea la contraseña de aplicación en [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords). Se muestra una sola vez, en cuatro grupos de cuatro: **quita los espacios** antes de pegarla.
-
-    <Callout type="warning">
-      La contraseña normal de tu cuenta no funcionará. Google desactivó el inicio de sesión con contraseña para clientes de correo, así que se necesita una contraseña de aplicación, y estas solo existen si la **verificación en dos pasos** está activada.
-    </Callout>
-
-    Si esa página dice *"The setting you are looking for is not available for your account"*, se da uno de estos casos: la verificación en dos pasos está desactivada; es una cuenta de Google Workspace cuyo administrador desactivó las contraseñas de aplicación; o la cuenta está inscrita en la Protección Avanzada, que las bloquea por completo.
-
-    Gmail también limita el envío a unos **500 destinatarios al día** en cuentas personales y **2.000** en Workspace. Es más que suficiente para notificaciones del equipo, pero no para envíos masivos.
-  </Tab>
-
+<Tabs items={['Resend', 'Servidor de correo de la empresa', 'Gmail (SMTP alternativo)']}>
   <Tab value="Resend">
     | Campo | Valor |
     | --- | --- |
@@ -70,9 +74,33 @@ Configúralo una vez por equipo en **Ajustes → Organización → Envío de cor
     - El nombre de usuario suele ser la **dirección completa del buzón**, no la parte anterior a la `@`.
     - La **dirección del remitente debe pertenecer a tu propio dominio**. La mayoría de los servidores corporativos se niegan a reenviar correo que dice proceder de otro sitio.
   </Tab>
+
+  <Tab value="Gmail (SMTP alternativo)">
+    Es preferible **Conectar Gmail** (arriba), que no necesita contraseña de aplicación. Usa SMTP solo si no puedes usar la conexión con Google.
+
+    | Campo | Valor |
+    | --- | --- |
+    | Servidor SMTP | `smtp.gmail.com` |
+    | Puerto | `587 (STARTTLS)` |
+    | Nombre de usuario | Tu dirección de Gmail completa |
+    | Contraseña | Una **contraseña de aplicación de 16 caracteres** |
+    | Dirección del remitente | La **misma** dirección de Gmail, o un alias verificado de "Enviar como" |
+
+    Crea la contraseña de aplicación en [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords). Se muestra una sola vez, en cuatro grupos de cuatro: **quita los espacios** antes de pegarla.
+
+    <Callout type="warning">
+      La contraseña normal de tu cuenta no funcionará. Google desactivó el inicio de sesión con contraseña para clientes de correo, así que se necesita una contraseña de aplicación, y estas solo existen si la **verificación en dos pasos** está activada.
+    </Callout>
+
+    Si esa página dice *"The setting you are looking for is not available for your account"*, se da uno de estos casos: la verificación en dos pasos está desactivada; es una cuenta de Google Workspace cuyo administrador desactivó las contraseñas de aplicación; o la cuenta está inscrita en la Protección Avanzada, que las bloquea por completo.
+
+    Gmail también limita el envío a unos **500 destinatarios al día** en cuentas personales y **2.000** en Workspace. Es más que suficiente para notificaciones del equipo, pero no para envíos masivos.
+  </Tab>
 </Tabs>
 
 ## Guardar y verificar
+
+Esta sección y la siguiente se aplican a los servidores SMTP; una conexión de Gmail se verifica con el inicio de sesión de Google.
 
 <Steps>
 ### Rellena los campos y haz clic en "Guardar y verificar"
@@ -106,5 +134,5 @@ En la página se muestra el **error exacto de tu servidor SMTP**, deliberadament
 - La contraseña **no vuelve a mostrarse** después de guardarla. Deja el campo en blanco cuando edites cualquier otra cosa y se mantendrá intacta.
 - Cambiar el servidor, el puerto, el nombre de usuario, la contraseña o la dirección del remitente devuelve el estado a **Sin verificar** hasta la siguiente comprobación correcta.
 - Guardar y verificar tiene un **límite de frecuencia** de unos pocos intentos por hora y equipo: cada intento se conecta realmente a tu servidor y envía de verdad un mensaje.
-- **Quitar** el servicio de envío elimina la contraseña guardada. No necesitas quitarlo para cambiar la configuración: basta con guardar encima. No se permite quitarlo mientras algún conector de correo siga **habilitado**, para que no rompas tus propias entregas sin darte cuenta.
+- **Quitar** el servicio de envío elimina la contraseña guardada. No necesitas quitarlo para cambiar la configuración: basta con guardar encima. No se permite quitarlo mientras un conector de correo **habilitado** siga usando ese servicio de envío, para que no rompas tus propias entregas sin darte cuenta.
 - Si una entrega posterior falla de forma permanente (las credenciales dejan de funcionar o se rechaza la dirección del remitente), el estado pasa a **Verificación fallida** y los conectores de correo dejan de entregar hasta que lo corrijas. Una sola dirección de destinatario incorrecta **no** provoca esto; solo hace fallar ese mensaje.

@@ -3,19 +3,20 @@ title: Die fünf Kanäle
 description: 'Die fünf Connector-Kanäle – E-Mail über Ihren eigenen SMTP-Server, Webhook, Slack, Zapier und Kit: was jeder zustellt, welche Empfänger und Formate Sie festlegen und warum es einen Connector pro Kanal gibt.'
 ---
 
-Jeder Kanal erlaubt **einen Connector pro Team**. Um einen bestehenden zu ersetzen, löschen Sie ihn zuerst.
+Webhook, Slack, Zapier und Kit erlauben **einen Connector pro Team** – um einen bestehenden zu ersetzen, löschen Sie ihn zuerst. E-Mail erlaubt **bis zu 3**, sodass verschiedene Teams oder Ereignisse jeweils eine eigene Benachrichtigung erhalten können.
 
 ## E-Mail
 
-In jedem Tarif verfügbar. Versendet über den eigenen SMTP-Server Ihres Teams, den Sie einmalig unter [E-Mail-Versand](/de/connectors/email-smtp) konfigurieren.
+In jedem Tarif verfügbar. Versendet über einen der eigenen Versanddienste Ihres Teams – einen SMTP-Server oder ein verbundenes Gmail-Konto, eingerichtet unter [E-Mail-Versand](/de/connectors/email-smtp).
 
+- **Versanddienst** – wählen Sie, welcher Ihrer Versanddienste die E-Mails dieses Connectors zustellt.
 - **Empfänger** – geben Sie eine Adresse ein und drücken Sie die Eingabetaste, **bis zu 10**. Sie können auch den dynamischen Empfänger „E-Mail des Teilnehmers" hinzufügen, um die Person selbst zu benachrichtigen.
 - **Betreff** – bis zu 200 Zeichen; keine Zeilenumbrüche, kein HTML.
 - **Inhalt** – bis zu 10.000 Zeichen; kein HTML.
 
 Betreff und Inhalt unterstützen beide das **Einfügen von Variablen**, in zwei Gruppen:
 
-- **Systemvariablen** – Lead-Name, E-Mail des Teilnehmers, Quiz-Name, Datensatznummer, Eingereicht am, Berichtslink, Link zur Lead-Seite.
+- **Systemvariablen** – Lead-Name, Name und E-Mail des Teilnehmers, Quiz-Name, Datensatznummer, Eingereicht am, Punktzahl, maximale Punktzahl, Ergebnisstufe, Ergebnistyp, Berichtslink, Link zur Lead-Seite, Teamname sowie bei Buchungsereignissen Name und E-Mail der teilnehmenden Person, Beginn und Ende der Buchung und der vorherige Beginn.
 - **Quiz-Fragen** – verweisen auf die Antwort zu einer bestimmten Frage.
 
 ## Webhook
@@ -50,10 +51,10 @@ Mit Zapier erreichen Sie Tausende von Apps:
 
 Kit (ehemals ConvertKit) ist ein E-Mail-Marketing-Tool. Nach **Kit verbinden** und dem OAuth-Ablauf:
 
-- **Tags für jeden neuen Lead** – werden jedem Abonnenten zugewiesen, z. B. `quiz-lead`. Geben Sie einen Namen ein, der noch nicht existiert, wird er beim Speichern **in Kit angelegt**.
+- **Tags für jeden neuen Lead** – ein fester Satz von bis zu 20 Tags, der jedem Abonnenten zugewiesen wird, z. B. `quiz-lead`. Geben Sie einen Namen ein, der noch nicht existiert, wird er beim Speichern **in Kit angelegt**. Alle erhalten dieselben Tags; sie hängen nicht von Punktzahl oder Ergebnis ab.
 - Mit **Tags aktualisieren** laden Sie die Tag-Liste bei Bedarf erneut aus Kit.
 
-Lösen Sie in Kit E-Mail-Sequenzen über diese Tags aus, und neue Leads gelangen direkt in Ihren Nurturing-Prozess.
+Lösen Sie in Kit E-Mail-Sequenzen über diese Tags aus, und neue Leads gelangen direkt in Ihren Nurturing-Prozess. Aktivieren Sie [Nur Leads mit Einwilligung](/de/connectors/events#nur-leads-mit-einwilligung), damit nur Personen abonniert werden, die Marketing-E-Mails zugestimmt haben.
 
 <Callout type="info">
   E-Mail und Slack sind in jedem Tarif verfügbar. Webhook, Zapier und Kit sind **nur im Pro-Tarif** verfügbar.

@@ -1,38 +1,59 @@
 ---
-title: Formulareinstellungen
-description: 'Alles an einem Quiz, was keine Frage ist: Titel, Beschreibung und Titelbild, Öffnen und Schließen, die Anmeldung der Teilnehmer, die Sichtbarkeit der Ergebnisse und die Felder für die Suchindexierung.'
+title: Quiz-Einstellungen
+description: 'Alles an einem Quiz, was keine Frage ist, Seite für Seite: Zugang und Sichtbarkeit, Basisdaten, die Beantwortung, das Follow-up der Ergebnisseite, Sprachversionen, Systemtexte und Google Analytics.'
 ---
 
-Alles am Quiz, was keine Frage ist, finden Sie hier – erreichbar über **Weitere Einstellungen** oben rechts im Editor.
+Alles am Quiz, was keine Frage ist, finden Sie im Tab **Einstellungen** des Quiz (neben **Bearbeiten**, **Einsendungen** und **Insights**). Er ist in sieben Seiten unterteilt, die im linken Menü aufgeführt sind.
 
-## Quiz-Informationen
+## Zugang & Sichtbarkeit
 
-Titel, Beschreibung, **Titelbild** und **Titelfarbe**. Der Titel kennzeichnet das Quiz im Dashboard und erscheint auf der Startseite; die Beschreibung fließt in die [Suchindexierung](/de/publish/promotion) ein, lassen Sie sie also nicht leer.
+### Quiz öffnen/schließen
 
-## Öffnen/Schließen
+Ein Hauptschalter zwischen **Geöffnet — Daten werden erfasst** und **Geschlossen — keine Erfassung**. Solange das Quiz geschlossen ist, werden **der Quiz-Link und alle bereits verschickten Berichtslinks als nicht verfügbar angezeigt**. Die erfassten Daten bleiben unberührt – schalten Sie das Quiz wieder ein, funktionieren beide wieder.
 
-Ein Hauptschalter zwischen **Geöffnet – Daten werden erfasst** und **Geschlossen – keine Erfassung**. Nach dem Schließen ist der Link weiterhin erreichbar, nimmt aber keine Einsendungen mehr an – schonender, als den Link nach Ende einer Kampagne zu löschen.
+### Teilnahmezugang
 
-## Teilnahmezugang
-
-Beantwortet die Frage „**Wer darf an diesem Quiz teilnehmen?**“ – mit drei Optionen. Ihre Wahl entscheidet darüber, ob Sie überhaupt [Leads](/de/leads) erhalten:
+Beantwortet die Frage „**Wer darf antworten, und wer darf den Bericht sehen?**“ – mit drei Optionen. Ihre Wahl entscheidet darüber, ob Sie überhaupt [Leads](/de/leads) erhalten:
 
 | Option | Bedeutung | Geeignet für |
 | --- | --- | --- |
-| **Offen für alle** | Keine Anmeldung; antworten und Ergebnisse sofort sehen | Maximale Reichweite, geringste Hürde |
-| **E-Mail nötig, um den Bericht zu sehen** | Jeder kann antworten, muss sich aber mit einer E-Mail-Adresse anmelden, um den Bericht zu sehen | **Die wichtigste Option zur Lead-Gewinnung** |
-| **Anmelden, um zu antworten** | Nur angemeldete Teilnehmer dürfen antworten | Nur auf Einladung oder für den internen Einsatz |
+| **Offen für alle** | Jeder kann ohne Anmeldung antworten und sieht den Bericht direkt nach dem Absenden | Maximale Reichweite, geringste Hürde |
+| **E-Mail nötig, um den Bericht zu sehen** | Jeder kann antworten, muss aber eine E-Mail-Adresse hinterlassen (oder sich anmelden), um den Bericht zu sehen | **Die wichtigste Option zur Lead-Gewinnung** |
+| **Anmelden, um zu antworten** | Nur angemeldete Teilnehmer können antworten | Geschlossene Zielgruppen auf Einladung |
+
+Bei **E-Mail nötig, um den Bericht zu sehen** legen Sie außerdem fest, ob die Option **E-Mail vor Anzeige des Berichts bestätigen** gilt. Sie ist **standardmäßig deaktiviert**:
+
+- **Aus** – Teilnehmer geben eine E-Mail-Adresse und einen Namen ein und gelangen direkt zum Bericht, was die Abschlussquote meist erhöht. Die Adresse ist nicht bestätigt, daher sind einige Tippfehler oder Fantasieadressen.
+- **An** – Teilnehmer geben einen 6-stelligen Code aus ihrem Posteingang ein. Die Adresse jedes Leads ist bestätigt, und sie erhalten ein Konto in Ihrem Team, mit dem sie sich später wieder anmelden und frühere Berichte ansehen können.
 
 <Callout type="info">
   Nur die beiden letzten Optionen erzeugen zuverlässig Leads – eine anonyme Einsendung hinterlässt keine Kontaktdaten. Wenn Sie breit streuen *und* Leads sammeln möchten, wählen Sie **E-Mail nötig, um den Bericht zu sehen**.
 </Callout>
 
-## Das Antworterlebnis
+### Ergebnis teilen
+
+Zeigt Teilen-Buttons auf der Ergebnisseite an und hängt geteilten Links eine automatisch erzeugte Karte an. Ist die Option deaktiviert, wird keine Karte erzeugt.
+
+### Suchmaschinen-Indexierung
+
+Standardmäßig aktiviert: Das Quiz wird in Ihre Sitemap aufgenommen, kann über Suchmaschinen gefunden und von KI-Assistenten zitiert werden. Deaktivieren Sie die Option für Entwürfe, Tests und Quizze, die nur für eine bestimmte Zielgruppe gedacht sind. Siehe [Suchindexierung](/de/publish/promotion).
+
+## Basisdaten
+
+**Quiz-Titel**, **Titelbild** (empfohlen 1200 × 630 px) und **Titelfarbe**. Der Titel kennzeichnet das Quiz im Dashboard und erscheint auf der Startseite.
+
+Die **Beschreibung** des Quiz bearbeiten Sie im Editor auf der Startseite, nicht hier. Sie fließt in die [Suchindexierung](/de/publish/promotion) ein, lassen Sie sie also nicht leer.
+
+## Beantwortung
 
 - **Nummerierungsmodus** – Keine / Arabische Zahlen (1, 2, 3) / Römische Ziffern (I, II, III).
-- **Zeitlimit** – ein Countdown startet, sobald ein Teilnehmer das Quiz betritt; läuft er ab, erscheint ein Dialog und die **bisherigen Antworten werden automatisch abgesendet**.
-- **Antwortbogen** – zeigt in der Seitenleiste eine Fragennavigation, damit Teilnehmer ihren Fortschritt sehen und springen können. Bei langen Quizzen lohnt sich das.
-- **Systemtexte** – überschreiben die integrierten Button- und Hinweistexte auf der Antwortseite.
+- **Zeitlimit** – ein Countdown startet, sobald ein Teilnehmer das Quiz betritt; läuft er ab, erscheint ein Dialog und die **bisherigen Antworten werden automatisch abgesendet**. Nur im **Wissensquiz und im Zufälligen Wissensquiz** verfügbar – das Bewertete Quiz und das Ergebnisquiz bieten es nicht an.
+- **Antwortbogen** – zeigt in der Seitenleiste eine Fragennavigation, damit Teilnehmer ihren Fortschritt sehen und zu jeder Frage springen können. Bei langen Quizzen lohnt sich das.
+- **Gruppenvergleich** – zeigt Teilnehmern, welcher Anteil der Personen dieselbe Option gewählt hat. Standardmäßig deaktiviert und in Wissensquizzen nicht verfügbar.
+
+## Follow-up der Ergebnisseite
+
+Aktivieren Sie den **Buchungsbereich** und den Block **Teilnehmer-Feedback** auf der Ergebnisseite und legen Sie deren Texte fest. Siehe [1:1-Buchungen](/de/bookings).
 
 ## Sprache
 
@@ -42,9 +63,13 @@ Legen Sie die **Hauptsprache** fest und verwalten Sie die **Sprachversionen** di
   Das Ändern der Hauptsprache kennzeichnet nur den Quellinhalt neu – es **übersetzt nichts**. Fügen Sie eine Übersetzung hinzu, um eine weitere Sprache anzubieten.
 </Callout>
 
+## Systemtexte
+
+Überschreiben Sie die integrierten Button- und Hinweistexte auf der Antwortseite – Navigations-Buttons, Absendestatus, die Hinweise zum Zeitlimit und Ähnliches.
+
 ## Analytics
 
-**Google Analytics** – geben Sie eine Mess-ID ein, und Seitenaufrufe des öffentlichen Quiz werden an GA übermittelt.
+**Google Analytics** – geben Sie eine Mess-ID ein (z. B. `G-XXXXXXXXXX`), und Seitenaufrufe des öffentlichen Quiz werden an GA übermittelt.
 
 <Callout type="warning">
   Google Analytics ist eine **Pro-Plan-Funktion**.
@@ -52,4 +77,4 @@ Legen Sie die **Hauptsprache** fest und verwalten Sie die **Sprachversionen** di
 
 ## Einstellungen an anderer Stelle
 
-Freigabelinks, QR-Codes, Einbettung, Social Cards, Quellen-Tracking, der Buchungsbereich und das Promotion-Kit befinden sich alle im Tab **Teilen** des Quiz – siehe [Veröffentlichen & Teilen](/de/publish). Theme und personalisierte Vorlagen finden Sie im Editor – siehe [Erscheinungsbild & personalisierte Vorlagen](/de/editor/design).
+Freigabelink, QR-Code, Share-Karte, Einbettungscode und Verteilungsplan finden Sie über den Button **Teilen** oben im Quiz – siehe [Veröffentlichen & Teilen](/de/publish). Theme und personalisierte Vorlagen finden Sie im Editor – siehe [Erscheinungsbild & personalisierte Vorlagen](/de/editor/design).

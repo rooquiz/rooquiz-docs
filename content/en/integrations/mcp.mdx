@@ -1,9 +1,13 @@
 ---
 title: MCP Integration
-description: 'RooQuiz ships an MCP server so Claude, Cursor, Codex and other AI clients can work on quizzes in your team with natural language — create them, add questions, configure reports, manage translations.'
+description: 'RooQuiz ships an MCP server so ChatGPT, Claude, Cursor, Codex and other AI clients can work in your team with natural language — build quizzes, manage translations, work leads and bookings, and read stats.'
 ---
 
-RooQuiz ships an **MCP (Model Context Protocol) server** that lets AI clients — Claude Desktop, Claude Code, Cursor, Codex, and others — operate on quizzes inside your team. With natural language you can create quizzes, scored quizzes, and outcome quizzes, append questions, reorder items, and configure report dimensions or outcome types; you can also duplicate / delete quizzes, manage translations and examinees, and read submission records, stats and conversion funnels — instead of building everything by hand in the editor.
+RooQuiz ships an **MCP (Model Context Protocol) server** that lets AI clients — ChatGPT, claude.ai, Claude Desktop, Claude Code, Cursor, Codex, and others — work inside your team. With natural language you can create quizzes from templates or from scratch, append and edit questions, configure report dimensions or outcome types, change delivery settings and get share links, manage translations and respondents, work your leads and bookings, and read submission records, stats and conversion funnels — instead of doing everything by hand in the editor.
+
+<Callout type="info">
+  RooQuiz has no built-in AI quiz generator. To build a quiz with AI, connect **your own AI client** over MCP and ask it to — it uses the tools below, and you review the result in the editor.
+</Callout>
 
 <Callout type="info">
   MCP is a feature for **power users** — you'll need an AI client that supports MCP. For basic, visual quiz building we still recommend the [editor](/en/editor).
@@ -18,9 +22,12 @@ RooQuiz ships an **MCP (Model Context Protocol) server** that lets AI clients �
 
 ## Option 1: OAuth authorization (recommended)
 
-Clients that support MCP OAuth — claude.ai and Claude Code — **need no manually created token**. Just provide the endpoint URL: the client discovers the authorization server automatically and opens your browser, where you sign in to RooQuiz, pick the team to authorize, and click "Authorize".
+Clients that support MCP OAuth — ChatGPT, claude.ai and Claude Code — **need no manually created token**. Just provide the endpoint URL: the client discovers the authorization server automatically and opens your browser, where you sign in to RooQuiz, pick the team to authorize, and click "Authorize".
 
-<Tabs items={['claude.ai (Web)', 'Claude Code']}>
+<Tabs items={['ChatGPT', 'claude.ai (Web)', 'Claude Code']}>
+  <Tab value="ChatGPT">
+    RooQuiz is available as an app in ChatGPT. Click **Use in ChatGPT** at the top of the RooQuiz admin to open it, then connect — your browser is redirected to the RooQuiz authorization page; sign in, pick a team, and click "Authorize".
+  </Tab>
   <Tab value="claude.ai (Web)">
     Open claude.ai's **Settings → Connectors → Add custom connector**:
 
@@ -51,10 +58,10 @@ For clients without OAuth support (Cursor, Codex CLI, Claude Desktop) or browser
 
 ### Create a token
 
-Go to **Settings → MCP Integration** and click "Create Token":
+Go to **Settings → MCP Integration** and click **Create token**:
 
-1. Give it a **name** (for recognition, e.g. `Cursor - my Mac`).
-2. Pick a **default team** — the token operates on this team by default, and the AI can later switch to any other team you belong to via the `switch_active_tenant` tool.
+1. Give it a **Token name** (for recognition, e.g. `Cursor - my Mac`).
+2. Pick an **Initial team** — the token operates on this team by default, and the AI can later switch to any other team you belong to via the `switch_active_tenant` tool.
 3. After creation, a plaintext token starting with `rqp_live_` is shown.
 
 <Callout type="warning">
@@ -63,7 +70,7 @@ Go to **Settings → MCP Integration** and click "Create Token":
 
 Limits:
 
-- Each user can hold at most **5 tokens** (including revoked ones; OAuth connections don't count). To create more, **delete** one to free a slot ("revoke" only deactivates — it does not free the slot).
+- Each user can hold at most **5 tokens** (including revoked ones; OAuth connections don't count). To create more, **delete** one to free a slot ("revoke" only deactivates — it does not free the slot). A revoked personal token can be switched back on with **Enable**.
 - A token is a **personal credential** — never commit it to source control or share it publicly.
 
 ### Configure your AI client
@@ -170,36 +177,52 @@ Exercises `list_form_translations` → `create_form_translation`.
 
 ## Available tools
 
-Once connected, the AI assistant can call the tools below. They all act on the team the token is **currently active** in.
+Once connected, the AI assistant can call the 48 tools below. They all act on the team the token is **currently active** in.
 
 ### Team (Tenant)
 
 | Tool | What it does |
 | --- | --- |
 | `list_my_tenants` | List all teams you belong to, marking the currently active one. |
-| `get_active_tenant` | Return the team the token is currently active in; all writes default to it. |
+| `get_active_tenant` | Return the team the token is currently active in (including its team address); all writes default to it. |
 | `switch_active_tenant` | Switch the active team (persists across sessions; target must be a team you've joined). |
+| `invite_member` | Invite someone to the active team by email as member, viewer or admin; an invitation email with a join link is sent. Owner / admin only. |
+| `update_tenant_slug` | Change the team address — the first path segment of every quiz link on the platform domain. Owner / admin only. Every public quiz link moves at once and the old address stops working; `/a/<token>` links keep working. |
+
+### Templates
+
+| Tool | What it does |
+| --- | --- |
+| `list_templates` | List the active templates in the public template library (title, scene, description, category, usage count), most-used first. |
+| `create_form_from_template` | Create a new quiz from a template in one call: structure, scoring / report configuration, visual settings and all language versions. The fastest way to build a quiz when a suitable template exists. |
 
 ### Form
 
 | Tool | What it does |
 | --- | --- |
-| `create_form` | Create a quiz (`knowledge_quiz` exam, `scored_quiz`, or `outcome_quiz` typing quiz). Can take a questions array and report config in one call to avoid round trips. An outcome quiz **must** include `report.outcomes` (the list of result types) at creation, with every choice voting for types via `outcomes`. |
-| `list_forms` | List the current team's quizzes, with optional scene or title filtering. |
+| `create_form` | Create a quiz (`knowledge_quiz`, `scored_quiz`, or `outcome_quiz` typing quiz). Can take a questions array and report config in one call to avoid round trips. An outcome quiz **must** include `report.outcomes` (the list of result types) at creation, with every choice voting for types via `outcomes`. |
+| `list_forms` | List the current team's quizzes, newest first, without question content. |
 | `get_form` | View a quiz's full details (the `fields[]` question list, report config, etc.); call this first to get each question's `code` before editing — for outcome quizzes, the result-type `code`s live in `report.outcomeAnalysis.outcomes`. |
-| `update_form` | Update title, description, open/closed state, or merge-replace the `report` config by sub-key; for outcome quizzes, pass `report.outcomes` to merge-update result types by `code` (name/description/CTA; configured images are kept, and removing a type still referenced by question votes is rejected). **Scene and language are locked after creation.** |
-| `delete_form` | Move a quiz to the trash (soft delete): hidden from `list_forms`, recoverable for 5 days via `restore_form` (then permanently purged). Only the quiz owner / team owner can delete; submission records are kept until permanent purge. |
-| `restore_form` | Restore a quiz deleted by `delete_form` from the trash. Only the owner / team owner can restore; errors if it's not in the trash. |
+| `update_form` | Update title, description, open/closed state, covers (`flagImg` / `landingImage`), theme, social share card (`openGraph`), system text, or merge-replace the `report` config by sub-key; for outcome quizzes, pass `report.outcomes` to merge-update result types by `code` (configured images are kept, and removing a type still referenced by question votes is rejected). **Language** can be changed only while the quiz has no language versions; **scene** never. |
+| `delete_form` | Move a quiz to the trash (soft delete): hidden from `list_forms`, recoverable for 5 days via `restore_form` (then permanently purged). Only the quiz owner or the team owner / admin can delete; submission records are kept until permanent purge. |
+| `restore_form` | Restore a quiz deleted by `delete_form` from the trash. |
 | `duplicate_form` | Duplicate a quiz: clones its question structure, scoring, report, visuals and settings plus **all language translations** into a new quiz owned by you (with fresh links). Does **not** copy submission records, sharing, integrations or ban state. Optional `newTitle`. |
+
+### Sharing & delivery settings
+
+| Tool | What it does |
+| --- | --- |
+| `get_form_share_info` | Everything needed to publish a quiz: the public answer link (also per language version), the team's custom domain and whether it is serving, embed snippets in three modes (inline / popup / iframe), and the current delivery settings. Pass `utmSource` to tag every link and snippet for one channel. |
+| `update_form_settings` | Change how a quiz is delivered: who may answer and whether the report needs an email (the lead-capture gate) and a verification code, time limit (knowledge quizzes), sharing and share card, answer sheet, crowd comparison, the result-page booking section, the feedback block, PDF download (Pro), Google Analytics ID, and more. |
 
 ### Question
 
 | Tool | What it does |
 | --- | --- |
-| `add_question` | Append an item to the end: a question (SingleCheck/MultiCheck/TrueFalse/FillBlank) or a page break (`Breaker`). In an outcome quiz, every choice must declare which result types it votes for (TrueFalse uses `trueOutcomes` / `falseOutcomes`). |
+| `add_question` | Append an item to the end: a question, a page break (`Breaker`), or a display block (`Statement` rich-text passage, `Swiper` image carousel). Question types: SingleCheck / MultiCheck / TrueFalse, FillBlank, DropDown, Cascade (scored quiz), Ordering (knowledge quiz), DateField / TimeField (scored quiz), NumberField and Rate (scored quiz). In an outcome quiz, every choice must declare which result types it votes for (TrueFalse uses `trueOutcomes` / `falseOutcomes`). |
 | `insert_question` | Insert an item at a specific position, using `after` / `before` to reference an existing `code`. |
 | `move_question` | Move an existing question or page break to a new position by `code`. |
-| `update_question` | Update stem, note, explanation, required flag, score, correct answer, or FillBlank AI grading by `code`. **Cannot change question type or choice content.** |
+| `update_question` | Update a question by `code`: stem, note, explanation, required flag, score, correct answer, FillBlank AI grading, number / date / rating options, or **replace all choices** of a choice question. Display blocks are edited here too. **Cannot change the question type.** |
 | `delete_question` | Delete a question or page break by `code`. |
 
 ### Report dimensions
@@ -220,25 +243,47 @@ Offer a quiz in multiple languages: one source quiz (primary language) plus one 
 | `update_form_translation` | Save a language version's translated copy (title / description / fields / report / systemText), or pause it via `isActive`; the structure is fixed by the source, you only change text, and omitted fields count as partial translation. |
 | `delete_form_translation` | Delete one language version. |
 
-### Examinees
+### Respondents (examinees)
 
-The people who take a quiz. Each examinee is bound to a single team; the tools return safe fields only — password, verification code, reset token and other sensitive fields are **never** exposed.
+The people who take a quiz — called Respondents in the admin UI; the tools keep the examinee wording. Each examinee is bound to a single team; the tools return safe fields only — password, verification code, reset token and other sensitive fields are **never** exposed.
 
 | Tool | What it does |
 | --- | --- |
-| `list_examinees` | List the current team's examinees, with optional fuzzy search by email / name and status (active / disabled) filtering. |
-| `get_examinee` | View an examinee's detail (including custom `customData`) by its business ID `examineeId` (e.g. `AB1234567890`, shown in the list). |
-| `update_examinee` | Edit an examinee's name / status / customData by `examineeId` (customData is validated against the team's field definitions). **Email and team cannot be changed.** |
+| `list_examinees` | List the current team's respondents, with optional fuzzy search by email / name and status (active / disabled) filtering. |
+| `get_examinee` | View a respondent's detail (including custom `customData`) by its business ID `examineeId` (e.g. `AB1234567890`, shown in the list). |
+| `update_examinee` | Edit a respondent's name / status / customData by `examineeId` (customData is validated against the team's field definitions and replaces the whole object). **Email and team cannot be changed.** |
+
+### Leads
+
+| Tool | What it does |
+| --- | --- |
+| `list_leads` | List the team's leads — one per respondent across all quizzes, with follow-up status, assignee, colour tags, submission count and next booking. Filter by status / assignee / tags / created date / keyword / upcoming booking. |
+| `get_lead` | View one lead by `leadId`, optionally with the respondent's submission history, the team's internal comments, and the change timeline. |
+| `list_lead_settings` | Read the team's follow-up statuses, tag library and assignable members. Call this before writing — status codes, tag codes and member ids are team-specific. |
+| `update_lead` | Move one lead to another follow-up status (e.g. new → contacted); recorded on the lead's timeline. |
+| `assign_leads` | Assign up to 50 leads to an active non-viewer member in one call (`"me"` for yourself), or clear the assignee. The assignee gets one aggregated notification. |
+| `set_lead_tags` | Set colour tags on up to 50 leads in one call: `replace` (single lead), or `add` / `remove` for batches so other people's tags survive. |
+| `add_lead_comment` | Write an internal follow-up comment on a lead (team-only, never shown to the respondent), optionally tied to one submission. |
+
+### Bookings
+
+| Tool | What it does |
+| --- | --- |
+| `list_bookings` | List the team's 1:1 bookings, earliest first, with time, status, attendee, source quiz and lead owner. Filter by status / quiz / respondent / time range — `pending` is the approval queue. |
+| `get_booking_availability` | Read the bookable slots in a date range, computed from the team's weekly hours minus what is taken. Pass `bookingId` to get slots for rescheduling that booking. |
+| `review_booking` | Confirm or decline a pending request. Confirming sends the attendee the meeting details (optionally a link / instructions for this one session); declining can include a reason. Team owner / admin or the lead owner only. |
+| `update_booking_status` | Close out a scheduled booking: mark completed or no-show (only after it has started), or cancel it (the attendee is emailed). |
+| `reschedule_booking` | Move a scheduled booking to one of the available slots; the attendee is emailed and the 24h reminder is re-armed. |
 
 ### Records & Analytics
 
-Read quiz performance, conversion funnels and leads so the AI can close the build → measure → iterate loop. The lead tools return respondent info (PII).
+Read quiz performance and submissions so the AI can close the build → measure → iterate loop.
 
 | Tool | What it does |
 | --- | --- |
 | `get_form_stats` | Read a quiz's stats over the last N days (default 30, max 180): KPI overview, daily trend, channels (utm_source), login types, devices, and per-question answer distributions. |
 | `get_form_funnel` | Read a quiz's conversion funnel over the last N days: viewed → started → submitted → lead captured → report viewed → CTA clicked → shared, plus per-channel funnel and drop-off points. |
-| `list_records` | List the current team's submission records (leads): examinee, answers, a compact report result and UTM; filter by quiz, report status and submitted time. |
+| `list_records` | List the current team's submission records: respondent, answers, a compact report result and UTM; filter by quiz, report status and submitted time. |
 | `get_record` | View one record's detail by its `id` (returned by `list_records`): full answers, report result and submission metadata. |
 
 ### Image upload
@@ -250,22 +295,25 @@ Read quiz performance, conversion funnels and leads so the AI can close the buil
 
 <Callout type="info">
   Typical flows:
+  - **From a template**: `list_templates` → `create_form_from_template` → adjust with `update_form` / `update_question`.
   - **Exam / scored quiz**: `create_form` to create the quiz and get each question's `code` → use `update_form` or `set_dimension_analysis` to configure report formulas / dimensions by `code`.
   - **Outcome quiz**: `create_form` in one call with `report.outcomes` (give each type a unique `code` of your own, e.g. `lion`) plus each choice's votes → after submission the type with the most votes wins (ties resolved by list order); fine-tune type copy / CTAs later via `update_form`.
+  - **Launch**: `update_form_settings` to set the lead gate and result-page sections → `get_form_share_info` for the link and embed code.
 </Callout>
 
 ## Current limitations
 
 - **Random Knowledge Quiz is not supported**: its questions live in the QuestionBank — manage them in the editor; MCP doesn't cover them yet.
-- **Can't change question type or choices directly**: to switch type or edit choices, `delete_question` then `add_question` to rebuild. The same applies to an outcome quiz's **choice-to-type vote mapping** — to change votes, rebuild the question.
-- **Scored Quiz choice scoring** uses Option Scoring: in the scored quiz scene `update_question` rejects `score` / `correctAnswer` / `aiMatch`. Edit choice scores in the admin UI, or delete and recreate. The outcome scene rejects those three parameters likewise (it decides by votes — there is no scoring).
-- **Outcome quiz question types**: voting questions are SingleCheck / MultiCheck / TrueFalse (FillBlank is not supported); result-type **images** can't be uploaded via MCP yet — configure them in the editor (images already configured are kept when MCP updates `report.outcomes`).
-- **Scene and language are locked** after creation and can't be changed via MCP.
+- **Question type can't be changed**: to switch type, `delete_question` then `add_question` to rebuild. Choices can be replaced as a whole with `update_question`, but **TrueFalse outcome votes** (`trueOutcomes` / `falseOutcomes`) still need delete + recreate.
+- **Scene-specific scoring**: in the scored quiz and outcome quiz scenes `update_question` rejects the top-level `score` / `correctAnswer` / `aiMatch` — pass choices carrying `choices[i].score` (Option Scoring) or `choices[i].outcomes` (votes) instead.
+- **Question types per scene**: Ordering is knowledge-quiz only; Cascade, Rate, DateField and TimeField are scored-quiz only; FillBlank in a scored quiz only collects data; outcome quizzes accept SingleCheck / MultiCheck / DropDown / TrueFalse (plus page breaks and display blocks).
+- **Outcome images**: result-type **images** can't be uploaded via MCP yet — configure them in the editor (images already configured are kept when MCP updates `report.outcomes`).
+- **Scene is locked** after creation; **language** can be changed only while the quiz has no language versions.
 - **Delete is a soft delete**: `delete_form` moves to the trash (auto-purged after 5 days), not an immediate permanent delete; for permanent removal, delete again in the admin UI.
 - **Question limit**: on the Free plan a quiz holds at most **50 questions** (page breaks, statements and image carousels don't count); `create_form`, `add_question` and `insert_question` are rejected past that. `duplicate_form` and `create_form_from_template` are not limited. Pro is unlimited — see [Question limit](/en/editor#question-limit).
 - **Duplicate copies no data**: `duplicate_form` clones structure and translations only — it does **not** copy submission records, sharing settings or integrations (which hold secrets); the new quiz starts clean.
-- **Examinee identity fields are immutable**: `update_examinee` can't change email, team, or `examineeId` (they are the auth identity).
-- **Leads contain PII**: `list_records` / `get_record` return respondent email, name, custom fields, etc. — handle them responsibly.
+- **Respondent identity fields are immutable**: `update_examinee` can't change email, team, or `examineeId` (they are the auth identity).
+- **Personal data comes back masked**: lead, booking, respondent and record tools return names, email addresses and phone numbers masked — including emails and phone numbers typed into answers. Masking is irreversible; refer to people by `examineeId`, `leadId` or record id.
 
 ## Security & rate limits
 

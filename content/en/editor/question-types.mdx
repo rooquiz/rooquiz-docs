@@ -1,9 +1,9 @@
 ---
 title: Question Types
-description: 'All 14+ RooQuiz question types grouped by purpose — choice, text, rating, date and more — what each one collects, where it is typically used, and which quiz format it suits best.'
+description: 'The 11 RooQuiz answer question types plus display blocks, grouped by purpose — choice, input, rating, ordering and more — what each one collects, where it fits, and which quiz type can use it.'
 ---
 
-RooQuiz offers 14+ question types. They are grouped below by purpose to help you pick the right format for each question.
+RooQuiz offers 11 answer question types plus display and structural blocks (Rich Text, Image Carousel, Page Break, Random Question). They are grouped below by purpose to help you pick the right format for each question.
 
 ## Choice
 
@@ -13,8 +13,7 @@ RooQuiz offers 14+ question types. They are grouped below by purpose to help you
 | **Multiple choice** | Pick several options | Multi-answer questions, interests/preferences |
 | **Dropdown** | Single choice shown as a dropdown | Saves space when there are many options |
 | **Cascade** | Multi-level linked selection (e.g. province–city–district) | Region or hierarchical category selection |
-| **True/False** | Choose true or false | Yes/no questions |
-| **Swiper** | Choose via an image carousel | Image preference, visual options |
+| **True / False** | Choose true or false | Yes/no questions |
 
 ## Input
 
@@ -32,12 +31,16 @@ RooQuiz offers 14+ question types. They are grouped below by purpose to help you
 | **Rating** | Score on a scale (e.g. 1–5 / 1–10) | Satisfaction, importance |
 | **Ordering** | Drag items into order | Priority, preference ranking |
 
-## Content & special
+## Display & special
+
+These blocks structure the quiz and collect no answer.
 
 | Type | Description | Common uses |
 | --- | --- | --- |
-| **Statement** | Displays text only; collects no answer | Section notes, instructions, disclaimers |
-| **Random question** | Draws a question from a bank | Used with the "Random Knowledge Quiz" type |
+| **Rich Text** | Displays formatted text and images | Section notes, instructions, disclaimers |
+| **Image Carousel** | Displays a set of images respondents can swipe through | Product shots, examples, visual context |
+| **Page Break** | Splits the quiz into pages | Long quizzes |
+| **Random Question** | A slot that draws questions from a bank | Used with the "Random Knowledge Quiz" type |
 
 ## Which quiz type can use which question types
 
@@ -49,9 +52,9 @@ Question types are not interchangeable across quiz types — some have no natura
 | Fill-in-the-blank | ✅ can be graded against a correct answer | ✅ **collected only, never scored** | ❌ |
 | Number | ✅ can be graded against a correct answer | ✅ the submitted number feeds formulas | ❌ |
 | Cascade / Rating | ❌ | ✅ | ❌ |
-| Date / Time | ❌ | ✅ collected only | ❌ |
+| Date / Time | ❌ | ✅ the value can feed formulas | ❌ |
 | Ordering | ✅ | ❌ | ❌ |
-| Statement / Swiper / Page break | ✅ | ✅ | ✅ |
+| Rich Text / Image Carousel / Page Break | ✅ | ✅ | ✅ |
 
 A **Random Knowledge Quiz** uses only random questions plus display types; the questions themselves come from the linked question bank.
 

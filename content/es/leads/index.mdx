@@ -12,12 +12,16 @@ Un **lead** es la capa que convierte los resultados del quiz en negocio. Cada pe
 
 ## De dónde vienen los leads
 
-Un lead se crea automáticamente cuando **un participante con sesión iniciada envía un quiz**. Los envíos anónimos no crean ningún lead: no hay datos de contacto que conservar.
+Un lead se crea automáticamente cuando **un participante deja su correo** a tu equipo (al iniciar sesión o al escribir su correo para ver el informe) y su envío queda vinculado a él. Los envíos anónimos sin correo no crean ningún lead: no hay datos de contacto que conservar.
 
-Así que, si quieres un flujo constante de leads, los participantes tienen que iniciar sesión primero. Dos formas habituales:
+Así que, si quieres un flujo constante de leads, pide un correo en el momento en que la gente quiere su resultado. Dos formas habituales:
 
-- Configura el informe como **visible tras iniciar sesión** en los ajustes del quiz. Las personas inician sesión para ver su resultado y, en el proceso, el envío queda vinculado a ellas.
+- En **Ajustes → Acceso y visibilidad** del quiz, elige **Correo obligatorio para ver el informe**: cualquiera puede responder, pero debe dejar un correo para ver el informe (recorrido del participante: responder → dejar un correo (o iniciar sesión) → ver el informe). Cada uno de esos envíos genera un lead.
 - Activa la [sección de reservas](/es/bookings/respondent) en la página de resultados. Reservar requiere iniciar sesión, lo que vincula el envío por el camino.
+
+<Callout type="info">
+  **Verificar el correo antes de mostrar el informe** está desactivado de forma predeterminada, así que los participantes solo tienen que escribir un correo para ver su informe. Esos leads aparecen como **Solo contacto** hasta que se verifica el correo, y algunas direcciones tendrán erratas o serán falsas. Activa la verificación si la calidad de los leads te importa más que la tasa de finalización. Consulta [Detalle del lead](/es/leads/detail).
+</Callout>
 
 También puedes **añadir un lead a mano** en la página de **Leads**, algo útil para personas que conociste en persona o que llegaron por otro canal. Consulta [Detalle del lead](/es/leads/detail).
 
@@ -28,7 +32,7 @@ Es fácil confundir estos dos conceptos:
 | | Participante | Lead |
 | --- | --- | --- |
 | Qué es | El **perfil de cuenta** de una persona: nombre, correo, avatar, campos extendidos | El **registro de seguimiento** de esa persona: estado, responsable, etiquetas, comentarios |
-| Cuándo se crea | Cuando envía, se registra o lo creas manualmente | Cuando envía con la sesión iniciada, o cuando añades el lead a mano |
+| Cuándo se crea | Cuando envía, se registra o lo creas manualmente | Cuando deja su correo con un envío (al iniciar sesión o en un informe con barrera de correo), o cuando añades el lead a mano |
 | Dónde encontrarlo | [Participantes](/es/respondents) | Leads |
 | Puede existir sin el otro | Sí: un participante puede no tener lead | No: un lead siempre pertenece a un participante |
 

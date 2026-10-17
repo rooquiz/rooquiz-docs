@@ -1,6 +1,6 @@
 ---
 title: Pontuação e regras de avaliação
-description: 'A pontuação varia por tipo de quiz: o Quiz de conhecimento avalia certo e errado e soma pontos, e o Quiz com pontuação gera análises multidimensionais e relatórios. Defina pontos, respostas e fórmulas.'
+description: 'A pontuação varia por tipo de quiz: o Quiz de conhecimento avalia certo e errado e soma pontos, e o Quiz com pontuação calcula a pontuação das dimensões a partir de fórmulas. Defina pontos, respostas, níveis e fórmulas.'
 ---
 
 "Pontuação" significa coisas diferentes dependendo do tipo de quiz: o Quiz de conhecimento foca em **certo/errado e totais**, enquanto o Quiz com pontuação foca em **análise multidimensional e relatórios**.
@@ -17,7 +17,7 @@ Em um **Quiz de conhecimento**, você pode:
 - **Correspondência por IA**: corrija respostas de preencher a lacuna por similaridade semântica, em vez de correspondência exata ou por "contém", com um limite de precisão definido por você. A correção por IA é ilimitada.
 
 <Callout type="info">
-  Pontos e correção de certo/errado estão disponíveis no Quiz de conhecimento e no Quiz de conhecimento aleatório. O Quiz com pontuação usa fórmulas por dimensão, e o Quiz de resultado não pontua nada.
+  Pontos e correção de certo/errado estão disponíveis no Quiz de conhecimento e no Quiz de conhecimento aleatório. O Quiz com pontuação usa fórmulas, e o Quiz de resultado não pontua nada.
 </Callout>
 
 ## Quiz de resultado: vence quem tem mais votos
@@ -30,12 +30,12 @@ Cada resultado pode ter seu próprio botão de CTA, conectando um resultado dive
 
 Em um **Quiz com pontuação**, a pontuação tem mais a ver com "traçar um perfil" do que com certo/errado:
 
-- **Pontuação multidimensional**: associe as questões a várias dimensões; após o envio, cada dimensão recebe uma pontuação, geralmente exibida em um **gráfico de radar**.
+- **Pontuação multidimensional**: defina várias dimensões, cada uma com **a própria fórmula** sobre os códigos das questões; após o envio, a fórmula de cada dimensão gera a pontuação dela, geralmente exibida em um **gráfico de radar**. Uma dimensão sem fórmula sempre tem pontuação 0.
 - **Perfil de resultado**: gere conclusões de personalidade/habilidade com base nas pontuações das dimensões.
 
 ### Quais questões são pontuadas
 
-O total de um Quiz com pontuação vem **apenas da fórmula**, que faz referência aos códigos das questões. Só podem ser referenciadas as questões que geram um número: questões de escolha (por meio da pontuação de cada opção), avaliação, número, data, hora e em cascata.
+O total de um Quiz com pontuação vem **apenas da fórmula**, que faz referência aos códigos das questões. Só podem ser referenciadas as questões que geram um número: escolha única, múltipla escolha, lista suspensa e verdadeiro/falso (por meio da pontuação de cada opção), em cascata, avaliação, número, data e hora. Uma questão de escolha configurada como **Apenas coletar dados** também não pode ser referenciada.
 
 **Preencher a lacuna apenas coleta texto e nunca é pontuada** — texto livre não pode entrar em cálculos, então não gera pontuação e não aparece entre os campos que podem ser inseridos no editor de fórmulas. Isso a torna a forma certa de fazer uma pergunta aberta ("há algo mais que devemos saber?") dentro de uma avaliação pontuada.
 

@@ -1,6 +1,6 @@
 ---
 title: Auslöseereignisse & Bereich
-description: 'Jeder Connector wird durch Auslöseereignisse aktiviert und durch den Bereich begrenzt, also welche Quizze ihn auslösen dürfen. Beides gilt gemeinsam: Was jedes Ereignis bedeutet und wie Sie eingrenzen.'
+description: 'Jeder Connector wird durch Auslöseereignisse aktiviert und durch den Bereich begrenzt, also welche Quizze ihn auslösen dürfen. Was die fünf Ereignisse bedeuten, wie Sie auf bestimmte Quizze eingrenzen, und der Einwilligungsfilter.'
 ---
 
 Jeder Connector legt fest, **wann er ausgelöst wird** (Ereignisse) und **welche Quizze ihn auslösen dürfen** (Bereich). Beides ist UND-verknüpft: Das Ereignis muss passen *und* das Quiz, aus dem es stammt, muss im Bereich liegen, bevor etwas zugestellt wird.
@@ -11,13 +11,22 @@ Jeder Connector benötigt mindestens ein Ereignis:
 
 | Ereignis | Wird ausgelöst, wenn |
 | --- | --- |
+| **Neue Einreichung** | Jemand ein Quiz abschließt – **jede** Einreichung, auch anonyme und wiederholte Versuche derselben Person |
 | **Neuer Lead** | Jemand Ihrem Team **zum ersten Mal** seine Kontaktdaten hinterlässt |
-| **Buchung erstellt** | Jemand einen Termin bucht |
+| **Buchung erstellt** | Ein Termin bestätigt ist. Mit aktivierter [Freigabe](/de/bookings/availability) ist das der Moment, in dem der Lead-Verantwortliche die Anfrage bestätigt; ohne Freigabe der Moment, in dem der Teilnehmer bucht |
 | **Buchung storniert** | Eine der beiden Seiten eine Buchung storniert |
 | **Buchung umgebucht** | Eine Buchung auf einen anderen Zeitpunkt verschoben wird |
 
 <Callout type="warning">
-  **„Neuer Lead" wird einmal ausgelöst – beim ersten Mal, wenn diese Person ihre Daten hinterlässt.** Nimmt dieselbe Person später an einem weiteren Quiz teil, wird das Ereignis nicht erneut ausgelöst, da Leads [quizübergreifend dedupliziert](/de/leads) werden. Wenn Sie bei jeder Einsendung benachrichtigt werden möchten, ist dies nicht das richtige Ereignis.
+  **„Neuer Lead" wird einmal ausgelöst – beim ersten Mal, wenn diese Person ihre Daten hinterlässt.** Nimmt dieselbe Person später an einem weiteren Quiz teil, wird das Ereignis nicht erneut ausgelöst, da Leads [quizübergreifend dedupliziert](/de/leads) werden. Wenn Sie bei jeder Einsendung benachrichtigt werden möchten, wählen Sie stattdessen **Neue Einreichung**.
+</Callout>
+
+<Callout type="info">
+  **Neue Einreichung** wird gesendet, sobald das Ergebnis berechnet ist – die Zustellung enthält also immer Punktzahl, Stufe oder Ergebnistyp.
+</Callout>
+
+<Callout type="info">
+  Buchungsereignisse betreffen nur Termine, die tatsächlich stehen. Eine ausstehende Anfrage, eine abgelehnte Anfrage oder eine ausstehende Anfrage, die verschoben oder zurückgezogen wird, löst **nichts** aus – nachgelagerte Automatisierungen sollen nicht auf einen Termin reagieren, der noch nicht vereinbart ist.
 </Callout>
 
 ## Auslösebereich
@@ -28,19 +37,28 @@ Der Bereich legt fest, welche Quizze diesen Connector auslösen dürfen:
 - **Bestimmte Quiz** – nur die von Ihnen ausgewählten Quizze lösen ihn aus.
 
 <Callout type="info">
-  Der Bereich wird mit **dem Quiz abgeglichen, aus dem das Ereignis stammt**. Bei „Neuer Lead" ist das das Quiz, in dem die Person **ihre Daten zum ersten Mal hinterlassen hat** – nicht das zuletzt absolvierte.
+  Der Bereich wird mit **dem Quiz abgeglichen, aus dem das Ereignis stammt**. Bei „Neue Einreichung" ist das das gerade eingereichte Quiz; bei „Neuer Lead" ist das das Quiz, in dem die Person **ihre Daten zum ersten Mal hinterlassen hat** – nicht das zuletzt absolvierte.
 </Callout>
 
 Ein typischer Anwendungsfall: Leiten Sie Ihr wichtigstes Lead-Generierungs-Quiz an Slack weiter, damit das Team neue Leads sofort sieht, und verhindern Sie, dass ein internes Quiz jemanden stört.
+
+## Nur Leads mit Einwilligung
+
+Webhook-, Zapier- und Kit-Connectors haben eine zusätzliche Sendebedingung: **Nur Leads mit Einwilligung**. Ist sie aktiviert, sendet der Connector nur Teilnehmer, die dem Erhalt von Marketing-E-Mails zugestimmt haben. Wer abgelehnt hat – oder nie gefragt wurde –, wird übersprungen, und diese Zustellung wird nicht wiederholt.
+
+<Callout type="warning">
+  Aktivieren Sie diese Option immer, wenn der Connector eine Mailingliste oder ein E-Mail-Tool speist. Personen ohne Einwilligung in Marketinglisten aufzunehmen, ist nicht DSGVO-konform. Slack- und E-Mail-Benachrichtigungen gehen an Ihr eigenes Team und bieten diesen Schalter daher nicht an.
+</Callout>
 
 ## Kombinationen zum Übernehmen
 
 | Ihr Ziel | Ereignisse | Bereich |
 | --- | --- | --- |
 | Alle erfahren von einem neuen Kunden | Neuer Lead | Alle Quiz |
+| Jede Antwort im eigenen Backend auswerten | Neue Einreichung | Alle Quiz |
 | Nur das wichtigste Quiz verfolgen | Neuer Lead | Bestimmte Quiz |
 | Benachrichtigt werden, wenn sich Ihr Kalender ändert | Buchung storniert + umgebucht | Alle Quiz |
-| Leads mit Ihrem E-Mail-Marketing-Dienst synchronisieren | Neuer Lead | Alle Quiz |
+| Leads mit Ihrem E-Mail-Marketing-Dienst synchronisieren | Neuer Lead + **Nur Leads mit Einwilligung** | Alle Quiz |
 
 <Callout type="info">
   Änderungen an Ereignissen oder Bereich **wirken sich nur auf künftige Ereignisse aus** – nichts wird nachträglich erneut zugestellt.

@@ -1,13 +1,13 @@
 ---
 title: Scoring & Assessment Rules
-description: 'Scoring differs by quiz type: Quiz judges right and wrong and totals the points, while Scored Quiz produces multi-dimensional analysis and reports. How to set points, answers and formulas.'
+description: 'Scoring differs by quiz type: Knowledge Quiz judges right and wrong and totals the points, while Scored Quiz builds dimension scores from formulas. How to set points, answers, levels and formulas.'
 ---
 
-"Scoring" means different things by quiz type: Quiz focuses on **right/wrong and totals**, while Scored Quiz focuses on **multi-dimensional analysis and reports**.
+"Scoring" means different things by quiz type: Knowledge Quiz focuses on **right/wrong and totals**, while Scored Quiz focuses on **multi-dimensional analysis and reports**.
 
-## Quiz: scoring and judgment
+## Knowledge Quiz: scoring and judgment
 
-In a **Quiz** you can:
+In a **Knowledge Quiz** you can:
 
 - **Set points**: Assign points to questions or correct options.
 - **Judge right/wrong**: Mark correct answers; the system judges each question automatically.
@@ -17,7 +17,7 @@ In a **Quiz** you can:
 - **AI Match**: Grade fill-in-the-blank answers by semantic similarity instead of exact or contains matching, with an accuracy threshold you set. AI grading is unlimited.
 
 <Callout type="info">
-  Points and right/wrong judgement are available in Quiz and Random Knowledge Quiz. Scored Quiz uses dimension formulas instead, and Outcome doesn't score at all.
+  Points and right/wrong judgement are available in Knowledge Quiz and Random Knowledge Quiz. Scored Quiz uses formulas instead, and Outcome Quiz doesn't score at all.
 </Callout>
 
 ## Outcome: winning by votes
@@ -30,12 +30,12 @@ Every outcome can carry its own CTA button, wiring an entertaining result straig
 
 In a **Scored Quiz**, scoring is more about "profiling" than right/wrong:
 
-- **Multi-dimensional scoring**: Map questions to several dimensions; after submission, each dimension gets a score, often shown as a **radar chart**.
+- **Multi-dimensional scoring**: Define several dimensions, each with **its own formula** over question codes; after submission, each dimension's formula gives its score, often shown as a **radar chart**. A dimension with no formula always scores 0.
 - **Result profile**: Produce personality/ability conclusions based on dimension scores.
 
 ### Which questions are scored
 
-A Scored Quiz total comes **only from the formula**, which references question codes. Only questions that yield a number can be referenced: choice questions (via per-option scores), rating, number, date, time, and cascade.
+A Scored Quiz total comes **only from the formula**, which references question codes. Only questions that yield a number can be referenced: single choice, multiple choice, dropdown and true/false (via per-option scores), cascade, rating, number, date and time. A choice question switched to **Collect data only** can't be referenced either.
 
 **Fill-in-the-blank only collects text and is never scored** — free text cannot take part in arithmetic, so it produces no score and does not appear among the insertable fields in the formula editor. That makes it the right way to ask one open-ended question ("anything else we should know?") inside a scored assessment.
 

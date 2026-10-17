@@ -5,24 +5,30 @@ description: 'Insights aggregate scattered responses into stats and charts — c
 
 Insights aggregate scattered responses into **stats and charts**, helping you grasp the big picture without scrolling through records one by one.
 
-## Common metrics and charts
+## Key numbers
 
-- **Completion rate**: The ratio of started to completed submissions, reflecting drop-off.
-- **Submission volume**: Total responses and their trend over time.
-- **Question-level distribution**: For choice questions, the share and distribution of each option.
-- **Source distribution**: Combined with [UTM Source Tracking](/en/publish/tracking), compare response volume across channels.
+The top strip shows **Today's Submissions** (vs. yesterday), **Total Submissions**, **Unique Respondents** (signed-in respondents only), **Average Score**, **Report Completion** (completed / failed / pending reports) and **Shares** with the share rate.
+
+## Common charts
+
+- **Submissions in the last N days**: Response volume over time.
+- **Answer Distribution**: For single-choice, dropdown, true/false and rating questions (up to 10), the share of each option.
+- **Traffic Source**: Compare response volume across channels, combined with [UTM Source Tracking](/en/publish/tracking).
+- **Login Method** and **Device Type**: Anonymous vs. registered respondents, and iOS / Android / desktop.
 
 ## Conversion funnel
 
-The funnel tracks **one visit (session)** through five stages: **Viewed → Started → Submitted → Report viewed → CTA clicked**. How each stage is counted:
+The **Conversion Funnel** tracks **one visit (session)** through **Viewed → Started → Submitted → Report viewed → CTA clicked**. Two stages appear only when they apply: **Lead Captured** (after Submitted) on quizzes set to **Email required to see the report**, or that have lead data from before; and **Shared** (at the end) once results have been shared. How each stage is counted:
 
 | Stage | Counted when |
 | --- | --- |
 | Viewed | The quiz page actually opens in a browser (crawlers and admin previews excluded) |
 | Started | The respondent answers any question for the first time (not just clicking "start") |
 | Submitted | The submission succeeds |
+| Lead Captured | The submission is tied to a respondent — they left an email or signed in |
 | Report viewed | The report finishes generating while the respondent is on the result page |
 | CTA clicked | The respondent clicks the [CTA button](/en/results/reports#result-page-cta-button) at the bottom of the report |
+| Shared | The respondent clicks a share button on the result page (first time, any channel) |
 
 The percentage next to each stage is the conversion rate **relative to the previous stage**, so you can see exactly where the drop happens.
 
@@ -41,7 +47,7 @@ Grouped by the link's `utm_source` (set by the [Distribution plan](/en/publish/p
 ## Suggestions
 
 - Use the **conversion funnel** to locate where the drop happens: many views but few starts points to the landing page or the first question; many starts but few submissions — check the top drop-off questions.
-- Use **option distribution** to understand respondents' overall tendencies.
+- Use **Answer Distribution** to understand respondents' overall tendencies.
 - Combine time trends with **conversion by source** to evaluate each channel's campaigns.
 
 <Callout type="info">

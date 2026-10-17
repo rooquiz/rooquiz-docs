@@ -5,24 +5,30 @@ description: 'Os Insights agregam respostas em estatísticas e gráficos — tax
 
 Os Insights agregam respostas dispersas em **estatísticas e gráficos**, ajudando você a entender o panorama geral sem percorrer os registros um a um.
 
-## Métricas e gráficos comuns
+## Números principais
 
-- **Taxa de conclusão**: a proporção entre envios iniciados e concluídos, refletindo o abandono.
-- **Volume de envios**: o total de respostas e sua tendência ao longo do tempo.
-- **Distribuição por pergunta**: para perguntas de escolha, a participação e a distribuição de cada opção.
-- **Distribuição por origem**: em conjunto com o [Rastreamento de origem UTM](/pt-BR/publish/tracking), compare o volume de respostas entre canais.
+A faixa superior mostra **Respostas de hoje** (em comparação com ontem), **Total de respostas**, **Respondentes únicos** (apenas respondentes conectados), **Pontuação média**, **Conclusão de relatórios** (relatórios concluídos / com falha / pendentes) e **Compartilhamentos**, com a taxa de compartilhamento.
+
+## Gráficos comuns
+
+- **Respostas nos últimos N dias**: o volume de respostas ao longo do tempo.
+- **Distribuição de respostas**: para perguntas de escolha única, lista suspensa, verdadeiro/falso e avaliação (até 10), a participação de cada opção.
+- **Origem do tráfego**: compare o volume de respostas entre canais, em conjunto com o [Rastreamento de origem com UTM](/pt-BR/publish/tracking).
+- **Método de login** e **Tipo de dispositivo**: respondentes anônimos vs. cadastrados, e iOS / Android / computador.
 
 ## Funil de conversão
 
-O funil acompanha **uma visita (sessão)** por cinco etapas: **Visualizou → Começou → Enviou → Relatório visualizado → CTA clicado**. Como cada etapa é contada:
+O **Funil de conversão** acompanha **uma visita (sessão)** por **Visualizou → Começou → Enviou → Relatório visualizado → CTA clicado**. Duas etapas só aparecem quando se aplicam: **Lead capturado** (depois de Enviou), em quizzes configurados com **E-mail obrigatório para ver o relatório** ou que já tenham dados de leads anteriores; e **Compartilhado** (no final), assim que os resultados forem compartilhados. Como cada etapa é contada:
 
 | Etapa | Contada quando |
 | --- | --- |
 | Visualizou | A página do quiz é de fato aberta em um navegador (crawlers e pré-visualizações de administradores são excluídos) |
 | Começou | O respondente responde a qualquer pergunta pela primeira vez (não basta clicar em "começar") |
 | Enviou | O envio é concluído com sucesso |
+| Lead capturado | O envio é vinculado a um respondente — a pessoa deixou um e-mail ou entrou |
 | Relatório visualizado | O relatório termina de ser gerado enquanto o respondente está na página de resultado |
 | CTA clicado | O respondente clica no [botão de CTA](/pt-BR/results/reports) no fim do relatório |
+| Compartilhado | O respondente clica em um botão de compartilhamento na página de resultado (primeira vez, qualquer canal) |
 
 A porcentagem ao lado de cada etapa é a taxa de conversão **em relação à etapa anterior**, para que você veja exatamente onde ocorre a perda.
 
@@ -41,7 +47,7 @@ Agrupada pelo `utm_source` do link (definido pelo [Plano de divulgação](/pt-BR
 ## Sugestões
 
 - Use o **funil de conversão** para localizar onde ocorre a perda: muitas visualizações e poucos inícios apontam para a página de entrada ou para a primeira pergunta; muitos inícios e poucos envios — verifique as perguntas com mais abandono.
-- Use a **distribuição de opções** para entender as tendências gerais dos respondentes.
+- Use a **Distribuição de respostas** para entender as tendências gerais dos respondentes.
 - Combine as tendências ao longo do tempo com a **conversão por origem** para avaliar as campanhas de cada canal.
 
 <Callout type="info">

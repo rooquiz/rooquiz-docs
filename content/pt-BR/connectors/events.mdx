@@ -1,6 +1,6 @@
 ---
 title: Eventos de gatilho e escopo
-description: 'Cada conector é acionado por eventos de gatilho e limitado por um escopo — quais quizzes podem acioná-lo. As duas valem juntas: veja o que significa cada evento e como restringir a quizzes específicos.'
+description: 'Cada conector é acionado por eventos de gatilho e limitado por um escopo — quais quizzes podem acioná-lo. O que significa cada um dos cinco eventos, como restringir o conector a quizzes específicos e o filtro de consentimento.'
 ---
 
 Cada conector define **quando é acionado** (eventos) e **quais quizzes podem acioná-lo** (escopo). As duas condições se combinam com E: o evento precisa corresponder *e* o quiz de origem precisa estar no escopo para que algo seja entregue.
@@ -11,13 +11,22 @@ Todo conector precisa de pelo menos um evento:
 
 | Evento | É acionado quando |
 | --- | --- |
+| **Nova resposta** | Alguém conclui um quiz — **todos** os envios, inclusive os anônimos e as novas tentativas da mesma pessoa |
 | **Novo lead** | Alguém deixa os dados de contato com a sua equipe **pela primeira vez** |
-| **Agendamento criado** | Alguém agenda uma sessão |
+| **Agendamento criado** | Uma sessão é confirmada. Com a [confirmação](/pt-BR/bookings/availability#confirmação) ativada, é o momento em que o responsável pelo lead confirma a solicitação; com ela desativada, é o momento em que o respondente agenda |
 | **Agendamento cancelado** | Qualquer uma das partes cancela um agendamento |
 | **Agendamento reagendado** | Um agendamento é movido para outro horário |
 
 <Callout type="warning">
-  **"Novo lead" é acionado uma única vez, na primeira vez que a pessoa deixa os dados.** Se a mesma pessoa fizer outro quiz depois, ele não é acionado de novo, porque os leads são [deduplicados entre quizzes](/pt-BR/leads). Se você quer uma notificação a cada envio, este não é o evento certo.
+  **"Novo lead" é acionado uma única vez, na primeira vez que a pessoa deixa os dados.** Se a mesma pessoa fizer outro quiz depois, ele não é acionado de novo, porque os leads são [deduplicados entre quizzes](/pt-BR/leads). Se você quer uma notificação a cada envio, escolha **Nova resposta**.
+</Callout>
+
+<Callout type="info">
+  **Nova resposta** é enviada depois que o resultado é calculado, então a entrega sempre traz a pontuação, o nível ou o tipo de resultado.
+</Callout>
+
+<Callout type="info">
+  Os eventos de agendamento só cobrem sessões que realmente estão de pé. Uma solicitação pendente, uma solicitação recusada ou uma solicitação pendente que é reagendada ou retirada **não aciona nada** — as automações seguintes não devem agir sobre uma reunião que ainda não foi acordada.
 </Callout>
 
 ## Escopo de acionamento
@@ -28,19 +37,28 @@ O escopo controla quais quizzes podem acionar este conector:
 - **Quizzes específicos** — somente os quizzes que você selecionar o acionam.
 
 <Callout type="info">
-  O escopo é comparado com **o quiz de onde veio o evento**. Para "Novo lead", é o quiz em que a pessoa **deixou os dados pela primeira vez** — não o mais recente que ela fez.
+  O escopo é comparado com **o quiz de onde veio o evento**. Para "Nova resposta", é o quiz que acabou de ser enviado; para "Novo lead", é o quiz em que a pessoa **deixou os dados pela primeira vez** — não o mais recente que ela fez.
 </Callout>
 
 Um uso típico: enviar o seu principal quiz de geração de leads para o Slack, para que a equipe veja na hora, e evitar que um quiz interno incomode alguém.
+
+## Somente leads com consentimento
+
+Os conectores de Webhook, Zapier e Kit têm mais uma condição de envio: **Somente leads com consentimento**. Quando ativada, o conector envia apenas respondentes que aceitaram receber e-mails de marketing. Quem recusou — ou nunca foi perguntado — é ignorado, e essa entrega não é repetida.
+
+<Callout type="warning">
+  Ative essa opção sempre que o conector alimentar uma lista de e-mails ou uma ferramenta de e-mail. Adicionar pessoas a listas de marketing sem o consentimento delas não está em conformidade com a GDPR. As notificações do Slack e de e-mail vão para a sua própria equipe, por isso não oferecem essa opção.
+</Callout>
 
 ## Combinações que vale copiar
 
 | O que você quer | Eventos | Escopo |
 | --- | --- | --- |
 | Todos ficam sabendo de um novo cliente | Novo lead | Todos os quizzes |
+| Pontuar cada resposta no seu próprio backend | Nova resposta | Todos os quizzes |
 | Acompanhar só o quiz principal | Novo lead | Quizzes específicos |
 | Ser avisado quando a agenda muda | Agendamento cancelado + reagendado | Todos os quizzes |
-| Sincronizar leads com seu ESP | Novo lead | Todos os quizzes |
+| Sincronizar leads com seu ESP | Novo lead + **Somente leads com consentimento** | Todos os quizzes |
 
 <Callout type="info">
   Alterar eventos ou escopo **só afeta os eventos dali em diante** — nada é reenviado.

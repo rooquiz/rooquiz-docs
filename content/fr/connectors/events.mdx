@@ -1,6 +1,6 @@
 ---
 title: Événements déclencheurs et portée
-description: "Chaque connecteur se déclenche sur des événements et est limité par une portée, c'est-à-dire les quiz autorisés à le déclencher. Le sens de chaque événement et comment cibler des quiz précis."
+description: "Chaque connecteur se déclenche sur des événements et est limité par une portée, c'est-à-dire les quiz autorisés à le déclencher. Le sens de chacun des cinq événements, comment cibler des quiz précis et le filtre de consentement."
 ---
 
 Chaque connecteur détermine **quand il se déclenche** (les événements) et **quels quiz peuvent le déclencher** (la portée). Les deux sont combinés par un ET : l'événement doit correspondre *et* le quiz d'origine doit être dans la portée pour que quoi que ce soit soit envoyé.
@@ -11,13 +11,22 @@ Chaque connecteur a besoin d'au moins un événement :
 
 | Événement | Se déclenche lorsque |
 | --- | --- |
+| **Nouvelle réponse** | Une personne termine un quiz : **chaque** soumission, y compris les réponses anonymes et les tentatives répétées de la même personne |
 | **Nouveau lead** | Une personne laisse ses coordonnées à votre équipe **pour la première fois** |
-| **Réservation créée** | Une personne réserve une session |
+| **Réservation créée** | Une session est confirmée. Avec la [confirmation](/fr/bookings/availability#confirmation) activée, c'est le moment où le responsable du lead confirme la demande ; sans elle, le moment où le répondant réserve |
 | **Réservation annulée** | L'une ou l'autre des parties annule une réservation |
 | **Réservation reprogrammée** | Une réservation est déplacée à un autre horaire |
 
 <Callout type="warning">
-  **« Nouveau lead » ne se déclenche qu'une fois, la première fois que la personne laisse ses coordonnées.** Si la même personne passe un autre quiz plus tard, l'événement ne se redéclenche pas, car les leads sont [dédupliqués entre les quiz](/fr/leads). Si vous voulez une notification à chaque soumission, ce n'est pas l'événement qu'il vous faut.
+  **« Nouveau lead » ne se déclenche qu'une fois, la première fois que la personne laisse ses coordonnées.** Si la même personne passe un autre quiz plus tard, l'événement ne se redéclenche pas, car les leads sont [dédupliqués entre les quiz](/fr/leads). Si vous voulez une notification à chaque soumission, choisissez plutôt **Nouvelle réponse**.
+</Callout>
+
+<Callout type="info">
+  **Nouvelle réponse** est envoyé une fois le résultat calculé : l'envoi contient donc toujours le score, le niveau ou le type de résultat.
+</Callout>
+
+<Callout type="info">
+  Les événements de réservation ne concernent que les sessions réellement maintenues. Une demande en attente, une demande refusée, ou une demande en attente reprogrammée ou retirée ne déclenche **rien** : les automatisations en aval ne doivent pas agir sur un rendez-vous qui n'a pas été convenu.
 </Callout>
 
 ## Portée du déclenchement
@@ -28,19 +37,28 @@ La portée détermine quels quiz peuvent déclencher ce connecteur :
 - **Quiz spécifiques** : seuls les quiz que vous sélectionnez le déclenchent.
 
 <Callout type="info">
-  La portée est comparée au **quiz dont provient l'événement**. Pour « Nouveau lead », il s'agit du quiz sur lequel la personne a **laissé ses coordonnées pour la première fois**, et non du dernier qu'elle a passé.
+  La portée est comparée au **quiz dont provient l'événement**. Pour « Nouvelle réponse », il s'agit du quiz qui vient d'être soumis ; pour « Nouveau lead », il s'agit du quiz sur lequel la personne a **laissé ses coordonnées pour la première fois**, et non du dernier qu'elle a passé.
 </Callout>
 
 Un usage typique : envoyer votre quiz phare de génération de leads vers Slack pour que l'équipe le voie instantanément, et éviter qu'un quiz interne ne dérange qui que ce soit.
+
+## Uniquement les leads consentants
+
+Les connecteurs Webhook, Zapier et Kit disposent d'une condition d'envoi supplémentaire : **Uniquement les leads consentants**. Lorsqu'elle est activée, le connecteur n'envoie que les répondants ayant accepté de recevoir des e-mails marketing. Toute personne ayant refusé, ou à qui la question n'a jamais été posée, est ignorée, et cet envoi n'est pas retenté.
+
+<Callout type="warning">
+  Activez-la chaque fois que le connecteur alimente une liste de diffusion ou un outil d'e-mailing. Ajouter des personnes à des listes marketing sans leur consentement n'est pas conforme au RGPD. Les notifications Slack et e-mail sont destinées à votre propre équipe, elles ne proposent donc pas cet interrupteur.
+</Callout>
 
 ## Combinaisons à reprendre
 
 | Objectif | Événements | Portée |
 | --- | --- | --- |
 | Toute l'équipe est informée d'un nouveau client | Nouveau lead | Tous les quiz |
+| Évaluer chaque réponse dans votre propre backend | Nouvelle réponse | Tous les quiz |
 | Suivre uniquement le quiz phare | Nouveau lead | Quiz spécifiques |
 | Être prévenu quand votre agenda change | Réservation annulée + reprogrammée | Tous les quiz |
-| Synchroniser les leads avec votre outil d'e-mailing | Nouveau lead | Tous les quiz |
+| Synchroniser les leads avec votre outil d'e-mailing | Nouveau lead + **Uniquement les leads consentants** | Tous les quiz |
 
 <Callout type="info">
   Modifier les événements ou la portée **n'affecte que les événements ultérieurs** : rien n'est rejoué.

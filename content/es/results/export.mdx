@@ -6,14 +6,14 @@ description: 'Exporta respuestas, leads y participantes como CSV en UTF-8 que se
 Las respuestas, los leads y los participantes se pueden exportar como **CSV** (UTF-8, se abre directamente en Excel).
 
 <Callout type="warning">
-  La exportación es una **función Pro** con un límite semanal de exportaciones. Los equipos con el plan gratuito ven un aviso para actualizar.
+  La exportación es una **función Pro** con un límite semanal de exportaciones, y solo los **propietarios y administradores** del equipo ven el botón **Exportar**. En el plan Free el botón sigue ahí, pero al hacer clic (para las filas seleccionadas o para todo) se abre un aviso para mejorar el plan.
 </Callout>
 
 ## Dos tipos de exportación
 
 | Método | Notas |
 | --- | --- |
-| **Exportar seleccionados** | Marca algunas filas y exporta solo esas. Se genera en tu navegador y **no consume tu cuota** |
+| **Exportar seleccionados** | Marca algunas filas y exporta solo esas. Se genera en tu navegador y **no consume tu cuota** (sigue siendo exclusivo de Pro) |
 | **Exportar todo** | Exporta todo lo que coincide con tus filtros actuales. Se genera en el servidor y **consume una exportación** |
 
 <Callout type="info">
@@ -36,7 +36,7 @@ Al confirmar, el archivo se **genera en segundo plano y se descarga automáticam
 La asignación semanal se reinicia el **lunes (UTC)**. Tanto el cuadro de diálogo como el mensaje de límite alcanzado te indican la hora exacta del reinicio.
 
 <Callout type="info">
-  **Las exportaciones fallidas no cuentan.** Solo consume cuota una exportación que realmente generó un archivo.
+  **Solo las exportaciones fallidas no cuentan.** Cualquier otra exportación consume cuota en cuanto empieza, incluidas las que siguen en cola o en proceso.
 </Callout>
 
 ## Cuando los datos son demasiados

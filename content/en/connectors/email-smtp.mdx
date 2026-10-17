@@ -1,17 +1,41 @@
 ---
-title: Email Sending Service (SMTP)
-description: 'Set up your team''s own SMTP sending service so email connectors send from your address with no platform limit: where to configure it, how verification works, and what breaks without it.'
+title: Email Sending Service
+description: 'Set up the sending services your team''s email goes out through — a connected Gmail account or your own SMTP server — so connectors and respondent emails arrive from your own address. Plan limits, setup and verification.'
 ---
 
-The [Email connector](/en/connectors/channels#email) sends through **your own SMTP server** — RooQuiz does not relay it. Notifications therefore arrive from your own address, and there is no platform sending limit.
+Email from your team — [Email connector](/en/connectors/channels#email) notifications and the emails you send to respondents — goes out through **your own sending services**. RooQuiz does not relay it, so messages arrive from your own address.
 
-Set it up once per team under **Settings → Organization → Email Sending**. Every email connector in the team uses it.
+Set them up under **Settings → Team → Email Sending**. Only the team owner and admins can manage sending services.
+
+| Plan | Sending services per team |
+| --- | --- |
+| **Free** | 1 |
+| **Pro** | Up to 3 |
+
+Gmail accounts and SMTP servers share the same slots. Each Email connector then picks one of them under **Sending service**.
 
 <Callout type="warning">
-  Without a **verified** sending service, an email connector still saves but never delivers. Its card shows a red "No sending service" tag.
+  An email connector with no **verified** sending service still saves but never delivers. Its card shows a red "No sending service" tag.
 </Callout>
 
-## What to fill in
+## Option 1: Connect Gmail (recommended for Gmail)
+
+Click **Connect Gmail** and approve access in the Google window. There is no SMTP to configure and **no app password** — RooQuiz only gets permission to send email; it can't read your inbox.
+
+- Each Gmail account sends **up to 500 emails a day** through RooQuiz. Bulk emails to respondents beyond that pause and **continue automatically the next day**; connector notifications beyond it fail until the next day.
+- **Test** sends a message from the Gmail account to your own address.
+- If the status shows **Needs reconnecting**, click **Reconnect** and approve again.
+- To send from another Gmail address, connect another Gmail account.
+
+<Callout type="info">
+  Disconnecting deletes RooQuiz's access to that Gmail account. Turn off the email connectors that use it first.
+</Callout>
+
+## Option 2: Add SMTP server
+
+Click **Add SMTP server** to send through your provider's SMTP — useful for a brand domain via a service like Resend, or your company mail server.
+
+### What to fill in
 
 | Field | Notes |
 | --- | --- |
@@ -27,29 +51,9 @@ Set it up once per team under **Settings → Organization → Email Sending**. E
   **Port 25 cannot be used.** Our hosting platform blocks outbound connections on that port. Use 587 or 465.
 </Callout>
 
-## Provider setup
+### Provider setup
 
-<Tabs items={['Gmail', 'Resend', 'Company mail server']}>
-  <Tab value="Gmail">
-    | Field | Value |
-    | --- | --- |
-    | SMTP server | `smtp.gmail.com` |
-    | Port | `587 (STARTTLS)` |
-    | Username | Your full Gmail address |
-    | Password | A **16-character app password** |
-    | From address | The **same** Gmail address, or a verified "Send mail as" alias |
-
-    Create the app password at [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords). It is shown once, in four groups of four — **remove the spaces** before pasting it.
-
-    <Callout type="warning">
-      Your regular account password will not work. Google disabled password sign-in for mail clients, so an app password is required — and app passwords only exist once **2-Step Verification** is switched on.
-    </Callout>
-
-    If that page says *"The setting you are looking for is not available for your account"*, one of these applies: 2-Step Verification is off; it's a Google Workspace account whose admin disabled app passwords; or the account is enrolled in Advanced Protection, which blocks them outright.
-
-    Gmail also caps sending at roughly **500 recipients per day** for personal accounts and **2,000** for Workspace. That is ample for team notifications, but not for bulk mail.
-  </Tab>
-
+<Tabs items={['Resend', 'Company mail server', 'Gmail (SMTP fallback)']}>
   <Tab value="Resend">
     | Field | Value |
     | --- | --- |
@@ -70,9 +74,33 @@ Set it up once per team under **Settings → Organization → Email Sending**. E
     - The username is often the **full mailbox address**, not the part before the `@`.
     - The **From address must belong to your own domain**. Most corporate servers refuse to relay mail claiming to be from somewhere else.
   </Tab>
+
+  <Tab value="Gmail (SMTP fallback)">
+    Prefer **Connect Gmail** above — it needs no app password. Use SMTP only if you can't use the Google connection.
+
+    | Field | Value |
+    | --- | --- |
+    | SMTP server | `smtp.gmail.com` |
+    | Port | `587 (STARTTLS)` |
+    | Username | Your full Gmail address |
+    | Password | A **16-character app password** |
+    | From address | The **same** Gmail address, or a verified "Send mail as" alias |
+
+    Create the app password at [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords). It is shown once, in four groups of four — **remove the spaces** before pasting it.
+
+    <Callout type="warning">
+      Your regular account password will not work. Google disabled password sign-in for mail clients, so an app password is required — and app passwords only exist once **2-Step Verification** is switched on.
+    </Callout>
+
+    If that page says *"The setting you are looking for is not available for your account"*, one of these applies: 2-Step Verification is off; it's a Google Workspace account whose admin disabled app passwords; or the account is enrolled in Advanced Protection, which blocks them outright.
+
+    Gmail also caps sending at roughly **500 recipients per day** for personal accounts and **2,000** for Workspace. That is ample for team notifications, but not for bulk mail.
+  </Tab>
 </Tabs>
 
 ## Save and verify
+
+This section and the next apply to SMTP servers; a Gmail connection is verified by Google's sign-in.
 
 <Steps>
 ### Fill in the fields and click "Save and verify"
@@ -106,5 +134,5 @@ The **exact error from your SMTP server** is shown on the page, deliberately une
 - The password is **never displayed again** after saving. Leave the field blank when editing anything else, and it stays untouched.
 - Changing the server, port, username, password or From address puts the status back to **Not verified** until the next successful check.
 - Save and verify are **rate limited** to a handful of attempts per hour per team — each one really connects to your server and really sends a message.
-- **Removing** the sending service deletes the stored password. You don't need to remove it to change settings — just save over them. Removal is refused while any email connector is still **enabled**, so you can't silently break your own deliveries.
+- **Removing** the sending service deletes the stored password. You don't need to remove it to change settings — just save over them. Removal is refused while an **enabled** email connector still uses that sending service, so you can't silently break your own deliveries.
 - If a later delivery fails permanently — the credentials stop working, or the From address is rejected — the status flips to **Verification failed** and email connectors stop delivering until you fix it. A single bad recipient address does **not** do this; it only fails that one message.

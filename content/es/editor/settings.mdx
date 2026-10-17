@@ -1,38 +1,59 @@
 ---
-title: Configuración del formulario
-description: 'Todo lo de un quiz que no es una pregunta: título, descripción e imagen de portada, los interruptores de apertura y cierre, el inicio de sesión de participantes, la visibilidad del resultado y la indexación.'
+title: Ajustes del quiz
+description: 'Todo lo de un quiz que no es una pregunta, página por página: acceso y visibilidad, información básica, la experiencia de respuesta, el seguimiento de la página de resultados, las versiones de idioma, los textos del sistema y Google Analytics.'
 ---
 
-Todo lo del quiz que no es una pregunta se encuentra aquí, a través de **Más configuración** en la esquina superior derecha del editor.
+Todo lo del quiz que no es una pregunta se encuentra en la pestaña **Ajustes** del quiz (junto a **Editar**, **Registros** e **Insights**). Está dividida en siete páginas, que aparecen en el menú de la izquierda.
 
-## Información del quiz
+## Acceso y visibilidad
 
-Título, descripción, **Imagen de portada** y **Color de portada**. El título identifica el quiz en el panel y se muestra en la página de inicio; la descripción alimenta la [indexación en buscadores](/es/publish/promotion), así que no la dejes vacía.
+### Abrir/Cerrar quiz
 
-## Abrir/Cerrar
+Un interruptor general entre **Abierto: recopilando datos** y **Cerrado: sin recopilar**. Mientras el quiz está cerrado, **el enlace del quiz y todos los enlaces de informe ya enviados aparecen como no disponibles**. Los datos recopilados no se tocan: vuelve a abrirlo y ambos funcionarán de nuevo.
 
-Un interruptor general entre **Abierto: recopilando datos** y **Cerrado: sin recopilar**. Una vez cerrado, el enlace sigue funcionando pero ya no acepta envíos; es más suave que eliminar el enlace cuando termina una campaña.
-
-## Acceso al envío
+### Acceso al envío
 
 Responde a "**¿Quién puede responder y quién puede ver el informe?**". Hay tres opciones, y la elección decide si obtendrás [leads](/es/leads) o no:
 
 | Opción | Significado | Ideal para |
 | --- | --- | --- |
-| **Abierto a todos** | Sin inicio de sesión; se responde y se ven los resultados al instante | Máximo alcance, mínima fricción |
-| **Correo obligatorio para ver el informe** | Cualquiera puede responder, pero debe iniciar sesión con un correo para ver el informe | **La opción principal para captar leads** |
-| **Iniciar sesión para responder** | Solo los participantes con sesión iniciada pueden responder | Uso por invitación o interno |
+| **Abierto a todos** | Cualquiera puede responder sin iniciar sesión y ve el informe justo después de enviar | Máximo alcance, mínima fricción |
+| **Correo obligatorio para ver el informe** | Cualquiera puede responder, pero debe dejar un correo (o iniciar sesión) para ver el informe | **La opción principal para captar leads** |
+| **Iniciar sesión para responder** | Solo los participantes con sesión iniciada pueden responder | Públicos por invitación |
+
+Con **Correo obligatorio para ver el informe** también eliges si quieres **Verificar el correo antes de mostrar el informe**. Está **desactivado de forma predeterminada**:
+
+- **Desactivado**: los participantes escriben un correo y un nombre y pasan directamente al informe, lo que suele aumentar la tasa de finalización. La dirección no está verificada, así que algunas tendrán erratas o serán falsas.
+- **Activado**: los participantes introducen un código de 6 dígitos recibido en su bandeja de entrada. La dirección de cada lead queda verificada, y obtienen una cuenta en tu equipo con la que pueden volver a iniciar sesión para ver informes anteriores.
 
 <Callout type="info">
   Solo las dos últimas generan leads de forma fiable: un envío anónimo no deja datos de contacto. Para difundir ampliamente *y* captar leads, elige **Correo obligatorio para ver el informe**.
 </Callout>
 
-## La experiencia de respuesta
+### Compartir resultados
+
+Muestra botones para compartir en la página de resultados y añade una tarjeta generada automáticamente a los enlaces compartidos. Si está desactivado, no se genera ninguna tarjeta.
+
+### Indexación en buscadores
+
+Activada de forma predeterminada, de modo que el quiz entra en tu sitemap y puede encontrarse en los buscadores y ser citado por asistentes de IA. Desactívala para borradores, pruebas y quizzes pensados solo para un público concreto. Consulta [indexación en buscadores](/es/publish/promotion).
+
+## Información básica
+
+**Título del quiz**, **Imagen de portada** (se recomienda 1200 × 630 px) y **Color de portada**. El título identifica el quiz en el panel y se muestra en la página de inicio.
+
+La **descripción** del quiz se edita en la página de inicio dentro del editor, no aquí. Alimenta la [indexación en buscadores](/es/publish/promotion), así que no la dejes vacía.
+
+## Experiencia de respuesta
 
 - **Modo de numeración**: Ninguna / Números arábigos (1, 2, 3) / Números romanos (I, II, III).
-- **Límite de tiempo**: se inicia una cuenta atrás cuando el participante entra en el quiz; cuando se agota, aparece un aviso y sus **respuestas actuales se envían automáticamente**.
-- **Hoja de respuestas**: muestra un navegador de preguntas en la barra lateral para que los participantes vean su progreso y salten entre preguntas. Merece la pena activarla en quizzes largos.
-- **Textos del sistema**: sustituye los textos predeterminados de los botones y mensajes de la página de respuesta.
+- **Límite de tiempo**: se inicia una cuenta atrás cuando el participante entra en el quiz; cuando se agota, aparece un aviso y sus **respuestas actuales se envían automáticamente**. Disponible **solo en Cuestionario de conocimiento y Cuestionario de conocimiento aleatorio**: Cuestionario con puntuación y Cuestionario de resultado no lo ofrecen.
+- **Hoja de respuestas**: muestra un navegador de preguntas en la barra lateral para que los participantes vean su progreso y salten a cualquier pregunta. Merece la pena activarla en quizzes largos.
+- **Comparación con el grupo**: muestra a los participantes qué porcentaje de personas eligió la misma opción. Desactivada de forma predeterminada y no disponible en los cuestionarios de conocimiento.
+
+## Seguimiento de la página de resultados
+
+Activa la **sección de reservas** y el bloque de **comentarios del participante** de la página de resultados, y define sus textos. Consulta [Reservas 1:1](/es/bookings).
 
 ## Idioma
 
@@ -42,9 +63,13 @@ Define el **Idioma principal** y gestiona las **Versiones de idioma** de este qu
   Cambiar el idioma principal solo vuelve a etiquetar el contenido original: **no traduce nada**. Añade una traducción para ofrecer otro idioma.
 </Callout>
 
+## Textos del sistema
+
+Sustituye los textos predeterminados de los botones y mensajes de la página de respuesta: botones de navegación, estados del envío, avisos del límite de tiempo, etc.
+
 ## Analítica
 
-**Google Analytics**: introduce un ID de medición y las visitas a la página pública del quiz se enviarán a GA.
+**Google Analytics**: introduce un ID de medición (por ejemplo, `G-XXXXXXXXXX`) y las visitas a la página pública del quiz se enviarán a GA.
 
 <Callout type="warning">
   Google Analytics es una **Función del plan Pro**.
@@ -52,4 +77,4 @@ Define el **Idioma principal** y gestiona las **Versiones de idioma** de este qu
 
 ## Configuración que está en otro lugar
 
-Los enlaces para compartir, los códigos QR, la inserción, las tarjetas sociales, el seguimiento de origen, la sección de reservas y el kit de promoción están en la pestaña **Compartir** del quiz; consulta [Publicar y compartir](/es/publish). El tema y las plantillas personalizadas están en el editor; consulta [Apariencia y plantillas personalizadas](/es/editor/design).
+El enlace para compartir, el código QR, la tarjeta para compartir, el código de inserción y el plan de difusión están en el botón **Compartir**, en la parte superior del quiz; consulta [Publicar y compartir](/es/publish). El tema y las plantillas personalizadas están en el editor; consulta [Apariencia y plantillas personalizadas](/es/editor/design).

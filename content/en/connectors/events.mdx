@@ -1,6 +1,6 @@
 ---
 title: Trigger Events & Scope
-description: 'Every connector fires on trigger events and is limited by scope — which quizzes may fire it. The two are ANDed: see what each event means and how to narrow a connector to specific quizzes.'
+description: 'Every connector fires on trigger events and is limited by scope — which quizzes may fire it. What each of the five events means, how to narrow a connector to specific quizzes, and the consent filter.'
 ---
 
 Each connector decides **when it fires** (events) and **which quizzes may fire it** (scope). The two are ANDed: the event must match *and* the source quiz must be in scope before anything is delivered.
@@ -11,13 +11,22 @@ Every connector needs at least one event:
 
 | Event | Fires when |
 | --- | --- |
+| **New submission** | Someone completes a quiz — **every** submission, including anonymous ones and repeat attempts by the same person |
 | **New lead** | Someone leaves their contact details with your team **for the first time** |
-| **Booking created** | Someone books a session |
+| **Booking created** | A session is confirmed. With [approval](/en/bookings/availability#approval) on, that is the moment the lead owner confirms the request; with it off, the moment the respondent books |
 | **Booking cancelled** | Either side cancels a booking |
 | **Booking rescheduled** | A booking moves to a different time |
 
 <Callout type="warning">
-  **"New lead" fires once, the first time that person leaves their details.** The same person taking another quiz later does not fire it again, because leads are [deduplicated across quizzes](/en/leads#where-leads-come-from). If you want a notification on every submission, this is not the event you want.
+  **"New lead" fires once, the first time that person leaves their details.** The same person taking another quiz later does not fire it again, because leads are [deduplicated across quizzes](/en/leads#where-leads-come-from). If you want a notification on every submission, choose **New submission** instead.
+</Callout>
+
+<Callout type="info">
+  **New submission** is sent once the result has been calculated, so the delivery always carries the score, level or result type.
+</Callout>
+
+<Callout type="info">
+  Booking events only cover sessions that actually stand. A pending request, a declined request, or a pending request that is rescheduled or withdrawn fires **nothing** — downstream automations shouldn't act on a meeting that hasn't been agreed.
 </Callout>
 
 ## Trigger scope
@@ -28,19 +37,28 @@ Scope controls which quizzes may fire this connector:
 - **Specific quizzes** — only the quizzes you select fire it.
 
 <Callout type="info">
-  Scope is matched against **the quiz the event came from**. For "New lead", that's the quiz where the person **first left their details** — not the most recent one they took.
+  Scope is matched against **the quiz the event came from**. For "New submission", that's the quiz that was just submitted; for "New lead", that's the quiz where the person **first left their details** — not the most recent one they took.
 </Callout>
 
 A typical use: push your flagship lead-gen quiz to Slack so the team sees it instantly, and keep an internal quiz from bothering anyone.
+
+## Only consented leads
+
+Webhook, Zapier and Kit connectors have one more push condition: **Only consented leads**. When it's on, the connector sends only respondents who agreed to receive marketing email. Anyone who declined — or was never asked — is skipped, and that delivery is not retried.
+
+<Callout type="warning">
+  Turn this on whenever the connector feeds a mailing list or an email tool. Adding people to marketing lists without their consent is not compliant with GDPR. Slack and Email notifications go to your own team, so they don't offer this switch.
+</Callout>
 
 ## Combinations worth copying
 
 | What you want | Events | Scope |
 | --- | --- | --- |
 | Everyone hears about a new client | New lead | All quizzes |
+| Score every response in your own backend | New submission | All quizzes |
 | Only track the flagship quiz | New lead | Specific quizzes |
 | Get told when your calendar shifts | Booking cancelled + rescheduled | All quizzes |
-| Sync leads into your ESP | New lead | All quizzes |
+| Sync leads into your ESP | New lead + **Only consented leads** | All quizzes |
 
 <Callout type="info">
   Changing events or scope **only affects events from then on** — nothing is replayed.

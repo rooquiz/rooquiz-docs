@@ -3,19 +3,20 @@ title: The Five Channels
 description: 'The five connector channels — Email through your own SMTP, Webhook, Slack, Zapier and Kit — what each one delivers, the recipients and message format you can set, and one connector per channel.'
 ---
 
-Each channel allows **one connector per team**. To replace an existing one, delete it first.
+Webhook, Slack, Zapier and Kit allow **one connector per team** — to replace an existing one, delete it first. Email allows **up to 3**, so different teams or events can get their own notification.
 
 ## Email
 
-Available on every plan. Sends through your team's own SMTP server, which you configure once under [Email Sending Service](/en/connectors/email-smtp).
+Available on every plan. Sends through one of your team's own sending services — an SMTP server or a connected Gmail account, set up under [Email Sending Service](/en/connectors/email-smtp).
 
+- **Sending service** — pick which of your sending services delivers this connector's email.
 - **Recipients** — type an address and press Enter, **up to 10**. You can also add the dynamic "Respondent email" recipient to notify the person themselves.
 - **Subject** — up to 200 characters; no line breaks, no HTML.
 - **Body** — up to 10,000 characters; no HTML.
 
 Subject and body both support **inserting variables**, in two groups:
 
-- **System variables** — lead name, respondent email, quiz name, record number, submitted at, report link, lead page link.
+- **System variables** — lead name, respondent name and email, quiz name, record number, submitted at, score, max score, result level, result type, report link, lead page link, team name, and for booking events the attendee name and email, booking start and end time, and previous start time.
 - **Quiz questions** — reference the answer to a specific question.
 
 ## Webhook
@@ -50,10 +51,10 @@ Use Zapier to reach thousands of apps:
 
 Kit (formerly ConvertKit) is an email marketing tool. After **Connect Kit** and the OAuth flow:
 
-- **Tags for every new lead** — applied to every subscriber, e.g. `quiz-lead`. Type a name that doesn't exist yet and it is **created in Kit** on save.
+- **Tags for every new lead** — a fixed set of up to 20 tags applied to every subscriber, e.g. `quiz-lead`. Type a name that doesn't exist yet and it is **created in Kit** on save. The same tags go to everyone; they don't vary by score or result.
 - Use **Refresh tags** to re-fetch the tag list from Kit when needed.
 
-Trigger email sequences from those tags in Kit and new leads flow straight into your nurture path.
+Trigger email sequences from those tags in Kit and new leads flow straight into your nurture path. Turn on [Only consented leads](/en/connectors/events#only-consented-leads) so only people who agreed to marketing email are subscribed.
 
 <Callout type="info">
   Email and Slack are available on every plan. Webhook, Zapier and Kit are **Pro plan only**.

@@ -1,9 +1,13 @@
 ---
 title: Intégration MCP
-description: "RooQuiz fournit un serveur MCP pour que Claude, Cursor, Codex et d'autres clients IA gèrent vos quiz en langage naturel : création, ajout de questions, rapports et gestion des traductions."
+description: "RooQuiz fournit un serveur MCP pour que ChatGPT, Claude, Cursor, Codex et d'autres clients IA agissent dans votre équipe en langage naturel : créer des quiz, gérer les traductions, traiter leads et réservations, lire les statistiques."
 ---
 
-RooQuiz fournit un **serveur MCP (Model Context Protocol)** qui permet à des clients IA (Claude Desktop, Claude Code, Cursor, Codex et d'autres) d'agir sur les quiz de votre équipe. En langage naturel, vous pouvez créer des quiz, des quiz notés et des quiz de résultat, ajouter des questions, réorganiser les éléments et configurer les dimensions du rapport ou les types de résultat ; vous pouvez aussi dupliquer ou supprimer des quiz, gérer les traductions et les répondants, et consulter les réponses, les statistiques et les entonnoirs de conversion, au lieu de tout construire à la main dans l'éditeur.
+RooQuiz fournit un **serveur MCP (Model Context Protocol)** qui permet à des clients IA (ChatGPT, claude.ai, Claude Desktop, Claude Code, Cursor, Codex et d'autres) d'agir au sein de votre équipe. En langage naturel, vous pouvez créer des quiz à partir de modèles ou de zéro, ajouter et modifier des questions, configurer les dimensions du rapport ou les types de résultat, modifier les paramètres de diffusion et obtenir les liens de partage, gérer les traductions et les répondants, traiter vos leads et vos réservations, et consulter les réponses, les statistiques et les entonnoirs de conversion, au lieu de tout faire à la main dans l'éditeur.
+
+<Callout type="info">
+  RooQuiz n'intègre pas de générateur de quiz par IA. Pour créer un quiz avec l'IA, connectez **votre propre client IA** via MCP et demandez-le-lui : il utilise les outils ci-dessous, et vous vérifiez le résultat dans l'éditeur.
+</Callout>
 
 <Callout type="info">
   MCP est une fonctionnalité destinée aux **utilisateurs avancés** : vous aurez besoin d'un client IA compatible MCP. Pour créer des quiz simplement et visuellement, nous recommandons toujours l'[éditeur](/fr/editor).
@@ -18,9 +22,12 @@ RooQuiz fournit un **serveur MCP (Model Context Protocol)** qui permet à des cl
 
 ## Option 1 : autorisation OAuth (recommandée)
 
-Les clients compatibles avec OAuth pour MCP, comme claude.ai et Claude Code, **ne nécessitent aucun jeton créé manuellement**. Il suffit de fournir l'URL du point de terminaison : le client découvre automatiquement le serveur d'autorisation et ouvre votre navigateur, où vous vous connectez à RooQuiz, choisissez l'équipe à autoriser et cliquez sur « Autoriser ».
+Les clients compatibles avec OAuth pour MCP, comme ChatGPT, claude.ai et Claude Code, **ne nécessitent aucun jeton créé manuellement**. Il suffit de fournir l'URL du point de terminaison : le client découvre automatiquement le serveur d'autorisation et ouvre votre navigateur, où vous vous connectez à RooQuiz, choisissez l'équipe à autoriser et cliquez sur « Autoriser ».
 
-<Tabs items={['claude.ai (Web)', 'Claude Code']}>
+<Tabs items={['ChatGPT', 'claude.ai (Web)', 'Claude Code']}>
+  <Tab value="ChatGPT">
+    RooQuiz est disponible sous forme d'application dans ChatGPT. Cliquez sur **Use in ChatGPT** en haut de l'interface d'administration de RooQuiz pour l'ouvrir, puis connectez-vous : votre navigateur est redirigé vers la page d'autorisation de RooQuiz ; connectez-vous, choisissez une équipe et cliquez sur « Autoriser ».
+  </Tab>
   <Tab value="claude.ai (Web)">
     Ouvrez **Settings → Connectors → Add custom connector** dans claude.ai :
 
@@ -51,10 +58,10 @@ Pour les clients non compatibles avec OAuth (Cursor, Codex CLI, Claude Desktop) 
 
 ### Créer un jeton
 
-Rendez-vous dans **Paramètres → Intégration MCP** et cliquez sur « Créer un jeton » :
+Rendez-vous dans **Paramètres → Intégration MCP** et cliquez sur **Créer un jeton** :
 
-1. Donnez-lui un **nom** (pour le reconnaître, par exemple `Cursor - my Mac`).
-2. Choisissez une **équipe par défaut** : le jeton agit sur cette équipe par défaut, et l'IA peut ensuite passer à n'importe quelle autre équipe dont vous êtes membre via l'outil `switch_active_tenant`.
+1. Donnez-lui un **Nom du jeton** (pour le reconnaître, par exemple `Cursor - my Mac`).
+2. Choisissez une **Équipe initiale** : le jeton agit sur cette équipe par défaut, et l'IA peut ensuite passer à n'importe quelle autre équipe dont vous êtes membre via l'outil `switch_active_tenant`.
 3. Une fois le jeton créé, un jeton en clair commençant par `rqp_live_` s'affiche.
 
 <Callout type="warning">
@@ -63,7 +70,7 @@ Rendez-vous dans **Paramètres → Intégration MCP** et cliquez sur « Créer u
 
 Limites :
 
-- Chaque utilisateur peut détenir au maximum **5 jetons** (jetons révoqués compris ; les connexions OAuth ne comptent pas). Pour en créer davantage, **supprimez** un jeton afin de libérer un emplacement (la « révocation » ne fait que désactiver le jeton, elle ne libère pas l'emplacement).
+- Chaque utilisateur peut détenir au maximum **5 jetons** (jetons révoqués compris ; les connexions OAuth ne comptent pas). Pour en créer davantage, **supprimez** un jeton afin de libérer un emplacement (la « révocation » ne fait que désactiver le jeton, elle ne libère pas l'emplacement). Un jeton personnel révoqué peut être réactivé avec **Activer**.
 - Un jeton est un **identifiant personnel** : ne le commitez jamais dans votre gestionnaire de code source et ne le partagez jamais publiquement.
 
 ### Configurer votre client IA
@@ -170,36 +177,52 @@ Sollicite `list_form_translations` → `create_form_translation`.
 
 ## Outils disponibles
 
-Une fois connecté, l'assistant IA peut appeler les outils ci-dessous. Ils agissent tous sur l'équipe dans laquelle le jeton est **actuellement actif**.
+Une fois connecté, l'assistant IA peut appeler les 48 outils ci-dessous. Ils agissent tous sur l'équipe dans laquelle le jeton est **actuellement actif**.
 
 ### Équipe (Tenant)
 
 | Outil | Rôle |
 | --- | --- |
 | `list_my_tenants` | Liste toutes les équipes dont vous êtes membre, en indiquant celle qui est active. |
-| `get_active_tenant` | Renvoie l'équipe dans laquelle le jeton est actuellement actif ; toutes les écritures s'y appliquent par défaut. |
+| `get_active_tenant` | Renvoie l'équipe dans laquelle le jeton est actuellement actif (y compris son adresse d'équipe) ; toutes les écritures s'y appliquent par défaut. |
 | `switch_active_tenant` | Change l'équipe active (persiste d'une session à l'autre ; la cible doit être une équipe que vous avez rejointe). |
+| `invite_member` | Invite une personne par e-mail dans l'équipe active en tant que membre, lecteur ou administrateur ; un e-mail d'invitation contenant un lien pour rejoindre l'équipe est envoyé. Propriétaire / administrateur uniquement. |
+| `update_tenant_slug` | Modifie l'adresse de l'équipe, c'est-à-dire le premier segment du chemin de chaque lien de quiz sur le domaine de la plateforme. Propriétaire / administrateur uniquement. Tous les liens publics des quiz changent en même temps et l'ancienne adresse cesse de fonctionner ; les liens `/a/<token>` continuent de fonctionner. |
+
+### Modèles
+
+| Outil | Rôle |
+| --- | --- |
+| `list_templates` | Liste les modèles actifs de la bibliothèque publique de modèles (titre, scène, description, catégorie, nombre d'utilisations), les plus utilisés en premier. |
+| `create_form_from_template` | Crée un nouveau quiz à partir d'un modèle en un seul appel : structure, configuration de la notation / du rapport, paramètres visuels et toutes les versions linguistiques. C'est le moyen le plus rapide de créer un quiz lorsqu'un modèle adapté existe. |
 
 ### Formulaire
 
 | Outil | Rôle |
 | --- | --- |
-| `create_form` | Crée un quiz (examen `knowledge_quiz`, `scored_quiz` ou quiz de profil `outcome_quiz`). Peut recevoir un tableau de questions et la configuration du rapport en un seul appel pour éviter les allers-retours. Un quiz de résultat **doit** inclure `report.outcomes` (la liste des types de résultat) dès sa création, chaque choix votant pour des types via `outcomes`. |
-| `list_forms` | Liste les quiz de l'équipe actuelle, avec un filtre facultatif par scène ou par titre. |
+| `create_form` | Crée un quiz (`knowledge_quiz`, `scored_quiz` ou quiz de profil `outcome_quiz`). Peut recevoir un tableau de questions et la configuration du rapport en un seul appel pour éviter les allers-retours. Un quiz de résultat **doit** inclure `report.outcomes` (la liste des types de résultat) dès sa création, chaque choix votant pour des types via `outcomes`. |
+| `list_forms` | Liste les quiz de l'équipe actuelle, du plus récent au plus ancien, sans le contenu des questions. |
 | `get_form` | Affiche le détail complet d'un quiz (la liste de questions `fields[]`, la configuration du rapport, etc.) ; appelez-le d'abord pour obtenir le `code` de chaque question avant toute modification. Pour les quiz de résultat, les `code` des types de résultat se trouvent dans `report.outcomeAnalysis.outcomes`. |
-| `update_form` | Met à jour le titre, la description, l'état ouvert/fermé, ou remplace par fusion la configuration `report` par sous-clé ; pour les quiz de résultat, passez `report.outcomes` pour mettre à jour par fusion les types de résultat selon leur `code` (nom/description/CTA ; les images configurées sont conservées, et la suppression d'un type encore référencé par des votes de questions est refusée). **La scène et la langue sont verrouillées après la création.** |
-| `delete_form` | Place un quiz dans la corbeille (suppression réversible) : il est masqué de `list_forms` et récupérable pendant 5 jours via `restore_form` (puis supprimé définitivement). Seul le propriétaire du quiz ou le propriétaire de l'équipe peut le supprimer ; les réponses sont conservées jusqu'à la suppression définitive. |
-| `restore_form` | Restaure depuis la corbeille un quiz supprimé par `delete_form`. Seul le propriétaire ou le propriétaire de l'équipe peut le restaurer ; renvoie une erreur si le quiz n'est pas dans la corbeille. |
+| `update_form` | Met à jour le titre, la description, l'état ouvert/fermé, les couvertures (`flagImg` / `landingImage`), le thème, la carte de partage sur les réseaux sociaux (`openGraph`), les textes système, ou remplace par fusion la configuration `report` par sous-clé ; pour les quiz de résultat, passez `report.outcomes` pour mettre à jour par fusion les types de résultat selon leur `code` (les images configurées sont conservées, et la suppression d'un type encore référencé par des votes de questions est refusée). La **langue** ne peut être modifiée que tant que le quiz n'a aucune version linguistique ; la **scène**, jamais. |
+| `delete_form` | Place un quiz dans la corbeille (suppression réversible) : il est masqué de `list_forms` et récupérable pendant 5 jours via `restore_form` (puis supprimé définitivement). Seul le propriétaire du quiz ou le propriétaire / un administrateur de l'équipe peut le supprimer ; les réponses sont conservées jusqu'à la suppression définitive. |
+| `restore_form` | Restaure depuis la corbeille un quiz supprimé par `delete_form`. |
 | `duplicate_form` | Duplique un quiz : copie sa structure de questions, sa notation, son rapport, ses éléments visuels et ses paramètres ainsi que **toutes ses traductions** dans un nouveau quiz qui vous appartient (avec de nouveaux liens). Ne copie **pas** les réponses, le partage, les intégrations ni l'état de blocage. `newTitle` facultatif. |
+
+### Partage et paramètres de diffusion
+
+| Outil | Rôle |
+| --- | --- |
+| `get_form_share_info` | Tout ce qu'il faut pour publier un quiz : le lien public de réponse (également par version linguistique), le domaine personnalisé de l'équipe et s'il est actif, les extraits d'intégration en trois modes (inline / popup / iframe) et les paramètres de diffusion actuels. Passez `utmSource` pour baliser chaque lien et chaque extrait pour un canal donné. |
+| `update_form_settings` | Modifie la façon dont un quiz est diffusé : qui peut répondre et si le rapport exige un e-mail (la barrière de capture de leads) et un code de vérification, la limite de temps (quiz de connaissances), le partage et la carte de partage, la feuille de réponses, la comparaison avec les autres, la section de réservation de la page de résultats, le bloc de retours, le téléchargement PDF (Pro), l'ID Google Analytics, etc. |
 
 ### Question
 
 | Outil | Rôle |
 | --- | --- |
-| `add_question` | Ajoute un élément à la fin : une question (SingleCheck/MultiCheck/TrueFalse/FillBlank) ou un saut de page (`Breaker`). Dans un quiz de résultat, chaque choix doit déclarer les types de résultat pour lesquels il vote (TrueFalse utilise `trueOutcomes` / `falseOutcomes`). |
+| `add_question` | Ajoute un élément à la fin : une question, un saut de page (`Breaker`) ou un bloc d'affichage (passage de texte enrichi `Statement`, carrousel d'images `Swiper`). Types de questions : SingleCheck / MultiCheck / TrueFalse, FillBlank, DropDown, Cascade (quiz noté), Ordering (quiz de connaissances), DateField / TimeField (quiz noté), NumberField et Rate (quiz noté). Dans un quiz de résultat, chaque choix doit déclarer les types de résultat pour lesquels il vote (TrueFalse utilise `trueOutcomes` / `falseOutcomes`). |
 | `insert_question` | Insère un élément à une position précise, en utilisant `after` / `before` pour référencer un `code` existant. |
 | `move_question` | Déplace une question ou un saut de page existant vers une nouvelle position, selon son `code`. |
-| `update_question` | Met à jour l'énoncé, la note, l'explication, le caractère obligatoire, le score, la bonne réponse ou la correction IA d'une question FillBlank, selon son `code`. **Ne peut pas modifier le type de question ni le contenu des choix.** |
+| `update_question` | Met à jour une question selon son `code` : énoncé, note, explication, caractère obligatoire, score, bonne réponse, correction IA d'une question FillBlank, options de nombre / date / notation, ou **remplacement de tous les choix** d'une question à choix. Les blocs d'affichage se modifient également ici. **Ne peut pas modifier le type de question.** |
 | `delete_question` | Supprime une question ou un saut de page selon son `code`. |
 
 ### Dimensions du rapport
@@ -220,25 +243,47 @@ Proposez un quiz en plusieurs langues : un quiz source (langue principale) plus 
 | `update_form_translation` | Enregistre le texte traduit d'une version linguistique (title / description / fields / report / systemText), ou la met en pause via `isActive` ; la structure est fixée par la source, vous ne modifiez que le texte, et les champs omis sont considérés comme une traduction partielle. |
 | `delete_form_translation` | Supprime une version linguistique. |
 
-### Répondants (Examinees)
+### Répondants (examinees)
 
-Les personnes qui répondent à un quiz. Chaque répondant est rattaché à une seule équipe ; les outils ne renvoient que des champs sûrs : le mot de passe, le code de vérification, le jeton de réinitialisation et les autres champs sensibles ne sont **jamais** exposés.
+Les personnes qui répondent à un quiz, appelées Répondants dans l'interface d'administration ; les outils conservent le terme examinee. Chaque répondant est rattaché à une seule équipe ; les outils ne renvoient que des champs sûrs : le mot de passe, le code de vérification, le jeton de réinitialisation et les autres champs sensibles ne sont **jamais** exposés.
 
 | Outil | Rôle |
 | --- | --- |
 | `list_examinees` | Liste les répondants de l'équipe actuelle, avec une recherche approximative facultative par e-mail / nom et un filtre par statut (actif / désactivé). |
 | `get_examinee` | Affiche le détail d'un répondant (y compris les données personnalisées `customData`) à partir de son identifiant métier `examineeId` (par exemple `AB1234567890`, affiché dans la liste). |
-| `update_examinee` | Modifie le nom, le statut ou les customData d'un répondant à partir de son `examineeId` (les customData sont validées selon les définitions de champs de l'équipe). **L'e-mail et l'équipe ne peuvent pas être modifiés.** |
+| `update_examinee` | Modifie le nom, le statut ou les customData d'un répondant à partir de son `examineeId` (les customData sont validées selon les définitions de champs de l'équipe et remplacent l'objet entier). **L'e-mail et l'équipe ne peuvent pas être modifiés.** |
+
+### Leads
+
+| Outil | Rôle |
+| --- | --- |
+| `list_leads` | Liste les leads de l'équipe (un par répondant, tous quiz confondus), avec le statut de suivi, le responsable, les étiquettes de couleur, le nombre de réponses et la prochaine réservation. Filtre par statut / responsable / étiquettes / date de création / mot-clé / réservation à venir. |
+| `get_lead` | Affiche un lead à partir de son `leadId`, avec en option l'historique des réponses du répondant, les commentaires internes de l'équipe et la chronologie des modifications. |
+| `list_lead_settings` | Lit les statuts de suivi, la bibliothèque d'étiquettes et les membres assignables de l'équipe. Appelez-le avant toute écriture : les codes de statut, les codes d'étiquette et les id de membres sont propres à chaque équipe. |
+| `update_lead` | Fait passer un lead à un autre statut de suivi (par exemple new → contacted) ; le changement est enregistré dans la chronologie du lead. |
+| `assign_leads` | Attribue jusqu'à 50 leads en un seul appel à un membre actif qui n'est pas lecteur (`"me"` pour vous-même), ou retire le responsable. La personne assignée reçoit une seule notification groupée. |
+| `set_lead_tags` | Définit les étiquettes de couleur de jusqu'à 50 leads en un seul appel : `replace` (un seul lead), ou `add` / `remove` pour les lots afin de préserver les étiquettes posées par d'autres. |
+| `add_lead_comment` | Rédige un commentaire de suivi interne sur un lead (réservé à l'équipe, jamais montré au répondant), éventuellement rattaché à une réponse. |
+
+### Réservations
+
+| Outil | Rôle |
+| --- | --- |
+| `list_bookings` | Liste les réservations 1:1 de l'équipe, des plus proches aux plus lointaines, avec l'horaire, le statut, le participant, le quiz d'origine et le responsable du lead. Filtre par statut / quiz / répondant / période ; `pending` correspond à la file des demandes à confirmer. |
+| `get_booking_availability` | Lit les créneaux réservables sur une plage de dates, calculés à partir des horaires hebdomadaires de l'équipe moins les créneaux déjà pris. Passez `bookingId` pour obtenir les créneaux permettant de reprogrammer cette réservation. |
+| `review_booking` | Confirme ou refuse une demande en attente. La confirmation envoie au participant les détails de la réunion (avec, en option, un lien / des instructions propres à cette session) ; un refus peut inclure un motif. Propriétaire / administrateur de l'équipe ou responsable du lead uniquement. |
+| `update_booking_status` | Clôture une réservation planifiée : la marquer comme terminée ou non honorée (uniquement après son début), ou l'annuler (le participant est prévenu par e-mail). |
+| `reschedule_booking` | Déplace une réservation planifiée vers l'un des créneaux disponibles ; le participant est prévenu par e-mail et le rappel 24 h est reprogrammé. |
 
 ### Réponses et analyses
 
-Consultez les performances des quiz, les entonnoirs de conversion et les leads pour que l'IA puisse boucler le cycle création → mesure → itération. Les outils liés aux leads renvoient des informations sur les répondants (données personnelles).
+Consultez les performances des quiz et les réponses pour que l'IA puisse boucler le cycle création → mesure → itération.
 
 | Outil | Rôle |
 | --- | --- |
 | `get_form_stats` | Lit les statistiques d'un quiz sur les N derniers jours (30 par défaut, 180 au maximum) : vue d'ensemble des KPI, tendance quotidienne, canaux (utm_source), types de connexion, appareils et répartition des réponses par question. |
 | `get_form_funnel` | Lit l'entonnoir de conversion d'un quiz sur les N derniers jours : vu → commencé → soumis → lead capturé → rapport consulté → CTA cliqué → partagé, ainsi que l'entonnoir par canal et les points d'abandon. |
-| `list_records` | Liste les réponses (leads) de l'équipe actuelle : répondant, réponses, résultat compact du rapport et UTM ; filtre par quiz, statut du rapport et date de soumission. |
+| `list_records` | Liste les réponses de l'équipe actuelle : répondant, réponses, résultat compact du rapport et UTM ; filtre par quiz, statut du rapport et date de soumission. |
 | `get_record` | Affiche le détail d'une réponse à partir de son `id` (renvoyé par `list_records`) : réponses complètes, résultat du rapport et métadonnées de soumission. |
 
 ### Téléversement d'images
@@ -250,22 +295,25 @@ Consultez les performances des quiz, les entonnoirs de conversion et les leads p
 
 <Callout type="info">
   Parcours types :
+  - **À partir d'un modèle** : `list_templates` → `create_form_from_template` → ajustez avec `update_form` / `update_question`.
   - **Examen / quiz noté** : `create_form` pour créer le quiz et obtenir le `code` de chaque question → utilisez `update_form` ou `set_dimension_analysis` pour configurer les formules / dimensions du rapport selon les `code`.
   - **Quiz de résultat** : `create_form` en un seul appel avec `report.outcomes` (attribuez à chaque type un `code` unique de votre choix, par exemple `lion`) ainsi que les votes de chaque choix → après la soumission, le type ayant obtenu le plus de votes l'emporte (en cas d'égalité, l'ordre de la liste prévaut) ; ajustez ensuite les textes et CTA des types via `update_form`.
+  - **Lancement** : `update_form_settings` pour définir la barrière de capture de leads et les sections de la page de résultats → `get_form_share_info` pour le lien et le code d'intégration.
 </Callout>
 
 ## Limites actuelles
 
 - **Le Quiz de connaissances aléatoire n'est pas pris en charge** : ses questions se trouvent dans la banque de questions (QuestionBank) ; gérez-les dans l'éditeur, MCP ne les couvre pas encore.
-- **Impossible de modifier directement le type de question ou les choix** : pour changer de type ou modifier les choix, utilisez `delete_question` puis `add_question` pour reconstruire la question. Il en va de même pour la **correspondance des votes entre choix et types** d'un quiz de résultat : pour modifier les votes, reconstruisez la question.
-- **La notation des choix du Quiz noté** utilise la notation par option : dans la scène du quiz noté, `update_question` refuse `score` / `correctAnswer` / `aiMatch`. Modifiez les scores des choix dans l'interface d'administration, ou supprimez et recréez la question. La scène du quiz de résultat refuse également ces trois paramètres (elle décide par votes, il n'y a pas de notation).
-- **Types de questions du quiz de résultat** : les questions de vote sont SingleCheck / MultiCheck / TrueFalse (FillBlank n'est pas pris en charge) ; les **images** des types de résultat ne peuvent pas encore être téléversées via MCP : configurez-les dans l'éditeur (les images déjà configurées sont conservées lorsque MCP met à jour `report.outcomes`).
-- **La scène et la langue sont verrouillées** après la création et ne peuvent pas être modifiées via MCP.
+- **Le type de question ne peut pas être modifié** : pour changer de type, utilisez `delete_question` puis `add_question` pour reconstruire la question. Les choix peuvent être remplacés en bloc avec `update_question`, mais les **votes de résultat d'une question TrueFalse** (`trueOutcomes` / `falseOutcomes`) nécessitent toujours une suppression puis une recréation.
+- **Notation propre à chaque scène** : dans les scènes du quiz noté et du quiz de résultat, `update_question` refuse les paramètres de premier niveau `score` / `correctAnswer` / `aiMatch` ; passez plutôt des choix portant `choices[i].score` (notation par option) ou `choices[i].outcomes` (votes).
+- **Types de questions par scène** : Ordering est réservé au quiz de connaissances ; Cascade, Rate, DateField et TimeField sont réservés au quiz noté ; dans un quiz noté, FillBlank ne fait que recueillir des données ; les quiz de résultat acceptent SingleCheck / MultiCheck / DropDown / TrueFalse (ainsi que les sauts de page et les blocs d'affichage).
+- **Images des résultats** : les **images** des types de résultat ne peuvent pas encore être téléversées via MCP : configurez-les dans l'éditeur (les images déjà configurées sont conservées lorsque MCP met à jour `report.outcomes`).
+- **La scène est verrouillée** après la création ; la **langue** ne peut être modifiée que tant que le quiz n'a aucune version linguistique.
 - **La suppression est réversible** : `delete_form` place le quiz dans la corbeille (purgée automatiquement après 5 jours), il ne s'agit pas d'une suppression définitive immédiate ; pour une suppression définitive, supprimez-le à nouveau dans l'interface d'administration.
-- **Limite de questions** : avec le forfait Free, un quiz contient au maximum **50 questions** (les sauts de page, les textes d'information et les carrousels d'images ne comptent pas) ; au-delà, `create_form`, `add_question` et `insert_question` sont refusés. `duplicate_form` et `create_form_from_template` ne sont pas limités. Le forfait Pro est illimité : consultez [Limite de questions](/fr/editor).
+- **Limite de questions** : avec le forfait Free, un quiz contient au maximum **50 questions** (les sauts de page, les blocs de texte enrichi et les carrousels d'images ne comptent pas) ; au-delà, `create_form`, `add_question` et `insert_question` sont refusés. `duplicate_form` et `create_form_from_template` ne sont pas limités. Le forfait Pro est illimité : consultez [Limite de questions](/fr/editor).
 - **La duplication ne copie aucune donnée** : `duplicate_form` ne clone que la structure et les traductions ; elle ne copie **pas** les réponses, les paramètres de partage ni les intégrations (qui contiennent des secrets). Le nouveau quiz démarre vierge.
 - **Les champs d'identité des répondants sont immuables** : `update_examinee` ne peut pas modifier l'e-mail, l'équipe ni l'`examineeId` (ils constituent l'identité d'authentification).
-- **Les leads contiennent des données personnelles** : `list_records` / `get_record` renvoient l'e-mail, le nom, les champs personnalisés, etc. des répondants ; traitez-les de manière responsable.
+- **Les données personnelles sont renvoyées masquées** : les outils de leads, de réservations, de répondants et de réponses renvoient les noms, adresses e-mail et numéros de téléphone masqués, y compris les e-mails et numéros saisis dans les réponses. Le masquage est irréversible ; désignez les personnes par `examineeId`, `leadId` ou l'id de la réponse.
 
 ## Sécurité et limites de débit
 

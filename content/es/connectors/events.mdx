@@ -1,6 +1,6 @@
 ---
 title: Eventos desencadenantes y alcance
-description: 'Cada conector se activa con eventos desencadenantes y está limitado por su alcance, es decir, qué quizzes pueden activarlo. Ambos se combinan con Y: descubre qué significa cada evento y cómo acotar un conector.'
+description: 'Cada conector se activa con eventos desencadenantes y está limitado por su alcance, es decir, qué quizzes pueden activarlo. Qué significa cada uno de los cinco eventos, cómo acotar un conector a quizzes concretos y el filtro de consentimiento.'
 ---
 
 Cada conector decide **cuándo se activa** (eventos) y **qué quizzes pueden activarlo** (alcance). Ambos se combinan con Y: el evento debe coincidir *y* el quiz de origen debe estar dentro del alcance para que se entregue algo.
@@ -11,13 +11,22 @@ Todo conector necesita al menos un evento:
 
 | Evento | Se activa cuando |
 | --- | --- |
+| **Nueva respuesta** | Alguien completa un quiz: **cada** envío, incluidos los anónimos y los intentos repetidos de la misma persona |
 | **Nuevo lead** | Alguien deja sus datos de contacto a tu equipo **por primera vez** |
-| **Reserva creada** | Alguien reserva una sesión |
+| **Reserva creada** | Se confirma una sesión. Con la [aprobación](/es/bookings/availability) activada, es el momento en que el responsable del lead confirma la solicitud; si está desactivada, el momento en que el participante reserva |
 | **Reserva cancelada** | Cualquiera de las dos partes cancela una reserva |
 | **Reserva reprogramada** | Una reserva se mueve a otra hora |
 
 <Callout type="warning">
-  **"Nuevo lead" se activa una sola vez, la primera vez que esa persona deja sus datos.** Si la misma persona hace otro quiz más adelante, no se vuelve a activar, porque los leads se [deduplican entre quizzes](/es/leads). Si quieres una notificación con cada envío, este no es el evento que buscas.
+  **"Nuevo lead" se activa una sola vez, la primera vez que esa persona deja sus datos.** Si la misma persona hace otro quiz más adelante, no se vuelve a activar, porque los leads se [deduplican entre quizzes](/es/leads). Si quieres una notificación con cada envío, elige **Nueva respuesta**.
+</Callout>
+
+<Callout type="info">
+  **Nueva respuesta** se envía una vez calculado el resultado, así que la entrega siempre incluye la puntuación, el nivel o el tipo de resultado.
+</Callout>
+
+<Callout type="info">
+  Los eventos de reserva solo cubren las sesiones que realmente se mantienen. Una solicitud pendiente, una solicitud rechazada o una solicitud pendiente que se reprograma o se retira **no activa nada**: las automatizaciones posteriores no deberían actuar sobre una reunión que no se ha acordado.
 </Callout>
 
 ## Alcance de activación
@@ -28,19 +37,28 @@ El alcance controla qué quizzes pueden activar este conector:
 - **Cuestionarios específicos**: solo lo activan los quizzes que selecciones.
 
 <Callout type="info">
-  El alcance se compara con **el quiz del que procede el evento**. En "Nuevo lead", es el quiz en el que la persona **dejó sus datos por primera vez**, no el más reciente que hizo.
+  El alcance se compara con **el quiz del que procede el evento**. En "Nueva respuesta", es el quiz que se acaba de enviar; en "Nuevo lead", es el quiz en el que la persona **dejó sus datos por primera vez**, no el más reciente que hizo.
 </Callout>
 
 Un uso típico: enviar tu quiz principal de captación de leads a Slack para que el equipo lo vea al instante, y evitar que un quiz interno moleste a nadie.
+
+## Solo leads con consentimiento
+
+Los conectores de Webhook, Zapier y Kit tienen una condición de envío más: **Solo leads con consentimiento**. Cuando está activada, el conector envía solo a los participantes que aceptaron recibir correo de marketing. Quien lo rechazó, o nunca recibió la pregunta, se omite, y esa entrega no se reintenta.
+
+<Callout type="warning">
+  Actívala siempre que el conector alimente una lista de correo o una herramienta de email. Añadir personas a listas de marketing sin su consentimiento no cumple el RGPD. Las notificaciones de Slack y de correo van a tu propio equipo, así que no ofrecen este interruptor.
+</Callout>
 
 ## Combinaciones que vale la pena copiar
 
 | Lo que quieres | Eventos | Alcance |
 | --- | --- | --- |
 | Que todos se enteren de un nuevo cliente | Nuevo lead | Todos los quizzes |
+| Puntuar cada respuesta en tu propio backend | Nueva respuesta | Todos los quizzes |
 | Seguir solo el quiz principal | Nuevo lead | Cuestionarios específicos |
 | Enterarte cuando cambia tu agenda | Reserva cancelada + reprogramada | Todos los quizzes |
-| Sincronizar los leads con tu ESP | Nuevo lead | Todos los quizzes |
+| Sincronizar los leads con tu ESP | Nuevo lead + **Solo leads con consentimiento** | Todos los quizzes |
 
 <Callout type="info">
   Cambiar los eventos o el alcance **solo afecta a los eventos a partir de ese momento**: no se reenvía nada anterior.

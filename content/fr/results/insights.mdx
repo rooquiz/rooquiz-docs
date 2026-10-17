@@ -5,24 +5,30 @@ description: "Les statistiques agrègent les réponses éparses en chiffres et g
 
 Les statistiques agrègent les réponses éparses en **chiffres et graphiques**, pour vous aider à saisir la vue d'ensemble sans parcourir les réponses une à une.
 
-## Indicateurs et graphiques courants
+## Chiffres clés
 
-- **Taux de complétion** : le rapport entre les soumissions commencées et terminées, qui reflète les abandons.
-- **Volume de soumissions** : le total des réponses et son évolution dans le temps.
-- **Répartition par question** : pour les questions à choix, la part et la répartition de chaque option.
-- **Répartition par source** : combinée au [suivi des sources UTM](/fr/publish/tracking), elle compare le volume de réponses entre les canaux.
+Le bandeau du haut affiche **Soumissions du jour** (par rapport à la veille), **Soumissions totales**, **Répondants uniques** (répondants connectés uniquement), **Score moyen**, **Rapports générés** (rapports terminés / en échec / en attente) et **Partages** avec le taux de partage.
+
+## Graphiques courants
+
+- **Soumissions des N derniers jours** : le volume de réponses dans le temps.
+- **Répartition des réponses** : pour les questions à choix unique, liste déroulante, vrai/faux et notation (10 au maximum), la part de chaque option.
+- **Source de trafic** : compare le volume de réponses entre les canaux, en combinaison avec le [suivi des sources UTM](/fr/publish/tracking).
+- **Mode de connexion** et **Type d'appareil** : répondants anonymes ou inscrits, et iOS / Android / ordinateur.
 
 ## Entonnoir de conversion
 
-L'entonnoir suit **une visite (session)** à travers cinq étapes : **Vu → Commencé → Soumis → Rapport consulté → CTA cliqué**. Voici comment chaque étape est comptabilisée :
+L'**Entonnoir de conversion** suit **une visite (session)** à travers **Vu → Commencé → Soumis → Rapport consulté → CTA cliqué**. Deux étapes n'apparaissent que lorsqu'elles s'appliquent : **Lead capturé** (après Soumis) sur les quiz configurés sur **E-mail requis pour voir le rapport**, ou qui disposent de données de leads antérieures ; et **Partagé** (à la fin) dès que des résultats ont été partagés. Voici comment chaque étape est comptabilisée :
 
 | Étape | Comptabilisée lorsque |
 | --- | --- |
 | Vu | La page du quiz s'ouvre réellement dans un navigateur (robots d'indexation et aperçus administrateur exclus) |
 | Commencé | Le répondant répond à une question pour la première fois (un simple clic sur « commencer » ne suffit pas) |
 | Soumis | La soumission réussit |
+| Lead capturé | La soumission est rattachée à un répondant : il a laissé un e-mail ou s'est connecté |
 | Rapport consulté | Le rapport termine sa génération pendant que le répondant se trouve sur la page de résultats |
 | CTA cliqué | Le répondant clique sur le [bouton CTA](/fr/results/reports) en bas du rapport |
+| Partagé | Le répondant clique sur un bouton de partage de la page de résultats (première fois, quel que soit le canal) |
 
 Le pourcentage affiché à côté de chaque étape est le taux de conversion **par rapport à l'étape précédente**, ce qui vous permet de voir précisément où se produit la perte.
 
@@ -41,7 +47,7 @@ Regroupée selon le `utm_source` du lien (défini par le [Plan de diffusion](/fr
 ## Suggestions
 
 - Utilisez l'**entonnoir de conversion** pour localiser la perte : beaucoup de vues mais peu de démarrages désignent la page d'accueil ou la première question ; beaucoup de démarrages mais peu de soumissions, examinez les principaux points d'abandon.
-- Utilisez la **répartition des options** pour comprendre les tendances globales des répondants.
+- Utilisez la **Répartition des réponses** pour comprendre les tendances globales des répondants.
 - Combinez les tendances dans le temps avec la **conversion par source** pour évaluer les campagnes de chaque canal.
 
 <Callout type="info">

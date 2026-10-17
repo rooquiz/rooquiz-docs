@@ -6,14 +6,14 @@ description: 'Exporte respostas, leads e respondentes em CSV UTF-8 que abre no E
 Respostas, leads e respondentes podem ser exportados em **CSV** (UTF-8, abre diretamente no Excel).
 
 <Callout type="warning">
-  A exportação é um **recurso Pro** com um limite semanal de exportações. Equipes no plano gratuito veem um aviso de upgrade.
+  A exportação é um **recurso Pro** com um limite semanal de exportações, e apenas os **proprietários e administradores** da equipe veem o botão **Exportar**. No plano Free o botão continua lá, mas clicar nele — para as linhas selecionadas ou para tudo — abre um aviso de upgrade.
 </Callout>
 
 ## Dois tipos de exportação
 
 | Método | Observações |
 | --- | --- |
-| **Exportar selecionados** | Marque algumas linhas e exporte só elas. O arquivo é gerado no seu navegador e **não consome sua cota** |
+| **Exportar selecionados** | Marque algumas linhas e exporte só elas. O arquivo é gerado no seu navegador e **não consome sua cota** (ainda assim, exclusivo do Pro) |
 | **Exportar tudo** | Exporta tudo o que corresponde aos filtros atuais. O arquivo é gerado no servidor e **consome uma exportação** |
 
 <Callout type="info">
@@ -36,7 +36,7 @@ Confirme e o arquivo é **gerado em segundo plano e baixado automaticamente**; e
 A cota semanal é renovada na **segunda-feira (UTC)**. Tanto a caixa de confirmação quanto a mensagem de limite atingido informam o horário exato da renovação.
 
 <Callout type="info">
-  **Exportações com falha não contam.** Só uma exportação que de fato gerou um arquivo consome sua cota.
+  **Só as exportações com falha não contam.** Todas as outras consomem sua cota assim que começam — inclusive as que ainda estão na fila ou em processamento.
 </Callout>
 
 ## Quando o volume de dados é grande demais

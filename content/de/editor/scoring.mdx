@@ -1,13 +1,13 @@
 ---
 title: Bewertungs- und Auswertungsregeln
-description: 'Bewertung hängt vom Quiztyp ab: Das Wissensquiz prüft richtig und falsch und summiert Punkte, das Bewertete Quiz liefert mehrdimensionale Analysen und Berichte. So legen Sie Punkte, Antworten und Formeln fest.'
+description: 'Bewertung hängt vom Quiztyp ab: Das Wissensquiz prüft richtig und falsch und summiert Punkte, das Bewertete Quiz bildet Dimensionspunkte aus Formeln. So legen Sie Punkte, Antworten, Stufen und Formeln fest.'
 ---
 
 „Bewertung“ bedeutet je nach Quiztyp etwas anderes: Das Wissensquiz konzentriert sich auf **richtig/falsch und Gesamtpunktzahl**, das Bewertete Quiz auf **mehrdimensionale Analysen und Berichte**.
 
 ## Wissensquiz: Bewertung und Beurteilung
 
-In einem **Quiz** können Sie:
+In einem **Wissensquiz** können Sie:
 
 - **Punkte vergeben**: Fragen oder richtigen Optionen Punkte zuweisen.
 - **Richtig/falsch beurteilen**: Richtige Antworten markieren; das System beurteilt jede Frage automatisch.
@@ -17,7 +17,7 @@ In einem **Quiz** können Sie:
 - **KI-Abgleich**: Lückentext-Antworten nach semantischer Ähnlichkeit statt per exakter oder Enthält-Übereinstimmung bewerten, mit einer von Ihnen festgelegten Genauigkeitsschwelle. Die KI-Bewertung ist unbegrenzt.
 
 <Callout type="info">
-  Punkte und die Richtig/Falsch-Beurteilung sind im Wissensquiz und im Zufälligen Wissensquiz verfügbar. Das Bewertete Quiz verwendet stattdessen Dimensionsformeln, und das Ergebnisquiz vergibt überhaupt keine Punkte.
+  Punkte und die Richtig/Falsch-Beurteilung sind im Wissensquiz und im Zufälligen Wissensquiz verfügbar. Das Bewertete Quiz verwendet stattdessen Formeln, und das Ergebnisquiz vergibt überhaupt keine Punkte.
 </Callout>
 
 ## Ergebnisquiz: Gewinnen durch Stimmen
@@ -30,12 +30,12 @@ Jedes Ergebnis kann einen eigenen CTA-Button tragen, der ein unterhaltsames Erge
 
 In einem **Bewerteten Quiz** geht es bei der Bewertung eher um ein „Profil“ als um richtig oder falsch:
 
-- **Mehrdimensionale Bewertung**: Ordnen Sie Fragen mehreren Dimensionen zu; nach dem Absenden erhält jede Dimension eine Punktzahl, oft als **Netzdiagramm** dargestellt.
+- **Mehrdimensionale Bewertung**: Legen Sie mehrere Dimensionen an, jede mit **einer eigenen Formel** über Fragecodes; nach dem Absenden liefert die Formel jeder Dimension deren Punktzahl, oft als **Netzdiagramm** dargestellt. Eine Dimension ohne Formel hat immer 0 Punkte.
 - **Ergebnisprofil**: Leiten Sie aus den Dimensionspunkten Aussagen zu Persönlichkeit oder Fähigkeiten ab.
 
 ### Welche Fragen bewertet werden
 
-Die Gesamtpunktzahl eines Bewerteten Quiz ergibt sich **ausschließlich aus der Formel**, die auf Fragecodes verweist. Referenziert werden können nur Fragen, die eine Zahl liefern: Auswahlfragen (über Punkte pro Option), Bewertung, Zahl, Datum, Uhrzeit und Kaskadenauswahl.
+Die Gesamtpunktzahl eines Bewerteten Quiz ergibt sich **ausschließlich aus der Formel**, die auf Fragecodes verweist. Referenziert werden können nur Fragen, die eine Zahl liefern: Einfachauswahl, Mehrfachauswahl, Dropdown und Richtig/Falsch (über Punkte pro Option), Kaskadenauswahl, Bewertung, Zahl, Datum und Uhrzeit. Eine Auswahlfrage, die auf **Nur Daten erfassen** gestellt ist, kann ebenfalls nicht referenziert werden.
 
 **Lückentext erfasst nur Text und wird nie bewertet** – freier Text kann nicht in Berechnungen einfließen, erzeugt daher keine Punkte und erscheint nicht unter den einfügbaren Feldern im Formeleditor. Damit ist er genau richtig, um innerhalb einer bewerteten Auswertung eine offene Frage zu stellen („Gibt es sonst noch etwas, das wir wissen sollten?“).
 

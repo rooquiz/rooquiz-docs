@@ -3,19 +3,20 @@ title: Os cinco canais
 description: 'Os cinco canais de conectores — e-mail pelo seu próprio SMTP, Webhook, Slack, Zapier e Kit: o que cada um entrega, os destinatários e o formato de mensagem que você define e um conector por canal.'
 ---
 
-Cada canal permite **um conector por equipe**. Para substituir um existente, exclua-o primeiro.
+Webhook, Slack, Zapier e Kit permitem **um conector por equipe** — para substituir um existente, exclua-o primeiro. O e-mail permite **até 3**, para que diferentes equipes ou eventos recebam a própria notificação.
 
 ## E-mail
 
-Disponível em todos os planos. Envia pelo servidor SMTP da sua própria equipe, que você configura uma única vez em [Serviço de envio de e-mail](/pt-BR/connectors/email-smtp).
+Disponível em todos os planos. Envia por um dos serviços de envio da sua própria equipe — um servidor SMTP ou uma conta do Gmail conectada, configurados em [Serviço de envio de e-mail](/pt-BR/connectors/email-smtp).
 
+- **Serviço de envio** — escolha qual dos seus serviços de envio entrega os e-mails deste conector.
 - **Destinatários** — digite um endereço e pressione Enter, **até 10**. Você também pode adicionar o destinatário dinâmico "E-mail do respondente" para notificar a própria pessoa.
 - **Assunto** — até 200 caracteres; sem quebras de linha, sem HTML.
 - **Corpo** — até 10.000 caracteres; sem HTML.
 
 Assunto e corpo aceitam **inserir variáveis**, em dois grupos:
 
-- **Variáveis do sistema** — nome do lead, e-mail do respondente, nome do quiz, número do registro, data de envio, link do relatório, link da página do lead.
+- **Variáveis do sistema** — nome do lead, nome e e-mail do respondente, nome do quiz, número do registro, data de envio, pontuação, pontuação máxima, nível do resultado, tipo de resultado, link do relatório, link da página do lead, nome da equipe e, em eventos de agendamento, nome e e-mail do participante, horário de início e de término do agendamento e horário de início anterior.
 - **Questões do quiz** — fazem referência à resposta de uma questão específica.
 
 ## Webhook
@@ -50,10 +51,10 @@ Use o Zapier para alcançar milhares de apps:
 
 O Kit (antigo ConvertKit) é uma ferramenta de e-mail marketing. Depois de clicar em **Conectar Kit** e concluir o fluxo OAuth:
 
-- **Tags para cada novo lead** — aplicadas a todos os inscritos, por exemplo `quiz-lead`. Digite um nome que ainda não existe e ele será **criado no Kit** ao salvar.
+- **Tags para cada novo lead** — um conjunto fixo de até 20 tags aplicado a todos os inscritos, por exemplo `quiz-lead`. Digite um nome que ainda não existe e ele será **criado no Kit** ao salvar. As mesmas tags vão para todos; elas não variam conforme a pontuação ou o resultado.
 - Use **Atualizar tags** para buscar novamente a lista de tags do Kit quando necessário.
 
-Dispare sequências de e-mail a partir dessas tags no Kit, e os novos leads entram direto no seu fluxo de nutrição.
+Dispare sequências de e-mail a partir dessas tags no Kit, e os novos leads entram direto no seu fluxo de nutrição. Ative [Somente leads com consentimento](/pt-BR/connectors/events#somente-leads-com-consentimento) para que só sejam inscritas as pessoas que aceitaram receber e-mails de marketing.
 
 <Callout type="info">
   E-mail e Slack estão disponíveis em todos os planos. Webhook, Zapier e Kit são **exclusivos do plano Pro**.

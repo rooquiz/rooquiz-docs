@@ -1,9 +1,13 @@
 ---
 title: MCP 接入
-description: 'RooQuiz 提供 MCP（Model Context Protocol）server，讓 Claude Desktop、Claude Code、Cursor、Codex 等 AI 客戶端在你的團隊下直接操作測驗：用自然語言建立各類測驗、追加題目、調整順序、設定報告維度與分型，還能複製刪除測驗、管理譯文與答題者。含兩種連接方式與限制說明。'
+description: 'RooQuiz 提供 MCP（Model Context Protocol）server，讓 ChatGPT、Claude、Cursor、Codex 等 AI 客戶端在你的團隊下用自然語言工作：從範本或從零建立測驗、管理多語言譯文、跟進線索與預約、讀取統計與轉化漏斗。這一頁說明 OAuth 與個人 Token 兩種連接方式、全部 48 個工具的用途、典型流程，以及目前的限制與安全頻率規則。'
 ---
 
-RooQuiz 提供一個 **MCP(Model Context Protocol)server**,讓 Claude Desktop、Claude Code、Cursor、Codex 等 AI 客戶端能在你的團隊下直接操作測驗——用自然語言就能建立考試、評分測驗、分型測驗,追加題目、調整順序、設定報告維度與分型結果;還能複製 / 刪除測驗、做多語言譯文、管理考生,以及讀取答題記錄、統計與轉化漏斗——而不必手動在編輯器裡一個個搭。
+RooQuiz 提供一個 **MCP（Model Context Protocol）server**，讓 ChatGPT、claude.ai、Claude Desktop、Claude Code、Cursor、Codex 等 AI 客戶端能在你的團隊下工作——用自然語言就能從範本或從零建立測驗，追加與修改題目，設定報告維度或結果類型，調整投放設定並拿到分享連結，管理多語言譯文與答題者，跟進線索與預約，以及讀取答題記錄、統計與轉化漏斗——而不必手動在編輯器裡一個個做。
+
+<Callout type="info">
+  RooQuiz 沒有內建的 AI 出題功能。想用 AI 建測驗，請透過 MCP 連接**你自己的 AI 客戶端**並讓它來做——它會使用下面的工具，你再到編輯器裡檢查結果。
+</Callout>
 
 <Callout type="info">
   MCP 是面向**進階使用者**的能力,需要你會使用支援 MCP 的 AI 客戶端。基礎的視覺化搭建仍推薦用 [編輯器](/zh-TW/editor)。
@@ -18,9 +22,12 @@ RooQuiz 提供一個 **MCP(Model Context Protocol)server**,讓 Claude Desktop、
 
 ## 連接方式一:OAuth 授權(推薦)
 
-claude.ai、Claude Code 等支援 MCP OAuth 的客戶端**無需手動建立 Token**——只要填入 Endpoint URL,客戶端會自動發現授權服務並開啟瀏覽器,你登入 RooQuiz 帳號、選擇要授權的團隊、點「授權」即完成連接。
+ChatGPT、claude.ai、Claude Code 等支援 MCP OAuth 的客戶端**無需手動建立 Token**——只要填入 Endpoint URL,客戶端會自動發現授權服務並開啟瀏覽器,你登入 RooQuiz 帳號、選擇要授權的團隊、點「授權」即完成連接。
 
-<Tabs items={['claude.ai 網頁版', 'Claude Code']}>
+<Tabs items={['ChatGPT', 'claude.ai 網頁版', 'Claude Code']}>
+  <Tab value="ChatGPT">
+    RooQuiz 已作為應用上架 ChatGPT。在 RooQuiz 後台頂部點 **在 ChatGPT 中使用** 開啟它，然後連接——瀏覽器會跳轉到 RooQuiz 授權頁，登入並選擇團隊，點「授權」。
+  </Tab>
   <Tab value="claude.ai 網頁版">
     開啟 claude.ai 的 **設定 → 連接器(Connectors)→ 新增自訂連接器**:
 
@@ -51,10 +58,10 @@ claude.ai、Claude Code 等支援 MCP OAuth 的客戶端**無需手動建立 Tok
 
 ### 建立 Token
 
-進入 **設定 → MCP 接入**,點「建立 Token」:
+進入 **設定 → MCP 接入**，點 **建立 Token**：
 
-1. 填寫一個**名稱**(便於識別,例如 `Cursor - 我的 Mac`)。
-2. 選擇一個**預設團隊**——Token 建立後預設操作這個團隊,AI 後續可用 `switch_active_tenant` 工具切換到你所在的其他團隊。
+1. 填寫 **Token 名稱**(便於識別,例如 `Cursor - 我的 Mac`)。
+2. 選擇 **預設團隊**——Token 建立後預設操作這個團隊,AI 後續可用 `switch_active_tenant` 工具切換到你所在的其他團隊。
 3. 生成後會顯示一段以 `rqp_live_` 開頭的明文 Token。
 
 <Callout type="warning">
@@ -63,7 +70,7 @@ claude.ai、Claude Code 等支援 MCP OAuth 的客戶端**無需手動建立 Tok
 
 限制:
 
-- 每個使用者最多保有 **5 個 Token**(含已撤銷的,OAuth 連接不計入)。要再建新的,需先**刪除**一個釋放名額(「撤銷」只是停用,不釋放名額)。
+- 每個使用者最多保有 **5 個 Token**(含已撤銷的,OAuth 連接不計入)。要再建新的,需先**刪除**一個釋放名額(「撤銷」只是停用,不釋放名額)。已撤銷的個人 Token 可以用 **啟用** 重新開啟。
 - Token 是**個人憑證**,請勿提交到程式碼儲存庫或公開分享。
 
 ### 在 AI 客戶端中設定
@@ -166,102 +173,143 @@ claude.ai、Claude Code 等支援 MCP OAuth 的客戶端**無需手動建立 Tok
 
 ## 支援的工具
 
-連接成功後,AI 助手可呼叫以下工具。它們都作用在 Token **目前啟用的團隊**下。
+連接成功後，AI 助手可呼叫以下 48 個工具。它們都作用在 Token **目前啟用的團隊**下。
 
-### 團隊(Tenant)
-
-| 工具 | 作用 |
-| --- | --- |
-| `list_my_tenants` | 列出你所在的所有團隊,標記目前啟用的那個。 |
-| `get_active_tenant` | 回傳 Token 目前啟用的團隊資訊;所有寫操作預設作用在該團隊。 |
-| `switch_active_tenant` | 切換目前啟用團隊(持久化、跨工作階段保留;目標必須是你已加入的團隊)。 |
-
-### 測驗(Form)
+### 團隊（Tenant）
 
 | 工具 | 作用 |
 | --- | --- |
-| `create_form` | 建立測驗(`knowledge_quiz` 考試、`scored_quiz` 評分測驗 或 `outcome_quiz` 分型測驗),可一次性傳入題目陣列和報告設定,減少往返呼叫。分型測驗**必須**在建立時一併傳入 `report.outcomes`(結果類型列表),並讓每個選項透過 `outcomes` 給類型投票。 |
-| `list_forms` | 列出目前團隊的測驗,支援按 scene 或標題模糊過濾。 |
-| `get_form` | 檢視指定測驗的完整詳情(題目列表 `fields[]`、報告設定等);改題前需先用它拿到每道題的 `code`,分型測驗則從 `report.outcomeAnalysis.outcomes` 拿結果類型的 `code`。 |
-| `update_form` | 更新標題、描述、開啟/關閉狀態,或按子鍵合併替換 `report` 設定;分型測驗傳 `report.outcomes` 即按 `code` 合併更新結果類型(名稱/描述/CTA,已設定的圖片保留;刪除仍被題目引用的類型會被拒絕)。**場景(scene)與語言建立後鎖定,不可改**。 |
-| `delete_form` | 把測驗移入回收站(軟刪):列表中不再顯示,5 天內可用 `restore_form` 找回(到期自動徹底清除)。僅測驗 owner / 團隊 owner 可刪;答題記錄在徹底清除前保留。 |
-| `restore_form` | 從回收站恢復被 `delete_form` 刪除的測驗。僅 owner / 團隊 owner 可恢復;不在回收站會報錯。 |
-| `duplicate_form` | 複製一份測驗:克隆題目結構、評分、報告、視覺與設定以及**全部語言譯文**,生成歸屬你的新測驗(新連結)。**不複製**答題記錄、共享設定、整合與封禁狀態。可選傳 `newTitle`。 |
+| `list_my_tenants` | 列出你所在的所有團隊，標記目前啟用的那個。 |
+| `get_active_tenant` | 回傳 Token 目前啟用的團隊資訊（含團隊位址）；所有寫操作預設作用在該團隊。 |
+| `switch_active_tenant` | 切換目前啟用團隊（持久化、跨工作階段保留；目標必須是你已加入的團隊）。 |
+| `invite_member` | 用電子郵件邀請某人以成員、檢視者或管理員身分加入目前團隊，對方會收到帶加入連結的邀請郵件。僅擁有者 / 管理員可用。 |
+| `update_tenant_slug` | 修改團隊位址——平台網域上每個測驗連結的第一段路徑。僅擁有者 / 管理員可用。所有公開測驗連結會一起變更，舊位址立即失效；`/a/<token>` 連結不受影響。 |
 
-### 題目(Question)
+### 範本（Templates）
 
 | 工具 | 作用 |
 | --- | --- |
-| `add_question` | 往測驗末尾追加一項:題目(單選/多選/判斷/填空)或分頁符(`Breaker`)。分型測驗的選擇題需為每個選項指明投給哪些結果類型(判斷題用 `trueOutcomes` / `falseOutcomes`)。 |
-| `insert_question` | 在指定位置插入一項,用 `after` / `before` 引用一個已存在的 `code`。 |
+| `list_templates` | 列出公共範本庫裡上架中的範本（標題、場景、描述、分類、使用次數），按使用次數由高到低排序。 |
+| `create_form_from_template` | 一次呼叫從範本建立新測驗：結構、計分 / 報告設定、視覺設定與全部語言版本。有合適範本時，這是建卷最快的方式。 |
+
+### 測驗（Form）
+
+| 工具 | 作用 |
+| --- | --- |
+| `create_form` | 建立測驗（`knowledge_quiz`、`scored_quiz` 或 `outcome_quiz` 分型測驗），可一次性傳入題目陣列和報告設定，減少往返呼叫。分型測驗**必須**在建立時一併傳入 `report.outcomes`（結果類型列表），並讓每個選項透過 `outcomes` 給類型投票。 |
+| `list_forms` | 列出目前團隊的測驗，由新到舊排序，不含題目內容。 |
+| `get_form` | 檢視指定測驗的完整詳情（題目列表 `fields[]`、報告設定等）；改題前需先用它拿到每道題的 `code`，分型測驗則從 `report.outcomeAnalysis.outcomes` 拿結果類型的 `code`。 |
+| `update_form` | 更新標題、描述、開啟/關閉狀態、封面（`flagImg` / `landingImage`）、主題、社交分享卡片（`openGraph`）、系統文案，或按子鍵合併替換 `report` 設定；分型測驗傳 `report.outcomes` 即按 `code` 合併更新結果類型（已設定的圖片保留；刪除仍被題目投票引用的類型會被拒絕）。**語言**只有在測驗還沒有語言版本時才能改；**場景（scene）**永遠不能改。 |
+| `delete_form` | 把測驗移入回收站（軟刪）：`list_forms` 中不再顯示，5 天內可用 `restore_form` 找回（到期自動徹底清除）。僅測驗擁有者或團隊擁有者 / 管理員可刪；答題記錄在徹底清除前保留。 |
+| `restore_form` | 從回收站恢復被 `delete_form` 刪除的測驗。 |
+| `duplicate_form` | 複製一份測驗：克隆題目結構、評分、報告、視覺與設定以及**全部語言譯文**，生成歸屬你的新測驗（新連結）。**不複製**答題記錄、共享設定、整合與封禁狀態。可選傳 `newTitle`。 |
+
+### 分享與投放設定
+
+| 工具 | 作用 |
+| --- | --- |
+| `get_form_share_info` | 發佈測驗需要的一切：公開答題連結（每個語言版本各一條）、團隊自訂網域及其是否已生效、三種模式（inline / popup / iframe）的嵌入程式碼，以及目前的投放設定。傳 `utmSource` 可給所有連結和程式碼加上同一個管道標記。 |
+| `update_form_settings` | 修改測驗的投放方式：誰能答題、看報告是否要留信箱（留資門檻）以及是否要驗證碼、限時答題（知識測驗）、結果頁分享與分享卡片、答題卡、群體對照、結果頁預約區塊、回饋區塊、PDF 下載（Pro）、Google Analytics ID 等。 |
+
+### 題目（Question）
+
+| 工具 | 作用 |
+| --- | --- |
+| `add_question` | 往測驗末尾追加一項：題目、分頁符（`Breaker`），或展示區塊（`Statement` 富文本段落、`Swiper` 圖片輪播）。題型：SingleCheck / MultiCheck / TrueFalse、FillBlank、DropDown、Cascade（評分測驗）、Ordering（知識測驗）、DateField / TimeField（評分測驗）、NumberField 和 Rate（評分測驗）。分型測驗的選擇題需為每個選項指明投給哪些結果類型（判斷題用 `trueOutcomes` / `falseOutcomes`）。 |
+| `insert_question` | 在指定位置插入一項，用 `after` / `before` 引用一個已存在的 `code`。 |
 | `move_question` | 按 `code` 把已有題目或分頁符挪到新位置。 |
-| `update_question` | 按 `code` 更新題幹、說明、解析、是否必答、分值、正確答案,或填空題的 AI 智慧判分。**不能改題型與選項內容**。 |
+| `update_question` | 按 `code` 更新題目：題幹、說明、解析、是否必答、分值、正確答案、填空題的 AI 判分、數字 / 日期 / 評分選項，或**整體替換**選擇題的全部選項。展示區塊也在這裡編輯。**不能改題型**。 |
 | `delete_question` | 按 `code` 刪除一道題目或分頁符。 |
 
 ### 報告維度
 
 | 工具 | 作用 |
 | --- | --- |
-| `set_dimension_analysis` | 整體設定測驗的多維度分析(雷達圖維度);quiz 場景每個維度引用題目 `code`,scored quiz 場景每個維度寫公式。傳空陣列即清空。分型測驗不適用(它沒有維度概念,用 `report.outcomes` 配結果類型)。 |
+| `set_dimension_analysis` | 整體設定測驗的多維度分析（雷達圖維度）；`knowledge_quiz` 場景每個維度引用題目 `code`，`scored_quiz` 場景每個維度寫公式。傳空陣列即清空。分型測驗不適用（它沒有維度概念，用 `report.outcomes` 配結果類型）。 |
 
-### 多語言譯文(FormTranslation)
+### 多語言譯文（FormTranslation）
 
-為同一測驗提供多語言版本:一份原始測驗(主語言)+ 每個其他語言一份譯文(結構與源同構,只譯文字,答題記錄恆錨定原始測驗)。
+為同一測驗提供多語言版本：一份原始測驗（主語言）+ 每個其他語言一份譯文（結構與源同構，只譯文字，答題記錄恆錨定原始測驗）。
 
 | 工具 | 作用 |
 | --- | --- |
-| `create_form_translation` | 為測驗新增一個語言版本,克隆原始文案為初稿(同 `code`、原始語言文字),並回傳克隆內容供直接翻譯。語言必須不同於主語言,每種語言至多一份。 |
-| `list_form_translations` | 列出某測驗已有的語言版本(語言、啟用狀態、公開連結等)。 |
-| `get_form_translation` | 讀取某語言版本的完整內容(含 `fields[]` 與 `report`),用於就地翻譯——所有 `code` 必須與原始測驗保持一致。 |
-| `update_form_translation` | 儲存某語言版本的譯文文案(title / description / fields / report / systemText),或用 `isActive` 暫停該語言;結構由源決定,只改文字,未傳的欄位視為部分翻譯。 |
+| `create_form_translation` | 為測驗新增一個語言版本，克隆原始文案為初稿（同 `code`、原始語言文字），並回傳克隆內容供直接翻譯。語言必須不同於主語言，每種語言至多一份。 |
+| `list_form_translations` | 列出某測驗已有的語言版本（語言、啟用狀態、公開連結等）。 |
+| `get_form_translation` | 讀取某語言版本的完整內容（含 `fields[]` 與 `report`），用於就地翻譯——所有 `code` 必須與原始測驗保持一致。 |
+| `update_form_translation` | 儲存某語言版本的譯文文案（title / description / fields / report / systemText），或用 `isActive` 暫停該語言；結構由源決定，只改文字，未傳的欄位視為部分翻譯。 |
 | `delete_form_translation` | 刪除某語言版本。 |
 
-### 考生(Examinee)
+### 答題者（examinee）
 
-測驗的答題人。考生固定綁定單一團隊;工具僅回傳安全欄位——密碼、驗證碼、重置權杖等敏感欄位**絕不外洩**。
-
-| 工具 | 作用 |
-| --- | --- |
-| `list_examinees` | 列出目前團隊的考生,支援按電子郵件 / 姓名模糊搜尋與狀態(active / disabled)過濾。 |
-| `get_examinee` | 按業務 ID `examineeId`(如 `AB1234567890`,見列表)檢視某考生詳情(含自訂欄位 customData)。 |
-| `update_examinee` | 按 `examineeId` 編輯考生的姓名 / 狀態 / 自訂欄位(customData 按團隊欄位定義校驗)。**電子郵件與所屬團隊不可改**。 |
-
-### 資料與分析(Records & Analytics)
-
-讀取測驗表現、轉化漏斗與線索(leads),讓 AI 形成「建卷 → 度量 → 迭代」閉環。線索類工具會回傳答題人資訊(PII)。
+做測驗的人——後台介面上叫「答題者」，工具名稱沿用 examinee 的說法。答題者固定綁定單一團隊；工具僅回傳安全欄位——密碼、驗證碼、重置權杖等敏感欄位**絕不外洩**。
 
 | 工具 | 作用 |
 | --- | --- |
-| `get_form_stats` | 讀取某測驗近 N 天(預設 30,上限 180)的統計:總覽 KPI、每日趨勢、管道(utm_source)、登入方式、裝置,以及單選類題目的答案分佈。 |
-| `get_form_funnel` | 讀取某測驗近 N 天的轉化漏斗:瀏覽 → 開始 → 提交 → 留資 → 看報告 → 點 CTA → 分享,以及分管道漏斗與流失點。 |
-| `list_records` | 列出目前團隊的答題記錄(線索):答題人、作答、報告結果摘要與 UTM;可按測驗、報告狀態、提交時間篩選。 |
-| `get_record` | 按記錄 `id`(`list_records` 回傳)檢視單條記錄詳情:完整作答、報告結果與提交的後設資料。 |
+| `list_examinees` | 列出目前團隊的答題者，支援按電子郵件 / 姓名模糊搜尋與狀態（active / disabled）過濾。 |
+| `get_examinee` | 按業務 ID `examineeId`（如 `AB1234567890`，見列表）檢視某答題者詳情（含自訂欄位 `customData`）。 |
+| `update_examinee` | 按 `examineeId` 編輯答題者的姓名 / 狀態 / customData（customData 按團隊欄位定義校驗，並整體替換）。**電子郵件與所屬團隊不可改**。 |
 
-### 圖片上傳(Image upload)
+### 線索（Leads）
 
 | 工具 | 作用 |
 | --- | --- |
-| `prepare_image_upload` | 第一步:為封面等圖片簽發直接上傳網址(把檔案 PUT 上去)。 |
-| `finalize_image_upload` | 第二步:校驗並把圖片存入團隊媒體庫,回傳 media id;再用 `update_form` 的 `flagImg` / `landingImage` 引用它。 |
+| `list_leads` | 列出團隊的線索——每個答題者跨所有測驗一條，含跟進狀態、負責人、顏色標記、提交次數與下一場預約。可按狀態 / 負責人 / 標籤 / 建立日期 / 關鍵字 / 即將到來的預約篩選。 |
+| `get_lead` | 按 `leadId` 檢視一條線索，可選帶上該答題者的提交歷史、團隊內部評論與變更時間軸。 |
+| `list_lead_settings` | 讀取團隊的跟進狀態、標籤庫與可指派的成員。寫入前先呼叫它——狀態 code、標籤 code 和成員 id 都是各團隊自有的。 |
+| `update_lead` | 把一條線索移到另一個跟進狀態（如 new → contacted），會記錄在線索的時間軸上。 |
+| `assign_leads` | 一次把最多 50 條線索指派給一位啟用中、非檢視者的成員（`"me"` 代表自己），或清除負責人。負責人會收到一則彙總通知。 |
+| `set_lead_tags` | 一次為最多 50 條線索設定顏色標記：`replace`（單條線索），或批次用 `add` / `remove`，以免覆蓋別人打的標籤。 |
+| `add_lead_comment` | 在線索上寫一條內部跟進評論（僅團隊可見，絕不展示給答題者），可選關聯到某一次提交。 |
+
+### 預約（Bookings）
+
+| 工具 | 作用 |
+| --- | --- |
+| `list_bookings` | 列出團隊的 1:1 預約，按時間由早到晚，含時間、狀態、預約人、來源測驗與線索負責人。可按狀態 / 測驗 / 答題者 / 時間範圍篩選——`pending` 就是待稽核佇列。 |
+| `get_booking_availability` | 讀取某個日期範圍內可預約的時段，按團隊的每週可預約時段扣除已被佔用的部分計算。傳 `bookingId` 可取得用於改期該預約的時段。 |
+| `review_booking` | 確認或拒絕一個待稽核申請。確認會給預約人發送會議資訊（可選附上僅用於這一場的連結 / 說明）；拒絕時可附理由。僅團隊擁有者 / 管理員或線索負責人可用。 |
+| `update_booking_status` | 為已排定的預約收尾：標記為已完成或未出席（僅限開始之後），或取消（會寄信通知預約人）。 |
+| `reschedule_booking` | 把已排定的預約改到某個可用時段；會寄信通知預約人，並重新安排 24 小時前的提醒。 |
+
+### 資料與分析（Records & Analytics）
+
+讀取測驗表現與答題記錄，讓 AI 形成「建卷 → 度量 → 迭代」閉環。
+
+| 工具 | 作用 |
+| --- | --- |
+| `get_form_stats` | 讀取某測驗近 N 天（預設 30，上限 180）的統計：總覽 KPI、每日趨勢、管道（utm_source）、登入方式、裝置，以及每道題的答案分佈。 |
+| `get_form_funnel` | 讀取某測驗近 N 天的轉化漏斗：瀏覽 → 開始 → 提交 → 留資 → 看報告 → 點 CTA → 分享，以及分管道漏斗與流失點。 |
+| `list_records` | 列出目前團隊的答題記錄：答題者、作答、報告結果摘要與 UTM；可按測驗、報告狀態、提交時間篩選。 |
+| `get_record` | 按記錄 `id`（`list_records` 回傳）檢視單條記錄詳情：完整作答、報告結果與提交的後設資料。 |
+
+### 圖片上傳（Image upload）
+
+| 工具 | 作用 |
+| --- | --- |
+| `prepare_image_upload` | 第一步：為封面等圖片簽發直接上傳網址（把檔案 PUT 上去）。 |
+| `finalize_image_upload` | 第二步：校驗並把圖片存入團隊媒體庫，回傳 media id；再用 `update_form` 的 `flagImg` / `landingImage` 引用它。 |
 
 <Callout type="info">
-  典型流程:
-  - **考試 / 評分測驗**:`create_form` 建立測驗並拿到每道題的 `code` → 用 `update_form` 或 `set_dimension_analysis` 按 `code` 設定報告公式 / 維度。
-  - **分型測驗**:`create_form` 一次傳齊 `report.outcomes`(每個類型自訂一個唯一 `code`,如 `lion`)與各題選項的投票對應 → 答題後票數最高的類型勝出(平票按列表順序),後續用 `update_form` 微調類型文案 / CTA。
+  典型流程：
+  - **從範本**：`list_templates` → `create_form_from_template` → 用 `update_form` / `update_question` 調整。
+  - **知識測驗 / 評分測驗**：`create_form` 建立測驗並拿到每道題的 `code` → 用 `update_form` 或 `set_dimension_analysis` 按 `code` 設定報告公式 / 維度。
+  - **分型測驗**：`create_form` 一次傳齊 `report.outcomes`（每個類型自訂一個唯一 `code`，如 `lion`）與各題選項的投票對應 → 答題後票數最高的類型勝出（平票按列表順序），後續用 `update_form` 微調類型文案 / CTA。
+  - **上線**：`update_form_settings` 設定留資門檻與結果頁區塊 → `get_form_share_info` 拿連結與嵌入程式碼。
 </Callout>
 
 ## 目前限制
 
-- **隨機題庫(Random Knowledge Quiz)不支援**:這類測驗的題目存放在題庫(QuestionBank)中,請在後台編輯器裡管理,MCP 暫不覆蓋。
-- **不能直接改題型或選項內容**:需要換題型或改選項時,先 `delete_question` 再 `add_question` 重建。分型測驗的**選項投票對應**同理——要改投票就刪題重建。
-- **評分測驗(scored quiz)的選項計分**走「選項分值(Option Scoring)」:`update_question` 在 scored quiz 場景下不接受 `score` / `correctAnswer` / `aiMatch`,改選項分值請在後台編輯,或刪了重建。分型測驗(outcome)同樣不接受這三個參數(它按票數判型,沒有計分概念)。
-- **分型測驗的題型範圍**:投票題型為單選 / 多選 / 判斷(不支援填空);結果類型的**配圖**暫不能透過 MCP 上傳,請在後台編輯器設定(MCP 更新 `report.outcomes` 時已設定的圖片會保留)。
-- **場景與語言建立後鎖定**,無法透過 MCP 修改。
-- **刪除是軟刪**:`delete_form` 移入回收站(5 天後自動徹底清除),並非立即永久刪除;徹底刪除請在後台二次刪除。
-- **題數上限**:免費版每份測評最多 **50 道題**(分頁符、說明文字、圖片輪播不計入),超過後 `create_form`、`add_question`、`insert_question` 會被拒絕;`duplicate_form`、`create_form_from_template` 不受限制。Pro 不限,詳見 [題數上限](/zh-TW/editor)。
-- **複製不含資料**:`duplicate_form` 只克隆結構與譯文,**不複製**答題記錄、共享設定與整合(含金鑰),新測驗為乾淨狀態。
-- **考生身分欄位不可改**:`update_examinee` 不能改電子郵件、所屬團隊與 `examineeId`(它們是認證身分)。
-- **線索含個人資訊(PII)**:`list_records` / `get_record` 會回傳答題人電子郵件、姓名、自訂欄位等,請妥善使用。
+- **隨機知識測驗（Random Knowledge Quiz）不支援**：這類測驗的題目存放在題庫（QuestionBank）中，請在後台編輯器裡管理，MCP 暫不覆蓋。
+- **不能改題型**：需要換題型時，先 `delete_question` 再 `add_question` 重建。選項可以用 `update_question` 整體替換，但**判斷題的分型投票**（`trueOutcomes` / `falseOutcomes`）仍需刪題重建。
+- **各場景的計分方式**：評分測驗和分型測驗場景下，`update_question` 不接受頂層的 `score` / `correctAnswer` / `aiMatch`——請改為傳入帶 `choices[i].score`（選項分值，Option Scoring）或 `choices[i].outcomes`（投票）的選項。
+- **各場景的題型範圍**：Ordering 僅限知識測驗；Cascade、Rate、DateField 與 TimeField 僅限評分測驗；評分測驗裡的 FillBlank 只收集資料；分型測驗接受 SingleCheck / MultiCheck / DropDown / TrueFalse（外加分頁符與展示區塊）。
+- **結果類型配圖**：結果類型的**配圖**暫不能透過 MCP 上傳，請在後台編輯器設定（MCP 更新 `report.outcomes` 時已設定的圖片會保留）。
+- **場景建立後鎖定**；**語言**只有在測驗還沒有語言版本時才能改。
+- **刪除是軟刪**：`delete_form` 移入回收站（5 天後自動徹底清除），並非立即永久刪除；徹底刪除請在後台二次刪除。
+- **題數上限**：免費版每份測評最多 **50 道題**（分頁符、富文本、圖片輪播不計入），超過後 `create_form`、`add_question`、`insert_question` 會被拒絕；`duplicate_form`、`create_form_from_template` 不受限制。Pro 不限，詳見 [題數上限](/zh-TW/editor#題數上限)。
+- **複製不含資料**：`duplicate_form` 只克隆結構與譯文，**不複製**答題記錄、共享設定與整合（含金鑰），新測驗為乾淨狀態。
+- **答題者身分欄位不可改**：`update_examinee` 不能改電子郵件、所屬團隊與 `examineeId`（它們是認證身分）。
+- **個人資料回傳時已脫敏**：線索、預約、答題者與答題記錄類工具回傳的姓名、電子郵件和手機號都經過脫敏——包括答題者在作答裡填寫的電子郵件和手機號。脫敏不可逆；指代某人請用 `examineeId`、`leadId` 或記錄 id。
 
 ## 安全與頻率
 

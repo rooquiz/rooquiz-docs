@@ -10,21 +10,30 @@ The public link is the most common way to distribute a quiz. Anyone with the lin
 <Steps>
 ### Open the share page
 
-In the target quiz, open **Share** → **Link**.
+In the target quiz, open **Share** → **Share Link**.
 
 ### Copy the public link
 
-The system generates a unique public link for each quiz. Copy it and distribute via chat, email, communities, and other channels.
+The system generates a unique public link for each quiz, shown under **Link Address**. Click **Copy** and distribute it via chat, email, communities, and other channels, or **Open** it to check what respondents see.
+
+### Set a custom path (optional)
+
+Under **Custom path**, give the quiz a memorable address such as `burnout-test` and click **Save**. Leave it empty to keep the random one.
+
+<Callout type="warning">
+  Changing the custom path **breaks the old address right away** — links, QR codes and posts that used it stop working. Set it before you distribute, and avoid changing it afterwards.
+</Callout>
 
 ### Generate a QR code
 
-The same link can produce a **QR code**, handy for posters, offline scenarios, or mobile scan-to-answer.
+The same link can produce a **QR code**, handy for posters, offline scenarios, or mobile scan-to-answer. Click **Download QR Code** to save the image.
 </Steps>
 
 ## Characteristics of the link
 
 - **Unique**: Each quiz has its own public link.
-- **Whether sign-in is needed**: decided by [Submission Access](/en/editor/settings#submission-access) — the default "Open to everyone" needs none, while "Sign in to view results" lets anyone answer but gates the report.
+- **Whether sign-in is needed**: decided by [Submission Access](/en/editor/settings#submission-access) — the default **Open to everyone** needs none; **Email required to see the report** lets anyone answer but asks for an email before the report (the **Verify the email before showing the report** switch, off by default, adds a 6-digit code); **Sign in to answer** requires signing in before answering.
+- **Your own domain**: on the Pro plan, links can use your team's [custom domain](/en/teams/custom-domain) instead of the platform one.
 - **Trackable source**: Combine with [UTM Source Tracking](/en/publish/tracking) to distinguish responses by channel.
 - **Multilingual**: a quiz with [language versions](/en/editor/translations) has a separate link per language.
 

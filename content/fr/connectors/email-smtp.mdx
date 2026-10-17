@@ -1,17 +1,41 @@
 ---
-title: Service d'envoi d'e-mails (SMTP)
-description: "Configurez le service d'envoi SMTP de votre équipe pour que les connecteurs e-mail envoient depuis votre adresse, sans limite de la plateforme : où le configurer, la vérification et ce qui échoue sans lui."
+title: Service d'envoi d'e-mails
+description: "Configurez les services d'envoi par lesquels partent les e-mails de votre équipe (un compte Gmail connecté ou votre propre serveur SMTP), pour que connecteurs et e-mails aux répondants arrivent depuis votre adresse. Limites, configuration et vérification."
 ---
 
-Le [connecteur E-mail](/fr/connectors/channels) envoie via **votre propre serveur SMTP** : RooQuiz ne sert pas de relais. Les notifications arrivent donc depuis votre propre adresse, et la plateforme n'impose aucune limite d'envoi.
+Les e-mails de votre équipe, c'est-à-dire les notifications du [connecteur E-mail](/fr/connectors/channels#e-mail) et les e-mails que vous envoyez aux répondants, partent par **vos propres services d'envoi**. RooQuiz ne sert pas de relais : les messages arrivent donc depuis votre propre adresse.
 
-Configurez-le une fois par équipe dans **Paramètres → Équipe → Envoi d'e-mails**. Tous les connecteurs e-mail de l'équipe l'utilisent.
+Configurez-les dans **Paramètres → Équipe → Envoi d'e-mails**. Seuls le propriétaire de l'équipe et les administrateurs peuvent gérer les services d'envoi.
+
+| Forfait | Services d'envoi par équipe |
+| --- | --- |
+| **Free** | 1 |
+| **Pro** | Jusqu'à 3 |
+
+Les comptes Gmail et les serveurs SMTP partagent les mêmes emplacements. Chaque connecteur E-mail choisit ensuite l'un d'eux dans **Service d'envoi**.
 
 <Callout type="warning">
-  Sans service d'envoi **vérifié**, un connecteur e-mail peut toujours être enregistré mais n'envoie jamais rien. Sa carte affiche une étiquette rouge « Aucun service d'envoi ».
+  Un connecteur e-mail sans service d'envoi **vérifié** peut toujours être enregistré mais n'envoie jamais rien. Sa carte affiche une étiquette rouge « Aucun service d'envoi ».
 </Callout>
 
-## Champs à renseigner
+## Option 1 : Connecter Gmail (recommandé pour Gmail)
+
+Cliquez sur **Connecter Gmail** et approuvez l'accès dans la fenêtre Google. Aucun SMTP à configurer et **aucun mot de passe d'application** : RooQuiz obtient uniquement l'autorisation d'envoyer des e-mails, il ne peut pas lire votre boîte de réception.
+
+- Chaque compte Gmail envoie **jusqu'à 500 e-mails par jour** via RooQuiz. Au-delà, les envois groupés aux répondants sont mis en pause et **reprennent automatiquement le lendemain** ; les notifications des connecteurs au-delà de cette limite échouent jusqu'au lendemain.
+- **Tester** envoie un message depuis le compte Gmail vers votre propre adresse.
+- Si le statut indique **Reconnexion requise**, cliquez sur **Reconnecter** et approuvez à nouveau.
+- Pour envoyer depuis une autre adresse Gmail, connectez un autre compte Gmail.
+
+<Callout type="info">
+  **Déconnecter** supprime l'accès de RooQuiz à ce compte Gmail. Désactivez d'abord les connecteurs e-mail qui l'utilisent.
+</Callout>
+
+## Option 2 : Ajouter un serveur SMTP
+
+Cliquez sur **Ajouter un serveur SMTP** pour envoyer via le SMTP de votre fournisseur : utile pour un domaine de marque via un service comme Resend, ou pour le serveur de messagerie de votre entreprise.
+
+### Champs à renseigner
 
 | Champ | Remarques |
 | --- | --- |
@@ -27,29 +51,9 @@ Configurez-le une fois par équipe dans **Paramètres → Équipe → Envoi d'e-
   **Le port 25 ne peut pas être utilisé.** Notre plateforme d'hébergement bloque les connexions sortantes sur ce port. Utilisez 587 ou 465.
 </Callout>
 
-## Configuration par fournisseur
+### Configuration par fournisseur
 
-<Tabs items={['Gmail', 'Resend', 'Serveur de messagerie d’entreprise']}>
-  <Tab value="Gmail">
-    | Champ | Valeur |
-    | --- | --- |
-    | Serveur SMTP | `smtp.gmail.com` |
-    | Port | `587 (STARTTLS)` |
-    | Nom d'utilisateur | Votre adresse Gmail complète |
-    | Mot de passe | Un **mot de passe d'application de 16 caractères** |
-    | Adresse d'expédition | La **même** adresse Gmail, ou un alias « Envoyer des e-mails en tant que » vérifié |
-
-    Créez le mot de passe d'application sur [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords). Il n'est affiché qu'une fois, en quatre groupes de quatre caractères : **supprimez les espaces** avant de le coller.
-
-    <Callout type="warning">
-      Le mot de passe habituel de votre compte ne fonctionnera pas. Google a désactivé la connexion par mot de passe pour les clients de messagerie : un mot de passe d'application est donc obligatoire, et les mots de passe d'application n'existent qu'une fois la **validation en deux étapes** activée.
-    </Callout>
-
-    Si cette page indique *« The setting you are looking for is not available for your account »*, l'un des cas suivants s'applique : la validation en deux étapes est désactivée ; il s'agit d'un compte Google Workspace dont l'administrateur a désactivé les mots de passe d'application ; ou le compte est inscrit au Programme Protection Avancée, qui les bloque purement et simplement.
-
-    Gmail limite aussi les envois à environ **500 destinataires par jour** pour les comptes personnels et **2 000** pour Workspace. C'est largement suffisant pour des notifications d'équipe, mais pas pour des envois en masse.
-  </Tab>
-
+<Tabs items={['Resend', 'Serveur de messagerie d’entreprise', 'Gmail (SMTP de secours)']}>
   <Tab value="Resend">
     | Champ | Valeur |
     | --- | --- |
@@ -70,9 +74,33 @@ Configurez-le une fois par équipe dans **Paramètres → Équipe → Envoi d'e-
     - Le nom d'utilisateur est souvent l'**adresse complète de la boîte**, et non la partie située avant le `@`.
     - L'**adresse d'expédition doit appartenir à votre propre domaine**. La plupart des serveurs d'entreprise refusent de relayer un e-mail prétendant venir d'ailleurs.
   </Tab>
+
+  <Tab value="Gmail (SMTP de secours)">
+    Préférez **Connecter Gmail** ci-dessus : aucun mot de passe d'application n'est nécessaire. N'utilisez le SMTP que si vous ne pouvez pas utiliser la connexion Google.
+
+    | Champ | Valeur |
+    | --- | --- |
+    | Serveur SMTP | `smtp.gmail.com` |
+    | Port | `587 (STARTTLS)` |
+    | Nom d'utilisateur | Votre adresse Gmail complète |
+    | Mot de passe | Un **mot de passe d'application de 16 caractères** |
+    | Adresse d'expédition | La **même** adresse Gmail, ou un alias « Envoyer des e-mails en tant que » vérifié |
+
+    Créez le mot de passe d'application sur [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords). Il n'est affiché qu'une fois, en quatre groupes de quatre caractères : **supprimez les espaces** avant de le coller.
+
+    <Callout type="warning">
+      Le mot de passe habituel de votre compte ne fonctionnera pas. Google a désactivé la connexion par mot de passe pour les clients de messagerie : un mot de passe d'application est donc obligatoire, et les mots de passe d'application n'existent qu'une fois la **validation en deux étapes** activée.
+    </Callout>
+
+    Si cette page indique *« The setting you are looking for is not available for your account »*, l'un des cas suivants s'applique : la validation en deux étapes est désactivée ; il s'agit d'un compte Google Workspace dont l'administrateur a désactivé les mots de passe d'application ; ou le compte est inscrit au Programme Protection Avancée, qui les bloque purement et simplement.
+
+    Gmail limite aussi les envois à environ **500 destinataires par jour** pour les comptes personnels et **2 000** pour Workspace. C'est largement suffisant pour des notifications d'équipe, mais pas pour des envois en masse.
+  </Tab>
 </Tabs>
 
 ## Enregistrer et vérifier
+
+Cette section et la suivante concernent les serveurs SMTP ; une connexion Gmail est vérifiée par la connexion Google.
 
 <Steps>
 ### Remplissez les champs et cliquez sur « Enregistrer et vérifier »
@@ -106,5 +134,5 @@ L'**erreur exacte renvoyée par votre serveur SMTP** est affichée sur la page, 
 - Le mot de passe n'est **plus jamais affiché** après l'enregistrement. Laissez le champ vide lorsque vous modifiez autre chose, et il reste inchangé.
 - Modifier le serveur, le port, le nom d'utilisateur, le mot de passe ou l'adresse d'expédition repasse le statut à **Non vérifié** jusqu'à la prochaine vérification réussie.
 - L'enregistrement et la vérification sont **limités** à quelques tentatives par heure et par équipe : chacune se connecte réellement à votre serveur et envoie réellement un message.
-- **Supprimer** le service d'envoi efface le mot de passe enregistré. Inutile de le supprimer pour modifier les paramètres : il suffit d'enregistrer par-dessus. La suppression est refusée tant qu'un connecteur e-mail est encore **activé**, pour que vous ne puissiez pas interrompre vos propres envois sans vous en rendre compte.
+- **Supprimer** le service d'envoi efface le mot de passe enregistré. Inutile de le supprimer pour modifier les paramètres : il suffit d'enregistrer par-dessus. La suppression est refusée tant qu'un connecteur e-mail **activé** utilise encore ce service d'envoi, pour que vous ne puissiez pas interrompre vos propres envois sans vous en rendre compte.
 - Si un envoi ultérieur échoue définitivement (les identifiants ne fonctionnent plus ou l'adresse d'expédition est refusée), le statut passe à **Échec de la vérification** et les connecteurs e-mail cessent d'envoyer jusqu'à ce que vous corrigiez le problème. Une seule adresse de destinataire invalide n'a **pas** cet effet : seul ce message échoue.

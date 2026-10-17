@@ -12,12 +12,16 @@ A **lead** is the layer that turns quiz results into business. Everyone who leav
 
 ## Where leads come from
 
-A lead is created automatically when **a signed-in respondent submits a quiz**. Anonymous submissions create no lead — there are no contact details to keep.
+A lead is created automatically when **a respondent leaves their email** with your team — by signing in, or by typing their email to see the report — and their submission is attached to them. Anonymous submissions with no email create no lead — there are no contact details to keep.
 
-So if you want a steady stream of leads, respondents need to sign in first. Two common ways:
+So if you want a steady stream of leads, ask for an email at the moment people want their result. Two common ways:
 
-- Set the report to be **visible after sign-in** in the quiz settings. People sign in to see their result, and the submission is claimed for them in the process.
+- In the quiz's **Settings → Access & visibility**, choose **Email required to see the report**: anyone can answer, but has to leave an email to see the report (respondent journey: answer → leave an email (or sign in) → see the report). Each such submission produces a lead.
 - Turn on the [booking section](/en/bookings/respondent) on the result page. Booking requires a sign-in, which claims the submission along the way.
+
+<Callout type="info">
+  **Verify the email before showing the report** is off by default, so respondents just type an email to see their report. Those leads are shown as **Lead only** until the email is verified, and some addresses will be typos or fakes. Turn verification on if lead quality matters more than completion rate. See [Lead detail](/en/leads/detail#whats-on-the-page).
+</Callout>
 
 You can also **add a lead by hand** on the **Leads** page — useful for people you met offline or who came from another channel. See [Lead detail](/en/leads/detail#add-a-lead-manually).
 
@@ -28,7 +32,7 @@ These two are easy to confuse:
 | | Respondent | Lead |
 | --- | --- | --- |
 | What it is | A person's **account profile**: name, email, avatar, extended fields | That person's **follow-up record**: status, owner, tags, comments |
-| Created when | They submit, sign up, or you create them manually | They submit while signed in, or you add the lead by hand |
+| Created when | They submit, sign up, or you create them manually | They leave their email with a submission (signing in or email-gated report), or you add the lead by hand |
 | Where to find it | [Respondents](/en/respondents) | Leads |
 | Can exist without the other | Yes — a respondent can have no lead | No — a lead always belongs to a respondent |
 

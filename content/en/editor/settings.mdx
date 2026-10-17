@@ -1,50 +1,75 @@
 ---
-title: Form Settings
-description: 'Everything about a quiz that isn''t a question: title, description and cover image, the open and close switches, respondent sign-in, result visibility, and the fields that feed search indexing.'
+title: Quiz Settings
+description: 'Everything about a quiz that isn''t a question, page by page: access and visibility, basic info, the answering experience, result page follow-up, language versions, system copy and Google Analytics.'
 ---
 
-Everything about the quiz that isn't a question lives here, reached via **More Settings** in the top right of the editor.
+Everything about the quiz that isn't a question lives in the quiz's **Settings** tab (next to **Edit**, **Records** and **Insights**). It is split into seven pages, listed in the left menu.
 
-## Quiz Information
+## Access & visibility
 
-Title, description, **Cover Image** and **Cover Color**. The title identifies the quiz in the dashboard and shows on the landing page; the description feeds [search indexing](/en/publish/promotion#search-engine-indexing), so don't leave it empty.
+### Quiz Open/Close
 
-## Open/Close
+A master switch between **Open — collecting data** and **Closed — not collecting**. While the quiz is closed, **the quiz link and every report link already sent out show as unavailable**. Collected data is untouched — turn it back on and both work again.
 
-A master switch between **Data Collecting** and **Not Collecting**. Once closed the link still resolves but no longer accepts submissions — gentler than deleting the link when a campaign ends.
+### Submission Access
 
-## Submission Access
-
-Answers "**Who can take this quiz?**" — three options, and the choice decides whether you get [leads](/en/leads) at all:
+Answers "**Who can answer, and who can see the report?**" — three options, and the choice decides whether you get [leads](/en/leads) at all:
 
 | Option | Meaning | Good for |
 | --- | --- | --- |
-| **Open to everyone** | No sign-in; answer and see results immediately | Maximum reach, lowest friction |
-| **Sign in to view results** | Anyone can answer, but must sign in with an email to see the report | **The main lead-capture option** |
-| **Sign in to take the quiz** | Only signed-in respondents may answer | Invite-only or internal use |
+| **Open to everyone** | Anyone can answer without signing in and sees the report right after submitting | Maximum reach, lowest friction |
+| **Email required to see the report** | Anyone can answer, but has to leave an email (or sign in) to see the report | **The main lead-capture option** |
+| **Sign in to answer** | Only signed-in respondents can answer | Invite-only audiences |
+
+With **Email required to see the report** you also choose whether to **Verify the email before showing the report**. It is **off by default**:
+
+- **Off** — respondents type an email and a name and go straight to the report, which usually lifts completion. The address is unverified, so some will be typos or fakes.
+- **On** — respondents enter a 6-digit code from their inbox. Every lead's address is verified, and they get an account on your team they can sign back into to see past reports.
 
 <Callout type="info">
-  Only the latter two produce leads reliably — an anonymous submission leaves no contact details. To spread widely *and* collect leads, choose **Sign in to view results**.
+  Only the latter two produce leads reliably — an anonymous submission leaves no contact details. To spread widely *and* collect leads, choose **Email required to see the report**.
 </Callout>
 
-## The answering experience
+### Result sharing
 
-- **Index Display** — None / Arabic Numbers (1, 2, 3) / Roman Numerals (I, II, III).
-- **Time limit** — a countdown starts when a respondent enters the quiz; when it runs out they get a modal and their **current answers are submitted automatically**.
-- **Answer sheet** — shows a question navigator in the sidebar so respondents can see progress and jump around. Worth enabling on long quizzes.
-- **System text** — override the built-in button and prompt copy on the answer page.
+Shows share buttons on the result page and attaches an auto-generated card to shared links. With it off, no card is generated.
+
+### Search engine indexing
+
+On by default, so the quiz goes into your sitemap and can be found through search and cited by AI assistants. Turn it off for drafts, tests and quizzes meant only for a specific audience. See [search indexing](/en/publish/promotion#search-engine-indexing).
+
+## Basic info
+
+**Quiz Title**, **Cover Image** (1200 × 630 px recommended) and **Cover Color**. The title identifies the quiz in the dashboard and shows on the landing page.
+
+The quiz **description** is edited on the landing page in the editor, not here. It feeds [search indexing](/en/publish/promotion#search-engine-indexing), so don't leave it empty.
+
+## Answering experience
+
+- **Index Display Mode** — None / Arabic Numbers (1, 2, 3) / Roman Numerals (I, II, III).
+- **Time limit** — a countdown starts when a respondent enters the quiz; when it runs out they get a modal and their **current answers are submitted automatically**. Available in **Knowledge Quiz and Random Knowledge Quiz only** — Scored Quiz and Outcome Quiz don't offer it.
+- **Answer sheet** — shows a question navigator in the sidebar so respondents can see progress and jump to any question. Worth enabling on long quizzes.
+- **Crowd compare** — shows respondents what share of people picked the same option. Off by default, and not available in knowledge quizzes.
+
+## Result page follow-up
+
+Turn on the result page's **booking section** and **respondent feedback** block, and set their wording. See [1:1 Bookings](/en/bookings).
 
 ## Language
 
-Set the **primary language** and manage this quiz's **language versions**. Full details in [Multilingual versions](/en/editor/translations).
+Set the **Primary Language** and manage this quiz's **Language versions**. Full details in [Multilingual versions](/en/editor/translations).
 
 <Callout type="warning">
   Changing the primary language only re-labels the source content — it **translates nothing**. Add a translation to offer another language.
 </Callout>
 
+## System copy
+
+Override the built-in button and prompt copy on the answer page — navigation buttons, submission states, the time-limit prompts and so on.
+
 ## Analytics
 
-**Google Analytics** — enter a measurement ID and page views on the public quiz are reported to GA.
+**Google Analytics** — enter a measurement ID (e.g. `G-XXXXXXXXXX`) and page views on the public quiz are reported to GA.
 
 <Callout type="warning">
   Google Analytics is a **Pro plan feature**.
@@ -52,4 +77,4 @@ Set the **primary language** and manage this quiz's **language versions**. Full 
 
 ## Settings that live elsewhere
 
-Share links, QR codes, embedding, social cards, source tracking, the booking section and the promotion kit are all under the quiz's **Share** tab — see [Publish & Share](/en/publish). Theme and personalized templates are in the editor — see [Appearance & personalized templates](/en/editor/design).
+The share link, QR code, share card, embed code and distribution plan are in the **Share** button at the top of the quiz — see [Publish & Share](/en/publish). Theme and personalized templates are in the editor — see [Appearance & personalized templates](/en/editor/design).

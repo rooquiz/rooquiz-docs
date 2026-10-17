@@ -1,9 +1,13 @@
 ---
 title: MCP 接入
-description: 'RooQuiz 提供 MCP（Model Context Protocol）server，让 Claude Desktop、Claude Code、Cursor、Codex 等 AI 客户端在你的团队下直接操作测验：用自然语言创建各类测验、追加题目、调整顺序、配置报告维度与分型，还能复制删除测验、管理译文与答题者。含两种连接方式与限制说明。'
+description: 'RooQuiz 提供 MCP（Model Context Protocol）server，让 ChatGPT、Claude、Cursor、Codex 等 AI 客户端在你的团队下用自然语言干活：从模板或从零搭建测验、改投放设置、拿分享链接、管理译文与答题者、跟进线索与预约、读取统计与漏斗。含两种连接方式、全部 48 个工具与当前限制说明。'
 ---
 
-RooQuiz 提供一个 **MCP(Model Context Protocol)server**,让 Claude Desktop、Claude Code、Cursor、Codex 等 AI 客户端能在你的团队下直接操作测验——用自然语言就能创建考试、评分测验、分型测验,追加题目、调整顺序、配置报告维度与分型结果;还能复制 / 删除测验、做多语言译文、管理考生,以及读取答题记录、统计与转化漏斗——而不必手动在编辑器里一个个搭。
+RooQuiz 提供一个 **MCP(Model Context Protocol)server**,让 ChatGPT、claude.ai、Claude Desktop、Claude Code、Cursor、Codex 等 AI 客户端能在你的团队下直接干活——用自然语言就能从模板或从零创建测验,追加与修改题目,配置报告维度与分型结果,修改投放设置并拿到分享链接,管理多语言译文与答题者,跟进线索与预约,以及读取答题记录、统计与转化漏斗——而不必在编辑器里一样样手动操作。
+
+<Callout type="info">
+  RooQuiz 没有内置的 AI 出题功能。想用 AI 搭测验,就通过 MCP 连上**你自己的 AI 客户端**,让它来做——它会调用下面这些工具,你再到编辑器里检查结果。
+</Callout>
 
 <Callout type="info">
   MCP 是面向**进阶用户**的能力,需要你会使用支持 MCP 的 AI 客户端。基础的可视化搭建仍推荐用 [编辑器](/zh/editor)。
@@ -18,9 +22,12 @@ RooQuiz 提供一个 **MCP(Model Context Protocol)server**,让 Claude Desktop、
 
 ## 连接方式一:OAuth 授权(推荐)
 
-claude.ai、Claude Code 等支持 MCP OAuth 的客户端**无需手动创建 Token**——只要填入 Endpoint URL,客户端会自动发现授权服务并打开浏览器,你登录 RooQuiz 账号、选择要授权的团队、点「授权」即完成连接。
+ChatGPT、claude.ai、Claude Code 等支持 MCP OAuth 的客户端**无需手动创建 Token**——只要填入 Endpoint URL,客户端会自动发现授权服务并打开浏览器,你登录 RooQuiz 账号、选择要授权的团队、点「授权」即完成连接。
 
-<Tabs items={['claude.ai 网页版', 'Claude Code']}>
+<Tabs items={['ChatGPT', 'claude.ai 网页版', 'Claude Code']}>
+  <Tab value="ChatGPT">
+    RooQuiz 已作为应用上架 ChatGPT。在 RooQuiz 后台顶部点 **在 ChatGPT 中使用** 打开它,然后连接——浏览器会跳转到 RooQuiz 授权页,登录并选择团队,点「授权」。
+  </Tab>
   <Tab value="claude.ai 网页版">
     打开 claude.ai 的 **设置 → 连接器(Connectors)→ 添加自定义连接器**:
 
@@ -51,10 +58,10 @@ claude.ai、Claude Code 等支持 MCP OAuth 的客户端**无需手动创建 Tok
 
 ### 创建 Token
 
-进入 **设置 → MCP 接入**,点「创建 Token」:
+进入 **设置 → MCP 接入**,点 **创建 Token**:
 
-1. 填写一个**名称**(便于识别,例如 `Cursor - 我的 Mac`)。
-2. 选择一个**默认团队**——Token 创建后默认操作这个团队,AI 后续可用 `switch_active_tenant` 工具切换到你所在的其它团队。
+1. 填写 **Token 名称**(便于识别,例如 `Cursor - 我的 Mac`)。
+2. 选择 **默认团队**——Token 创建后默认操作这个团队,AI 后续可用 `switch_active_tenant` 工具切换到你所在的其它团队。
 3. 生成后会显示一段以 `rqp_live_` 开头的明文 Token。
 
 <Callout type="warning">
@@ -63,7 +70,7 @@ claude.ai、Claude Code 等支持 MCP OAuth 的客户端**无需手动创建 Tok
 
 限制:
 
-- 每个用户最多保有 **5 个 Token**(含已吊销的,OAuth 连接不计入)。要再建新的,需先**删除**一个释放名额(「吊销」只是停用,不释放名额)。
+- 每个用户最多保有 **5 个 Token**(含已吊销的,OAuth 连接不计入)。要再建新的,需先**删除**一个释放名额(「吊销」只是停用,不释放名额)。已吊销的个人 Token 可以点 **启用** 重新打开。
 - Token 是**个人凭证**,请勿提交到代码仓库或公开分享。
 
 ### 在 AI 客户端中配置
@@ -166,43 +173,59 @@ claude.ai、Claude Code 等支持 MCP OAuth 的客户端**无需手动创建 Tok
 
 ## 支持的工具
 
-连接成功后,AI 助手可调用以下工具。它们都作用在 Token **当前激活的团队**下。
+连接成功后,AI 助手可调用以下 48 个工具。它们都作用在 Token **当前激活的团队**下。
 
 ### 团队(Tenant)
 
 | 工具 | 作用 |
 | --- | --- |
 | `list_my_tenants` | 列出你所在的所有团队,标记当前激活的那个。 |
-| `get_active_tenant` | 返回 Token 当前激活的团队信息;所有写操作默认作用在该团队。 |
+| `get_active_tenant` | 返回 Token 当前激活的团队信息(含团队地址);所有写操作默认作用在该团队。 |
 | `switch_active_tenant` | 切换当前激活团队(持久化、跨会话保留;目标必须是你已加入的团队)。 |
+| `invite_member` | 按邮箱邀请别人以成员、查看者或管理员身份加入当前团队,会发出一封带加入链接的邀请邮件。仅所有者 / 管理员可用。 |
+| `update_tenant_slug` | 修改团队地址——平台域名下每条测评链接的第一段路径。仅所有者 / 管理员可用。所有公开测评链接会一起变更,旧地址立即失效;`/a/<token>` 形式的链接不受影响。 |
+
+### 模板(Templates)
+
+| 工具 | 作用 |
+| --- | --- |
+| `list_templates` | 列出公共模板库里上架中的模板(标题、场景、描述、分类、使用次数),按使用次数从多到少排列。 |
+| `create_form_from_template` | 一次调用从模板创建新测验:题目结构、计分 / 报告配置、视觉设置与全部语言版本。有合适模板时,这是建卷最快的方式。 |
 
 ### 测验(Form)
 
 | 工具 | 作用 |
 | --- | --- |
-| `create_form` | 创建测验(`knowledge_quiz` 考试、`scored_quiz` 评分测验 或 `outcome_quiz` 分型测验),可一次性传入题目数组和报告配置,减少往返调用。分型测验**必须**在创建时一并传入 `report.outcomes`(结果类型列表),并让每个选项通过 `outcomes` 给类型投票。 |
-| `list_forms` | 列出当前团队的测验,支持按 scene 或标题模糊过滤。 |
+| `create_form` | 创建测验(`knowledge_quiz`、`scored_quiz` 或 `outcome_quiz` 分型测验),可一次性传入题目数组和报告配置,减少往返调用。分型测验**必须**在创建时一并传入 `report.outcomes`(结果类型列表),并让每个选项通过 `outcomes` 给类型投票。 |
+| `list_forms` | 列出当前团队的测验,最新的在前,不含题目内容。 |
 | `get_form` | 查看指定测验的完整详情(题目列表 `fields[]`、报告配置等);改题前需先用它拿到每道题的 `code`,分型测验则从 `report.outcomeAnalysis.outcomes` 拿结果类型的 `code`。 |
-| `update_form` | 更新标题、描述、开启/关闭状态,或按子键合并替换 `report` 配置;分型测验传 `report.outcomes` 即按 `code` 合并更新结果类型(名称/描述/CTA,已配置的图片保留;删除仍被题目引用的类型会被拒绝)。**场景(scene)与语言创建后锁定,不可改**。 |
-| `delete_form` | 把测验移入回收站(软删):列表中不再显示,5 天内可用 `restore_form` 找回(到期自动彻底清除)。仅测验 owner / 团队 owner 可删;答题记录在彻底清除前保留。 |
-| `restore_form` | 从回收站恢复被 `delete_form` 删除的测验。仅 owner / 团队 owner 可恢复;不在回收站会报错。 |
+| `update_form` | 更新标题、描述、开启/关闭状态、封面(`flagImg` / `landingImage`)、主题、社交分享卡片(`openGraph`)、系统文案,或按子键合并替换 `report` 配置;分型测验传 `report.outcomes` 即按 `code` 合并更新结果类型(已配置的图片保留;删除仍被题目投票引用的类型会被拒绝)。**语言**只有在测验还没有语言版本时才能改;**场景(scene)**永远不能改。 |
+| `delete_form` | 把测验移入回收站(软删):`list_forms` 中不再显示,5 天内可用 `restore_form` 找回(到期自动彻底清除)。仅测验 owner 或团队所有者 / 管理员可删;答题记录在彻底清除前保留。 |
+| `restore_form` | 从回收站恢复被 `delete_form` 删除的测验。 |
 | `duplicate_form` | 复制一份测验:克隆题目结构、评分、报告、视觉与设置以及**全部语言译文**,生成归属你的新测验(新链接)。**不复制**答题记录、共享设置、集成与封禁状态。可选传 `newTitle`。 |
+
+### 分享与投放设置
+
+| 工具 | 作用 |
+| --- | --- |
+| `get_form_share_info` | 发布一份测验所需的全部信息:公开答题链接(也包括各语言版本的链接)、团队自定义域名及其是否生效、三种模式(内嵌 / 弹窗 / iframe)的嵌入代码,以及当前的投放设置。传 `utmSource` 可给所有链接和代码打上同一个渠道标记。 |
+| `update_form_settings` | 修改测验的投放方式:谁能作答、看报告是否需要留邮箱(留资门槛)以及是否要验证码、限时答题(知识测验)、分享与分享卡片、答题卡、群体对照、结果页预约块、反馈板块、PDF 下载(Pro)、Google Analytics ID 等。 |
 
 ### 题目(Question)
 
 | 工具 | 作用 |
 | --- | --- |
-| `add_question` | 往测验末尾追加一项:题目(单选/多选/判断/填空)或分页符(`Breaker`)。分型测验的选择题需为每个选项指明投给哪些结果类型(判断题用 `trueOutcomes` / `falseOutcomes`)。 |
+| `add_question` | 往测验末尾追加一项:题目、分页符(`Breaker`)或展示块(`Statement` 富文本段落、`Swiper` 图片轮播)。题型:SingleCheck / MultiCheck / TrueFalse、FillBlank、DropDown、Cascade(评分测验)、Ordering(知识测验)、DateField / TimeField(评分测验)、NumberField 与 Rate(评分测验)。分型测验的选择题需为每个选项指明投给哪些结果类型(判断题用 `trueOutcomes` / `falseOutcomes`)。 |
 | `insert_question` | 在指定位置插入一项,用 `after` / `before` 引用一个已存在的 `code`。 |
 | `move_question` | 按 `code` 把已有题目或分页符挪到新位置。 |
-| `update_question` | 按 `code` 更新题干、说明、解析、是否必答、分值、正确答案,或填空题的 AI 智能判分。**不能改题型与选项内容**。 |
+| `update_question` | 按 `code` 更新题目:题干、说明、解析、是否必答、分值、正确答案、填空题的 AI 智能判分、数字 / 日期 / 评分的选项,或**整体替换**选择题的全部选项。展示块也在这里编辑。**不能改题型**。 |
 | `delete_question` | 按 `code` 删除一道题目或分页符。 |
 
 ### 报告维度
 
 | 工具 | 作用 |
 | --- | --- |
-| `set_dimension_analysis` | 整体设置测验的多维度分析(雷达图维度);quiz 场景每个维度引用题目 `code`,scored quiz 场景每个维度写公式。传空数组即清空。分型测验不适用(它没有维度概念,用 `report.outcomes` 配结果类型)。 |
+| `set_dimension_analysis` | 整体设置测验的多维度分析(雷达图维度);`knowledge_quiz` 场景每个维度引用题目 `code`,`scored_quiz` 场景每个维度写公式。传空数组即清空。分型测验不适用(它没有维度概念,用 `report.outcomes` 配结果类型)。 |
 
 ### 多语言译文(FormTranslation)
 
@@ -216,25 +239,47 @@ claude.ai、Claude Code 等支持 MCP OAuth 的客户端**无需手动创建 Tok
 | `update_form_translation` | 保存某语言版本的译文文案(title / description / fields / report / systemText),或用 `isActive` 暂停该语言;结构由源决定,只改文字,未传的字段视为部分翻译。 |
 | `delete_form_translation` | 删除某语言版本。 |
 
-### 考生(Examinee)
+### 答题者(examinee)
 
-测验的答题人。考生强绑定单一团队;工具仅返回安全字段——密码、验证码、重置令牌等敏感字段**绝不外泄**。
+做测验的人——后台界面里叫「答题者」,工具名仍沿用 examinee 的叫法。答题者强绑定单一团队;工具仅返回安全字段——密码、验证码、重置令牌等敏感字段**绝不外泄**。
 
 | 工具 | 作用 |
 | --- | --- |
-| `list_examinees` | 列出当前团队的考生,支持按邮箱 / 姓名模糊搜索与状态(active / disabled)过滤。 |
-| `get_examinee` | 按业务 ID `examineeId`(如 `AB1234567890`,见列表)查看某考生详情(含自定义字段 customData)。 |
-| `update_examinee` | 按 `examineeId` 编辑考生的姓名 / 状态 / 自定义字段(customData 按团队字段定义校验)。**邮箱与所属团队不可改**。 |
+| `list_examinees` | 列出当前团队的答题者,支持按邮箱 / 姓名模糊搜索与状态(active / disabled)过滤。 |
+| `get_examinee` | 按业务 ID `examineeId`(如 `AB1234567890`,见列表)查看某答题者详情(含自定义字段 `customData`)。 |
+| `update_examinee` | 按 `examineeId` 编辑答题者的姓名 / 状态 / 自定义字段(customData 按团队字段定义校验,并整体替换)。**邮箱与所属团队不可改**。 |
+
+### 线索(Leads)
+
+| 工具 | 作用 |
+| --- | --- |
+| `list_leads` | 列出团队的线索——每个答题者跨所有测评一条,含跟进状态、负责人、颜色标记、提交次数与下一场预约。可按状态 / 负责人 / 标记 / 创建时间 / 关键词 / 即将到来的预约筛选。 |
+| `get_lead` | 按 `leadId` 查看一条线索,可选带上该答题者的提交历史、团队内部评论与变更时间线。 |
+| `list_lead_settings` | 读取团队的跟进状态、标记库与可指派的成员。写入前先调用它——状态 code、标记 code 与成员 id 都因团队而异。 |
+| `update_lead` | 把一条线索移到另一个跟进状态(如 new → contacted);会记入该线索的时间线。 |
+| `assign_leads` | 一次把最多 50 条线索指派给一位在职的非查看者成员(`"me"` 表示自己),或清空负责人。负责人会收到一条汇总通知。 |
+| `set_lead_tags` | 一次给最多 50 条线索设置颜色标记:`replace`(单条线索),或批量用 `add` / `remove`,保留别人打的标记。 |
+| `add_lead_comment` | 在线索上写一条内部跟进评论(仅团队可见,答题者永远看不到),可选关联到某一次提交。 |
+
+### 预约(Bookings)
+
+| 工具 | 作用 |
+| --- | --- |
+| `list_bookings` | 列出团队的 1:1 预约,最早的在前,含时间、状态、预约人、来源测评与线索负责人。可按状态 / 测评 / 答题者 / 时间范围筛选——`pending` 就是待审核队列。 |
+| `get_booking_availability` | 读取某个日期范围内的可约时段,由团队每周可约时间减去已占用的时段算出。传 `bookingId` 可拿到给这场预约改期用的时段。 |
+| `review_booking` | 确认或拒绝一条待审核的申请。确认会把会议信息发给预约人(可选附上这一场专用的链接 / 说明);拒绝时可附理由。仅团队所有者 / 管理员或线索负责人可用。 |
+| `update_booking_status` | 了结一场已确认的预约:标记为已完成或未到场(仅限开始之后),或取消(会邮件通知预约人)。 |
+| `reschedule_booking` | 把一场已确认的预约改到某个可约时段;会邮件通知预约人,并重新设置 24 小时提醒。 |
 
 ### 数据与分析(Records & Analytics)
 
-读取测验表现、转化漏斗与线索(leads),让 AI 形成「建卷 → 度量 → 迭代」闭环。线索类工具会返回答题人信息(PII)。
+读取测验表现与答题记录,让 AI 形成「建卷 → 度量 → 迭代」闭环。
 
 | 工具 | 作用 |
 | --- | --- |
-| `get_form_stats` | 读取某测验近 N 天(默认 30,上限 180)的统计:总览 KPI、每日趋势、渠道(utm_source)、登录方式、设备,以及单选类题目的答案分布。 |
+| `get_form_stats` | 读取某测验近 N 天(默认 30,上限 180)的统计:总览 KPI、每日趋势、渠道(utm_source)、登录方式、设备,以及各题的答案分布。 |
 | `get_form_funnel` | 读取某测验近 N 天的转化漏斗:浏览 → 开始 → 提交 → 留资 → 看报告 → 点 CTA → 分享,以及分渠道漏斗与流失点。 |
-| `list_records` | 列出当前团队的答题记录(线索):答题人、作答、报告结果摘要与 UTM;可按测验、报告状态、提交时间筛选。 |
+| `list_records` | 列出当前团队的答题记录:答题者、作答、报告结果摘要与 UTM;可按测验、报告状态、提交时间筛选。 |
 | `get_record` | 按记录 `id`(`list_records` 返回)查看单条记录详情:完整作答、报告结果与提交元数据。 |
 
 ### 图片上传(Image upload)
@@ -246,22 +291,25 @@ claude.ai、Claude Code 等支持 MCP OAuth 的客户端**无需手动创建 Tok
 
 <Callout type="info">
   典型流程:
+  - **从模板建卷**:`list_templates` → `create_form_from_template` → 用 `update_form` / `update_question` 调整。
   - **考试 / 评分测验**:`create_form` 创建测验并拿到每道题的 `code` → 用 `update_form` 或 `set_dimension_analysis` 按 `code` 配置报告公式 / 维度。
   - **分型测验**:`create_form` 一次传齐 `report.outcomes`(每个类型自定义一个唯一 `code`,如 `lion`)与各题选项的投票映射 → 答题后票数最高的类型胜出(平票按列表顺序),后续用 `update_form` 微调类型文案 / CTA。
+  - **上线**:`update_form_settings` 设置留资门槛与结果页板块 → `get_form_share_info` 拿到链接和嵌入代码。
 </Callout>
 
 ## 当前限制
 
-- **随机题库(Random Knowledge Quiz)不支持**:这类测验的题目存放在题库(QuestionBank)中,请在后台编辑器里管理,MCP 暂不覆盖。
-- **不能直接改题型或选项内容**:需要换题型或改选项时,先 `delete_question` 再 `add_question` 重建。分型测验的**选项投票映射**同理——要改投票就删题重建。
-- **评分测验(scored quiz)的选项计分**走「选项分值(Option Scoring)」:`update_question` 在 scored quiz 场景下不接受 `score` / `correctAnswer` / `aiMatch`,改选项分值请在后台编辑,或删了重建。分型测验(outcome)同样不接受这三个参数(它按票数判型,没有计分概念)。
-- **分型测验的题型范围**:投票题型为单选 / 多选 / 判断(不支持填空);结果类型的**配图**暂不能通过 MCP 上传,请在后台编辑器配置(MCP 更新 `report.outcomes` 时已配置的图片会保留)。
-- **场景与语言创建后锁定**,无法通过 MCP 修改。
+- **随机知识测验(Random Knowledge Quiz)不支持**:这类测验的题目存放在题库(QuestionBank)中,请在后台编辑器里管理,MCP 暂不覆盖。
+- **不能改题型**:需要换题型时,先 `delete_question` 再 `add_question` 重建。选项可以用 `update_question` 整体替换,但**判断题的分型投票**(`trueOutcomes` / `falseOutcomes`)仍需删题重建。
+- **按场景区分的计分方式**:在评分测验和分型测验场景下,`update_question` 不接受顶层的 `score` / `correctAnswer` / `aiMatch`——请改传带 `choices[i].score`(选项分值,Option Scoring)或 `choices[i].outcomes`(投票)的选项。
+- **各场景可用的题型**:Ordering 仅限知识测验;Cascade、Rate、DateField、TimeField 仅限评分测验;评分测验里的 FillBlank 只收集数据;分型测验接受 SingleCheck / MultiCheck / DropDown / TrueFalse(以及分页符和展示块)。
+- **结果类型配图**:结果类型的**配图**暂不能通过 MCP 上传,请在后台编辑器配置(MCP 更新 `report.outcomes` 时已配置的图片会保留)。
+- **场景创建后锁定**;**语言**只有在测验还没有语言版本时才能修改。
 - **删除是软删**:`delete_form` 移入回收站(5 天后自动彻底清除),并非立即永久删除;彻底删除请在后台二次删除。
-- **题数上限**:免费版每份测评最多 **50 道题**(分页符、说明文字、图片轮播不计入),超过后 `create_form`、`add_question`、`insert_question` 会被拒绝;`duplicate_form`、`create_form_from_template` 不受限制。Pro 不限,详见 [题数上限](/zh/editor#题数上限)。
+- **题数上限**:免费版每份测评最多 **50 道题**(分页符、富文本、图片轮播不计入),超过后 `create_form`、`add_question`、`insert_question` 会被拒绝;`duplicate_form`、`create_form_from_template` 不受限制。Pro 不限,详见 [题数上限](/zh/editor#题数上限)。
 - **复制不含数据**:`duplicate_form` 只克隆结构与译文,**不复制**答题记录、共享设置与集成(含密钥),新测验为干净状态。
-- **考生身份字段不可改**:`update_examinee` 不能改邮箱、所属团队与 `examineeId`(它们是认证身份)。
-- **线索含个人信息(PII)**:`list_records` / `get_record` 会返回答题人邮箱、姓名、自定义字段等,请妥善使用。
+- **答题者身份字段不可改**:`update_examinee` 不能改邮箱、所属团队与 `examineeId`(它们是认证身份)。
+- **个人信息返回时已脱敏**:线索、预约、答题者与答题记录类工具返回的姓名、邮箱、手机号都是脱敏的——包括答题者在作答里填写的邮箱和手机号。脱敏不可逆;指代某个人请用 `examineeId`、`leadId` 或记录 id。
 
 ## 安全与频率
 

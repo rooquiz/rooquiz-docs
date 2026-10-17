@@ -1,17 +1,41 @@
 ---
-title: E-Mail-Versand (SMTP)
-description: 'Richten Sie den eigenen SMTP-Versanddienst Ihres Teams ein, damit E-Mail-Connectors ohne Plattformlimit von Ihrer Adresse senden: wo Sie ihn konfigurieren, wie die Prüfung abläuft und was ohne ihn ausfällt.'
+title: E-Mail-Versand
+description: 'Richten Sie die Versanddienste ein, über die die E-Mails Ihres Teams verschickt werden – ein verbundenes Gmail-Konto oder Ihr eigener SMTP-Server –, damit Connectors und Teilnehmer-E-Mails von Ihrer Adresse kommen. Tariflimits, Einrichtung und Prüfung.'
 ---
 
-Der [E-Mail-Connector](/de/connectors/channels) versendet über **Ihren eigenen SMTP-Server** – RooQuiz leitet die Mails nicht selbst weiter. Benachrichtigungen kommen daher von Ihrer eigenen Adresse, und es gibt kein Versandlimit seitens der Plattform.
+E-Mails Ihres Teams – Benachrichtigungen des [E-Mail-Connectors](/de/connectors/channels) und die E-Mails, die Sie an Teilnehmer senden – werden über **Ihre eigenen Versanddienste** verschickt. RooQuiz leitet sie nicht selbst weiter, daher kommen die Nachrichten von Ihrer eigenen Adresse.
 
-Richten Sie ihn einmal pro Team unter **Einstellungen → Organisation → E-Mail-Versand** ein. Jeder E-Mail-Connector im Team nutzt ihn.
+Richten Sie sie unter **Einstellungen → Team → E-Mail-Versand** ein. Nur der Team-Inhaber und Administratoren können Versanddienste verwalten.
+
+| Tarif | Versanddienste pro Team |
+| --- | --- |
+| **Free** | 1 |
+| **Pro** | Bis zu 3 |
+
+Gmail-Konten und SMTP-Server teilen sich dieselben Plätze. Jeder E-Mail-Connector wählt dann unter **Versanddienst** einen davon aus.
 
 <Callout type="warning">
-  Ohne einen **verifizierten** Versanddienst lässt sich ein E-Mail-Connector zwar speichern, stellt aber nie etwas zu. Seine Karte zeigt dann den roten Tag „Kein Versanddienst".
+  Ein E-Mail-Connector ohne **verifizierten** Versanddienst lässt sich zwar speichern, stellt aber nie etwas zu. Seine Karte zeigt dann den roten Tag „Kein Versanddienst".
 </Callout>
 
-## Was Sie ausfüllen
+## Option 1: Gmail verbinden (empfohlen für Gmail)
+
+Klicken Sie auf **Gmail verbinden** und erteilen Sie im Google-Fenster den Zugriff. Es gibt kein SMTP zu konfigurieren und **kein App-Passwort** – RooQuiz erhält nur die Berechtigung, E-Mails zu senden; Ihren Posteingang kann es nicht lesen.
+
+- Jedes Gmail-Konto sendet über RooQuiz **bis zu 500 E-Mails pro Tag**. Massen-E-Mails an Teilnehmer, die darüber hinausgehen, werden pausiert und **am nächsten Tag automatisch fortgesetzt**; Connector-Benachrichtigungen darüber hinaus schlagen bis zum nächsten Tag fehl.
+- **Testen** sendet eine Nachricht vom Gmail-Konto an Ihre eigene Adresse.
+- Zeigt der Status **Neu verbinden nötig**, klicken Sie auf **Neu verbinden** und erteilen Sie den Zugriff erneut.
+- Um von einer anderen Gmail-Adresse zu senden, verbinden Sie ein weiteres Gmail-Konto.
+
+<Callout type="info">
+  Das Trennen löscht den Zugriff von RooQuiz auf dieses Gmail-Konto. Deaktivieren Sie zuerst die E-Mail-Connectors, die es verwenden.
+</Callout>
+
+## Option 2: SMTP-Server hinzufügen
+
+Klicken Sie auf **SMTP-Server hinzufügen**, um über den SMTP-Server Ihres Anbieters zu senden – nützlich für eine Marken-Domain über einen Dienst wie Resend oder für den Mailserver Ihres Unternehmens.
+
+### Was Sie ausfüllen
 
 | Feld | Hinweise |
 | --- | --- |
@@ -27,29 +51,9 @@ Richten Sie ihn einmal pro Team unter **Einstellungen → Organisation → E-Mai
   **Port 25 kann nicht verwendet werden.** Unsere Hosting-Plattform blockiert ausgehende Verbindungen auf diesem Port. Verwenden Sie 587 oder 465.
 </Callout>
 
-## Einrichtung nach Anbieter
+### Einrichtung nach Anbieter
 
-<Tabs items={['Gmail', 'Resend', 'Firmen-Mailserver']}>
-  <Tab value="Gmail">
-    | Feld | Wert |
-    | --- | --- |
-    | SMTP-Server | `smtp.gmail.com` |
-    | Port | `587 (STARTTLS)` |
-    | Benutzername | Ihre vollständige Gmail-Adresse |
-    | Passwort | Ein **16-stelliges App-Passwort** |
-    | Absenderadresse | **Dieselbe** Gmail-Adresse oder ein verifizierter „Senden als"-Alias |
-
-    Erstellen Sie das App-Passwort unter [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords). Es wird einmalig in vier Vierergruppen angezeigt – **entfernen Sie die Leerzeichen**, bevor Sie es einfügen.
-
-    <Callout type="warning">
-      Ihr normales Kontopasswort funktioniert nicht. Google hat die Passwortanmeldung für Mail-Clients deaktiviert, daher ist ein App-Passwort erforderlich – und App-Passwörter gibt es erst, wenn die **Bestätigung in zwei Schritten** aktiviert ist.
-    </Callout>
-
-    Wenn auf der Seite *„Die gesuchte Einstellung ist für Ihr Konto nicht verfügbar"* steht, trifft einer dieser Fälle zu: Die Bestätigung in zwei Schritten ist deaktiviert; es handelt sich um ein Google-Workspace-Konto, dessen Administrator App-Passwörter deaktiviert hat; oder das Konto ist im Erweiterten Sicherheitsprogramm registriert, das sie grundsätzlich blockiert.
-
-    Gmail begrenzt den Versand außerdem auf etwa **500 Empfänger pro Tag** bei privaten Konten und **2.000** bei Workspace. Für Team-Benachrichtigungen reicht das völlig, für Massenmails jedoch nicht.
-  </Tab>
-
+<Tabs items={['Resend', 'Firmen-Mailserver', 'Gmail (SMTP-Alternative)']}>
   <Tab value="Resend">
     | Feld | Wert |
     | --- | --- |
@@ -70,9 +74,33 @@ Richten Sie ihn einmal pro Team unter **Einstellungen → Organisation → E-Mai
     - Der Benutzername ist oft die **vollständige Postfachadresse**, nicht nur der Teil vor dem `@`.
     - Die **Absenderadresse muss zu Ihrer eigenen Domain gehören**. Die meisten Unternehmensserver lehnen es ab, Mails weiterzuleiten, die vorgeben, von woanders zu stammen.
   </Tab>
+
+  <Tab value="Gmail (SMTP-Alternative)">
+    Verwenden Sie lieber oben **Gmail verbinden** – dafür ist kein App-Passwort nötig. Nutzen Sie SMTP nur, wenn die Google-Verbindung für Sie nicht infrage kommt.
+
+    | Feld | Wert |
+    | --- | --- |
+    | SMTP-Server | `smtp.gmail.com` |
+    | Port | `587 (STARTTLS)` |
+    | Benutzername | Ihre vollständige Gmail-Adresse |
+    | Passwort | Ein **16-stelliges App-Passwort** |
+    | Absenderadresse | **Dieselbe** Gmail-Adresse oder ein verifizierter „Senden als"-Alias |
+
+    Erstellen Sie das App-Passwort unter [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords). Es wird einmalig in vier Vierergruppen angezeigt – **entfernen Sie die Leerzeichen**, bevor Sie es einfügen.
+
+    <Callout type="warning">
+      Ihr normales Kontopasswort funktioniert nicht. Google hat die Passwortanmeldung für Mail-Clients deaktiviert, daher ist ein App-Passwort erforderlich – und App-Passwörter gibt es erst, wenn die **Bestätigung in zwei Schritten** aktiviert ist.
+    </Callout>
+
+    Wenn auf der Seite *„Die gesuchte Einstellung ist für Ihr Konto nicht verfügbar"* steht, trifft einer dieser Fälle zu: Die Bestätigung in zwei Schritten ist deaktiviert; es handelt sich um ein Google-Workspace-Konto, dessen Administrator App-Passwörter deaktiviert hat; oder das Konto ist im Erweiterten Sicherheitsprogramm registriert, das sie grundsätzlich blockiert.
+
+    Gmail begrenzt den Versand außerdem auf etwa **500 Empfänger pro Tag** bei privaten Konten und **2.000** bei Workspace. Für Team-Benachrichtigungen reicht das völlig, für Massenmails jedoch nicht.
+  </Tab>
 </Tabs>
 
 ## Speichern und überprüfen
+
+Dieser und der nächste Abschnitt gelten für SMTP-Server; eine Gmail-Verbindung wird über die Google-Anmeldung verifiziert.
 
 <Steps>
 ### Felder ausfüllen und auf „Speichern und überprüfen" klicken
@@ -106,5 +134,5 @@ Der **genaue Fehler Ihres SMTP-Servers** wird auf der Seite angezeigt – bewuss
 - Das Passwort wird nach dem Speichern **nie wieder angezeigt**. Lassen Sie das Feld leer, wenn Sie etwas anderes bearbeiten, dann bleibt es unverändert.
 - Eine Änderung von Server, Port, Benutzername, Passwort oder Absenderadresse setzt den Status bis zur nächsten erfolgreichen Prüfung auf **Nicht verifiziert** zurück.
 - Speichern und Überprüfen sind auf wenige Versuche pro Stunde und Team **begrenzt** – jeder Versuch verbindet sich tatsächlich mit Ihrem Server und sendet tatsächlich eine Nachricht.
-- Das **Entfernen** des Versanddienstes löscht das gespeicherte Passwort. Um Einstellungen zu ändern, müssen Sie ihn nicht entfernen – speichern Sie die neuen Werte einfach darüber. Das Entfernen wird verweigert, solange noch ein E-Mail-Connector **aktiviert** ist, damit Sie Ihre eigenen Zustellungen nicht unbemerkt unterbrechen.
+- Das **Entfernen** des Versanddienstes löscht das gespeicherte Passwort. Um Einstellungen zu ändern, müssen Sie ihn nicht entfernen – speichern Sie die neuen Werte einfach darüber. Das Entfernen wird verweigert, solange ein **aktivierter** E-Mail-Connector diesen Versanddienst noch verwendet, damit Sie Ihre eigenen Zustellungen nicht unbemerkt unterbrechen.
 - Schlägt eine spätere Zustellung dauerhaft fehl – die Zugangsdaten funktionieren nicht mehr oder die Absenderadresse wird abgelehnt –, wechselt der Status auf **Überprüfung fehlgeschlagen**, und E-Mail-Connectors stellen nichts mehr zu, bis Sie das Problem beheben. Eine einzelne fehlerhafte Empfängeradresse bewirkt das **nicht**; sie lässt nur diese eine Nachricht fehlschlagen.
