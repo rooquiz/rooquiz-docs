@@ -13,9 +13,9 @@ Chaque connecteur a besoin d'au moins un événement :
 | --- | --- |
 | **Nouvelle réponse** | Une personne termine un quiz : **chaque** soumission, y compris les réponses anonymes et les tentatives répétées de la même personne |
 | **Nouveau lead** | Une personne laisse ses coordonnées à votre équipe **pour la première fois** |
-| **Réservation créée** | Une session est confirmée. Avec la [confirmation](/fr/bookings/availability#confirmation) activée, c'est le moment où le responsable du lead confirme la demande ; sans elle, le moment où le répondant réserve |
-| **Réservation annulée** | L'une ou l'autre des parties annule une réservation |
-| **Réservation reprogrammée** | Une réservation est déplacée à un autre horaire |
+| **Réservation créée** | Un appel réservé depuis une page de résultats est maintenu. Si le type d'événement Cal.com exige une confirmation, c'est le moment où vous la confirmez dans Cal.com |
+| **Réservation annulée** | L'une ou l'autre des parties annule l'appel dans Cal.com |
+| **Réservation reprogrammée** | L'appel est déplacé à un autre horaire dans Cal.com |
 
 <Callout type="warning">
   **« Nouveau lead » ne se déclenche qu'une fois, la première fois que la personne laisse ses coordonnées.** Si la même personne passe un autre quiz plus tard, l'événement ne se redéclenche pas, car les leads sont [dédupliqués entre les quiz](/fr/leads). Si vous voulez une notification à chaque soumission, choisissez plutôt **Nouvelle réponse**.
@@ -26,7 +26,7 @@ Chaque connecteur a besoin d'au moins un événement :
 </Callout>
 
 <Callout type="info">
-  Les événements de réservation ne concernent que les sessions réellement maintenues. Une demande en attente, une demande refusée, ou une demande en attente reprogrammée ou retirée ne déclenche **rien** : les automatisations en aval ne doivent pas agir sur un rendez-vous qui n'a pas été convenu.
+  Les événements de réservation ne concernent que les sessions réellement maintenues. Une demande en attente, une demande refusée, ou une demande en attente reprogrammée ou retirée ne déclenche **rien** : les automatisations en aval ne doivent pas agir sur un rendez-vous qui n'a pas été convenu. Les événements de réservation nécessitent aussi le [connecteur Cal.com](/fr/bookings/calcom) (Pro) : sans lui, RooQuiz n'est jamais informé des réservations.
 </Callout>
 
 ## Portée du déclenchement

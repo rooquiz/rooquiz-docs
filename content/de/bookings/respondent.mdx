@@ -1,13 +1,15 @@
 ---
 title: Die Teilnehmerseite
-description: 'Buchungen aus Sicht der Teilnehmer: wie Sie den Buchungsbereich für ein Quiz aktivieren, welche Texte Sie anpassen können und was Teilnehmer anschließend selbst verschieben oder stornieren können.'
+description: 'Buchungen aus Sicht der Teilnehmer: wie Sie den Buchungsbereich für ein Quiz aktivieren, welche Texte Sie anpassen können und was passiert, wenn jemand von seinem Ergebnis aus Ihre Cal.com-Seite bucht.'
 ---
 
-Teilnehmer sehen genau einen Einstiegspunkt für Buchungen: **den Buchungsbereich auf der Ergebnisseite**. Diese Seite beschreibt, wie er aussieht, wie Sie ihn aktivieren und was Teilnehmer danach selbst erledigen können.
+Teilnehmer sehen genau einen Einstiegspunkt für Buchungen: **den Buchungsbereich auf der Ergebnisseite**. Diese Seite beschreibt, wie Sie ihn aktivieren und was Teilnehmer dabei erleben.
 
 ## Buchungsbereich aktivieren
 
-Öffnen Sie im Quiz **Teilen → Buchung** und aktivieren Sie **Buchungsbereich auf der Ergebnisseite anzeigen**.
+Öffnen Sie im Quiz **Einstellungen → Follow-up der Ergebnisseite** und aktivieren Sie **Buchungsbereich auf der Ergebnisseite anzeigen**.
+
+- **Cal.com-Buchungslink** – erforderlich. Fügen Sie den Link des Cal.com-Event-Typs ein, den Teilnehmer buchen sollen, etwa `cal.com/ihr-name/kennenlernen`; akzeptiert werden nur Links von `cal.com` und `cal.eu`. Mit dem [Cal.com-Connector](/de/bookings/calcom) können Sie stattdessen einen Event-Typ aus einer Liste auswählen.
 
 Drei Texte lassen sich anpassen; lassen Sie sie leer, wird der Standardtext in der Sprache des Quiz verwendet:
 
@@ -15,35 +17,23 @@ Drei Texte lassen sich anpassen; lassen Sie sie leer, wird der Standardtext in d
 - **Beschreibung** – eine Zeile dazu, worum es in dem Termin geht.
 - **Button-Text** – z. B. „Kostenlose Beratung buchen".
 
-<Callout type="warning">
-  Solange die [Verfügbarkeit](/de/bookings/availability) nicht konfiguriert ist, wird selbst bei aktiviertem Schalter nichts angezeigt – die Einstellungsseite fordert Sie auf, diese zuerst einzurichten.
-</Callout>
+In der **Bericht**-Vorschau des Editors können Sie den Buchungsbereich zwischen den anderen Blöcken der Ergebnisseite nach oben oder unten verschieben.
 
 ## Was der Teilnehmer tut
 
 1. Er reicht das Quiz ein und liest sein Ergebnis.
-2. Er wählt im Buchungsbereich einen Zeitpunkt. Die Zeiten werden **in seiner eigenen Zeitzone** angezeigt, nicht in Ihrer.
-3. Er klickt auf Buchen, wofür eine **Anmeldung** erforderlich ist (E-Mail-Code oder Google).
-4. Nach dem Absenden: Ist die [Bestätigung](/de/bookings/availability) aktiviert, bleibt die Buchung „Ausstehend", bis Sie bestätigen, und erst dann erhält er die Meeting-Adresse; ist sie deaktiviert, erhält er Bestätigung und Details sofort.
+2. Er klickt auf den Buchungsbutton. Ihre Cal.com-Buchungsseite öffnet sich über der Ergebnisseite, **Name und E-Mail-Adresse sind bereits ausgefüllt**, sofern RooQuiz sie kennt.
+3. Er wählt in Cal.com einen Zeitpunkt und bucht ihn; Cal.com zeigt die Zeiten in seiner eigenen Zeitzone an und schickt ihm die Bestätigung.
 
 <Callout type="info">
-  Für eine Buchung ist **bewusst eine Anmeldung erforderlich**: Nur eine identifizierte Person kann später selbst umbuchen und stornieren, und nur so lässt sich der Termin dem richtigen [Lead](/de/leads) zuordnen.
+  Für eine Buchung ist **keine Anmeldung** bei RooQuiz nötig. Lässt sich die Buchungsseite nicht direkt auf der Seite öffnen, wird sie stattdessen in einem neuen Tab geöffnet.
 </Callout>
 
-## Was Teilnehmer danach tun können
+## Die Buchung einem Lead zuordnen
 
-Im Tab **Termine** ihres [Portals](/de/respondents/portal) kann ein angemeldeter Teilnehmer:
+Mit aktivem Connector wird die Buchung mit der Einsendung verknüpft, aus der sie stammt:
 
-- Uhrzeit und Meeting-Details des Termins einsehen.
-- **Selbst umbuchen** – einen anderen Zeitpunkt aus Ihrer aktuellen Verfügbarkeit wählen.
-- **Stornieren**.
+- Gehört die Einsendung bereits einem Teilnehmer – weil er sich angemeldet oder sie übernommen hat –, landet die Buchung bei seinem Lead.
+- War sie anonym, findet oder erstellt RooQuiz einen Teilnehmer und einen Lead anhand der **in Cal.com eingegebenen E-Mail-Adresse**. Die Einsendung selbst wird von dieser E-Mail-Adresse **nicht** übernommen, da sie nicht bestätigt ist.
 
-Jede Umbuchung oder Stornierung wird mit Ihrer Seite **1:1-Buchungen** synchronisiert und in der Aktivität des Leads erfasst.
-
-## Eine Buchung pro Person, quizübergreifend
-
-Eine Person kann **jeweils nur eine aktive Buchung bei Ihrem Team** haben, und diese Grenze gilt quizübergreifend: Hat sie über Quiz A gebucht, teilt ihr die Ergebnisseite von Quiz B mit, dass sie bereits einen Termin hat, statt einen zweiten anzubieten.
-
-<Callout type="info">
-  Die Regel richtet sich nach dem **angemeldeten Teilnehmer**, nicht nach der Einsendung. So bucht dieselbe Person, die ein weiteres Quiz absolviert, nie doppelt einen Termin.
-</Callout>
+Zum Umbuchen oder Stornieren nutzt die teilnehmende Person die Links in den E-Mails von Cal.com; die Änderung wird zurück zu RooQuiz synchronisiert.

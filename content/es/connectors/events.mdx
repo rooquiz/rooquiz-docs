@@ -13,9 +13,9 @@ Todo conector necesita al menos un evento:
 | --- | --- |
 | **Nueva respuesta** | Alguien completa un quiz: **cada** envío, incluidos los anónimos y los intentos repetidos de la misma persona |
 | **Nuevo lead** | Alguien deja sus datos de contacto a tu equipo **por primera vez** |
-| **Reserva creada** | Se confirma una sesión. Con la [aprobación](/es/bookings/availability) activada, es el momento en que el responsable del lead confirma la solicitud; si está desactivada, el momento en que el participante reserva |
-| **Reserva cancelada** | Cualquiera de las dos partes cancela una reserva |
-| **Reserva reprogramada** | Una reserva se mueve a otra hora |
+| **Reserva creada** | Una llamada reservada desde una página de resultados sigue en pie. Si el tipo de evento de Cal.com requiere confirmación, es el momento en que la confirmas en Cal.com |
+| **Reserva cancelada** | Cualquiera de las dos partes cancela la llamada en Cal.com |
+| **Reserva reprogramada** | La llamada se mueve a otra hora en Cal.com |
 
 <Callout type="warning">
   **"Nuevo lead" se activa una sola vez, la primera vez que esa persona deja sus datos.** Si la misma persona hace otro quiz más adelante, no se vuelve a activar, porque los leads se [deduplican entre quizzes](/es/leads). Si quieres una notificación con cada envío, elige **Nueva respuesta**.
@@ -26,7 +26,7 @@ Todo conector necesita al menos un evento:
 </Callout>
 
 <Callout type="info">
-  Los eventos de reserva solo cubren las sesiones que realmente se mantienen. Una solicitud pendiente, una solicitud rechazada o una solicitud pendiente que se reprograma o se retira **no activa nada**: las automatizaciones posteriores no deberían actuar sobre una reunión que no se ha acordado.
+  Los eventos de reserva solo cubren las sesiones que realmente se mantienen. Una solicitud pendiente, una solicitud rechazada o una solicitud pendiente que se reprograma o se retira **no activa nada**: las automatizaciones posteriores no deberían actuar sobre una reunión que no se ha acordado. Los eventos de reserva también requieren el [conector de Cal.com](/es/bookings/calcom) (Pro); sin él, RooQuiz nunca se entera de las reservas.
 </Callout>
 
 ## Alcance de activación

@@ -1,70 +1,69 @@
 ---
-title: '1:1-Buchungen'
-description: 'Mit 1:1-Buchungen buchen Teilnehmer direkt auf der Ergebnisseite des Quiz einen Termin bei Ihnen – ohne externen Kalender und ohne E-Mail-Pingpong. Die Verfügbarkeit gilt teamweit für jedes Quiz.'
+title: Buchungen
+description: 'Lassen Sie Teilnehmer direkt auf der Ergebnisseite des Quiz über Cal.com ein Gespräch mit Ihnen buchen, und verbinden Sie Cal.com im Pro-Tarif, um jede Buchung mit dem Lead zu synchronisieren, aus dem sie stammt.'
 sidebarTitle: Überblick
 ---
 
-Der Moment, in dem jemand ein Quiz abschließt und sein Ergebnis liest, ist der Moment, in dem er am ehesten bereit ist, mit Ihnen zu sprechen. Mit **1:1-Buchungen** kann er genau dort auf der Ergebnisseite einen Termin bei Ihnen buchen – ohne externes Kalender-Tool und ohne E-Mail-Pingpong über Uhrzeiten.
+Der Moment, in dem jemand ein Quiz abschließt und sein Ergebnis liest, ist der Moment, in dem er am ehesten bereit ist, mit Ihnen zu sprechen. Der **Buchungsbereich** bringt Ihre [Cal.com](https://cal.com)-Buchungsseite direkt auf die Ergebnisseite, sodass die Person ein Gespräch buchen kann, ohne die Seite zu verlassen – Name und E-Mail-Adresse sind bereits ausgefüllt.
 
-<Callout type="info">
-  Die Verfügbarkeit ist eine Ressource **auf Teamebene**: Einmal konfiguriert, wird sie von jedem Quiz gemeinsam genutzt. Sie müssen Ihre Woche nicht für jedes Quiz neu planen.
-</Callout>
+RooQuiz betreibt keinen eigenen Kalender. Ihre Verfügbarkeit, Event-Typen, Meeting-Links, Erinnerungen und Umbuchungen liegen alle in Cal.com; RooQuiz liefert den Einstiegspunkt auf der Ergebnisseite und bringt jede Buchung mit dem Connector zurück zum Lead.
 
-<Callout type="info">
-  Der Buchungsbereich auf der Ergebnisseite ist im **Free-Tarif** enthalten – Sie brauchen kein Upgrade, um Buchungen anzunehmen.
-</Callout>
+## Zwei Stufen
 
-## In drei Schritten startklar
+| | Was Sie erhalten | Tarif |
+| --- | --- | --- |
+| **Buchungsbereich** | Ein Cal.com-Buchungsbutton auf der Ergebnisseite, Name und E-Mail-Adresse vorausgefüllt | Free |
+| **Cal.com-Connector** | Buchungen werden zurück zu RooQuiz synchronisiert: beim Lead und bei der Einsendung, in der Aktivität des Leads, in Benachrichtigungen und in Ihren anderen Connectors | Pro |
+
+Ohne den Connector funktioniert der Buchungsbereich trotzdem, aber die Buchung existiert nur in Cal.com – RooQuiz erfährt nichts davon.
+
+## Startklar machen
 
 <Steps>
-### Verfügbarkeit festlegen
+### Einen Cal.com-Event-Typ bereithalten
 
-Öffnen Sie auf der Seite **1:1-Buchungen** die **Buchbaren Zeiten** und legen Sie Zeitzone, Sitzungsdauer und wöchentliche Zeiten fest. Siehe [Buchbare Zeiten](/de/bookings/availability).
+Legen Sie in Cal.com den Event-Typ an, den Teilnehmer buchen sollen (zum Beispiel ein 30-minütiges Kennenlerngespräch), und kopieren Sie seinen Link, etwa `cal.com/ihr-name/kennenlernen`.
 
-### Buchungsbereich in einem Quiz aktivieren
+### Den Buchungsbereich in einem Quiz aktivieren
 
-Gehen Sie in diesem Quiz zu **Teilen → Buchung** und aktivieren Sie **Buchungsbereich auf der Ergebnisseite anzeigen**. Siehe [Die Teilnehmerseite](/de/bookings/respondent).
+Öffnen Sie im Quiz **Einstellungen → Follow-up der Ergebnisseite**, aktivieren Sie den **Buchungsbereich** und fügen Sie Ihren **Cal.com-Buchungslink** ein. Siehe [Die Teilnehmerseite](/de/bookings/respondent).
 
-### Buchungen auf der Buchungsseite bearbeiten
+### Cal.com verbinden (Pro)
 
-Neue Buchungen erscheinen auf der Seite **1:1-Buchungen**. Siehe [Buchungen verwalten](/de/bookings/manage).
+Verbinden Sie unter **Connectors → Termine buchen** Ihr Cal.com-Konto, damit Buchungen zurückfließen. Siehe [Cal.com verbinden](/de/bookings/calcom).
 </Steps>
 
-<Callout type="warning">
-  Solange die Verfügbarkeit nicht konfiguriert ist, zeigt die Ergebnisseite **keinen** Buchungsbereich an, selbst wenn der Schalter aktiviert ist – die Einstellungsseite weist ausdrücklich darauf hin.
+## Was zurück synchronisiert wird
+
+Mit dem Connector wird jede Buchung, die **über eine Ergebnisseite** zustande kommt, in RooQuiz gespiegelt:
+
+- Sie erscheint auf der [Detailseite des Leads](/de/leads/detail) und bei der Einsendung, aus der sie stammt, und füllt die Spalte **Nächster Termin** der Lead-Liste.
+- Gebuchte, umgebuchte und stornierte Gespräche werden in der Aktivität des Leads festgehalten.
+- Der Lead-Betreuer (ersatzweise der Quiz-Inhaber, dann der Team-Inhaber) erhält für jede neue Buchung eine **In-App-Benachrichtigung**.
+- Buchung erstellt, storniert und umgebucht können jeweils [einen Connector auslösen](/de/connectors/events), sodass Sie bei Änderungen in Ihrem Kalender in Slack posten oder an Zapier übertragen können.
+
+<Callout type="info">
+  Buchungen, die Personen **außerhalb** eines Quiz auf Ihrer Cal.com-Seite vornehmen, werden ignoriert – synchronisiert werden nur Gespräche, die über eine RooQuiz-Ergebnisseite gebucht wurden. So wird Ihre Lead-Liste nicht mit Ihrem gesamten Kalender überflutet.
 </Callout>
 
-## Die drei Abschnitte der Liste
-
-Die Seite **1:1-Buchungen** ist danach geordnet, was Ihre Aufmerksamkeit erfordert:
-
-- **Wartet auf dich** – ausstehende Anfragen stehen ganz oben, wenn die Bestätigung aktiviert ist, denn sie halten jemand anderen auf.
-- **Anstehend** – bestätigte Termine, die noch nicht stattgefunden haben; der allernächste erhält eine große Karte mit Countdown.
-- **Vergangen** – der Verlauf, standardmäßig eingeklappt.
-
-Der Eintrag **1:1-Buchungen** in der Seitenleiste trägt ein Badge mit der Anzahl ausstehender Anfragen.
+<Callout type="info">
+  RooQuiz versendet **keine Buchungs-E-Mails**. Bestätigungen, Erinnerungen und Umbuchungshinweise kommen von Cal.com – an Sie und an die teilnehmende Person.
+</Callout>
 
 ## Status auf einen Blick
 
 | Status | Bedeutung |
 | --- | --- |
-| **Ausstehend** | Eine Anfrage, die auf Bestätigung durch den zuständigen Lead-Betreuer wartet (nur wenn die Bestätigung aktiviert ist) |
-| **Gebucht** | Bestätigt; der Teilnehmer hat die Meeting-Details |
-| **Abgeschlossen** | Der Termin hat stattgefunden – von Ihnen markiert |
-| **Nicht erschienen** | Die Person ist nicht erschienen – von Ihnen markiert |
+| **Ausstehend** | Der Event-Typ erfordert eine Bestätigung, und Sie haben in Cal.com noch nicht bestätigt |
+| **Gebucht** | Das Gespräch steht |
+| **Abgelehnt** | Sie haben die Anfrage in Cal.com abgelehnt |
 | **Storniert** | Von einer der beiden Seiten abgesagt |
-| **Abgelehnt** | Sie haben die Anfrage abgelehnt |
-
-## Benachrichtigungen und Automatisierung
-
-- **Ihre Seite** – wenn eine Buchung oder Anfrage eingeht, erhält der Lead-Betreuer (ersatzweise der Quiz-Inhaber, dann der Team-Inhaber) eine In-App-Benachrichtigung und eine E-Mail. Auch Stornierungen, Umbuchungen und eine Erinnerung 24 Stunden vorher kommen per E-Mail. Die E-Mails schalten Sie unter **Einstellungen → Benachrichtigungen → Terminaktivität** ab.
-- **Der Teilnehmer** – erhält eine Bestätigungs-E-Mail mit den Meeting-Details (oder, solange die Bestätigung aussteht, eine E-Mail „Anfrage erhalten“), außerdem E-Mails bei Umbuchung, Stornierung oder Ablehnung sowie eine Erinnerung 24 Stunden vorher.
-- **Connectors** – Buchung erstellt, storniert und umgebucht können jeweils [einen Connector auslösen](/de/connectors/events), sodass Sie bei Änderungen in Ihrem Kalender in Slack posten oder an Zapier übertragen können.
+| **Nicht erschienen** | In Cal.com als nicht erschienen markiert |
 
 ## In diesem Abschnitt
 
 <Cards>
-  <Card title="Buchbare Zeiten" href="/de/bookings/availability" />
-  <Card title="Buchungen verwalten" href="/de/bookings/manage" />
+  <Card title="Cal.com verbinden" href="/de/bookings/calcom" />
   <Card title="Die Teilnehmerseite" href="/de/bookings/respondent" />
+  <Card title="Buchungen ansehen" href="/de/bookings/manage" />
 </Cards>

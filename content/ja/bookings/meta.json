@@ -1,9 +1,9 @@
 {
-  "title": "1:1予約",
+  "title": "予約",
   "pages": [
     "index",
-    "availability",
-    "manage",
-    "respondent"
+    "calcom",
+    "respondent",
+    "manage"
   ]
 }

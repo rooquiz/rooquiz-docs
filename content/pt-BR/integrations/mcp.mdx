@@ -1,9 +1,9 @@
 ---
 title: Integração MCP
-description: 'O servidor MCP do RooQuiz permite que ChatGPT, Claude, Cursor, Codex e outros clientes de IA trabalhem na sua equipe em linguagem natural: montar quizzes, gerenciar traduções, trabalhar leads e agendamentos e ler estatísticas.'
+description: 'O servidor MCP do RooQuiz permite que ChatGPT, Claude, Cursor, Codex e outros clientes de IA trabalhem na sua equipe em linguagem natural: montar quizzes, gerenciar traduções, trabalhar leads, consultar agendamentos e ler estatísticas.'
 ---
 
-O RooQuiz oferece um **servidor MCP (Model Context Protocol)** que permite que clientes de IA — ChatGPT, claude.ai, Claude Desktop, Claude Code, Cursor, Codex e outros — trabalhem dentro da sua equipe. Com linguagem natural, você pode criar quizzes a partir de modelos ou do zero, adicionar e editar perguntas, configurar dimensões do relatório ou tipos de resultado, alterar configurações de entrega e obter links de compartilhamento, gerenciar traduções e respondentes, trabalhar seus leads e agendamentos e ler registros de respostas, estatísticas e funis de conversão — em vez de fazer tudo manualmente no editor.
+O RooQuiz oferece um **servidor MCP (Model Context Protocol)** que permite que clientes de IA — ChatGPT, claude.ai, Claude Desktop, Claude Code, Cursor, Codex e outros — trabalhem dentro da sua equipe. Com linguagem natural, você pode criar quizzes a partir de modelos ou do zero, adicionar e editar perguntas, configurar dimensões do relatório ou tipos de resultado, alterar configurações de entrega e obter links de compartilhamento, gerenciar traduções e respondentes, trabalhar seus leads e ler agendamentos, registros de respostas, estatísticas e funis de conversão — em vez de fazer tudo manualmente no editor.
 
 <Callout type="info">
   O RooQuiz não tem um gerador de quizzes por IA integrado. Para montar um quiz com IA, conecte **o seu próprio cliente de IA** via MCP e peça a ele — ele usa as ferramentas abaixo, e você revisa o resultado no editor.
@@ -177,7 +177,7 @@ Usa `list_form_translations` → `create_form_translation`.
 
 ## Ferramentas disponíveis
 
-Depois de conectado, o assistente de IA pode chamar as 48 ferramentas abaixo. Todas atuam na equipe em que o token está **ativo no momento**.
+Depois de conectado, o assistente de IA pode chamar as 44 ferramentas abaixo. Todas atuam na equipe em que o token está **ativo no momento**.
 
 ### Equipe (Tenant)
 
@@ -213,7 +213,7 @@ Depois de conectado, o assistente de IA pode chamar as 48 ferramentas abaixo. To
 | Ferramenta | O que faz |
 | --- | --- |
 | `get_form_share_info` | Tudo o que é preciso para publicar um quiz: o link público de resposta (também por versão de idioma), o domínio personalizado da equipe e se ele está ativo, trechos de incorporação em três modos (inline / popup / iframe) e as configurações de entrega atuais. Passe `utmSource` para marcar todos os links e trechos para um canal. |
-| `update_form_settings` | Altera como um quiz é entregue: quem pode responder e se o relatório exige um e-mail (a barreira de captação de leads) e um código de verificação, tempo limite (quizzes de conhecimento), compartilhamento e cartão de compartilhamento, folha de respostas, comparação com outros respondentes, a seção de agendamento da página de resultados, o bloco de feedback, download em PDF (Pro), ID do Google Analytics e mais. |
+| `update_form_settings` | Altera como um quiz é entregue: quem pode responder e se o relatório exige um e-mail (a barreira de captação de leads) e um código de verificação, tempo limite (quizzes de conhecimento), compartilhamento e cartão de compartilhamento, folha de respostas, comparação com outros respondentes, a seção de agendamento da página de resultados e seu link do Cal.com, o bloco de feedback, download em PDF (Pro), ID do Google Analytics e mais. |
 
 ### Pergunta
 
@@ -269,11 +269,7 @@ As pessoas que fazem um quiz — chamadas de Respondentes no painel administrati
 
 | Ferramenta | O que faz |
 | --- | --- |
-| `list_bookings` | Lista os agendamentos 1:1 da equipe, dos mais próximos para os mais distantes, com horário, status, participante, quiz de origem e responsável pelo lead. Filtre por status / quiz / respondente / intervalo de tempo — `pending` é a fila de confirmação. |
-| `get_booking_availability` | Lê os horários disponíveis em um intervalo de datas, calculados a partir dos horários semanais da equipe menos os já ocupados. Passe `bookingId` para obter horários para reagendar esse agendamento. |
-| `review_booking` | Confirma ou recusa uma solicitação pendente. Ao confirmar, o participante recebe os dados da reunião (opcionalmente um link / instruções só para essa sessão); ao recusar, é possível incluir um motivo. Somente proprietário / administrador da equipe ou o responsável pelo lead. |
-| `update_booking_status` | Encerra um agendamento marcado: marca como concluído ou não comparecimento (somente depois que ele começou), ou o cancela (o participante recebe um e-mail). |
-| `reschedule_booking` | Move um agendamento marcado para um dos horários disponíveis; o participante recebe um e-mail e o lembrete de 24 h é reprogramado. |
+| `list_bookings` | Lista os agendamentos da equipe sincronizados do Cal.com, dos mais próximos para os mais distantes, com horário, status, tipo de evento do Cal.com, participante, quiz e envio de origem e responsável pelo lead. Filtre por status / quiz / respondente / intervalo de tempo. Somente leitura — os agendamentos são alterados no Cal.com. |
 
 ### Registros e análises
 

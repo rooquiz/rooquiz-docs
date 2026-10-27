@@ -1,0 +1,41 @@
+---
+title: Connecter Cal.com
+description: "Connectez votre compte Cal.com pour que les réservations faites depuis les pages de résultats de vos quiz remontent dans vos leads et connecteurs RooQuiz : OAuth ou clé d'API, région UE, forfait et autorisations expliqués."
+---
+
+Le **connecteur Cal.com** permet à RooQuiz de voir les appels que les personnes réservent depuis vos pages de résultats. C'est un connecteur au niveau de l'équipe, sous **Connecteurs → Réserver des appels**, et chaque équipe peut en avoir **un seul**.
+
+<Callout type="warning">
+  Le connecteur Cal.com est une fonctionnalité **Pro**, et seul le **propriétaire de l'équipe ou un administrateur** peut le configurer. La [section réservation](/fr/bookings/respondent) elle-même fonctionne sans lui avec le forfait Free.
+</Callout>
+
+## Connexion
+
+<Steps>
+### Ouvrez la carte Cal.com
+
+Allez dans **Connecteurs**, repérez **Cal.com** sous **Réserver des appels** et cliquez sur **Connecter Cal.com**.
+
+### Choisissez la région des données
+
+Choisissez **Global (cal.com)** ou **UE (cal.eu)** selon l'endroit où se trouve votre compte Cal.com.
+
+### Autorisez l'accès
+
+- **Global** : cliquez sur **Continuer vers Cal.com** et approuvez l'accès. RooQuiz lit uniquement votre profil et vos types d'événements, et ajoute un webhook pour que les réservations remontent.
+- **UE**, ou si vous préférez ne pas utiliser OAuth : choisissez **Utiliser plutôt une clé d'API**. Dans Cal.com, ouvrez **Settings → Developer → API keys**, créez une clé sans date d'expiration et collez-la.
+</Steps>
+
+Une fois la connexion établie, RooQuiz enregistre automatiquement le webhook dans votre compte Cal.com et récupère vos types d'événements. Supprimer le connecteur retire ce webhook.
+
+## Choisir un type d'événement dans un quiz
+
+Une fois le connecteur en place, le champ **Lien de réservation Cal.com** de la section réservation d'un quiz vous suggère vos types d'événements : vous pouvez en choisir un au lieu de coller un lien. Si vous venez de créer un type d'événement dans Cal.com, cliquez sur **Actualiser les types d'événements**.
+
+## Changements de forfait
+
+Si votre équipe repasse au forfait Free, le connecteur est conservé mais **cesse de synchroniser** : les nouvelles réservations restent uniquement dans Cal.com. Une nouvelle mise à niveau relance la synchronisation. La section réservation de vos pages de résultats continue de fonctionner dans les deux cas.
+
+<Callout type="info">
+  Les reprogrammations et annulations se font dans **Cal.com**, par vous ou par le participant via les e-mails de Cal.com, puis se synchronisent dans RooQuiz. Il n'y a rien à gérer côté RooQuiz.
+</Callout>

@@ -1,9 +1,9 @@
 ---
 title: MCP 接入
-description: 'RooQuiz 提供 MCP（Model Context Protocol）server，讓 ChatGPT、Claude、Cursor、Codex 等 AI 客戶端在你的團隊下用自然語言工作：從範本或從零建立測驗、管理多語言譯文、跟進線索與預約、讀取統計與轉化漏斗。這一頁說明 OAuth 與個人 Token 兩種連接方式、全部 48 個工具的用途、典型流程，以及目前的限制與安全頻率規則。'
+description: 'RooQuiz 提供 MCP（Model Context Protocol）server，讓 ChatGPT、Claude、Cursor、Codex 等 AI 客戶端在你的團隊下用自然語言工作：從範本或從零建立測驗、管理多語言譯文、跟進線索、讀取預約、統計與轉化漏斗。這一頁說明 OAuth 與個人 Token 兩種連接方式、全部 44 個工具的用途、典型流程，以及目前的限制與安全頻率規則。'
 ---
 
-RooQuiz 提供一個 **MCP（Model Context Protocol）server**，讓 ChatGPT、claude.ai、Claude Desktop、Claude Code、Cursor、Codex 等 AI 客戶端能在你的團隊下工作——用自然語言就能從範本或從零建立測驗，追加與修改題目，設定報告維度或結果類型，調整投放設定並拿到分享連結，管理多語言譯文與答題者，跟進線索與預約，以及讀取答題記錄、統計與轉化漏斗——而不必手動在編輯器裡一個個做。
+RooQuiz 提供一個 **MCP（Model Context Protocol）server**，讓 ChatGPT、claude.ai、Claude Desktop、Claude Code、Cursor、Codex 等 AI 客戶端能在你的團隊下工作——用自然語言就能從範本或從零建立測驗，追加與修改題目，設定報告維度或結果類型，調整投放設定並拿到分享連結，管理多語言譯文與答題者，跟進線索，以及讀取預約、答題記錄、統計與轉化漏斗——而不必手動在編輯器裡一個個做。
 
 <Callout type="info">
   RooQuiz 沒有內建的 AI 出題功能。想用 AI 建測驗，請透過 MCP 連接**你自己的 AI 客戶端**並讓它來做——它會使用下面的工具，你再到編輯器裡檢查結果。
@@ -173,7 +173,7 @@ ChatGPT、claude.ai、Claude Code 等支援 MCP OAuth 的客戶端**無需手動
 
 ## 支援的工具
 
-連接成功後，AI 助手可呼叫以下 48 個工具。它們都作用在 Token **目前啟用的團隊**下。
+連接成功後，AI 助手可呼叫以下 44 個工具。它們都作用在 Token **目前啟用的團隊**下。
 
 ### 團隊（Tenant）
 
@@ -209,7 +209,7 @@ ChatGPT、claude.ai、Claude Code 等支援 MCP OAuth 的客戶端**無需手動
 | 工具 | 作用 |
 | --- | --- |
 | `get_form_share_info` | 發佈測驗需要的一切：公開答題連結（每個語言版本各一條）、團隊自訂網域及其是否已生效、三種模式（inline / popup / iframe）的嵌入程式碼，以及目前的投放設定。傳 `utmSource` 可給所有連結和程式碼加上同一個管道標記。 |
-| `update_form_settings` | 修改測驗的投放方式：誰能答題、看報告是否要留信箱（留資門檻）以及是否要驗證碼、限時答題（知識測驗）、結果頁分享與分享卡片、答題卡、群體對照、結果頁預約區塊、回饋區塊、PDF 下載（Pro）、Google Analytics ID 等。 |
+| `update_form_settings` | 修改測驗的投放方式：誰能答題、看報告是否要留信箱（留資門檻）以及是否要驗證碼、限時答題（知識測驗）、結果頁分享與分享卡片、答題卡、群體對照、結果頁預約區塊及其 Cal.com 連結、回饋區塊、PDF 下載（Pro）、Google Analytics ID 等。 |
 
 ### 題目（Question）
 
@@ -265,11 +265,7 @@ ChatGPT、claude.ai、Claude Code 等支援 MCP OAuth 的客戶端**無需手動
 
 | 工具 | 作用 |
 | --- | --- |
-| `list_bookings` | 列出團隊的 1:1 預約，按時間由早到晚，含時間、狀態、預約人、來源測驗與線索負責人。可按狀態 / 測驗 / 答題者 / 時間範圍篩選——`pending` 就是待稽核佇列。 |
-| `get_booking_availability` | 讀取某個日期範圍內可預約的時段，按團隊的每週可預約時段扣除已被佔用的部分計算。傳 `bookingId` 可取得用於改期該預約的時段。 |
-| `review_booking` | 確認或拒絕一個待稽核申請。確認會給預約人發送會議資訊（可選附上僅用於這一場的連結 / 說明）；拒絕時可附理由。僅團隊擁有者 / 管理員或線索負責人可用。 |
-| `update_booking_status` | 為已排定的預約收尾：標記為已完成或未出席（僅限開始之後），或取消（會寄信通知預約人）。 |
-| `reschedule_booking` | 把已排定的預約改到某個可用時段；會寄信通知預約人，並重新安排 24 小時前的提醒。 |
+| `list_bookings` | 列出團隊從 Cal.com 同步過來的預約，按時間由早到晚，含時間、狀態、Cal.com 事件類型、預約人、來源測驗與答題記錄，以及線索負責人。可按狀態 / 測驗 / 答題者 / 時間範圍篩選。唯讀——預約要在 Cal.com 裡修改。 |
 
 ### 資料與分析（Records & Analytics）
 

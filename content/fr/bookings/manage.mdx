@@ -1,67 +1,21 @@
 ---
-title: Gérer les réservations
-description: "Traitez les sessions depuis la page Réservations 1:1 : confirmez ou refusez les demandes en attente, associez un lien de réunion et des instructions à une session, et filtrez la liste par quiz et par statut."
+title: Consulter les réservations
+description: "Où apparaissent dans RooQuiz les réservations synchronisées depuis Cal.com : page de détail du lead, réponse, liste des leads et ses filtres, activité du lead, et pourquoi les modifications se font dans Cal.com."
 ---
 
-La page **Réservations 1:1** est l'endroit où vous traitez toutes les sessions. Les filtres en haut de page permettent d'affiner par quiz et par statut.
+Les réservations synchronisées depuis [Cal.com](/fr/bookings/calcom) sont en **lecture seule** dans RooQuiz. Pour reprogrammer, annuler, confirmer une demande ou marquer une absence, faites-le dans Cal.com : la modification se synchronise ici en quelques instants.
 
-## Traiter les demandes en attente
+## Où elles apparaissent
 
-Lorsque la [confirmation](/fr/bookings/availability) est activée, les nouvelles réservations arrivent dans « En attente de vous » :
-
-- **Confirmer la demande** : confirme la réunion et communique l'adresse. Vous pouvez définir un lien de réunion et des instructions **pour cette seule session** ; laissez-les vides pour utiliser les paramètres de l'équipe.
-- **Refuser la demande** : vous pouvez ajouter un motif, qui figurera dans l'e-mail. La personne est notifiée et peut demander un autre créneau.
+- **Détail du lead** : le bloc **Prochaine réservation** affiche son prochain appel à venir avec un compte à rebours, le type d'événement et le quiz d'origine.
+- **Détail de la réponse** : une section **Réservation** affiche l'appel réservé depuis ce résultat précis.
+- **Liste des leads** : la colonne **Prochaine réservation** affiche le prochain appel de chaque lead, et vous pouvez [filtrer](/fr/leads/views#filtres-disponibles) selon qu'un lead en a un ou non.
+- **Activité du lead** : les appels réservés, confirmés, refusés, reprogrammés et annulés y sont tous enregistrés.
 
 <Callout type="info">
-  L'examen des demandes revient au **propriétaire de l'équipe, à un administrateur ou au responsable du lead**. Une demande dont l'heure de réunion est déjà passée peut seulement être refusée, pas confirmée.
+  Chaque réservation synchronisée porte un badge Cal.com pour rappeler qu'elle est gérée là-bas. L'ancienne page Réservations 1:1 a été retirée ; les réservations se trouvent désormais avec le lead.
 </Callout>
 
-## Actions sur une session confirmée
+## Via MCP
 
-| Action | Remarques |
-| --- | --- |
-| **Reprogrammer** | Choisissez un nouvel horaire parmi vos créneaux disponibles ; le participant reçoit un e-mail et le rappel 24 h avant est reprogrammé |
-| **Marquer comme terminée** | La session a eu lieu. Suivi interne uniquement : le participant n'est pas contacté |
-| **Marquer comme absent** | La personne ne s'est pas présentée. Également interne uniquement |
-| **Annuler la réservation** | Annule la session et en informe le participant par e-mail |
-| **Voir la réponse** | Ouvre la réponse que la personne a soumise |
-
-<Callout type="warning">
-  Les statuts **Terminée** et **Absent** ne peuvent être définis qu'une fois la réunion **déjà commencée**. La reprogrammation ne s'applique qu'aux sessions à l'état Réservée.
-</Callout>
-
-## Ajouter une réservation manuellement
-
-Pour les sessions convenues par téléphone ou par messagerie, enregistrez-les directement :
-
-<Steps>
-### Cliquez sur « Ajouter un rendez-vous »
-
-En haut à droite de la page **Réservations 1:1**.
-
-### Choisissez le lead
-
-Recherchez par nom ou e-mail. **Les membres ordinaires ne peuvent ajouter des réservations que pour les leads dont ils sont responsables** ; le propriétaire et les administrateurs n'ont pas cette restriction.
-
-### Choisissez un horaire
-
-**Créneaux disponibles** : choisissez dans la grille de créneaux habituelle, exactement celle que verrait un répondant.
-
-**Heure personnalisée** : saisissez n'importe quelle date et heure, **en contournant la grille de créneaux**. Utile pour enregistrer un arrangement particulier déjà convenu.
-
-### Décidez de la notification
-
-Cochez « Envoyer un e-mail de confirmation au participant » pour qu'il reçoive une confirmation ; laissez la case décochée et la réservation reste un simple enregistrement de votre côté.
-</Steps>
-
-<Callout type="warning">
-  Un lead ne peut avoir **qu'une seule réservation active à la fois**. Une personne qui en a déjà une est signalée : annulez ou reprogrammez d'abord la session existante.
-</Callout>
-
-## Le lien avec les leads
-
-Les réservations et les [leads](/fr/leads) sont reliés :
-
-- Le bloc « Prochaine réservation » de la page de détail d'un lead affiche la session à venir et permet de la reprogrammer ou de l'annuler sur place.
-- La liste des leads comporte une colonne **Prochaine réservation**, et vous pouvez [filtrer](/fr/leads/views) selon qu'un lead en a une ou non.
-- Chaque demande, confirmation, refus, reprogrammation et annulation est inscrit dans l'**activité** du lead.
+Un client IA connecté par [MCP](/fr/integrations/mcp) peut lister les réservations de l'équipe avec `list_bookings`, filtrées par statut, quiz, répondant ou période.

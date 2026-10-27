@@ -1,9 +1,9 @@
 {
-  "title": "Réservations 1:1",
+  "title": "Réservations",
   "pages": [
     "index",
-    "availability",
-    "manage",
-    "respondent"
+    "calcom",
+    "respondent",
+    "manage"
   ]
 }

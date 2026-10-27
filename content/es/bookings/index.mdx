@@ -1,70 +1,69 @@
 ---
-title: 'Reservas 1:1'
-description: 'Las Reservas 1:1 permiten a los participantes reservar una sesión contigo directamente en la página de resultados del quiz, sin calendarios externos ni correos de ida y vuelta. La disponibilidad es del equipo.'
+title: Reservas
+description: 'Permite que los participantes reserven una llamada contigo a través de Cal.com directamente en la página de resultados del quiz y, con Pro, conecta Cal.com para sincronizar cada reserva con el lead del que procede.'
 sidebarTitle: Descripción general
 ---
 
-El momento en que alguien termina un quiz y lee su resultado es cuando está más dispuesto a hablar contigo. **Reservas 1:1** le permite reservar una sesión contigo ahí mismo, en la página de resultados: sin herramientas de calendario de terceros y sin intercambiar correos para cuadrar horarios.
+El momento en que alguien termina un quiz y lee su resultado es cuando está más dispuesto a hablar contigo. La **sección de reservas** coloca tu página de reservas de [Cal.com](https://cal.com) directamente en la página de resultados, para que la persona pueda reservar una llamada sin salir de ella, con su nombre y su correo ya rellenados.
 
-<Callout type="info">
-  La disponibilidad es un recurso **a nivel de equipo**: la configuras una vez y todos los quizzes la comparten. No tienes que volver a planificar tu semana para cada quiz.
-</Callout>
+RooQuiz no tiene un calendario propio. Tu disponibilidad, tus tipos de evento, los enlaces de reunión, los recordatorios y las reprogramaciones viven en Cal.com; RooQuiz añade el punto de acceso en la página de resultados y, con el conector, devuelve cada reserva al lead.
 
-<Callout type="info">
-  La sección de reservas de la página de resultados está disponible en el **plan Free**: no hace falta mejorar el plan para empezar a recibir reservas.
-</Callout>
+## Dos niveles
 
-## Tres pasos para ponerlo en marcha
+| | Qué obtienes | Plan |
+| --- | --- | --- |
+| **Sección de reservas** | Un botón de reserva de Cal.com en la página de resultados, con nombre y correo rellenados | Free |
+| **Conector de Cal.com** | Las reservas se sincronizan con RooQuiz: en el lead y en la respuesta, en la actividad del lead, en las notificaciones y en tus otros conectores | Pro |
+
+Sin el conector, la sección de reservas sigue funcionando, pero la reserva solo existe en Cal.com: RooQuiz no se entera de que se ha hecho.
+
+## Ponerlo en marcha
 
 <Steps>
-### Configura tu disponibilidad
+### Ten un tipo de evento en Cal.com
 
-En la página **Reservas 1:1**, abre **Disponibilidad de reservas** y define tu zona horaria, la duración de la sesión y el horario semanal. Consulta [Disponibilidad de reservas](/es/bookings/availability).
+Crea en Cal.com el tipo de evento que deben reservar los participantes (por ejemplo, una llamada de presentación de 30 minutos) y copia su enlace, como `cal.com/your-name/intro-call`.
 
 ### Activa la sección de reservas en un quiz
 
-Ve a **Compartir → Reserva** de ese quiz y activa **Mostrar sección de reservas en la página de resultados**. Consulta [La experiencia del participante](/es/bookings/respondent).
+Abre **Ajustes → Seguimiento de la página de resultados** del quiz, activa la **Sección de reservas** y pega tu **Enlace de reserva de Cal.com**. Consulta [La experiencia del participante](/es/bookings/respondent).
 
-### Gestiona las reservas en la página de reservas
+### Conecta Cal.com (Pro)
 
-Las nuevas reservas llegan a la página **Reservas 1:1**. Consulta [Gestionar reservas](/es/bookings/manage).
+En **Conectores → Reservar llamadas**, conecta tu cuenta de Cal.com para que las reservas vuelvan a RooQuiz. Consulta [Conectar Cal.com](/es/bookings/calcom).
 </Steps>
 
-<Callout type="warning">
-  Mientras no configures la disponibilidad, la página de resultados **no** muestra la sección de reservas aunque el interruptor esté activado; la página de configuración lo indica de forma explícita.
+## Qué se sincroniza
+
+Con el conector, cada reserva hecha **desde una página de resultados** se refleja en RooQuiz:
+
+- Aparece en la [página de detalle del lead](/es/leads/detail) y en la respuesta de la que procede, y rellena la columna **Próxima cita** de la lista de leads.
+- Las llamadas reservadas, reprogramadas y canceladas se registran en la actividad del lead.
+- El responsable del lead (o, si no hay, el propietario del quiz y después el propietario del equipo) recibe una **notificación en la aplicación** por cada nueva reserva.
+- La creación, la cancelación y el cambio de hora de una reserva pueden [activar un conector](/es/connectors/events), para publicar en Slack o enviar a Zapier cuando cambia tu calendario.
+
+<Callout type="info">
+  Las reservas que la gente hace en tu página de Cal.com **fuera** de un quiz se ignoran: solo se sincronizan las llamadas reservadas desde una página de resultados de RooQuiz, para que tu lista de leads no se llene con todo tu calendario.
 </Callout>
 
-## Las tres secciones de la lista
-
-La página **Reservas 1:1** se ordena según lo que requiere tu atención:
-
-- **Esperan tu respuesta**: con la confirmación activada, las solicitudes pendientes aparecen arriba, porque están bloqueando a otra persona.
-- **Próximas**: sesiones confirmadas que aún no han tenido lugar; la más cercana se muestra en una tarjeta grande con cuenta atrás.
-- **Pasadas**: el historial, contraído de forma predeterminada.
-
-El elemento **Reservas 1:1** de la barra lateral muestra una insignia con el número de solicitudes pendientes.
+<Callout type="info">
+  RooQuiz **no envía correos de reservas**. Las confirmaciones, los recordatorios y los avisos de reprogramación los envía Cal.com, a ti y al asistente.
+</Callout>
 
 ## Estados de un vistazo
 
 | Estado | Significado |
 | --- | --- |
-| **Pendiente** | Una solicitud a la espera de que el responsable del lead la confirme (solo con la confirmación activada) |
-| **Reservada** | Confirmada; el asistente tiene los datos de la reunión |
-| **Completada** | La sesión tuvo lugar; tú la marcaste |
-| **No asistió** | La persona no se presentó; tú lo marcaste |
+| **Pendiente** | El tipo de evento requiere confirmación y aún no la has confirmado en Cal.com |
+| **Reservada** | La llamada sigue en pie |
+| **Rechazada** | Rechazaste la solicitud en Cal.com |
 | **Cancelada** | Anulada por cualquiera de las dos partes |
-| **Rechazada** | Rechazaste la solicitud |
-
-## Notificaciones y automatización
-
-- **Por tu parte**: cuando llega una reserva o una solicitud, el responsable del lead (o, si no hay, el propietario del quiz y después el propietario del equipo) recibe una notificación en la aplicación y un correo. Las cancelaciones, los cambios de hora y un recordatorio 24 horas antes también se envían por correo. Desactiva estos correos en **Ajustes → Alertas → Actividad de reservas**.
-- **El asistente**: recibe un correo de confirmación con los detalles de la reunión (o un correo de "solicitud recibida" mientras la aprobación está pendiente), además de correos cuando la sesión se cambia de hora, se cancela o se rechaza, y un recordatorio 24 horas antes.
-- **Conectores**: la creación, la cancelación y el cambio de hora de una reserva pueden [activar un conector](/es/connectors/events), para publicar en Slack o enviar a Zapier cuando cambia tu calendario.
+| **No asistió** | Marcada como no asistida en Cal.com |
 
 ## En esta sección
 
 <Cards>
-  <Card title="Disponibilidad de reservas" href="/es/bookings/availability" />
-  <Card title="Gestionar reservas" href="/es/bookings/manage" />
+  <Card title="Conectar Cal.com" href="/es/bookings/calcom" />
   <Card title="La experiencia del participante" href="/es/bookings/respondent" />
+  <Card title="Ver reservas" href="/es/bookings/manage" />
 </Cards>

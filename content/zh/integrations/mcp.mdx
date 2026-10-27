@@ -1,9 +1,9 @@
 ---
 title: MCP 接入
-description: 'RooQuiz 提供 MCP（Model Context Protocol）server，让 ChatGPT、Claude、Cursor、Codex 等 AI 客户端在你的团队下用自然语言干活：从模板或从零搭建测验、改投放设置、拿分享链接、管理译文与答题者、跟进线索与预约、读取统计与漏斗。含两种连接方式、全部 48 个工具与当前限制说明。'
+description: 'RooQuiz 提供 MCP（Model Context Protocol）server，让 ChatGPT、Claude、Cursor、Codex 等 AI 客户端在你的团队下用自然语言干活：从模板或从零搭建测验、改投放设置、拿分享链接、管理译文与答题者、跟进线索、读取预约与统计漏斗。含两种连接方式、全部 44 个工具与当前限制说明。'
 ---
 
-RooQuiz 提供一个 **MCP(Model Context Protocol)server**,让 ChatGPT、claude.ai、Claude Desktop、Claude Code、Cursor、Codex 等 AI 客户端能在你的团队下直接干活——用自然语言就能从模板或从零创建测验,追加与修改题目,配置报告维度与分型结果,修改投放设置并拿到分享链接,管理多语言译文与答题者,跟进线索与预约,以及读取答题记录、统计与转化漏斗——而不必在编辑器里一样样手动操作。
+RooQuiz 提供一个 **MCP(Model Context Protocol)server**,让 ChatGPT、claude.ai、Claude Desktop、Claude Code、Cursor、Codex 等 AI 客户端能在你的团队下直接干活——用自然语言就能从模板或从零创建测验,追加与修改题目,配置报告维度与分型结果,修改投放设置并拿到分享链接,管理多语言译文与答题者,跟进线索,以及读取预约、答题记录、统计与转化漏斗——而不必在编辑器里一样样手动操作。
 
 <Callout type="info">
   RooQuiz 没有内置的 AI 出题功能。想用 AI 搭测验,就通过 MCP 连上**你自己的 AI 客户端**,让它来做——它会调用下面这些工具,你再到编辑器里检查结果。
@@ -173,7 +173,7 @@ ChatGPT、claude.ai、Claude Code 等支持 MCP OAuth 的客户端**无需手动
 
 ## 支持的工具
 
-连接成功后,AI 助手可调用以下 48 个工具。它们都作用在 Token **当前激活的团队**下。
+连接成功后,AI 助手可调用以下 44 个工具。它们都作用在 Token **当前激活的团队**下。
 
 ### 团队(Tenant)
 
@@ -209,7 +209,7 @@ ChatGPT、claude.ai、Claude Code 等支持 MCP OAuth 的客户端**无需手动
 | 工具 | 作用 |
 | --- | --- |
 | `get_form_share_info` | 发布一份测验所需的全部信息:公开答题链接(也包括各语言版本的链接)、团队自定义域名及其是否生效、三种模式(内嵌 / 弹窗 / iframe)的嵌入代码,以及当前的投放设置。传 `utmSource` 可给所有链接和代码打上同一个渠道标记。 |
-| `update_form_settings` | 修改测验的投放方式:谁能作答、看报告是否需要留邮箱(留资门槛)以及是否要验证码、限时答题(知识测验)、分享与分享卡片、答题卡、群体对照、结果页预约块、反馈板块、PDF 下载(Pro)、Google Analytics ID 等。 |
+| `update_form_settings` | 修改测验的投放方式:谁能作答、看报告是否需要留邮箱(留资门槛)以及是否要验证码、限时答题(知识测验)、分享与分享卡片、答题卡、群体对照、结果页预约块及其 Cal.com 链接、反馈板块、PDF 下载(Pro)、Google Analytics ID 等。 |
 
 ### 题目(Question)
 
@@ -265,11 +265,7 @@ ChatGPT、claude.ai、Claude Code 等支持 MCP OAuth 的客户端**无需手动
 
 | 工具 | 作用 |
 | --- | --- |
-| `list_bookings` | 列出团队的 1:1 预约,最早的在前,含时间、状态、预约人、来源测评与线索负责人。可按状态 / 测评 / 答题者 / 时间范围筛选——`pending` 就是待审核队列。 |
-| `get_booking_availability` | 读取某个日期范围内的可约时段,由团队每周可约时间减去已占用的时段算出。传 `bookingId` 可拿到给这场预约改期用的时段。 |
-| `review_booking` | 确认或拒绝一条待审核的申请。确认会把会议信息发给预约人(可选附上这一场专用的链接 / 说明);拒绝时可附理由。仅团队所有者 / 管理员或线索负责人可用。 |
-| `update_booking_status` | 了结一场已确认的预约:标记为已完成或未到场(仅限开始之后),或取消(会邮件通知预约人)。 |
-| `reschedule_booking` | 把一场已确认的预约改到某个可约时段;会邮件通知预约人,并重新设置 24 小时提醒。 |
+| `list_bookings` | 列出团队从 Cal.com 同步过来的预约,最早的在前,含时间、状态、Cal.com 预约类型、预约人、来源测评与答卷,以及线索负责人。可按状态 / 测评 / 答题者 / 时间范围筛选。只读——预约要在 Cal.com 里修改。 |
 
 ### 数据与分析(Records & Analytics)
 

@@ -1,9 +1,9 @@
 ---
 title: MCP-Integration
-description: 'RooQuiz bietet einen MCP-Server, über den ChatGPT, Claude, Cursor, Codex und andere KI-Clients per natürlicher Sprache in Ihrem Team arbeiten: Quizze bauen, Übersetzungen verwalten, Leads und Buchungen bearbeiten, Statistiken lesen.'
+description: 'RooQuiz bietet einen MCP-Server, über den ChatGPT, Claude, Cursor, Codex und andere KI-Clients per natürlicher Sprache in Ihrem Team arbeiten: Quizze bauen, Übersetzungen verwalten, Leads bearbeiten, Buchungen und Statistiken lesen.'
 ---
 
-RooQuiz bietet einen **MCP-Server (Model Context Protocol)**, über den KI-Clients – ChatGPT, claude.ai, Claude Desktop, Claude Code, Cursor, Codex und andere – in Ihrem Team arbeiten können. Per natürlicher Sprache können Sie Quizze aus Vorlagen oder von Grund auf erstellen, Fragen anhängen und bearbeiten, Berichtsdimensionen oder Ergebnistypen konfigurieren, Auslieferungseinstellungen ändern und Freigabelinks abrufen, Übersetzungen und Teilnehmer verwalten, Ihre Leads und Buchungen bearbeiten sowie Einsendungen, Statistiken und Conversion-Funnels lesen – statt alles von Hand im Editor zu erledigen.
+RooQuiz bietet einen **MCP-Server (Model Context Protocol)**, über den KI-Clients – ChatGPT, claude.ai, Claude Desktop, Claude Code, Cursor, Codex und andere – in Ihrem Team arbeiten können. Per natürlicher Sprache können Sie Quizze aus Vorlagen oder von Grund auf erstellen, Fragen anhängen und bearbeiten, Berichtsdimensionen oder Ergebnistypen konfigurieren, Auslieferungseinstellungen ändern und Freigabelinks abrufen, Übersetzungen und Teilnehmer verwalten, Ihre Leads bearbeiten sowie Buchungen, Einsendungen, Statistiken und Conversion-Funnels lesen – statt alles von Hand im Editor zu erledigen.
 
 <Callout type="info">
   RooQuiz hat keinen integrierten KI-Quizgenerator. Um ein Quiz mit KI zu erstellen, verbinden Sie **Ihren eigenen KI-Client** über MCP und bitten ihn darum – er nutzt die unten aufgeführten Tools, und Sie prüfen das Ergebnis im Editor.
@@ -177,7 +177,7 @@ Nutzt `list_form_translations` → `create_form_translation`.
 
 ## Verfügbare Tools
 
-Nach dem Verbinden kann der KI-Assistent die folgenden 48 Tools aufrufen. Sie wirken alle auf das Team, in dem das Token **gerade aktiv** ist.
+Nach dem Verbinden kann der KI-Assistent die folgenden 44 Tools aufrufen. Sie wirken alle auf das Team, in dem das Token **gerade aktiv** ist.
 
 ### Team (Tenant)
 
@@ -213,7 +213,7 @@ Nach dem Verbinden kann der KI-Assistent die folgenden 48 Tools aufrufen. Sie wi
 | Tool | Funktion |
 | --- | --- |
 | `get_form_share_info` | Alles, was zum Veröffentlichen eines Quiz nötig ist: der öffentliche Antwortlink (auch pro Sprachversion), die benutzerdefinierte Domain des Teams und ob sie aktiv ist, Einbettungs-Snippets in drei Modi (inline / popup / iframe) und die aktuellen Auslieferungseinstellungen. Übergeben Sie `utmSource`, um jeden Link und jedes Snippet für einen Kanal zu kennzeichnen. |
-| `update_form_settings` | Ändert, wie ein Quiz ausgeliefert wird: wer antworten darf und ob der Bericht eine E-Mail-Adresse (die Lead-Abfrage) und einen Bestätigungscode erfordert, Zeitlimit (Wissensquizze), Teilen und Share-Karte, Antwortbogen, Gruppenvergleich, der Buchungsbereich der Ergebnisseite, der Feedback-Block, PDF-Download (Pro), Google-Analytics-ID und mehr. |
+| `update_form_settings` | Ändert, wie ein Quiz ausgeliefert wird: wer antworten darf und ob der Bericht eine E-Mail-Adresse (die Lead-Abfrage) und einen Bestätigungscode erfordert, Zeitlimit (Wissensquizze), Teilen und Share-Karte, Antwortbogen, Gruppenvergleich, der Buchungsbereich der Ergebnisseite samt Cal.com-Link, der Feedback-Block, PDF-Download (Pro), Google-Analytics-ID und mehr. |
 
 ### Frage
 
@@ -269,11 +269,7 @@ Die Personen, die ein Quiz absolvieren – in der Admin-Oberfläche „Teilnehme
 
 | Tool | Funktion |
 | --- | --- |
-| `list_bookings` | Listet die 1:1-Buchungen des Teams auf, die frühesten zuerst, mit Zeit, Status, teilnehmender Person, Quell-Quiz und Lead-Verantwortlichem. Filterbar nach Status / Quiz / Teilnehmer / Zeitraum – `pending` ist die Freigabe-Warteschlange. |
-| `get_booking_availability` | Liest die buchbaren Zeitfenster in einem Datumsbereich, berechnet aus den wöchentlichen Zeiten des Teams abzüglich bereits belegter Termine. Übergeben Sie `bookingId`, um Zeitfenster zum Umbuchen dieser Buchung zu erhalten. |
-| `review_booking` | Bestätigt oder lehnt eine ausstehende Anfrage ab. Beim Bestätigen erhält die teilnehmende Person die Termindetails (optional mit Link / Hinweisen für genau diesen Termin); eine Ablehnung kann eine Begründung enthalten. Nur für Team-Inhaber / Administratoren oder den Lead-Verantwortlichen. |
-| `update_booking_status` | Schließt eine geplante Buchung ab: als abgeschlossen oder nicht erschienen markieren (erst nach Beginn) oder stornieren (die teilnehmende Person erhält eine E-Mail). |
-| `reschedule_booking` | Verschiebt eine geplante Buchung auf eines der verfügbaren Zeitfenster; die teilnehmende Person erhält eine E-Mail, und die Erinnerung 24 Stunden vorher wird neu eingeplant. |
+| `list_bookings` | Listet die aus Cal.com synchronisierten Buchungen des Teams auf, die frühesten zuerst, mit Zeit, Status, Cal.com-Event-Typ, teilnehmender Person, Quell-Quiz und Einsendung sowie Lead-Verantwortlichem. Filterbar nach Status / Quiz / Teilnehmer / Zeitraum. Schreibgeschützt – Buchungen werden in Cal.com geändert. |
 
 ### Einsendungen & Analysen
 

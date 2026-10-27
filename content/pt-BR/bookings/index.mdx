@@ -1,70 +1,69 @@
 ---
-title: 'Agendamentos 1:1'
-description: 'Com os Agendamentos 1:1, os respondentes agendam uma sessão com você direto na página de resultado do quiz — sem calendário externo nem troca de e-mails. A disponibilidade vale para a equipe toda.'
+title: Agendamentos
+description: 'Permita que os respondentes agendem uma chamada com você pelo Cal.com direto na página de resultado do quiz e conecte o Cal.com no plano Pro para sincronizar cada agendamento de volta com o lead de origem.'
 sidebarTitle: Visão geral
 ---
 
-O momento em que alguém termina um quiz e lê o resultado é o momento em que essa pessoa está mais disposta a conversar com você. Os **Agendamentos 1:1** permitem que ela agende uma sessão com você ali mesmo, na página de resultado — sem ferramenta de calendário de terceiros, sem troca de e-mails para combinar horários.
+O momento em que alguém termina um quiz e lê o resultado é o momento em que essa pessoa está mais disposta a conversar com você. A **seção de agendamento** coloca sua página de agendamento do [Cal.com](https://cal.com) direto na página de resultado, para que a pessoa agende uma chamada sem sair dali — com o nome e o e-mail já preenchidos.
 
-<Callout type="info">
-  A disponibilidade é um recurso **no nível da equipe**: configure uma vez e todos os quizzes a compartilham. Você não precisa montar sua agenda semanal de novo para cada quiz.
-</Callout>
+O RooQuiz não tem uma agenda própria. Sua disponibilidade, seus tipos de evento, links de reunião, lembretes e remarcações ficam todos no Cal.com; o RooQuiz adiciona o ponto de entrada na página de resultado e, com o conector, traz cada agendamento de volta para o lead.
 
-<Callout type="info">
-  A seção de agendamento na página de resultado está disponível no **plano Free** — não é preciso fazer upgrade para começar a receber agendamentos.
-</Callout>
+## Dois níveis
 
-## Três passos para colocar em funcionamento
+| | O que você recebe | Plano |
+| --- | --- | --- |
+| **Seção de agendamento** | Um botão de agendamento do Cal.com na página de resultado, com nome e e-mail pré-preenchidos | Free |
+| **Conector do Cal.com** | Os agendamentos são sincronizados de volta com o RooQuiz: no lead e no envio, na atividade do lead, nas notificações e nos seus outros conectores | Pro |
+
+Sem o conector, a seção de agendamento continua funcionando, mas o agendamento existe apenas no Cal.com — o RooQuiz não fica sabendo que ele aconteceu.
+
+## Como colocar em funcionamento
 
 <Steps>
-### Defina sua disponibilidade
+### Tenha um tipo de evento no Cal.com
 
-Na página **Agendamentos 1:1**, abra **Disponibilidade de agendamento** e defina seu fuso horário, a duração da sessão e os horários semanais. Consulte [Disponibilidade de agendamento](/pt-BR/bookings/availability).
+Crie no Cal.com o tipo de evento que os respondentes devem agendar (por exemplo, uma chamada de apresentação de 30 minutos) e copie o link dele, como `cal.com/seu-nome/intro-call`.
 
 ### Ative a seção de agendamento em um quiz
 
-Vá até **Compartilhar → Agendamento** desse quiz e ative **Mostrar seção de agendamento na página de resultados**. Consulte [O lado do respondente](/pt-BR/bookings/respondent).
+Abra **Configurações → Acompanhamento da página de resultados** do quiz, ative a **Seção de agendamento** e cole seu **Link de agendamento do Cal.com**. Consulte [O lado do respondente](/pt-BR/bookings/respondent).
 
-### Gerencie os agendamentos na página de agendamentos
+### Conecte o Cal.com (Pro)
 
-Novos agendamentos chegam à página **Agendamentos 1:1**. Consulte [Gerenciar agendamentos](/pt-BR/bookings/manage).
+Em **Conectores → Agendar chamadas**, conecte sua conta do Cal.com para que os agendamentos voltem. Consulte [Conectar o Cal.com](/pt-BR/bookings/calcom).
 </Steps>
 
-<Callout type="warning">
-  Enquanto a disponibilidade não estiver configurada, a página de resultado **não** mostra a seção de agendamento, mesmo com a opção ativada — a página de configurações avisa isso explicitamente.
+## O que é sincronizado de volta
+
+Com o conector, todo agendamento feito **a partir de uma página de resultado** é espelhado no RooQuiz:
+
+- Ele aparece na [página de detalhes do lead](/pt-BR/leads/detail) e no envio de origem, e preenche a coluna **Próximo agendamento** da lista de leads.
+- Chamadas agendadas, remarcadas e canceladas são registradas na atividade do lead.
+- O responsável pelo lead (ou, na falta dele, o proprietário do quiz e depois o proprietário da equipe) recebe uma **notificação no app** a cada novo agendamento.
+- Agendamento criado, cancelado e reagendado podem, cada um, [acionar um conector](/pt-BR/connectors/events), para você publicar no Slack ou enviar ao Zapier quando sua agenda mudar.
+
+<Callout type="info">
+  Os agendamentos que as pessoas fazem na sua página do Cal.com **fora** de um quiz são ignorados — só as chamadas agendadas a partir de uma página de resultado do RooQuiz são sincronizadas, para que sua lista de leads não seja inundada com toda a sua agenda.
 </Callout>
 
-## As três seções da lista
-
-A página **Agendamentos 1:1** é ordenada pelo que precisa da sua atenção:
-
-- **Esperando por você** — as solicitações pendentes ficam no topo quando a confirmação está ativada, porque estão bloqueando outra pessoa.
-- **Próximos** — sessões confirmadas que ainda não aconteceram; a mais próxima ganha um card grande com contagem regressiva.
-- **Passados** — o histórico, recolhido por padrão.
-
-O item **Agendamentos 1:1** na barra lateral exibe um selo com o número de pendentes.
+<Callout type="info">
+  O RooQuiz **não envia e-mails de agendamento**. Confirmações, lembretes e avisos de remarcação vêm do Cal.com, para você e para o participante.
+</Callout>
 
 ## Status em resumo
 
 | Status | Significado |
 | --- | --- |
-| **Pendente** | Uma solicitação aguardando confirmação do responsável pelo lead (somente quando a confirmação está ativada) |
-| **Agendado** | Confirmado; o participante já tem os dados da reunião |
-| **Concluído** | A sessão aconteceu — você a marcou |
-| **Não compareceu** | A pessoa não apareceu — você a marcou |
+| **Pendente** | O tipo de evento exige confirmação e você ainda não confirmou no Cal.com |
+| **Agendado** | A chamada está de pé |
+| **Recusada** | Você rejeitou a solicitação no Cal.com |
 | **Cancelado** | Cancelado por qualquer uma das partes |
-| **Recusada** | Você recusou a solicitação |
-
-## Notificações e automação
-
-- **Do seu lado** — quando chega um agendamento ou uma solicitação, o responsável pelo lead (ou, na falta dele, o proprietário do quiz e depois o proprietário da equipe) recebe uma notificação no app e um e-mail. Cancelamentos, remarcações e um lembrete de 24 horas também são enviados por e-mail. Desative esses e-mails em **Configurações → Configurações de alertas → Atividade de agendamentos**.
-- **O participante** — recebe um e-mail de confirmação com os dados da reunião (ou um e-mail de "solicitação recebida" enquanto a confirmação estiver pendente), além de e-mails quando a sessão é remarcada, cancelada ou recusada, e um lembrete 24 horas antes.
-- **Conectores** — agendamento criado, cancelado e remarcado podem, cada um, [acionar um conector](/pt-BR/connectors/events), para você publicar no Slack ou enviar ao Zapier quando sua agenda mudar.
+| **Não compareceu** | Marcado como não comparecimento no Cal.com |
 
 ## Nesta seção
 
 <Cards>
-  <Card title="Disponibilidade de agendamento" href="/pt-BR/bookings/availability" />
-  <Card title="Gerenciar agendamentos" href="/pt-BR/bookings/manage" />
+  <Card title="Conectar o Cal.com" href="/pt-BR/bookings/calcom" />
   <Card title="O lado do respondente" href="/pt-BR/bookings/respondent" />
+  <Card title="Ver agendamentos" href="/pt-BR/bookings/manage" />
 </Cards>

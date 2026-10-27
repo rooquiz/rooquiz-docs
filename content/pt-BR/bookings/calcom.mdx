@@ -1,0 +1,41 @@
+---
+title: Conectar o Cal.com
+description: 'Conecte sua conta do Cal.com para que os agendamentos feitos nas páginas de resultado dos quizzes voltem para os leads e conectores do RooQuiz. OAuth ou chave de API, a região da UE, plano e permissões explicados.'
+---
+
+O **conector do Cal.com** é o que permite ao RooQuiz ver as chamadas que as pessoas agendam a partir das suas páginas de resultado. É um conector da equipe, em **Conectores → Agendar chamadas**, e cada equipe pode ter **um**.
+
+<Callout type="warning">
+  O conector do Cal.com é um recurso **Pro**, e somente o **proprietário da equipe ou um administrador** pode configurá-lo. A [seção de agendamento](/pt-BR/bookings/respondent) em si funciona no plano Free sem ele.
+</Callout>
+
+## Como conectar
+
+<Steps>
+### Abra o cartão do Cal.com
+
+Vá até **Conectores**, encontre o **Cal.com** em **Agendar chamadas** e clique em **Conectar Cal.com**.
+
+### Escolha a região dos dados
+
+Escolha **Global (cal.com)** ou **UE (cal.eu)**, conforme o local onde sua conta do Cal.com está hospedada.
+
+### Autorize
+
+- **Global** — clique em **Continuar no Cal.com** e aprove o acesso. O RooQuiz apenas lê seu perfil e seus tipos de evento, e adiciona um webhook para que os agendamentos voltem.
+- **UE**, ou se você preferir não usar OAuth — escolha **Usar uma chave de API**. No Cal.com, abra **Settings → Developer → API keys**, crie uma chave que nunca expire e cole-a aqui.
+</Steps>
+
+Depois de conectado, o RooQuiz registra o webhook na sua conta do Cal.com automaticamente e importa seus tipos de evento. Excluir o conector remove esse webhook novamente.
+
+## Escolher um tipo de evento em um quiz
+
+Com o conector configurado, o campo **Link de agendamento do Cal.com** na seção de agendamento de um quiz sugere seus tipos de evento, para que você escolha um em vez de colar um link. Se você acabou de criar um tipo de evento no Cal.com, clique em **Atualizar tipos de evento**.
+
+## Mudanças de plano
+
+Se a sua equipe voltar para o plano Free, o conector é mantido, mas **deixa de sincronizar**: os novos agendamentos ficam apenas no Cal.com. Fazer upgrade de novo retoma a sincronização. A seção de agendamento nas suas páginas de resultado continua funcionando em qualquer caso.
+
+<Callout type="info">
+  Remarcações e cancelamentos acontecem no **Cal.com** — feitos por você ou pelo participante, pelos próprios e-mails do Cal.com — e são sincronizados de volta com o RooQuiz. Não há nada para gerenciar do lado do RooQuiz.
+</Callout>

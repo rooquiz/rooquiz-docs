@@ -1,0 +1,41 @@
+---
+title: Conectar Cal.com
+description: 'Conecta tu cuenta de Cal.com para que las reservas hechas desde las páginas de resultados de tus quizzes vuelvan a los leads y conectores de RooQuiz. OAuth o clave de API, la región UE, el plan y los permisos.'
+---
+
+El **conector de Cal.com** es lo que permite a RooQuiz ver las llamadas que la gente reserva desde tus páginas de resultados. Es un conector de nivel de equipo que está en **Conectores → Reservar llamadas**, y cada equipo puede tener **uno**.
+
+<Callout type="warning">
+  El conector de Cal.com es una función **Pro**, y solo el **propietario del equipo o un administrador** puede configurarlo. La [sección de reservas](/es/bookings/respondent) en sí funciona en el plan Free sin él.
+</Callout>
+
+## Conectar
+
+<Steps>
+### Abre la tarjeta de Cal.com
+
+Ve a **Conectores**, busca **Cal.com** en **Reservar llamadas** y haz clic en **Conectar Cal.com**.
+
+### Elige la región de datos
+
+Elige **Global (cal.com)** o **UE (cal.eu)** según dónde esté tu cuenta de Cal.com.
+
+### Autoriza
+
+- **Global**: haz clic en **Continuar en Cal.com** y aprueba el acceso. RooQuiz solo lee tu perfil y tus tipos de evento, y añade un webhook para que las reservas vuelvan.
+- **UE**, o si prefieres no usar OAuth: elige **Usar una clave de API**. En Cal.com, abre **Settings → Developer → API keys**, crea una clave que no caduque nunca y pégala.
+</Steps>
+
+Una vez conectado, RooQuiz registra automáticamente el webhook en tu cuenta de Cal.com e importa tus tipos de evento. Al eliminar el conector, ese webhook se elimina también.
+
+## Elegir un tipo de evento en un quiz
+
+Con el conector configurado, el campo **Enlace de reserva de Cal.com** de la sección de reservas de un quiz te sugiere tus tipos de evento, así que puedes elegir uno en lugar de pegar un enlace. Si acabas de crear un tipo de evento nuevo en Cal.com, haz clic en **Actualizar tipos de evento**.
+
+## Cambios de plan
+
+Si tu equipo vuelve al plan Free, el conector se conserva pero **deja de sincronizar**: las nuevas reservas quedan solo en Cal.com. Al volver a mejorar el plan, la sincronización se reanuda. La sección de reservas de tus páginas de resultados sigue funcionando en ambos casos.
+
+<Callout type="info">
+  Las reprogramaciones y cancelaciones se hacen en **Cal.com** (tú, o el asistente a través de los correos de Cal.com) y se sincronizan con RooQuiz. No hay nada que gestionar en RooQuiz.
+</Callout>

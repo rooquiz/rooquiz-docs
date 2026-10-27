@@ -1,0 +1,41 @@
+---
+title: Cal.com verbinden
+description: 'Verbinden Sie Ihr Cal.com-Konto, damit Buchungen von den Ergebnisseiten Ihrer Quizze zurück in die Leads und Connectors von RooQuiz fließen. OAuth oder API-Schlüssel, EU-Region, Tarif und Berechtigungen im Überblick.'
+---
+
+Der **Cal.com-Connector** sorgt dafür, dass RooQuiz die Gespräche sieht, die über Ihre Ergebnisseiten gebucht werden. Er ist ein Connector auf Teamebene unter **Connectors → Termine buchen**, und jedes Team kann **einen** davon haben.
+
+<Callout type="warning">
+  Der Cal.com-Connector ist eine **Pro**-Funktion, und nur der **Team-Inhaber oder ein Administrator** kann ihn einrichten. Der [Buchungsbereich](/de/bookings/respondent) selbst funktioniert auch ohne ihn im Free-Tarif.
+</Callout>
+
+## Verbinden
+
+<Steps>
+### Die Cal.com-Karte öffnen
+
+Gehen Sie zu **Connectors**, suchen Sie **Cal.com** unter **Termine buchen** und klicken Sie auf **Cal.com verbinden**.
+
+### Die Datenregion wählen
+
+Wählen Sie **Global (cal.com)** oder **EU (cal.eu)** – je nachdem, wo Ihr Cal.com-Konto liegt.
+
+### Autorisieren
+
+- **Global** – klicken Sie auf **Weiter zu Cal.com** und erlauben Sie den Zugriff. RooQuiz liest nur Ihr Profil und Ihre Event-Typen und fügt einen Webhook hinzu, damit Buchungen zurückfließen.
+- **EU** oder wenn Sie OAuth lieber nicht nutzen möchten – wählen Sie **Stattdessen einen API-Schlüssel verwenden**. Öffnen Sie in Cal.com **Settings → Developer → API keys**, erstellen Sie einen Schlüssel ohne Ablaufdatum und fügen Sie ihn ein.
+</Steps>
+
+Nach dem Verbinden registriert RooQuiz den Webhook automatisch in Ihrem Cal.com-Konto und übernimmt Ihre Event-Typen. Wenn Sie den Connector löschen, wird dieser Webhook wieder entfernt.
+
+## Einen Event-Typ im Quiz auswählen
+
+Ist der Connector eingerichtet, schlägt das Feld **Cal.com-Buchungslink** im Buchungsbereich eines Quiz Ihre Event-Typen vor, sodass Sie einen auswählen können, statt einen Link einzufügen. Haben Sie gerade einen neuen Event-Typ in Cal.com angelegt, klicken Sie auf **Event-Typen aktualisieren**.
+
+## Tarifwechsel
+
+Fällt Ihr Team auf den Free-Tarif zurück, bleibt der Connector erhalten, **synchronisiert aber nicht mehr**: Neue Buchungen existieren dann nur in Cal.com. Nach einem erneuten Upgrade läuft die Synchronisierung weiter. Der Buchungsbereich auf Ihren Ergebnisseiten funktioniert in beiden Fällen.
+
+<Callout type="info">
+  Umbuchungen und Stornierungen erfolgen in **Cal.com** – durch Sie oder durch die teilnehmende Person über die E-Mails von Cal.com – und werden zurück zu RooQuiz synchronisiert. Auf der RooQuiz-Seite gibt es nichts zu verwalten.
+</Callout>

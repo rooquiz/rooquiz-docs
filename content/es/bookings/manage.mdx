@@ -1,67 +1,21 @@
 ---
-title: Gestionar reservas
-description: 'Gestiona tus sesiones en la página Reservas 1:1: confirma o rechaza solicitudes pendientes, añade un enlace de reunión e instrucciones a una sesión concreta y filtra la lista por quiz y estado.'
+title: Ver reservas
+description: 'Dónde aparecen en RooQuiz las reservas sincronizadas desde Cal.com: en la página de detalle del lead, en la respuesta, en la lista de leads y sus filtros y en la actividad del lead, y por qué los cambios se hacen en Cal.com.'
 ---
 
-La página **Reservas 1:1** es donde gestionas todas las sesiones. Los filtros de la parte superior permiten acotar por quiz y estado.
+Las reservas sincronizadas desde [Cal.com](/es/bookings/calcom) son **de solo lectura** en RooQuiz. Para reprogramar, cancelar, confirmar una solicitud o marcar que alguien no asistió, hazlo en Cal.com: el cambio se sincroniza aquí en unos instantes.
 
-## Gestionar solicitudes pendientes
+## Dónde aparecen
 
-Con la [confirmación](/es/bookings/availability) activada, las nuevas reservas llegan a "Esperan tu respuesta":
-
-- **Confirmar solicitud**: confirma la reunión y envía la dirección. Puedes definir un enlace de reunión e instrucciones **solo para esta sesión**; si los dejas vacíos, se usa la configuración del equipo.
-- **Rechazar solicitud**: puedes añadir un motivo, que se incluye en el correo. Se notifica a la persona y puede solicitar otro horario.
+- **Detalle del lead**: el bloque **Próxima cita** muestra su próxima llamada con una cuenta regresiva, el tipo de evento y el quiz del que procede.
+- **Detalle de la respuesta**: una sección **Reserva** muestra la llamada reservada desde ese resultado concreto.
+- **Lista de leads**: la columna **Próxima cita** muestra la próxima llamada de cada lead, y puedes [filtrar](/es/leads/views#filtros-disponibles) según si un lead tiene una.
+- **Actividad del lead**: se registran las llamadas reservadas, confirmadas, rechazadas, reprogramadas y canceladas.
 
 <Callout type="info">
-  Las solicitudes las revisa **el propietario del equipo, un administrador o el responsable de ese lead**. Una solicitud cuya hora de reunión ya ha pasado solo se puede rechazar, no confirmar.
+  Cada reserva sincronizada lleva una insignia de Cal.com para recordarte que se gestiona allí. La antigua página Reservas 1:1 se ha retirado; ahora las reservas viven junto al lead.
 </Callout>
 
-## Acciones sobre una sesión confirmada
+## A través de MCP
 
-| Acción | Notas |
-| --- | --- |
-| **Reprogramar** | Elige una nueva hora entre tus franjas disponibles; se envía un correo al asistente y se vuelve a programar el recordatorio de 24 h |
-| **Marcar completada** | La sesión tuvo lugar. Es un registro interno; no se contacta al asistente |
-| **Marcar como no asistió** | La persona no se presentó. También es solo interno |
-| **Cancelar reserva** | Cancela la sesión y notifica al asistente por correo |
-| **Ver respuesta** | Abre la respuesta que envió |
-
-<Callout type="warning">
-  **Completada** y **No asistió** solo se pueden marcar una vez que la reunión **ya ha comenzado**. La reprogramación solo se aplica a sesiones en estado Reservada.
-</Callout>
-
-## Añadir una reserva manualmente
-
-Para sesiones acordadas por teléfono o por chat, regístralas directamente:
-
-<Steps>
-### Haz clic en "Añadir reserva"
-
-En la esquina superior derecha de la página **Reservas 1:1**.
-
-### Elige el lead
-
-Busca por nombre o correo. **Los miembros normales solo pueden añadir reservas para los leads de los que son responsables**; los propietarios y administradores no tienen ese límite.
-
-### Elige una hora
-
-**Horarios disponibles**: elige en la cuadrícula de franjas habitual, exactamente lo que vería un participante.
-
-**Hora personalizada**: introduce cualquier fecha y hora, **saltándote la cuadrícula de franjas**. Útil para registrar un acuerdo especial que ya cerraste.
-
-### Decide si notificar
-
-Marca "Enviar correo de confirmación al asistente" y la persona recibirá una confirmación; si lo dejas sin marcar, la reserva es solo un registro para ti.
-</Steps>
-
-<Callout type="warning">
-  Un lead solo puede tener **una reserva activa a la vez**. Si alguien ya tiene una, se indica: cancela o reprograma primero la sesión existente.
-</Callout>
-
-## Cómo se conecta con los leads
-
-Las reservas y los [leads](/es/leads) están vinculados:
-
-- El bloque "Próxima sesión" de la página de detalle de un lead muestra la próxima sesión y te permite reprogramarla o cancelarla ahí mismo.
-- La lista de leads tiene una columna **Próxima cita** y puedes [filtrar](/es/leads/views) según si un lead tiene una.
-- Cada solicitud, confirmación, rechazo, reprogramación y cancelación se registra en la **actividad** del lead.
+Un cliente de AI conectado por [MCP](/es/integrations/mcp) puede listar las reservas del equipo con `list_bookings`, filtradas por estado, quiz, participante o intervalo de tiempo.

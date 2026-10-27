@@ -1,9 +1,9 @@
 {
-  "title": "Agendamentos 1:1",
+  "title": "Agendamentos",
   "pages": [
     "index",
-    "availability",
-    "manage",
-    "respondent"
+    "calcom",
+    "respondent",
+    "manage"
   ]
 }

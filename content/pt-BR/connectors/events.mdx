@@ -13,9 +13,9 @@ Todo conector precisa de pelo menos um evento:
 | --- | --- |
 | **Nova resposta** | Alguém conclui um quiz — **todos** os envios, inclusive os anônimos e as novas tentativas da mesma pessoa |
 | **Novo lead** | Alguém deixa os dados de contato com a sua equipe **pela primeira vez** |
-| **Agendamento criado** | Uma sessão é confirmada. Com a [confirmação](/pt-BR/bookings/availability#confirmação) ativada, é o momento em que o responsável pelo lead confirma a solicitação; com ela desativada, é o momento em que o respondente agenda |
-| **Agendamento cancelado** | Qualquer uma das partes cancela um agendamento |
-| **Agendamento reagendado** | Um agendamento é movido para outro horário |
+| **Agendamento criado** | Uma chamada agendada a partir de uma página de resultado está de pé. Se o tipo de evento do Cal.com exige confirmação, é o momento em que você a confirma no Cal.com |
+| **Agendamento cancelado** | Qualquer uma das partes cancela a chamada no Cal.com |
+| **Agendamento reagendado** | A chamada é movida para outro horário no Cal.com |
 
 <Callout type="warning">
   **"Novo lead" é acionado uma única vez, na primeira vez que a pessoa deixa os dados.** Se a mesma pessoa fizer outro quiz depois, ele não é acionado de novo, porque os leads são [deduplicados entre quizzes](/pt-BR/leads). Se você quer uma notificação a cada envio, escolha **Nova resposta**.
@@ -26,7 +26,7 @@ Todo conector precisa de pelo menos um evento:
 </Callout>
 
 <Callout type="info">
-  Os eventos de agendamento só cobrem sessões que realmente estão de pé. Uma solicitação pendente, uma solicitação recusada ou uma solicitação pendente que é reagendada ou retirada **não aciona nada** — as automações seguintes não devem agir sobre uma reunião que ainda não foi acordada.
+  Os eventos de agendamento só cobrem sessões que realmente estão de pé. Uma solicitação pendente, uma solicitação recusada ou uma solicitação pendente que é reagendada ou retirada **não aciona nada** — as automações seguintes não devem agir sobre uma reunião que ainda não foi acordada. Os eventos de agendamento também exigem o [conector do Cal.com](/pt-BR/bookings/calcom) (Pro); sem ele, o RooQuiz nunca fica sabendo dos agendamentos.
 </Callout>
 
 ## Escopo de acionamento

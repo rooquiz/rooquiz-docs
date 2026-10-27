@@ -1,13 +1,15 @@
 ---
 title: Côté répondant
-description: "La réservation vue par le répondant : comment activer la section réservation d'un quiz, quels textes vous pouvez personnaliser, et ce que les personnes peuvent reprogrammer ou annuler elles-mêmes ensuite."
+description: "La réservation vue par le répondant : comment activer la section réservation d'un quiz, quels textes vous pouvez personnaliser, et ce qui se passe lorsqu'une personne réserve votre page Cal.com depuis son résultat."
 ---
 
-Les répondants ne voient qu'un seul point d'entrée pour réserver : **la section réservation de la page de résultats**. Cette page décrit son apparence, comment l'activer et ce que les répondants peuvent faire eux-mêmes ensuite.
+Les répondants ne voient qu'un seul point d'entrée pour réserver : **la section réservation de la page de résultats**. Cette page explique comment l'activer et ce que vit le répondant.
 
 ## Activer la section réservation
 
-Ouvrez **Partager → Réservation** dans le quiz et activez **Afficher la section réservation sur la page de résultats**.
+Ouvrez **Paramètres → Suivi de la page de résultats** dans le quiz et activez **Afficher la section réservation sur la page de résultats**.
+
+- **Lien de réservation Cal.com** : obligatoire. Collez le lien du type d'événement Cal.com que les personnes doivent réserver, par exemple `cal.com/votre-nom/intro-call` ; seuls les liens `cal.com` et `cal.eu` sont acceptés. Avec le [connecteur Cal.com](/fr/bookings/calcom), vous pouvez plutôt choisir un type d'événement dans une liste.
 
 Trois textes sont personnalisables ; laissez-les vides pour utiliser la formulation par défaut dans la langue du quiz :
 
@@ -15,35 +17,23 @@ Trois textes sont personnalisables ; laissez-les vides pour utiliser la formulat
 - **Description** : une ligne sur le contenu de la session.
 - **Texte du bouton** : par exemple « Réserver une consultation gratuite ».
 
-<Callout type="warning">
-  Tant que les [disponibilités](/fr/bookings/availability) ne sont pas configurées, rien ne s'affiche, même si l'option est activée ; la page de paramètres vous invite à les configurer d'abord.
-</Callout>
+Dans l'aperçu **Rapport** de l'éditeur, vous pouvez monter ou descendre la section réservation parmi les autres blocs de la page de résultats.
 
 ## Le parcours du répondant
 
 1. Il soumet le quiz et lit son résultat.
-2. Il choisit un horaire dans la section réservation. Les horaires sont affichés **dans son propre fuseau horaire**, et non dans le vôtre.
-3. Il clique pour réserver, ce qui nécessite une **connexion** (code envoyé par e-mail ou Google).
-4. Après l'envoi : si la [confirmation](/fr/bookings/availability) est activée, la réservation reste En attente jusqu'à ce que vous la confirmiez, et ce n'est qu'alors qu'il reçoit l'adresse de la réunion ; si elle est désactivée, il reçoit immédiatement la confirmation et les détails.
+2. Il clique sur le bouton de réservation. Votre page de réservation Cal.com s'ouvre par-dessus la page de résultats, avec son **nom et son e-mail déjà renseignés** lorsque RooQuiz les connaît.
+3. Il choisit un horaire et réserve dans Cal.com, qui affiche les horaires dans son propre fuseau horaire et lui envoie la confirmation.
 
 <Callout type="info">
-  La réservation **exige une connexion** par conception : seule une personne identifiée peut ensuite reprogrammer ou annuler d'elle-même, et ce n'est qu'alors que la session peut être rattachée au bon [lead](/fr/leads).
+  La réservation ne demande **aucune connexion** à RooQuiz. Si la page de réservation ne peut pas s'ouvrir sur place, elle s'ouvre dans un nouvel onglet.
 </Callout>
 
-## Ce qu'il peut faire ensuite
+## Rattacher la réservation à un lead
 
-Dans l'onglet **Réservations** de son [portail](/fr/respondents/portal), un répondant connecté peut :
+Avec le connecteur activé, la réservation est rattachée à la réponse dont elle provient :
 
-- Consulter l'horaire de la session et les détails de la réunion.
-- **Reprogrammer lui-même** : choisir un autre horaire parmi vos disponibilités actuelles.
-- **Annuler**.
+- Si la réponse appartient déjà à un répondant (il s'est connecté ou l'a récupérée), la réservation va sur son lead.
+- Si elle était anonyme, RooQuiz retrouve ou crée un répondant et un lead à partir de l'**e-mail saisi dans Cal.com**. La réponse elle-même n'est **pas** rattachée à cet e-mail, car il n'a pas été vérifié.
 
-Chaque reprogrammation ou annulation est synchronisée avec votre page **Réservations 1:1** et enregistrée dans l'activité du lead.
-
-## Une réservation par personne, tous quiz confondus
-
-Une personne ne peut avoir **qu'une seule réservation active avec votre équipe à la fois**, et cette limite s'applique à tous les quiz : si elle a réservé depuis le quiz A, la page de résultats du quiz B lui indique qu'elle a déjà une session au lieu de lui en proposer une seconde.
-
-<Callout type="info">
-  La règle s'applique au **répondant connecté**, et non à la soumission. Ainsi, la même personne qui passe un autre quiz ne réserve jamais deux fois un créneau.
-</Callout>
+Pour reprogrammer ou annuler, le participant utilise les liens des e-mails de Cal.com ; le changement se synchronise dans RooQuiz.

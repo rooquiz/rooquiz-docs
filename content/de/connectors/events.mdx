@@ -13,9 +13,9 @@ Jeder Connector benötigt mindestens ein Ereignis:
 | --- | --- |
 | **Neue Einreichung** | Jemand ein Quiz abschließt – **jede** Einreichung, auch anonyme und wiederholte Versuche derselben Person |
 | **Neuer Lead** | Jemand Ihrem Team **zum ersten Mal** seine Kontaktdaten hinterlässt |
-| **Buchung erstellt** | Ein Termin bestätigt ist. Mit aktivierter [Freigabe](/de/bookings/availability) ist das der Moment, in dem der Lead-Verantwortliche die Anfrage bestätigt; ohne Freigabe der Moment, in dem der Teilnehmer bucht |
-| **Buchung storniert** | Eine der beiden Seiten eine Buchung storniert |
-| **Buchung umgebucht** | Eine Buchung auf einen anderen Zeitpunkt verschoben wird |
+| **Buchung erstellt** | Ein über eine Ergebnisseite gebuchtes Gespräch steht. Erfordert der Cal.com-Event-Typ eine Bestätigung, ist das der Moment, in dem Sie es in Cal.com bestätigen |
+| **Buchung storniert** | Eine der beiden Seiten das Gespräch in Cal.com storniert |
+| **Buchung umgebucht** | Das Gespräch in Cal.com auf einen anderen Zeitpunkt verschoben wird |
 
 <Callout type="warning">
   **„Neuer Lead" wird einmal ausgelöst – beim ersten Mal, wenn diese Person ihre Daten hinterlässt.** Nimmt dieselbe Person später an einem weiteren Quiz teil, wird das Ereignis nicht erneut ausgelöst, da Leads [quizübergreifend dedupliziert](/de/leads) werden. Wenn Sie bei jeder Einsendung benachrichtigt werden möchten, wählen Sie stattdessen **Neue Einreichung**.
@@ -26,7 +26,7 @@ Jeder Connector benötigt mindestens ein Ereignis:
 </Callout>
 
 <Callout type="info">
-  Buchungsereignisse betreffen nur Termine, die tatsächlich stehen. Eine ausstehende Anfrage, eine abgelehnte Anfrage oder eine ausstehende Anfrage, die verschoben oder zurückgezogen wird, löst **nichts** aus – nachgelagerte Automatisierungen sollen nicht auf einen Termin reagieren, der noch nicht vereinbart ist.
+  Buchungsereignisse betreffen nur Termine, die tatsächlich stehen. Eine ausstehende Anfrage, eine abgelehnte Anfrage oder eine ausstehende Anfrage, die verschoben oder zurückgezogen wird, löst **nichts** aus – nachgelagerte Automatisierungen sollen nicht auf einen Termin reagieren, der noch nicht vereinbart ist. Buchungsereignisse setzen außerdem den [Cal.com-Connector](/de/bookings/calcom) (Pro) voraus; ohne ihn erfährt RooQuiz nichts von Buchungen.
 </Callout>
 
 ## Auslösebereich

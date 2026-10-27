@@ -1,9 +1,9 @@
 ---
 title: Intégration MCP
-description: "RooQuiz fournit un serveur MCP pour que ChatGPT, Claude, Cursor, Codex et d'autres clients IA agissent dans votre équipe en langage naturel : créer des quiz, gérer les traductions, traiter leads et réservations, lire les statistiques."
+description: "RooQuiz fournit un serveur MCP pour que ChatGPT, Claude, Cursor, Codex et d'autres clients IA agissent dans votre équipe en langage naturel : créer des quiz, gérer les traductions, traiter les leads, consulter réservations et statistiques."
 ---
 
-RooQuiz fournit un **serveur MCP (Model Context Protocol)** qui permet à des clients IA (ChatGPT, claude.ai, Claude Desktop, Claude Code, Cursor, Codex et d'autres) d'agir au sein de votre équipe. En langage naturel, vous pouvez créer des quiz à partir de modèles ou de zéro, ajouter et modifier des questions, configurer les dimensions du rapport ou les types de résultat, modifier les paramètres de diffusion et obtenir les liens de partage, gérer les traductions et les répondants, traiter vos leads et vos réservations, et consulter les réponses, les statistiques et les entonnoirs de conversion, au lieu de tout faire à la main dans l'éditeur.
+RooQuiz fournit un **serveur MCP (Model Context Protocol)** qui permet à des clients IA (ChatGPT, claude.ai, Claude Desktop, Claude Code, Cursor, Codex et d'autres) d'agir au sein de votre équipe. En langage naturel, vous pouvez créer des quiz à partir de modèles ou de zéro, ajouter et modifier des questions, configurer les dimensions du rapport ou les types de résultat, modifier les paramètres de diffusion et obtenir les liens de partage, gérer les traductions et les répondants, traiter vos leads, et consulter les réservations, les réponses, les statistiques et les entonnoirs de conversion, au lieu de tout faire à la main dans l'éditeur.
 
 <Callout type="info">
   RooQuiz n'intègre pas de générateur de quiz par IA. Pour créer un quiz avec l'IA, connectez **votre propre client IA** via MCP et demandez-le-lui : il utilise les outils ci-dessous, et vous vérifiez le résultat dans l'éditeur.
@@ -177,7 +177,7 @@ Sollicite `list_form_translations` → `create_form_translation`.
 
 ## Outils disponibles
 
-Une fois connecté, l'assistant IA peut appeler les 48 outils ci-dessous. Ils agissent tous sur l'équipe dans laquelle le jeton est **actuellement actif**.
+Une fois connecté, l'assistant IA peut appeler les 44 outils ci-dessous. Ils agissent tous sur l'équipe dans laquelle le jeton est **actuellement actif**.
 
 ### Équipe (Tenant)
 
@@ -213,7 +213,7 @@ Une fois connecté, l'assistant IA peut appeler les 48 outils ci-dessous. Ils ag
 | Outil | Rôle |
 | --- | --- |
 | `get_form_share_info` | Tout ce qu'il faut pour publier un quiz : le lien public de réponse (également par version linguistique), le domaine personnalisé de l'équipe et s'il est actif, les extraits d'intégration en trois modes (inline / popup / iframe) et les paramètres de diffusion actuels. Passez `utmSource` pour baliser chaque lien et chaque extrait pour un canal donné. |
-| `update_form_settings` | Modifie la façon dont un quiz est diffusé : qui peut répondre et si le rapport exige un e-mail (la barrière de capture de leads) et un code de vérification, la limite de temps (quiz de connaissances), le partage et la carte de partage, la feuille de réponses, la comparaison avec les autres, la section de réservation de la page de résultats, le bloc de retours, le téléchargement PDF (Pro), l'ID Google Analytics, etc. |
+| `update_form_settings` | Modifie la façon dont un quiz est diffusé : qui peut répondre et si le rapport exige un e-mail (la barrière de capture de leads) et un code de vérification, la limite de temps (quiz de connaissances), le partage et la carte de partage, la feuille de réponses, la comparaison avec les autres, la section de réservation de la page de résultats et son lien Cal.com, le bloc de retours, le téléchargement PDF (Pro), l'ID Google Analytics, etc. |
 
 ### Question
 
@@ -269,11 +269,7 @@ Les personnes qui répondent à un quiz, appelées Répondants dans l'interface 
 
 | Outil | Rôle |
 | --- | --- |
-| `list_bookings` | Liste les réservations 1:1 de l'équipe, des plus proches aux plus lointaines, avec l'horaire, le statut, le participant, le quiz d'origine et le responsable du lead. Filtre par statut / quiz / répondant / période ; `pending` correspond à la file des demandes à confirmer. |
-| `get_booking_availability` | Lit les créneaux réservables sur une plage de dates, calculés à partir des horaires hebdomadaires de l'équipe moins les créneaux déjà pris. Passez `bookingId` pour obtenir les créneaux permettant de reprogrammer cette réservation. |
-| `review_booking` | Confirme ou refuse une demande en attente. La confirmation envoie au participant les détails de la réunion (avec, en option, un lien / des instructions propres à cette session) ; un refus peut inclure un motif. Propriétaire / administrateur de l'équipe ou responsable du lead uniquement. |
-| `update_booking_status` | Clôture une réservation planifiée : la marquer comme terminée ou non honorée (uniquement après son début), ou l'annuler (le participant est prévenu par e-mail). |
-| `reschedule_booking` | Déplace une réservation planifiée vers l'un des créneaux disponibles ; le participant est prévenu par e-mail et le rappel 24 h est reprogrammé. |
+| `list_bookings` | Liste les réservations de l'équipe synchronisées depuis Cal.com, des plus proches aux plus lointaines, avec l'horaire, le statut, le type d'événement Cal.com, le participant, le quiz et la réponse d'origine, et le responsable du lead. Filtre par statut / quiz / répondant / période. Lecture seule : les réservations se modifient dans Cal.com. |
 
 ### Réponses et analyses
 
