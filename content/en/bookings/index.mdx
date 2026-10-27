@@ -1,70 +1,69 @@
 ---
-title: '1:1 Bookings'
-description: '1:1 Bookings lets respondents book a session with you right on the quiz result page — no third-party calendar, no email ping-pong. Availability is team-level and shared by every quiz.'
+title: Bookings
+description: 'Let respondents book a call with you through Cal.com right on the quiz result page, then connect Cal.com on Pro to sync every booking back to the lead it came from.'
 sidebarTitle: Overview
 ---
 
-The moment someone finishes a quiz and reads their result is the moment they're most willing to talk to you. **1:1 Bookings** lets them book a session with you right there on the result page — no third-party calendar tool, no email ping-pong about times.
+The moment someone finishes a quiz and reads their result is the moment they're most willing to talk to you. The **booking section** puts your [Cal.com](https://cal.com) booking page right on the result page, so they can book a call without leaving — with their name and email already filled in.
 
-<Callout type="info">
-  Availability is a **team-level** resource: configure it once and every quiz shares it. You don't schedule your week again per quiz.
-</Callout>
+RooQuiz doesn't run a calendar of its own. Your availability, event types, meeting links, reminders and reschedules all live in Cal.com; RooQuiz adds the entry point on the result page and, with the connector, brings each booking back to the lead.
 
-<Callout type="info">
-  The result-page booking section is available on the **Free plan** — no upgrade is needed to start taking bookings.
-</Callout>
+## Two levels
 
-## Three steps to get it running
+| | What you get | Plan |
+| --- | --- | --- |
+| **Booking section** | A Cal.com booking button on the result page, name and email prefilled | Free |
+| **Cal.com connector** | Bookings sync back into RooQuiz: on the lead and the submission, in the lead's activity, in notifications and in your other connectors | Pro |
+
+Without the connector the booking section still works, but the booking only exists in Cal.com — RooQuiz doesn't know it happened.
+
+## Getting it running
 
 <Steps>
-### Set your availability
+### Have a Cal.com event type
 
-On the **1:1 Bookings** page open **Booking availability** and set your timezone, session length and weekly hours. See [Booking availability](/en/bookings/availability).
+Create the event type respondents should book in Cal.com (for example a 30-minute intro call) and copy its link, such as `cal.com/your-name/intro-call`.
 
 ### Turn on the booking section in a quiz
 
-Go to that quiz's **Share → Booking** and enable **Show booking section on result page**. See [The respondent side](/en/bookings/respondent).
+Open the quiz's **Settings → Result page follow-up**, turn on the **Booking section** and paste your **Cal.com booking link**. See [The respondent side](/en/bookings/respondent).
 
-### Handle bookings on the bookings page
+### Connect Cal.com (Pro)
 
-New bookings land on the **1:1 Bookings** page. See [Managing bookings](/en/bookings/manage).
+Under **Connectors → Book calls**, connect your Cal.com account so bookings flow back. See [Connect Cal.com](/en/bookings/calcom).
 </Steps>
 
-<Callout type="warning">
-  Until availability is configured, the result page shows **no** booking section even with the switch on — the settings page says so explicitly.
+## What syncs back
+
+With the connector, every booking made **from a result page** is mirrored into RooQuiz:
+
+- It appears on the [lead's detail page](/en/leads/detail) and on the submission it came from, and fills the lead list's **Next booking** column.
+- Booked, rescheduled and cancelled calls are written to the lead's activity.
+- The lead owner (falling back to the quiz owner, then the team owner) gets an **in-app notification** for each new booking.
+- Booking created, cancelled and rescheduled can each [trigger a connector](/en/connectors/events), so you can post to Slack or push to Zapier when your calendar changes.
+
+<Callout type="info">
+  Bookings people make on your Cal.com page **outside** a quiz are ignored — only calls booked from a RooQuiz result page are synced, so your lead list isn't flooded with your whole calendar.
 </Callout>
 
-## The three sections of the list
-
-The **1:1 Bookings** page is ordered by what needs your attention:
-
-- **Waiting for you** — pending requests sit at the top when approval is on, because they're blocking someone else.
-- **Upcoming** — confirmed sessions that haven't happened yet; the very next one gets a large card with a countdown.
-- **Past** — history, collapsed by default.
-
-The **1:1 Bookings** item in the sidebar carries a badge with the pending count.
+<Callout type="info">
+  RooQuiz sends **no booking emails**. Confirmations, reminders and reschedule notices come from Cal.com, to you and to the attendee.
+</Callout>
 
 ## Statuses at a glance
 
 | Status | Meaning |
 | --- | --- |
-| **Pending** | A request awaiting confirmation by the lead owner (only when approval is on) |
-| **Scheduled** | Confirmed; the attendee has the meeting details |
-| **Completed** | The session happened — you marked it |
-| **No-show** | They didn't turn up — you marked it |
+| **Pending** | The event type requires confirmation and you haven't confirmed it in Cal.com yet |
+| **Scheduled** | The call stands |
+| **Declined** | You rejected the request in Cal.com |
 | **Cancelled** | Called off by either side |
-| **Declined** | You turned the request down |
-
-## Notifications and automation
-
-- **Your side** — when a booking or request comes in, the lead owner (falling back to the quiz owner, then the team owner) gets an in-app notification and an email. Cancellations, reschedules and a 24-hour reminder are emailed too. Turn the emails off under **Settings → Alert Settings → Booking activity**.
-- **The attendee** — gets a confirmation email with the meeting details (or a "request received" email while approval is pending), plus emails when the session is rescheduled, cancelled or declined, and a 24-hour reminder.
-- **Connectors** — booking created, cancelled and rescheduled can each [trigger a connector](/en/connectors/events), so you can post to Slack or push to Zapier when your calendar changes.
+| **No-show** | Marked as a no-show in Cal.com |
 
 ## In this section
 
 <Cards>
-  <Card title="Booking Availability" href="/en/bookings/availability" />
-  <Card title="Managing Bookings" href="/en/bookings/manage" />
+  <Card title="Connect Cal.com" href="/en/bookings/calcom" />
   <Card title="The Respondent Side" href="/en/bookings/respondent" />
+  <Card title="Viewing Bookings" href="/en/bookings/manage" />
 </Cards>

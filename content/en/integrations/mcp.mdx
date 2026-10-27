@@ -1,6 +1,6 @@
 ---
 title: MCP Integration
-description: 'RooQuiz ships an MCP server so ChatGPT, Claude, Cursor, Codex and other AI clients can work in your team with natural language — build quizzes, manage translations, work leads and bookings, and read stats.'
+description: 'RooQuiz ships an MCP server so ChatGPT, Claude, Cursor, Codex and other AI clients can work in your team with natural language — build quizzes, manage translations, work leads, read bookings and stats.'
 ---
 
 RooQuiz ships an **MCP (Model Context Protocol) server** that lets AI clients — ChatGPT, claude.ai, Claude Desktop, Claude Code, Cursor, Codex, and others — work inside your team. With natural language you can create quizzes from templates or from scratch, append and edit questions, configure report dimensions or outcome types, change delivery settings and get share links, manage translations and respondents, work your leads and bookings, and read submission records, stats and conversion funnels — instead of doing everything by hand in the editor.
@@ -213,7 +213,7 @@ Once connected, the AI assistant can call the 48 tools below. They all act on th
 | Tool | What it does |
 | --- | --- |
 | `get_form_share_info` | Everything needed to publish a quiz: the public answer link (also per language version), the team's custom domain and whether it is serving, embed snippets in three modes (inline / popup / iframe), and the current delivery settings. Pass `utmSource` to tag every link and snippet for one channel. |
-| `update_form_settings` | Change how a quiz is delivered: who may answer and whether the report needs an email (the lead-capture gate) and a verification code, time limit (knowledge quizzes), sharing and share card, answer sheet, crowd comparison, the result-page booking section, the feedback block, PDF download (Pro), Google Analytics ID, and more. |
+| `update_form_settings` | Change how a quiz is delivered: who may answer and whether the report needs an email (the lead-capture gate) and a verification code, time limit (knowledge quizzes), sharing and share card, answer sheet, crowd comparison, the result-page booking section and its Cal.com link, the feedback block, PDF download (Pro), Google Analytics ID, and more. |
 
 ### Question
 
@@ -269,11 +269,7 @@ The people who take a quiz — called Respondents in the admin UI; the tools kee
 
 | Tool | What it does |
 | --- | --- |
-| `list_bookings` | List the team's 1:1 bookings, earliest first, with time, status, attendee, source quiz and lead owner. Filter by status / quiz / respondent / time range — `pending` is the approval queue. |
-| `get_booking_availability` | Read the bookable slots in a date range, computed from the team's weekly hours minus what is taken. Pass `bookingId` to get slots for rescheduling that booking. |
-| `review_booking` | Confirm or decline a pending request. Confirming sends the attendee the meeting details (optionally a link / instructions for this one session); declining can include a reason. Team owner / admin or the lead owner only. |
-| `update_booking_status` | Close out a scheduled booking: mark completed or no-show (only after it has started), or cancel it (the attendee is emailed). |
-| `reschedule_booking` | Move a scheduled booking to one of the available slots; the attendee is emailed and the 24h reminder is re-armed. |
+| `list_bookings` | List the team's bookings synced from Cal.com, earliest first, with time, status, Cal.com event type, attendee, source quiz and submission, and lead owner. Filter by status / quiz / respondent / time range. Read-only — bookings are changed in Cal.com. |
 
 ### Records & Analytics
 

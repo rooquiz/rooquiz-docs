@@ -13,9 +13,9 @@ Every connector needs at least one event:
 | --- | --- |
 | **New submission** | Someone completes a quiz — **every** submission, including anonymous ones and repeat attempts by the same person |
 | **New lead** | Someone leaves their contact details with your team **for the first time** |
-| **Booking created** | A session is confirmed. With [approval](/en/bookings/availability#approval) on, that is the moment the lead owner confirms the request; with it off, the moment the respondent books |
-| **Booking cancelled** | Either side cancels a booking |
-| **Booking rescheduled** | A booking moves to a different time |
+| **Booking created** | A call booked from a result page stands. If the Cal.com event type requires confirmation, that is the moment you confirm it in Cal.com |
+| **Booking cancelled** | Either side cancels the call in Cal.com |
+| **Booking rescheduled** | The call moves to a different time in Cal.com |
 
 <Callout type="warning">
   **"New lead" fires once, the first time that person leaves their details.** The same person taking another quiz later does not fire it again, because leads are [deduplicated across quizzes](/en/leads#where-leads-come-from). If you want a notification on every submission, choose **New submission** instead.
@@ -26,7 +26,7 @@ Every connector needs at least one event:
 </Callout>
 
 <Callout type="info">
-  Booking events only cover sessions that actually stand. A pending request, a declined request, or a pending request that is rescheduled or withdrawn fires **nothing** — downstream automations shouldn't act on a meeting that hasn't been agreed.
+  Booking events only cover sessions that actually stand. A pending request, a declined request, or a pending request that is rescheduled or withdrawn fires **nothing** — downstream automations shouldn't act on a meeting that hasn't been agreed. Booking events also need the [Cal.com connector](/en/bookings/calcom) (Pro); without it RooQuiz never hears about bookings.
 </Callout>
 
 ## Trigger scope

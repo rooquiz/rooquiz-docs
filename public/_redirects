@@ -11,3 +11,7 @@
 # The "AI Credits & Billing" page was removed when AI usage became unlimited (no more credits,
 # allowances or top-ups). Keep its indexed URLs alive by sending them to the account overview.
 /:lang/account/ai-billing  /:lang/account  301
+
+# Booking availability moved to Cal.com when the built-in scheduler was retired (2026-10).
+# The page that took its place in the section explains connecting Cal.com.
+/:lang/bookings/availability  /:lang/bookings/calcom  301

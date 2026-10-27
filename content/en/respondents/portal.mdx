@@ -1,16 +1,15 @@
 ---
 title: Respondent Sign-in & Portal
-description: 'Respondents can sign in to revisit their reports and manage their own bookings. When signing in is required, what the portal shows them, and how that layer is what makes leads possible.'
+description: 'Respondents can sign in to revisit their reports and keep their details up to date. When signing in is required, what the portal shows them, and how that self-service layer is what makes leads possible.'
 ---
 
-Respondents aren't only anonymous visitors who submit and leave — they can sign in, revisit their reports, and manage their own bookings. That self-service layer is also what makes [leads](/en/leads) possible in the first place.
+Respondents aren't only anonymous visitors who submit and leave — they can sign in, revisit their reports, and keep their details up to date. That self-service layer is also what makes [leads](/en/leads) possible in the first place.
 
 ## When sign-in is required
 
-Answering a quiz requires signing in **only** when its [Submission Access](/en/editor/settings#submission-access) is set to **Sign in to answer**. Otherwise, two things trigger it:
+Answering a quiz requires signing in **only** when its [Submission Access](/en/editor/settings#submission-access) is set to **Sign in to answer**. Otherwise, one thing triggers it:
 
 - **Seeing the full report** — if the quiz makes the report visible only after sign-in, respondents must sign in to see their complete result.
-- **Booking** — the [booking section](/en/bookings/respondent) on the result page requires a sign-in, so the attendee can reschedule or cancel on their own later.
 
 Respondents sign in with an **email code**, **Google**, or a **password** if they have one — no prior registration needed. Signed-in respondents can set or change their password in the portal.
 
@@ -20,25 +19,23 @@ Respondents sign in with an **email code**, **Google**, or a **password** if the
 
 ## The portal
 
-Once signed in, respondents get their own portal with three tabs:
+Once signed in, respondents get their own portal with two tabs:
 
 | Tab | Contents |
 | --- | --- |
 | **Records** | Every response they've submitted to your team, with their reports |
-| **Bookings** | The sessions they've booked, with self-service reschedule and cancel |
 | **Account** | Name, avatar, **Change password**, email preferences, and any [extended fields](/en/respondents/fields) you configured |
 
 Under **Emails from** followed by your team name, respondents choose **I'd like to receive emails** or **Don't email me**, which updates their marketing consent. Their email address can't be changed in the portal — your team can change it from [Respondents](/en/respondents#changing-a-respondents-email).
 
 <Callout type="info">
-  The portal is **scoped per team**: in team A a respondent sees only team A's records and bookings.
+  The portal is **scoped per team**: in team A a respondent sees only team A's records.
 </Callout>
 
 ## How it maps back to the dashboard
 
 What respondents do in the portal shows up in your dashboard right away:
 
-- They reschedule or cancel → the [1:1 Bookings](/en/bookings/manage) list updates and the lead's activity records it.
 - They fill in an extended field → the matching column in [Respondents](/en/respondents) updates.
 - They sign in and claim a response → "claimed an anonymous response" appears in the lead's activity.
 

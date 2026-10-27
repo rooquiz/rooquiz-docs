@@ -1,13 +1,15 @@
 ---
 title: The Respondent Side
-description: 'Booking seen from the respondent''s side: how to switch the booking section on for a quiz, which pieces of copy you can customise, and what people can reschedule or cancel for themselves.'
+description: 'Booking seen from the respondent''s side: how to turn on the booking section for a quiz, which copy you can customise, and what happens when someone books your Cal.com page from their result.'
 ---
 
-Respondents see exactly one booking entry point: **the booking section on the result page**. This page covers what it looks like, how to turn it on, and what they can do for themselves afterwards.
+Respondents see exactly one booking entry point: **the booking section on the result page**. This page covers how to turn it on and what the respondent experiences.
 
 ## Turning the booking section on
 
-Open the quiz's **Share → Booking** and enable **Show booking section on result page**.
+Open the quiz's **Settings → Result page follow-up** and turn on **Show booking section on result page**.
+
+- **Cal.com booking link** — required. Paste the link of the Cal.com event type people should book, such as `cal.com/your-name/intro-call`; only `cal.com` and `cal.eu` links are accepted. With the [Cal.com connector](/en/bookings/calcom) you can pick an event type from a list instead.
 
 Three pieces of copy are customizable; leave them empty to use the default wording in the quiz language:
 
@@ -15,35 +17,23 @@ Three pieces of copy are customizable; leave them empty to use the default wordi
 - **Section description** — one line on what the session covers.
 - **Button text** — e.g. "Book a free consultation".
 
-<Callout type="warning">
-  Until [availability](/en/bookings/availability) is configured, nothing shows even with the switch on — the settings page tells you to set it up first.
-</Callout>
+In the editor's **Report** preview you can move the booking section up or down among the other result-page blocks.
 
 ## What the respondent does
 
 1. Submits the quiz and reads their result.
-2. Picks a time in the booking section. Times are shown **in their own timezone**, not yours.
-3. Clicks to book, which requires a **sign-in** (email code or Google).
-4. After submitting: with [approval](/en/bookings/availability#approval) on the booking is Pending until you confirm and only then do they get the meeting address; with it off they receive the confirmation and details immediately.
+2. Clicks the booking button. Your Cal.com booking page opens on top of the result page, with their **name and email already filled in** when RooQuiz knows them.
+3. Picks a time and books it in Cal.com, which shows times in their own timezone and sends them the confirmation.
 
 <Callout type="info">
-  Booking **requires sign-in** by design: only an identified person can reschedule and cancel on their own later, and only then can the session be attached to the right [lead](/en/leads).
+  Booking needs **no sign-in** to RooQuiz. If the booking page can't open in place, it opens in a new tab instead.
 </Callout>
 
-## What they can do afterwards
+## Matching the booking to a lead
 
-In the **Bookings** tab of their [portal](/en/respondents/portal), a signed-in respondent can:
+With the connector on, the booking is tied to the submission it came from:
 
-- See the session time and meeting details.
-- **Reschedule themselves** — pick another time from your current availability.
-- **Cancel**.
+- If the submission already belongs to a respondent — they signed in, or claimed it — the booking goes on their lead.
+- If it was anonymous, RooQuiz finds or creates a respondent and a lead from the **email entered in Cal.com**. The submission itself is **not** claimed by that email, because it wasn't verified.
 
-Every reschedule or cancellation syncs to your **1:1 Bookings** page and is recorded in the lead's activity.
-
-## One booking per person, across quizzes
-
-A person can have **only one active booking with your team at a time**, and that limit spans quizzes: having booked from quiz A, the result page of quiz B tells them they already have a session rather than offering a second one.
-
-<Callout type="info">
-  The rule is judged by the **signed-in respondent**, not by submission. So the same person taking another quiz never double-books a slot.
-</Callout>
+To reschedule or cancel, the attendee uses the links in Cal.com's emails; the change syncs back to RooQuiz.
