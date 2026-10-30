@@ -1,12 +1,12 @@
 ---
 title: Connect Cal.com
-description: 'Connect your Cal.com account so bookings made from quiz result pages flow back into RooQuiz leads and connectors. OAuth or API key, the EU region, plan and permissions explained.'
+description: 'Connect your Cal.com account so bookings made from quiz result pages flow back into RooQuiz leads and connectors. OAuth or API key, the EU region and who can set it up, explained.'
 ---
 
 The **Cal.com connector** is what lets RooQuiz see the calls people book from your result pages. It's a team-level connector under **Connectors → Book calls**, and each team can have **one**.
 
 <Callout type="warning">
-  The Cal.com connector is a **Pro** feature, and only the **team owner or an admin** can set it up. The [booking section](/en/bookings/respondent) itself works on the Free plan without it.
+  The Cal.com connector is available on every plan, including Free, but only the **team owner or an admin** can set it up. The [booking section](/en/bookings/respondent) itself works without it.
 </Callout>
 
 ## Connecting
@@ -31,10 +31,6 @@ Once connected, RooQuiz registers the webhook in your Cal.com account automatica
 ## Picking an event type in a quiz
 
 With the connector in place, the **Cal.com booking link** field in a quiz's booking section suggests your event types, so you can pick one instead of pasting a link. If you've just created a new event type in Cal.com, click **Refresh event types**.
-
-## Plan changes
-
-If your team drops back to the Free plan, the connector is kept but **stops syncing**: new bookings stay in Cal.com only. Upgrading again resumes the sync. The booking section on your result pages keeps working either way.
 
 <Callout type="info">
   Reschedules and cancellations happen in **Cal.com** — by you or by the attendee through Cal.com's own emails — and sync back into RooQuiz. There's nothing to manage on the RooQuiz side.

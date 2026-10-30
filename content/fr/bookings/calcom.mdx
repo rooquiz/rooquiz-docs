@@ -1,12 +1,12 @@
 ---
 title: Connecter Cal.com
-description: "Connectez votre compte Cal.com pour que les réservations faites depuis les pages de résultats de vos quiz remontent dans vos leads et connecteurs RooQuiz : OAuth ou clé d'API, région UE, forfait et autorisations expliqués."
+description: "Connectez votre compte Cal.com pour que les réservations faites depuis les pages de résultats de vos quiz remontent dans vos leads et connecteurs RooQuiz : OAuth ou clé d'API, région UE et autorisations expliqués."
 ---
 
 Le **connecteur Cal.com** permet à RooQuiz de voir les appels que les personnes réservent depuis vos pages de résultats. C'est un connecteur au niveau de l'équipe, sous **Connecteurs → Réserver des appels**, et chaque équipe peut en avoir **un seul**.
 
 <Callout type="warning">
-  Le connecteur Cal.com est une fonctionnalité **Pro**, et seul le **propriétaire de l'équipe ou un administrateur** peut le configurer. La [section réservation](/fr/bookings/respondent) elle-même fonctionne sans lui avec le forfait Free.
+  Le connecteur Cal.com est disponible sur tous les forfaits, Free compris, mais seul le **propriétaire de l'équipe ou un administrateur** peut le configurer. La [section réservation](/fr/bookings/respondent) elle-même fonctionne sans lui.
 </Callout>
 
 ## Connexion
@@ -31,10 +31,6 @@ Une fois la connexion établie, RooQuiz enregistre automatiquement le webhook da
 ## Choisir un type d'événement dans un quiz
 
 Une fois le connecteur en place, le champ **Lien de réservation Cal.com** de la section réservation d'un quiz vous suggère vos types d'événements : vous pouvez en choisir un au lieu de coller un lien. Si vous venez de créer un type d'événement dans Cal.com, cliquez sur **Actualiser les types d'événements**.
-
-## Changements de forfait
-
-Si votre équipe repasse au forfait Free, le connecteur est conservé mais **cesse de synchroniser** : les nouvelles réservations restent uniquement dans Cal.com. Une nouvelle mise à niveau relance la synchronisation. La section réservation de vos pages de résultats continue de fonctionner dans les deux cas.
 
 <Callout type="info">
   Les reprogrammations et annulations se font dans **Cal.com**, par vous ou par le participant via les e-mails de Cal.com, puis se synchronisent dans RooQuiz. Il n'y a rien à gérer côté RooQuiz.

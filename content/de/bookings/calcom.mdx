@@ -1,12 +1,12 @@
 ---
 title: Cal.com verbinden
-description: 'Verbinden Sie Ihr Cal.com-Konto, damit Buchungen von den Ergebnisseiten Ihrer Quizze zurück in die Leads und Connectors von RooQuiz fließen. OAuth oder API-Schlüssel, EU-Region, Tarif und Berechtigungen im Überblick.'
+description: 'Verbinden Sie Ihr Cal.com-Konto, damit Buchungen von den Ergebnisseiten Ihrer Quizze zurück in die Leads und Connectors von RooQuiz fließen. OAuth oder API-Schlüssel, EU-Region und Berechtigungen im Überblick.'
 ---
 
 Der **Cal.com-Connector** sorgt dafür, dass RooQuiz die Gespräche sieht, die über Ihre Ergebnisseiten gebucht werden. Er ist ein Connector auf Teamebene unter **Connectors → Termine buchen**, und jedes Team kann **einen** davon haben.
 
 <Callout type="warning">
-  Der Cal.com-Connector ist eine **Pro**-Funktion, und nur der **Team-Inhaber oder ein Administrator** kann ihn einrichten. Der [Buchungsbereich](/de/bookings/respondent) selbst funktioniert auch ohne ihn im Free-Tarif.
+  Der Cal.com-Connector ist in jedem Tarif verfügbar, auch im Free-Tarif, aber nur der **Team-Inhaber oder ein Administrator** kann ihn einrichten. Der [Buchungsbereich](/de/bookings/respondent) selbst funktioniert auch ohne ihn.
 </Callout>
 
 ## Verbinden
@@ -31,10 +31,6 @@ Nach dem Verbinden registriert RooQuiz den Webhook automatisch in Ihrem Cal.com-
 ## Einen Event-Typ im Quiz auswählen
 
 Ist der Connector eingerichtet, schlägt das Feld **Cal.com-Buchungslink** im Buchungsbereich eines Quiz Ihre Event-Typen vor, sodass Sie einen auswählen können, statt einen Link einzufügen. Haben Sie gerade einen neuen Event-Typ in Cal.com angelegt, klicken Sie auf **Event-Typen aktualisieren**.
-
-## Tarifwechsel
-
-Fällt Ihr Team auf den Free-Tarif zurück, bleibt der Connector erhalten, **synchronisiert aber nicht mehr**: Neue Buchungen existieren dann nur in Cal.com. Nach einem erneuten Upgrade läuft die Synchronisierung weiter. Der Buchungsbereich auf Ihren Ergebnisseiten funktioniert in beiden Fällen.
 
 <Callout type="info">
   Umbuchungen und Stornierungen erfolgen in **Cal.com** – durch Sie oder durch die teilnehmende Person über die E-Mails von Cal.com – und werden zurück zu RooQuiz synchronisiert. Auf der RooQuiz-Seite gibt es nichts zu verwalten.
