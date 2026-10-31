@@ -225,7 +225,7 @@ ChatGPT、claude.ai、Claude Code 等支援 MCP OAuth 的客戶端**無需手動
 
 | 工具 | 作用 |
 | --- | --- |
-| `set_dimension_analysis` | 整體設定測驗的多維度分析（雷達圖維度）；`knowledge_quiz` 場景每個維度引用題目 `code`，`scored_quiz` 場景每個維度寫公式。傳空陣列即清空。分型測驗不適用（它沒有維度概念，用 `report.outcomes` 配結果類型）。 |
+| `set_dimension_analysis` | 整體設定測驗的多維度分析（雷達圖維度）；只有 `scored_quiz` 場景有維度，每個維度寫引用題目 `code` 的公式（知識測驗沒有維度）。傳空陣列即清空。分型測驗不適用（它沒有維度概念，用 `report.outcomes` 配結果類型）。 |
 
 ### 多語言譯文（FormTranslation）
 

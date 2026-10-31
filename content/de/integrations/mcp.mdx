@@ -229,7 +229,7 @@ Nach dem Verbinden kann der KI-Assistent die folgenden 44 Tools aufrufen. Sie wi
 
 | Tool | Funktion |
 | --- | --- |
-| `set_dimension_analysis` | Legt die Mehrdimensionsanalyse eines Quiz (Dimensionen des Netzdiagramms) als Ganzes fest; in `knowledge_quiz` verweist jede Dimension auf Fragen-`code`s, in `scored_quiz` nutzt jede eine Formel. Übergeben Sie ein leeres Array zum Leeren. Nicht für Ergebnisquizze anwendbar (sie haben keine Dimensionen – konfigurieren Sie Ergebnistypen stattdessen über `report.outcomes`). |
+| `set_dimension_analysis` | Legt die Mehrdimensionsanalyse eines Quiz (Dimensionen des Netzdiagramms) als Ganzes fest; nur `scored_quiz` hat Dimensionen, jede nutzt eine Formel über Fragen-`code`s (Wissensquizze haben keine Dimensionen). Übergeben Sie ein leeres Array zum Leeren. Nicht für Ergebnisquizze anwendbar (sie haben keine Dimensionen – konfigurieren Sie Ergebnistypen stattdessen über `report.outcomes`). |
 
 ### Übersetzungen (FormTranslation)
 

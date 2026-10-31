@@ -228,7 +228,7 @@ OAuth를 지원하지 않는 클라이언트(Cursor, Codex CLI, Claude Desktop)�
 
 | 도구 | 기능 |
 | --- | --- |
-| `set_dimension_analysis` | 퀴즈의 다차원 분석(레이더 차트 차원)을 통째로 설정합니다. `knowledge_quiz`에서는 각 차원이 문항 `code`를 참조하고, `scored_quiz`에서는 각 차원이 수식을 사용합니다. 비우려면 빈 배열을 전달하세요. 결과 유형 퀴즈에는 적용되지 않습니다(차원이 없으므로 `report.outcomes`로 결과 유형을 구성하세요). |
+| `set_dimension_analysis` | 퀴즈의 다차원 분석(레이더 차트 차원)을 통째로 설정합니다. 차원은 `scored_quiz`에만 있으며, 각 차원은 문항 `code`를 참조하는 수식을 사용합니다(지식 퀴즈에는 차원이 없습니다). 비우려면 빈 배열을 전달하세요. 결과 유형 퀴즈에는 적용되지 않습니다(차원이 없으므로 `report.outcomes`로 결과 유형을 구성하세요). |
 
 ### 번역(FormTranslation)
 

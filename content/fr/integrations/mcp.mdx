@@ -229,7 +229,7 @@ Une fois connecté, l'assistant IA peut appeler les 44 outils ci-dessous. Ils ag
 
 | Outil | Rôle |
 | --- | --- |
-| `set_dimension_analysis` | Définit en bloc l'analyse multidimensionnelle d'un quiz (dimensions du graphique radar) ; dans `knowledge_quiz`, chaque dimension référence des `code` de questions, dans `scored_quiz` chacune utilise une formule. Passez un tableau vide pour l'effacer. Ne s'applique pas aux quiz de résultat (ils n'ont pas de dimensions : configurez plutôt les types de résultat via `report.outcomes`). |
+| `set_dimension_analysis` | Définit en bloc l'analyse multidimensionnelle d'un quiz (dimensions du graphique radar) ; seul `scored_quiz` a des dimensions, chacune utilisant une formule sur des `code` de questions (les quiz de connaissances n'ont pas de dimensions). Passez un tableau vide pour l'effacer. Ne s'applique pas aux quiz de résultat (ils n'ont pas de dimensions : configurez plutôt les types de résultat via `report.outcomes`). |
 
 ### Traductions (FormTranslation)
 

@@ -229,7 +229,7 @@ Once connected, the AI assistant can call the 44 tools below. They all act on th
 
 | Tool | What it does |
 | --- | --- |
-| `set_dimension_analysis` | Set a quiz's multi-dimension analysis (radar chart dimensions) as a whole; in `knowledge_quiz` each dimension references question `code`s, in `scored_quiz` each uses a formula. Pass an empty array to clear. Not applicable to outcome quizzes (they have no dimensions — configure result types via `report.outcomes` instead). |
+| `set_dimension_analysis` | Set a quiz's multi-dimension analysis (radar chart dimensions) as a whole; only `scored_quiz` has dimensions, and each uses a formula over question `code`s (knowledge quizzes have no dimensions). Pass an empty array to clear. Not applicable to outcome quizzes (they have no dimensions — configure result types via `report.outcomes` instead). |
 
 ### Translations (FormTranslation)
 

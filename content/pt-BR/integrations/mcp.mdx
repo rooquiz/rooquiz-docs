@@ -229,7 +229,7 @@ Depois de conectado, o assistente de IA pode chamar as 44 ferramentas abaixo. To
 
 | Ferramenta | O que faz |
 | --- | --- |
-| `set_dimension_analysis` | Define de uma vez a análise multidimensional de um quiz (as dimensões do gráfico de radar); em `knowledge_quiz` cada dimensão referencia `code`s de perguntas, em `scored_quiz` cada uma usa uma fórmula. Passe um array vazio para limpar. Não se aplica a quizzes de resultado (eles não têm dimensões — configure os tipos de resultado via `report.outcomes`). |
+| `set_dimension_analysis` | Define de uma vez a análise multidimensional de um quiz (as dimensões do gráfico de radar); só `scored_quiz` tem dimensões, e cada uma usa uma fórmula sobre `code`s de perguntas (quizzes de conhecimento não têm dimensões). Passe um array vazio para limpar. Não se aplica a quizzes de resultado (eles não têm dimensões — configure os tipos de resultado via `report.outcomes`). |
 
 ### Traduções (FormTranslation)
 
