@@ -17,7 +17,7 @@ Dans un **Quiz de connaissances**, vous pouvez :
 - **Correspondance IA** : corrigez les réponses aux questions Texte à trous par similarité sémantique plutôt que par correspondance exacte ou partielle, avec un seuil de précision que vous définissez. La correction par IA est illimitée.
 
 <Callout type="info">
-  Les points et la correction juste/faux sont disponibles dans le Quiz de connaissances et le Quiz de connaissances aléatoire. Le Quiz noté utilise à la place des formules, et le Quiz de résultat n'attribue aucun score.
+  Les points et la correction juste/faux sont disponibles dans le Quiz de connaissances et le Quiz de connaissances aléatoire. Le Quiz noté attribue plutôt un score à chaque option, et le Quiz de résultat n'attribue aucun score.
 </Callout>
 
 ## Quiz de résultat : la majorité des votes l'emporte
@@ -33,15 +33,13 @@ Dans un **Quiz noté**, la notation sert davantage à « dresser un profil » qu
 - **Notation multidimensionnelle** : définissez plusieurs dimensions, chacune avec **sa propre formule** portant sur les codes de question ; après l'envoi, la formule de chaque dimension donne son score, souvent affiché sous forme de **graphique radar**. Une dimension sans formule obtient toujours 0.
 - **Profil de résultat** : produisez des conclusions sur la personnalité ou les compétences à partir des scores par dimension.
 
-### Quelles questions sont notées
+### Comment le total est calculé
 
-Le total d'un Quiz noté provient **uniquement de la formule**, qui référence des codes de question. Seules les questions qui produisent un nombre peuvent être référencées : choix unique, choix multiple, liste déroulante et vrai/faux (via le score de chaque option), cascade, notation, nombre, date et heure. Une question à choix passée en **Collecter les données uniquement** ne peut pas non plus être référencée.
+Par défaut, le total d'un Quiz noté est la **somme de toutes les questions notées** : les points des options choisies dans les questions à choix unique, à choix multiple, à liste déroulante, vrai/faux et en cascade, plus les étoiles données à une question de notation (ou le score que vous avez fixé pour cette étoile). Le score maximal est la somme du meilleur score possible de chaque question, ce qui permet à la page de résultats d'afficher un anneau de score. Les réponses aux questions de nombre, de date et d'heure ne sont pas additionnées : ce sont des valeurs brutes, comme un âge ou une date, pas des points.
+
+Besoin de pondérations, de scores de dimension ou de réponses nombre/date dans le total ? Écrivez une **formule** dans Analyse globale, dans les paramètres du rapport. Une formule remplace la somme par défaut et peut référencer des codes de question et de dimension — par exemple compter une question double, ou additionner deux dimensions. Avec une formule, il n'y a pas de score maximal naturel : la page de résultats affiche le score sans anneau.
 
 **Le Texte à trous ne fait que recueillir du texte et n'est jamais noté** : un texte libre ne peut pas entrer dans un calcul, il ne produit donc aucun score et n'apparaît pas parmi les champs insérables dans l'éditeur de formules. C'est donc la bonne façon de poser une question ouverte (« Autre chose à nous dire ? ») au sein d'une évaluation notée.
-
-<Callout type="warning">
-  Sans formule, le score total est vide, aucun niveau ne peut jamais correspondre et le bloc d'évaluation globale disparaît de la page de résultat. Dès que vous configurez des niveaux, configurez aussi la formule.
-</Callout>
 
 ## Niveaux et actions de la page de résultat
 

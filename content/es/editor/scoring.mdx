@@ -17,7 +17,7 @@ En un **Cuestionario de conocimiento** puedes:
 - **Coincidencia con AI**: corrige las respuestas de completar el espacio por similitud semántica, en lugar de por coincidencia exacta o parcial, con el umbral de precisión que tú definas. La corrección con AI es ilimitada.
 
 <Callout type="info">
-  Los puntos y la corrección de aciertos/errores están disponibles en el Cuestionario de conocimiento y en el Cuestionario de conocimiento aleatorio. El Cuestionario con puntuación usa fórmulas, y el Cuestionario de resultado no puntúa en absoluto.
+  Los puntos y la corrección de aciertos/errores están disponibles en el Cuestionario de conocimiento y en el Cuestionario de conocimiento aleatorio. El Cuestionario con puntuación puntúa cada opción, y el Cuestionario de resultado no puntúa en absoluto.
 </Callout>
 
 ## Cuestionario de resultado: gana el más votado
@@ -33,15 +33,13 @@ En un **Cuestionario con puntuación**, puntuar consiste más en "elaborar un pe
 - **Puntuación multidimensional**: define varias dimensiones, cada una con **su propia fórmula** sobre códigos de pregunta; tras el envío, la fórmula de cada dimensión da su puntuación, que a menudo se muestra como un **gráfico de radar**. Una dimensión sin fórmula siempre puntúa 0.
 - **Perfil de resultado**: genera conclusiones de personalidad o capacidad a partir de las puntuaciones por dimensión.
 
-### Qué preguntas se puntúan
+### Cómo se calcula el total
 
-El total de un Cuestionario con puntuación proviene **solo de la fórmula**, que referencia códigos de pregunta. Solo se pueden referenciar preguntas que producen un número: opción única, opción múltiple, lista desplegable y verdadero/falso (mediante la puntuación de cada opción), cascada, valoración, número, fecha y hora. Tampoco se puede referenciar una pregunta de elección configurada como **Solo recopilar datos**.
+Por defecto, el total de un Cuestionario con puntuación es la **suma de todas las preguntas puntuadas**: los puntos de las opciones elegidas en preguntas de opción única, opción múltiple, lista desplegable, verdadero/falso y cascada, más las estrellas dadas en una pregunta de valoración (o la puntuación que hayas fijado para esa estrella). La puntuación máxima es la suma de la puntuación más alta posible de cada pregunta, lo que permite a la página de resultados mostrar un anillo de puntuación. Las respuestas de número, fecha y hora no se suman: son valores en bruto, como una edad o una fecha, no puntos.
+
+¿Necesitas ponderaciones, puntuaciones de dimensión o respuestas de número/fecha en el total? Escribe una **fórmula** en Análisis general, dentro de la configuración del informe. Una fórmula sustituye la suma por defecto y puede referenciar códigos de pregunta y de dimensión; por ejemplo, contar una pregunta el doble o sumar dos dimensiones. Con una fórmula no hay una puntuación máxima natural, así que la página de resultados muestra la puntuación sin anillo.
 
 **Completar el espacio solo recopila texto y nunca se puntúa**: el texto libre no puede participar en operaciones aritméticas, así que no genera puntuación y no aparece entre los campos que se pueden insertar en el editor de fórmulas. Por eso es la forma adecuada de hacer una pregunta abierta ("¿algo más que debamos saber?") dentro de una evaluación con puntuación.
-
-<Callout type="warning">
-  Sin fórmula, la puntuación total queda vacía, ningún nivel puede coincidir nunca y el bloque de evaluación general desaparece de la página de resultados. Siempre que configures niveles, configura también la fórmula.
-</Callout>
 
 ## Niveles y acciones en la página de resultados
 

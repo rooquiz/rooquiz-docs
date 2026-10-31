@@ -17,7 +17,7 @@ In einem **Wissensquiz** können Sie:
 - **KI-Abgleich**: Lückentext-Antworten nach semantischer Ähnlichkeit statt per exakter oder Enthält-Übereinstimmung bewerten, mit einer von Ihnen festgelegten Genauigkeitsschwelle. Die KI-Bewertung ist unbegrenzt.
 
 <Callout type="info">
-  Punkte und die Richtig/Falsch-Beurteilung sind im Wissensquiz und im Zufälligen Wissensquiz verfügbar. Das Bewertete Quiz verwendet stattdessen Formeln, und das Ergebnisquiz vergibt überhaupt keine Punkte.
+  Punkte und die Richtig/Falsch-Beurteilung sind im Wissensquiz und im Zufälligen Wissensquiz verfügbar. Das Bewertete Quiz vergibt stattdessen Punkte pro Option, und das Ergebnisquiz vergibt überhaupt keine Punkte.
 </Callout>
 
 ## Ergebnisquiz: Gewinnen durch Stimmen
@@ -33,15 +33,13 @@ In einem **Bewerteten Quiz** geht es bei der Bewertung eher um ein „Profil“ 
 - **Mehrdimensionale Bewertung**: Legen Sie mehrere Dimensionen an, jede mit **einer eigenen Formel** über Fragecodes; nach dem Absenden liefert die Formel jeder Dimension deren Punktzahl, oft als **Netzdiagramm** dargestellt. Eine Dimension ohne Formel hat immer 0 Punkte.
 - **Ergebnisprofil**: Leiten Sie aus den Dimensionspunkten Aussagen zu Persönlichkeit oder Fähigkeiten ab.
 
-### Welche Fragen bewertet werden
+### So wird die Gesamtpunktzahl berechnet
 
-Die Gesamtpunktzahl eines Bewerteten Quiz ergibt sich **ausschließlich aus der Formel**, die auf Fragecodes verweist. Referenziert werden können nur Fragen, die eine Zahl liefern: Einfachauswahl, Mehrfachauswahl, Dropdown und Richtig/Falsch (über Punkte pro Option), Kaskadenauswahl, Bewertung, Zahl, Datum und Uhrzeit. Eine Auswahlfrage, die auf **Nur Daten erfassen** gestellt ist, kann ebenfalls nicht referenziert werden.
+Standardmäßig ist die Gesamtpunktzahl eines Bewerteten Quiz die **Summe aller bewerteten Fragen**: die Punkte der gewählten Optionen bei Einfachauswahl, Mehrfachauswahl, Dropdown, Richtig/Falsch und Kaskadenauswahl sowie die vergebenen Sterne bei einer Bewertungsfrage (oder die Punkte, die Sie für diesen Stern festgelegt haben). Die Höchstpunktzahl ist die Summe der höchstmöglichen Punkte jeder Frage, sodass die Ergebnisseite einen Punktering zeigen kann. Antworten auf Zahl-, Datums- und Uhrzeitfragen werden nicht addiert – das sind Rohwerte wie ein Alter oder ein Datum, keine Punkte.
+
+Sie brauchen Gewichtungen, Dimensionspunkte oder Zahl-/Datumsantworten in der Gesamtpunktzahl? Schreiben Sie in den Berichtseinstellungen unter Gesamtanalyse eine **Formel**. Eine Formel ersetzt die Standardsumme und kann auf Fragecodes und Dimensionscodes verweisen – etwa eine Frage doppelt zählen oder zwei Dimensionen addieren. Mit einer Formel gibt es keine natürliche Höchstpunktzahl, daher zeigt die Ergebnisseite die Punktzahl ohne Ring.
 
 **Lückentext erfasst nur Text und wird nie bewertet** – freier Text kann nicht in Berechnungen einfließen, erzeugt daher keine Punkte und erscheint nicht unter den einfügbaren Feldern im Formeleditor. Damit ist er genau richtig, um innerhalb einer bewerteten Auswertung eine offene Frage zu stellen („Gibt es sonst noch etwas, das wir wissen sollten?“).
-
-<Callout type="warning">
-  Ohne Formel bleibt die Gesamtpunktzahl leer, keine Stufe kann je zutreffen, und der Block mit der Gesamtbewertung verschwindet von der Ergebnisseite. Wenn Sie Stufen konfigurieren, konfigurieren Sie immer auch die Formel.
-</Callout>
 
 ## Stufen und Aktionen auf der Ergebnisseite
 

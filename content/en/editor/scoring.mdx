@@ -17,7 +17,7 @@ In a **Knowledge Quiz** you can:
 - **AI Match**: Grade fill-in-the-blank answers by semantic similarity instead of exact or contains matching, with an accuracy threshold you set. AI grading is unlimited.
 
 <Callout type="info">
-  Points and right/wrong judgement are available in Knowledge Quiz and Random Knowledge Quiz. Scored Quiz uses formulas instead, and Outcome Quiz doesn't score at all.
+  Points and right/wrong judgement are available in Knowledge Quiz and Random Knowledge Quiz. Scored Quiz scores each option instead, and Outcome Quiz doesn't score at all.
 </Callout>
 
 ## Outcome: winning by votes
@@ -33,15 +33,13 @@ In a **Scored Quiz**, scoring is more about "profiling" than right/wrong:
 - **Multi-dimensional scoring**: Define several dimensions, each with **its own formula** over question codes; after submission, each dimension's formula gives its score, often shown as a **radar chart**. A dimension with no formula always scores 0.
 - **Result profile**: Produce personality/ability conclusions based on dimension scores.
 
-### Which questions are scored
+### How the total is calculated
 
-A Scored Quiz total comes **only from the formula**, which references question codes. Only questions that yield a number can be referenced: single choice, multiple choice, dropdown and true/false (via per-option scores), cascade, rating, number, date and time. A choice question switched to **Collect data only** can't be referenced either.
+By default a Scored Quiz total is the **sum of every scored question**: the points of the chosen options in single choice, multiple choice, dropdown, true/false and cascade questions, plus the stars given on a rating question (or the score you set for that star). The full mark is the sum of each question's highest possible score, which lets the result page draw a score ring. Number, date and time answers are not added in — they are raw values such as an age or a date, not points.
+
+Need weights, dimension scores or number/date answers in the total? Write a **formula** under Overall Analysis in the report settings. A formula replaces the default sum and can reference question codes and dimension codes — for example, count one question double, or add up two dimensions. With a formula there is no natural full mark, so the result page shows the score without a ring.
 
 **Fill-in-the-blank only collects text and is never scored** — free text cannot take part in arithmetic, so it produces no score and does not appear among the insertable fields in the formula editor. That makes it the right way to ask one open-ended question ("anything else we should know?") inside a scored assessment.
-
-<Callout type="warning">
-  With no formula the total score is empty, no level can ever match, and the overall-assessment block disappears from the result page. Whenever you configure levels, configure the formula too.
-</Callout>
 
 ## Levels and result-page actions
 

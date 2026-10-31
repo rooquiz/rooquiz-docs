@@ -17,7 +17,7 @@ Em um **Quiz de conhecimento**, você pode:
 - **Correspondência por IA**: corrija respostas de preencher a lacuna por similaridade semântica, em vez de correspondência exata ou por "contém", com um limite de precisão definido por você. A correção por IA é ilimitada.
 
 <Callout type="info">
-  Pontos e correção de certo/errado estão disponíveis no Quiz de conhecimento e no Quiz de conhecimento aleatório. O Quiz com pontuação usa fórmulas, e o Quiz de resultado não pontua nada.
+  Pontos e correção de certo/errado estão disponíveis no Quiz de conhecimento e no Quiz de conhecimento aleatório. O Quiz com pontuação pontua cada opção, e o Quiz de resultado não pontua nada.
 </Callout>
 
 ## Quiz de resultado: vence quem tem mais votos
@@ -33,15 +33,13 @@ Em um **Quiz com pontuação**, a pontuação tem mais a ver com "traçar um per
 - **Pontuação multidimensional**: defina várias dimensões, cada uma com **a própria fórmula** sobre os códigos das questões; após o envio, a fórmula de cada dimensão gera a pontuação dela, geralmente exibida em um **gráfico de radar**. Uma dimensão sem fórmula sempre tem pontuação 0.
 - **Perfil de resultado**: gere conclusões de personalidade/habilidade com base nas pontuações das dimensões.
 
-### Quais questões são pontuadas
+### Como o total é calculado
 
-O total de um Quiz com pontuação vem **apenas da fórmula**, que faz referência aos códigos das questões. Só podem ser referenciadas as questões que geram um número: escolha única, múltipla escolha, lista suspensa e verdadeiro/falso (por meio da pontuação de cada opção), em cascata, avaliação, número, data e hora. Uma questão de escolha configurada como **Apenas coletar dados** também não pode ser referenciada.
+Por padrão, o total de um Quiz com pontuação é a **soma de todas as questões pontuadas**: os pontos das opções escolhidas em questões de escolha única, múltipla escolha, lista suspensa, verdadeiro/falso e em cascata, mais as estrelas dadas em uma questão de avaliação (ou a pontuação que você definiu para aquela estrela). A pontuação máxima é a soma da maior pontuação possível de cada questão, o que permite à página de resultados exibir um anel de pontuação. Respostas de número, data e hora não entram na soma — são valores brutos, como uma idade ou uma data, não pontos.
+
+Precisa de pesos, pontuações de dimensão ou respostas de número/data no total? Escreva uma **fórmula** em Análise geral, nas configurações do relatório. Uma fórmula substitui a soma padrão e pode fazer referência a códigos de questão e de dimensão — por exemplo, contar uma questão em dobro ou somar duas dimensões. Com uma fórmula não há uma pontuação máxima natural, então a página de resultados mostra a pontuação sem o anel.
 
 **Preencher a lacuna apenas coleta texto e nunca é pontuada** — texto livre não pode entrar em cálculos, então não gera pontuação e não aparece entre os campos que podem ser inseridos no editor de fórmulas. Isso a torna a forma certa de fazer uma pergunta aberta ("há algo mais que devemos saber?") dentro de uma avaliação pontuada.
-
-<Callout type="warning">
-  Sem fórmula, a pontuação total fica vazia, nenhum nível pode ser atingido e o bloco de avaliação geral desaparece da página de resultado. Sempre que configurar níveis, configure também a fórmula.
-</Callout>
 
 ## Níveis e ações na página de resultado
 
