@@ -28,3 +28,27 @@ Quando os respondentes enviam respostas por um link com tags UTM, a origem é re
 <Callout type="info">
   Usar uma **nomenclatura clara e consistente** para cada canal (por exemplo, tudo em minúsculas, separado por hífens) mantém a sua análise posterior organizada.
 </Callout>
+
+## Parâmetros de URL (campos ocultos)
+
+As tags UTM cobrem os canais. Para registrar outras informações do link — qual **parceiro**, qual **ID de campanha** ou qual **página de destino** trouxe o respondente —, declare seus próprios parâmetros de URL.
+
+<Steps>
+### Declare os parâmetros
+
+No quiz, abra **Configurações → Análises → URL parameters** e adicione os nomes, por exemplo `partner` e `campaign_id`. Use letras minúsculas, dígitos e sublinhados, até 10 por quiz. `utm_*` e nomes do sistema como `email`, `name`, `lang` e `ref` são reservados.
+
+### Adicione ao link
+
+Acrescente os valores ao link do quiz: `https://YOUR_QUIZ_LINK?partner=acme&campaign_id=spring`.
+</Steps>
+
+Os valores são salvos com cada resposta e aparecem nos detalhes de [Respostas](/pt-BR/results/records), nas exportações (uma coluna por parâmetro) e nos envios de Webhook e Zapier em `metadata.params`. Só os parâmetros declarados são guardados; o resto do link é ignorado. Os valores são cortados em 256 caracteres. Disponível em todos os planos.
+
+<Callout type="info">
+  Links compartilhados a partir da página de resultados não levam esses parâmetros, então a resposta de um amigo não é atribuída ao parceiro ou à campanha original.
+</Callout>
+
+## Preencha o formulário de leads pelo link
+
+Adicione `?email=` (e, se quiser, `?name=`) a um link do quiz — por exemplo, em uma newsletter — e o formulário de leads antes do relatório já aparece preenchido. Isso só poupa digitação: o respondente continua verificando o e-mail normalmente. Os valores saem da barra de endereço assim que a página carrega, antes que o Google Analytics ou qualquer pixel de anúncios possa vê-los.

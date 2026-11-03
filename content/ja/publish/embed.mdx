@@ -57,6 +57,7 @@ iframe は常にクイズの固定アドレス `/a/<token>` を指し、カス�
 | `data-rooquiz-height` | インラインモードの初期の高さ(px)。自動調整が始まるまでの間に使われます |
 | `data-rooquiz-text` | ポップアップモードのボタンのラベル |
 | `data-rooquiz-track` | `auto`：ページにすでにある Meta と TikTok のピクセルも発火させます（[コンバージョンイベント](#コンバージョンイベント)を参照） |
+| `data-rooquiz-pass` | ページのアドレスからクイズに引き継ぐ [URL パラメータ](/ja/publish/tracking)（カンマ区切り）。例：`partner,campaign_id`（`email,name` を加えるとリード獲得フォームを事前入力）。JS API では `params: { partner: 'acme' }` で値を直接渡せます |
 
 UTM 属性を設定しない場合は、埋め込み先ページの URL に付いている `utm_*` パラメーターが自動的に引き継がれます。
 

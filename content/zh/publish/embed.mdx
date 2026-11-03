@@ -57,6 +57,7 @@ iframe 始终指向测评稳定的 `/a/<token>` 地址,而不是它的自定义�
 | `data-rooquiz-height` | 内嵌模式的初始高度(px),自适应生效前的占位 |
 | `data-rooquiz-text` | 弹窗模式的按钮文案 |
 | `data-rooquiz-track` | `auto`：同时触发你网页上已有的 Meta 和 TikTok 像素（见[转化事件](#转化事件)） |
+| `data-rooquiz-pass` | 要从你网页地址透传给测评的 [URL 参数](/zh/publish/tracking)，逗号分隔，例如 `partner,campaign_id`（加上 `email,name` 可预填留资表单）。使用 JS API 时可以直接传 `params: { partner: 'acme' }` |
 
 不设置 UTM 属性时,宿主页面网址上的 `utm_*` 参数会自动透传。
 

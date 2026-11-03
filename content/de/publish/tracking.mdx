@@ -28,3 +28,27 @@ Wenn Teilnehmer über einen UTM-markierten Link einsenden, wird die Quelle mit d
 <Callout type="info">
   Eine **klare, einheitliche Benennung** für jeden Kanal (z. B. durchgehend Kleinbuchstaben, mit Bindestrichen getrennt) hält Ihre spätere Auswertung übersichtlich.
 </Callout>
+
+## URL-Parameter (versteckte Felder)
+
+UTM-Tags erfassen Kanäle. Um weitere Angaben aus dem Link mitzunehmen – welcher **Partner**, welche **Kampagnen-ID** oder welche **Landingpage** die Person geschickt hat –, deklarieren Sie eigene URL-Parameter.
+
+<Steps>
+### Parameter deklarieren
+
+Öffnen Sie im Quiz **Einstellungen → Analytics → URL parameters** und fügen Sie die Namen hinzu, etwa `partner` und `campaign_id`. Erlaubt sind Kleinbuchstaben, Ziffern und Unterstriche, höchstens 10 pro Quiz. `utm_*` und Systemnamen wie `email`, `name`, `lang` und `ref` sind reserviert.
+
+### An den Link anhängen
+
+Hängen Sie die Werte an den Quiz-Link an: `https://YOUR_QUIZ_LINK?partner=acme&campaign_id=spring`.
+</Steps>
+
+Die Werte werden mit jeder Antwort gespeichert und erscheinen in den Details der [Antworten](/de/results/records), in Exporten (eine Spalte pro Parameter) sowie in Webhook- und Zapier-Daten unter `metadata.params`. Gespeichert werden nur deklarierte Parameter; alles andere im Link wird ignoriert. Werte werden auf 256 Zeichen gekürzt. In allen Tarifen verfügbar.
+
+<Callout type="info">
+  Links, die auf der Ergebnisseite geteilt werden, enthalten diese Parameter nicht – die Antwort eines Freundes wird also nicht dem ursprünglichen Partner oder der Kampagne zugerechnet.
+</Callout>
+
+## Lead-Formular per Link vorausfüllen
+
+Hängen Sie `?email=` (und optional `?name=`) an einen Quiz-Link an – etwa in einem Newsletter –, dann ist das Lead-Formular vor dem Bericht schon ausgefüllt. Das spart nur Tipparbeit: Die E-Mail wird wie gewohnt bestätigt. Die Werte werden direkt beim Laden aus der Adresszeile entfernt, bevor Google Analytics oder ein Werbe-Pixel sie sehen kann.

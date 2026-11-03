@@ -28,3 +28,27 @@ When respondents submit via a UTM-tagged link, the source is recorded with the r
 <Callout type="info">
   Using **clear, consistent naming** for each channel (e.g. all lowercase, hyphen-separated) keeps your later analysis tidy.
 </Callout>
+
+## URL parameters (hidden fields)
+
+UTM tags cover channels. To capture anything else from the link — which **partner**, **campaign ID** or **landing page** sent the respondent — declare your own URL parameters.
+
+<Steps>
+### Declare the parameters
+
+On the quiz, open **Settings → Analytics → URL parameters** and add the names, for example `partner` and `campaign_id`. Use lowercase letters, digits and underscores, up to 10 per quiz. `utm_*` and system names such as `email`, `name`, `lang` and `ref` are reserved.
+
+### Add them to your link
+
+Append the values to the quiz link: `https://YOUR_QUIZ_LINK?partner=acme&campaign_id=spring`.
+</Steps>
+
+The values are saved with each response and appear in [Response Records](/en/results/records) details, in exports (one column per parameter), and in webhook and Zapier payloads under `metadata.params`. Only declared parameters are kept; anything else on the link is ignored. Values are trimmed to 256 characters. Available on every plan.
+
+<Callout type="info">
+  Share links created from the result page don't carry these parameters, so a friend's response isn't credited to the original partner or campaign.
+</Callout>
+
+## Prefill the lead form from a link
+
+Add `?email=` (and optionally `?name=`) to a quiz link — for example in a newsletter — and the lead form before the report is filled in for the respondent. It only saves typing: the respondent still verifies their email as usual. The values are removed from the address bar as soon as the page loads, before Google Analytics or any ad pixel can see them.

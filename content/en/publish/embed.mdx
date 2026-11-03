@@ -57,6 +57,7 @@ On the **Free plan**, embeds keep a small **Made with RooQuiz** credit line. It 
 | `data-rooquiz-height` | Initial height (px) for inline mode, used before auto-resize kicks in |
 | `data-rooquiz-text` | Button label for popup mode |
 | `data-rooquiz-track` | `auto`: also fire the Meta and TikTok pixels already on your page (see [Conversion events](#conversion-events)) |
+| `data-rooquiz-pass` | Comma-separated [URL parameters](/en/publish/tracking#url-parameters-hidden-fields) to copy from your page's address into the quiz, e.g. `partner,campaign_id` (add `email,name` to prefill the lead form). With the JS API, pass `params: { partner: 'acme' }` to set values directly |
 
 If you don't set the UTM attributes, any `utm_*` parameters on the host page's URL are passed through automatically.
 

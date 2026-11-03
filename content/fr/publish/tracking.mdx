@@ -28,3 +28,27 @@ Lorsque des répondants envoient leurs réponses via un lien balisé UTM, la sou
 <Callout type="info">
   Utiliser un **nommage clair et cohérent** pour chaque canal (par ex. tout en minuscules, mots séparés par des traits d'union) facilite vos analyses ultérieures.
 </Callout>
+
+## Paramètres d'URL (champs cachés)
+
+Les balises UTM couvrent les canaux. Pour récupérer d'autres informations depuis le lien — quel **partenaire**, quel **ID de campagne** ou quelle **page d'atterrissage** a envoyé le répondant —, déclarez vos propres paramètres d'URL.
+
+<Steps>
+### Déclarer les paramètres
+
+Dans le quiz, ouvrez **Paramètres → Analytique → URL parameters** et ajoutez les noms, par exemple `partner` et `campaign_id`. Minuscules, chiffres et tirets bas uniquement, 10 au maximum par quiz. `utm_*` et les noms système comme `email`, `name`, `lang` et `ref` sont réservés.
+
+### Les ajouter au lien
+
+Ajoutez les valeurs au lien du quiz : `https://YOUR_QUIZ_LINK?partner=acme&campaign_id=spring`.
+</Steps>
+
+Les valeurs sont enregistrées avec chaque réponse et apparaissent dans le détail des [Réponses](/fr/results/records), dans les exports (une colonne par paramètre) et dans les envois Webhook et Zapier sous `metadata.params`. Seuls les paramètres déclarés sont conservés ; le reste du lien est ignoré. Les valeurs sont tronquées à 256 caractères. Disponible dans toutes les offres.
+
+<Callout type="info">
+  Les liens partagés depuis la page de résultats ne portent pas ces paramètres : la réponse d'un ami n'est donc pas attribuée au partenaire ou à la campagne d'origine.
+</Callout>
+
+## Préremplir le formulaire de lead depuis un lien
+
+Ajoutez `?email=` (et éventuellement `?name=`) à un lien de quiz — par exemple dans une newsletter — et le formulaire de lead avant le rapport sera prérempli. Cela évite seulement la saisie : le répondant vérifie toujours son e-mail. Les valeurs sont retirées de la barre d'adresse dès le chargement de la page, avant que Google Analytics ou un pixel publicitaire puisse les voir.
