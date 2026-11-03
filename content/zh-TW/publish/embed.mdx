@@ -57,7 +57,7 @@ iframe 始終指向測驗穩定的 `/a/<token>` 位址，而不是自訂路徑�
 | `data-rooquiz-height` | 內嵌模式的初始高度(px),自適應生效前的佔位 |
 | `data-rooquiz-text` | 彈出視窗模式的按鈕文案 |
 | `data-rooquiz-track` | `auto`：同時觸發你網頁上已有的 Meta 和 TikTok 像素（見[轉換事件](#轉換事件)） |
-| `data-rooquiz-pass` | 要從你網頁網址傳給測驗的 [URL 參數](/zh-TW/publish/tracking)，以逗號分隔，例如 `partner,campaign_id`（加上 `email,name` 可預先填好留資表單）。使用 JS API 時可直接傳入 `params: { partner: 'acme' }` |
+| `data-rooquiz-pass` | 要從你網頁網址傳給測驗的 [URL 參數](/zh-TW/publish/tracking)，以逗號分隔，例如 `partner,campaign_id`（加上 `email,name` 可預先填好留資表單）。使用 JS API 時可直接傳入 `params: { partner: 'acme' }` 改了測驗的 URL 參數後，請重新複製嵌入程式碼：已經貼在網站上的程式碼仍是舊的參數清單。 |
 
 如果沒有設定 UTM 屬性,宿主頁面網址上的 `utm_*` 參數會自動透傳。
 

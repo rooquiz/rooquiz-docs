@@ -52,3 +52,7 @@ The values are saved with each response and appear in [Response Records](/en/res
 ## Prefill the lead form from a link
 
 Add `?email=` (and optionally `?name=`) to a quiz link — for example in a newsletter — and the lead form before the report is filled in for the respondent. It only saves typing: the respondent still verifies their email as usual. The values are removed from the address bar as soon as the page loads, before Google Analytics or any ad pixel can see them.
+
+<Callout type="warning">
+  The email address travels in the link itself, so it can end up in server logs, browser history and anywhere the link is forwarded. Use prefill links only in one-to-one channels such as an email to that person — never on a public page or in an ad.
+</Callout>
