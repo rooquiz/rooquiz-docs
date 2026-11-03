@@ -56,8 +56,15 @@ En el **plan Free**, las inserciones conservan una pequeña línea de crédito *
 | `data-rooquiz-utm-campaign` | Campaña UTM (opcional) |
 | `data-rooquiz-height` | Altura inicial (px) para el modo en línea, usada antes de que se active el ajuste automático |
 | `data-rooquiz-text` | Texto del botón para el modo de ventana emergente |
+| `data-rooquiz-track` | `auto`: dispara también los píxeles de Meta y TikTok que ya tiene tu página (consulta [Eventos de conversión](#eventos-de-conversión)) |
 
 Si no defines los atributos UTM, los parámetros `utm_*` que haya en la URL de la página que aloja el quiz se transmiten automáticamente.
+
+## Eventos de conversión
+
+En el plan **Pro**, las inserciones en línea y emergentes pasan a tu página los eventos de conversión del quiz: quiz iniciado, lead captado, quiz completado, clic en el CTA y más. Cada uno se envía al `dataLayer` de tu página como `rooquiz_<evento>` (para tu propio Google Tag Manager) y se emite como evento del navegador `rooquiz:<evento>`. Añade `data-rooquiz-track="auto"`, o activa **Also fire my page's Meta and TikTok pixels** en el panel de inserción, para enviarlos directamente a los píxeles que ya tiene tu página. Con la API de JS, pasa `track: 'auto'`.
+
+Un iframe simple no puede pasar eventos. Consulta la lista completa en [Píxeles de seguimiento publicitario](/es/publish/ad-pixels).
 
 ## API de JS
 

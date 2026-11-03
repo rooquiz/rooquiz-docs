@@ -1,0 +1,118 @@
+---
+title: 廣告追蹤像素
+description: '把測驗轉換發到 Meta、TikTok、LinkedIn 和 Google 代碼管理工具：團隊像素與單一測驗的設定方法、會發送的全部事件及其在各平台的事件名稱、GTM 觸發條件設定範例、嵌入網站時事件如何轉給你的網頁、Cookie 同意規則，以及上線後怎麼用 Pixel Helper 和 GTM 預覽模式確認事件真的發出去了。'
+---
+
+**廣告追蹤像素**會把測驗的轉換——開始作答、留下聯絡資料、完成作答等——發到你的廣告平台。這樣你能衡量廣告帶來多少名單，讓平台依留資自動最佳化投放，還能依測驗結果建立受眾。
+
+支援的平台：**Meta**（Facebook / Instagram）、**TikTok**、**LinkedIn** 與 **Google 代碼管理工具（GTM）**。Google Analytics 在每個測驗的[分析設定](/zh-TW/editor/settings)裡另外設定。
+
+<Callout type="warning">
+  廣告追蹤像素是 **Pro 方案功能**。團隊像素只有團隊 **owner** 和**管理員**可以修改。
+</Callout>
+
+## 設定團隊像素
+
+前往 **設定 → Tracking pixels**（此頁面目前以英文顯示）。所有測驗預設沿用這裡的像素，除非在測驗裡另外修改。不用的平台留空即可。
+
+| 欄位 | 填什麼 | 在哪裡找 |
+| --- | --- | --- |
+| **Meta Pixel ID** | 15–16 位數字 | Meta 事件管理工具 → 資料來源 |
+| **TikTok Pixel code** | 大寫字母與數字，約 20 碼 | TikTok 廣告管理員 → 工具 → 事件 |
+| **LinkedIn Partner ID** | 數字 | Campaign Manager → Analyze → Insight Tag |
+| **LinkedIn conversion IDs** | 數字，每個事件一個（選填） | Campaign Manager → Analyze → Conversion tracking |
+| **Google Tag Manager container** | `GTM-` 加上字母數字 | 代碼管理工具工作區頂端 |
+
+LinkedIn 只統計你在 Campaign Manager 裡建立好的轉換。為想統計的每個事件各建立一個轉換（例如「測驗留資」），再把轉換 ID 填到對應事件旁。
+
+<Callout type="info">
+  GTM 容器**只在團隊[自訂網域](/zh-TW/teams/custom-domain)上載入**。容器裡可以放任意指令碼，而平台共用網域有許多團隊在用，所以那裡不載入容器。沒有自訂網域時，請改用 Meta、TikTok、LinkedIn 這幾個欄位。
+</Callout>
+
+## 單一測驗的設定
+
+在測驗裡開啟 **設定 → 分析**，找到 **Ad tracking pixels**：
+
+- **Use team pixels**（預設）：測驗使用團隊像素，頁面上會列出已設定的平台。
+- **Use different pixels**：測驗只用這裡填的 ID，例如某次活動使用獨立的廣告帳戶。不會和團隊像素混在一起。
+- **Don't track this quiz**：不載入任何像素，嵌入到網站時也不會把事件轉給你的網頁。
+
+**Include the result in events**（預設開啟）會在每個事件裡帶上作答者的結果類型、分級與分數，方便建立「所有測出*入門*的人」這類受眾。健康、財務等敏感主題建議關閉。
+
+## 會發送的事件
+
+| 事件 | 觸發時機 | Meta | TikTok | GA4 | GTM dataLayer |
+| --- | --- | --- | --- | --- | --- |
+| 開始作答 | 作答第一題 | `QuizStart`（自訂） | `ClickButton` | `quiz_start` | `rooquiz_start` |
+| 完成作答 | 提交測驗 | `QuizComplete`（自訂） | `CompleteRegistration` | `quiz_complete` | `rooquiz_complete` |
+| 查看結果 | 作答者看到自己的結果 | `QuizResult`（自訂） | `ViewContent` | `quiz_result` | `rooquiz_result` |
+| 留資 | 作答者通過看報告前的信箱驗證 | `Lead` | `SubmitForm` | `generate_lead` | `rooquiz_lead` |
+| 點擊結果頁 CTA | 點擊結果頁上的行動按鈕 | `Contact` | `Contact` | `report_cta_click` | `rooquiz_cta_click` |
+| 預約成功 | 透過結果頁預約區塊完成預約 | `Schedule` | `Contact` | `booking_created` | `rooquiz_booking` |
+| 分享結果 | 點擊分享按鈕 | `QuizShare`（自訂） | — | `share_click` | `rooquiz_share` |
+
+LinkedIn 只接收填了轉換 ID 的事件。
+
+每個事件帶有這些參數：
+
+| 參數 | 值 |
+| --- | --- |
+| `form_token` | 測驗的公開 token，用來區分不同測驗 |
+| `quiz_outcome` / `quiz_outcome_code` | 結果類型的名稱與代碼（分型測驗） |
+| `quiz_level` | 分級（計分測驗、知識測驗） |
+| `quiz_score` | 總分 |
+
+結果參數只在開啟了 **Include the result in events**、且結果已經算出來時才會帶上——「完成作答」觸發時結果還沒算好，依結果建立受眾請用「查看結果」。事件**絕不包含姓名、電子郵件或任何其他個人資料**。
+
+合理的事件只發一次：「開始作答」每個測驗在同一個瀏覽器分頁裡只發一次，「完成作答」「查看結果」「留資」「預約成功」每份作答只發一次。點擊 CTA 和分享每次都發。
+
+## 在 GTM 裡設定
+
+每個事件都會以最後一欄的名稱推進 `dataLayer`。例如想在留資時觸發代碼：
+
+<Steps>
+### 建立觸發條件
+
+在代碼管理工具裡建立一個**自訂事件**類型的觸發條件，事件名稱填 `rooquiz_lead`。
+
+### 讀取參數
+
+為需要的參數建立**資料層變數**，例如 `quiz_outcome`、`quiz_score`。
+
+### 掛到代碼上
+
+把觸發條件套用到你的廣告平台代碼上，然後發布容器。
+</Steps>
+
+## 嵌入網站的測驗
+
+嵌入的測驗在 iframe 裡執行，廣告平台的 Cookie 大多會被封鎖，轉換也會記到測驗網域而不是你的網站。所以**嵌入的測驗自己不載入像素**，而是把事件轉給你的網頁：
+
+- 每個事件都會推進你網頁的 `dataLayer`（`rooquiz_lead` 等），你自己的 GTM 容器可以直接使用。
+- 你的網頁還會收到名為 `rooquiz:<事件>` 的瀏覽器事件，方便自己寫程式串接：
+
+```html
+<script>
+  window.addEventListener('rooquiz:lead', (e) => {
+    console.log('新的測驗名單', e.detail.quiz_outcome)
+  })
+</script>
+```
+
+- 如果你的網頁上已經裝了 Meta 或 TikTok 像素，複製程式碼時開啟 **Also fire my page's Meta and TikTok pixels**（會加上 `data-rooquiz-track="auto"`），事件就會直接發給這些像素。LinkedIn 請在 GTM 裡設定轉換。
+
+這只對**內嵌**和**彈出視窗**兩種嵌入程式碼有效。**純 iframe** 沒有嵌入指令碼，無法轉發事件。詳見[嵌入網站](/zh-TW/publish/embed)。
+
+## Cookie 同意
+
+歐盟、歐洲經濟區和英國的訪客會看到 Cookie 橫幅，同意**行銷**類 Cookie 後才會載入像素（Google Analytics 跟隨**分析**類的選擇）。其他地區直接載入。GTM 和 Google Analytics 會透過同意模式（Consent Mode）收到訪客的選擇。
+
+<Callout type="info">
+  測驗上執行哪些像素由你決定，請在你自己的隱私權政策裡說明。嵌入的測驗自己不載入像素，你網頁上的同意由你自己的方案處理。
+</Callout>
+
+## 確認是否生效
+
+- 在瀏覽器裡安裝 **Meta Pixel Helper** 或 **TikTok Pixel Helper**，開啟公開測驗作答一遍，事件會隨作答依序出現。
+- 在代碼管理工具裡，對自訂網域或嵌入了測驗的網頁使用**預覽**模式。
+- 如果你在歐盟或英國，先在 Cookie 橫幅上點同意，否則什麼都不會載入。

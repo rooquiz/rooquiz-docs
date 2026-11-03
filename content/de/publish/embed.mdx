@@ -56,8 +56,15 @@ Im **Free-Tarif** enthalten Einbettungen eine kleine Hinweiszeile **Made with Ro
 | `data-rooquiz-utm-campaign` | UTM-Kampagne (optional) |
 | `data-rooquiz-height` | Anfangshöhe (px) im Inline-Modus, bevor die automatische Größenanpassung greift |
 | `data-rooquiz-text` | Beschriftung des Buttons im Popup-Modus |
+| `data-rooquiz-track` | `auto`: löst zusätzlich die bereits auf Ihrer Seite installierten Meta- und TikTok-Pixel aus (siehe [Conversion-Events](#conversion-events)) |
 
 Wenn Sie die UTM-Attribute nicht setzen, werden alle `utm_*`-Parameter aus der URL der einbettenden Seite automatisch übernommen.
+
+## Conversion-Events
+
+Im **Pro**-Tarif geben Inline- und Popup-Einbettungen die Conversion-Events des Quiz – Quiz gestartet, Lead gewonnen, Quiz abgeschlossen, CTA geklickt und mehr – an Ihre Seite weiter. Jedes Event landet als `rooquiz_<event>` im `dataLayer` Ihrer Seite (für Ihren eigenen Google Tag Manager) und wird als Browser-Event `rooquiz:<event>` ausgelöst. Mit `data-rooquiz-track="auto"` oder dem Schalter **Also fire my page's Meta and TikTok pixels** im Einbettungsbereich gehen die Events direkt an die bereits auf Ihrer Seite installierten Pixel. In der JS-API übergeben Sie `track: 'auto'`.
+
+Ein einfaches iframe kann keine Events weitergeben. Die vollständige Event-Liste finden Sie unter [Werbe-Tracking-Pixel](/de/publish/ad-pixels).
 
 ## JS-API
 

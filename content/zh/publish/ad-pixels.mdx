@@ -1,0 +1,118 @@
+---
+title: 广告跟踪像素
+description: '把测评转化发到 Meta、TikTok、LinkedIn 和 Google 跟踪代码管理器：团队像素与单个测评的设置方法、会发送的全部事件及其在各平台的事件名、GTM 触发器配置示例、嵌入网站时事件如何转给你的网页、Cookie 同意规则，以及上线后怎么用 Pixel Helper 和 GTM 预览模式确认事件真的发出去了。'
+---
+
+**广告跟踪像素**会把测评的转化——开始答题、留资、完成答题等——发到你的广告平台。这样你能衡量广告带来了多少线索，让平台按留资自动优化投放，还能按测评结果建受众。
+
+支持的平台：**Meta**（Facebook / Instagram）、**TikTok**、**LinkedIn** 和 **Google 跟踪代码管理器（GTM）**。Google Analytics 在每个测评的[分析设置](/zh/editor/settings)里单独配置。
+
+<Callout type="warning">
+  广告跟踪像素是 **Pro 套餐功能**。团队像素只有团队 **owner** 和**管理员**可以修改。
+</Callout>
+
+## 设置团队像素
+
+进入 **设置 → 跟踪像素**。所有测评默认沿用这里的像素，除非在测评里单独修改。不用的平台留空即可。
+
+| 字段 | 填什么 | 在哪里找 |
+| --- | --- | --- |
+| **Meta Pixel ID** | 15–16 位数字 | Meta 事件管理工具 → 数据源 |
+| **TikTok Pixel 代码** | 大写字母和数字，约 20 位 | TikTok 广告管理平台 → 工具 → 事件 |
+| **LinkedIn Partner ID** | 数字 | Campaign Manager → Analyze → Insight Tag |
+| **LinkedIn 转化 ID** | 数字，每个事件一个（选填） | Campaign Manager → Analyze → Conversion tracking |
+| **Google 跟踪代码管理器容器** | `GTM-` 加字母数字 | 跟踪代码管理器工作区顶部 |
+
+LinkedIn 只统计你在 Campaign Manager 里建好的转化。为想统计的每个事件各建一个转化（例如「测评留资」），再把转化 ID 填到对应事件旁边。
+
+<Callout type="info">
+  GTM 容器**只在团队[自定义域名](/zh/teams/custom-domain)上加载**。容器里可以放任意脚本，而平台共享域名有很多团队在用，所以那里不加载容器。没有自定义域名时，请改用 Meta、TikTok、LinkedIn 这几个字段。
+</Callout>
+
+## 单个测评的设置
+
+在测评里打开 **设置 → 分析**，找到 **广告跟踪像素**：
+
+- **沿用团队像素**（默认）：测评使用团队像素，页面上会列出已配置的平台。
+- **单独填写**：测评只用这里填的 ID，例如某次活动用单独的广告账户。不会和团队像素混在一起。
+- **不跟踪本测评**：不加载任何像素，嵌入到网站时也不会把事件转给你的网页。
+
+**事件附带结果信息**（默认开启）会在每个事件里带上答题者的结果类型、分档和分数，便于建「所有测出*入门*的人」这类受众。健康、财务等敏感题材建议关闭。
+
+## 会发送的事件
+
+| 事件 | 触发时机 | Meta | TikTok | GA4 | GTM dataLayer |
+| --- | --- | --- | --- | --- | --- |
+| 开始答题 | 作答第一题 | `QuizStart`（自定义） | `ClickButton` | `quiz_start` | `rooquiz_start` |
+| 完成答题 | 提交测评 | `QuizComplete`（自定义） | `CompleteRegistration` | `quiz_complete` | `rooquiz_complete` |
+| 查看结果 | 答题者看到自己的结果 | `QuizResult`（自定义） | `ViewContent` | `quiz_result` | `rooquiz_result` |
+| 留资 | 答题者通过看报告前的邮箱验证 | `Lead` | `SubmitForm` | `generate_lead` | `rooquiz_lead` |
+| 点击结果页 CTA | 点击结果页上的行动按钮 | `Contact` | `Contact` | `report_cta_click` | `rooquiz_cta_click` |
+| 预约成功 | 通过结果页预约块完成预约 | `Schedule` | `Contact` | `booking_created` | `rooquiz_booking` |
+| 分享结果 | 点击分享按钮 | `QuizShare`（自定义） | — | `share_click` | `rooquiz_share` |
+
+LinkedIn 只接收填了转化 ID 的事件。
+
+每个事件带这些参数：
+
+| 参数 | 值 |
+| --- | --- |
+| `form_token` | 测评的公开 token，用来区分不同测评 |
+| `quiz_outcome` / `quiz_outcome_code` | 结果类型的名称和代码（分型测评） |
+| `quiz_level` | 分档（计分测评、知识测验） |
+| `quiz_score` | 总分 |
+
+结果参数只在开启了**事件附带结果信息**、且结果已经算出来时才会带上——「完成答题」触发时结果还没算好，按结果建受众请用「查看结果」。事件**绝不包含姓名、邮箱或任何其他个人信息**。
+
+合理的事件只发一次：「开始答题」每个测评在同一个浏览器标签页里只发一次，「完成答题」「查看结果」「留资」「预约成功」每份答卷只发一次。点击 CTA 和分享每次都发。
+
+## 在 GTM 里配置
+
+每个事件都会以最后一列的名字推进 `dataLayer`。比如想在留资时触发代码：
+
+<Steps>
+### 新建触发器
+
+在跟踪代码管理器里新建一个**自定义事件**类型的触发器，事件名填 `rooquiz_lead`。
+
+### 读取参数
+
+为需要的参数新建**数据层变量**，例如 `quiz_outcome`、`quiz_score`。
+
+### 挂到代码上
+
+把触发器挂到你的广告平台代码上，然后发布容器。
+</Steps>
+
+## 嵌入网站的测评
+
+嵌入的测评跑在 iframe 里，广告平台的 Cookie 基本会被拦截，转化也会记到测评域名而不是你的网站上。所以**嵌入的测评自己不加载像素**，而是把事件转给你的网页：
+
+- 每个事件都会推进你网页的 `dataLayer`（`rooquiz_lead` 等），你自己的 GTM 容器可以直接用。
+- 你的网页还会收到名为 `rooquiz:<事件>` 的浏览器事件，方便自己写代码对接：
+
+```html
+<script>
+  window.addEventListener('rooquiz:lead', (e) => {
+    console.log('新的测评线索', e.detail.quiz_outcome)
+  })
+</script>
+```
+
+- 如果你的网页上已经装了 Meta 或 TikTok 像素，复制代码时打开**同时触发我网页上的 Meta 和 TikTok 像素**（会加上 `data-rooquiz-track="auto"`），事件就会直接发给这些像素。LinkedIn 请在 GTM 里配置转化。
+
+这只对**内嵌**和**弹窗**两种嵌入代码有效。**纯 iframe** 没有嵌入脚本，无法转发事件。详见[嵌入网站](/zh/publish/embed)。
+
+## Cookie 同意
+
+欧盟、欧洲经济区和英国的访客会看到 Cookie 横幅，同意**营销**类 Cookie 后才会加载像素（Google Analytics 跟随**分析**类的选择）。其他地区直接加载。GTM 和 Google Analytics 会通过同意模式（Consent Mode）收到访客的选择。
+
+<Callout type="info">
+  测评上跑哪些像素由你决定，请在你自己的隐私政策里说明。嵌入的测评自己不加载像素，你网页上的同意由你自己的方案处理。
+</Callout>
+
+## 确认是否生效
+
+- 在浏览器里装 **Meta Pixel Helper** 或 **TikTok Pixel Helper**，打开公开测评答一遍，事件会随作答依次出现。
+- 在跟踪代码管理器里，对自定义域名或嵌入了测评的网页使用**预览**模式。
+- 如果你在欧盟或英国，先在 Cookie 横幅上点同意，否则什么都不会加载。

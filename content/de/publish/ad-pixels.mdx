@@ -1,0 +1,118 @@
+---
+title: Werbe-Tracking-Pixel
+description: 'Quiz-Conversions an Meta, TikTok, LinkedIn und den Google Tag Manager senden: Pixel für das Team und pro Quiz, alle gesendeten Events mit ihrem Namen auf jeder Plattform, Einbettungen, Cookie-Einwilligung und Tests.'
+---
+
+**Werbe-Tracking-Pixel** senden die Conversions Ihres Quiz – Quiz gestartet, Lead gewonnen, Quiz abgeschlossen und mehr – an Ihre Werbeplattformen. So messen Sie, was Ihre Kampagnen bringen, lassen die Plattformen auf Leads optimieren und bauen Zielgruppen nach Quiz-Ergebnis auf.
+
+Unterstützte Plattformen: **Meta** (Facebook / Instagram), **TikTok**, **LinkedIn** und **Google Tag Manager**. Google Analytics richten Sie separat in den [Analytics-Einstellungen](/de/editor/settings) jedes Quiz ein.
+
+<Callout type="warning">
+  Werbe-Tracking-Pixel sind eine **Funktion des Pro-Tarifs**. Nur **Owner** und **Admins** des Teams können die Team-Pixel ändern.
+</Callout>
+
+## Team-Pixel einrichten
+
+Öffnen Sie **Einstellungen → Tracking pixels** (die Seite ist derzeit auf Englisch). Jedes Quiz verwendet diese Pixel, sofern Sie es im Quiz nicht ändern. Lassen Sie ein Feld leer, um die Plattform auszulassen.
+
+| Feld | Was eintragen | Wo zu finden |
+| --- | --- | --- |
+| **Meta Pixel ID** | 15–16 Ziffern | Meta Events Manager → Datenquellen |
+| **TikTok Pixel code** | Großbuchstaben und Ziffern, etwa 20 Zeichen | TikTok Ads Manager → Tools → Events |
+| **LinkedIn Partner ID** | Ziffern | Campaign Manager → Analyze → Insight Tag |
+| **LinkedIn conversion IDs** | Ziffern, eine pro Event (optional) | Campaign Manager → Analyze → Conversion tracking |
+| **Google Tag Manager container** | `GTM-` gefolgt von Buchstaben und Ziffern | Tag Manager, oben im Arbeitsbereich |
+
+LinkedIn zählt nur Conversions, die Sie im Campaign Manager angelegt haben. Legen Sie für jedes gewünschte Event eine Conversion an (z. B. „Quiz-Lead“) und tragen Sie deren ID beim passenden Event ein.
+
+<Callout type="info">
+  Der Google-Tag-Manager-Container wird **nur auf Ihrer [eigenen Domain](/de/teams/custom-domain) geladen**. Ein Container kann beliebige Skripte ausführen, und die gemeinsame Quiz-Domain nutzen viele Teams – dort laden wir deshalb keine Container. Ohne eigene Domain verwenden Sie die Felder für Meta, TikTok und LinkedIn.
+</Callout>
+
+## Einstellungen pro Quiz
+
+Öffnen Sie im Quiz **Einstellungen → Analytics** und suchen Sie **Ad tracking pixels**:
+
+- **Use team pixels** (Standard): Das Quiz verwendet die Team-Pixel. Die Seite zeigt, welche Plattformen eingerichtet sind.
+- **Use different pixels**: Das Quiz verwendet nur die hier eingetragenen IDs – etwa ein eigenes Werbekonto für eine Kampagne. Sie werden nicht mit den Team-Pixeln gemischt.
+- **Don't track this quiz**: Es werden keine Pixel geladen, und eine eingebettete Kopie gibt auch keine Events an Ihre Seite weiter.
+
+**Include the result in events** (standardmäßig an) fügt jedem Event das Ergebnis, die Stufe und die Punktzahl hinzu – so bauen Sie Zielgruppen wie „alle mit dem Ergebnis *Einsteiger*“. Schalten Sie es bei sensiblen Themen wie Gesundheit oder Finanzen aus.
+
+## Gesendete Events
+
+| Event | Wann es ausgelöst wird | Meta | TikTok | GA4 | GTM dataLayer |
+| --- | --- | --- | --- | --- | --- |
+| Quiz gestartet | Bei der ersten Antwort | `QuizStart` (benutzerdefiniert) | `ClickButton` | `quiz_start` | `rooquiz_start` |
+| Quiz abgeschlossen | Beim Absenden des Quiz | `QuizComplete` (benutzerdefiniert) | `CompleteRegistration` | `quiz_complete` | `rooquiz_complete` |
+| Ergebnis angesehen | Die Person sieht ihr eigenes Ergebnis | `QuizResult` (benutzerdefiniert) | `ViewContent` | `quiz_result` | `rooquiz_result` |
+| Lead gewonnen | Die Person besteht die E-Mail-Abfrage vor dem Bericht | `Lead` | `SubmitForm` | `generate_lead` | `rooquiz_lead` |
+| CTA auf der Ergebnisseite | Klick auf den Call-to-Action der Ergebnisseite | `Contact` | `Contact` | `report_cta_click` | `rooquiz_cta_click` |
+| Termin gebucht | Buchung über den Terminblock der Ergebnisseite | `Schedule` | `Contact` | `booking_created` | `rooquiz_booking` |
+| Ergebnis geteilt | Klick auf einen Teilen-Button | `QuizShare` (benutzerdefiniert) | — | `share_click` | `rooquiz_share` |
+
+LinkedIn erhält die Events, für die eine Conversion-ID eingetragen ist.
+
+Jedes Event enthält diese Parameter:
+
+| Parameter | Wert |
+| --- | --- |
+| `form_token` | Der öffentliche Token des Quiz, um Quizze zu unterscheiden |
+| `quiz_outcome` / `quiz_outcome_code` | Name und Code des Ergebnistyps (Typ-Quizze) |
+| `quiz_level` | Die Stufe (Punkte- und Wissensquizze) |
+| `quiz_score` | Die Gesamtpunktzahl |
+
+Die Ergebnis-Parameter sind nur enthalten, wenn **Include the result in events** aktiviert ist und das Ergebnis schon feststeht – „Quiz abgeschlossen“ wird ausgelöst, bevor das Ergebnis berechnet ist; für Zielgruppen nach Ergebnis nutzen Sie „Ergebnis angesehen“. Events enthalten **niemals Namen, E-Mail-Adressen oder andere personenbezogene Daten**.
+
+Events, bei denen das sinnvoll ist, werden nur einmal gesendet: „Quiz gestartet“ einmal pro Quiz und Browser-Tab, „Quiz abgeschlossen“, „Ergebnis angesehen“, „Lead gewonnen“ und „Termin gebucht“ einmal pro Antwort. CTA-Klicks und Teilen werden jedes Mal gesendet.
+
+## Einrichtung im Google Tag Manager
+
+Jedes Event wird mit dem Namen aus der letzten Spalte in den `dataLayer` geschrieben. Um zum Beispiel bei Leads ein Tag auszulösen:
+
+<Steps>
+### Trigger anlegen
+
+Legen Sie im Tag Manager einen Trigger vom Typ **Benutzerdefiniertes Ereignis** mit dem Ereignisnamen `rooquiz_lead` an.
+
+### Parameter auslesen
+
+Legen Sie **Datenschichtvariablen** für die benötigten Parameter an, etwa `quiz_outcome` oder `quiz_score`.
+
+### Tags verknüpfen
+
+Verwenden Sie den Trigger in den Tags Ihrer Werbeplattformen und veröffentlichen Sie den Container.
+</Steps>
+
+## Eingebettete Quizze
+
+Ein eingebettetes Quiz läuft in einem iframe. Dort werden Cookies der Werbeplattformen meist blockiert, und Conversions würden der Quiz-Domain statt Ihrer Website zugerechnet. Deshalb **lädt ein eingebettetes Quiz selbst keine Pixel**, sondern gibt seine Events an Ihre Seite weiter:
+
+- Jedes Event landet im `dataLayer` Ihrer Seite (`rooquiz_lead` usw.) und steht Ihrem eigenen Tag-Manager-Container zur Verfügung.
+- Ihre Seite erhält außerdem ein Browser-Event namens `rooquiz:<event>` für eigenen Code:
+
+```html
+<script>
+  window.addEventListener('rooquiz:lead', (e) => {
+    console.log('Neuer Quiz-Lead', e.detail.quiz_outcome)
+  })
+</script>
+```
+
+- Ist auf Ihrer Seite bereits das Meta- oder TikTok-Pixel installiert, aktivieren Sie beim Kopieren des Codes **Also fire my page's Meta and TikTok pixels** (fügt `data-rooquiz-track="auto"` hinzu). Die Events gehen dann direkt an diese Pixel. LinkedIn-Conversions richten Sie im Tag Manager ein.
+
+Das funktioniert mit dem **Inline**- und dem **Popup**-Code. Ein **einfaches iframe** hat kein Einbettungsskript und kann keine Events weitergeben. Siehe [Einbetten](/de/publish/embed).
+
+## Cookie-Einwilligung
+
+Besucher aus der EU, dem EWR und dem Vereinigten Königreich sehen ein Cookie-Banner; Pixel laden erst, wenn sie **Marketing**-Cookies zustimmen (Google Analytics folgt der Auswahl für **Analyse**). Anderswo laden Pixel sofort. Google Tag Manager und Google Analytics erhalten die Auswahl über den Einwilligungsmodus (Consent Mode).
+
+<Callout type="info">
+  Sie entscheiden, welche Pixel auf Ihren Quizzen laufen – erwähnen Sie sie daher in Ihrer eigenen Datenschutzerklärung. Eingebettete Quizze laden selbst keine Pixel; die Einwilligung auf Ihrer Seite regelt Ihre eigene Lösung.
+</Callout>
+
+## Funktion prüfen
+
+- Installieren Sie **Meta Pixel Helper** oder **TikTok Pixel Helper** im Browser, öffnen Sie das öffentliche Quiz und beantworten Sie es – die Events erscheinen nach und nach.
+- Nutzen Sie im Tag Manager die **Vorschau** auf Ihrer eigenen Domain oder auf der Seite, in die das Quiz eingebettet ist.
+- Wenn Sie sich in der EU oder im Vereinigten Königreich befinden, stimmen Sie zuerst im Cookie-Banner zu. Vorher lädt nichts.

@@ -1,0 +1,118 @@
+---
+title: Ad Tracking Pixels
+description: 'Send quiz conversions to Meta, TikTok, LinkedIn and Google Tag Manager: team and per-quiz pixel settings, every event we send and its name on each platform, embeds, cookie consent and testing.'
+---
+
+**Ad tracking pixels** send your quiz's conversions — quiz started, lead captured, quiz completed and more — to your ad platforms. You can then measure what your campaigns bring in, let the platforms optimize for leads, and build audiences by quiz result.
+
+Supported platforms: **Meta** (Facebook / Instagram), **TikTok**, **LinkedIn** and **Google Tag Manager**. Google Analytics is set up separately in each quiz's [Analytics settings](/en/editor/settings#analytics).
+
+<Callout type="warning">
+  Ad tracking pixels are a **Pro plan feature**. Only team **owners** and **admins** can change the team pixels.
+</Callout>
+
+## Set up your team pixels
+
+Go to **Settings → Tracking pixels**. Every quiz uses these pixels unless you change it on the quiz. Leave a field empty to skip that platform.
+
+| Field | What to enter | Where to find it |
+| --- | --- | --- |
+| **Meta Pixel ID** | 15–16 digits | Meta Events Manager → Data sources |
+| **TikTok Pixel code** | Uppercase letters and digits, about 20 characters | TikTok Ads Manager → Tools → Events |
+| **LinkedIn Partner ID** | Digits | Campaign Manager → Analyze → Insight Tag |
+| **LinkedIn conversion IDs** | Digits, one per event (optional) | Campaign Manager → Analyze → Conversion tracking |
+| **Google Tag Manager container** | `GTM-` followed by letters and digits | Tag Manager, top of the workspace |
+
+LinkedIn only counts conversions you have created in Campaign Manager. Create one conversion per event you care about (for example "Quiz lead"), then paste its ID next to that event.
+
+<Callout type="info">
+  The Google Tag Manager container loads **only on your [custom domain](/en/teams/custom-domain)**. A container can run any script you add to it, and the shared quiz domain is used by many teams, so we don't load containers there. Without a custom domain, use the Meta, TikTok and LinkedIn fields instead.
+</Callout>
+
+## Per-quiz settings
+
+On a quiz, open **Settings → Analytics** and find **Ad tracking pixels**:
+
+- **Use team pixels** (default): the quiz uses the team pixels. The page lists which platforms are set up.
+- **Use different pixels**: the quiz uses only the IDs you enter here — for example a separate ad account for one campaign. It doesn't mix with the team pixels.
+- **Don't track this quiz**: no pixels load, and an embedded copy doesn't pass events to your page either.
+
+**Include the result in events** (on by default) adds the respondent's outcome, level and score to each event, so you can build audiences such as "everyone who got *Beginner*". Turn it off for sensitive topics such as health or finance.
+
+## Events we send
+
+| Event | When it fires | Meta | TikTok | GA4 | GTM dataLayer |
+| --- | --- | --- | --- | --- | --- |
+| Quiz started | The first answer | `QuizStart` (custom) | `ClickButton` | `quiz_start` | `rooquiz_start` |
+| Quiz completed | The quiz is submitted | `QuizComplete` (custom) | `CompleteRegistration` | `quiz_complete` | `rooquiz_complete` |
+| Result viewed | The respondent sees their own result | `QuizResult` (custom) | `ViewContent` | `quiz_result` | `rooquiz_result` |
+| Lead captured | The respondent passes the email gate before the report | `Lead` | `SubmitForm` | `generate_lead` | `rooquiz_lead` |
+| Result CTA clicked | A click on the result page call to action | `Contact` | `Contact` | `report_cta_click` | `rooquiz_cta_click` |
+| Call booked | A booking through the result page booking block | `Schedule` | `Contact` | `booking_created` | `rooquiz_booking` |
+| Result shared | A click on a share button | `QuizShare` (custom) | — | `share_click` | `rooquiz_share` |
+
+LinkedIn receives the events that have a conversion ID filled in.
+
+Each event carries these parameters:
+
+| Parameter | Value |
+| --- | --- |
+| `form_token` | The quiz's public token, so you can tell quizzes apart |
+| `quiz_outcome` / `quiz_outcome_code` | The outcome name and code (outcome quizzes) |
+| `quiz_level` | The score level (scored and knowledge quizzes) |
+| `quiz_score` | The overall score |
+
+The result parameters are only included when **Include the result in events** is on and the result is already known — "Quiz completed" fires before the result is calculated, so use "Result viewed" for result-based audiences. Events **never include names, email addresses or any other personal details**.
+
+Each event fires once per respondent where that makes sense: "Quiz started" once per quiz per browser tab, and "Quiz completed", "Result viewed", "Lead captured" and "Call booked" once per response. CTA clicks and shares fire every time.
+
+## Google Tag Manager setup
+
+Every event is pushed to the `dataLayer` with the name in the last column. To fire a tag on leads, for example:
+
+<Steps>
+### Create a trigger
+
+In Tag Manager, add a trigger of type **Custom Event** with the event name `rooquiz_lead`.
+
+### Read the parameters
+
+Add **Data Layer Variables** for the parameters you need, such as `quiz_outcome` or `quiz_score`.
+
+### Attach your tags
+
+Use the trigger on your ad platform tags, then publish the container.
+</Steps>
+
+## Embedded quizzes
+
+An embedded quiz runs inside an iframe, where ad platform cookies are mostly blocked and conversions would be credited to the quiz domain instead of your site. So **an embedded quiz loads no pixels itself** — it passes its events to your page instead:
+
+- Every event is pushed to your page's `dataLayer` (`rooquiz_lead` and so on), ready for your own Tag Manager container.
+- Your page also receives a browser event named `rooquiz:<event>`, for code of your own:
+
+```html
+<script>
+  window.addEventListener('rooquiz:lead', (e) => {
+    console.log('New quiz lead', e.detail.quiz_outcome)
+  })
+</script>
+```
+
+- If your page already has the Meta or TikTok pixel installed, turn on **Also fire my page's Meta and TikTok pixels** when copying the code (it adds `data-rooquiz-track="auto"`), and the events go straight to those pixels. For LinkedIn, set the conversions up in Tag Manager.
+
+This works with the **inline** and **popup** embed codes. A **plain iframe** has no embed script and can't pass events. See [Embed](/en/publish/embed).
+
+## Cookie consent
+
+Visitors in the EU, EEA and UK see a cookie banner and pixels only load after they accept **marketing** cookies (Google Analytics follows the **analytics** choice). Elsewhere pixels load right away. Google Tag Manager and Google Analytics receive the visitor's choice through Consent Mode.
+
+<Callout type="info">
+  You decide which pixels run on your quizzes, so mention them in your own privacy policy. Embedded quizzes don't load pixels themselves; consent on your page is handled by your own setup.
+</Callout>
+
+## Check that it works
+
+- Install **Meta Pixel Helper** or **TikTok Pixel Helper** in your browser, open the public quiz and answer it — the events appear as you go.
+- In Tag Manager, use **Preview** on your custom domain or on the page where the quiz is embedded.
+- If you're in the EU or UK, accept the cookie banner first. Nothing loads before that.

@@ -1,0 +1,118 @@
+---
+title: Pixels de suivi publicitaire
+description: "Envoyez les conversions de vos quiz vers Meta, TikTok, LinkedIn et Google Tag Manager : pixels d'équipe et par quiz, chaque événement envoyé et son nom sur chaque plateforme, intégrations, consentement aux cookies et tests."
+---
+
+Les **pixels de suivi publicitaire** envoient les conversions de votre quiz — quiz commencé, lead obtenu, quiz terminé, etc. — vers vos plateformes publicitaires. Vous mesurez ce que rapportent vos campagnes, laissez les plateformes optimiser pour les leads et créez des audiences selon le résultat du quiz.
+
+Plateformes prises en charge : **Meta** (Facebook / Instagram), **TikTok**, **LinkedIn** et **Google Tag Manager**. Google Analytics se configure séparément dans les [paramètres Analytique](/fr/editor/settings) de chaque quiz.
+
+<Callout type="warning">
+  Les pixels de suivi publicitaire sont une **fonctionnalité de l'offre Pro**. Seuls les **owners** et **administrateurs** de l'équipe peuvent modifier les pixels de l'équipe.
+</Callout>
+
+## Configurer les pixels de l'équipe
+
+Allez dans **Paramètres → Tracking pixels** (cette page s'affiche pour l'instant en anglais). Tous les quiz utilisent ces pixels, sauf si vous le modifiez dans le quiz. Laissez un champ vide pour ignorer une plateforme.
+
+| Champ | Ce qu'il faut saisir | Où le trouver |
+| --- | --- | --- |
+| **Meta Pixel ID** | 15 à 16 chiffres | Gestionnaire d'événements Meta → Sources de données |
+| **TikTok Pixel code** | Majuscules et chiffres, environ 20 caractères | TikTok Ads Manager → Outils → Événements |
+| **LinkedIn Partner ID** | Chiffres | Campaign Manager → Analyze → Insight Tag |
+| **LinkedIn conversion IDs** | Chiffres, un par événement (facultatif) | Campaign Manager → Analyze → Conversion tracking |
+| **Google Tag Manager container** | `GTM-` suivi de lettres et chiffres | Tag Manager, en haut de l'espace de travail |
+
+LinkedIn ne compte que les conversions créées dans Campaign Manager. Créez une conversion par événement qui vous intéresse (par exemple « Lead quiz »), puis collez son ID en face de cet événement.
+
+<Callout type="info">
+  Le conteneur Google Tag Manager se charge **uniquement sur votre [domaine personnalisé](/fr/teams/custom-domain)**. Un conteneur peut exécuter n'importe quel script et le domaine partagé des quiz est utilisé par de nombreuses équipes : nous n'y chargeons donc pas de conteneurs. Sans domaine personnalisé, utilisez les champs Meta, TikTok et LinkedIn.
+</Callout>
+
+## Réglages par quiz
+
+Dans un quiz, ouvrez **Paramètres → Analytique** et repérez **Ad tracking pixels** :
+
+- **Use team pixels** (par défaut) : le quiz utilise les pixels de l'équipe. La page indique quelles plateformes sont configurées.
+- **Use different pixels** : le quiz utilise uniquement les ID saisis ici — par exemple un compte publicitaire dédié à une campagne. Ils ne se mélangent pas aux pixels de l'équipe.
+- **Don't track this quiz** : aucun pixel ne se charge, et une copie intégrée ne transmet pas non plus d'événements à votre page.
+
+**Include the result in events** (activé par défaut) ajoute à chaque événement le résultat, le niveau et le score du répondant, pour créer des audiences comme « tous ceux qui ont obtenu *Débutant* ». Désactivez-le pour les sujets sensibles comme la santé ou la finance.
+
+## Événements envoyés
+
+| Événement | Déclenchement | Meta | TikTok | GA4 | GTM dataLayer |
+| --- | --- | --- | --- | --- | --- |
+| Quiz commencé | À la première réponse | `QuizStart` (personnalisé) | `ClickButton` | `quiz_start` | `rooquiz_start` |
+| Quiz terminé | À l'envoi du quiz | `QuizComplete` (personnalisé) | `CompleteRegistration` | `quiz_complete` | `rooquiz_complete` |
+| Résultat consulté | Le répondant voit son propre résultat | `QuizResult` (personnalisé) | `ViewContent` | `quiz_result` | `rooquiz_result` |
+| Lead obtenu | Le répondant passe la vérification par e-mail avant le rapport | `Lead` | `SubmitForm` | `generate_lead` | `rooquiz_lead` |
+| Clic sur le CTA du résultat | Clic sur l'appel à l'action de la page de résultats | `Contact` | `Contact` | `report_cta_click` | `rooquiz_cta_click` |
+| Rendez-vous réservé | Réservation via le bloc de rendez-vous de la page de résultats | `Schedule` | `Contact` | `booking_created` | `rooquiz_booking` |
+| Résultat partagé | Clic sur un bouton de partage | `QuizShare` (personnalisé) | — | `share_click` | `rooquiz_share` |
+
+LinkedIn reçoit les événements pour lesquels un ID de conversion est renseigné.
+
+Chaque événement contient ces paramètres :
+
+| Paramètre | Valeur |
+| --- | --- |
+| `form_token` | Le token public du quiz, pour distinguer les quiz |
+| `quiz_outcome` / `quiz_outcome_code` | Nom et code du type de résultat (quiz de profil) |
+| `quiz_level` | Le niveau (quiz notés et quiz de connaissances) |
+| `quiz_score` | Le score global |
+
+Les paramètres de résultat ne sont inclus que si **Include the result in events** est activé et que le résultat est déjà connu : « Quiz terminé » se déclenche avant le calcul du résultat, utilisez donc « Résultat consulté » pour les audiences par résultat. Les événements **n'incluent jamais de nom, d'adresse e-mail ni aucune autre donnée personnelle**.
+
+Les événements concernés ne sont envoyés qu'une fois : « Quiz commencé » une fois par quiz et par onglet, et « Quiz terminé », « Résultat consulté », « Lead obtenu » et « Rendez-vous réservé » une fois par réponse. Les clics sur le CTA et les partages sont envoyés à chaque fois.
+
+## Configuration dans Google Tag Manager
+
+Chaque événement est poussé dans le `dataLayer` sous le nom de la dernière colonne. Par exemple, pour déclencher une balise sur les leads :
+
+<Steps>
+### Créer un déclencheur
+
+Dans Tag Manager, ajoutez un déclencheur de type **Événement personnalisé** avec le nom d'événement `rooquiz_lead`.
+
+### Lire les paramètres
+
+Ajoutez des **variables de couche de données** pour les paramètres utiles, comme `quiz_outcome` ou `quiz_score`.
+
+### Associer vos balises
+
+Utilisez le déclencheur sur les balises de vos plateformes publicitaires, puis publiez le conteneur.
+</Steps>
+
+## Quiz intégrés
+
+Un quiz intégré s'exécute dans un iframe, où les cookies des plateformes publicitaires sont le plus souvent bloqués et où les conversions seraient attribuées au domaine du quiz plutôt qu'à votre site. **Un quiz intégré ne charge donc aucun pixel** : il transmet ses événements à votre page.
+
+- Chaque événement est poussé dans le `dataLayer` de votre page (`rooquiz_lead`, etc.), prêt pour votre propre conteneur Tag Manager.
+- Votre page reçoit aussi un événement navigateur nommé `rooquiz:<événement>` pour votre propre code :
+
+```html
+<script>
+  window.addEventListener('rooquiz:lead', (e) => {
+    console.log('Nouveau lead du quiz', e.detail.quiz_outcome)
+  })
+</script>
+```
+
+- Si le pixel Meta ou TikTok est déjà installé sur votre page, activez **Also fire my page's Meta and TikTok pixels** en copiant le code (cela ajoute `data-rooquiz-track="auto"`) : les événements partent directement vers ces pixels. Pour LinkedIn, configurez les conversions dans Tag Manager.
+
+Cela fonctionne avec les codes d'intégration **en ligne** et **pop-up**. Un **iframe simple** n'a pas de script d'intégration et ne peut pas transmettre d'événements. Voir [Intégration](/fr/publish/embed).
+
+## Consentement aux cookies
+
+Les visiteurs de l'UE, de l'EEE et du Royaume-Uni voient une bannière de cookies, et les pixels ne se chargent qu'après acceptation des cookies **marketing** (Google Analytics suit le choix **analyse**). Ailleurs, les pixels se chargent immédiatement. Google Tag Manager et Google Analytics reçoivent le choix via le mode Consentement (Consent Mode).
+
+<Callout type="info">
+  C'est vous qui décidez quels pixels tournent sur vos quiz : mentionnez-les dans votre propre politique de confidentialité. Les quiz intégrés ne chargent aucun pixel ; le consentement sur votre page relève de votre propre dispositif.
+</Callout>
+
+## Vérifier le fonctionnement
+
+- Installez **Meta Pixel Helper** ou **TikTok Pixel Helper** dans votre navigateur, ouvrez le quiz public et répondez : les événements apparaissent au fil des réponses.
+- Dans Tag Manager, utilisez l'**Aperçu** sur votre domaine personnalisé ou sur la page où le quiz est intégré.
+- Si vous êtes dans l'UE ou au Royaume-Uni, acceptez d'abord la bannière de cookies. Rien ne se charge avant.

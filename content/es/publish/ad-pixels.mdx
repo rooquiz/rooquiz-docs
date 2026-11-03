@@ -1,0 +1,118 @@
+---
+title: Píxeles de seguimiento publicitario
+description: 'Envía las conversiones del quiz a Meta, TikTok, LinkedIn y Google Tag Manager: píxeles del equipo y por quiz, todos los eventos que enviamos con su nombre en cada plataforma, inserciones, consentimiento de cookies y pruebas.'
+---
+
+Los **píxeles de seguimiento publicitario** envían las conversiones de tu quiz —quiz iniciado, lead captado, quiz completado y más— a tus plataformas de anuncios. Así mides lo que aportan tus campañas, dejas que las plataformas optimicen para conseguir leads y creas audiencias según el resultado del quiz.
+
+Plataformas compatibles: **Meta** (Facebook / Instagram), **TikTok**, **LinkedIn** y **Google Tag Manager**. Google Analytics se configura aparte en los [ajustes de Analítica](/es/editor/settings) de cada quiz.
+
+<Callout type="warning">
+  Los píxeles de seguimiento publicitario son una **función del plan Pro**. Solo los **owners** y **administradores** del equipo pueden cambiar los píxeles del equipo.
+</Callout>
+
+## Configura los píxeles del equipo
+
+Ve a **Ajustes → Tracking pixels** (esta página se muestra por ahora en inglés). Todos los quizzes usan estos píxeles salvo que lo cambies en el quiz. Deja un campo vacío para no usar esa plataforma.
+
+| Campo | Qué introducir | Dónde encontrarlo |
+| --- | --- | --- |
+| **Meta Pixel ID** | 15–16 dígitos | Administrador de eventos de Meta → Orígenes de datos |
+| **TikTok Pixel code** | Mayúsculas y dígitos, unos 20 caracteres | TikTok Ads Manager → Herramientas → Eventos |
+| **LinkedIn Partner ID** | Dígitos | Campaign Manager → Analyze → Insight Tag |
+| **LinkedIn conversion IDs** | Dígitos, uno por evento (opcional) | Campaign Manager → Analyze → Conversion tracking |
+| **Google Tag Manager container** | `GTM-` seguido de letras y dígitos | Tag Manager, arriba en el espacio de trabajo |
+
+LinkedIn solo cuenta las conversiones que hayas creado en Campaign Manager. Crea una conversión por cada evento que te interese (por ejemplo, «Lead del quiz») y pega su ID junto a ese evento.
+
+<Callout type="info">
+  El contenedor de Google Tag Manager se carga **solo en tu [dominio personalizado](/es/teams/custom-domain)**. Un contenedor puede ejecutar cualquier script que le añadas y el dominio compartido de los quizzes lo usan muchos equipos, así que ahí no cargamos contenedores. Sin dominio personalizado, usa los campos de Meta, TikTok y LinkedIn.
+</Callout>
+
+## Ajustes por quiz
+
+En un quiz, abre **Ajustes → Analítica** y busca **Ad tracking pixels**:
+
+- **Use team pixels** (predeterminado): el quiz usa los píxeles del equipo. La página muestra qué plataformas están configuradas.
+- **Use different pixels**: el quiz usa solo los ID que introduzcas aquí; por ejemplo, una cuenta publicitaria aparte para una campaña. No se mezclan con los píxeles del equipo.
+- **Don't track this quiz**: no se carga ningún píxel, y una copia insertada tampoco pasa eventos a tu página.
+
+**Include the result in events** (activado por defecto) añade a cada evento el resultado, el nivel y la puntuación de la persona, para crear audiencias como «todos los que obtuvieron *Principiante*». Desactívalo en temas sensibles como salud o finanzas.
+
+## Eventos que enviamos
+
+| Evento | Cuándo se dispara | Meta | TikTok | GA4 | GTM dataLayer |
+| --- | --- | --- | --- | --- | --- |
+| Quiz iniciado | Con la primera respuesta | `QuizStart` (personalizado) | `ClickButton` | `quiz_start` | `rooquiz_start` |
+| Quiz completado | Al enviar el quiz | `QuizComplete` (personalizado) | `CompleteRegistration` | `quiz_complete` | `rooquiz_complete` |
+| Resultado visto | La persona ve su propio resultado | `QuizResult` (personalizado) | `ViewContent` | `quiz_result` | `rooquiz_result` |
+| Lead captado | La persona supera la verificación por correo antes del informe | `Lead` | `SubmitForm` | `generate_lead` | `rooquiz_lead` |
+| Clic en el CTA del resultado | Clic en la llamada a la acción de la página de resultados | `Contact` | `Contact` | `report_cta_click` | `rooquiz_cta_click` |
+| Cita reservada | Reserva desde el bloque de citas de la página de resultados | `Schedule` | `Contact` | `booking_created` | `rooquiz_booking` |
+| Resultado compartido | Clic en un botón de compartir | `QuizShare` (personalizado) | — | `share_click` | `rooquiz_share` |
+
+LinkedIn recibe los eventos que tienen un ID de conversión.
+
+Cada evento lleva estos parámetros:
+
+| Parámetro | Valor |
+| --- | --- |
+| `form_token` | El token público del quiz, para distinguir quizzes |
+| `quiz_outcome` / `quiz_outcome_code` | Nombre y código del tipo de resultado (quizzes de tipos) |
+| `quiz_level` | El nivel (quizzes con puntuación y de conocimientos) |
+| `quiz_score` | La puntuación total |
+
+Los parámetros del resultado solo se incluyen si **Include the result in events** está activado y el resultado ya se conoce: «Quiz completado» se dispara antes de calcular el resultado, así que para audiencias por resultado usa «Resultado visto». Los eventos **nunca incluyen nombres, correos ni otros datos personales**.
+
+Los eventos en los que tiene sentido se envían una sola vez: «Quiz iniciado» una vez por quiz y pestaña del navegador, y «Quiz completado», «Resultado visto», «Lead captado» y «Cita reservada» una vez por respuesta. Los clics en el CTA y al compartir se envían siempre.
+
+## Configuración en Google Tag Manager
+
+Cada evento se envía al `dataLayer` con el nombre de la última columna. Por ejemplo, para disparar una etiqueta con los leads:
+
+<Steps>
+### Crea un activador
+
+En Tag Manager, añade un activador de tipo **Evento personalizado** con el nombre de evento `rooquiz_lead`.
+
+### Lee los parámetros
+
+Añade **Variables de capa de datos** para los parámetros que necesites, como `quiz_outcome` o `quiz_score`.
+
+### Asocia tus etiquetas
+
+Usa el activador en las etiquetas de tus plataformas de anuncios y publica el contenedor.
+</Steps>
+
+## Quizzes insertados
+
+Un quiz insertado se ejecuta dentro de un iframe, donde las cookies de las plataformas de anuncios suelen bloquearse y las conversiones se atribuirían al dominio del quiz en lugar de a tu web. Por eso **un quiz insertado no carga píxeles**: pasa sus eventos a tu página:
+
+- Cada evento se envía al `dataLayer` de tu página (`rooquiz_lead`, etc.), listo para tu propio contenedor de Tag Manager.
+- Tu página también recibe un evento del navegador llamado `rooquiz:<evento>` para tu propio código:
+
+```html
+<script>
+  window.addEventListener('rooquiz:lead', (e) => {
+    console.log('Nuevo lead del quiz', e.detail.quiz_outcome)
+  })
+</script>
+```
+
+- Si tu página ya tiene instalado el píxel de Meta o de TikTok, activa **Also fire my page's Meta and TikTok pixels** al copiar el código (añade `data-rooquiz-track="auto"`) y los eventos irán directamente a esos píxeles. Para LinkedIn, configura las conversiones en Tag Manager.
+
+Esto funciona con los códigos de inserción **en línea** y **emergente**. Un **iframe simple** no tiene script de inserción y no puede pasar eventos. Consulta [Insertar](/es/publish/embed).
+
+## Consentimiento de cookies
+
+Los visitantes de la UE, el EEE y el Reino Unido ven un banner de cookies y los píxeles solo se cargan después de aceptar las cookies de **marketing** (Google Analytics sigue la elección de **análisis**). En el resto de regiones se cargan de inmediato. Google Tag Manager y Google Analytics reciben la elección mediante el modo de consentimiento (Consent Mode).
+
+<Callout type="info">
+  Tú decides qué píxeles se ejecutan en tus quizzes, así que menciónalos en tu propia política de privacidad. Los quizzes insertados no cargan píxeles; el consentimiento en tu página lo gestiona tu propia solución.
+</Callout>
+
+## Comprueba que funciona
+
+- Instala **Meta Pixel Helper** o **TikTok Pixel Helper** en tu navegador, abre el quiz público y respóndelo: los eventos aparecerán a medida que avanzas.
+- En Tag Manager, usa la **Vista previa** en tu dominio personalizado o en la página donde está insertado el quiz.
+- Si estás en la UE o el Reino Unido, acepta primero el banner de cookies. Antes de eso no se carga nada.

@@ -1,0 +1,118 @@
+---
+title: 광고 추적 픽셀
+description: '퀴즈 전환을 Meta, TikTok, LinkedIn, Google 태그 관리자로 보내는 방법을 설명합니다. 팀과 퀴즈별 픽셀 설정, 전송되는 모든 이벤트와 플랫폼별 이벤트 이름, GTM 트리거 예시, 임베드 시 이벤트 전달, 쿠키 동의, 실제로 이벤트가 전송되는지 확인하는 방법까지 다룹니다.'
+---
+
+**광고 추적 픽셀**은 퀴즈 전환(퀴즈 시작, 리드 확보, 퀴즈 완료 등)을 광고 플랫폼으로 보냅니다. 광고 성과를 측정하고, 플랫폼이 리드 기준으로 자동 최적화하게 하며, 퀴즈 결과별 잠재고객도 만들 수 있습니다.
+
+지원 플랫폼: **Meta**(Facebook / Instagram), **TikTok**, **LinkedIn**, **Google 태그 관리자(GTM)**. Google Analytics는 각 퀴즈의 [분석 설정](/ko/editor/settings)에서 따로 설정합니다.
+
+<Callout type="warning">
+  광고 추적 픽셀은 **Pro 요금제 기능**입니다. 팀 픽셀은 팀 **owner**와 **관리자**만 변경할 수 있습니다.
+</Callout>
+
+## 팀 픽셀 설정
+
+**설정 → Tracking pixels**로 이동합니다(이 페이지는 현재 영어로 표시됩니다). 퀴즈에서 따로 바꾸지 않으면 모든 퀴즈가 이 픽셀을 사용합니다. 사용하지 않는 플랫폼은 비워 두세요.
+
+| 항목 | 입력할 내용 | 찾는 위치 |
+| --- | --- | --- |
+| **Meta Pixel ID** | 15~16자리 숫자 | Meta 이벤트 관리자 → 데이터 소스 |
+| **TikTok Pixel code** | 영문 대문자와 숫자, 약 20자 | TikTok 광고 관리자 → 도구 → 이벤트 |
+| **LinkedIn Partner ID** | 숫자 | Campaign Manager → Analyze → Insight Tag |
+| **LinkedIn conversion IDs** | 숫자, 이벤트마다 하나(선택) | Campaign Manager → Analyze → Conversion tracking |
+| **Google Tag Manager container** | `GTM-` 뒤에 영문과 숫자 | 태그 관리자 작업공간 상단 |
+
+LinkedIn은 Campaign Manager에서 만든 전환만 집계합니다. 측정하려는 이벤트마다 전환(예: '퀴즈 리드')을 하나씩 만든 뒤, 해당 이벤트 옆에 전환 ID를 붙여 넣으세요.
+
+<Callout type="info">
+  GTM 컨테이너는 **팀의 [사용자 지정 도메인](/ko/teams/custom-domain)에서만 로드됩니다**. 컨테이너에는 어떤 스크립트든 넣을 수 있고 공유 퀴즈 도메인은 여러 팀이 함께 쓰기 때문에, 그곳에서는 컨테이너를 로드하지 않습니다. 사용자 지정 도메인이 없다면 Meta, TikTok, LinkedIn 항목을 사용하세요.
+</Callout>
+
+## 퀴즈별 설정
+
+퀴즈에서 **설정 → 분석**을 열고 **Ad tracking pixels**를 찾습니다.
+
+- **Use team pixels**(기본값): 팀 픽셀을 사용합니다. 설정된 플랫폼 목록이 표시됩니다.
+- **Use different pixels**: 여기에 입력한 ID만 사용합니다. 특정 캠페인에 별도 광고 계정을 쓰는 경우 등에 사용하세요. 팀 픽셀과 섞이지 않습니다.
+- **Don't track this quiz**: 픽셀을 전혀 로드하지 않으며, 임베드했을 때도 이벤트를 페이지로 전달하지 않습니다.
+
+**Include the result in events**(기본값 켜짐)는 응답자의 결과 유형, 등급, 점수를 각 이벤트에 포함합니다. '*입문* 결과가 나온 모든 사람' 같은 잠재고객을 만들 때 유용합니다. 건강이나 금융처럼 민감한 주제라면 꺼 두세요.
+
+## 전송되는 이벤트
+
+| 이벤트 | 발생 시점 | Meta | TikTok | GA4 | GTM dataLayer |
+| --- | --- | --- | --- | --- | --- |
+| 퀴즈 시작 | 첫 응답 시 | `QuizStart`(맞춤) | `ClickButton` | `quiz_start` | `rooquiz_start` |
+| 퀴즈 완료 | 퀴즈 제출 시 | `QuizComplete`(맞춤) | `CompleteRegistration` | `quiz_complete` | `rooquiz_complete` |
+| 결과 확인 | 응답자가 자신의 결과를 볼 때 | `QuizResult`(맞춤) | `ViewContent` | `quiz_result` | `rooquiz_result` |
+| 리드 확보 | 리포트 열람 전 이메일 인증을 통과할 때 | `Lead` | `SubmitForm` | `generate_lead` | `rooquiz_lead` |
+| 결과 페이지 CTA 클릭 | 결과 페이지의 행동 유도 버튼 클릭 | `Contact` | `Contact` | `report_cta_click` | `rooquiz_cta_click` |
+| 예약 완료 | 결과 페이지 예약 블록으로 예약할 때 | `Schedule` | `Contact` | `booking_created` | `rooquiz_booking` |
+| 결과 공유 | 공유 버튼 클릭 | `QuizShare`(맞춤) | — | `share_click` | `rooquiz_share` |
+
+LinkedIn에는 전환 ID를 입력한 이벤트만 전송됩니다.
+
+각 이벤트에는 다음 매개변수가 포함됩니다.
+
+| 매개변수 | 값 |
+| --- | --- |
+| `form_token` | 퀴즈의 공개 token. 퀴즈를 구분하는 데 사용합니다 |
+| `quiz_outcome` / `quiz_outcome_code` | 결과 유형의 이름과 코드(유형 퀴즈) |
+| `quiz_level` | 등급(점수형 퀴즈, 지식 퀴즈) |
+| `quiz_score` | 총점 |
+
+결과 매개변수는 **Include the result in events**가 켜져 있고 결과가 이미 나온 경우에만 포함됩니다. '퀴즈 완료'는 결과가 계산되기 전에 발생하므로, 결과별 잠재고객에는 '결과 확인'을 사용하세요. 이벤트에는 **이름, 이메일 주소 등 개인 정보가 절대 포함되지 않습니다**.
+
+의미가 있는 이벤트는 한 번만 전송됩니다. '퀴즈 시작'은 브라우저 탭마다 퀴즈당 한 번, '퀴즈 완료', '결과 확인', '리드 확보', '예약 완료'는 응답당 한 번입니다. CTA 클릭과 공유는 매번 전송됩니다.
+
+## GTM 설정
+
+모든 이벤트는 마지막 열의 이름으로 `dataLayer`에 전달됩니다. 예를 들어 리드 확보 시 태그를 실행하려면:
+
+<Steps>
+### 트리거 만들기
+
+태그 관리자에서 **맞춤 이벤트** 유형의 트리거를 추가하고 이벤트 이름에 `rooquiz_lead`를 입력합니다.
+
+### 매개변수 읽기
+
+필요한 매개변수(`quiz_outcome`, `quiz_score` 등)에 대해 **데이터 영역 변수**를 추가합니다.
+
+### 태그에 연결하기
+
+광고 플랫폼 태그에 트리거를 연결한 뒤 컨테이너를 게시합니다.
+</Steps>
+
+## 임베드한 퀴즈
+
+임베드된 퀴즈는 iframe 안에서 실행되므로 광고 플랫폼 쿠키가 대부분 차단되고, 전환도 내 사이트가 아니라 퀴즈 도메인에 집계됩니다. 그래서 **임베드된 퀴즈는 직접 픽셀을 로드하지 않고** 이벤트를 내 페이지로 전달합니다.
+
+- 모든 이벤트가 페이지의 `dataLayer`로 전달됩니다(`rooquiz_lead` 등). 내 GTM 컨테이너에서 바로 사용할 수 있습니다.
+- 페이지에는 `rooquiz:<이벤트>`라는 이름의 브라우저 이벤트도 전달되므로 직접 작성한 코드로 받을 수 있습니다.
+
+```html
+<script>
+  window.addEventListener('rooquiz:lead', (e) => {
+    console.log('새 퀴즈 리드', e.detail.quiz_outcome)
+  })
+</script>
+```
+
+- 페이지에 이미 Meta나 TikTok 픽셀이 설치되어 있다면, 코드를 복사할 때 **Also fire my page's Meta and TikTok pixels**를 켜세요(`data-rooquiz-track="auto"`가 추가됩니다). 이벤트가 해당 픽셀로 바로 전송됩니다. LinkedIn은 태그 관리자에서 전환을 설정하세요.
+
+이 기능은 **인라인**과 **팝업** 임베드 코드에서 작동합니다. **기본 iframe**에는 임베드 스크립트가 없어 이벤트를 전달할 수 없습니다. 자세한 내용은 [임베드](/ko/publish/embed)를 참고하세요.
+
+## 쿠키 동의
+
+EU, EEA, 영국 방문자에게는 쿠키 배너가 표시되며, **마케팅** 쿠키에 동의한 뒤에만 픽셀이 로드됩니다(Google Analytics는 **분석** 선택을 따릅니다). 그 외 지역에서는 바로 로드됩니다. GTM과 Google Analytics에는 동의 모드(Consent Mode)로 방문자의 선택이 전달됩니다.
+
+<Callout type="info">
+  퀴즈에서 어떤 픽셀을 실행할지는 직접 정하므로, 자체 개인정보처리방침에 이를 안내하세요. 임베드된 퀴즈는 픽셀을 로드하지 않으므로 페이지의 동의는 직접 구성한 방식으로 처리됩니다.
+</Callout>
+
+## 작동 확인
+
+- 브라우저에 **Meta Pixel Helper** 또는 **TikTok Pixel Helper**를 설치하고 공개 퀴즈를 열어 응답해 보면 진행에 따라 이벤트가 표시됩니다.
+- 태그 관리자에서는 사용자 지정 도메인이나 퀴즈를 임베드한 페이지에서 **미리보기**를 사용하세요.
+- EU나 영국에서 접속한다면 먼저 쿠키 배너에서 동의하세요. 동의하기 전에는 아무것도 로드되지 않습니다.

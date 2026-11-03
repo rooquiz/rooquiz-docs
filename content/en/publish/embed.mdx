@@ -56,8 +56,15 @@ On the **Free plan**, embeds keep a small **Made with RooQuiz** credit line. It 
 | `data-rooquiz-utm-campaign` | UTM campaign (optional) |
 | `data-rooquiz-height` | Initial height (px) for inline mode, used before auto-resize kicks in |
 | `data-rooquiz-text` | Button label for popup mode |
+| `data-rooquiz-track` | `auto`: also fire the Meta and TikTok pixels already on your page (see [Conversion events](#conversion-events)) |
 
 If you don't set the UTM attributes, any `utm_*` parameters on the host page's URL are passed through automatically.
+
+## Conversion events
+
+On **Pro**, inline and popup embeds pass the quiz's conversion events — quiz started, lead captured, quiz completed, CTA clicked and more — to your page. Each one is pushed to your page's `dataLayer` as `rooquiz_<event>` (for your own Google Tag Manager) and dispatched as a `rooquiz:<event>` browser event. Add `data-rooquiz-track="auto"`, or turn on **Also fire my page's Meta and TikTok pixels** in the embed panel, to send them straight to the pixels already installed on your page. With the JS API, pass `track: 'auto'`.
+
+A plain iframe can't pass events. See [Ad Tracking Pixels](/en/publish/ad-pixels#embedded-quizzes) for the full event list.
 
 ## JS API
 

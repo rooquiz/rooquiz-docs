@@ -1,0 +1,118 @@
+---
+title: Pixels de rastreamento de anúncios
+description: 'Envie as conversões do quiz para Meta, TikTok, LinkedIn e Google Tag Manager: pixels da equipe e por quiz, todos os eventos enviados com o nome em cada plataforma, incorporações, consentimento de cookies e testes.'
+---
+
+Os **pixels de rastreamento de anúncios** enviam as conversões do seu quiz — quiz iniciado, lead capturado, quiz concluído e outras — para as suas plataformas de anúncios. Assim você mede o que as campanhas trazem, deixa as plataformas otimizarem para leads e cria públicos de acordo com o resultado do quiz.
+
+Plataformas compatíveis: **Meta** (Facebook / Instagram), **TikTok**, **LinkedIn** e **Google Tag Manager**. O Google Analytics é configurado separadamente nas [configurações de Análises](/pt-BR/editor/settings) de cada quiz.
+
+<Callout type="warning">
+  Os pixels de rastreamento de anúncios são um **recurso do plano Pro**. Somente **owners** e **administradores** da equipe podem alterar os pixels da equipe.
+</Callout>
+
+## Configure os pixels da equipe
+
+Acesse **Configurações → Tracking pixels** (por enquanto, esta página aparece em inglês). Todos os quizzes usam esses pixels, a menos que você altere no próprio quiz. Deixe um campo vazio para não usar a plataforma.
+
+| Campo | O que informar | Onde encontrar |
+| --- | --- | --- |
+| **Meta Pixel ID** | 15–16 dígitos | Gerenciador de Eventos da Meta → Fontes de dados |
+| **TikTok Pixel code** | Letras maiúsculas e dígitos, cerca de 20 caracteres | TikTok Ads Manager → Ferramentas → Eventos |
+| **LinkedIn Partner ID** | Dígitos | Campaign Manager → Analyze → Insight Tag |
+| **LinkedIn conversion IDs** | Dígitos, um por evento (opcional) | Campaign Manager → Analyze → Conversion tracking |
+| **Google Tag Manager container** | `GTM-` seguido de letras e dígitos | Tag Manager, no topo do espaço de trabalho |
+
+O LinkedIn só conta as conversões criadas no Campaign Manager. Crie uma conversão para cada evento que interessa (por exemplo, "Lead do quiz") e cole o ID ao lado do evento correspondente.
+
+<Callout type="info">
+  O contêiner do Google Tag Manager é carregado **somente no seu [domínio personalizado](/pt-BR/teams/custom-domain)**. Um contêiner pode executar qualquer script que você adicionar, e o domínio compartilhado dos quizzes é usado por muitas equipes, então não carregamos contêineres lá. Sem domínio personalizado, use os campos de Meta, TikTok e LinkedIn.
+</Callout>
+
+## Configurações por quiz
+
+No quiz, abra **Configurações → Análises** e procure **Ad tracking pixels**:
+
+- **Use team pixels** (padrão): o quiz usa os pixels da equipe. A página mostra quais plataformas estão configuradas.
+- **Use different pixels**: o quiz usa apenas os IDs informados aqui — por exemplo, uma conta de anúncios separada para uma campanha. Eles não se misturam com os pixels da equipe.
+- **Don't track this quiz**: nenhum pixel é carregado, e uma cópia incorporada também não repassa eventos para a sua página.
+
+**Include the result in events** (ativado por padrão) adiciona a cada evento o resultado, o nível e a pontuação do respondente, para criar públicos como "todos que tiveram *Iniciante*". Desative em temas sensíveis, como saúde ou finanças.
+
+## Eventos enviados
+
+| Evento | Quando é disparado | Meta | TikTok | GA4 | GTM dataLayer |
+| --- | --- | --- | --- | --- | --- |
+| Quiz iniciado | Na primeira resposta | `QuizStart` (personalizado) | `ClickButton` | `quiz_start` | `rooquiz_start` |
+| Quiz concluído | Ao enviar o quiz | `QuizComplete` (personalizado) | `CompleteRegistration` | `quiz_complete` | `rooquiz_complete` |
+| Resultado visualizado | O respondente vê o próprio resultado | `QuizResult` (personalizado) | `ViewContent` | `quiz_result` | `rooquiz_result` |
+| Lead capturado | O respondente passa pela verificação de e-mail antes do relatório | `Lead` | `SubmitForm` | `generate_lead` | `rooquiz_lead` |
+| Clique no CTA do resultado | Clique na chamada para ação da página de resultados | `Contact` | `Contact` | `report_cta_click` | `rooquiz_cta_click` |
+| Reunião agendada | Agendamento pelo bloco de agendamento da página de resultados | `Schedule` | `Contact` | `booking_created` | `rooquiz_booking` |
+| Resultado compartilhado | Clique em um botão de compartilhar | `QuizShare` (personalizado) | — | `share_click` | `rooquiz_share` |
+
+O LinkedIn recebe os eventos que têm um ID de conversão preenchido.
+
+Cada evento traz estes parâmetros:
+
+| Parâmetro | Valor |
+| --- | --- |
+| `form_token` | O token público do quiz, para diferenciar os quizzes |
+| `quiz_outcome` / `quiz_outcome_code` | Nome e código do tipo de resultado (quizzes de perfil) |
+| `quiz_level` | O nível (quizzes com pontuação e de conhecimento) |
+| `quiz_score` | A pontuação total |
+
+Os parâmetros de resultado só são incluídos quando **Include the result in events** está ativado e o resultado já é conhecido — "Quiz concluído" é disparado antes de o resultado ser calculado, então use "Resultado visualizado" para públicos por resultado. Os eventos **nunca incluem nomes, e-mails ou outros dados pessoais**.
+
+Os eventos em que isso faz sentido são enviados só uma vez: "Quiz iniciado" uma vez por quiz e por aba do navegador, e "Quiz concluído", "Resultado visualizado", "Lead capturado" e "Reunião agendada" uma vez por resposta. Cliques no CTA e compartilhamentos são enviados sempre.
+
+## Configuração no Google Tag Manager
+
+Cada evento é enviado ao `dataLayer` com o nome da última coluna. Por exemplo, para disparar uma tag nos leads:
+
+<Steps>
+### Crie um acionador
+
+No Tag Manager, adicione um acionador do tipo **Evento personalizado** com o nome de evento `rooquiz_lead`.
+
+### Leia os parâmetros
+
+Adicione **Variáveis da camada de dados** para os parâmetros de que precisa, como `quiz_outcome` ou `quiz_score`.
+
+### Vincule suas tags
+
+Use o acionador nas tags das suas plataformas de anúncios e publique o contêiner.
+</Steps>
+
+## Quizzes incorporados
+
+Um quiz incorporado roda dentro de um iframe, onde os cookies das plataformas de anúncios costumam ser bloqueados e as conversões seriam atribuídas ao domínio do quiz em vez do seu site. Por isso **um quiz incorporado não carrega pixels**: ele repassa os eventos para a sua página.
+
+- Cada evento é enviado ao `dataLayer` da sua página (`rooquiz_lead` etc.), pronto para o seu próprio contêiner do Tag Manager.
+- A sua página também recebe um evento do navegador chamado `rooquiz:<evento>` para o seu próprio código:
+
+```html
+<script>
+  window.addEventListener('rooquiz:lead', (e) => {
+    console.log('Novo lead do quiz', e.detail.quiz_outcome)
+  })
+</script>
+```
+
+- Se a sua página já tem o pixel da Meta ou do TikTok instalado, ative **Also fire my page's Meta and TikTok pixels** ao copiar o código (adiciona `data-rooquiz-track="auto"`) e os eventos vão direto para esses pixels. Para o LinkedIn, configure as conversões no Tag Manager.
+
+Isso funciona com os códigos de incorporação **inline** e **popup**. Um **iframe simples** não tem o script de incorporação e não consegue repassar eventos. Veja [Incorporar](/pt-BR/publish/embed).
+
+## Consentimento de cookies
+
+Visitantes da UE, do EEE e do Reino Unido veem um banner de cookies, e os pixels só carregam depois que aceitam os cookies de **marketing** (o Google Analytics segue a escolha de **análise**). Nas demais regiões, os pixels carregam na hora. O Google Tag Manager e o Google Analytics recebem a escolha pelo modo de consentimento (Consent Mode).
+
+<Callout type="info">
+  Você decide quais pixels rodam nos seus quizzes, então mencione-os na sua própria política de privacidade. Quizzes incorporados não carregam pixels; o consentimento na sua página é tratado pela sua própria solução.
+</Callout>
+
+## Confira se está funcionando
+
+- Instale o **Meta Pixel Helper** ou o **TikTok Pixel Helper** no navegador, abra o quiz público e responda — os eventos aparecem conforme você avança.
+- No Tag Manager, use a **Visualização** no seu domínio personalizado ou na página em que o quiz está incorporado.
+- Se você estiver na UE ou no Reino Unido, aceite primeiro o banner de cookies. Antes disso, nada é carregado.

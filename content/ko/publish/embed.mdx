@@ -56,8 +56,15 @@ iframe은 항상 사용자 지정 경로가 아닌 퀴즈의 고정 주소 `/a/<
 | `data-rooquiz-utm-campaign` | UTM 캠페인(선택) |
 | `data-rooquiz-height` | 인라인 모드의 초기 높이(px). 자동 크기 조정이 시작되기 전에 사용됩니다 |
 | `data-rooquiz-text` | 팝업 모드의 버튼 텍스트 |
+| `data-rooquiz-track` | `auto`: 페이지에 이미 설치된 Meta와 TikTok 픽셀도 함께 실행합니다([전환 이벤트](#전환-이벤트) 참고) |
 
 UTM 속성을 지정하지 않으면 호스트 페이지 URL에 있는 `utm_*` 매개변수가 자동으로 전달됩니다.
+
+## 전환 이벤트
+
+**Pro** 요금제에서는 인라인과 팝업 임베드가 퀴즈의 전환 이벤트(퀴즈 시작, 리드 확보, 퀴즈 완료, CTA 클릭 등)를 페이지로 전달합니다. 각 이벤트는 `rooquiz_<이벤트>`로 페이지의 `dataLayer`에 전달되고(내 Google 태그 관리자용), `rooquiz:<이벤트>`라는 브라우저 이벤트로도 발생합니다. `data-rooquiz-track="auto"`를 추가하거나 임베드 패널에서 **Also fire my page's Meta and TikTok pixels**를 켜면 페이지에 이미 설치된 픽셀로 바로 전송됩니다. JS API에서는 `track: 'auto'`를 전달하세요.
+
+기본 iframe은 이벤트를 전달할 수 없습니다. 전체 이벤트 목록은 [광고 추적 픽셀](/ko/publish/ad-pixels)을 참고하세요.
 
 ## JS API
 

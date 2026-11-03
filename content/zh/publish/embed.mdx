@@ -56,8 +56,15 @@ iframe 始终指向测评稳定的 `/a/<token>` 地址,而不是它的自定义�
 | `data-rooquiz-utm-campaign` | UTM 活动(可选) |
 | `data-rooquiz-height` | 内嵌模式的初始高度(px),自适应生效前的占位 |
 | `data-rooquiz-text` | 弹窗模式的按钮文案 |
+| `data-rooquiz-track` | `auto`：同时触发你网页上已有的 Meta 和 TikTok 像素（见[转化事件](#转化事件)） |
 
 不设置 UTM 属性时,宿主页面网址上的 `utm_*` 参数会自动透传。
+
+## 转化事件
+
+**Pro** 团队的内嵌和弹窗嵌入会把测评的转化事件——开始答题、留资、完成答题、点击 CTA 等——转给你的网页：每个事件以 `rooquiz_<事件>` 推进网页的 `dataLayer`（给你自己的 GTM 用），同时派发名为 `rooquiz:<事件>` 的浏览器事件。加上 `data-rooquiz-track="auto"`，或在嵌入面板里打开**同时触发我网页上的 Meta 和 TikTok 像素**，事件就会直接发给你网页上已装好的像素。使用 JS API 时传 `track: 'auto'`。
+
+纯 iframe 无法转发事件。完整事件列表见[广告跟踪像素](/zh/publish/ad-pixels)。
 
 ## JS API
 
