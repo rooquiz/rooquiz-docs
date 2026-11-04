@@ -33,10 +33,12 @@ Lorsque des répondants envoient leurs réponses via un lien balisé UTM, la sou
 
 Les balises UTM couvrent les canaux. Pour récupérer d'autres informations depuis le lien — quel **partenaire**, quel **ID de campagne** ou quelle **page d'atterrissage** a envoyé le répondant —, déclarez vos propres paramètres d'URL.
 
+Les valeurs viennent généralement de l'extérieur : la balise de fusion de votre outil d'e-mailing, comme `?crm_id={{contact.id}}`, la page où le quiz est intégré, ou un lien propre à chaque partenaire. Si vous voulez seulement distinguer les canaux, utilisez plutôt le [Plan de diffusion](/fr/publish/promotion) : il ajoute les balises UTM pour vous et affiche les chiffres de chaque canal.
+
 <Steps>
 ### Déclarer les paramètres
 
-Dans le quiz, ouvrez **Paramètres → Analytique → URL parameters** et ajoutez les noms, par exemple `partner` et `campaign_id`. Minuscules, chiffres et tirets bas uniquement, 10 au maximum par quiz. `utm_*` et les noms système comme `email`, `name`, `lang` et `ref` sont réservés.
+Dans le quiz, ouvrez **Partager** → **URL parameters** et ajoutez les noms, par exemple `partner` et `campaign_id`. Minuscules, chiffres et tirets bas uniquement, 10 au maximum par quiz. `utm_*` et les noms système comme `email`, `name`, `lang` et `ref` sont réservés.
 
 ### Les ajouter au lien
 

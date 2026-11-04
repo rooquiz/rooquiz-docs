@@ -33,10 +33,12 @@ Wenn Teilnehmer über einen UTM-markierten Link einsenden, wird die Quelle mit d
 
 UTM-Tags erfassen Kanäle. Um weitere Angaben aus dem Link mitzunehmen – welcher **Partner**, welche **Kampagnen-ID** oder welche **Landingpage** die Person geschickt hat –, deklarieren Sie eigene URL-Parameter.
 
+Die Werte kommen meist von außen: aus dem Merge-Tag Ihres E-Mail-Tools wie `?crm_id={{contact.id}}`, von der Seite, in die das Quiz eingebettet ist, oder aus einem eigenen Link für jeden Partner. Wenn Sie nur Kanäle unterscheiden möchten, nutzen Sie stattdessen den [Verteilungsplan](/de/publish/promotion) – er setzt die UTM-Tags für Sie und zeigt die Zahlen pro Kanal.
+
 <Steps>
 ### Parameter deklarieren
 
-Öffnen Sie im Quiz **Einstellungen → Analytics → URL parameters** und fügen Sie die Namen hinzu, etwa `partner` und `campaign_id`. Erlaubt sind Kleinbuchstaben, Ziffern und Unterstriche, höchstens 10 pro Quiz. `utm_*` und Systemnamen wie `email`, `name`, `lang` und `ref` sind reserviert.
+Öffnen Sie im Quiz **Teilen** → **URL parameters** und fügen Sie die Namen hinzu, etwa `partner` und `campaign_id`. Erlaubt sind Kleinbuchstaben, Ziffern und Unterstriche, höchstens 10 pro Quiz. `utm_*` und Systemnamen wie `email`, `name`, `lang` und `ref` sind reserviert.
 
 ### An den Link anhängen
 

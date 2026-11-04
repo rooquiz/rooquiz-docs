@@ -33,10 +33,12 @@ When respondents submit via a UTM-tagged link, the source is recorded with the r
 
 UTM tags cover channels. To capture anything else from the link — which **partner**, **campaign ID** or **landing page** sent the respondent — declare your own URL parameters.
 
+The values usually come from outside: an email tool's merge tag such as `?crm_id={{contact.id}}`, the page the quiz is embedded on, or a link you give each partner. If you only want to tell channels apart, use the [Distribution plan](/en/publish/promotion) instead — it adds UTM tags for you and shows each channel's numbers.
+
 <Steps>
 ### Declare the parameters
 
-On the quiz, open **Settings → Analytics → URL parameters** and add the names, for example `partner` and `campaign_id`. Use lowercase letters, digits and underscores, up to 10 per quiz. `utm_*` and system names such as `email`, `name`, `lang` and `ref` are reserved.
+On the quiz, open **Share** → **URL parameters** and add the names, for example `partner` and `campaign_id`. Use lowercase letters, digits and underscores, up to 10 per quiz. `utm_*` and system names such as `email`, `name`, `lang` and `ref` are reserved.
 
 ### Add them to your link
 
