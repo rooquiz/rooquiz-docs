@@ -23,14 +23,18 @@ A **respondent** is the account profile of someone who has taken your quizzes �
 | **Email Verified** | Whether they verified their address |
 | **Created At** | When the profile was created |
 
-Two more columns cover email permissions:
+One more column covers email permissions:
 
-- **Marketing consent** — **Consented** or **Not consented**, captured from the respondent. When someone asks you directly to stop emailing them, use **Withdraw consent**: they're excluded from consent-filtered exports and connectors, and only the respondent can give consent again.
-- **Email subscription** — **Subscribed** or **Unsubscribed**.
+- **Marketing consent** — one of three states:
+  - **Consented** — the respondent ticked the consent box, or turned consent on in their account.
+  - **Not opted in** — they were asked but didn't tick the box, or were never asked.
+  - **Opted out** — they turned consent off in their account, clicked unsubscribe in one of your email campaigns, or you marked them yourself.
+
+  Email campaigns never reach anyone who opted out. When someone asks you directly to stop emailing them, use **Mark as opted out**. Only the respondent can give consent again.
 
 If you've configured [extended fields](/en/respondents/fields), they appear as extra columns too.
 
-**Filters** cover Name, Email, Respondent ID, Status, Source, Email Verified, Marketing consent, Email subscription and Created At. **Export** works the same as for responses — see [Exporting data](/en/results/export).
+**Filters** cover Name, Email, Respondent ID, Status, Source, Email Verified, Marketing consent and Created At. **Export** works the same as for responses — see [Exporting data](/en/results/export).
 
 ## The three sources
 
