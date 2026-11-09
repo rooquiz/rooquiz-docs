@@ -42,14 +42,6 @@ Scope controls which quizzes may fire this connector:
 
 A typical use: push your flagship lead-gen quiz to Slack so the team sees it instantly, and keep an internal quiz from bothering anyone.
 
-## Only consented leads
-
-Webhook, Zapier and Kit connectors have one more push condition: **Only consented leads**. When it's on, the connector sends only respondents who agreed to receive marketing email. Anyone who declined — or was never asked — is skipped, and that delivery is not retried.
-
-<Callout type="warning">
-  Turn this on whenever the connector feeds a mailing list or an email tool. Adding people to marketing lists without their consent is not compliant with GDPR. Slack and Email notifications go to your own team, so they don't offer this switch.
-</Callout>
-
 ## Combinations worth copying
 
 | What you want | Events | Scope |
@@ -58,7 +50,7 @@ Webhook, Zapier and Kit connectors have one more push condition: **Only consente
 | Score every response in your own backend | New submission | All quizzes |
 | Only track the flagship quiz | New lead | Specific quizzes |
 | Get told when your calendar shifts | Booking cancelled + rescheduled | All quizzes |
-| Sync leads into your ESP | New lead + **Only consented leads** | All quizzes |
+| Sync leads into your ESP | New lead | All quizzes |
 
 <Callout type="info">
   Changing events or scope **only affects events from then on** — nothing is replayed.

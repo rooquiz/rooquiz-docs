@@ -42,14 +42,6 @@ O escopo controla quais quizzes podem acionar este conector:
 
 Um uso típico: enviar o seu principal quiz de geração de leads para o Slack, para que a equipe veja na hora, e evitar que um quiz interno incomode alguém.
 
-## Somente leads com consentimento
-
-Os conectores de Webhook, Zapier e Kit têm mais uma condição de envio: **Somente leads com consentimento**. Quando ativada, o conector envia apenas respondentes que aceitaram receber e-mails de marketing. Quem recusou — ou nunca foi perguntado — é ignorado, e essa entrega não é repetida.
-
-<Callout type="warning">
-  Ative essa opção sempre que o conector alimentar uma lista de e-mails ou uma ferramenta de e-mail. Adicionar pessoas a listas de marketing sem o consentimento delas não está em conformidade com a GDPR. As notificações do Slack e de e-mail vão para a sua própria equipe, por isso não oferecem essa opção.
-</Callout>
-
 ## Combinações que vale copiar
 
 | O que você quer | Eventos | Escopo |
@@ -58,7 +50,7 @@ Os conectores de Webhook, Zapier e Kit têm mais uma condição de envio: **Some
 | Pontuar cada resposta no seu próprio backend | Nova resposta | Todos os quizzes |
 | Acompanhar só o quiz principal | Novo lead | Quizzes específicos |
 | Ser avisado quando a agenda muda | Agendamento cancelado + reagendado | Todos os quizzes |
-| Sincronizar leads com seu ESP | Novo lead + **Somente leads com consentimento** | Todos os quizzes |
+| Sincronizar leads com seu ESP | Novo lead | Todos os quizzes |
 
 <Callout type="info">
   Alterar eventos ou escopo **só afeta os eventos dali em diante** — nada é reenviado.

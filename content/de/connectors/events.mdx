@@ -42,14 +42,6 @@ Der Bereich legt fest, welche Quizze diesen Connector auslösen dürfen:
 
 Ein typischer Anwendungsfall: Leiten Sie Ihr wichtigstes Lead-Generierungs-Quiz an Slack weiter, damit das Team neue Leads sofort sieht, und verhindern Sie, dass ein internes Quiz jemanden stört.
 
-## Nur Leads mit Einwilligung
-
-Webhook-, Zapier- und Kit-Connectors haben eine zusätzliche Sendebedingung: **Nur Leads mit Einwilligung**. Ist sie aktiviert, sendet der Connector nur Teilnehmer, die dem Erhalt von Marketing-E-Mails zugestimmt haben. Wer abgelehnt hat – oder nie gefragt wurde –, wird übersprungen, und diese Zustellung wird nicht wiederholt.
-
-<Callout type="warning">
-  Aktivieren Sie diese Option immer, wenn der Connector eine Mailingliste oder ein E-Mail-Tool speist. Personen ohne Einwilligung in Marketinglisten aufzunehmen, ist nicht DSGVO-konform. Slack- und E-Mail-Benachrichtigungen gehen an Ihr eigenes Team und bieten diesen Schalter daher nicht an.
-</Callout>
-
 ## Kombinationen zum Übernehmen
 
 | Ihr Ziel | Ereignisse | Bereich |
@@ -58,7 +50,7 @@ Webhook-, Zapier- und Kit-Connectors haben eine zusätzliche Sendebedingung: **N
 | Jede Antwort im eigenen Backend auswerten | Neue Einreichung | Alle Quiz |
 | Nur das wichtigste Quiz verfolgen | Neuer Lead | Bestimmte Quiz |
 | Benachrichtigt werden, wenn sich Ihr Kalender ändert | Buchung storniert + umgebucht | Alle Quiz |
-| Leads mit Ihrem E-Mail-Marketing-Dienst synchronisieren | Neuer Lead + **Nur Leads mit Einwilligung** | Alle Quiz |
+| Leads mit Ihrem E-Mail-Marketing-Dienst synchronisieren | Neuer Lead | Alle Quiz |
 
 <Callout type="info">
   Änderungen an Ereignissen oder Bereich **wirken sich nur auf künftige Ereignisse aus** – nichts wird nachträglich erneut zugestellt.

@@ -42,14 +42,6 @@ El alcance controla qué quizzes pueden activar este conector:
 
 Un uso típico: enviar tu quiz principal de captación de leads a Slack para que el equipo lo vea al instante, y evitar que un quiz interno moleste a nadie.
 
-## Solo leads con consentimiento
-
-Los conectores de Webhook, Zapier y Kit tienen una condición de envío más: **Solo leads con consentimiento**. Cuando está activada, el conector envía solo a los participantes que aceptaron recibir correo de marketing. Quien lo rechazó, o nunca recibió la pregunta, se omite, y esa entrega no se reintenta.
-
-<Callout type="warning">
-  Actívala siempre que el conector alimente una lista de correo o una herramienta de email. Añadir personas a listas de marketing sin su consentimiento no cumple el RGPD. Las notificaciones de Slack y de correo van a tu propio equipo, así que no ofrecen este interruptor.
-</Callout>
-
 ## Combinaciones que vale la pena copiar
 
 | Lo que quieres | Eventos | Alcance |
@@ -58,7 +50,7 @@ Los conectores de Webhook, Zapier y Kit tienen una condición de envío más: **
 | Puntuar cada respuesta en tu propio backend | Nueva respuesta | Todos los quizzes |
 | Seguir solo el quiz principal | Nuevo lead | Cuestionarios específicos |
 | Enterarte cuando cambia tu agenda | Reserva cancelada + reprogramada | Todos los quizzes |
-| Sincronizar los leads con tu ESP | Nuevo lead + **Solo leads con consentimiento** | Todos los quizzes |
+| Sincronizar los leads con tu ESP | Nuevo lead | Todos los quizzes |
 
 <Callout type="info">
   Cambiar los eventos o el alcance **solo afecta a los eventos a partir de ese momento**: no se reenvía nada anterior.

@@ -42,14 +42,6 @@ La portée détermine quels quiz peuvent déclencher ce connecteur :
 
 Un usage typique : envoyer votre quiz phare de génération de leads vers Slack pour que l'équipe le voie instantanément, et éviter qu'un quiz interne ne dérange qui que ce soit.
 
-## Uniquement les leads consentants
-
-Les connecteurs Webhook, Zapier et Kit disposent d'une condition d'envoi supplémentaire : **Uniquement les leads consentants**. Lorsqu'elle est activée, le connecteur n'envoie que les répondants ayant accepté de recevoir des e-mails marketing. Toute personne ayant refusé, ou à qui la question n'a jamais été posée, est ignorée, et cet envoi n'est pas retenté.
-
-<Callout type="warning">
-  Activez-la chaque fois que le connecteur alimente une liste de diffusion ou un outil d'e-mailing. Ajouter des personnes à des listes marketing sans leur consentement n'est pas conforme au RGPD. Les notifications Slack et e-mail sont destinées à votre propre équipe, elles ne proposent donc pas cet interrupteur.
-</Callout>
-
 ## Combinaisons à reprendre
 
 | Objectif | Événements | Portée |
@@ -58,7 +50,7 @@ Les connecteurs Webhook, Zapier et Kit disposent d'une condition d'envoi supplé
 | Évaluer chaque réponse dans votre propre backend | Nouvelle réponse | Tous les quiz |
 | Suivre uniquement le quiz phare | Nouveau lead | Quiz spécifiques |
 | Être prévenu quand votre agenda change | Réservation annulée + reprogrammée | Tous les quiz |
-| Synchroniser les leads avec votre outil d'e-mailing | Nouveau lead + **Uniquement les leads consentants** | Tous les quiz |
+| Synchroniser les leads avec votre outil d'e-mailing | Nouveau lead | Tous les quiz |
 
 <Callout type="info">
   Modifier les événements ou la portée **n'affecte que les événements ultérieurs** : rien n'est rejoué.
