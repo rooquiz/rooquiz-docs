@@ -298,7 +298,6 @@ OAuth를 지원하지 않는 클라이언트(Cursor, Codex CLI, Claude Desktop)�
 
 ## 현재 제한 사항
 
-- **랜덤 지식 퀴즈는 지원하지 않습니다.** 문항이 QuestionBank에 있으므로 편집기에서 관리하세요. MCP는 아직 이를 다루지 않습니다.
 - **문항 유형은 바꿀 수 없습니다.** 유형을 바꾸려면 `delete_question` 후 `add_question`으로 다시 만드세요. 선택지는 `update_question`으로 통째로 교체할 수 있지만, **TrueFalse 결과 유형 투표**(`trueOutcomes` / `falseOutcomes`)는 여전히 삭제 후 다시 만들어야 합니다.
 - **시나리오별 채점**: 점수 퀴즈와 결과 유형 퀴즈 시나리오에서 `update_question`은 최상위 `score` / `correctAnswer` / `aiMatch`를 거부합니다. 대신 `choices[i].score`(선택지 점수, Option Scoring) 또는 `choices[i].outcomes`(투표)를 담은 선택지를 전달하세요.
 - **시나리오별 문항 유형**: Ordering은 지식 퀴즈 전용이고, Cascade, Rate, DateField, TimeField는 점수 퀴즈 전용입니다. 점수 퀴즈의 FillBlank는 데이터만 수집합니다. 결과 유형 퀴즈는 SingleCheck / MultiCheck / DropDown / TrueFalse(그리고 페이지 나누기와 표시 블록)를 받습니다.

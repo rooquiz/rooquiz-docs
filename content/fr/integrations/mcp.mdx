@@ -299,7 +299,6 @@ Consultez les performances des quiz et les réponses pour que l'IA puisse boucle
 
 ## Limites actuelles
 
-- **Le Quiz de connaissances aléatoire n'est pas pris en charge** : ses questions se trouvent dans la banque de questions (QuestionBank) ; gérez-les dans l'éditeur, MCP ne les couvre pas encore.
 - **Le type de question ne peut pas être modifié** : pour changer de type, utilisez `delete_question` puis `add_question` pour reconstruire la question. Les choix peuvent être remplacés en bloc avec `update_question`, mais les **votes de résultat d'une question TrueFalse** (`trueOutcomes` / `falseOutcomes`) nécessitent toujours une suppression puis une recréation.
 - **Notation propre à chaque scène** : dans les scènes du quiz noté et du quiz de résultat, `update_question` refuse les paramètres de premier niveau `score` / `correctAnswer` / `aiMatch` ; passez plutôt des choix portant `choices[i].score` (notation par option) ou `choices[i].outcomes` (votes).
 - **Types de questions par scène** : Ordering est réservé au quiz de connaissances ; Cascade, Rate, DateField et TimeField sont réservés au quiz noté ; dans un quiz noté, FillBlank ne fait que recueillir des données ; les quiz de résultat acceptent SingleCheck / MultiCheck / DropDown / TrueFalse (ainsi que les sauts de page et les blocs d'affichage).

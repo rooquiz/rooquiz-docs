@@ -299,7 +299,6 @@ Consulta el rendimiento de los quizzes y las respuestas para que la AI pueda cer
 
 ## Limitaciones actuales
 
-- **El Cuestionario de conocimiento aleatorio no es compatible**: sus preguntas están en el banco de preguntas (QuestionBank); gestiónalas en el editor, MCP todavía no las cubre.
 - **El tipo de pregunta no se puede cambiar**: para cambiar el tipo, usa `delete_question` y luego `add_question` para reconstruirla. Las opciones se pueden reemplazar en bloque con `update_question`, pero los **votos de resultado de TrueFalse** (`trueOutcomes` / `falseOutcomes`) siguen requiriendo eliminar y volver a crear.
 - **Puntuación según el escenario**: en los escenarios de cuestionario con puntuación y de resultado, `update_question` rechaza `score` / `correctAnswer` / `aiMatch` en el nivel superior; pasa en su lugar opciones con `choices[i].score` (Option Scoring) o `choices[i].outcomes` (votos).
 - **Tipos de pregunta por escenario**: Ordering es exclusivo del cuestionario de conocimiento; Cascade, Rate, DateField y TimeField son exclusivos del cuestionario con puntuación; FillBlank en un cuestionario con puntuación solo recopila datos; los cuestionarios de resultado aceptan SingleCheck / MultiCheck / DropDown / TrueFalse (además de saltos de página y bloques de presentación).

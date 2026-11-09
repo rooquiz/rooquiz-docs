@@ -294,7 +294,6 @@ OAuth に対応していないクライアント(Cursor、Codex CLI、Claude Des
 
 ## 現在の制限
 
-- **ランダム知識クイズには対応していません**:設問は QuestionBank にあるため、エディターで管理してください。MCP はまだ対応していません。
 - **設問タイプは変更できません**:タイプを切り替えるには、`delete_question` してから `add_question` で作り直します。選択肢は `update_question` でまとめて置き換えられますが、**TrueFalse の結果タイプへの投票**(`trueOutcomes` / `falseOutcomes`)を変更するには、引き続き削除して作り直す必要があります。
 - **シーンごとの採点**:スコアクイズと結果タイプクイズのシーンでは、`update_question` はトップレベルの `score` / `correctAnswer` / `aiMatch` を拒否します。代わりに、`choices[i].score`(Option Scoring)または `choices[i].outcomes`(投票)を持つ選択肢を渡してください。
 - **シーンごとの設問タイプ**:Ordering は知識クイズ専用、Cascade、Rate、DateField、TimeField はスコアクイズ専用です。スコアクイズの FillBlank はデータを収集するだけです。結果タイプクイズで使えるのは SingleCheck / MultiCheck / DropDown / TrueFalse(と改ページ、表示用のブロック)です。

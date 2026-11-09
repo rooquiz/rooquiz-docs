@@ -299,7 +299,6 @@ Leia o desempenho dos quizzes e os envios para que a IA feche o ciclo criar → 
 
 ## Limitações atuais
 
-- **O Quiz de conhecimento aleatório não é suportado**: suas perguntas ficam no QuestionBank — gerencie-as no editor; o MCP ainda não as cobre.
 - **O tipo da pergunta não pode ser alterado**: para trocar o tipo, use `delete_question` e depois `add_question` para recriar. As opções podem ser substituídas por inteiro com `update_question`, mas os **votos de resultado de TrueFalse** (`trueOutcomes` / `falseOutcomes`) ainda exigem excluir e recriar.
 - **Pontuação específica de cada cenário**: nos cenários de quiz com pontuação e de quiz de resultado, `update_question` rejeita `score` / `correctAnswer` / `aiMatch` no nível superior — passe opções com `choices[i].score` (Pontuação por opção) ou `choices[i].outcomes` (votos).
 - **Tipos de pergunta por cenário**: Ordering é exclusivo do quiz de conhecimento; Cascade, Rate, DateField e TimeField são exclusivos do quiz com pontuação; FillBlank em um quiz com pontuação apenas coleta dados; quizzes de resultado aceitam SingleCheck / MultiCheck / DropDown / TrueFalse (além de quebras de página e blocos de exibição).

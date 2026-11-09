@@ -15,3 +15,7 @@
 # Booking availability moved to Cal.com when the built-in scheduler was retired (2026-10).
 # The page that took its place in the section explains connecting Cal.com.
 /:lang/bookings/availability  /:lang/bookings/calcom  301
+
+# Question banks (and the random knowledge quiz that drew from them) were removed from the
+# product (2026-11). Send the old page to the Template Center, the reuse path that remains.
+/:lang/library/question-banks  /:lang/library/templates  301

@@ -295,7 +295,6 @@ ChatGPT、claude.ai、Claude Code 等支援 MCP OAuth 的客戶端**無需手動
 
 ## 目前限制
 
-- **隨機知識測驗（Random Knowledge Quiz）不支援**：這類測驗的題目存放在題庫（QuestionBank）中，請在後台編輯器裡管理，MCP 暫不覆蓋。
 - **不能改題型**：需要換題型時，先 `delete_question` 再 `add_question` 重建。選項可以用 `update_question` 整體替換，但**判斷題的分型投票**（`trueOutcomes` / `falseOutcomes`）仍需刪題重建。
 - **各場景的計分方式**：評分測驗和分型測驗場景下，`update_question` 不接受頂層的 `score` / `correctAnswer` / `aiMatch`——請改為傳入帶 `choices[i].score`（選項分值，Option Scoring）或 `choices[i].outcomes`（投票）的選項。
 - **各場景的題型範圍**：Ordering 僅限知識測驗；Cascade、Rate、DateField 與 TimeField 僅限評分測驗；評分測驗裡的 FillBlank 只收集資料；分型測驗接受 SingleCheck / MultiCheck / DropDown / TrueFalse（外加分頁符與展示區塊）。

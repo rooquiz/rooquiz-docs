@@ -299,7 +299,6 @@ Read quiz performance and submissions so the AI can close the build → measure 
 
 ## Current limitations
 
-- **Random Knowledge Quiz is not supported**: its questions live in the QuestionBank — manage them in the editor; MCP doesn't cover them yet.
 - **Question type can't be changed**: to switch type, `delete_question` then `add_question` to rebuild. Choices can be replaced as a whole with `update_question`, but **TrueFalse outcome votes** (`trueOutcomes` / `falseOutcomes`) still need delete + recreate.
 - **Scene-specific scoring**: in the scored quiz and outcome quiz scenes `update_question` rejects the top-level `score` / `correctAnswer` / `aiMatch` — pass choices carrying `choices[i].score` (Option Scoring) or `choices[i].outcomes` (votes) instead.
 - **Question types per scene**: Ordering is knowledge-quiz only; Cascade, Rate, DateField and TimeField are scored-quiz only; FillBlank in a scored quiz only collects data; outcome quizzes accept SingleCheck / MultiCheck / DropDown / TrueFalse (plus page breaks and display blocks).

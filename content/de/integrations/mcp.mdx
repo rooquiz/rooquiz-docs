@@ -299,7 +299,6 @@ Lesen Sie Quiz-Performance und Einsendungen, damit die KI den Kreislauf aus Erst
 
 ## Aktuelle Einschränkungen
 
-- **Das Zufällige Wissensquiz wird nicht unterstützt**: Seine Fragen liegen im Fragenpool (QuestionBank) – verwalten Sie sie im Editor; MCP deckt sie noch nicht ab.
 - **Der Fragetyp lässt sich nicht ändern**: Um den Typ zu wechseln, verwenden Sie `delete_question` und dann `add_question`, um die Frage neu aufzubauen. Auswahloptionen lassen sich mit `update_question` als Ganzes ersetzen, aber **TrueFalse-Stimmen im Ergebnisquiz** (`trueOutcomes` / `falseOutcomes`) erfordern weiterhin Löschen und Neuanlegen.
 - **Szenenspezifische Bewertung**: In den Szenen Bewertetes Quiz und Ergebnisquiz lehnt `update_question` die Parameter `score` / `correctAnswer` / `aiMatch` auf oberster Ebene ab – übergeben Sie stattdessen Auswahloptionen mit `choices[i].score` (Option Scoring) oder `choices[i].outcomes` (Stimmen).
 - **Fragetypen pro Szene**: Ordering gibt es nur im Wissensquiz; Cascade, Rate, DateField und TimeField nur im Bewerteten Quiz; FillBlank erfasst im Bewerteten Quiz nur Daten; Ergebnisquizze akzeptieren SingleCheck / MultiCheck / DropDown / TrueFalse (plus Seitenumbrüche und Anzeigeblöcke).
