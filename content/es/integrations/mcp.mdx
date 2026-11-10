@@ -186,7 +186,7 @@ Una vez conectado, el asistente de AI puede llamar a las 44 herramientas siguien
 | `list_my_tenants` | Lista todos los equipos de los que formas parte y marca el que está activo. |
 | `get_active_tenant` | Devuelve el equipo activo del token (incluida su dirección de equipo); todas las escrituras se dirigen a él de forma predeterminada. |
 | `switch_active_tenant` | Cambia el equipo activo (se mantiene entre sesiones; el destino debe ser un equipo al que te hayas unido). |
-| `invite_member` | Invita por correo electrónico a alguien al equipo activo como miembro, visualizador o administrador; se envía un correo de invitación con un enlace para unirse. Solo propietario / administrador. |
+| `invite_member` | Invita por correo electrónico a alguien al equipo activo como miembro o administrador; se envía un correo de invitación con un enlace para unirse. Solo propietario / administrador. |
 | `update_tenant_slug` | Cambia la dirección del equipo, el primer segmento de la ruta de cada enlace de quiz en el dominio de la plataforma. Solo propietario / administrador. Todos los enlaces públicos de quiz cambian a la vez y la dirección anterior deja de funcionar; los enlaces `/a/<token>` siguen funcionando. |
 
 ### Plantillas
@@ -206,7 +206,7 @@ Una vez conectado, el asistente de AI puede llamar a las 44 herramientas siguien
 | `update_form` | Actualiza el título, la descripción, el estado abierto/cerrado, las portadas (`flagImg` / `landingImage`), el tema, la tarjeta para compartir en redes (`openGraph`), los textos del sistema, o reemplaza fusionando la configuración de `report` por subclave; en los cuestionarios de resultado, pasa `report.outcomes` para actualizar fusionando los tipos de resultado por `code` (las imágenes configuradas se conservan, y se rechaza eliminar un tipo al que todavía votan preguntas). El **idioma** solo se puede cambiar mientras el quiz no tenga versiones de idioma; el **escenario**, nunca. |
 | `delete_form` | Mueve un quiz a la papelera (eliminación lógica): se oculta de `list_forms` y puede recuperarse durante 5 días con `restore_form` (después se purga definitivamente). Solo el propietario del quiz o el propietario / un administrador del equipo pueden eliminarlo; los registros de respuestas se conservan hasta la purga definitiva. |
 | `restore_form` | Restaura desde la papelera un quiz eliminado con `delete_form`. |
-| `duplicate_form` | Duplica un quiz: clona su estructura de preguntas, puntuación, informe, apariencia y configuración, además de **todas las traducciones**, en un nuevo quiz del que eres propietario (con enlaces nuevos). **No** copia los registros de respuestas, la configuración de compartir, las integraciones ni el estado de bloqueo. `newTitle` es opcional. |
+| `duplicate_form` | Duplica un quiz: clona su estructura de preguntas, puntuación, informe, apariencia y configuración, además de **todas las traducciones**, en un nuevo quiz del que eres propietario (con enlaces nuevos). **No** copia los registros de respuestas, las integraciones ni el estado de bloqueo. `newTitle` es opcional. |
 
 ### Compartir y configuración de entrega
 
@@ -261,7 +261,7 @@ Las personas que responden un quiz; en la interfaz de administración se llaman 
 | `get_lead` | Muestra un lead por `leadId`, opcionalmente con el historial de respuestas del participante, los comentarios internos del equipo y la cronología de cambios. |
 | `list_lead_settings` | Lee los estados de seguimiento, la biblioteca de etiquetas y los miembros asignables del equipo. Llámala antes de escribir: los códigos de estado, los códigos de etiqueta y los ids de miembro son propios de cada equipo. |
 | `update_lead` | Mueve un lead a otro estado de seguimiento (p. ej. nuevo → contactado); queda registrado en la cronología del lead. |
-| `assign_leads` | Asigna hasta 50 leads a un miembro activo que no sea visualizador en una sola llamada (`"me"` para ti), o quita el responsable. El responsable recibe una única notificación agrupada. |
+| `assign_leads` | Asigna hasta 50 leads a un miembro activo en una sola llamada (`"me"` para ti), o quita el responsable. El responsable recibe una única notificación agrupada. |
 | `set_lead_tags` | Define etiquetas de color en hasta 50 leads en una sola llamada: `replace` (un solo lead), o `add` / `remove` para lotes, de modo que se conserven las etiquetas de otras personas. |
 | `add_lead_comment` | Escribe un comentario interno de seguimiento en un lead (solo para el equipo, nunca se muestra al participante), opcionalmente vinculado a una respuesta. |
 
@@ -306,7 +306,7 @@ Consulta el rendimiento de los quizzes y las respuestas para que la AI pueda cer
 - **El escenario queda fijado** tras la creación; el **idioma** solo se puede cambiar mientras el quiz no tenga versiones de idioma.
 - **La eliminación es lógica**: `delete_form` mueve el quiz a la papelera (se purga automáticamente a los 5 días), no lo elimina definitivamente al instante; para eliminarlo de forma permanente, vuelve a eliminarlo en la interfaz de administración.
 - **Límite de preguntas**: en el plan Free, un quiz admite como máximo **50 preguntas** (los saltos de página, los bloques de texto enriquecido y los carruseles de imágenes no cuentan); `create_form`, `add_question` e `insert_question` se rechazan al superar ese número. `duplicate_form` y `create_form_from_template` no tienen límite. Pro es ilimitado; consulta [Límite de preguntas](/es/editor).
-- **Duplicar no copia datos**: `duplicate_form` clona solo la estructura y las traducciones; **no** copia los registros de respuestas, la configuración de compartir ni las integraciones (que contienen secretos). El nuevo quiz empieza limpio.
+- **Duplicar no copia datos**: `duplicate_form` clona solo la estructura y las traducciones; **no** copia los registros de respuestas ni las integraciones (que contienen secretos). El nuevo quiz empieza limpio.
 - **Los campos de identidad del participante son inmutables**: `update_examinee` no puede cambiar el correo electrónico, el equipo ni el `examineeId` (son la identidad de autenticación).
 - **Los datos personales se devuelven enmascarados**: las herramientas de leads, reservas, participantes y registros devuelven nombres, direcciones de correo y números de teléfono enmascarados, incluidos los correos y teléfonos escritos en las respuestas. El enmascaramiento es irreversible; refiérete a las personas por `examineeId`, `leadId` o el id del registro.
 

@@ -1,6 +1,6 @@
 ---
 title: Membres et rôles
-description: "Invitez vos coéquipiers par e-mail et attribuez à chacun l'un des quatre rôles, de propriétaire à lecteur. Ce que permet chaque rôle, la durée de validité d'une invitation et comment modifier ou retirer un membre."
+description: "Invitez vos coéquipiers par e-mail et attribuez à chacun l'un des trois rôles : propriétaire, administrateur ou membre. Ce que permet chaque rôle, la durée de validité d'une invitation et comment modifier ou retirer un membre."
 ---
 
 ## Inviter des membres
@@ -9,16 +9,17 @@ Dans **Paramètres → Liste des membres**, saisissez un e-mail et choisissez un
 
 Une équipe peut compter jusqu'à **3 membres avec Free** et **10 avec Pro**, invitations en attente comprises. Besoin de plus de 10 ? Renseignez-vous sur l'offre Enterprise à [support@rooquiz.com](mailto:support@rooquiz.com).
 
-## Les quatre rôles
+## Les trois rôles
 
-Une équipe compte quatre rôles, du plus au moins privilégié :
+Une équipe compte trois rôles, du plus au moins privilégié :
 
 | Rôle | En une ligne |
 | --- | --- |
 | **Propriétaire** | Le détenteur final de l'équipe, avec un accès complet. Chaque équipe a **exactement un** propriétaire. |
-| **Administrateur** | Gère l'équipe au quotidien : formulaires, répondants, leads, membres, paramètres d'équipe. |
-| **Membre** | Crée des quiz et traite les leads qu'ils génèrent. |
-| **Lecteur** | Consulte. Ne peut rien modifier, nulle part. |
+| **Administrateur** | Gère l'équipe au quotidien : tout ce que fait un membre, plus les membres et les paramètres d'équipe. |
+| **Membre** | Crée et modifie tous les quiz de l'équipe et traite ses leads. |
+
+Tous les membres d'une équipe voient **chaque quiz et chaque réponse** de l'équipe : il n'y a pas de partage quiz par quiz. Les rôles décident seulement qui peut supprimer, gérer les personnes et modifier les paramètres de l'équipe.
 
 La frontière entre propriétaire et administrateur est volontaire : **l'administrateur gère l'équipe, le propriétaire la détient.** Tout ce qui modifie l'appartenance de l'équipe, ou sa relation avec nous en tant que client payant, reste du ressort du propriétaire.
 
@@ -28,58 +29,55 @@ La frontière entre propriétaire et administrateur est volontaire : **l'adminis
 
 ### Quiz
 
-| | Propriétaire | Administrateur | Membre | Lecteur |
-| --- | :---: | :---: | :---: | :---: |
-| Créer un quiz | ✅ | ✅ | ✅ | — |
-| Voir la liste des quiz | ✅ | ✅ | **les siens + partagés** | **partagés uniquement** |
-| Modifier le contenu d'un quiz | ✅ | ✅ | **les siens + partagés** | — |
-| Partage, transfert, traductions, duplication | ✅ | ✅ | **les siens + partagés** | — |
-| Mettre à la corbeille, restaurer, supprimer | ✅ | ✅ | **les siens uniquement** | — |
-| Voir les réponses | ✅ | ✅ | **les siens + partagés** | **partagés uniquement** |
-| Supprimer des réponses | ✅ | ✅ | **les siens + partagés** | — |
+| | Propriétaire | Administrateur | Membre |
+| --- | :---: | :---: | :---: |
+| Créer un quiz | ✅ | ✅ | ✅ |
+| Voir tous les quiz de l'équipe | ✅ | ✅ | ✅ |
+| Modifier le contenu, les paramètres et les traductions d'un quiz ; dupliquer | ✅ | ✅ | ✅ |
+| Transférer un quiz à un autre membre | ✅ | ✅ | **les siens uniquement** |
+| Mettre à la corbeille, restaurer, supprimer | ✅ | ✅ | **les siens uniquement** |
+| Voir les réponses | ✅ | ✅ | ✅ |
+| Supprimer des réponses | ✅ | ✅ | ✅ |
+
+« Les siens » désigne les quiz dont vous êtes le propriétaire : par défaut, la personne qui l'a créé, jusqu'à ce qu'il soit transféré.
 
 ### Répondants et leads
 
-| | Propriétaire | Administrateur | Membre | Lecteur |
-| --- | :---: | :---: | :---: | :---: |
-| Voir tous les répondants et leads de l'équipe | ✅ | ✅ | ✅ | ✅ |
-| Traiter les leads : attribuer, étiqueter, changer le statut, commenter | ✅ | ✅ | ✅ | — |
-| Modifier les informations d'un répondant | ✅ | ✅ | ✅ | — |
-| Créer ou supprimer un répondant | ✅ | ✅ | — | — |
-| Configurer les statuts et étiquettes de lead | ✅ | ✅ | — | — |
-| Exporter des données | ✅ | ✅ | — | — |
-
-<Callout type="info">
-  Les répondants et les leads sont **communs à toute l'équipe** pour tout le monde, lecteurs compris : ils ne sont pas restreints selon les quiz que vous pouvez voir. Seules les *réponses* suivent la visibilité des quiz.
-</Callout>
+| | Propriétaire | Administrateur | Membre |
+| --- | :---: | :---: | :---: |
+| Voir tous les répondants et leads de l'équipe | ✅ | ✅ | ✅ |
+| Traiter les leads : attribuer, étiqueter, changer le statut, commenter | ✅ | ✅ | ✅ |
+| Créer, modifier ou supprimer un répondant | ✅ | ✅ | ✅ |
+| Configurer les statuts et étiquettes de lead | ✅ | ✅ | — |
+| Exporter des données | ✅ | ✅ | — |
 
 ### Membres
 
-| | Propriétaire | Administrateur | Membre | Lecteur |
-| --- | :---: | :---: | :---: | :---: |
-| Voir la liste des membres | ✅ | ✅ | ✅ | ✅ |
-| Inviter des membres, y compris en tant qu'administrateur | ✅ | ✅ | — | — |
-| Changer les rôles, désactiver, activer, retirer | **tout le monde sauf le propriétaire** | **tout le monde sauf le propriétaire** | — | — |
-| Transférer la propriété | ✅ | — | — | — |
-| Quitter l'équipe | **transférer d'abord** | ✅ | ✅ | ✅ |
+| | Propriétaire | Administrateur | Membre |
+| --- | :---: | :---: | :---: |
+| Voir la liste des membres | ✅ | ✅ | ✅ |
+| Inviter des membres, y compris en tant qu'administrateur | ✅ | ✅ | — |
+| Changer les rôles, désactiver, activer, retirer | **tout le monde sauf le propriétaire** | **tout le monde sauf le propriétaire** | — |
+| Transférer la propriété de l'équipe | ✅ | — | — |
+| Quitter l'équipe | **transférer d'abord** | ✅ | ✅ |
 
 ### Paramètres d'équipe
 
-| | Propriétaire | Administrateur | Membre | Lecteur |
-| --- | :---: | :---: | :---: | :---: |
-| Nom, logo et adresse de l'équipe | ✅ | ✅ | — | — |
-| Connecteurs | ✅ | ✅ | — | — |
-| Envoi d'e-mails | ✅ | ✅ | — | — |
-| Journaux d'audit | ✅ | ✅ | — | — |
-| Domaine personnalisé | ✅ | — | — | — |
-| Clés API | ✅ | — | — | — |
-| Supprimer l'équipe | ✅ | — | — | — |
+| | Propriétaire | Administrateur | Membre |
+| --- | :---: | :---: | :---: |
+| Nom, logo et adresse de l'équipe | ✅ | ✅ | — |
+| Connecteurs | ✅ | ✅ | — |
+| Envoi d'e-mails | ✅ | ✅ | — |
+| Journaux d'audit | ✅ | ✅ | — |
+| Domaine personnalisé | ✅ | — | — |
+| Clés API | ✅ | — | — |
+| Supprimer l'équipe | ✅ | — | — |
 
 ### Facturation
 
-| | Propriétaire | Administrateur | Membre | Lecteur |
-| --- | :---: | :---: | :---: | :---: |
-| Mise à niveau, moyen de paiement, résiliation, remboursement | ✅ | — | — | — |
+| | Propriétaire | Administrateur | Membre |
+| --- | :---: | :---: | :---: |
+| Mise à niveau, moyen de paiement, résiliation, remboursement | ✅ | — | — |
 
 Tout ce qui modifie l'abonnement lui-même reste du ressort du propriétaire.
 
@@ -88,18 +86,14 @@ Tout ce qui modifie l'abonnement lui-même reste du ressort du propriétaire.
 - Le **propriétaire** et les **administrateurs** peuvent tous deux gérer tous les autres, y compris entre eux. Un administrateur peut nommer un autre administrateur, le rétrograder, le désactiver ou le retirer.
 - La ligne du **propriétaire** lui-même est intouchable. Le propriétaire ne change que par un [transfert de propriété](#transférer-la-propriété), jamais par une modification de rôle.
 - **Personne ne peut modifier son propre rôle**, pas même pour se rétrograder. Demandez à un autre propriétaire ou administrateur de le faire. Quitter l'équipe reste toujours une décision qui vous appartient.
-- Les **membres** et les **lecteurs** ne peuvent gérer personne.
+- Les **membres** ne peuvent gérer personne.
 
 <Callout type="warning">
-  Comme les administrateurs peuvent se rétrograder entre eux, n'accordez ce rôle qu'aux personnes à qui vous confieriez l'équipe. Si vous voulez qu'une personne voie tout sans rien modifier, choisissez **Lecteur**.
+  Comme les administrateurs peuvent se rétrograder entre eux, n'accordez ce rôle qu'aux personnes à qui vous confieriez l'équipe.
 </Callout>
 
 ## Transférer la propriété
 
-Seul le propriétaire peut transférer la propriété, depuis **Paramètres → Liste des membres**. Le nouveau propriétaire doit déjà être un membre actif de l'équipe. Après le transfert, vous devenez un membre ordinaire : l'équipe a toujours exactement un propriétaire.
+Seul le propriétaire peut transférer la propriété de l'équipe, depuis **Paramètres → Liste des membres**. Le nouveau propriétaire doit déjà être un membre actif de l'équipe. Après le transfert, vous devenez un membre ordinaire : l'équipe a toujours exactement un propriétaire.
 
 Un propriétaire ne peut pas quitter l'équipe directement ; il doit d'abord transférer la propriété.
-
-<Callout type="info">
-  Vous voulez qu'une personne voie les résultats sans toucher au quiz ? Invitez-la en tant que **Lecteur**, puis partagez avec elle les quiz concernés.
-</Callout>

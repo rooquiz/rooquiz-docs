@@ -1,6 +1,6 @@
 ---
 title: Mitglieder & Rollen
-description: 'Laden Sie Teammitglieder per E-Mail ein und geben Sie jedem eine der vier Rollen, vom Inhaber bis zum Betrachter. Was jede Rolle darf, wie lange Einladungen gelten und wie Sie Mitglieder ändern oder entfernen.'
+description: 'Laden Sie Teammitglieder per E-Mail ein und geben Sie jedem eine der drei Rollen: Inhaber, Administrator oder Mitglied. Was jede Rolle darf, wie lange Einladungen gelten und wie Sie Mitglieder ändern oder entfernen.'
 ---
 
 ## Mitglieder einladen
@@ -9,16 +9,17 @@ Geben Sie unter **Einstellungen → Mitgliederliste** eine E-Mail-Adresse ein un
 
 Ein Team kann im **Free-Tarif bis zu 3 Mitglieder** und im **Pro-Tarif bis zu 10** haben, ausstehende Einladungen eingerechnet. Mehr als 10 nötig? Fragen Sie unter [support@rooquiz.com](mailto:support@rooquiz.com) nach Enterprise.
 
-## Die vier Rollen
+## Die drei Rollen
 
-Ein Team hat vier Rollen, von den meisten zu den wenigsten Rechten:
+Ein Team hat drei Rollen, von den meisten zu den wenigsten Rechten:
 
 | Rolle | In einem Satz |
 | --- | --- |
 | **Inhaber** | Der endgültige Eigentümer des Teams, mit vollem Zugriff. Jedes Team hat **genau einen** Inhaber. |
-| **Administrator** | Führt das Team im Alltag: Formulare, Teilnehmer, Leads, Mitglieder, Team-Einstellungen. |
-| **Mitglied** | Erstellt Quizze und bearbeitet die daraus entstehenden Leads. |
-| **Betrachter** | Liest. Kann nirgends etwas ändern. |
+| **Administrator** | Führt das Team im Alltag: alles, was ein Mitglied kann, plus Mitglieder und Team-Einstellungen. |
+| **Mitglied** | Erstellt und bearbeitet alle Quizze des Teams und bearbeitet seine Leads. |
+
+Alle im Team sehen **jedes Quiz und jede Antwort** darin – es gibt kein Teilen einzelner Quizze. Rollen entscheiden nur, wer löschen, Personen verwalten und Einstellungen auf Teamebene ändern darf.
 
 Die Grenze zwischen Inhaber und Administrator ist gewollt: **Ein Administrator führt das Team, ein Inhaber besitzt es.** Alles, was ändert, wem das Team gehört, oder seine Beziehung zu uns als zahlendem Kunden betrifft, bleibt beim Inhaber.
 
@@ -28,58 +29,55 @@ Die Grenze zwischen Inhaber und Administrator ist gewollt: **Ein Administrator f
 
 ### Quizze
 
-| | Inhaber | Administrator | Mitglied | Betrachter |
-| --- | :---: | :---: | :---: | :---: |
-| Ein Quiz erstellen | ✅ | ✅ | ✅ | — |
-| Die Quiz-Liste sehen | ✅ | ✅ | **eigene + geteilte** | **nur geteilte** |
-| Quiz-Inhalte bearbeiten | ✅ | ✅ | **eigene + geteilte** | — |
-| Teilen, Übertragen, Übersetzungen, Duplizieren | ✅ | ✅ | **eigene + geteilte** | — |
-| In den Papierkorb verschieben, wiederherstellen, löschen | ✅ | ✅ | **nur eigene** | — |
-| Antworten sehen | ✅ | ✅ | **eigene + geteilte** | **nur geteilte** |
-| Antworten löschen | ✅ | ✅ | **eigene + geteilte** | — |
+| | Inhaber | Administrator | Mitglied |
+| --- | :---: | :---: | :---: |
+| Ein Quiz erstellen | ✅ | ✅ | ✅ |
+| Alle Quizze des Teams sehen | ✅ | ✅ | ✅ |
+| Quiz-Inhalte, Einstellungen und Übersetzungen bearbeiten; duplizieren | ✅ | ✅ | ✅ |
+| Ein Quiz an ein anderes Mitglied übertragen | ✅ | ✅ | **nur eigene** |
+| In den Papierkorb verschieben, wiederherstellen, löschen | ✅ | ✅ | **nur eigene** |
+| Antworten sehen | ✅ | ✅ | ✅ |
+| Antworten löschen | ✅ | ✅ | ✅ |
+
+„Eigene“ sind Quizze, deren Quiz-Inhaber Sie sind – standardmäßig die Person, die es erstellt hat, bis es übertragen wird.
 
 ### Teilnehmer & Leads
 
-| | Inhaber | Administrator | Mitglied | Betrachter |
-| --- | :---: | :---: | :---: | :---: |
-| Alle Teilnehmer und Leads des Teams sehen | ✅ | ✅ | ✅ | ✅ |
-| Leads bearbeiten – zuweisen, markieren, Status ändern, kommentieren | ✅ | ✅ | ✅ | — |
-| Teilnehmerdaten bearbeiten | ✅ | ✅ | ✅ | — |
-| Einen Teilnehmer anlegen oder löschen | ✅ | ✅ | — | — |
-| Lead-Status und Markierungen konfigurieren | ✅ | ✅ | — | — |
-| Daten exportieren | ✅ | ✅ | — | — |
-
-<Callout type="info">
-  Teilnehmer und Leads gelten für alle **teamweit**, auch für Betrachter – sie werden nicht dadurch eingeschränkt, welche Quizze Sie sehen können. Nur *Antworten* folgen der Sichtbarkeit der Quizze.
-</Callout>
+| | Inhaber | Administrator | Mitglied |
+| --- | :---: | :---: | :---: |
+| Alle Teilnehmer und Leads des Teams sehen | ✅ | ✅ | ✅ |
+| Leads bearbeiten – zuweisen, markieren, Status ändern, kommentieren | ✅ | ✅ | ✅ |
+| Einen Teilnehmer anlegen, bearbeiten oder löschen | ✅ | ✅ | ✅ |
+| Lead-Status und Markierungen konfigurieren | ✅ | ✅ | — |
+| Daten exportieren | ✅ | ✅ | — |
 
 ### Mitglieder
 
-| | Inhaber | Administrator | Mitglied | Betrachter |
-| --- | :---: | :---: | :---: | :---: |
-| Die Mitgliederliste sehen | ✅ | ✅ | ✅ | ✅ |
-| Mitglieder einladen, auch als Administrator | ✅ | ✅ | — | — |
-| Rollen ändern, deaktivieren, aktivieren, entfernen | **alle außer dem Inhaber** | **alle außer dem Inhaber** | — | — |
-| Inhaberschaft übertragen | ✅ | — | — | — |
-| Das Team verlassen | **erst übertragen** | ✅ | ✅ | ✅ |
+| | Inhaber | Administrator | Mitglied |
+| --- | :---: | :---: | :---: |
+| Die Mitgliederliste sehen | ✅ | ✅ | ✅ |
+| Mitglieder einladen, auch als Administrator | ✅ | ✅ | — |
+| Rollen ändern, deaktivieren, aktivieren, entfernen | **alle außer dem Inhaber** | **alle außer dem Inhaber** | — |
+| Team-Inhaberschaft übertragen | ✅ | — | — |
+| Das Team verlassen | **erst übertragen** | ✅ | ✅ |
 
 ### Team-Einstellungen
 
-| | Inhaber | Administrator | Mitglied | Betrachter |
-| --- | :---: | :---: | :---: | :---: |
-| Teamname, Logo, Adresse | ✅ | ✅ | — | — |
-| Connectors | ✅ | ✅ | — | — |
-| E-Mail-Versand | ✅ | ✅ | — | — |
-| Audit-Logs | ✅ | ✅ | — | — |
-| Eigene Domain | ✅ | — | — | — |
-| API-Schlüssel | ✅ | — | — | — |
-| Das Team löschen | ✅ | — | — | — |
+| | Inhaber | Administrator | Mitglied |
+| --- | :---: | :---: | :---: |
+| Teamname, Logo, Adresse | ✅ | ✅ | — |
+| Connectors | ✅ | ✅ | — |
+| E-Mail-Versand | ✅ | ✅ | — |
+| Audit-Logs | ✅ | ✅ | — |
+| Eigene Domain | ✅ | — | — |
+| API-Schlüssel | ✅ | — | — |
+| Das Team löschen | ✅ | — | — |
 
 ### Abrechnung
 
-| | Inhaber | Administrator | Mitglied | Betrachter |
-| --- | :---: | :---: | :---: | :---: |
-| Upgrade, Zahlungsmethode, Kündigung, Rückerstattung | ✅ | — | — | — |
+| | Inhaber | Administrator | Mitglied |
+| --- | :---: | :---: | :---: |
+| Upgrade, Zahlungsmethode, Kündigung, Rückerstattung | ✅ | — | — |
 
 Alles, was das Abonnement selbst verändert, bleibt beim Inhaber.
 
@@ -88,18 +86,14 @@ Alles, was das Abonnement selbst verändert, bleibt beim Inhaber.
 - **Inhaber** und **Administrator** können beide alle anderen verwalten – auch sich gegenseitig. Ein Administrator kann einen anderen Administrator ernennen, herabstufen, deaktivieren oder entfernen.
 - Die eigene Zeile des **Inhabers** ist unantastbar. Der Inhaber wechselt nur durch [Übertragung der Inhaberschaft](#inhaberschaft-übertragen), nie durch Bearbeiten einer Rolle.
 - **Niemand kann seine eigene Rolle ändern**, nicht einmal, um zurückzutreten. Bitten Sie einen anderen Inhaber oder Administrator darum. Das Team zu verlassen, können Sie dagegen immer selbst.
-- **Mitglied** und **Betrachter** können niemanden verwalten.
+- **Mitglieder** können niemanden verwalten.
 
 <Callout type="warning">
-  Da Administratoren sich gegenseitig herabstufen können, sollten Sie die Administratorrolle nur Personen geben, denen Sie das Team anvertrauen würden. Wenn jemand alles sehen, aber nichts anfassen soll, ist das die Rolle **Betrachter**.
+  Da Administratoren sich gegenseitig herabstufen können, sollten Sie die Administratorrolle nur Personen geben, denen Sie das Team anvertrauen würden.
 </Callout>
 
 ## Inhaberschaft übertragen
 
-Nur der Inhaber kann die Inhaberschaft übertragen, und zwar unter **Einstellungen → Mitgliederliste**. Der neue Inhaber muss bereits ein aktives Mitglied des Teams sein. Nach der Übertragung werden Sie ein normales Mitglied – das Team hat immer genau einen Inhaber.
+Nur der Inhaber kann die Team-Inhaberschaft übertragen, und zwar unter **Einstellungen → Mitgliederliste**. Der neue Inhaber muss bereits ein aktives Mitglied des Teams sein. Nach der Übertragung werden Sie ein normales Mitglied – das Team hat immer genau einen Inhaber.
 
 Ein Inhaber kann das Team nicht direkt verlassen; übertragen Sie zuerst die Inhaberschaft.
-
-<Callout type="info">
-  Soll jemand Ergebnisse sehen, ohne das Quiz anzufassen? Laden Sie die Person als **Betrachter** ein und teilen Sie anschließend die relevanten Quizze mit ihr.
-</Callout>

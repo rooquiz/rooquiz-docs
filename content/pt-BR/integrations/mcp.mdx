@@ -186,7 +186,7 @@ Depois de conectado, o assistente de IA pode chamar as 44 ferramentas abaixo. To
 | `list_my_tenants` | Lista todas as equipes de que você faz parte, marcando a ativa no momento. |
 | `get_active_tenant` | Retorna a equipe em que o token está ativo no momento (incluindo o endereço da equipe); todas as escritas usam essa equipe por padrão. |
 | `switch_active_tenant` | Troca a equipe ativa (persiste entre sessões; o destino deve ser uma equipe de que você participa). |
-| `invite_member` | Convida alguém por e-mail para a equipe ativa como membro, visualizador ou administrador; é enviado um e-mail de convite com um link de entrada. Somente proprietário / administrador. |
+| `invite_member` | Convida alguém por e-mail para a equipe ativa como membro ou administrador; é enviado um e-mail de convite com um link de entrada. Somente proprietário / administrador. |
 | `update_tenant_slug` | Altera o endereço da equipe — o primeiro segmento do caminho de todo link de quiz no domínio da plataforma. Somente proprietário / administrador. Todos os links públicos de quiz mudam de uma vez e o endereço antigo deixa de funcionar; links `/a/<token>` continuam funcionando. |
 
 ### Modelos
@@ -206,7 +206,7 @@ Depois de conectado, o assistente de IA pode chamar as 44 ferramentas abaixo. To
 | `update_form` | Atualiza título, descrição, estado aberto/fechado, capas (`flagImg` / `landingImage`), tema, cartão de compartilhamento social (`openGraph`), textos do sistema, ou substitui por mesclagem a configuração `report` por subchave; nos quizzes de resultado, passe `report.outcomes` para atualizar por mesclagem os tipos de resultado por `code` (imagens já configuradas são mantidas, e remover um tipo ainda referenciado por votos de perguntas é rejeitado). O **idioma** só pode ser alterado enquanto o quiz não tiver versões de idioma; o **cenário**, nunca. |
 | `delete_form` | Move um quiz para a lixeira (exclusão lógica): fica oculto em `list_forms` e pode ser recuperado por 5 dias via `restore_form` (depois é removido permanentemente). Apenas o proprietário do quiz ou o proprietário / administrador da equipe pode excluir; os registros de respostas são mantidos até a remoção permanente. |
 | `restore_form` | Restaura da lixeira um quiz excluído por `delete_form`. |
-| `duplicate_form` | Duplica um quiz: clona a estrutura de perguntas, a pontuação, o relatório, o visual e as configurações, além de **todas as traduções**, em um novo quiz de sua propriedade (com links novos). **Não** copia registros de respostas, compartilhamento, integrações nem estado de bloqueio. `newTitle` opcional. |
+| `duplicate_form` | Duplica um quiz: clona a estrutura de perguntas, a pontuação, o relatório, o visual e as configurações, além de **todas as traduções**, em um novo quiz de sua propriedade (com links novos). **Não** copia registros de respostas, integrações nem estado de bloqueio. `newTitle` opcional. |
 
 ### Compartilhamento e configurações de entrega
 
@@ -261,7 +261,7 @@ As pessoas que fazem um quiz — chamadas de Respondentes no painel administrati
 | `get_lead` | Mostra um lead por `leadId`, opcionalmente com o histórico de envios do respondente, os comentários internos da equipe e a linha do tempo de alterações. |
 | `list_lead_settings` | Lê os status de acompanhamento, a biblioteca de tags e os membros atribuíveis da equipe. Chame antes de escrever — os códigos de status, os códigos de tag e os ids de membros são específicos de cada equipe. |
 | `update_lead` | Move um lead para outro status de acompanhamento (por exemplo, novo → contatado); fica registrado na linha do tempo do lead. |
-| `assign_leads` | Atribui até 50 leads a um membro ativo que não seja visualizador em uma única chamada (`"me"` para você mesmo), ou remove o responsável. O responsável recebe uma única notificação agregada. |
+| `assign_leads` | Atribui até 50 leads a um membro ativo em uma única chamada (`"me"` para você mesmo), ou remove o responsável. O responsável recebe uma única notificação agregada. |
 | `set_lead_tags` | Define tags coloridas em até 50 leads em uma única chamada: `replace` (um único lead), ou `add` / `remove` em lotes, para que as tags de outras pessoas sejam preservadas. |
 | `add_lead_comment` | Escreve um comentário interno de acompanhamento em um lead (só para a equipe, nunca exibido ao respondente), opcionalmente vinculado a um envio. |
 
@@ -306,7 +306,7 @@ Leia o desempenho dos quizzes e os envios para que a IA feche o ciclo criar → 
 - **O cenário fica bloqueado** após a criação; o **idioma** só pode ser alterado enquanto o quiz não tiver versões de idioma.
 - **A exclusão é lógica**: `delete_form` move para a lixeira (removido automaticamente após 5 dias), não é uma exclusão permanente imediata; para remoção permanente, exclua novamente no painel administrativo.
 - **Limite de perguntas**: no plano Free, um quiz comporta no máximo **50 perguntas** (quebras de página, blocos de rich text e carrosséis de imagens não contam); `create_form`, `add_question` e `insert_question` são rejeitados acima disso. `duplicate_form` e `create_form_from_template` não têm limite. O Pro é ilimitado — consulte [Limite de perguntas](/pt-BR/editor).
-- **A duplicação não copia dados**: `duplicate_form` clona apenas a estrutura e as traduções — **não** copia registros de respostas, configurações de compartilhamento nem integrações (que contêm segredos); o novo quiz começa limpo.
+- **A duplicação não copia dados**: `duplicate_form` clona apenas a estrutura e as traduções — **não** copia registros de respostas nem integrações (que contêm segredos); o novo quiz começa limpo.
 - **Os campos de identidade do respondente são imutáveis**: `update_examinee` não pode alterar e-mail, equipe ou `examineeId` (eles são a identidade de autenticação).
 - **Os dados pessoais retornam mascarados**: as ferramentas de leads, agendamentos, respondentes e registros retornam nomes, endereços de e-mail e números de telefone mascarados — incluindo e-mails e telefones digitados nas respostas. O mascaramento é irreversível; faça referência às pessoas por `examineeId`, `leadId` ou id do registro.
 

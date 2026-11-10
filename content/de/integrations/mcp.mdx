@@ -186,7 +186,7 @@ Nach dem Verbinden kann der KI-Assistent die folgenden 44 Tools aufrufen. Sie wi
 | `list_my_tenants` | Listet alle Teams auf, denen Sie angehören, und markiert das gerade aktive. |
 | `get_active_tenant` | Gibt das Team zurück, in dem das Token gerade aktiv ist (einschließlich seiner Team-Adresse); alle Schreibvorgänge beziehen sich standardmäßig darauf. |
 | `switch_active_tenant` | Wechselt das aktive Team (bleibt sitzungsübergreifend erhalten; das Ziel muss ein Team sein, dem Sie beigetreten sind). |
-| `invite_member` | Lädt eine Person per E-Mail als Mitglied, Betrachter oder Administrator in das aktive Team ein; es wird eine Einladungs-E-Mail mit Beitrittslink versendet. Nur für Inhaber / Administratoren. |
+| `invite_member` | Lädt eine Person per E-Mail als Mitglied oder Administrator in das aktive Team ein; es wird eine Einladungs-E-Mail mit Beitrittslink versendet. Nur für Inhaber / Administratoren. |
 | `update_tenant_slug` | Ändert die Team-Adresse – das erste Pfadsegment jedes Quiz-Links auf der Plattform-Domain. Nur für Inhaber / Administratoren. Alle öffentlichen Quiz-Links ändern sich auf einmal, und die alte Adresse funktioniert nicht mehr; `/a/<token>`-Links funktionieren weiterhin. |
 
 ### Vorlagen
@@ -206,7 +206,7 @@ Nach dem Verbinden kann der KI-Assistent die folgenden 44 Tools aufrufen. Sie wi
 | `update_form` | Aktualisiert Titel, Beschreibung, Status geöffnet/geschlossen, Titelbilder (`flagImg` / `landingImage`), Theme, Social-Share-Card (`openGraph`), Systemtexte oder ersetzt die `report`-Konfiguration zusammenführend pro Unterschlüssel; bei Ergebnisquizzen übergeben Sie `report.outcomes`, um Ergebnistypen per `code` zusammenführend zu aktualisieren (konfigurierte Bilder bleiben erhalten, und das Entfernen eines Typs, auf den noch Stimmen von Fragen verweisen, wird abgelehnt). Die **Sprache** lässt sich nur ändern, solange das Quiz keine Sprachversionen hat; die **Szene** nie. |
 | `delete_form` | Verschiebt ein Quiz in den Papierkorb (Soft Delete): ausgeblendet in `list_forms`, 5 Tage lang über `restore_form` wiederherstellbar (danach endgültig gelöscht). Nur der Quiz-Inhaber oder der Team-Inhaber / ein Administrator kann löschen; Einsendungen bleiben bis zur endgültigen Löschung erhalten. |
 | `restore_form` | Stellt ein mit `delete_form` gelöschtes Quiz aus dem Papierkorb wieder her. |
-| `duplicate_form` | Dupliziert ein Quiz: klont Fragenstruktur, Bewertung, Bericht, Gestaltung und Einstellungen sowie **alle Sprachübersetzungen** in ein neues Quiz in Ihrem Besitz (mit neuen Links). Kopiert **keine** Einsendungen, Freigaben, Integrationen oder Sperrstatus. Optional `newTitle`. |
+| `duplicate_form` | Dupliziert ein Quiz: klont Fragenstruktur, Bewertung, Bericht, Gestaltung und Einstellungen sowie **alle Sprachübersetzungen** in ein neues Quiz in Ihrem Besitz (mit neuen Links). Kopiert **keine** Einsendungen, Integrationen oder Sperrstatus. Optional `newTitle`. |
 
 ### Teilen & Auslieferungseinstellungen
 
@@ -261,7 +261,7 @@ Die Personen, die ein Quiz absolvieren – in der Admin-Oberfläche „Teilnehme
 | `get_lead` | Zeigt einen Lead per `leadId` an, optional mit der Einsendungshistorie des Teilnehmers, den internen Kommentaren des Teams und dem Änderungsverlauf. |
 | `list_lead_settings` | Liest die Nachfass-Status, die Markierungsbibliothek und die zuweisbaren Mitglieder des Teams. Rufen Sie dies vor dem Schreiben auf – Status-Codes, Markierungs-Codes und Mitglieds-IDs sind teamspezifisch. |
 | `update_lead` | Verschiebt einen Lead in einen anderen Nachfass-Status (z. B. neu → kontaktiert); wird im Verlauf des Leads festgehalten. |
-| `assign_leads` | Weist in einem Aufruf bis zu 50 Leads einem aktiven Mitglied zu, das kein Betrachter ist (`"me"` für Sie selbst), oder entfernt die Zuweisung. Der Zuständige erhält eine gesammelte Benachrichtigung. |
+| `assign_leads` | Weist in einem Aufruf bis zu 50 Leads einem aktiven Mitglied zu (`"me"` für Sie selbst), oder entfernt die Zuweisung. Der Zuständige erhält eine gesammelte Benachrichtigung. |
 | `set_lead_tags` | Setzt Farbmarkierungen für bis zu 50 Leads in einem Aufruf: `replace` (einzelner Lead) oder `add` / `remove` für Stapel, damit die Markierungen anderer erhalten bleiben. |
 | `add_lead_comment` | Schreibt einen internen Nachfass-Kommentar zu einem Lead (nur für das Team, nie für den Teilnehmer sichtbar), optional mit Bezug auf eine Einsendung. |
 
@@ -306,7 +306,7 @@ Lesen Sie Quiz-Performance und Einsendungen, damit die KI den Kreislauf aus Erst
 - **Die Szene ist nach dem Erstellen gesperrt**; die **Sprache** lässt sich nur ändern, solange das Quiz keine Sprachversionen hat.
 - **Löschen ist ein Soft Delete**: `delete_form` verschiebt in den Papierkorb (nach 5 Tagen automatisch endgültig gelöscht), es löscht nicht sofort endgültig; für die endgültige Entfernung löschen Sie erneut in der Admin-Oberfläche.
 - **Fragenlimit**: Im Free-Tarif enthält ein Quiz höchstens **50 Fragen** (Seitenumbrüche, Rich-Text-Blöcke und Bildkarussells zählen nicht); `create_form`, `add_question` und `insert_question` werden darüber hinaus abgelehnt. `duplicate_form` und `create_form_from_template` sind nicht begrenzt. Pro ist unbegrenzt – siehe [Fragenlimit](/de/editor).
-- **Duplizieren kopiert keine Daten**: `duplicate_form` klont nur Struktur und Übersetzungen – es kopiert **keine** Einsendungen, Freigabeeinstellungen oder Integrationen (die Geheimnisse enthalten); das neue Quiz startet leer.
+- **Duplizieren kopiert keine Daten**: `duplicate_form` klont nur Struktur und Übersetzungen – es kopiert **keine** Einsendungen oder Integrationen (die Geheimnisse enthalten); das neue Quiz startet leer.
 - **Identitätsfelder von Teilnehmern sind unveränderlich**: `update_examinee` kann E-Mail, Team oder `examineeId` nicht ändern (sie bilden die Authentifizierungsidentität).
 - **Personenbezogene Daten werden maskiert zurückgegeben**: Die Tools für Leads, Buchungen, Teilnehmer und Einsendungen geben Namen, E-Mail-Adressen und Telefonnummern maskiert zurück – auch E-Mail-Adressen und Telefonnummern, die in Antworten eingegeben wurden. Die Maskierung ist nicht umkehrbar; verweisen Sie auf Personen über `examineeId`, `leadId` oder die ID der Einsendung.
 

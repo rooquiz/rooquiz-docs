@@ -186,7 +186,7 @@ Once connected, the AI assistant can call the 44 tools below. They all act on th
 | `list_my_tenants` | List all teams you belong to, marking the currently active one. |
 | `get_active_tenant` | Return the team the token is currently active in (including its team address); all writes default to it. |
 | `switch_active_tenant` | Switch the active team (persists across sessions; target must be a team you've joined). |
-| `invite_member` | Invite someone to the active team by email as member, viewer or admin; an invitation email with a join link is sent. Owner / admin only. |
+| `invite_member` | Invite someone to the active team by email as member or admin; an invitation email with a join link is sent. Owner / admin only. |
 | `update_tenant_slug` | Change the team address — the first path segment of every quiz link on the platform domain. Owner / admin only. Every public quiz link moves at once and the old address stops working; `/a/<token>` links keep working. |
 
 ### Templates
@@ -206,7 +206,7 @@ Once connected, the AI assistant can call the 44 tools below. They all act on th
 | `update_form` | Update title, description, open/closed state, covers (`flagImg` / `landingImage`), theme, social share card (`openGraph`), system text, or merge-replace the `report` config by sub-key; for outcome quizzes, pass `report.outcomes` to merge-update result types by `code` (configured images are kept, and removing a type still referenced by question votes is rejected). **Language** can be changed only while the quiz has no language versions; **scene** never. |
 | `delete_form` | Move a quiz to the trash (soft delete): hidden from `list_forms`, recoverable for 5 days via `restore_form` (then permanently purged). Only the quiz owner or the team owner / admin can delete; submission records are kept until permanent purge. |
 | `restore_form` | Restore a quiz deleted by `delete_form` from the trash. |
-| `duplicate_form` | Duplicate a quiz: clones its question structure, scoring, report, visuals and settings plus **all language translations** into a new quiz owned by you (with fresh links). Does **not** copy submission records, sharing, integrations or ban state. Optional `newTitle`. |
+| `duplicate_form` | Duplicate a quiz: clones its question structure, scoring, report, visuals and settings plus **all language translations** into a new quiz owned by you (with fresh links). Does **not** copy submission records, integrations or ban state. Optional `newTitle`. |
 
 ### Sharing & delivery settings
 
@@ -261,7 +261,7 @@ The people who take a quiz — called Respondents in the admin UI; the tools kee
 | `get_lead` | View one lead by `leadId`, optionally with the respondent's submission history, the team's internal comments, and the change timeline. |
 | `list_lead_settings` | Read the team's follow-up statuses, tag library and assignable members. Call this before writing — status codes, tag codes and member ids are team-specific. |
 | `update_lead` | Move one lead to another follow-up status (e.g. new → contacted); recorded on the lead's timeline. |
-| `assign_leads` | Assign up to 50 leads to an active non-viewer member in one call (`"me"` for yourself), or clear the assignee. The assignee gets one aggregated notification. |
+| `assign_leads` | Assign up to 50 leads to an active member in one call (`"me"` for yourself), or clear the assignee. The assignee gets one aggregated notification. |
 | `set_lead_tags` | Set colour tags on up to 50 leads in one call: `replace` (single lead), or `add` / `remove` for batches so other people's tags survive. |
 | `add_lead_comment` | Write an internal follow-up comment on a lead (team-only, never shown to the respondent), optionally tied to one submission. |
 
@@ -306,7 +306,7 @@ Read quiz performance and submissions so the AI can close the build → measure 
 - **Scene is locked** after creation; **language** can be changed only while the quiz has no language versions.
 - **Delete is a soft delete**: `delete_form` moves to the trash (auto-purged after 5 days), not an immediate permanent delete; for permanent removal, delete again in the admin UI.
 - **Question limit**: on the Free plan a quiz holds at most **50 questions** (page breaks, statements and image carousels don't count); `create_form`, `add_question` and `insert_question` are rejected past that. `duplicate_form` and `create_form_from_template` are not limited. Pro is unlimited — see [Question limit](/en/editor#question-limit).
-- **Duplicate copies no data**: `duplicate_form` clones structure and translations only — it does **not** copy submission records, sharing settings or integrations (which hold secrets); the new quiz starts clean.
+- **Duplicate copies no data**: `duplicate_form` clones structure and translations only — it does **not** copy submission records or integrations (which hold secrets); the new quiz starts clean.
 - **Respondent identity fields are immutable**: `update_examinee` can't change email, team, or `examineeId` (they are the auth identity).
 - **Personal data comes back masked**: lead, booking, respondent and record tools return names, email addresses and phone numbers masked — including emails and phone numbers typed into answers. Masking is irreversible; refer to people by `examineeId`, `leadId` or record id.
 

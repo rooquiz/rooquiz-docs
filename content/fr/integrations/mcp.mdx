@@ -186,7 +186,7 @@ Une fois connecté, l'assistant IA peut appeler les 44 outils ci-dessous. Ils ag
 | `list_my_tenants` | Liste toutes les équipes dont vous êtes membre, en indiquant celle qui est active. |
 | `get_active_tenant` | Renvoie l'équipe dans laquelle le jeton est actuellement actif (y compris son adresse d'équipe) ; toutes les écritures s'y appliquent par défaut. |
 | `switch_active_tenant` | Change l'équipe active (persiste d'une session à l'autre ; la cible doit être une équipe que vous avez rejointe). |
-| `invite_member` | Invite une personne par e-mail dans l'équipe active en tant que membre, lecteur ou administrateur ; un e-mail d'invitation contenant un lien pour rejoindre l'équipe est envoyé. Propriétaire / administrateur uniquement. |
+| `invite_member` | Invite une personne par e-mail dans l'équipe active en tant que membre ou administrateur ; un e-mail d'invitation contenant un lien pour rejoindre l'équipe est envoyé. Propriétaire / administrateur uniquement. |
 | `update_tenant_slug` | Modifie l'adresse de l'équipe, c'est-à-dire le premier segment du chemin de chaque lien de quiz sur le domaine de la plateforme. Propriétaire / administrateur uniquement. Tous les liens publics des quiz changent en même temps et l'ancienne adresse cesse de fonctionner ; les liens `/a/<token>` continuent de fonctionner. |
 
 ### Modèles
@@ -206,7 +206,7 @@ Une fois connecté, l'assistant IA peut appeler les 44 outils ci-dessous. Ils ag
 | `update_form` | Met à jour le titre, la description, l'état ouvert/fermé, les couvertures (`flagImg` / `landingImage`), le thème, la carte de partage sur les réseaux sociaux (`openGraph`), les textes système, ou remplace par fusion la configuration `report` par sous-clé ; pour les quiz de résultat, passez `report.outcomes` pour mettre à jour par fusion les types de résultat selon leur `code` (les images configurées sont conservées, et la suppression d'un type encore référencé par des votes de questions est refusée). La **langue** ne peut être modifiée que tant que le quiz n'a aucune version linguistique ; la **scène**, jamais. |
 | `delete_form` | Place un quiz dans la corbeille (suppression réversible) : il est masqué de `list_forms` et récupérable pendant 5 jours via `restore_form` (puis supprimé définitivement). Seul le propriétaire du quiz ou le propriétaire / un administrateur de l'équipe peut le supprimer ; les réponses sont conservées jusqu'à la suppression définitive. |
 | `restore_form` | Restaure depuis la corbeille un quiz supprimé par `delete_form`. |
-| `duplicate_form` | Duplique un quiz : copie sa structure de questions, sa notation, son rapport, ses éléments visuels et ses paramètres ainsi que **toutes ses traductions** dans un nouveau quiz qui vous appartient (avec de nouveaux liens). Ne copie **pas** les réponses, le partage, les intégrations ni l'état de blocage. `newTitle` facultatif. |
+| `duplicate_form` | Duplique un quiz : copie sa structure de questions, sa notation, son rapport, ses éléments visuels et ses paramètres ainsi que **toutes ses traductions** dans un nouveau quiz qui vous appartient (avec de nouveaux liens). Ne copie **pas** les réponses, les intégrations ni l'état de blocage. `newTitle` facultatif. |
 
 ### Partage et paramètres de diffusion
 
@@ -261,7 +261,7 @@ Les personnes qui répondent à un quiz, appelées Répondants dans l'interface 
 | `get_lead` | Affiche un lead à partir de son `leadId`, avec en option l'historique des réponses du répondant, les commentaires internes de l'équipe et la chronologie des modifications. |
 | `list_lead_settings` | Lit les statuts de suivi, la bibliothèque d'étiquettes et les membres assignables de l'équipe. Appelez-le avant toute écriture : les codes de statut, les codes d'étiquette et les id de membres sont propres à chaque équipe. |
 | `update_lead` | Fait passer un lead à un autre statut de suivi (par exemple new → contacted) ; le changement est enregistré dans la chronologie du lead. |
-| `assign_leads` | Attribue jusqu'à 50 leads en un seul appel à un membre actif qui n'est pas lecteur (`"me"` pour vous-même), ou retire le responsable. La personne assignée reçoit une seule notification groupée. |
+| `assign_leads` | Attribue jusqu'à 50 leads en un seul appel à un membre actif (`"me"` pour vous-même), ou retire le responsable. La personne assignée reçoit une seule notification groupée. |
 | `set_lead_tags` | Définit les étiquettes de couleur de jusqu'à 50 leads en un seul appel : `replace` (un seul lead), ou `add` / `remove` pour les lots afin de préserver les étiquettes posées par d'autres. |
 | `add_lead_comment` | Rédige un commentaire de suivi interne sur un lead (réservé à l'équipe, jamais montré au répondant), éventuellement rattaché à une réponse. |
 
@@ -306,7 +306,7 @@ Consultez les performances des quiz et les réponses pour que l'IA puisse boucle
 - **La scène est verrouillée** après la création ; la **langue** ne peut être modifiée que tant que le quiz n'a aucune version linguistique.
 - **La suppression est réversible** : `delete_form` place le quiz dans la corbeille (purgée automatiquement après 5 jours), il ne s'agit pas d'une suppression définitive immédiate ; pour une suppression définitive, supprimez-le à nouveau dans l'interface d'administration.
 - **Limite de questions** : avec le forfait Free, un quiz contient au maximum **50 questions** (les sauts de page, les blocs de texte enrichi et les carrousels d'images ne comptent pas) ; au-delà, `create_form`, `add_question` et `insert_question` sont refusés. `duplicate_form` et `create_form_from_template` ne sont pas limités. Le forfait Pro est illimité : consultez [Limite de questions](/fr/editor).
-- **La duplication ne copie aucune donnée** : `duplicate_form` ne clone que la structure et les traductions ; elle ne copie **pas** les réponses, les paramètres de partage ni les intégrations (qui contiennent des secrets). Le nouveau quiz démarre vierge.
+- **La duplication ne copie aucune donnée** : `duplicate_form` ne clone que la structure et les traductions ; elle ne copie **pas** les réponses ni les intégrations (qui contiennent des secrets). Le nouveau quiz démarre vierge.
 - **Les champs d'identité des répondants sont immuables** : `update_examinee` ne peut pas modifier l'e-mail, l'équipe ni l'`examineeId` (ils constituent l'identité d'authentification).
 - **Les données personnelles sont renvoyées masquées** : les outils de leads, de réservations, de répondants et de réponses renvoient les noms, adresses e-mail et numéros de téléphone masqués, y compris les e-mails et numéros saisis dans les réponses. Le masquage est irréversible ; désignez les personnes par `examineeId`, `leadId` ou l'id de la réponse.
 
