@@ -204,7 +204,7 @@ Once connected, the AI assistant can call the 44 tools below. They all act on th
 | `list_forms` | List the current team's quizzes, newest first, without question content. |
 | `get_form` | View a quiz's full details (the `fields[]` question list, report config, etc.); call this first to get each question's `code` before editing — for outcome quizzes, the result-type `code`s live in `report.outcomeAnalysis.outcomes`. |
 | `update_form` | Update title, description, open/closed state, covers (`flagImg` / `landingImage`), theme, social share card (`openGraph`), system text, or merge-replace the `report` config by sub-key; for outcome quizzes, pass `report.outcomes` to merge-update result types by `code` (configured images are kept, and removing a type still referenced by question votes is rejected). **Language** can be changed only while the quiz has no language versions; **scene** never. |
-| `delete_form` | Move a quiz to the trash (soft delete): hidden from `list_forms`, recoverable for 5 days via `restore_form` (then permanently purged). Only the quiz owner or the team owner / admin can delete; submission records are kept until permanent purge. |
+| `delete_form` | Move a quiz to the trash (soft delete): hidden from `list_forms`, recoverable for 5 days via `restore_form` (then permanently purged). Any team member can delete; submission records are kept until permanent purge. |
 | `restore_form` | Restore a quiz deleted by `delete_form` from the trash. |
 | `duplicate_form` | Duplicate a quiz: clones its question structure, scoring, report, visuals and settings plus **all language translations** into a new quiz owned by you (with fresh links). Does **not** copy submission records, integrations or ban state. Optional `newTitle`. |
 

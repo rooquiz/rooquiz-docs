@@ -200,7 +200,7 @@ ChatGPT、claude.ai、Claude Code 等支持 MCP OAuth 的客户端**无需手动
 | `list_forms` | 列出当前团队的测验,最新的在前,不含题目内容。 |
 | `get_form` | 查看指定测验的完整详情(题目列表 `fields[]`、报告配置等);改题前需先用它拿到每道题的 `code`,分型测验则从 `report.outcomeAnalysis.outcomes` 拿结果类型的 `code`。 |
 | `update_form` | 更新标题、描述、开启/关闭状态、封面(`flagImg` / `landingImage`)、主题、社交分享卡片(`openGraph`)、系统文案,或按子键合并替换 `report` 配置;分型测验传 `report.outcomes` 即按 `code` 合并更新结果类型(已配置的图片保留;删除仍被题目投票引用的类型会被拒绝)。**语言**只有在测验还没有语言版本时才能改;**场景(scene)**永远不能改。 |
-| `delete_form` | 把测验移入回收站(软删):`list_forms` 中不再显示,5 天内可用 `restore_form` 找回(到期自动彻底清除)。仅测验 owner 或团队所有者 / 管理员可删;答题记录在彻底清除前保留。 |
+| `delete_form` | 把测验移入回收站(软删):`list_forms` 中不再显示,5 天内可用 `restore_form` 找回(到期自动彻底清除)。团队任意成员都可删;答题记录在彻底清除前保留。 |
 | `restore_form` | 从回收站恢复被 `delete_form` 删除的测验。 |
 | `duplicate_form` | 复制一份测验:克隆题目结构、评分、报告、视觉与设置以及**全部语言译文**,生成归属你的新测验(新链接)。**不复制**答题记录、集成与封禁状态。可选传 `newTitle`。 |
 

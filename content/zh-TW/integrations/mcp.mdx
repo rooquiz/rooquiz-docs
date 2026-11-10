@@ -200,7 +200,7 @@ ChatGPT、claude.ai、Claude Code 等支援 MCP OAuth 的客戶端**無需手動
 | `list_forms` | 列出目前團隊的測驗，由新到舊排序，不含題目內容。 |
 | `get_form` | 檢視指定測驗的完整詳情（題目列表 `fields[]`、報告設定等）；改題前需先用它拿到每道題的 `code`，分型測驗則從 `report.outcomeAnalysis.outcomes` 拿結果類型的 `code`。 |
 | `update_form` | 更新標題、描述、開啟/關閉狀態、封面（`flagImg` / `landingImage`）、主題、社交分享卡片（`openGraph`）、系統文案，或按子鍵合併替換 `report` 設定；分型測驗傳 `report.outcomes` 即按 `code` 合併更新結果類型（已設定的圖片保留；刪除仍被題目投票引用的類型會被拒絕）。**語言**只有在測驗還沒有語言版本時才能改；**場景（scene）**永遠不能改。 |
-| `delete_form` | 把測驗移入回收站（軟刪）：`list_forms` 中不再顯示，5 天內可用 `restore_form` 找回（到期自動徹底清除）。僅測驗擁有者或團隊擁有者 / 管理員可刪；答題記錄在徹底清除前保留。 |
+| `delete_form` | 把測驗移入回收站（軟刪）：`list_forms` 中不再顯示，5 天內可用 `restore_form` 找回（到期自動徹底清除）。團隊任意成員都可刪；答題記錄在徹底清除前保留。 |
 | `restore_form` | 從回收站恢復被 `delete_form` 刪除的測驗。 |
 | `duplicate_form` | 複製一份測驗：克隆題目結構、評分、報告、視覺與設定以及**全部語言譯文**，生成歸屬你的新測驗（新連結）。**不複製**答題記錄、整合與封禁狀態。可選傳 `newTitle`。 |
 
