@@ -215,7 +215,7 @@ ChatGPT、claude.ai、Claude Code 等支援 MCP OAuth 的客戶端**無需手動
 
 | 工具 | 作用 |
 | --- | --- |
-| `add_question` | 往測驗末尾追加一項：題目、分頁符（`Breaker`），或展示區塊（`Statement` 富文本段落、`Swiper` 圖片輪播）。題型：SingleCheck / MultiCheck / TrueFalse、FillBlank、DropDown、Cascade（評分測驗）、Ordering（知識測驗）、DateField / TimeField（評分測驗）、NumberField 和 Rate（評分測驗）。分型測驗的選擇題需為每個選項指明投給哪些結果類型（判斷題用 `trueOutcomes` / `falseOutcomes`）。 |
+| `add_question` | 往測驗末尾追加一項：題目、分頁符（`Breaker`），或展示區塊（`Statement` 富文本段落、`Swiper` 圖片輪播）。題型：SingleCheck / MultiCheck / TrueFalse、FillBlank、DropDown、Ordering（知識測驗）、DateField / TimeField（評分測驗）、NumberField 和 Rate（評分測驗）。分型測驗的選擇題需為每個選項指明投給哪些結果類型（判斷題用 `trueOutcomes` / `falseOutcomes`）。 |
 | `insert_question` | 在指定位置插入一項，用 `after` / `before` 引用一個已存在的 `code`。 |
 | `move_question` | 按 `code` 把已有題目或分頁符挪到新位置。 |
 | `update_question` | 按 `code` 更新題目：題幹、說明、解析、是否必答、分值、正確答案、填空題的 AI 判分、數字 / 日期 / 評分選項，或**整體替換**選擇題的全部選項。展示區塊也在這裡編輯。**不能改題型**。 |
@@ -297,7 +297,7 @@ ChatGPT、claude.ai、Claude Code 等支援 MCP OAuth 的客戶端**無需手動
 
 - **不能改題型**：需要換題型時，先 `delete_question` 再 `add_question` 重建。選項可以用 `update_question` 整體替換，但**判斷題的分型投票**（`trueOutcomes` / `falseOutcomes`）仍需刪題重建。
 - **各場景的計分方式**：評分測驗和分型測驗場景下，`update_question` 不接受頂層的 `score` / `correctAnswer` / `aiMatch`——請改為傳入帶 `choices[i].score`（選項分值，Option Scoring）或 `choices[i].outcomes`（投票）的選項。
-- **各場景的題型範圍**：Ordering 僅限知識測驗；Cascade、Rate、DateField 與 TimeField 僅限評分測驗；評分測驗裡的 FillBlank 只收集資料；分型測驗接受 SingleCheck / MultiCheck / DropDown / TrueFalse（外加分頁符與展示區塊）。
+- **各場景的題型範圍**：Ordering 僅限知識測驗；Rate、DateField 與 TimeField 僅限評分測驗；評分測驗裡的 FillBlank 只收集資料；分型測驗接受 SingleCheck / MultiCheck / DropDown / TrueFalse（外加分頁符與展示區塊）。
 - **結果類型配圖**：結果類型的**配圖**暫不能透過 MCP 上傳，請在後台編輯器設定（MCP 更新 `report.outcomes` 時已設定的圖片會保留）。
 - **場景建立後鎖定**；**語言**只有在測驗還沒有語言版本時才能改。
 - **刪除是軟刪**：`delete_form` 移入回收站（5 天後自動徹底清除），並非立即永久刪除；徹底刪除請在後台二次刪除。

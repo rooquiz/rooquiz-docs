@@ -219,7 +219,7 @@ Once connected, the AI assistant can call the 44 tools below. They all act on th
 
 | Tool | What it does |
 | --- | --- |
-| `add_question` | Append an item to the end: a question, a page break (`Breaker`), or a display block (`Statement` rich-text passage, `Swiper` image carousel). Question types: SingleCheck / MultiCheck / TrueFalse, FillBlank, DropDown, Cascade (scored quiz), Ordering (knowledge quiz), DateField / TimeField (scored quiz), NumberField and Rate (scored quiz). In an outcome quiz, every choice must declare which result types it votes for (TrueFalse uses `trueOutcomes` / `falseOutcomes`). |
+| `add_question` | Append an item to the end: a question, a page break (`Breaker`), or a display block (`Statement` rich-text passage, `Swiper` image carousel). Question types: SingleCheck / MultiCheck / TrueFalse, FillBlank, DropDown, Ordering (knowledge quiz), DateField / TimeField (scored quiz), NumberField and Rate (scored quiz). In an outcome quiz, every choice must declare which result types it votes for (TrueFalse uses `trueOutcomes` / `falseOutcomes`). |
 | `insert_question` | Insert an item at a specific position, using `after` / `before` to reference an existing `code`. |
 | `move_question` | Move an existing question or page break to a new position by `code`. |
 | `update_question` | Update a question by `code`: stem, note, explanation, required flag, score, correct answer, FillBlank AI grading, number / date / rating options, or **replace all choices** of a choice question. Display blocks are edited here too. **Cannot change the question type.** |
@@ -301,7 +301,7 @@ Read quiz performance and submissions so the AI can close the build → measure 
 
 - **Question type can't be changed**: to switch type, `delete_question` then `add_question` to rebuild. Choices can be replaced as a whole with `update_question`, but **TrueFalse outcome votes** (`trueOutcomes` / `falseOutcomes`) still need delete + recreate.
 - **Scene-specific scoring**: in the scored quiz and outcome quiz scenes `update_question` rejects the top-level `score` / `correctAnswer` / `aiMatch` — pass choices carrying `choices[i].score` (Option Scoring) or `choices[i].outcomes` (votes) instead.
-- **Question types per scene**: Ordering is knowledge-quiz only; Cascade, Rate, DateField and TimeField are scored-quiz only; FillBlank in a scored quiz only collects data; outcome quizzes accept SingleCheck / MultiCheck / DropDown / TrueFalse (plus page breaks and display blocks).
+- **Question types per scene**: Ordering is knowledge-quiz only; Rate, DateField and TimeField are scored-quiz only; FillBlank in a scored quiz only collects data; outcome quizzes accept SingleCheck / MultiCheck / DropDown / TrueFalse (plus page breaks and display blocks).
 - **Outcome images**: result-type **images** can't be uploaded via MCP yet — configure them in the editor (images already configured are kept when MCP updates `report.outcomes`).
 - **Scene is locked** after creation; **language** can be changed only while the quiz has no language versions.
 - **Delete is a soft delete**: `delete_form` moves to the trash (auto-purged after 5 days), not an immediate permanent delete; for permanent removal, delete again in the admin UI.

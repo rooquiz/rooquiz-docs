@@ -214,7 +214,7 @@ OAuth に対応していないクライアント(Cursor、Codex CLI、Claude Des
 
 | ツール | 内容 |
 | --- | --- |
-| `add_question` | 末尾に項目を追加します。設問、改ページ(`Breaker`)、または表示用のブロック(`Statement` のリッチテキスト、`Swiper` の画像カルーセル)です。設問タイプは SingleCheck / MultiCheck / TrueFalse、FillBlank、DropDown、Cascade(スコアクイズ)、Ordering(知識クイズ)、DateField / TimeField(スコアクイズ)、NumberField と Rate(スコアクイズ)です。結果タイプクイズでは、すべての選択肢でどの結果タイプに投票するかを宣言する必要があります(TrueFalse では `trueOutcomes` / `falseOutcomes` を使います)。 |
+| `add_question` | 末尾に項目を追加します。設問、改ページ(`Breaker`)、または表示用のブロック(`Statement` のリッチテキスト、`Swiper` の画像カルーセル)です。設問タイプは SingleCheck / MultiCheck / TrueFalse、FillBlank、DropDown、Ordering(知識クイズ)、DateField / TimeField(スコアクイズ)、NumberField と Rate(スコアクイズ)です。結果タイプクイズでは、すべての選択肢でどの結果タイプに投票するかを宣言する必要があります(TrueFalse では `trueOutcomes` / `falseOutcomes` を使います)。 |
 | `insert_question` | `after` / `before` で既存の `code` を参照し、指定した位置に項目を挿入します。 |
 | `move_question` | 既存の設問または改ページを、`code` を指定して新しい位置に移動します。 |
 | `update_question` | `code` を指定して設問を更新します。問題文、注記、解説、必須フラグ、配点、正解、FillBlank の AI 採点、数値 / 日付 / 評価のオプションを変更でき、選択式の設問では **選択肢をまとめて置き換え** られます。表示用のブロックもここで編集します。**設問タイプは変更できません。** |
@@ -296,7 +296,7 @@ OAuth に対応していないクライアント(Cursor、Codex CLI、Claude Des
 
 - **設問タイプは変更できません**:タイプを切り替えるには、`delete_question` してから `add_question` で作り直します。選択肢は `update_question` でまとめて置き換えられますが、**TrueFalse の結果タイプへの投票**(`trueOutcomes` / `falseOutcomes`)を変更するには、引き続き削除して作り直す必要があります。
 - **シーンごとの採点**:スコアクイズと結果タイプクイズのシーンでは、`update_question` はトップレベルの `score` / `correctAnswer` / `aiMatch` を拒否します。代わりに、`choices[i].score`(Option Scoring)または `choices[i].outcomes`(投票)を持つ選択肢を渡してください。
-- **シーンごとの設問タイプ**:Ordering は知識クイズ専用、Cascade、Rate、DateField、TimeField はスコアクイズ専用です。スコアクイズの FillBlank はデータを収集するだけです。結果タイプクイズで使えるのは SingleCheck / MultiCheck / DropDown / TrueFalse(と改ページ、表示用のブロック)です。
+- **シーンごとの設問タイプ**:Ordering は知識クイズ専用、Rate、DateField、TimeField はスコアクイズ専用です。スコアクイズの FillBlank はデータを収集するだけです。結果タイプクイズで使えるのは SingleCheck / MultiCheck / DropDown / TrueFalse(と改ページ、表示用のブロック)です。
 - **結果タイプの画像**:結果タイプの **画像** はまだ MCP からアップロードできないため、エディターで設定してください(MCP で `report.outcomes` を更新しても、設定済みの画像は保持されます)。
 - **シーンは作成後に固定されます**。**言語** を変更できるのは、クイズに言語バージョンがない間だけです。
 - **削除はソフトデリートです**:`delete_form` はゴミ箱に移動するだけで(5 日後に自動的に完全削除されます)、即座に完全削除されるわけではありません。完全に削除するには、管理画面で再度削除してください。
