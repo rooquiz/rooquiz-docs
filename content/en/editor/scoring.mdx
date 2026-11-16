@@ -13,7 +13,7 @@ In a **Knowledge Quiz** you can:
 - **Judge right/wrong**: Mark correct answers; the system judges each question automatically.
 - **Sum totals**: Points are added up automatically.
 - **Levels**: Split the total into score bands (see [Levels](#levels-and-result-page-actions)) — each band shows its own result instead of a bare number.
-- **Answer feedback**: Show respondents the correctness and explanation per question.
+- **Answer feedback**: Show respondents the correctness and explanation per question — after they submit, or page by page with [Instant feedback](/en/editor/settings#answering-experience).
 - **AI Match**: Grade fill-in-the-blank answers by semantic similarity instead of exact or contains matching, with an accuracy threshold you set. AI grading is unlimited.
 
 <Callout type="info">
@@ -24,7 +24,7 @@ In a **Knowledge Quiz** you can:
 
 An **Outcome** quiz doesn't score — it **counts votes**. Each option votes for one or more outcome types, and the type with the most votes wins; ties go to whichever comes first in the outcome list. If the quiz uses [conditional logic](/en/editor/logic#outcome-quizzes-vote-share), types are compared by vote share instead, so a type with a longer follow-up branch doesn't win just by collecting more votes.
 
-Every outcome can carry its own CTA button, wiring an entertaining result straight into a next step. See [The four quiz types](/en/getting-started/quiz-types#outcome-quiz).
+Every outcome can carry its own CTA button or [redirect link](#redirect-after-submission-pro), wiring an entertaining result straight into a next step. See [The four quiz types](/en/getting-started/quiz-types#outcome-quiz).
 
 ## Scored Quiz: dimensional analysis
 
@@ -43,10 +43,32 @@ Need weights, dimension scores or number answers in the total? Write a **formula
 
 ## Levels and result-page actions
 
-Split the total score into **levels** (0–60 needs work / 60–80 good / 80+ excellent). Each carries a name, colour and description, and can hold a **CTA button** — the low band might offer "Book a consultation". This is the step that wires an assessment into conversion.
+Split the total score into **levels** (0–60 needs work / 60–80 good / 80+ excellent) under **Score Level Config** in the editor's **Report** section. Each level carries a name, colour and description, and can hold its own **CTA button** and **redirect link** — the low band might offer "Book a consultation". This is the step that wires an assessment into conversion.
+
+- **Level order** — list levels **Low → High** or **High → Low**. This only changes how they're shown, in the editor and on the result page's score scale; scoring works the same either way. Dimension levels follow the same order as the overall levels.
+- **Score style** — how the overall score is drawn on the result page: **Scale** (default), **Ring**, **Gauge** or **Steps**. Steps needs at least 2 levels, and Ring and Gauge need levels or a maximum score; until the quiz has that data, the result page shows the scale.
 
 <Callout type="info">
-  Don't want respondents seeing a number? Turn on **Hide scores**: the overall score **and every dimension score** (score ring/number, percentile, progress bars, score rate) disappear from the result page, while the levels and analysis stay — better for quizzes that should feel like a diagnosis rather than an exam. If your summary template still inserts the score variable, remove it too, or the score will still show there.
+  Don't want respondents seeing a number? Turn on **Hide scores** under **Settings → Answering experience**: respondents never see a score — not on the result page (overall and dimension scores), not on each question while answering, not in instant feedback or the answer review — while levels, analysis and right / wrong stay. If your summary template still inserts the score variable, remove it too, or the score will still show there.
+</Callout>
+
+### CTA buttons
+
+Under **CTA Button**, switch the button on and set a **default button** (text and link). Every level — or every outcome, in an Outcome Quiz — without a button of its own uses the default; leave the default empty and only levels with their own button show one. Switch **CTA Button** off and no result shows a button. See [Result page CTA button](/en/results/reports#result-page-cta-button).
+
+### Redirect after submission (Pro)
+
+Turn on **Redirect after submission** to send respondents straight to a link based on their result instead of showing the result page — e.g. low scorers to a starter-course page, high scorers to a booking page.
+
+- Set a **Redirect link** on each level (or each outcome), plus an optional **Default link** for results without one.
+- **Add the result to the link** appends `score`, `level`, `outcome` and `outcome_name`, plus the quiz's [URL parameters](/en/publish/tracking#url-parameters-hidden-fields) and UTM tags. Emails and other personal details are never added, parameters already in your link are kept, and `score` is left out when scores are hidden.
+- If the report requires an email or sign-in, respondents are redirected **after** that step.
+- In an [embedded quiz](/en/publish/embed), the whole host page navigates to the link.
+
+The result page (with its descriptions and CTA buttons) still shows when the respondent's result has no link and there's no default link, when they come back to their result later, and when someone opens a shared result link.
+
+<Callout type="warning">
+  Redirects are a **Pro** feature and aren't available for AI Quizzes. If your team leaves Pro, respondents see the result page again; your links are kept and work again once you upgrade.
 </Callout>
 
 ## Result page section order

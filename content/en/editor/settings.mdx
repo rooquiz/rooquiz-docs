@@ -1,9 +1,9 @@
 ---
 title: Quiz Settings
-description: 'Everything about a quiz that isn''t a question, page by page: access and visibility, basic info, the answering experience, result page follow-up, language versions, system copy and Google Analytics.'
+description: 'Everything about a quiz that isn''t a question, page by page: access and visibility, the answering experience, result page follow-up, language versions, system copy and conversion tracking.'
 ---
 
-Everything about the quiz that isn't a question lives in the quiz's **Settings** tab (next to **Edit**, **Records** and **Insights**). It is split into seven pages, listed in the left menu.
+Everything about the quiz that isn't a question lives in the quiz's **Settings** tab (next to **Edit**, **Records** and **Insights**). It is split into six pages, listed in the left menu.
 
 ## Access & visibility
 
@@ -39,7 +39,7 @@ On by default, so the quiz goes into your sitemap and can be found through searc
 
 ## Basic info
 
-**Quiz Title**, **Cover Image** (1200 × 630 px recommended) and **Cover Color**. The title identifies the quiz in the dashboard and shows on the landing page.
+**Quiz Title**, **Cover Image** (1200 × 630 px recommended) and **Cover Color** aren't in Settings: click the quiz title in the top bar to edit them. The title identifies the quiz in the dashboard and shows on the landing page.
 
 The quiz **description** is edited on the landing page in the editor, not here. It feeds [search indexing](/en/publish/promotion#search-engine-indexing), so don't leave it empty.
 
@@ -47,6 +47,11 @@ The quiz **description** is edited on the landing page in the editor, not here. 
 
 - **Index Display Mode** — None / Arabic Numbers (1, 2, 3) / Roman Numerals (I, II, III).
 - **Time limit** — a countdown starts when a respondent enters the quiz; when it runs out they get a modal and their **current answers are submitted automatically**. Available in **Knowledge Quiz only** — Scored Quiz and Outcome Quiz don't offer it.
+- **Instant feedback** — turn on **Check answers page by page** and respondents submit each page on its own and see whether they got it right, the correct answer and your explanation before moving on. **Knowledge Quiz only.**
+  - Checked questions can no longer be changed. On the last page, a **See results** button finishes the quiz.
+  - On a page with a single one-tap question (single choice, true/false, dropdown or rating), the answer is checked as soon as it's picked.
+  - This reveals the answers question by question, so leave it off for quizzes whose score is used for placement.
+- **Hide scores** — turn on **Hide scores from respondents** and respondents never see a score: not on the result page (overall and dimension scores), not each question's points while answering, not in instant feedback or the answer review. Levels, analysis and right / wrong still show, and you still see scores in the dashboard. Not shown for Outcome and AI Quizzes, which have no scores.
 - **Answer sheet** — shows a question navigator in the sidebar so respondents can see progress and jump to any question. On by default for new quizzes; you can turn it off for short quizzes meant to be answered straight through.
 - **Crowd compare** — turn on **Show choice percentages** and respondents see what share of people picked the same option right after they answer (e.g. "62% of people chose the same as you"). Only percentages are shown, never individual answers.
   - Off by default, and available in Scored Quiz and Outcome Quiz only — not in knowledge quizzes, where the most-picked option would give the answer away.
@@ -55,7 +60,9 @@ The quiz **description** is edited on the landing page in the editor, not here. 
 
 ## Result page follow-up
 
-Two optional blocks for the result page. Their order on the page is set in the editor — see [Result page section order](/en/editor/scoring#result-page-section-order).
+**Emails by result** — send a follow-up email that matches each respondent's result, e.g. recommend a starter course to "Beginner" and invite "Advanced" to a trial class. Each level or outcome gets a row where you can add its own email, and **All respondents** sends the same email to everyone. These emails are Email connectors under the hood, so they also appear in your team's [Connectors](/en/connectors/channels#email) and need a [sending service](/en/connectors/email-smtp). Only team owners and admins can set them up.
+
+Below that are two optional blocks for the result page. Their order on the page is set in the editor — see [Result page section order](/en/editor/scoring#result-page-section-order).
 
 - **Booking section** — lets respondents book a call through your Cal.com page from their result. Turn it on, paste your **Cal.com booking link** (required), and optionally set the heading, description and button text — see [Bookings](/en/bookings).
 - **Respondent feedback** — turn on **Show the feedback block** to ask **one question** on the result page. Choose the answer type: **1–5 rating**, **Single choice** or **Free text**. Answers land on the respondent's lead, so whoever follows up knows what this person actually wants.

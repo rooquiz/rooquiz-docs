@@ -13,6 +13,9 @@ Available on every plan. Sends through one of your team's own sending services �
 - **Recipients** — type an address and press Enter, **up to 10**. You can also add the dynamic "Respondent email" recipient to notify the person themselves.
 - **Subject** — up to 200 characters; no line breaks, no HTML.
 - **Body** — up to 10,000 characters; no HTML.
+- **When to send** — **Every time**, or **Only for specific results**: pick a quiz and one or more of its levels or result types (an AI Quiz's result tags count too), e.g. a follow-up for the "Beginner" level only. Conditions apply to new submissions and new leads; booking events never match. Because the result may not be ready when someone first becomes a lead (in an AI Quiz it never is), trigger result-based emails on **New submission**.
+
+The quickest way to set up result-based emails for one quiz is **Settings → Result page follow-up → Emails by result** in that quiz — see [Quiz settings](/en/editor/settings#result-page-follow-up).
 
 Subject and body both support **inserting variables**, in two groups:
 
@@ -51,7 +54,8 @@ Use Zapier to reach thousands of apps:
 
 Kit (formerly ConvertKit) is an email marketing tool. After **Connect Kit** and the OAuth flow:
 
-- **Tags for every new lead** — a fixed set of up to 20 tags applied to every subscriber, e.g. `quiz-lead`. Type a name that doesn't exist yet and it is **created in Kit** on save. The same tags go to everyone; they don't vary by score or result.
+- **Tags for every new lead** — a fixed set of up to 20 tags applied to every subscriber, e.g. `quiz-lead`. Type a name that doesn't exist yet and it is **created in Kit** on save.
+- **Tags by result** — add rules that tag respondents by their result: each rule picks a quiz, one or more of its levels or result types (or AI result tags), and the tags to add. Start a different Kit sequence for each tag. Rules apply on every submission, so a retake that lands on a new result adds that result's tags too.
 - Use **Refresh tags** to re-fetch the tag list from Kit when needed.
 
 Trigger email sequences from those tags in Kit and new leads flow straight into your nurture path.
