@@ -1,18 +1,20 @@
 ---
 title: Rapports
-description: "Chaque réponse peut générer un rapport avec score, niveau, scores par dimension et graphique radar. Comment les rapports sont produits, comment la Correspondance IA corrige les Textes à trous et comment les répondants les consultent ou les téléchargent."
+description: "Chaque réponse peut générer un rapport avec score, niveau, scores par dimension, graphique radar ou analyse rédigée par l'IA. Comment les rapports sont produits, comment la Correspondance IA corrige les réponses, les boutons CTA, et comment les répondants les consultent ou les téléchargent."
 ---
 
-Chaque réponse peut générer un **rapport** présentant le score du répondant, son niveau, ses scores par dimension et les conclusions de profil.
+Chaque réponse peut générer un **rapport** présentant le score du répondant, son niveau, ses scores par dimension et les conclusions de profil ou, dans un Quiz IA, une analyse personnalisée rédigée par l'IA.
 
 ## Contenu d'un rapport
 
 - **Scores par dimension** : les scores de chaque dimension, souvent présentés sous forme de **graphique radar**.
 - **Conclusions de profil** : des conclusions sur la personnalité ou les compétences, déduites des scores par dimension.
+- **Score global** : représenté sous forme d'échelle, d'anneau, de jauge ou de paliers ; consultez [Score style](/fr/editor/scoring#niveaux-et-actions-de-la-page-de-résultat).
+- **Rapport IA** : dans un Quiz IA, le rapport est rédigé par l'IA à partir de vos instructions et des réponses du répondant ; consultez [Rapports IA](/fr/editor/ai-report).
 
 ### Masquer les scores
 
-Activez **Masquer les scores** dans la section **Rapport** de l'éditeur pour masquer le score global **et chaque score de dimension** sur la page de résultats (anneau/chiffre du score, percentile, barres de progression, taux de réussite), tout en conservant les niveaux et l'analyse. Les administrateurs voient toujours les scores dans le tableau de bord. Si le modèle de synthèse insère la variable du score, le score continue de s'y afficher : retirez-la pour masquer complètement les scores.
+Activez **Hide scores** sous **Paramètres → Expérience de réponse** et les répondants ne voient jamais de score : les scores global et par dimension sur la page de résultats, les points de chaque question pendant qu'ils répondent, le score dans le retour immédiat et les scores par question dans la revue des réponses sont tous masqués. Les niveaux, l'analyse et le juste/faux restent affichés. Les administrateurs voient toujours les scores dans le tableau de bord. Si le modèle de synthèse insère la variable du score, le score continue de s'y afficher : retirez-la pour masquer complètement les scores.
 
 ### Ordre des sections
 
@@ -20,12 +22,13 @@ Dans l'aperçu du rapport de l'éditeur, déplacez vers le haut ou vers le bas l
 
 ### Correction par Correspondance IA
 
-Dans un **Quiz de connaissances**, une question Texte à trous peut être corrigée avec la **Correspondance IA** : l'IA juge si la réponse est correcte selon sa similarité sémantique, plutôt que par une correspondance exacte du texte. C'est illimité : il n'y a aucun crédit IA à acheter. Dans un Quiz noté, les réponses aux Textes à trous sont recueillies mais pas notées.
+Dans un **Quiz de connaissances**, une question Texte à trous peut être corrigée avec la **Correspondance IA** : l'IA juge si la réponse est correcte selon sa similarité sémantique, plutôt que par une correspondance exacte du texte. C'est illimité et ne consomme aucun point IA (les points IA ne servent qu'aux [rapports de Quiz IA](/fr/editor/ai-report#points-ia-et-envois-de-fichiers)). Dans un Quiz noté, les réponses aux Textes à trous sont recueillies mais pas notées.
 
 ## Génération d'un rapport
 
 - Le **score de base** est calculé **immédiatement** après la soumission.
-- Les **calculs plus lourds**, comme l'analyse par dimension et la correction par Correspondance IA, sont générés **de manière asynchrone** ; le rapport passe par un état « en cours de génération → terminé ».
+- Les **calculs plus lourds**, comme l'analyse par dimension, la correction par Correspondance IA et les rapports de Quiz IA, sont générés **de manière asynchrone** ; le rapport passe par un état « en cours de génération → terminé ».
+- Dans un Quiz IA qui exige un e-mail pour voir le rapport, le rapport d'un répondant anonyme n'est généré **qu'après qu'il a franchi cette étape**.
 - En cas d'échec de la génération, le système **réessaie automatiquement** pendant un certain délai.
 
 <Callout type="info">
@@ -49,12 +52,16 @@ Ouvrez une réponse dans les [Réponses](/fr/results/records) et cliquez sur **R
 
 ## Bouton CTA de la page de résultats
 
-Vous pouvez configurer un bouton d'appel à l'action (CTA) pour **chaque niveau de score** ; les répondants qui atteignent ce niveau le voient en bas de leur rapport. Par exemple, « À améliorer » mène à la réservation d'une consultation, tandis que « Excellent » mène au téléchargement de ressources avancées.
+Un bouton d'appel à l'action (CTA) transforme un résultat en étape suivante : « À améliorer » mène à la réservation d'une consultation, tandis que « Excellent » mène au téléchargement de ressources avancées.
 
-- Dans la section **Rapport** de l'éditeur → **Configuration des niveaux de score**, activez le **Bouton CTA** d'un niveau et renseignez le texte et le lien du bouton ; le texte d'introduction est facultatif. Les liens CTA s'ouvrent toujours dans une nouvelle fenêtre.
-- Pour utiliser le même bouton sur plusieurs niveaux, configurez-en un et cliquez sur **Appliquer à tous les niveaux**.
+- Dans la section **Rapport** de l'éditeur, activez **Bouton CTA** et définissez un **bouton par défaut** (texte et lien du bouton ; le texte d'introduction est facultatif). Le texte et le lien vont ensemble : renseignez les deux ou laissez les deux vides.
+- Donnez à un **niveau**, un **résultat** ou une **étiquette de résultat** IA son propre bouton, dans l'élément concerné. Tout ce qui reste vide utilise le bouton par défaut ; si celui-ci est vide aussi, ce résultat n'affiche aucun bouton.
+- Désactivez **Bouton CTA** et aucun résultat n'affiche de bouton, même ceux qui ont le leur.
+- Les liens CTA s'ouvrent toujours dans une nouvelle fenêtre.
 - Les modifications du CTA **s'appliquent immédiatement à tous les rapports existants** : changez de lien de campagne ou de texte sans craindre des boutons obsolètes dans les anciens rapports.
 - Les clics des répondants sur le CTA alimentent l'entonnoir de conversion des [Statistiques](/fr/results/insights).
+
+Vous préférez sauter la page de résultats et envoyer directement les personnes vers une page ? Utilisez [Redirect after submission](/fr/editor/scoring#redirection-après-soumission-pro) (Pro).
 
 <Callout type="info">
   Les liens doivent commencer par `http(s)://`. Le style du bouton suit automatiquement la couleur du thème de votre quiz.

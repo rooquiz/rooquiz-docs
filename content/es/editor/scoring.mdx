@@ -13,7 +13,7 @@ En un **Cuestionario de conocimiento** puedes:
 - **Juzgar aciertos y errores**: marca las respuestas correctas; el sistema corrige cada pregunta automáticamente.
 - **Sumar totales**: los puntos se suman automáticamente.
 - **Niveles**: divide el total en tramos de puntuación (consulta la sección de niveles más abajo); cada tramo muestra su propio resultado en lugar de un número a secas.
-- **Retroalimentación de respuestas**: muestra a los participantes si acertaron y la explicación de cada pregunta.
+- **Retroalimentación de respuestas**: muestra a los participantes si acertaron y la explicación de cada pregunta, después de enviar o página a página con la [retroalimentación inmediata](/es/editor/settings#experiencia-de-respuesta).
 - **Coincidencia con AI**: corrige las respuestas de completar el espacio por similitud semántica, en lugar de por coincidencia exacta o parcial, con el umbral de precisión que tú definas. La corrección con AI es ilimitada.
 
 <Callout type="info">
@@ -24,7 +24,7 @@ En un **Cuestionario de conocimiento** puedes:
 
 Un **Cuestionario de resultado** no puntúa: **cuenta votos**. Cada opción vota por uno o varios tipos de resultado, y gana el tipo con más votos; en caso de empate, gana el que aparece primero en la lista de resultados. Si el cuestionario usa [lógica condicional](/es/editor/logic), los tipos se comparan por proporción de votos, para que un tipo con una rama de seguimiento más larga no gane solo por acumular más votos.
 
-Cada resultado puede tener su propio botón de CTA, que conecta un resultado entretenido directamente con un siguiente paso. Consulta [Los cuatro tipos de quiz](/es/getting-started/quiz-types).
+Cada resultado puede tener su propio botón de CTA o [enlace de redirección](#redirección-tras-el-envío-pro), que conecta un resultado entretenido directamente con un siguiente paso. Consulta [Los cuatro tipos de quiz](/es/getting-started/quiz-types).
 
 ## Cuestionario con puntuación: análisis por dimensiones
 
@@ -43,10 +43,32 @@ Por defecto, el total de un Cuestionario con puntuación es la **suma de todas l
 
 ## Niveles y acciones en la página de resultados
 
-Divide la puntuación total en **niveles** (0–60 necesita mejorar / 60–80 bien / 80+ excelente). Cada uno tiene un nombre, un color y una descripción, y puede incluir un **Botón de CTA**: el tramo bajo podría ofrecer "Reserva una consulta". Este es el paso que conecta una evaluación con la conversión.
+Divide la puntuación total en **niveles** (0–60 necesita mejorar / 60–80 bien / 80+ excelente) en **Configuración de niveles de puntaje**, dentro de la sección **Informe** del editor. Cada nivel tiene un nombre, un color y una descripción, y puede incluir su propio **Botón de CTA** y su propio **enlace de redirección**: el tramo bajo podría ofrecer "Reserva una consulta". Este es el paso que conecta una evaluación con la conversión.
+
+- **Orden de los niveles**: muestra los niveles **Low → High** o **High → Low**. Solo cambia cómo se muestran, en el editor y en la escala de puntuación de la página de resultados; la puntuación funciona igual en ambos casos. Los niveles de las dimensiones siguen el mismo orden que los niveles generales.
+- **Score style**: cómo se dibuja la puntuación general en la página de resultados: **Scale** (predeterminado), **Ring**, **Gauge** o **Steps**. Steps necesita al menos 2 niveles, y Ring y Gauge necesitan niveles o una puntuación máxima; hasta que el quiz tenga esos datos, la página de resultados muestra la escala.
 
 <Callout type="info">
-  ¿No quieres que los participantes vean un número? Activa **Ocultar puntuaciones**: la puntuación general **y todas las puntuaciones por dimensión** (anillo/número de puntuación, percentil, barras de progreso, porcentaje de acierto) desaparecen de la página de resultados, mientras que los niveles y el análisis se mantienen; es mejor para quizzes que deben sentirse como un diagnóstico y no como un examen. Si tu plantilla de resumen todavía inserta la variable de puntuación, quítala también, o la puntuación seguirá apareciendo ahí.
+  ¿No quieres que los participantes vean un número? Activa **Hide scores** en **Ajustes → Experiencia de respuesta**: los participantes nunca ven una puntuación, ni en la página de resultados (puntuación general y por dimensión), ni en cada pregunta mientras responden, ni en la retroalimentación inmediata ni en la revisión de respuestas, mientras que los niveles, el análisis y los aciertos / errores se mantienen. Si tu plantilla de resumen todavía inserta la variable de puntuación, quítala también, o la puntuación seguirá apareciendo ahí.
+</Callout>
+
+### Botones de CTA
+
+En **Botón de CTA**, activa el botón y define un **botón predeterminado** (texto y enlace). Cada nivel (o cada resultado, en un Cuestionario de resultado) que no tenga botón propio usa el predeterminado; si dejas vacío el predeterminado, solo muestran botón los niveles que tienen uno propio. Desactiva **Botón de CTA** y ningún resultado muestra botón. Consulta [Botón de CTA en la página de resultados](/es/results/reports#botón-de-cta-en-la-página-de-resultados).
+
+### Redirección tras el envío (Pro)
+
+Activa **Redirect after submission** para enviar a los participantes directamente a un enlace según su resultado, en lugar de mostrar la página de resultados; por ejemplo, a quienes puntúan bajo, a la página de un curso de iniciación, y a quienes puntúan alto, a una página de reservas.
+
+- Define un **Redirect link** en cada nivel (o en cada resultado), además de un **Default link** opcional para los resultados que no tengan uno.
+- **Add the result to the link** añade `score`, `level`, `outcome` y `outcome_name`, además de los [parámetros de URL](/es/publish/tracking#parámetros-de-url-campos-ocultos) del quiz y las etiquetas UTM. Nunca se añaden correos ni otros datos personales, los parámetros que ya tenga tu enlace se conservan, y `score` se omite cuando las puntuaciones están ocultas.
+- Si el informe exige un correo o iniciar sesión, los participantes se redirigen **después** de ese paso.
+- En un [quiz insertado](/es/publish/embed), toda la página anfitriona navega al enlace.
+
+La página de resultados (con sus descripciones y botones de CTA) se sigue mostrando cuando el resultado del participante no tiene enlace y no hay enlace predeterminado, cuando vuelve más tarde a su resultado y cuando alguien abre un enlace de resultado compartido.
+
+<Callout type="warning">
+  Las redirecciones son una función **Pro** y no están disponibles en los Quizzes de IA. Si tu equipo deja Pro, los participantes vuelven a ver la página de resultados; tus enlaces se conservan y vuelven a funcionar en cuanto mejoras el plan.
 </Callout>
 
 ## Orden de las secciones de la página de resultados

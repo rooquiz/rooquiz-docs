@@ -1,49 +1,100 @@
 ---
-title: Apariencia y plantillas personalizadas
-description: 'La apariencia tiene dos capas: el tema controla los colores y los radios de las esquinas, y una plantilla personalizada controla el diseño de la página. Qué cambia cada una y cuándo basta con el tema.'
+title: Diseños, temas y módulos
+description: 'Cómo se ve un quiz: elige un diseño de la galería, ajusta los colores y la forma de su tema, edita sus textos e imágenes y añade módulos a las páginas de inicio y de resultados. Qué diseños requieren Pro y qué pasa cuando vence el plan.'
 ---
 
-La apariencia tiene dos capas: el **tema** controla los colores y los radios de las esquinas, mientras que una **plantilla personalizada** controla el diseño de la página en sí. La mayoría de las veces, el tema es todo lo que necesitas.
+La apariencia de un quiz tiene tres capas, todas en la pestaña **Personalizado** del editor, a la derecha:
+
+| Capa | Qué controla |
+| --- | --- |
+| **Diseño** | La maquetación de la página de inicio, las páginas de preguntas y la página de resultados: el aspecto general |
+| **Tema** | Los colores, los radios de las esquinas y la densidad sobre esa maquetación |
+| **Módulos** | Bloques de contenido adicionales en las páginas de inicio y de resultados (solo en los diseños de la galería) |
+
+Los cambios se muestran en directo en la vista previa. Haz clic en cualquier elemento de la vista previa y sus ajustes se abrirán en el panel derecho.
+
+## Elegir un diseño
+
+La tarjeta **Diseño** muestra el diseño actual. Haz clic en la miniatura o en **Cambiar** para abrir la galería.
+
+- **Predeterminado** es la maquetación limpia y neutra que encaja con la mayoría de los quizzes.
+- Los demás diseños están pensados para casos de uso concretos (coaching, cursos, finanzas, fitness, bienestar y más), cada uno con su propia página de inicio, página de resultados y módulos predeterminados. Explóralos con un quiz de ejemplo en directo en la página [Quiz themes](https://rooquiz.com/explore/themes).
+- Los diseños creados solo para tu equipo aparecen primero, con la etiqueta **Exclusivo**.
+- Selecciona un diseño para ver su descripción y sus imágenes de vista previa. **Probar en mi quiz** lo previsualiza con tus propias preguntas sin cambiar nada.
+- Haz clic en **Confirmar selección** para cambiar de diseño.
+
+<Callout type="warning">
+  Cambiar de diseño **restablece la configuración de personalización actual**. Cada diseño tiene sus propios parámetros de maquetación, textos y módulos predeterminados, y los ajustes anteriores no se pueden trasladar. Duplica primero el quiz si quieres conservarlos.
+</Callout>
+
+### Diseños Pro
+
+Todos los equipos pueden probar y editar los diseños marcados como **Pro**, pero **guardar un quiz con un diseño Pro requiere el plan Pro**. En el plan Free verás "This design requires Pro. Upgrade to save, or switch to a free design."
+
+Si tu equipo deja Pro, los quizzes que ya usan un diseño Pro conservan su configuración, pero la página pública muestra el diseño Predeterminado hasta que vuelvas a mejorar el plan.
+
+<Callout type="info">
+  ¿No encuentras el aspecto adecuado? El equipo de RooQuiz puede diseñar un tema para tu marca, visible solo para tu equipo; consulta [Custom quiz design](https://rooquiz.com/custom-quiz-design) (requiere el plan Pro).
+</Callout>
 
 ## Tema
 
-Ajústalo en **Selección de tema** dentro del editor; los cambios se muestran en directo en la vista previa:
+La tarjeta **Tema** define la paleta de colores:
+
+- Elige un tema de la cuadrícula. La fila **Colores** muestra su paleta: Base, Primario, Secundario, Acento, Neutro y los colores Información / Éxito / Advertencia / Error; **Mostrar todos** la despliega.
+- **Extraer colores de la imagen**: sube una imagen de tu marca y la paleta se generará a partir de ella, algo mucho mejor que introducir códigos hexadecimales a mano.
+- **Añadir un tema oscuro** (o **Añadir un tema claro**): el quiz cambia automáticamente cuando el dispositivo del visitante está en modo oscuro (o claro). El tema adicional solo cambia los colores; las formas siempre vienen del tema principal. Algunos diseños incluyen una pareja fija de tema claro y oscuro.
+
+La tarjeta **Estilo** afina la forma:
 
 | Control | Notas |
 | --- | --- |
-| **Colores del tema** | Primario, secundario, acento y neutro, además de información / éxito / advertencia / error |
 | **Radio de borde** | Valores independientes para cajas, campos y selectores |
-| **Efectos** | Interruptores de profundidad, ruido y texturas similares |
-| **Tamaños y borde** | Densidad general y grosor del borde |
+| **Efectos** | Interruptores de textura **Profundidad** y **Ruido** |
+| **Tamaños** | Tamaño de los campos y selectores, y grosor del borde |
+
+## Textos e imágenes
+
+Los diseños de la galería incluyen sus propios textos: eslóganes, el texto junto al botón de inicio, el recuadro "Next step" de la página de resultados. Edítalos en **Textos del tema**, dentro de los ajustes de la página de inicio y de la página de resultados, agrupados según dónde aparecen: **Header**, **Next to the start button**, **"Next step" box** y **Other**.
+
+Los campos de imagen se pueden subir, sustituir o quitar, o elegir con **Elegir de Unsplash**. **Ajustar área visible** te permite arrastrar y redimensionar el recorte a la proporción que usa el diseño.
+
+## Módulos
+
+Los diseños de la galería te permiten añadir **módulos** (bloques de contenido como una introducción, testimonios, preguntas frecuentes, precios o un perfil) a la **página de inicio** y a la **página de resultados**. El diseño Predeterminado no tiene módulos.
+
+- **Añadir**: haz clic en **+ Añadir módulo** debajo de los módulos existentes y elige uno de la galería. Algunos diseños tienen módulos propios, que aparecen en **Exclusive to this theme**.
+- **Editar**: haz clic en un módulo y luego en **Editar**. El editor muestra una vista previa en directo a la izquierda (haz clic en cualquier texto para editarlo ahí mismo) y sus campos a la derecha. **Guardar** aplica los cambios; **Cancelar** los descarta.
+- **Reordenar o eliminar**: usa **Mover arriba**, **Mover abajo** y **Eliminar** en la barra de acciones del módulo.
+- **Botón de inicio**: en la página de inicio, el botón de inicio se puede subir o bajar entre los módulos.
+- **Secciones de la página de resultados**: los bloques integrados **Análisis por dimensiones**, **Sección de reservas** y **Comentarios del participante** están en la misma lista que los módulos, así que puedes poner, por ejemplo, la reserva encima de un testimonio. Las secciones integradas se pueden mover, pero aquí no se pueden editar ni eliminar.
 
 <Callout type="info">
-  Si tienes imágenes de marca, usa **Extraer colores de la imagen**: sube una y la paleta se extraerá a los colores de tu tema, algo mucho mejor que introducir códigos hexadecimales a mano.
+  Un quiz puede tener hasta **20 módulos** entre la página de inicio y la de resultados en total. El botón de inicio y las secciones integradas de resultados no cuentan.
 </Callout>
 
-## Plantillas personalizadas
+## Encabezado y progreso
 
-Una plantilla personalizada cambia el **diseño**, no solo la paleta. Hay tres disponibles:
+Haz clic en **Encabezado** en la lista de la izquierda del editor para definir el **Título del encabezado** (con el interruptor **Mostrar título**), la **Descripción del encabezado** y la **Alineación del encabezado** (Izquierda / Centro / Derecha).
 
-| Plantilla | Notas |
-| --- | --- |
-| **Predeterminada** | El diseño estándar: limpio y neutro, adecuado para la mayoría de los quizzes |
-| **Cinético** | Un diseño con más peso visual en la página de inicio y en la de resultados |
-| **Clarity** | Un diseño pensado para coaches, con su propio diseño de página de inicio y de resultados |
+**Progress style** define cómo se muestra el progreso en los quizzes de varias páginas: **None**, **Badge**, **Bar** o **Segments**. Cada diseño define un valor predeterminado.
 
-<Callout type="warning">
-  El cambio de plantilla **aún no está disponible para todos los equipos**: en la mayoría se muestra la plantilla actual en modo de solo lectura. Un quiz que ya usa **Cinético** o **Clarity** sigue mostrándose, editándose y duplicándose con normalidad.
-</Callout>
+Las preguntas de valoración tienen su propio **Display style** (**Stars** o **Numbers**) en los ajustes de la pregunta.
 
-Al cambiar de plantilla aparece una advertencia de que **la configuración de personalización actual se restablecerá**: un diseño distinto implica otro conjunto de parámetros de diseño, y los ajustes anteriores no se pueden trasladar. Duplica primero el quiz si quieres conservarlos.
+## Estilo de la puntuación en la página de resultados
+
+Cómo se dibuja la puntuación general en la página de resultados (**Scale**, **Ring**, **Gauge** o **Steps**) se define en la sección **Informe**, dentro de **Análisis general**. Al cambiar de diseño se fija el valor predeterminado del diseño; puedes cambiarlo después. Consulta [Niveles y acciones en la página de resultados](/es/editor/scoring#niveles-y-acciones-en-la-página-de-resultados).
 
 ## La página de inicio
 
-La página de inicio es la primera pantalla que ve un participante. En el editor controlas:
+La página de inicio es la primera pantalla que ve un participante. En sus ajustes controlas:
 
-- Si se muestran el **título** y la **descripción**, y cómo se alinean.
-- La **imagen de portada**.
-- El texto del botón de inicio.
+- **Habilitar página de inicio**: desactívala para abrir directamente en las preguntas.
+- La **imagen de portada** (**Subir imagen de encabezado**), el título del quiz y la descripción.
+- Los **Textos del tema** y los módulos, en los diseños de la galería.
+
+El texto del botón de inicio está en **Ajustes → Textos del sistema**.
 
 <Callout type="info">
-  La página de inicio también afecta a la [indexación en buscadores](/es/publish/promotion): si la desactivas, el quiz se abre directamente en las preguntas y los buscadores casi no tienen nada que leer. Si quieres que te encuentren, mantén la página de inicio activada y escribe una descripción real.
+  La página de inicio también afecta a la [indexación en buscadores](/es/publish/promotion#indexación-en-buscadores): si la desactivas, el quiz se abre directamente en las preguntas y los buscadores casi no tienen nada que leer. Si quieres que te encuentren, mantén la página de inicio activada y escribe una descripción real.
 </Callout>

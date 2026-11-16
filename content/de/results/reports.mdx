@@ -1,18 +1,20 @@
 ---
 title: Berichte
-description: 'Jede Antwort kann einen Bericht mit Punktzahl, Stufe, Dimensionswerten und Netzdiagramm erzeugen. So entstehen Berichte, so bewertet der KI-Abgleich Lückentext-Antworten, und so sehen Teilnehmer sie an oder laden sie herunter.'
+description: 'Jede Antwort kann einen Bericht mit Punktzahl, Stufe, Dimensionswerten, Netzdiagramm oder einer von KI geschriebenen Analyse erzeugen. So entstehen Berichte, so bewertet der KI-Abgleich Antworten, so funktionieren CTA-Buttons, und so sehen Teilnehmer sie an oder laden sie herunter.'
 ---
 
-Jede Antwort kann einen **Bericht** erzeugen, der Punktzahl, Stufe, Dimensionswerte und Profilaussagen des Teilnehmers darstellt.
+Jede Antwort kann einen **Bericht** erzeugen, der Punktzahl, Stufe, Dimensionswerte und Profilaussagen des Teilnehmers darstellt – oder, in einem KI-Quiz, eine von KI geschriebene persönliche Analyse.
 
 ## Was ein Bericht enthält
 
 - **Dimensionswerte**: Punktzahlen pro Dimension, häufig als **Netzdiagramm** dargestellt.
 - **Profilaussagen**: Aussagen zu Persönlichkeit/Fähigkeiten, abgeleitet aus den Dimensionswerten.
+- **Gesamtpunktzahl**: Dargestellt als Skala, Ring, Tacho oder Stufen – siehe [Score style](/de/editor/scoring#stufen-und-aktionen-auf-der-ergebnisseite).
+- **KI-Bericht**: In einem KI-Quiz schreibt die KI den Bericht aus Ihren Anweisungen und den Antworten des Teilnehmers – siehe [KI-Berichte](/de/editor/ai-report).
 
 ### Punktzahlen ausblenden
 
-Aktivieren Sie im Editor im Bereich **Bericht** die Option **Punktzahlen ausblenden**, um die Gesamtpunktzahl **und jede Dimensionspunktzahl** auf der Ergebnisseite auszublenden (Punkte-Ring/Zahl, Perzentil, Fortschrittsbalken, Punktequote), während Stufen und Analyse erhalten bleiben. Administratoren sehen die Punktzahlen im Dashboard weiterhin. Fügt die Zusammenfassungsvorlage die Punktzahl-Variable ein, wird die Punktzahl dort weiterhin angezeigt – entfernen Sie sie, um Punktzahlen vollständig auszublenden.
+Aktivieren Sie **Hide scores** unter **Einstellungen → Beantwortung**, und Teilnehmer sehen nie eine Punktzahl: Gesamt- und Dimensionspunktzahlen auf der Ergebnisseite, die Punkte jeder Frage während der Beantwortung, die Punktzahl im Sofort-Feedback und die Punkte pro Frage in der Antwortübersicht werden alle ausgeblendet. Stufen, Analyse und richtig / falsch werden weiterhin angezeigt. Administratoren sehen die Punktzahlen im Dashboard weiterhin. Fügt die Zusammenfassungsvorlage die Punktzahl-Variable ein, wird die Punktzahl dort weiterhin angezeigt – entfernen Sie sie, um Punktzahlen vollständig auszublenden.
 
 ### Reihenfolge der Abschnitte
 
@@ -20,12 +22,13 @@ Verschieben Sie in der Berichtsvorschau des Editors Abschnitte der Ergebnisseite
 
 ### Bewertung per KI-Abgleich
 
-In einem **Wissensquiz** kann eine Lückentext-Frage per **KI-Abgleich** bewertet werden: Die KI beurteilt anhand der semantischen Ähnlichkeit statt einer exakten Textübereinstimmung, ob die Antwort richtig ist. Das ist unbegrenzt – es gibt keine KI-Guthaben zu kaufen. In einem Bewerteten Quiz werden Lückentext-Antworten erfasst, aber nicht bewertet.
+In einem **Wissensquiz** kann eine Lückentext-Frage per **KI-Abgleich** bewertet werden: Die KI beurteilt anhand der semantischen Ähnlichkeit statt einer exakten Textübereinstimmung, ob die Antwort richtig ist. Das ist unbegrenzt und verbraucht keine KI-Punkte (KI-Punkte werden nur für [Berichte in KI-Quizzen](/de/editor/ai-report#ki-punkte-und-datei-uploads) verbraucht). In einem Bewerteten Quiz werden Lückentext-Antworten erfasst, aber nicht bewertet.
 
 ## Wie ein Bericht erstellt wird
 
 - Die **Basisbewertung** wird **unmittelbar** nach dem Absenden berechnet.
-- **Aufwendigere Berechnungen** wie Dimensionsanalyse und Bewertung per KI-Abgleich werden **asynchron** erstellt; der Bericht durchläuft dabei den Zustand „wird erstellt → abgeschlossen“.
+- **Aufwendigere Berechnungen** wie Dimensionsanalyse, Bewertung per KI-Abgleich und Berichte in KI-Quizzen werden **asynchron** erstellt; der Bericht durchläuft dabei den Zustand „wird erstellt → abgeschlossen“.
+- In einem KI-Quiz, das eine E-Mail-Adresse verlangt, um den Bericht zu sehen, wird der Bericht eines anonymen Teilnehmers erst **nach dieser Hürde** erstellt.
 - Schlägt die Erstellung fehl, **wiederholt das System sie automatisch** innerhalb eines bestimmten Zeitfensters.
 
 <Callout type="info">
@@ -49,12 +52,16 @@ In einem **Wissensquiz** kann eine Lückentext-Frage per **KI-Abgleich** bewerte
 
 ## CTA-Button auf der Ergebnisseite
 
-Sie können für **jede Punktestufe** einen Call-to-Action-Button (CTA) konfigurieren; Teilnehmer, die in dieser Stufe landen, sehen ihn am Ende ihres Berichts – z. B. führt „Verbesserungsbedarf“ zur Buchung einer Beratung, während „Ausgezeichnet“ zum Download weiterführender Materialien führt.
+Ein Call-to-Action-Button (CTA) macht aus einem Ergebnis einen nächsten Schritt – „Verbesserungsbedarf“ führt zur Buchung einer Beratung, während „Ausgezeichnet“ zum Download weiterführender Materialien führt.
 
-- Aktivieren Sie im Editor im Bereich **Bericht** → **Punktestufen-Konfiguration** den **CTA-Button** für eine Stufe und geben Sie Button-Text und Link ein; der Einleitungstext ist optional. CTA-Links öffnen sich immer in einem neuen Fenster.
-- Um denselben Button für alle Stufen zu verwenden, konfigurieren Sie einen und klicken Sie auf **Auf alle Stufen anwenden**.
+- Aktivieren Sie im Editor im Bereich **Bericht** den **CTA-Button** und legen Sie einen **Default button** fest (Button-Text und Link; der Einleitungstext ist optional). Text und Link gehören zusammen – füllen Sie beide aus oder lassen Sie beide leer.
+- Geben Sie einer **Stufe**, einem **Ergebnis** oder einem KI-**Ergebnis-Tag** einen eigenen Button innerhalb dieses Eintrags. Alles, was leer bleibt, verwendet den Standard-Button; ist auch dieser leer, zeigt das Ergebnis keinen Button.
+- Ist **CTA-Button** deaktiviert, zeigt kein Ergebnis einen Button – auch keines mit eigenem Button.
+- CTA-Links öffnen sich immer in einem neuen Fenster.
 - Änderungen am CTA **gelten sofort für alle bisherigen Berichte** – tauschen Sie Kampagnenlinks oder Texte aus, ohne sich um veraltete Buttons in alten Berichten zu sorgen.
 - Die CTA-Klicks der Teilnehmer fließen in den Conversion-Funnel unter [Insights](/de/results/insights) ein.
+
+Sie möchten die Ergebnisseite überspringen und Teilnehmer direkt auf eine Seite schicken? Nutzen Sie [Weiterleitung nach dem Absenden](/de/editor/scoring#weiterleitung-nach-dem-absenden-pro) (Pro).
 
 <Callout type="info">
   Links müssen mit `http(s)://` beginnen. Der Button-Stil folgt automatisch der Designfarbe Ihres Quiz.

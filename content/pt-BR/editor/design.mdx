@@ -1,49 +1,100 @@
 ---
-title: Aparência e modelos personalizados
-description: 'A aparência tem duas camadas: o tema controla cores e raios de borda, enquanto um modelo personalizado controla o próprio layout da página. Veja o que cada um muda e quando o tema basta.'
+title: Designs, temas e módulos
+description: 'A aparência de um quiz: escolha um design na galeria, ajuste as cores e a forma do tema, edite textos e imagens e adicione módulos às páginas inicial e de resultado. Quais designs exigem o Pro e o que acontece quando o plano expira.'
 ---
 
-A aparência tem duas camadas: o **tema** controla cores e raios de borda, enquanto um **modelo personalizado** controla o próprio layout da página. Na maioria das vezes, o tema é tudo de que você precisa.
+A aparência de um quiz tem três camadas, todas na aba **Personalizado** do editor, à direita:
+
+| Camada | O que controla |
+| --- | --- |
+| **Design** | O layout da página inicial, das páginas de questões e da página de resultado — a aparência geral |
+| **Tema** | Cores, raios de borda e densidade sobre esse layout |
+| **Módulos** | Blocos de conteúdo extras nas páginas inicial e de resultado (somente designs da galeria) |
+
+As alterações aparecem em tempo real na pré-visualização. Clique em qualquer elemento da pré-visualização e as configurações dele se abrem no painel direito.
+
+## Escolher um design
+
+O cartão **Design** mostra o design atual. Clique na miniatura ou em **Alterar** para abrir a galeria.
+
+- O **Padrão** é o layout limpo e neutro, adequado para a maioria dos quizzes.
+- Os outros designs foram criados para usos específicos — coaching, cursos, finanças, fitness, bem-estar e outros —, cada um com a própria página inicial, página de resultado e módulos padrão. Explore-os com um quiz de exemplo ao vivo na página [Quiz themes](https://rooquiz.com/explore/themes).
+- Os designs feitos só para a sua equipe aparecem primeiro, com a etiqueta **Exclusivo**.
+- Selecione um design para ver a descrição e as imagens de pré-visualização. **Testar no meu quiz** mostra como ele fica com as suas próprias questões, sem alterar nada.
+- Clique em **Confirmar seleção** para trocar.
+
+<Callout type="warning">
+  Trocar de design **redefine as suas configurações de personalização atuais**. Cada design tem os próprios parâmetros de layout, textos e módulos padrão, e os ajustes antigos não podem ser transferidos. Duplique o quiz antes se quiser mantê-los.
+</Callout>
+
+### Designs Pro
+
+Os designs marcados como **Pro** podem ser testados e editados por qualquer equipe, mas **salvar um quiz com um design Pro exige o plano Pro**. No plano Free, aparece a mensagem "This design requires Pro. Upgrade to save, or switch to a free design."
+
+Se a sua equipe sair do Pro, os quizzes que já usam um design Pro mantêm as configurações, mas a página pública exibe o design Padrão até você fazer upgrade de novo.
+
+<Callout type="info">
+  Não encontrou a aparência certa? A equipe do RooQuiz pode criar um tema para a sua marca, visível apenas para a sua equipe — veja [Custom quiz design](https://rooquiz.com/custom-quiz-design) (requer o plano Pro).
+</Callout>
 
 ## Tema
 
-Ajuste-o em **Seleção de tema** no editor; as alterações aparecem em tempo real na pré-visualização:
+O cartão **Tema** define a paleta de cores:
+
+- Escolha um tema na grade. A linha **Cores** mostra a paleta dele — Base, Primária, Secundária, Destaque, Neutra e as cores de Informação / Sucesso / Aviso / Erro; **Mostrar todas** a expande.
+- **Extrair cores da imagem** — envie uma imagem da marca e a paleta é gerada a partir dela, o que é bem melhor do que digitar códigos hexadecimais à mão.
+- **Adicionar tema escuro** (ou **Adicionar tema claro**) — o quiz troca automaticamente quando o dispositivo do visitante está no modo escuro (ou claro). O tema extra muda apenas as cores; as formas sempre vêm do tema principal. Alguns designs já vêm com um par claro/escuro fixo.
+
+O cartão **Estilo** ajusta a forma:
 
 | Controle | Observações |
 | --- | --- |
-| **Cores do tema** | Primária, secundária, de destaque e neutra, além de informação / sucesso / aviso / erro |
 | **Raio da borda** | Valores separados para caixas, campos e seletores |
-| **Efeitos** | Profundidade, ruído e opções de textura semelhantes |
-| **Tamanhos e borda** | Densidade geral e espessura da borda |
+| **Efeitos** | Opções de textura **Profundidade** e **Ruído** |
+| **Tamanhos** | Tamanho dos campos e seletores e espessura da borda |
+
+## Textos e imagens
+
+Os designs da galeria vêm com os próprios textos — slogans, o texto ao lado do botão de início, o quadro "Próximo passo" na página de resultado. Edite-os em **Textos do tema**, nas configurações da página inicial e da página de resultado, agrupados por onde aparecem: **Header**, **Next to the start button**, **"Next step" box** e **Other**.
+
+Os campos de imagem podem ser enviados, substituídos ou removidos, ou escolhidos com **Escolher no Unsplash**. **Ajustar área visível** permite arrastar e redimensionar o recorte na proporção que o design usa.
+
+## Módulos
+
+Os designs da galeria permitem adicionar **módulos** — blocos de conteúdo como uma introdução, depoimentos, perguntas frequentes, preços ou um perfil — à **página inicial** e à **página de resultado**. O design Padrão não tem módulos.
+
+- **Adicionar** — clique em **+ Adicionar módulo** abaixo dos módulos existentes e escolha um na galeria. Alguns designs têm módulos próprios, listados em **Exclusive to this theme**.
+- **Editar** — clique em um módulo e depois em **Editar**. O editor mostra uma pré-visualização ao vivo à esquerda (clique em qualquer texto para editá-lo ali mesmo) e os campos do módulo à direita. **Salvar** aplica as alterações; **Cancelar** as descarta.
+- **Reordenar ou excluir** — use **Mover para cima**, **Mover para baixo** e **Excluir** na barra de ações do módulo.
+- **Botão de início** — na página inicial, o botão de início pode ser movido para cima ou para baixo entre os módulos.
+- **Seções da página de resultado** — os blocos nativos **Análise por Dimensões**, **Seção de agendamento** e **Feedback do respondente** ficam na mesma lista que os módulos, então você pode, por exemplo, colocar o agendamento acima de um depoimento. As seções nativas podem ser movidas, mas não editadas nem excluídas aqui.
 
 <Callout type="info">
-  Se você tiver imagens da marca, use **Extrair cores da imagem** — envie uma e a paleta é extraída para as cores do seu tema, o que é bem melhor do que digitar códigos hexadecimais à mão.
+  Um quiz pode ter até **20 módulos** somando a página inicial e a página de resultado. O botão de início e as seções nativas da página de resultado não contam.
 </Callout>
 
-## Modelos personalizados
+## Cabeçalho e progresso
 
-Um modelo personalizado muda o **layout**, não apenas a paleta. Há três disponíveis:
+Clique em **Cabeçalho** na lista à esquerda do editor para definir o **Título do cabeçalho** (com a opção **Mostrar título**), a **Descrição do cabeçalho** e o **Alinhamento do cabeçalho** (Esquerda / Centro / Direita).
 
-| Modelo | Observações |
-| --- | --- |
-| **Padrão** | O layout padrão — limpo e neutro, adequado para a maioria dos quizzes |
-| **Cinético** | Um layout orientado ao design, com tratamento visual mais marcante nas páginas inicial e de resultado |
-| **Clarity** | Um layout criado para coaches, com design próprio para as páginas inicial e de resultado |
+**Progress style** define como o progresso aparece em quizzes de várias páginas: **None**, **Badge**, **Bar** ou **Segments**. Cada design define um padrão.
 
-<Callout type="warning">
-  A troca de modelo **ainda não está liberada para todas as equipes** — na maioria delas, o modelo atual aparece somente para leitura. Um quiz que já usa o **Cinético** ou o **Clarity** continua sendo exibido, editado e duplicado normalmente.
-</Callout>
+As questões de avaliação têm o próprio **Display style** — **Stars** ou **Numbers** — nas configurações da questão.
 
-Ao trocar de modelo, você recebe um aviso de que **suas configurações de personalização atuais serão redefinidas** — um layout diferente significa um conjunto diferente de parâmetros de layout, e os ajustes antigos não podem ser transferidos. Duplique o quiz antes se quiser mantê-los.
+## Estilo da pontuação na página de resultado
+
+A forma como a pontuação geral aparece na página de resultado — **Scale**, **Ring**, **Gauge** ou **Steps** — é definida na seção **Relatório**, em **Análise Geral**. Trocar de design aplica o padrão do novo design; você pode alterá-lo depois. Veja [Níveis e ações na página de resultado](/pt-BR/editor/scoring#níveis-e-ações-na-página-de-resultado).
 
 ## A página inicial
 
-A página inicial é a primeira tela que o respondente vê. No editor, você controla:
+A página inicial é a primeira tela que o respondente vê. Nas configurações dela, você controla:
 
-- Se o **título** e a **descrição** aparecem e como ficam alinhados.
-- A **imagem de capa**.
-- O texto do botão de início.
+- **Ativar página inicial** — desative para abrir direto nas questões.
+- A **imagem de capa** (**Enviar imagem de cabeçalho**), o título do quiz e a descrição.
+- **Textos do tema** e módulos, nos designs da galeria.
+
+O texto do botão de início fica em **Configurações → Textos do sistema**.
 
 <Callout type="info">
-  A página inicial também afeta a [indexação em mecanismos de busca](/pt-BR/publish/promotion): com ela desativada, o quiz abre direto nas questões e os mecanismos de busca quase não têm o que ler. Se você quer ser encontrado, mantenha a página inicial ativada e escreva uma descrição de verdade.
+  A página inicial também afeta a [indexação em buscadores](/pt-BR/publish/promotion#indexação-em-buscadores): com ela desativada, o quiz abre direto nas questões e os mecanismos de busca quase não têm o que ler. Se você quer ser encontrado, mantenha a página inicial ativada e escreva uma descrição de verdade.
 </Callout>

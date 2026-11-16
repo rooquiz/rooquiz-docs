@@ -1,0 +1,96 @@
+---
+title: Informes de IA
+description: 'Cómo un Quiz de IA redacta un informe personal para cada participante: instrucciones de generación, extensión del informe, reglas de estilo, subida de archivos, etiquetas de resultado internas, puntos de IA y qué pasa cuando se agotan.'
+---
+
+En un **Quiz de IA** no se puntúa nada. Cuando un participante envía sus respuestas, la IA lee lo que ha contestado (y los archivos que haya subido) y le redacta un **informe personal**, siguiendo las instrucciones que le des. Elige este tipo cuando el propio informe es el valor que ofreces: un diagnóstico, una revisión, un plan de coaching. Consulta [Los cuatro tipos de quiz](/es/getting-started/quiz-types#quiz-de-ia).
+
+## Escribir las instrucciones de generación
+
+Abre la sección **Informe** del editor. En **Instrucciones de generación**, indica a la IA qué debe cubrir el informe y cómo debe redactarlo, por ejemplo:
+
+> Evalúa la muestra oral en fluidez, estructura y seguridad, asigna un nivel de A1 a C2, enumera 3 puntos fuertes y 3 aspectos que practicar, y termina con un plan de estudio de 2 semanas.
+
+- Las respuestas del participante y los archivos subidos se envían a la IA automáticamente: no hace falta que los pegues.
+- Para referirte a una pregunta concreta, haz clic en **+** en el editor e insértala; por ejemplo, "adapta los consejos a [Puesto objetivo]".
+- Si dejas las instrucciones vacías, la IA redacta un resumen general con puntos fuertes y sugerencias.
+- Las instrucciones admiten hasta 20.000 caracteres.
+
+### Extensión del informe
+
+**Extensión del informe** tiene tres opciones; **Estándar** es la predeterminada.
+
+| Opción | Qué contiene el informe |
+| --- | --- |
+| **Breve** | La conclusión y los 1–2 puntos más importantes |
+| **Estándar** | La conclusión, 2–3 hallazgos clave y los próximos pasos |
+| **Detallado** | 3–5 hallazgos y hasta 3 gráficos |
+
+### Estilo y reglas
+
+**Estilo y reglas (opcional)** define el tono y las reglas obligatorias, con hasta 5.000 caracteres; por ejemplo, "Tono cercano y alentador. Trata al lector de tú. No menciones nunca a la competencia." Una regla de extensión escrita aquí tiene prioridad sobre **Extensión del informe**.
+
+<Callout type="info">
+  La vista previa del informe en el editor muestra un **informe de ejemplo**. Los informes reales se redactan para cada participante a partir de tus instrucciones y de sus respuestas, así que dos participantes nunca reciben el mismo texto.
+</Callout>
+
+## Subida de archivos
+
+Un Quiz de IA puede incluir **preguntas de subida de archivos** para que la IA revise trabajo real: un CV, una muestra oral, la foto de un producto. Cada pregunta de subida acepta un tipo de archivo:
+
+| Tipo | Formatos aceptados | Límite por archivo | Cómo lo lee la IA |
+| --- | --- | --- | --- |
+| Imagen | JPG, PNG, WebP, GIF | 10 MB | Mira la imagen |
+| Audio | MP3, M4A, WAV, WebM, OGG | 10 MB, hasta 3 minutos | Lee una transcripción |
+| Vídeo corto | MP4, WebM, MOV | 20 MB, hasta 1 minuto | Lee una transcripción del audio |
+| Documento | PDF, Word, Excel, PowerPoint, TXT, CSV, Markdown | 10 MB | Lee su texto |
+
+- Un Quiz de IA puede tener **hasta 2** preguntas de subida, y cada una acepta **hasta 3 archivos** (ajusta **Máx. de archivos** para permitir menos).
+- Las preguntas de subida solo recopilan archivos; no se puntúan.
+- Los archivos subidos cuentan para la cuota mensual de **subida de archivos** de tu equipo; consulta [Puntos de IA y subida de archivos](#puntos-de-ia-y-subida-de-archivos).
+
+## Etiquetas de resultado
+
+**Etiquetas de resultado (opcional)** permite que la IA clasifique a los participantes por ti. Añade hasta **10** etiquetas, cada una con un nombre y una regla en lenguaje natural sobre cuándo usarla; por ejemplo, *Listo para comprar*: "Tiene presupuesto y quiere empezar en menos de un mes". Antes de redactar cada informe, la IA elige la etiqueta que mejor encaja.
+
+- **Los participantes nunca ven la etiqueta.** Solo ven el botón de CTA de la etiqueta debajo de su informe.
+- En [Registros de respuestas](/es/results/records), filtra por resultado y consulta la etiqueta de cada respuesta.
+- Las etiquetas se envían a tus [conectores](/es/connectors) junto con la respuesta, y puedes usarlas como condiciones; por ejemplo, etiquetar suscriptores en Kit o enviar un correo de seguimiento solo a *Listo para comprar*.
+- Eliminar una etiqueta no cambia los informes que ya la tienen.
+
+Varias plantillas de IA incluyen tres etiquetas de ejemplo (hacer seguimiento ya / nutrir / demasiado pronto) como punto de partida.
+
+## Botón de CTA
+
+En **Botón de CTA**, define un **botón predeterminado** que aparece debajo de cada informe de IA y, si quieres, da a cada etiqueta de resultado su propio botón. Una etiqueta sin botón propio usa el predeterminado. Consulta [Botón de CTA en la página de resultados](/es/results/reports#botón-de-cta-en-la-página-de-resultados).
+
+## Cómo se genera el informe
+
+1. El participante envía sus respuestas; el informe empieza a **generarse** de inmediato y aparece en la página de resultados a medida que la IA lo redacta.
+2. Si el quiz usa **Correo obligatorio para ver el informe**, el informe de un participante anónimo se genera **después de que supere ese paso**: no se gastan puntos de IA en personas que nunca dejan su correo. En el panel, estas respuestas muestran "El informe aún no se ha generado", con un botón para generarlo ahora.
+3. Si la generación falla, se reintenta automáticamente; también puedes usar **Regenerar informe** desde la respuesta; consulta [Informes](/es/results/reports#regenerar-un-informe).
+
+<Callout type="warning">
+  La redirección de los participantes a un enlace tras el envío no está disponible en los Quizzes de IA, porque el informe se redacta después de que envíen sus respuestas.
+</Callout>
+
+## Puntos de IA y subida de archivos
+
+Cada informe de un Quiz de IA consume **1 punto de IA**. Cada equipo recibe una cuota mensual que se restablece el día 1 de cada mes (UTC):
+
+| | Free | Pro |
+| --- | --- | --- |
+| Puntos de IA al mes | 5 | 100 |
+| Subida de archivos al mes | 100 MB | 2 GB |
+
+Durante una prueba gratuita de Pro, los puntos de IA se mantienen en la cuota de Free hasta que empieza la suscripción.
+
+Cuando se agota la cuota se usan las **recargas**; consulta [Complementos](/es/account#complementos). Si ambas se agotan:
+
+- Los participantes pueden seguir respondiendo y enviando; **no se pierde ninguna respuesta**.
+- Su informe no se genera y aparece como fallido porque el equipo se ha quedado sin puntos de IA. Recarga y luego regenéralo desde la respuesta.
+- Los propietarios y administradores del equipo reciben un correo y una notificación en la aplicación cuando los puntos de IA o la subida de archivos están a punto de agotarse, y otra vez cuando se agotan.
+
+<Callout type="info">
+  Los puntos de IA solo los consumen los informes de los Quizzes de IA. La corrección con **Coincidencia con AI** de las respuestas de completar el espacio en un Cuestionario de conocimiento es ilimitada y no consume puntos.
+</Callout>

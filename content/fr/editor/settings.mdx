@@ -1,9 +1,9 @@
 ---
 title: Paramètres du quiz
-description: "Tout ce qui, dans un quiz, n'est pas une question, page par page : accès et visibilité, informations de base, expérience de réponse, suivi de la page de résultats, versions linguistiques, textes système et Google Analytics."
+description: "Tout ce qui, dans un quiz, n'est pas une question, page par page : accès et visibilité, expérience de réponse, suivi de la page de résultats, versions linguistiques, textes système et suivi des conversions."
 ---
 
-Tout ce qui, dans le quiz, n'est pas une question se trouve dans l'onglet **Paramètres** du quiz (à côté de **Modifier**, **Réponses** et **Statistiques**). Il est divisé en sept pages, listées dans le menu de gauche.
+Tout ce qui, dans le quiz, n'est pas une question se trouve dans l'onglet **Paramètres** du quiz (à côté de **Modifier**, **Réponses** et **Statistiques**). Il est divisé en six pages, listées dans le menu de gauche.
 
 ## Accès et visibilité
 
@@ -39,7 +39,7 @@ Activée par défaut : le quiz est ajouté à votre sitemap et peut être trouv�
 
 ## Informations de base
 
-**Titre du quiz**, **Image de couverture** (1200 × 630 px recommandé) et **Couleur de couverture**. Le titre identifie le quiz dans le tableau de bord et s'affiche sur la page d'accueil.
+**Titre du quiz**, **Image de couverture** (1200 × 630 px recommandé) et **Couleur de couverture** ne se trouvent pas dans les Paramètres : cliquez sur le titre du quiz dans la barre supérieure pour les modifier. Le titre identifie le quiz dans le tableau de bord et s'affiche sur la page d'accueil.
 
 La **description** du quiz se modifie sur la page d'accueil, dans l'éditeur, et non ici. Elle alimente l'[indexation par les moteurs de recherche](/fr/publish/promotion#indexation-par-les-moteurs-de-recherche) : ne la laissez donc pas vide.
 
@@ -47,6 +47,11 @@ La **description** du quiz se modifie sur la page d'accueil, dans l'éditeur, et
 
 - **Mode d'affichage de la numérotation** — Aucune / Chiffres arabes (1, 2, 3) / Chiffres romains (I, II, III).
 - **Limite de temps** — un compte à rebours démarre lorsque le répondant entre dans le quiz ; à son terme, une fenêtre s'affiche et ses **réponses en cours sont envoyées automatiquement**. Disponible **uniquement dans le Quiz de connaissances** : le Quiz noté et le Quiz de résultat ne la proposent pas.
+- **Instant feedback** — activez **Check answers page by page** et les répondants envoient chaque page séparément, puis voient s'ils ont juste, la bonne réponse et votre explication avant de continuer. **Quiz de connaissances uniquement.**
+  - Les questions vérifiées ne peuvent plus être modifiées. Sur la dernière page, un bouton **See results** termine le quiz.
+  - Sur une page ne comportant qu'une seule question à réponse en un geste (choix unique, vrai/faux, liste déroulante ou notation), la réponse est vérifiée dès qu'elle est choisie.
+  - Les réponses sont ainsi révélées question par question : laissez cette option désactivée pour les quiz dont le score sert à orienter vers un niveau.
+- **Hide scores** — activez **Hide scores from respondents** et les répondants ne voient jamais de score : ni sur la page de résultats (scores global et par dimension), ni les points de chaque question pendant qu'ils répondent, ni dans le retour immédiat ou la revue des réponses. Les niveaux, l'analyse et le juste/faux restent affichés, et vous voyez toujours les scores dans le tableau de bord. Non affiché pour les Quiz de résultat et les Quiz IA, qui n'ont pas de score.
 - **Feuille de réponses** — affiche un navigateur de questions dans la barre latérale pour que les répondants voient leur progression et accèdent à n'importe quelle question. Activée par défaut sur les nouveaux quiz ; vous pouvez la désactiver pour les quiz courts à faire d'une traite.
 - **Comparaison avec les autres** — activez **Afficher les pourcentages par option** et les répondants voient, juste après avoir répondu, la part des personnes ayant choisi la même option (par ex. « 62 % des personnes ont choisi comme vous »). Seuls des pourcentages s'affichent, jamais les réponses individuelles.
   - Désactivée par défaut et disponible uniquement dans le Quiz noté et le Quiz de résultat ; pas dans les quiz de connaissances, où l'option la plus choisie trahirait la réponse.
@@ -55,7 +60,9 @@ La **description** du quiz se modifie sur la page d'accueil, dans l'éditeur, et
 
 ## Suivi de la page de résultats
 
-Deux blocs facultatifs pour la page de résultats. Leur ordre sur la page se règle dans l'éditeur : consultez [Ordre des sections de la page de résultats](/fr/editor/scoring#ordre-des-sections-de-la-page-de-résultats).
+**Emails by result** — envoyez un e-mail de suivi adapté au résultat de chaque répondant, par exemple recommander un cours pour débutants à « Débutant » et inviter « Avancé » à un cours d'essai. Chaque niveau ou résultat dispose d'une ligne où ajouter son propre e-mail, et **All respondents** envoie le même e-mail à tout le monde. Ces e-mails sont en réalité des connecteurs E-mail : ils apparaissent donc aussi dans les [Connecteurs](/fr/connectors/channels#e-mail) de votre équipe et nécessitent un [service d'envoi](/fr/connectors/email-smtp). Seuls les propriétaires et administrateurs de l'équipe peuvent les configurer.
+
+En dessous se trouvent deux blocs facultatifs pour la page de résultats. Leur ordre sur la page se règle dans l'éditeur : consultez [Ordre des sections de la page de résultats](/fr/editor/scoring#ordre-des-sections-de-la-page-de-résultats).
 
 - **Section réservation** — permet aux répondants de réserver un appel via votre page Cal.com depuis leur résultat. Activez-la, collez votre **Lien de réservation Cal.com** (obligatoire) et définissez, si vous le souhaitez, le titre, la description et le texte du bouton : consultez [Réservations](/fr/bookings).
 - **Retour du répondant** — activez **Afficher le bloc de retour** pour poser **une seule question** sur la page de résultats. Choisissez le type de réponse : **Note de 1 à 5**, **Choix unique** ou **Texte libre**. Les réponses arrivent sur le lead du répondant : la personne chargée du suivi sait ainsi ce que cette personne veut vraiment.

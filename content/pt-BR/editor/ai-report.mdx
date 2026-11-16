@@ -1,0 +1,96 @@
+---
+title: Relatórios com IA
+description: 'Como um Quiz com IA escreve um relatório personalizado para cada respondente: instruções de geração, extensão do relatório, regras de estilo, envio de arquivos, etiquetas de resultado internas, pontos de IA e o que acontece quando eles acabam.'
+---
+
+Em um **Quiz com IA**, nada é pontuado. Depois que o respondente envia, a IA lê as respostas (e os arquivos que ele enviou) e escreve um **relatório personalizado**, seguindo as instruções que você der. Escolha este tipo quando o próprio relatório for o valor que você oferece — um diagnóstico, uma análise, um plano de mentoria. Veja [Os quatro tipos de quiz](/pt-BR/getting-started/quiz-types#quiz-com-ia).
+
+## Escrever as instruções de geração
+
+Abra a seção **Relatório** do editor. Em **Instruções de geração**, diga à IA o que o relatório deve abordar e como escrevê-lo, por exemplo:
+
+> Avalie a amostra de fala quanto à fluência, à estrutura e à confiança, atribua um nível de A1 a C2, liste 3 pontos fortes e 3 pontos a praticar e termine com um plano de estudos de 2 semanas.
+
+- As respostas e os arquivos enviados pelo respondente são enviados à IA automaticamente — não é preciso colá-los.
+- Para se referir a uma questão específica, clique em **+** no editor e insira-a, por exemplo "adapte os conselhos ao [Cargo desejado]".
+- Deixe as instruções vazias e a IA escreve um resumo geral com pontos fortes e sugestões.
+- As instruções podem ter até 20.000 caracteres.
+
+### Extensão do relatório
+
+**Extensão do relatório** tem três opções; **Padrão** é a opção predefinida.
+
+| Opção | O que o relatório contém |
+| --- | --- |
+| **Breve** | A conclusão e os 1–2 pontos mais importantes |
+| **Padrão** | A conclusão, 2–3 descobertas principais e os próximos passos |
+| **Detalhado** | 3–5 descobertas e até 3 gráficos |
+
+### Estilo e regras
+
+**Estilo e regras (opcional)** define o tom e regras rígidas, com até 5.000 caracteres — por exemplo "Tom acolhedor e encorajador. Trate o leitor por 'você'. Nunca mencione concorrentes." Uma regra de extensão escrita aqui tem prioridade sobre a **Extensão do relatório**.
+
+<Callout type="info">
+  A pré-visualização do relatório no editor mostra um **relatório de exemplo**. Os relatórios reais são escritos para cada respondente a partir das suas instruções e das respostas dele, então dois respondentes nunca recebem o mesmo texto.
+</Callout>
+
+## Envio de arquivos
+
+Um Quiz com IA pode incluir **questões de envio de arquivo** para que a IA analise trabalhos reais — um currículo, uma amostra de fala, a foto de um produto. Cada questão de envio aceita um tipo de arquivo:
+
+| Tipo | Formatos aceitos | Limite por arquivo | Como a IA lê |
+| --- | --- | --- | --- |
+| Imagem | JPG, PNG, WebP, GIF | 10 MB | Analisa a imagem |
+| Áudio | MP3, M4A, WAV, WebM, OGG | 10 MB, até 3 minutos | Lê uma transcrição |
+| Vídeo curto | MP4, WebM, MOV | 20 MB, até 1 minuto | Lê uma transcrição do áudio |
+| Documento | PDF, Word, Excel, PowerPoint, TXT, CSV, Markdown | 10 MB | Lê o texto |
+
+- Um Quiz com IA pode ter **até 2** questões de envio, cada uma aceitando **até 3 arquivos** (defina **Máx. de arquivos** para permitir menos).
+- As questões de envio apenas coletam arquivos; elas não são pontuadas.
+- Os envios contam para a cota mensal de **envio de arquivos** da sua equipe — veja [Pontos de IA e envio de arquivos](#pontos-de-ia-e-envio-de-arquivos).
+
+## Etiquetas de resultado
+
+**Etiquetas de resultado (opcional)** permitem que a IA classifique os respondentes para você. Adicione até **10** etiquetas, cada uma com um nome e uma regra em linguagem simples para quando usá-la — por exemplo *Pronto para comprar*: "Tem orçamento e quer começar dentro de um mês". Antes de escrever cada relatório, a IA escolhe a etiqueta que melhor se encaixa.
+
+- **Os respondentes nunca veem a etiqueta.** Eles veem apenas o botão de CTA da etiqueta abaixo do relatório.
+- Em [Registros de respostas](/pt-BR/results/records), filtre por resultado e veja a etiqueta de cada resposta.
+- As etiquetas são enviadas aos seus [conectores](/pt-BR/connectors) junto com a resposta, e você pode usá-las como condições — por exemplo, aplicar tags aos inscritos no Kit ou enviar um e-mail de acompanhamento correspondente só para *Pronto para comprar*.
+- Excluir uma etiqueta não altera os relatórios que já a receberam.
+
+Vários modelos com IA vêm com três etiquetas de exemplo (acompanhar agora / nutrir / cedo demais) para você começar.
+
+## Botão de CTA
+
+Em **Botão de CTA**, defina um **botão padrão** que aparece abaixo de todo relatório com IA e, se quiser, dê a cada etiqueta de resultado o próprio botão. Uma etiqueta sem botão próprio usa o padrão. Veja [Botão de CTA da página de resultado](/pt-BR/results/reports#botão-de-cta-da-página-de-resultado).
+
+## Como o relatório é gerado
+
+1. O respondente envia; o relatório começa a ser **gerado** imediatamente e aparece na página de resultado à medida que a IA escreve.
+2. Se o quiz usa **E-mail obrigatório para ver o relatório**, o relatório de um respondente anônimo é gerado **depois que ele passa pela etapa de e-mail** — nenhum ponto de IA é gasto com quem nunca deixa o e-mail. No painel, essas respostas mostram "O relatório ainda não foi gerado", com um botão para gerá-lo agora.
+3. Se a geração falhar, ela é repetida automaticamente; você também pode clicar em **Gerar relatório novamente** na resposta — veja [Relatórios](/pt-BR/results/reports#gerar-o-relatório-novamente).
+
+<Callout type="warning">
+  O redirecionamento dos respondentes para um link após o envio não está disponível para Quizzes com IA, porque o relatório é escrito depois que eles enviam.
+</Callout>
+
+## Pontos de IA e envio de arquivos
+
+Cada relatório de Quiz com IA usa **1 ponto de IA**. Toda equipe recebe uma cota mensal que é renovada no dia 1º de cada mês (UTC):
+
+| | Free | Pro |
+| --- | --- | --- |
+| Pontos de IA por mês | 5 | 100 |
+| Envio de arquivos por mês | 100 MB | 2 GB |
+
+Durante o teste grátis do Pro, os pontos de IA continuam na cota do Free até a assinatura começar.
+
+Quando a cota acaba, são usadas as **recargas** — veja [Complementos](/pt-BR/account#complementos). Se as duas se esgotarem:
+
+- Os respondentes ainda podem responder e enviar; **nenhuma resposta é perdida**.
+- O relatório deles não é gerado e aparece como falho porque a equipe ficou sem pontos de IA. Faça uma recarga e gere-o novamente a partir da resposta.
+- Os proprietários e administradores da equipe recebem um e-mail e uma notificação no app quando os pontos de IA ou o envio de arquivos estão acabando, e de novo quando acabam.
+
+<Callout type="info">
+  Os pontos de IA são usados apenas pelos relatórios de Quiz com IA. A correção por **Correspondência por IA** de respostas de preencher a lacuna em um Quiz de conhecimento é ilimitada e não usa pontos.
+</Callout>

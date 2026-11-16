@@ -1,49 +1,100 @@
 ---
-title: Apparence et modèles personnalisés
-description: "L'apparence repose sur deux niveaux : le thème gère couleurs et arrondis, le modèle personnalisé gère la mise en page elle-même. Ce que chacun modifie et quand un simple thème suffit."
+title: Designs, thèmes et modules
+description: "L'apparence d'un quiz : choisir un design dans la galerie, ajuster les couleurs et la forme de son thème, modifier ses textes et ses images, et ajouter des modules aux pages d'accueil et de résultats. Designs Pro et effet de la fin d'un forfait."
 ---
 
-L'apparence repose sur deux niveaux : le **thème** gère les couleurs et les arrondis des angles, tandis qu'un **modèle personnalisé** gère la mise en page elle-même. La plupart du temps, le thème suffit.
+L'apparence d'un quiz repose sur trois niveaux, tous dans l'onglet **Personnalisé** à droite de l'éditeur :
+
+| Niveau | Ce qu'il contrôle |
+| --- | --- |
+| **Design** | La mise en page de la page d'accueil, des pages de questions et de la page de résultats : l'aspect général |
+| **Thème** | Les couleurs, les arrondis et la densité appliqués à cette mise en page |
+| **Modules** | Des blocs de contenu supplémentaires sur les pages d'accueil et de résultats (designs de la galerie uniquement) |
+
+Les modifications s'affichent en direct dans l'aperçu. Cliquez sur n'importe quel élément de l'aperçu et ses réglages s'ouvrent dans le volet de droite.
+
+## Choisir un design
+
+La carte **Design** affiche le design actuel. Cliquez sur la miniature ou sur **Changer** pour ouvrir la galerie.
+
+- **Par défaut** est la mise en page épurée et neutre, adaptée à la plupart des quiz.
+- Les autres designs sont conçus pour des usages précis (coaching, formations, finance, fitness, bien-être, etc.), chacun avec sa propre page d'accueil, sa page de résultats et ses modules par défaut. Parcourez-les avec un quiz d'exemple en direct sur la page [Quiz themes](https://rooquiz.com/explore/themes).
+- Les designs créés uniquement pour votre équipe apparaissent en premier avec une étiquette **Exclusif**.
+- Sélectionnez un design pour voir sa description et ses images d'aperçu. **Essayer sur mon quiz** l'affiche avec vos propres questions sans rien modifier.
+- Cliquez sur **Confirmer la sélection** pour l'adopter.
+
+<Callout type="warning">
+  Changer de design **réinitialise vos paramètres de personnalisation actuels**. Chaque design a ses propres paramètres de mise en page, ses textes et ses modules par défaut, et les anciens réglages ne peuvent pas être repris. Dupliquez d'abord le quiz si vous souhaitez les conserver.
+</Callout>
+
+### Designs Pro
+
+Les designs marqués **Pro** peuvent être essayés et modifiés par toutes les équipes, mais **enregistrer un quiz avec un design Pro nécessite le forfait Pro**. Avec le forfait Free, le message « This design requires Pro. Upgrade to save, or switch to a free design. » s'affiche.
+
+Si votre équipe quitte Pro, les quiz qui utilisent déjà un design Pro conservent leurs réglages, mais la page publique affiche le design Par défaut jusqu'à votre retour à Pro.
+
+<Callout type="info">
+  Vous ne trouvez pas l'apparence qui vous convient ? L'équipe RooQuiz peut concevoir un thème à l'image de votre marque, visible uniquement par votre équipe : consultez [Custom quiz design](https://rooquiz.com/custom-quiz-design) (forfait Pro requis).
+</Callout>
 
 ## Thème
 
-Réglez-le dans **Choix du thème** dans l'éditeur ; les modifications s'affichent en direct dans l'aperçu :
+La carte **Thème** définit la palette de couleurs :
+
+- Choisissez un thème dans la grille. La ligne **Couleurs** affiche sa palette : Base, Principale, Secondaire, Accent, Neutre, ainsi que les couleurs Info / Succès / Avertissement / Erreur ; **Tout afficher** la déploie.
+- **Extraire les couleurs d'une image** : importez un visuel de marque et la palette en est générée, ce qui est bien plus pratique que de saisir des codes hexadécimaux à la main.
+- **Ajouter un thème sombre** (ou **Ajouter un thème clair**) : le quiz bascule automatiquement lorsque l'appareil du visiteur est en mode sombre (ou clair). Le thème supplémentaire ne change que les couleurs ; les formes viennent toujours du thème principal. Certains designs sont fournis avec une paire clair/sombre fixe.
+
+La carte **Style** affine la forme :
 
 | Réglage | Remarques |
 | --- | --- |
-| **Couleurs du thème** | Principale, secondaire, d'accent et neutre, plus info / succès / avertissement / erreur |
 | **Rayon des bordures** | Valeurs distinctes pour les blocs, les champs et les sélecteurs |
-| **Effets** | Profondeur, grain et autres options de texture |
-| **Tailles et bordure** | Densité générale et épaisseur des bordures |
+| **Effets** | Interrupteurs de texture **Profondeur** et **Bruit** |
+| **Tailles** | Taille des champs et des sélecteurs, et épaisseur des bordures |
+
+## Textes et images
+
+Les designs de la galerie sont fournis avec leurs propres textes : accroches, texte à côté du bouton de démarrage, encadré « Next step » de la page de résultats. Modifiez-les sous **Textes du thème** dans les réglages de la page d'accueil et de la page de résultats, regroupés selon leur emplacement : **Header**, **Next to the start button**, **"Next step" box** et **Other**.
+
+Les champs image peuvent être importés, remplacés ou supprimés, ou choisis avec **Choisir sur Unsplash**. **Ajuster la zone visible** vous permet de déplacer et redimensionner le recadrage au format utilisé par le design.
+
+## Modules
+
+Les designs de la galerie vous permettent d'ajouter des **modules** (des blocs de contenu tels qu'une présentation, des témoignages, une FAQ, des tarifs ou un profil) à la **page d'accueil** et à la **page de résultats**. Le design Par défaut n'a pas de modules.
+
+- **Ajouter** : cliquez sur **+ Ajouter un module** sous les modules existants et choisissez-en un dans la galerie. Certains designs ont leurs propres modules, listés sous **Exclusive to this theme**.
+- **Modifier** : cliquez sur un module, puis sur **Modifier**. L'éditeur affiche un aperçu en direct à gauche (cliquez sur n'importe quel texte pour le modifier sur place) et ses champs à droite. **Enregistrer** applique les modifications ; **Annuler** les abandonne.
+- **Réordonner ou supprimer** : utilisez **Monter**, **Descendre** et **Supprimer** dans la barre d'actions du module.
+- **Bouton de démarrage** : sur la page d'accueil, le bouton de démarrage peut être monté ou descendu parmi les modules.
+- **Sections de la page de résultats** : les blocs intégrés **Analyse par dimension**, **Section réservation** et **Retour du répondant** figurent dans la même liste que les modules ; vous pouvez par exemple placer la réservation au-dessus d'un témoignage. Les sections intégrées peuvent être déplacées, mais pas modifiées ni supprimées ici.
 
 <Callout type="info">
-  Si vous disposez de visuels de marque, utilisez **Extraire les couleurs d'une image** : importez-en un et la palette est extraite dans les couleurs de votre thème, ce qui est bien plus pratique que de saisir des codes hexadécimaux à la main.
+  Un quiz peut comporter jusqu'à **20 modules** au total sur la page d'accueil et la page de résultats. Le bouton de démarrage et les sections intégrées de la page de résultats ne comptent pas.
 </Callout>
 
-## Modèles personnalisés
+## En-tête et progression
 
-Un modèle personnalisé modifie la **mise en page**, pas seulement la palette. Trois modèles sont disponibles :
+Cliquez sur **En-tête** dans la liste de gauche de l'éditeur pour définir le **Titre de l'en-tête** (avec un interrupteur **Afficher le titre**), la **Description de l'en-tête** et l'**Alignement de l'en-tête** (Gauche / Centre / Droite).
 
-| Modèle | Remarques |
-| --- | --- |
-| **Par défaut** | La mise en page standard, épurée et neutre, adaptée à la plupart des quiz |
-| **Cinétique** | Une mise en page axée sur le design, avec un traitement visuel plus marqué sur les pages d'accueil et de résultat |
-| **Clarity** | Une mise en page conçue pour les coachs, avec son propre design de page d'accueil et de page de résultats |
+**Progress style** définit l'affichage de la progression dans les quiz à plusieurs pages : **None**, **Badge**, **Bar** ou **Segments**. Chaque design fixe une valeur par défaut.
 
-<Callout type="warning">
-  Le changement de modèle **n'est pas encore ouvert à toutes les équipes** : dans la plupart d'entre elles, le modèle actuel s'affiche en lecture seule. Un quiz qui utilise déjà **Cinétique** ou **Clarity** continue de s'afficher, de se modifier et de se dupliquer normalement.
-</Callout>
+Les questions de notation ont leur propre **Display style** (**Stars** ou **Numbers**) dans les réglages de la question.
 
-Changer de modèle vous avertit que **vos paramètres de personnalisation actuels seront réinitialisés** : une autre mise en page implique d'autres paramètres de mise en page, et les anciens réglages ne peuvent pas être repris. Dupliquez d'abord le quiz si vous souhaitez les conserver.
+## Style du score sur la page de résultats
+
+La façon dont le score global est représenté sur la page de résultats (**Scale**, **Ring**, **Gauge** ou **Steps**) se règle dans la section **Rapport**, sous **Analyse globale**. Changer de design applique la valeur par défaut du design ; vous pouvez la modifier ensuite. Consultez [Niveaux et actions de la page de résultat](/fr/editor/scoring#niveaux-et-actions-de-la-page-de-résultat).
 
 ## La page d'accueil
 
-La page d'accueil est le premier écran que voit le répondant. Dans l'éditeur, vous contrôlez :
+La page d'accueil est le premier écran que voit le répondant. Dans ses réglages, vous contrôlez :
 
-- L'affichage ou non du **titre** et de la **description**, ainsi que leur alignement.
-- L'**image de couverture**.
-- Le libellé du bouton de démarrage.
+- **Activer la page d'accueil** : désactivez-la pour ouvrir directement sur les questions.
+- L'**image de couverture** (**Téléverser l'image d'en-tête**), le titre du quiz et la description.
+- Les **Textes du thème** et les modules, pour les designs de la galerie.
+
+Le libellé du bouton de démarrage se trouve dans **Paramètres → Textes système**.
 
 <Callout type="info">
-  La page d'accueil influe aussi sur l'[indexation par les moteurs de recherche](/fr/publish/promotion) : si elle est désactivée, le quiz s'ouvre directement sur les questions et les moteurs de recherche n'ont presque rien à lire. Si vous voulez être trouvé, gardez la page d'accueil activée et rédigez une vraie description.
+  La page d'accueil influe aussi sur l'[indexation par les moteurs de recherche](/fr/publish/promotion#indexation-par-les-moteurs-de-recherche) : si elle est désactivée, le quiz s'ouvre directement sur les questions et les moteurs de recherche n'ont presque rien à lire. Si vous voulez être trouvé, gardez la page d'accueil activée et rédigez une vraie description.
 </Callout>

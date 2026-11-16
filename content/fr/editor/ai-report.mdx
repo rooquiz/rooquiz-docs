@@ -1,0 +1,96 @@
+---
+title: Rapports IA
+description: "Comment un Quiz IA rédige un rapport personnalisé pour chaque répondant : instructions de génération, longueur du rapport, style et règles, envoi de fichiers, étiquettes de résultat internes, points IA et ce qui se passe quand ils sont épuisés."
+---
+
+Dans un **Quiz IA**, rien n'est noté. Après l'envoi, l'IA lit les réponses du répondant (et les fichiers qu'il a envoyés) et lui rédige un **rapport personnalisé**, en suivant vos instructions. Choisissez ce type lorsque le rapport lui-même est la valeur que vous proposez : un diagnostic, un bilan, un plan de coaching. Consultez [Les quatre types de quiz](/fr/getting-started/quiz-types#quiz-ia).
+
+## Rédiger les instructions de génération
+
+Ouvrez la section **Rapport** de l'éditeur. Sous **Instructions de génération**, indiquez à l'IA ce que le rapport doit couvrir et comment le rédiger, par exemple :
+
+> Évaluez l'échantillon oral selon l'aisance, la structure et la confiance, donnez un niveau de A1 à C2, listez 3 points forts et 3 points à travailler, et terminez par un plan d'étude de 2 semaines.
+
+- Les réponses du répondant et les fichiers envoyés sont transmis automatiquement à l'IA : inutile de les coller.
+- Pour cibler une question précise, cliquez sur **+** dans l'éditeur et insérez-la, par exemple « adaptez les conseils à [Poste visé] ».
+- Laissez les instructions vides et l'IA rédige un résumé général avec points forts et suggestions.
+- Les instructions peuvent compter jusqu'à 20 000 caractères.
+
+### Longueur du rapport
+
+**Longueur du rapport** propose trois réglages ; **Standard** est le réglage par défaut.
+
+| Réglage | Contenu du rapport |
+| --- | --- |
+| **Court** | Le verdict et les 1 à 2 points essentiels |
+| **Standard** | Le verdict, 2 à 3 constats clés et les prochaines étapes |
+| **Détaillé** | 3 à 5 constats et jusqu'à 3 graphiques |
+
+### Style et règles
+
+**Style et règles (facultatif)** définit le ton et des règles strictes, jusqu'à 5 000 caractères, par exemple « Ton chaleureux et encourageant. S'adresser au lecteur avec "vous". Ne jamais citer de concurrents. » Une règle de longueur écrite ici est prioritaire sur **Longueur du rapport**.
+
+<Callout type="info">
+  L'aperçu du rapport dans l'éditeur affiche un **exemple de rapport**. Les vrais rapports sont rédigés pour chaque répondant à partir de vos instructions et de ses réponses : deux répondants n'obtiennent jamais le même texte.
+</Callout>
+
+## Envoi de fichiers
+
+Un Quiz IA peut comporter des **questions Pièce jointe** pour que l'IA examine un vrai travail : un CV, un échantillon oral, la photo d'un produit. Chaque question Pièce jointe accepte un seul type de fichier :
+
+| Type | Formats acceptés | Limite par fichier | Comment l'IA le lit |
+| --- | --- | --- | --- |
+| Image | JPG, PNG, WebP, GIF | 10 Mo | Elle regarde l'image |
+| Audio | MP3, M4A, WAV, WebM, OGG | 10 Mo, jusqu'à 3 minutes | Elle lit une transcription |
+| Vidéo courte | MP4, WebM, MOV | 20 Mo, jusqu'à 1 minute | Elle lit une transcription de l'audio |
+| Document | PDF, Word, Excel, PowerPoint, TXT, CSV, Markdown | 10 Mo | Elle lit son texte |
+
+- Un Quiz IA peut comporter **jusqu'à 2** questions Pièce jointe, chacune acceptant **jusqu'à 3 fichiers** (réglez **Nombre max. de fichiers** pour en autoriser moins).
+- Les questions Pièce jointe ne font que recueillir des fichiers ; elles ne sont pas notées.
+- Les fichiers envoyés sont décomptés du quota mensuel d'**envois de fichiers** de votre équipe : consultez [Points IA et envois de fichiers](#points-ia-et-envois-de-fichiers).
+
+## Étiquettes de résultat
+
+**Étiquettes de résultat (facultatif)** laisse l'IA trier les répondants pour vous. Ajoutez jusqu'à **10** étiquettes, chacune avec un nom et une règle en langage courant indiquant quand l'utiliser, par exemple *Prêt à acheter* : « A un budget et veut démarrer dans le mois ». Avant de rédiger chaque rapport, l'IA choisit l'étiquette qui correspond le mieux.
+
+- **Les répondants ne voient jamais l'étiquette.** Ils ne voient que le bouton CTA de l'étiquette sous leur rapport.
+- Dans les [Réponses](/fr/results/records), filtrez par résultat et consultez l'étiquette de chaque réponse.
+- Les étiquettes sont envoyées à vos [connecteurs](/fr/connectors) avec la réponse, et vous pouvez les utiliser comme conditions : par exemple ajouter des tags aux abonnés dans Kit, ou envoyer un e-mail de suivi adapté uniquement pour *Prêt à acheter*.
+- Supprimer une étiquette ne modifie pas les rapports qui l'ont déjà reçue.
+
+Plusieurs modèles IA sont fournis avec trois étiquettes d'exemple (relancer maintenant / nurturing / trop tôt) pour démarrer.
+
+## Bouton CTA
+
+Sous **Bouton CTA**, définissez un **bouton par défaut** qui s'affiche sous chaque rapport IA, et donnez éventuellement à chaque étiquette de résultat son propre bouton. Une étiquette sans bouton propre utilise celui par défaut. Consultez [Bouton CTA de la page de résultats](/fr/results/reports#bouton-cta-de-la-page-de-résultats).
+
+## Génération du rapport
+
+1. Le répondant envoie ses réponses ; la **génération** du rapport démarre aussitôt et il apparaît sur la page de résultats au fur et à mesure que l'IA l'écrit.
+2. Si le quiz utilise **E-mail requis pour voir le rapport**, le rapport d'un répondant anonyme est généré **après qu'il a franchi cette étape** : aucun point IA n'est dépensé pour les personnes qui ne laissent jamais leur e-mail. Dans le tableau de bord, ces réponses indiquent « Le rapport n'a pas encore été généré », avec un bouton pour le générer immédiatement.
+3. En cas d'échec, la génération est relancée automatiquement ; vous pouvez aussi cliquer sur **Régénérer le rapport** depuis la réponse : consultez [Rapports](/fr/results/reports#régénérer-un-rapport).
+
+<Callout type="warning">
+  La redirection des répondants vers un lien après l'envoi n'est pas disponible pour les Quiz IA, car le rapport est rédigé après l'envoi.
+</Callout>
+
+## Points IA et envois de fichiers
+
+Chaque rapport de Quiz IA consomme **1 point IA**. Chaque équipe dispose d'un quota mensuel, réinitialisé le 1er de chaque mois (UTC) :
+
+| | Free | Pro |
+| --- | --- | --- |
+| Points IA par mois | 5 | 100 |
+| Envois de fichiers par mois | 100 Mo | 2 Go |
+
+Pendant un essai gratuit de Pro, les points IA restent au niveau du quota Free jusqu'au début de l'abonnement.
+
+Lorsque le quota est épuisé, les **recharges** prennent le relais : consultez [Options](/fr/account#options). Si les deux sont épuisés :
+
+- Les répondants peuvent toujours répondre et envoyer leurs réponses ; **aucune réponse n'est perdue**.
+- Leur rapport n'est pas généré et apparaît en échec, car l'équipe n'a plus de points IA. Rechargez, puis régénérez-le depuis la réponse.
+- Les propriétaires et administrateurs de l'équipe reçoivent un e-mail et une notification dans l'application lorsque les points IA ou les envois de fichiers sont presque épuisés, puis à nouveau lorsqu'ils le sont.
+
+<Callout type="info">
+  Les points IA ne sont utilisés que par les rapports de Quiz IA. La correction par **Correspondance IA** des Textes à trous dans un Quiz de connaissances est illimitée et ne consomme aucun point.
+</Callout>

@@ -13,7 +13,7 @@ In einem **Wissensquiz** können Sie:
 - **Richtig/falsch beurteilen**: Richtige Antworten markieren; das System beurteilt jede Frage automatisch.
 - **Gesamtpunktzahl bilden**: Punkte werden automatisch addiert.
 - **Stufen**: Die Gesamtpunktzahl in Punktebereiche aufteilen (siehe [Stufen](#stufen-und-aktionen-auf-der-ergebnisseite)) – jeder Bereich zeigt ein eigenes Ergebnis statt einer bloßen Zahl.
-- **Antwort-Feedback**: Teilnehmern pro Frage anzeigen, ob sie richtig lagen, samt Erklärung.
+- **Antwort-Feedback**: Teilnehmern pro Frage anzeigen, ob sie richtig lagen, samt Erklärung – nach dem Absenden oder Seite für Seite mit [Instant feedback](/de/editor/settings#beantwortung).
 - **KI-Abgleich**: Lückentext-Antworten nach semantischer Ähnlichkeit statt per exakter oder Enthält-Übereinstimmung bewerten, mit einer von Ihnen festgelegten Genauigkeitsschwelle. Die KI-Bewertung ist unbegrenzt.
 
 <Callout type="info">
@@ -24,7 +24,7 @@ In einem **Wissensquiz** können Sie:
 
 Ein **Ergebnisquiz** vergibt keine Punkte – es **zählt Stimmen**. Jede Option stimmt für einen oder mehrere Ergebnistypen, und der Typ mit den meisten Stimmen gewinnt; bei Gleichstand entscheidet die Reihenfolge in der Ergebnisliste. Nutzt das Quiz [bedingte Logik](/de/editor/logic), werden die Typen stattdessen nach Stimmenanteil verglichen, damit ein Typ mit längerem Folgefragen-Zweig nicht allein durch mehr Stimmen gewinnt.
 
-Jedes Ergebnis kann einen eigenen CTA-Button tragen, der ein unterhaltsames Ergebnis direkt mit einem nächsten Schritt verbindet. Siehe [Die vier Quiztypen](/de/getting-started/quiz-types).
+Jedes Ergebnis kann einen eigenen CTA-Button oder [Weiterleitungslink](#weiterleitung-nach-dem-absenden-pro) tragen, der ein unterhaltsames Ergebnis direkt mit einem nächsten Schritt verbindet. Siehe [Die vier Quiztypen](/de/getting-started/quiz-types).
 
 ## Bewertetes Quiz: Dimensionsanalyse
 
@@ -43,10 +43,32 @@ Sie brauchen Gewichtungen, Dimensionspunkte oder Zahlantworten in der Gesamtpunk
 
 ## Stufen und Aktionen auf der Ergebnisseite
 
-Teilen Sie die Gesamtpunktzahl in **Stufen** auf (0–60 ausbaufähig / 60–80 gut / ab 80 ausgezeichnet). Jede Stufe hat einen Namen, eine Farbe und eine Beschreibung und kann einen **CTA-Button** enthalten – die niedrige Stufe könnte etwa „Beratung buchen“ anbieten. Mit diesem Schritt verbinden Sie eine Auswertung mit der Conversion.
+Teilen Sie die Gesamtpunktzahl unter **Punktestufen-Konfiguration** im Bereich **Bericht** des Editors in **Stufen** auf (0–60 ausbaufähig / 60–80 gut / ab 80 ausgezeichnet). Jede Stufe hat einen Namen, eine Farbe und eine Beschreibung und kann einen eigenen **CTA-Button** und **Weiterleitungslink** enthalten – die niedrige Stufe könnte etwa „Beratung buchen“ anbieten. Mit diesem Schritt verbinden Sie eine Auswertung mit der Conversion.
+
+- **Reihenfolge der Stufen** – listen Sie die Stufen **Low → High** oder **High → Low** auf. Das ändert nur die Darstellung, im Editor und auf der Punkteskala der Ergebnisseite; die Bewertung funktioniert in beiden Fällen gleich. Dimensionsstufen folgen derselben Reihenfolge wie die Gesamtstufen.
+- **Score style** – wie die Gesamtpunktzahl auf der Ergebnisseite dargestellt wird: **Scale** (Standard), **Ring**, **Gauge** oder **Steps**. **Steps** braucht mindestens 2 Stufen, **Ring** und **Gauge** brauchen Stufen oder eine Höchstpunktzahl; solange das Quiz diese Daten nicht hat, zeigt die Ergebnisseite die Skala.
 
 <Callout type="info">
-  Teilnehmer sollen keine Zahl sehen? Aktivieren Sie **Punktzahlen ausblenden**: Die Gesamtpunktzahl **und jede Dimensionspunktzahl** (Punkte-Ring/Zahl, Perzentil, Fortschrittsbalken, Punktequote) verschwinden von der Ergebnisseite, während Stufen und Analyse erhalten bleiben – besser für Quizze, die sich wie eine Diagnose und nicht wie eine Prüfung anfühlen sollen. Fügt Ihre Zusammenfassungsvorlage noch die Punktzahl-Variable ein, entfernen Sie diese ebenfalls, sonst wird die Punktzahl dort weiterhin angezeigt.
+  Teilnehmer sollen keine Zahl sehen? Aktivieren Sie **Hide scores** unter **Einstellungen → Beantwortung**: Teilnehmer sehen nie eine Punktzahl – weder auf der Ergebnisseite (Gesamt- und Dimensionspunktzahlen) noch bei den einzelnen Fragen während der Beantwortung, im Sofort-Feedback oder in der Antwortübersicht –, während Stufen, Analyse und richtig / falsch erhalten bleiben. Fügt Ihre Zusammenfassungsvorlage noch die Punktzahl-Variable ein, entfernen Sie diese ebenfalls, sonst wird die Punktzahl dort weiterhin angezeigt.
+</Callout>
+
+### CTA-Buttons
+
+Aktivieren Sie unter **CTA-Button** den Button und legen Sie einen **Default button** fest (Text und Link). Jede Stufe – bzw. jedes Ergebnis in einem Ergebnisquiz – ohne eigenen Button verwendet den Standard-Button; lassen Sie ihn leer, zeigen nur Stufen mit eigenem Button einen an. Ist **CTA-Button** deaktiviert, zeigt kein Ergebnis einen Button. Siehe [CTA-Button auf der Ergebnisseite](/de/results/reports#cta-button-auf-der-ergebnisseite).
+
+### Weiterleitung nach dem Absenden (Pro)
+
+Aktivieren Sie **Redirect after submission**, um Teilnehmer abhängig von ihrem Ergebnis direkt zu einem Link weiterzuleiten, statt die Ergebnisseite anzuzeigen – z. B. niedrige Punktzahlen zu einer Einsteigerkurs-Seite, hohe Punktzahlen zu einer Buchungsseite.
+
+- Legen Sie für jede Stufe (oder jedes Ergebnis) einen **Redirect link** fest, dazu optional einen **Default link** für Ergebnisse ohne eigenen Link.
+- **Add the result to the link** hängt `score`, `level`, `outcome` und `outcome_name` an, außerdem die [URL-Parameter](/de/publish/tracking#url-parameter-versteckte-felder) und UTM-Tags des Quiz. E-Mail-Adressen und andere personenbezogene Daten werden nie angehängt, bereits vorhandene Parameter in Ihrem Link bleiben erhalten, und `score` entfällt, wenn Punktzahlen ausgeblendet sind.
+- Erfordert der Bericht eine E-Mail-Adresse oder Anmeldung, werden Teilnehmer **nach** diesem Schritt weitergeleitet.
+- In einem [eingebetteten Quiz](/de/publish/embed) navigiert die gesamte Host-Seite zu dem Link.
+
+Die Ergebnisseite (mit ihren Beschreibungen und CTA-Buttons) wird weiterhin angezeigt, wenn das Ergebnis des Teilnehmers keinen Link hat und es keinen Standardlink gibt, wenn er später zu seinem Ergebnis zurückkehrt und wenn jemand einen geteilten Ergebnislink öffnet.
+
+<Callout type="warning">
+  Weiterleitungen sind eine **Pro**-Funktion und für KI-Quizze nicht verfügbar. Verlässt Ihr Team den Pro-Tarif, sehen Teilnehmer wieder die Ergebnisseite; Ihre Links bleiben gespeichert und funktionieren nach einem Upgrade wieder.
 </Callout>
 
 ## Reihenfolge der Abschnitte auf der Ergebnisseite

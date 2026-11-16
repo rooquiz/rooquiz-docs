@@ -1,0 +1,96 @@
+---
+title: KI-Berichte
+description: 'So schreibt ein KI-Quiz jedem Teilnehmer einen persönlichen Bericht: Anweisungen zur Erstellung, Berichtslänge, Stil und Regeln, Datei-Uploads, interne Ergebnis-Tags, KI-Punkte und was passiert, wenn sie aufgebraucht sind.'
+---
+
+In einem **KI-Quiz** wird nichts bewertet. Nachdem ein Teilnehmer abgesendet hat, liest die KI seine Antworten (und alle hochgeladenen Dateien) und schreibt ihm einen **persönlichen Bericht** – nach den Anweisungen, die Sie vorgeben. Wählen Sie diesen Typ, wenn der Bericht selbst der Mehrwert ist, den Sie bieten – eine Diagnose, eine Begutachtung, ein Coaching-Plan. Siehe [Die vier Quiztypen](/de/getting-started/quiz-types#ki-quiz).
+
+## Die Anweisungen zur Erstellung schreiben
+
+Öffnen Sie im Editor den Bereich **Bericht**. Unter **Anweisungen zur Erstellung** legen Sie fest, was der Bericht abdecken und wie er geschrieben sein soll, zum Beispiel:
+
+> Bewerte die Sprechprobe nach Flüssigkeit, Struktur und Sicherheit, gib ein Niveau von A1 bis C2 an, nenne 3 Stärken und 3 Übungsschwerpunkte und schließe mit einem zweiwöchigen Lernplan ab.
+
+- Die Antworten des Teilnehmers und hochgeladene Dateien werden automatisch an die KI übergeben – Sie müssen sie nicht einfügen.
+- Um auf eine bestimmte Frage zu verweisen, klicken Sie im Editor auf **+** und fügen Sie sie ein, z. B. „passe die Empfehlungen an [Zielposition] an“.
+- Lassen Sie die Anweisungen leer, schreibt die KI eine allgemeine Zusammenfassung mit Stärken und Empfehlungen.
+- Anweisungen können bis zu 20.000 Zeichen lang sein.
+
+### Berichtslänge
+
+Die **Berichtslänge** hat drei Stufen; **Standard** ist voreingestellt.
+
+| Einstellung | Inhalt des Berichts |
+| --- | --- |
+| **Kurz** | Das Ergebnis und die 1–2 wichtigsten Punkte |
+| **Standard** | Das Ergebnis, 2–3 zentrale Erkenntnisse und nächste Schritte |
+| **Ausführlich** | 3–5 Erkenntnisse und bis zu 3 Diagramme |
+
+### Stil & Regeln
+
+**Stil & Regeln (optional)** legt Tonfall und feste Regeln fest, bis zu 5.000 Zeichen – zum Beispiel „Warmer, ermutigender Ton. Sprich die Leser mit ‚du‘ an. Erwähne niemals Wettbewerber.“ Eine hier festgelegte Längenregel hat Vorrang vor der **Berichtslänge**.
+
+<Callout type="info">
+  Die Berichtsvorschau im Editor zeigt einen **Beispielbericht**. Echte Berichte werden für jeden Teilnehmer aus Ihren Anweisungen und seinen Antworten geschrieben, daher erhalten zwei Teilnehmer nie denselben Text.
+</Callout>
+
+## Datei-Uploads
+
+Ein KI-Quiz kann **Datei-Upload-Fragen** enthalten, damit die KI echte Arbeiten begutachten kann – einen Lebenslauf, eine Sprechprobe, ein Produktfoto. Jede Upload-Frage nimmt eine Dateiart an:
+
+| Art | Akzeptiert | Limit pro Datei | So liest die KI sie |
+| --- | --- | --- | --- |
+| Bild | JPG, PNG, WebP, GIF | 10 MB | Betrachtet das Bild |
+| Audio | MP3, M4A, WAV, WebM, OGG | 10 MB, bis zu 3 Minuten | Liest ein Transkript |
+| Kurzvideo | MP4, WebM, MOV | 20 MB, bis zu 1 Minute | Liest ein Transkript der Tonspur |
+| Dokument | PDF, Word, Excel, PowerPoint, TXT, CSV, Markdown | 10 MB | Liest den Text |
+
+- Ein KI-Quiz kann **bis zu 2** Upload-Fragen haben, die jeweils **bis zu 3 Dateien** annehmen (mit **Max. Dateien** erlauben Sie weniger).
+- Upload-Fragen sammeln nur Dateien; sie werden nicht bewertet.
+- Uploads werden auf das monatliche Kontingent für **Datei-Uploads** Ihres Teams angerechnet – siehe [KI-Punkte und Datei-Uploads](#ki-punkte-und-datei-uploads).
+
+## Ergebnis-Tags
+
+Mit **Ergebnis-Tags (optional)** sortiert die KI die Teilnehmer für Sie. Fügen Sie bis zu **10** Tags hinzu, jeweils mit einem Namen und einer Regel in Alltagssprache, wann er gilt – zum Beispiel *Kaufbereit*: „Hat ein Budget und möchte innerhalb eines Monats starten“. Bevor sie den Bericht schreibt, wählt die KI den Tag, der am besten passt.
+
+- **Teilnehmer sehen den Tag nie.** Sie sehen nur den CTA-Button des Tags unter ihrem Bericht.
+- Unter [Einsendungen](/de/results/records) filtern Sie nach Ergebnis und sehen den Tag bei jeder Antwort.
+- Tags werden zusammen mit der Antwort an Ihre [Connectors](/de/connectors) übergeben, und Sie können sie als Bedingung nutzen – z. B. Abonnenten in Kit taggen oder eine passende Follow-up-E-Mail nur an *Kaufbereit* senden.
+- Das Löschen eines Tags ändert nichts an Berichten, die ihn bereits tragen.
+
+Mehrere KI-Vorlagen bringen drei Beispiel-Tags mit (jetzt nachfassen / weiter pflegen / zu früh), auf denen Sie aufbauen können.
+
+## CTA-Button
+
+Unter **CTA-Button** legen Sie einen **Default button** fest, der unter jedem KI-Bericht erscheint, und geben optional jedem Ergebnis-Tag einen eigenen Button. Ein Tag ohne eigenen Button verwendet den Standard-Button. Siehe [CTA-Button auf der Ergebnisseite](/de/results/reports#cta-button-auf-der-ergebnisseite).
+
+## So wird der Bericht erstellt
+
+1. Der Teilnehmer sendet ab; die Erstellung des Berichts **beginnt sofort**, und er erscheint auf der Ergebnisseite, während die KI schreibt.
+2. Nutzt das Quiz **E-Mail nötig, um den Bericht zu sehen**, wird der Bericht eines anonymen Teilnehmers erst **nach dieser Hürde** erstellt – für Personen, die nie ihre E-Mail-Adresse hinterlassen, werden keine KI-Punkte verbraucht. Im Dashboard zeigen solche Antworten „Der Bericht wurde noch nicht erstellt“ mit einem Button, um ihn sofort zu erstellen.
+3. Schlägt die Erstellung fehl, wird sie automatisch wiederholt; Sie können den Bericht auch über **Bericht neu generieren** in der Antwort neu erstellen – siehe [Berichte](/de/results/reports#einen-bericht-neu-generieren).
+
+<Callout type="warning">
+  Eine Weiterleitung der Teilnehmer zu einem Link nach dem Absenden ist bei KI-Quizzen nicht verfügbar, weil der Bericht erst nach dem Absenden geschrieben wird.
+</Callout>
+
+## KI-Punkte und Datei-Uploads
+
+Jeder Bericht eines KI-Quiz verbraucht **1 KI-Punkt**. Jedes Team erhält ein monatliches Kontingent, das am 1. jedes Monats (UTC) zurückgesetzt wird:
+
+| | Free | Pro |
+| --- | --- | --- |
+| KI-Punkte pro Monat | 5 | 100 |
+| Datei-Uploads pro Monat | 100 MB | 2 GB |
+
+Während einer kostenlosen Pro-Testphase bleiben die KI-Punkte auf dem Free-Kontingent, bis das Abonnement beginnt.
+
+Ist das Kontingent aufgebraucht, werden **Aufladungen** verwendet – siehe [Zusatzpakete](/de/account#zusatzpakete). Ist beides aufgebraucht:
+
+- Teilnehmer können weiterhin antworten und absenden; **keine Antwort geht verloren**.
+- Ihr Bericht wird nicht erstellt und als fehlgeschlagen angezeigt, weil das Team keine KI-Punkte mehr hat. Laden Sie auf und generieren Sie den Bericht dann in der Antwort neu.
+- Team-Inhaber und Administratoren erhalten eine E-Mail und eine In-App-Benachrichtigung, wenn KI-Punkte oder Datei-Uploads knapp werden, und erneut, wenn sie aufgebraucht sind.
+
+<Callout type="info">
+  KI-Punkte werden nur von Berichten in KI-Quizzen verbraucht. Die Bewertung von Lückentext-Antworten per **KI-Abgleich** im Wissensquiz ist unbegrenzt und verbraucht keine Punkte.
+</Callout>

@@ -13,7 +13,7 @@ Dans un **Quiz de connaissances**, vous pouvez :
 - **Juger juste/faux** : indiquez les bonnes réponses ; le système corrige automatiquement chaque question.
 - **Additionner les totaux** : les points sont additionnés automatiquement.
 - **Niveaux** : découpez le total en tranches de score (voir [Niveaux](#niveaux-et-actions-de-la-page-de-résultat)) ; chaque tranche affiche son propre résultat plutôt qu'un simple chiffre.
-- **Retour sur les réponses** : montrez aux répondants si chaque réponse est correcte, avec son explication.
+- **Retour sur les réponses** : montrez aux répondants si chaque réponse est correcte, avec son explication, après l'envoi ou page par page avec le [retour immédiat](/fr/editor/settings#expérience-de-réponse).
 - **Correspondance IA** : corrigez les réponses aux questions Texte à trous par similarité sémantique plutôt que par correspondance exacte ou partielle, avec un seuil de précision que vous définissez. La correction par IA est illimitée.
 
 <Callout type="info">
@@ -24,7 +24,7 @@ Dans un **Quiz de connaissances**, vous pouvez :
 
 Un **Quiz de résultat** n'attribue pas de score : il **compte des votes**. Chaque option vote pour un ou plusieurs types de résultat, et le type qui recueille le plus de votes l'emporte ; en cas d'égalité, c'est celui qui apparaît en premier dans la liste des résultats qui gagne. Si le quiz utilise la [logique conditionnelle](/fr/editor/logic), les types sont comparés par part des votes, afin qu'un type doté d'une branche de suivi plus longue ne gagne pas simplement en accumulant plus de votes.
 
-Chaque résultat peut avoir son propre bouton CTA, ce qui relie directement un résultat ludique à une étape suivante. Consultez [Les quatre types de quiz](/fr/getting-started/quiz-types).
+Chaque résultat peut avoir son propre bouton CTA ou son [lien de redirection](#redirection-après-soumission-pro), ce qui relie directement un résultat ludique à une étape suivante. Consultez [Les quatre types de quiz](/fr/getting-started/quiz-types).
 
 ## Quiz noté : analyse par dimension
 
@@ -43,10 +43,32 @@ Besoin de pondérations, de scores de dimension ou de réponses nombre dans le t
 
 ## Niveaux et actions de la page de résultat
 
-Découpez le score total en **niveaux** (0–60 à améliorer / 60–80 bien / 80+ excellent). Chacun possède un nom, une couleur et une description, et peut comporter un **bouton CTA** : la tranche la plus basse peut par exemple proposer « Réserver une consultation ». C'est cette étape qui relie une évaluation à la conversion.
+Découpez le score total en **niveaux** (0–60 à améliorer / 60–80 bien / 80+ excellent) sous **Configuration des niveaux de score**, dans la section **Rapport** de l'éditeur. Chaque niveau possède un nom, une couleur et une description, et peut comporter son propre **bouton CTA** et son **lien de redirection** : la tranche la plus basse peut par exemple proposer « Réserver une consultation ». C'est cette étape qui relie une évaluation à la conversion.
+
+- **Ordre des niveaux** : listez les niveaux **Low → High** ou **High → Low**. Cela ne change que leur affichage, dans l'éditeur et sur l'échelle de score de la page de résultats ; la notation fonctionne de la même façon dans les deux cas. Les niveaux de dimension suivent le même ordre que les niveaux globaux.
+- **Score style** : la façon dont le score global est représenté sur la page de résultats : **Scale** (par défaut), **Ring**, **Gauge** ou **Steps**. Steps nécessite au moins 2 niveaux, et Ring et Gauge nécessitent des niveaux ou un score maximal ; tant que le quiz ne dispose pas de ces données, la page de résultats affiche l'échelle.
 
 <Callout type="info">
-  Vous ne voulez pas que les répondants voient un chiffre ? Activez **Masquer les scores** : le score global **et chaque score de dimension** (anneau/chiffre du score, percentile, barres de progression, taux de réussite) disparaissent de la page de résultats, tandis que les niveaux et l'analyse restent : idéal pour les quiz qui doivent ressembler à un diagnostic plutôt qu'à un examen. Si votre modèle de synthèse insère encore la variable du score, retirez-la aussi, sinon le score continuera de s'y afficher.
+  Vous ne voulez pas que les répondants voient un chiffre ? Activez **Hide scores** sous **Paramètres → Expérience de réponse** : les répondants ne voient jamais de score, ni sur la page de résultats (scores global et par dimension), ni sur chaque question pendant qu'ils répondent, ni dans le retour immédiat ou la revue des réponses, tandis que les niveaux, l'analyse et le juste/faux restent affichés. Si votre modèle de synthèse insère encore la variable du score, retirez-la aussi, sinon le score continuera de s'y afficher.
+</Callout>
+
+### Boutons CTA
+
+Sous **Bouton CTA**, activez le bouton et définissez un **bouton par défaut** (texte et lien). Chaque niveau (ou chaque résultat, dans un Quiz de résultat) sans bouton propre utilise celui par défaut ; laissez le bouton par défaut vide et seuls les niveaux dotés de leur propre bouton en affichent un. Désactivez **Bouton CTA** et aucun résultat n'affiche de bouton. Consultez [Bouton CTA de la page de résultats](/fr/results/reports#bouton-cta-de-la-page-de-résultats).
+
+### Redirection après soumission (Pro)
+
+Activez **Redirect after submission** pour envoyer les répondants directement vers un lien selon leur résultat, au lieu d'afficher la page de résultats : par exemple les scores faibles vers une page de cours pour débutants, les scores élevés vers une page de réservation.
+
+- Définissez un **Redirect link** sur chaque niveau (ou chaque résultat), ainsi qu'un **Default link** facultatif pour les résultats qui n'en ont pas.
+- **Add the result to the link** ajoute `score`, `level`, `outcome` et `outcome_name`, ainsi que les [paramètres d'URL](/fr/publish/tracking#paramètres-durl-champs-cachés) et les balises UTM du quiz. Les e-mails et autres données personnelles ne sont jamais ajoutés, les paramètres déjà présents dans votre lien sont conservés, et `score` est omis lorsque les scores sont masqués.
+- Si le rapport exige un e-mail ou une connexion, les répondants sont redirigés **après** cette étape.
+- Dans un [quiz intégré](/fr/publish/embed), c'est toute la page hôte qui navigue vers le lien.
+
+La page de résultats (avec ses descriptions et ses boutons CTA) s'affiche toujours lorsque le résultat du répondant n'a pas de lien et qu'il n'y a pas de lien par défaut, lorsqu'il revient plus tard sur son résultat, et lorsque quelqu'un ouvre un lien de résultat partagé.
+
+<Callout type="warning">
+  Les redirections sont une fonctionnalité **Pro** et ne sont pas disponibles pour les Quiz IA. Si votre équipe quitte Pro, les répondants voient de nouveau la page de résultats ; vos liens sont conservés et fonctionnent à nouveau dès que vous repassez à Pro.
 </Callout>
 
 ## Ordre des sections de la page de résultats

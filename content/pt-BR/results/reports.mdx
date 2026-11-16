@@ -1,18 +1,20 @@
 ---
 title: Relatórios
-description: 'Cada resposta pode gerar um relatório com pontuação, nível, pontuações por dimensão e gráfico de radar. Veja como os relatórios são gerados, como a Correspondência por IA corrige respostas de preencher a lacuna e como os respondentes os veem ou baixam.'
+description: 'Cada resposta pode gerar um relatório com pontuação, nível, pontuações por dimensão, gráfico de radar ou uma análise escrita pela IA. Veja como os relatórios são gerados, como a Correspondência por IA corrige respostas, os botões de CTA e como os respondentes os veem ou baixam.'
 ---
 
-Cada resposta pode gerar um **relatório** que apresenta a pontuação, o nível, as pontuações por dimensão e as conclusões de perfil do respondente.
+Cada resposta pode gerar um **relatório** que apresenta a pontuação, o nível, as pontuações por dimensão e as conclusões de perfil do respondente — ou, em um Quiz com IA, uma análise personalizada escrita pela IA.
 
 ## O que há em um relatório
 
 - **Pontuações por dimensão**: pontuações de cada dimensão, geralmente exibidas em um **gráfico de radar**.
 - **Conclusões de perfil**: conclusões de personalidade/habilidade derivadas das pontuações por dimensão.
+- **Pontuação geral**: desenhada como escala, anel, medidor ou etapas — veja [Score style](/pt-BR/editor/scoring#níveis-e-ações-na-página-de-resultado).
+- **Relatório com IA**: em um Quiz com IA, o relatório é escrito pela IA a partir das suas instruções e das respostas do respondente — veja [Relatórios com IA](/pt-BR/editor/ai-report).
 
 ### Ocultar pontuações
 
-Ative **Ocultar pontuações** na seção **Relatório** do editor para ocultar a pontuação geral **e todas as pontuações por dimensão** na página de resultado (anel/número da pontuação, percentil, barras de progresso, taxa de acerto), mantendo os níveis e a análise. Os administradores continuam vendo as pontuações no painel. Se o modelo de resumo insere a variável da pontuação, ela continua aparecendo ali — remova-a para ocultar as pontuações por completo.
+Ative **Hide scores** em **Configurações → Experiência de resposta** e os respondentes nunca veem uma pontuação: a pontuação geral e as pontuações por dimensão na página de resultado, os pontos de cada questão enquanto respondem, a pontuação no feedback imediato e as pontuações por questão na revisão das respostas ficam todas ocultas. Níveis, análise e certo/errado continuam aparecendo. Os administradores continuam vendo as pontuações no painel. Se o modelo de resumo insere a variável da pontuação, ela continua aparecendo ali — remova-a para ocultar as pontuações por completo.
 
 ### Ordem das seções
 
@@ -20,12 +22,13 @@ Na pré-visualização do relatório no editor, mova para cima ou para baixo as 
 
 ### Correção por Correspondência por IA
 
-Em um **Quiz de conhecimento**, uma questão de preencher a lacuna pode ser corrigida com a **Correspondência por IA**: a IA avalia se a resposta está correta por similaridade semântica, em vez de exigir uma correspondência exata do texto. É ilimitada — não há créditos de IA para comprar. Em um Quiz com pontuação, as respostas de preencher a lacuna são coletadas, mas não pontuadas.
+Em um **Quiz de conhecimento**, uma questão de preencher a lacuna pode ser corrigida com a **Correspondência por IA**: a IA avalia se a resposta está correta por similaridade semântica, em vez de exigir uma correspondência exata do texto. É ilimitada e não usa pontos de IA (os pontos de IA só são gastos em [relatórios de Quiz com IA](/pt-BR/editor/ai-report#pontos-de-ia-e-envio-de-arquivos)). Em um Quiz com pontuação, as respostas de preencher a lacuna são coletadas, mas não pontuadas.
 
 ## Como um relatório é gerado
 
 - A **pontuação básica** é calculada **imediatamente** após o envio.
-- **Cálculos mais pesados**, como a análise por dimensão e a correção por Correspondência por IA, são gerados de forma **assíncrona**; o relatório passa por um estado "gerando → concluído".
+- **Cálculos mais pesados**, como a análise por dimensão, a correção por Correspondência por IA e os relatórios de Quiz com IA, são gerados de forma **assíncrona**; o relatório passa por um estado "gerando → concluído".
+- Em um Quiz com IA que exige e-mail para ver o relatório, o relatório de um respondente anônimo só é gerado **depois que ele passa pela etapa de e-mail**.
 - Se a geração falhar, o sistema **tenta novamente de forma automática** dentro de um determinado intervalo.
 
 <Callout type="info">
@@ -49,12 +52,16 @@ Abra uma resposta em [Registros de respostas](/pt-BR/results/records) e clique e
 
 ## Botão de CTA da página de resultado
 
-Você pode configurar um botão de chamada para ação (CTA) para **cada nível de pontuação**; os respondentes que ficam naquele nível o veem no fim do relatório — por exemplo, "Precisa melhorar" leva ao agendamento de uma consultoria, enquanto "Excelente" leva ao download de material avançado.
+Um botão de chamada para ação (CTA) transforma um resultado em um próximo passo — "Precisa melhorar" leva ao agendamento de uma consultoria, enquanto "Excelente" leva ao download de material avançado.
 
-- Na seção **Relatório** do editor → **Configuração de níveis de pontuação**, ative o **Botão de CTA** de um nível e preencha o texto e o link do botão; o texto introdutório é opcional. Os links de CTA sempre abrem em uma nova janela.
-- Para usar o mesmo botão em vários níveis, configure um e clique em **Aplicar a todos os níveis**.
+- Na seção **Relatório** do editor, ative o **Botão de CTA** e defina um **botão padrão** (texto e link do botão; o texto introdutório é opcional). Texto e link andam juntos — preencha os dois ou deixe os dois vazios.
+- Dê a um **nível**, a um **resultado** ou a uma **etiqueta de resultado** da IA o próprio botão, dentro desse item. Tudo o que ficar vazio usa o botão padrão; se o padrão também estiver vazio, esse resultado não mostra botão.
+- Desative o **Botão de CTA** e nenhum resultado mostra botão, nem os que têm botão próprio.
+- Os links de CTA sempre abrem em uma nova janela.
 - As edições do CTA **passam a valer imediatamente em todos os relatórios históricos** — troque links ou textos de campanha sem se preocupar com botões desatualizados em relatórios antigos.
 - Os cliques dos respondentes no CTA alimentam o funil de conversão em [Insights](/pt-BR/results/insights).
+
+Quer pular a página de resultado e enviar as pessoas direto a uma página? Use o [redirecionamento após o envio](/pt-BR/editor/scoring#redirecionamento-após-o-envio-pro) (Pro).
 
 <Callout type="info">
   Os links precisam começar com `http(s)://`. O estilo do botão acompanha automaticamente a cor do tema do seu quiz.

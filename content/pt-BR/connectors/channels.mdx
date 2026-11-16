@@ -13,6 +13,9 @@ Disponível em todos os planos. Envia por um dos serviços de envio da sua próp
 - **Destinatários** — digite um endereço e pressione Enter, **até 10**. Você também pode adicionar o destinatário dinâmico "E-mail do respondente" para notificar a própria pessoa.
 - **Assunto** — até 200 caracteres; sem quebras de linha, sem HTML.
 - **Corpo** — até 10.000 caracteres; sem HTML.
+- **When to send** — **Every time** ou **Only for specific results**: escolha um quiz e um ou mais dos níveis ou tipos de resultado dele (as etiquetas de resultado de um Quiz com IA também contam), por exemplo um acompanhamento apenas para o nível "Iniciante". As condições valem para novas respostas e novos leads; eventos de agendamento nunca correspondem. Como o resultado pode não estar pronto quando alguém se torna lead (em um Quiz com IA, nunca está), acione os e-mails por resultado com **Nova resposta**.
+
+O jeito mais rápido de configurar e-mails por resultado para um quiz é em **Configurações → Acompanhamento da página de resultados → Emails by result** nesse quiz — veja [Configurações do quiz](/pt-BR/editor/settings#acompanhamento-da-página-de-resultados).
 
 Assunto e corpo aceitam **inserir variáveis**, em dois grupos:
 
@@ -51,7 +54,8 @@ Use o Zapier para alcançar milhares de apps:
 
 O Kit (antigo ConvertKit) é uma ferramenta de e-mail marketing. Depois de clicar em **Conectar Kit** e concluir o fluxo OAuth:
 
-- **Tags para cada novo lead** — um conjunto fixo de até 20 tags aplicado a todos os inscritos, por exemplo `quiz-lead`. Digite um nome que ainda não existe e ele será **criado no Kit** ao salvar. As mesmas tags vão para todos; elas não variam conforme a pontuação ou o resultado.
+- **Tags para cada novo lead** — um conjunto fixo de até 20 tags aplicado a todos os inscritos, por exemplo `quiz-lead`. Digite um nome que ainda não existe e ele será **criado no Kit** ao salvar.
+- **Tags by result** — adicione regras que aplicam tags aos respondentes conforme o resultado: cada regra escolhe um quiz, um ou mais dos níveis ou tipos de resultado dele (ou etiquetas de resultado da IA) e as tags a adicionar. Inicie uma sequência diferente do Kit para cada tag. As regras valem a cada envio, então uma nova tentativa que chega a outro resultado também adiciona as tags desse resultado.
 - Use **Atualizar tags** para buscar novamente a lista de tags do Kit quando necessário.
 
 Dispare sequências de e-mail a partir dessas tags no Kit, e os novos leads entram direto no seu fluxo de nutrição.

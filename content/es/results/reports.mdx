@@ -1,18 +1,20 @@
 ---
 title: Informes
-description: 'Cada respuesta puede generar un informe con puntuación, nivel, puntuaciones por dimensión y gráfico de radar. Cómo se generan, cómo la Coincidencia con AI corrige el completar el espacio y cómo los participantes lo ven o descargan.'
+description: 'Cada respuesta puede generar un informe con puntuación, nivel, puntuaciones por dimensión, gráfico de radar o un análisis redactado por IA. Cómo se generan, cómo corrige la Coincidencia con AI, los botones de CTA y cómo los participantes lo ven o descargan.'
 ---
 
-Cada respuesta puede generar un **informe** que presenta la puntuación del participante, su nivel, las puntuaciones por dimensión y las conclusiones de perfil.
+Cada respuesta puede generar un **informe** que presenta la puntuación del participante, su nivel, las puntuaciones por dimensión y las conclusiones de perfil o, en un Quiz de IA, un análisis personal redactado por IA.
 
 ## Qué contiene un informe
 
 - **Puntuaciones por dimensión**: la puntuación de cada dimensión, a menudo mostrada en un **gráfico de radar**.
 - **Conclusiones de perfil**: conclusiones de personalidad o de capacidad derivadas de las puntuaciones por dimensión.
+- **Puntuación general**: se dibuja como escala, anillo, indicador o pasos; consulta [Score style](/es/editor/scoring#niveles-y-acciones-en-la-página-de-resultados).
+- **Informe de IA**: en un Quiz de IA, el informe lo redacta la IA a partir de tus instrucciones y de las respuestas del participante; consulta [Informes de IA](/es/editor/ai-report).
 
 ### Ocultar puntuaciones
 
-Activa **Ocultar puntuaciones** en la sección **Informe** del editor para ocultar la puntuación general **y todas las puntuaciones por dimensión** en la página de resultados (anillo/número de puntuación, percentil, barras de progreso, porcentaje de acierto), manteniendo los niveles y el análisis. Los administradores siguen viendo las puntuaciones en el panel. Si la plantilla de resumen inserta la variable de puntuación, la puntuación sigue apareciendo ahí; quítala para ocultar las puntuaciones por completo.
+Activa **Hide scores** en **Ajustes → Experiencia de respuesta** y los participantes nunca ven una puntuación: se ocultan la puntuación general y las puntuaciones por dimensión en la página de resultados, los puntos de cada pregunta mientras responden, la puntuación en la retroalimentación inmediata y las puntuaciones por pregunta en la revisión de respuestas. Los niveles, el análisis y los aciertos / errores se siguen mostrando. Los administradores siguen viendo las puntuaciones en el panel. Si la plantilla de resumen inserta la variable de puntuación, la puntuación sigue apareciendo ahí; quítala para ocultar las puntuaciones por completo.
 
 ### Orden de las secciones
 
@@ -20,12 +22,13 @@ En la vista previa del informe del editor, sube o baja las secciones de la pági
 
 ### Corrección con Coincidencia con AI
 
-En un **Cuestionario de conocimiento**, una pregunta de completar el espacio puede corregirse con **Coincidencia con AI**: la AI juzga si la respuesta es correcta por similitud semántica en lugar de exigir una coincidencia exacta del texto. Es ilimitada: no hay créditos de AI que comprar. En un Cuestionario con puntuación, las respuestas de completar el espacio se recopilan, pero no se puntúan.
+En un **Cuestionario de conocimiento**, una pregunta de completar el espacio puede corregirse con **Coincidencia con AI**: la AI juzga si la respuesta es correcta por similitud semántica en lugar de exigir una coincidencia exacta del texto. Es ilimitada y no consume puntos de IA (los puntos de IA solo se gastan en los [informes de los Quizzes de IA](/es/editor/ai-report#puntos-de-ia-y-subida-de-archivos)). En un Cuestionario con puntuación, las respuestas de completar el espacio se recopilan, pero no se puntúan.
 
 ## Cómo se genera un informe
 
 - La **puntuación básica** se calcula **inmediatamente** después del envío.
-- Los **cálculos más pesados**, como el análisis por dimensiones y la corrección con Coincidencia con AI, se generan de forma **asíncrona**; el informe pasa por un estado "generando → completado".
+- Los **cálculos más pesados**, como el análisis por dimensiones, la corrección con Coincidencia con AI y los informes de los Quizzes de IA, se generan de forma **asíncrona**; el informe pasa por un estado "generando → completado".
+- En un Quiz de IA que exige un correo para ver el informe, el informe de un participante anónimo solo se genera **después de que supere ese paso**.
 - Si la generación falla, el sistema **lo reintenta automáticamente** dentro de un plazo determinado.
 
 <Callout type="info">
@@ -49,12 +52,16 @@ Abre una respuesta en [Registros de respuestas](/es/results/records) y haz clic 
 
 ## Botón de CTA en la página de resultados
 
-Puedes configurar un botón de llamada a la acción (CTA) para **cada nivel de puntuación**; los participantes que quedan en ese nivel lo ven al final de su informe. Por ejemplo, "Necesita mejorar" lleva a reservar una consulta, mientras que "Excelente" lleva a descargar material avanzado.
+Un botón de llamada a la acción (CTA) convierte un resultado en un siguiente paso: "Necesita mejorar" lleva a reservar una consulta, mientras que "Excelente" lleva a descargar material avanzado.
 
-- En la sección **Informe** del editor → **Configuración de niveles de puntaje**, activa el **Botón de CTA** de un nivel y rellena el texto y el enlace del botón; el texto introductorio es opcional. Los enlaces del CTA siempre se abren en una ventana nueva.
-- Para usar el mismo botón en todos los niveles, configura uno y haz clic en **Aplicar a todos los niveles**.
+- En la sección **Informe** del editor, activa **Botón de CTA** y define un **botón predeterminado** (texto y enlace del botón; el texto introductorio es opcional). El texto y el enlace van juntos: rellena ambos o deja ambos vacíos.
+- Da a un **nivel**, a un **resultado** o a una **etiqueta de resultado** de IA su propio botón dentro de ese elemento. Lo que quede vacío usa el botón predeterminado; si el predeterminado también está vacío, ese resultado no muestra botón.
+- Desactiva **Botón de CTA** y ningún resultado muestra botón, ni siquiera los que tienen uno propio.
+- Los enlaces del CTA siempre se abren en una ventana nueva.
 - Los cambios en el CTA **se aplican inmediatamente a todos los informes históricos**: cambia los enlaces de campaña o el texto sin preocuparte por botones obsoletos en informes antiguos.
 - Los clics de los participantes en el CTA alimentan el embudo de conversión de [Insights](/es/results/insights).
+
+¿Prefieres saltarte la página de resultados y enviar a las personas directamente a una página? Usa [Redirect after submission](/es/editor/scoring#redirección-tras-el-envío-pro) (Pro).
 
 <Callout type="info">
   Los enlaces deben empezar por `http(s)://`. El estilo del botón sigue automáticamente el color del tema de tu quiz.

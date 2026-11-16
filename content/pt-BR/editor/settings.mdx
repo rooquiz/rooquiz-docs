@@ -1,9 +1,9 @@
 ---
 title: Configurações do quiz
-description: 'Tudo em um quiz que não é questão, página por página: acesso e visibilidade, informações básicas, a experiência de resposta, o acompanhamento da página de resultados, versões de idioma, textos do sistema e Google Analytics.'
+description: 'Tudo em um quiz que não é questão, página por página: acesso e visibilidade, a experiência de resposta, o acompanhamento da página de resultados, versões de idioma, textos do sistema e rastreamento de conversões.'
 ---
 
-Tudo no quiz que não é uma questão fica na aba **Configurações** do quiz (ao lado de **Editar**, **Respostas** e **Insights**). Ela é dividida em sete páginas, listadas no menu à esquerda.
+Tudo no quiz que não é uma questão fica na aba **Configurações** do quiz (ao lado de **Editar**, **Respostas** e **Insights**). Ela é dividida em seis páginas, listadas no menu à esquerda.
 
 ## Acesso e visibilidade
 
@@ -39,7 +39,7 @@ Ativada por padrão, para que o quiz entre no seu sitemap e possa ser encontrado
 
 ## Informações básicas
 
-**Título do quiz**, **Imagem de capa** (recomendado 1200 × 630 px) e **Cor da capa**. O título identifica o quiz no painel e aparece na página inicial.
+**Título do quiz**, **Imagem de capa** (recomendado 1200 × 630 px) e **Cor da capa** não ficam em Configurações: clique no título do quiz na barra superior para editá-los. O título identifica o quiz no painel e aparece na página inicial.
 
 A **descrição** do quiz é editada na página inicial dentro do editor, não aqui. Ela alimenta a [indexação em buscadores](/pt-BR/publish/promotion), então não a deixe vazia.
 
@@ -47,6 +47,11 @@ A **descrição** do quiz é editada na página inicial dentro do editor, não a
 
 - **Modo de exibição de numeração** — Nenhuma / Números arábicos (1, 2, 3) / Algarismos romanos (I, II, III).
 - **Tempo limite** — uma contagem regressiva começa quando o respondente entra no quiz; quando o tempo acaba, aparece um modal e as **respostas atuais são enviadas automaticamente**. Disponível **apenas no Quiz de conhecimento** — o Quiz com pontuação e o Quiz de resultado não oferecem essa opção.
+- **Instant feedback** — ative **Check answers page by page** e os respondentes enviam cada página separadamente e veem se acertaram, a resposta correta e a sua explicação antes de seguir. **Apenas no Quiz de conhecimento.**
+  - As questões já verificadas não podem mais ser alteradas. Na última página, um botão **See results** conclui o quiz.
+  - Em uma página com uma única questão de um toque (escolha única, verdadeiro/falso, lista suspensa ou avaliação), a resposta é verificada assim que é escolhida.
+  - Isso revela as respostas questão por questão, então deixe desativado em quizzes cuja pontuação é usada para nivelamento.
+- **Hide scores** — ative **Hide scores from respondents** e os respondentes nunca veem uma pontuação: nem na página de resultado (pontuação geral e por dimensão), nem os pontos de cada questão enquanto respondem, nem no feedback imediato ou na revisão das respostas. Níveis, análise e certo/errado continuam aparecendo, e você continua vendo as pontuações no painel. Não aparece nos Quizzes de resultado e com IA, que não têm pontuação.
 - **Folha de respostas** — exibe um navegador de questões na barra lateral para que os respondentes vejam o progresso e pulem para qualquer questão. Ativada por padrão em quizzes novos; você pode desativá-la em quizzes curtos, feitos de uma vez.
 - **Comparação com outros respondentes** — ative **Mostrar porcentagens das opções** e os respondentes veem qual parcela das pessoas escolheu a mesma opção logo depois de responder (por exemplo, "62% das pessoas escolheram o mesmo que você"). Só porcentagens são exibidas, nunca respostas individuais.
   - Desativada por padrão e disponível apenas no Quiz com pontuação e no Quiz de resultado — não nos quizzes de conhecimento, em que a opção mais escolhida entregaria a resposta.
@@ -55,7 +60,9 @@ A **descrição** do quiz é editada na página inicial dentro do editor, não a
 
 ## Acompanhamento da página de resultados
 
-Dois blocos opcionais para a página de resultados. A ordem deles na página é definida no editor — veja [Ordem das seções da página de resultado](/pt-BR/editor/scoring#ordem-das-seções-da-página-de-resultado).
+**Emails by result** — envie um e-mail de acompanhamento que corresponda ao resultado de cada respondente, por exemplo recomendar um curso introdutório a "Iniciante" e convidar "Avançado" para uma aula experimental. Cada nível ou resultado ganha uma linha em que você pode adicionar o próprio e-mail, e **All respondents** envia o mesmo e-mail a todos. Por trás, esses e-mails são conectores de E-mail, então também aparecem nos [Conectores](/pt-BR/connectors/channels#e-mail) da sua equipe e precisam de um [serviço de envio](/pt-BR/connectors/email-smtp). Apenas proprietários e administradores da equipe podem configurá-los.
+
+Abaixo disso ficam dois blocos opcionais para a página de resultados. A ordem deles na página é definida no editor — veja [Ordem das seções da página de resultado](/pt-BR/editor/scoring#ordem-das-seções-da-página-de-resultado).
 
 - **Seção de agendamento** — permite que os respondentes agendem uma chamada pela sua página do Cal.com a partir do resultado. Ative-a, cole seu **Link de agendamento do Cal.com** (obrigatório) e, se quiser, defina o título, a descrição e o texto do botão — veja [Agendamentos](/pt-BR/bookings).
 - **Feedback do respondente** — ative **Mostrar o bloco de feedback** para fazer **uma pergunta** na página de resultados. Escolha o tipo de resposta: **Nota de 1 a 5**, **Escolha única** ou **Texto livre**. As respostas vão para o lead do respondente, para que quem fizer o acompanhamento saiba o que essa pessoa realmente quer.
