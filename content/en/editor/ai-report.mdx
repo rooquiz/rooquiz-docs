@@ -1,0 +1,96 @@
+---
+title: AI Reports
+description: 'How an AI Quiz writes each respondent a personal report: generation instructions, report length, style rules, file uploads, internal result tags, AI points and what happens when they run out.'
+---
+
+In an **AI Quiz**, nothing is scored. After a respondent submits, AI reads their answers (and any files they uploaded) and writes them a **personal report**, following the instructions you give it. Pick this type when the report itself is the value you offer — a diagnosis, a review, a coaching plan. See [The four quiz types](/en/getting-started/quiz-types#ai-quiz).
+
+## Writing the generation instructions
+
+Open the editor's **Report** section. Under **Generation instructions**, tell the AI what the report should cover and how to write it, for example:
+
+> Assess the speaking sample for fluency, structure and confidence, give a level from A1 to C2, list 3 strengths and 3 things to practise, and end with a 2-week study plan.
+
+- The respondent's answers and uploaded files are sent to the AI automatically — you don't need to paste them in.
+- To point at one specific question, click **+** in the editor and insert it, e.g. "tailor the advice to [Target role]".
+- Leave the instructions empty and the AI writes a general summary with strengths and suggestions.
+- Instructions can be up to 20,000 characters.
+
+### Report length
+
+**Report length** has three settings; **Standard** is the default.
+
+| Setting | What the report contains |
+| --- | --- |
+| **Brief** | The verdict and the 1–2 points that matter most |
+| **Standard** | The verdict, 2–3 key findings and next steps |
+| **Detailed** | 3–5 findings and up to 3 charts |
+
+### Style & rules
+
+**Style & rules (optional)** sets tone and hard rules, up to 5,000 characters — for example "Warm, encouraging tone. Address the reader as 'you'. Never mention competitors." A length rule written here takes priority over **Report length**.
+
+<Callout type="info">
+  The editor's report preview shows a **sample report**. Real reports are written per respondent from your instructions and their answers, so two respondents never get the same text.
+</Callout>
+
+## File uploads
+
+An AI Quiz can include **file upload questions** so the AI can review real work — a CV, a speaking sample, a photo of a product. Each upload question accepts one kind of file:
+
+| Kind | Accepted | Limit per file | How the AI reads it |
+| --- | --- | --- | --- |
+| Image | JPG, PNG, WebP, GIF | 10 MB | Looks at the image |
+| Audio | MP3, M4A, WAV, WebM, OGG | 10 MB, up to 3 minutes | Reads a transcript |
+| Short video | MP4, WebM, MOV | 20 MB, up to 1 minute | Reads a transcript of the audio |
+| Document | PDF, Word, Excel, PowerPoint, TXT, CSV, Markdown | 10 MB | Reads its text |
+
+- An AI Quiz can have **up to 2** upload questions, each accepting **up to 3 files** (set **Max files** to allow fewer).
+- Upload questions only collect files; they are not scored.
+- Uploads count against your team's monthly **file uploads** allowance — see [AI points and file uploads](#ai-points-and-file-uploads).
+
+## Result tags
+
+**Result tags (optional)** let the AI sort respondents for you. Add up to **10** tags, each with a name and a plain-language rule for when to use it — for example *Ready to buy*: "Has a budget and wants to start within a month". Before writing each report, the AI picks the one tag that fits best.
+
+- **Respondents never see the tag.** They only see the tag's CTA button under their report.
+- In [Response records](/en/results/records), filter by result and see the tag on each response.
+- Tags are sent to your [connectors](/en/connectors) with the response, and you can use them as conditions — e.g. tag subscribers in Kit or send a matching follow-up email only for *Ready to buy*.
+- Deleting a tag doesn't change reports already tagged with it.
+
+Several AI templates come with three example tags (follow up now / nurture / too early) to start from.
+
+## CTA button
+
+Under **CTA Button**, set a **default button** that shows below every AI report, and optionally give each result tag its own button. A tag without its own button uses the default. See [Result page CTA button](/en/results/reports#result-page-cta-button).
+
+## How the report is generated
+
+1. The respondent submits; the report starts **generating** right away and appears on the result page as the AI writes it.
+2. If the quiz uses **Email required to see the report**, an anonymous respondent's report is generated **after they pass the gate** — no AI points are spent on people who never leave their email. In the dashboard these responses show "The report hasn't been generated yet", with a button to generate it now.
+3. If generation fails, it is retried automatically; you can also **Regenerate report** from the response — see [Reports](/en/results/reports#regenerating-a-report).
+
+<Callout type="warning">
+  Redirecting respondents to a link after submission is not available for AI Quizzes, because the report is written after they submit.
+</Callout>
+
+## AI points and file uploads
+
+Each AI Quiz report uses **1 AI point**. Every team gets a monthly allowance that resets on the 1st of each month (UTC):
+
+| | Free | Pro |
+| --- | --- | --- |
+| AI points per month | 5 | 100 |
+| File uploads per month | 100 MB | 2 GB |
+
+During a Pro free trial, AI points stay at the Free allowance until the subscription begins.
+
+When the allowance runs out, **top-ups** are used — see [Add-ons](/en/account#add-ons). If both are used up:
+
+- Respondents can still answer and submit; **no response is lost**.
+- Their report isn't generated and shows as failed because the team is out of AI points. Top up, then regenerate it from the response.
+- Team owners and admins get an email and an in-app notification when AI points or file uploads are running low, and again when they run out.
+
+<Callout type="info">
+  AI points are only used by AI Quiz reports. **AI Match** grading of fill-in-the-blank answers in a Knowledge Quiz is unlimited and uses no points.
+</Callout>
