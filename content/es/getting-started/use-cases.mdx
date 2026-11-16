@@ -1,0 +1,64 @@
+---
+title: Recetas por objetivo
+description: 'Configuraciones paso a paso para los objetivos más habituales: una evaluación para captar leads, un buscador de productos o cursos, una prueba de nivel, un quiz de personalidad para compartir y un diagnóstico redactado por IA, con el tipo que elegir y los ajustes clave.'
+---
+
+Cada receta indica el tipo de quiz que debes elegir y los pocos ajustes que lo hacen funcionar. Siempre que haya una plantilla parecida, empieza desde ella en las tarjetas **¿Qué quieres crear?** del panel; consulta [Crear un quiz](/es/getting-started/create-quiz).
+
+## Evaluación para captar leads
+
+*«¿Qué tan preparado está tu negocio para X?»: una puntuación que se gana una conversación comercial.*
+
+1. Tarjeta: **Evaluación** (Cuestionario con puntuación). Asigna una puntuación a cada opción de respuesta; el total es su suma. Añade [dimensiones](/es/editor/scoring#cuestionario-con-puntuación-análisis-por-dimensiones) si quieres un gráfico de radar con varias áreas.
+2. Divide el total en [niveles](/es/editor/scoring#niveles-y-acciones-en-la-página-de-resultados) y da a los tramos bajo y medio un **botón de CTA** como «Reserva una llamada».
+3. **Ajustes → Acceso y visibilidad → Correo obligatorio para ver el informe**, para que cada quiz completado se convierta en un [lead](/es/leads).
+4. Añade una [sección de reservas](/es/bookings) a la página de resultados y un [correo según el resultado](/es/editor/settings#seguimiento-de-la-página-de-resultados) para cada nivel.
+5. Sigue el embudo en [Insights](/es/results/insights): dónde abandonan las personas y cuántas hacen clic en el CTA.
+
+## Buscador de productos o cursos
+
+*«¿Qué curso es el adecuado para ti?»: cada persona emparejada con una oferta.*
+
+1. Tarjeta: **Buscador de productos o cursos** (Cuestionario de resultado). Crea un resultado por cada producto o curso.
+2. Haz que cada opción de respuesta vote por los resultados a los que apunta; gana el resultado más votado. Usa la [lógica condicional](/es/editor/logic) para saltar las preguntas que no apliquen.
+3. Da a cada resultado un CTA hacia la página de su producto o, en Pro, [redirige](/es/editor/scoring#redirección-tras-el-envío-pro) directamente a ella con el resultado añadido al enlace.
+4. Etiqueta a los suscriptores según su resultado en [Kit](/es/connectors/channels#kit), para que cada resultado inicie su propia secuencia de correos.
+
+<Callout type="info">
+  Deja desactivada la **Comparación con el resto** en los buscadores y en los quizzes de nivel: ver lo que eligió la mayoría empuja a los siguientes participantes hacia la misma opción.
+</Callout>
+
+## Prueba de nivel
+
+*Una prueba de nivel para una escuela de idiomas o un curso de formación.*
+
+1. Tarjeta: **Prueba de nivel**. Responde a **¿Las preguntas tienen respuestas correctas?**: **Sí** para preguntas que se califican (Cuestionario de conocimiento), **No** para autoevaluaciones (Cuestionario con puntuación).
+2. Define [niveles](/es/editor/scoring#niveles-y-acciones-en-la-página-de-resultados) como A1–C2 y da a cada uno un CTA hacia la clase correspondiente o una clase de prueba. **Orden de los niveles → High → Low** muestra primero el nivel más alto.
+3. Mantén desactivado el [Instant feedback](/es/editor/settings#experiencia-de-respuesta): revela las respuestas página a página.
+4. Envía un [correo según el resultado](/es/editor/settings#seguimiento-de-la-página-de-resultados) de seguimiento que recomiende la clase adecuada.
+
+## Quiz de personalidad para compartir
+
+*«¿Qué X eres?»: hecho para difundirse.*
+
+1. Tarjeta: **Quiz de personalidad** (Cuestionario de resultado). Da a cada resultado un nombre, una imagen y una descripción con gancho.
+2. Mantén activado **Compartir resultados** y revisa la [tarjeta para compartir](/es/publish/og): es lo que la gente ve cuando se publica el resultado.
+3. Activa la [Comparación con el resto](/es/editor/settings#experiencia-de-respuesta) para que los participantes vean «El 62 % de las personas eligió lo mismo que tú».
+4. Elige un [diseño](/es/editor/design) con una página de inicio llamativa; usa el acceso **Abierto a todos** para reducir la fricción.
+
+## Reto de trivia
+
+*Un quiz de conocimientos divertido para competir.*
+
+1. Tarjeta: **Reto de trivia** (Cuestionario de conocimiento). Marca las respuestas correctas y asigna los puntos.
+2. Añade un [límite de tiempo](/es/editor/settings#experiencia-de-respuesta) y activa el **Instant feedback** para que se aprenda sobre la marcha.
+3. Usa los niveles para dar a cada tramo de puntuación un título divertido que valga la pena compartir.
+
+## Diagnóstico redactado por IA
+
+*Una revisión de CV, una evaluación oral, una auditoría de negocio: un informe personal para cada participante.*
+
+1. Tarjeta: **Informe personal con IA** (Quiz de IA). Añade las preguntas y, si la IA debe revisar un trabajo real, una pregunta de subida de archivos.
+2. Escribe las [instrucciones de generación](/es/editor/ai-report#escribir-las-instrucciones-de-generación) y elige la extensión del informe.
+3. Añade [etiquetas de resultado](/es/editor/ai-report#etiquetas-de-resultado) como *Listo para comprar* / *Nutrir* / *Demasiado pronto*, con un CTA para cada una, y envíalas a tus conectores.
+4. Usa **Correo obligatorio para ver el informe**: los informes solo se generan (y los puntos de IA solo se gastan) para quienes dejan su correo.

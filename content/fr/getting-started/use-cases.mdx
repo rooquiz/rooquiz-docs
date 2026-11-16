@@ -1,0 +1,64 @@
+---
+title: Recettes par objectif
+description: "Configurations pas à pas pour les objectifs les plus courants : évaluation pour générer des leads, sélecteur de produit ou de cours, test de niveau, quiz de personnalité à partager et diagnostic rédigé par l'IA, avec le type à choisir et les réglages clés."
+---
+
+Chaque recette ci-dessous indique le type de quiz à choisir et les quelques réglages qui le font fonctionner. Partez d'un modèle depuis les cartes **Que souhaitez-vous créer ?** du tableau de bord dès qu'un modèle s'en approche : consultez [Créer un quiz](/fr/getting-started/create-quiz).
+
+## Évaluation pour générer des leads
+
+*« Votre entreprise est-elle prête pour X ? » : un score qui ouvre la porte à un échange commercial.*
+
+1. Carte : **Évaluation** (Quiz noté). Attribuez un score à chaque choix de réponse ; le total en est la somme. Ajoutez des [dimensions](/fr/editor/scoring#quiz-noté--analyse-par-dimension) si vous voulez un graphique radar sur plusieurs domaines.
+2. Découpez le total en [niveaux](/fr/editor/scoring#niveaux-et-actions-de-la-page-de-résultat) et donnez aux tranches basse et moyenne un **bouton CTA** comme « Réserver un appel ».
+3. **Paramètres → Accès et visibilité → E-mail requis pour voir le rapport**, pour que chaque quiz terminé devienne un [lead](/fr/leads).
+4. Ajoutez une [section réservation](/fr/bookings) à la page de résultats, et un [e-mail par résultat](/fr/editor/settings#suivi-de-la-page-de-résultats) pour chaque niveau.
+5. Suivez le funnel dans [Insights](/fr/results/insights) : où les gens abandonnent et combien cliquent sur le CTA.
+
+## Sélecteur de produit ou de cours
+
+*« Quel cours vous convient ? » : chaque personne est associée à une offre.*
+
+1. Carte : **Sélecteur de produit ou de cours** (Quiz de résultat). Créez un résultat par produit ou par cours.
+2. Faites voter chaque choix de réponse pour les résultats vers lesquels il oriente ; le résultat le plus voté l'emporte. Utilisez la [logique conditionnelle](/fr/editor/logic) pour sauter les questions qui ne s'appliquent pas.
+3. Donnez à chaque résultat un CTA vers sa page produit ou, avec Pro, [redirigez](/fr/editor/scoring#redirection-après-soumission-pro) directement vers elle en ajoutant le résultat au lien.
+4. Étiquetez les abonnés selon leur résultat dans [Kit](/fr/connectors/channels#kit), pour que chaque résultat déclenche sa propre séquence d'e-mails.
+
+<Callout type="info">
+  Laissez **Comparaison avec les autres** désactivée pour les sélecteurs et les quiz de placement : voir ce que la majorité a choisi pousse les répondants suivants vers la même option.
+</Callout>
+
+## Test de niveau
+
+*Un test de placement pour une école de langues ou une formation.*
+
+1. Carte : **Test de niveau**. Répondez à **Les questions ont-elles de bonnes réponses ?** : **Oui** pour des questions corrigées (Quiz de connaissances), **Non** pour des auto-évaluations (Quiz noté).
+2. Définissez des [niveaux](/fr/editor/scoring#niveaux-et-actions-de-la-page-de-résultat) comme A1–C2 et donnez à chacun un CTA vers la classe correspondante ou un cours d'essai. **Ordre des niveaux → High → Low** affiche le niveau le plus élevé en premier.
+3. Laissez [Instant feedback](/fr/editor/settings#expérience-de-réponse) désactivé : il révèle les réponses page par page.
+4. Envoyez un [e-mail par résultat](/fr/editor/settings#suivi-de-la-page-de-résultats) de suivi qui recommande la bonne classe.
+
+## Quiz de personnalité à partager
+
+*« Quel X êtes-vous ? » : conçu pour se diffuser.*
+
+1. Carte : **Quiz de personnalité** (Quiz de résultat). Donnez à chaque résultat un nom fort, une image et une description.
+2. Gardez **Partage des résultats** activé, et vérifiez la [carte de partage](/fr/publish/og) : c'est ce que les gens voient quand le résultat est publié.
+3. Activez la [Comparaison avec les autres](/fr/editor/settings#expérience-de-réponse) pour que les répondants voient « 62 % des personnes ont choisi comme vous ».
+4. Choisissez un [design](/fr/editor/design) avec une page d'accueil marquante ; utilisez l'accès **Ouvert à tous** pour limiter les frictions.
+
+## Défi de culture générale
+
+*Un quiz de connaissances ludique pour se mesurer aux autres.*
+
+1. Carte : **Défi de culture générale** (Quiz de connaissances). Indiquez les bonnes réponses et fixez les points.
+2. Ajoutez une [limite de temps](/fr/editor/settings#expérience-de-réponse) et activez **Instant feedback** pour apprendre en jouant.
+3. Utilisez les niveaux pour donner à chaque tranche de score un titre amusant qui donne envie de partager.
+
+## Diagnostic rédigé par l'IA
+
+*Une relecture de CV, une évaluation de l'expression orale, un audit d'entreprise : un rapport personnel par répondant.*
+
+1. Carte : **Rapport personnel IA** (Quiz IA). Ajoutez les questions, ainsi qu'une question d'envoi de fichier si l'IA doit examiner un travail réel.
+2. Rédigez les [instructions de génération](/fr/editor/ai-report#rédiger-les-instructions-de-génération) et choisissez une longueur de rapport.
+3. Ajoutez des [étiquettes de résultat](/fr/editor/ai-report#étiquettes-de-résultat) comme *Prêt à acheter* / *À nourrir* / *Trop tôt*, avec un CTA pour chacune, et transmettez-les à vos connecteurs.
+4. Utilisez **E-mail requis pour voir le rapport** : les rapports ne sont générés (et les points IA dépensés) que pour les personnes qui laissent leur e-mail.
