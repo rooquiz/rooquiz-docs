@@ -1,48 +1,99 @@
 ---
-title: Appearance & Personalized Templates
-description: 'Appearance has two layers: the theme controls colours and corner radii, while a personalized template controls the page layout itself. What each one changes and when a theme is enough.'
+title: Designs, Themes & Modules
+description: 'How a quiz looks: pick a design from the gallery, adjust its theme colours and shape, edit its text and images, and add modules to the start and result pages. Which designs need Pro and what happens when a plan lapses.'
 ---
 
-Appearance has two layers: the **theme** controls colours and corner radii, while a **personalized template** controls the page layout itself. Most of the time the theme is all you need.
+A quiz's look has three layers, all in the editor's **Personalized** tab on the right:
+
+| Layer | What it controls |
+| --- | --- |
+| **Design** | The layout of the start page, question pages and result page — the overall look and feel |
+| **Theme** | Colours, corner radii and density on top of that layout |
+| **Modules** | Extra content blocks on the start and result pages (designs from the gallery only) |
+
+Changes show live in the preview. Click any element in the preview and its settings open in the right panel.
+
+## Choosing a design
+
+The **Design** card shows the current design. Click the thumbnail or **Change** to open the gallery.
+
+- **Default** is the clean, neutral layout that suits most quizzes.
+- The other designs are built for specific use cases — coaching, courses, finance, fitness, wellness and more — each with its own start page, result page and default modules. Browse them with a live sample quiz on the [Quiz themes](https://rooquiz.com/explore/themes) page.
+- Designs made only for your team are listed first with an **Exclusive** tag.
+- Select a design to see its description and preview images. **Try on my quiz** previews it with your own questions without changing anything.
+- Click **Confirm Selection** to switch.
+
+<Callout type="warning">
+  Switching designs **resets your current personalization settings**. Each design has its own layout parameters, text and default modules, and the old adjustments can't carry over. Duplicate the quiz first if you want to keep them.
+</Callout>
+
+### Pro designs
+
+Designs marked **Pro** can be tried and edited by every team, but **saving a quiz with a Pro design requires the Pro plan**. On the Free plan you'll see "This design requires Pro. Upgrade to save, or switch to a free design."
+
+If your team leaves Pro, quizzes that already use a Pro design keep their settings, but the public page shows the Default design until you upgrade again.
+
+<Callout type="info">
+  Can't find the right look? The RooQuiz team can design a theme for your brand, visible only to your team — see [Custom quiz design](https://rooquiz.com/custom-quiz-design) (Pro plan required).
+</Callout>
 
 ## Theme
 
-Adjust it under **Theme Selection** in the editor; changes show live in the preview:
+The **Theme** card sets the colour palette:
+
+- Pick a theme from the grid. The **Colors** row shows its palette — Base, Primary, Secondary, Accent, Neutral, and the Info / Success / Warning / Error colours; **Show all** expands it.
+- **Pick colors from image** — upload a brand image and the palette is generated from it, which beats entering hex codes by hand.
+- **Add a dark theme** (or **Add a light theme**) — the quiz switches automatically when a visitor's device is in dark (or light) mode. The extra theme changes colours only; shapes always come from the main theme. Some designs come with a fixed light/dark pair.
+
+The **Style** card fine-tunes the shape:
 
 | Control | Notes |
 | --- | --- |
-| **Theme colours** | Primary, secondary, accent and neutral, plus info / success / warning / error |
-| **Border radius** | Separate values for boxes, fields and selectors |
-| **Effects** | Depth, noise and similar texture toggles |
-| **Sizes & border** | Overall density and border weight |
+| **Border Radius** | Separate values for boxes, fields and selectors |
+| **Effects** | **Depth** and **Noise** texture toggles |
+| **Sizes** | Field and selector size, and border weight |
+
+## Text and images
+
+Designs from the gallery come with their own text — taglines, the copy next to the start button, the "Next step" box on the result page. Edit it under **Theme text** in the start page and result page settings, grouped by where it appears: **Header**, **Next to the start button**, **"Next step" box** and **Other**.
+
+Image fields can be uploaded, replaced or removed, or picked with **Choose from Unsplash**. **Adjust visible area** lets you drag and resize the crop to the ratio the design uses.
+
+## Modules
+
+Designs from the gallery let you add **modules** — content blocks such as an intro, testimonials, an FAQ, pricing or a profile — to the **start page** and the **result page**. The Default design has no modules.
+
+- **Add** — click **+ Add Module** below the existing modules and pick one from the gallery. Some designs have modules of their own, listed under **Exclusive to this theme**.
+- **Edit** — click a module, then **Edit**. The editor shows a live preview on the left (click any text to edit it in place) and its fields on the right. **Save** applies the changes; **Cancel** discards them.
+- **Reorder or delete** — use **Move Up**, **Move Down** and **Delete** on the module's action bar.
+- **Start button** — on the start page, the start button can be moved up or down among the modules.
+- **Result page sections** — the built-in **Dimension Analysis**, **Booking section** and **Respondent feedback** blocks sit in the same list as the modules, so you can put booking above a testimonial, for example. Built-in sections can be moved but not edited or deleted here.
 
 <Callout type="info">
-  If you have brand imagery, use **Pick colors from image** — upload one and the palette is extracted into your theme colours, which beats entering hex codes by hand.
+  A quiz can have up to **20 modules** across the start and result pages combined. The start button and built-in result sections don't count.
 </Callout>
 
-## Personalized templates
+## Header and progress
 
-A personalized template changes the **layout**, not just the palette. Three are available:
+Click the **Header** in the editor's left list to set the **Header Title** (with a **Show title** toggle), **Header Description** and **Header Alignment** (Left / Center / Right).
 
-| Template | Notes |
-| --- | --- |
-| **Default** | The standard layout — clean and neutral, right for most quizzes |
-| **Kinetic** | A design-led layout with a stronger visual treatment on the landing and result pages |
-| **Clarity** | A layout built for coaches, with its own landing and result page design |
+**Progress style** sets how progress is shown on multi-page quizzes: **None**, **Badge**, **Bar** or **Segments**. Each design sets a default.
 
-<Callout type="warning">
-  Switching templates is **not yet open to every team** — on most teams the current template is shown read-only. A quiz that already uses **Kinetic** or **Clarity** keeps rendering, editing and duplicating normally.
-</Callout>
+Rating questions have their own **Display style** — **Stars** or **Numbers** — in the question's settings.
 
-Switching templates warns that **your current personalization settings will be reset** — a different layout means a different set of layout parameters, and the old adjustments can't carry over. Duplicate the quiz first if you want to keep them.
+## Result page score style
+
+How the overall score is drawn on the result page — **Scale**, **Ring**, **Gauge** or **Steps** — is set in the **Report** section under **Overall Analysis**. Switching designs sets it to the design's default; you can change it afterwards. See [Levels and result-page actions](/en/editor/scoring#levels-and-result-page-actions).
 
 ## The landing page
 
-The landing page is the first screen a respondent sees. In the editor you control:
+The landing page (start page) is the first screen a respondent sees. In its settings you control:
 
-- Whether the **title** and **description** show, and how they're aligned.
-- The **cover image**.
-- The start button's wording.
+- **Enable Landing Page** — turn it off to open straight into the questions.
+- The **cover image** (**Upload Header Image**), the quiz title and the description.
+- **Theme text** and modules, for designs from the gallery.
+
+The start button's wording is under **Settings → System copy**.
 
 <Callout type="info">
   The landing page also affects [search indexing](/en/publish/promotion#search-engine-indexing): with it turned off, the quiz opens straight into questions and search engines have almost nothing to read. If you want to be found, keep the landing page on and write a real description.
