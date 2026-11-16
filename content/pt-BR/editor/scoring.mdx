@@ -45,11 +45,11 @@ Precisa de pesos, pontuações de dimensão ou respostas de número no total? Es
 
 Divida a pontuação total em **níveis** (0–60 precisa melhorar / 60–80 bom / 80+ excelente) em **Configuração de níveis de pontuação**, na seção **Relatório** do editor. Cada nível tem nome, cor e descrição, e pode ter o próprio **botão de CTA** e **link de redirecionamento** — a faixa mais baixa pode oferecer "Agende uma consultoria". É essa etapa que conecta uma avaliação à conversão.
 
-- **Ordem dos níveis** — liste os níveis de **Low → High** ou de **High → Low**. Isso só muda a forma como são exibidos, no editor e na escala de pontuação da página de resultado; a pontuação funciona da mesma forma nos dois casos. Os níveis das dimensões seguem a mesma ordem dos níveis gerais.
-- **Score style** — como a pontuação geral é desenhada na página de resultado: **Scale** (padrão), **Ring**, **Gauge** ou **Steps**. Steps exige pelo menos 2 níveis, e Ring e Gauge exigem níveis ou uma pontuação máxima; enquanto o quiz não tiver esses dados, a página de resultado mostra a escala.
+- **Ordem dos níveis** — liste os níveis de **Menor → Maior** ou de **Maior → Menor**. Isso só muda a forma como são exibidos, no editor e na escala de pontuação da página de resultado; a pontuação funciona da mesma forma nos dois casos. Os níveis das dimensões seguem a mesma ordem dos níveis gerais.
+- **Estilo da pontuação** — como a pontuação geral é desenhada na página de resultado: **Escala** (padrão), **Anel**, **Medidor** ou **Etapas**. Etapas exige pelo menos 2 níveis, e Anel e Medidor exigem níveis ou uma pontuação máxima; enquanto o quiz não tiver esses dados, a página de resultado mostra a escala.
 
 <Callout type="info">
-  Não quer que os respondentes vejam um número? Ative **Hide scores** em **Configurações → Experiência de resposta**: os respondentes nunca veem uma pontuação — nem na página de resultado (pontuação geral e por dimensão), nem em cada questão enquanto respondem, nem no feedback imediato ou na revisão das respostas —, enquanto os níveis, a análise e o certo/errado permanecem. Se o seu modelo de resumo ainda insere a variável da pontuação, remova-a também, ou a pontuação continuará aparecendo ali.
+  Não quer que os respondentes vejam um número? Ative **Ocultar pontuações** em **Configurações → Experiência de resposta**: os respondentes nunca veem uma pontuação — nem na página de resultado (pontuação geral e por dimensão), nem em cada questão enquanto respondem, nem no feedback imediato ou na revisão das respostas —, enquanto os níveis, a análise e o certo/errado permanecem. Se o seu modelo de resumo ainda insere a variável da pontuação, remova-a também, ou a pontuação continuará aparecendo ali.
 </Callout>
 
 ### Botões de CTA
@@ -58,10 +58,10 @@ Em **Botão de CTA**, ative o botão e defina um **botão padrão** (texto e lin
 
 ### Redirecionamento após o envio (Pro)
 
-Ative **Redirect after submission** para enviar os respondentes direto a um link conforme o resultado, em vez de mostrar a página de resultado — por exemplo, quem pontua pouco para a página de um curso introdutório e quem pontua muito para uma página de agendamento.
+Ative **Redirecionar após o envio** para enviar os respondentes direto a um link conforme o resultado, em vez de mostrar a página de resultado — por exemplo, quem pontua pouco para a página de um curso introdutório e quem pontua muito para uma página de agendamento.
 
-- Defina um **Redirect link** em cada nível (ou em cada resultado), além de um **Default link** opcional para os resultados sem link.
-- **Add the result to the link** acrescenta `score`, `level`, `outcome` e `outcome_name`, além dos [parâmetros de URL](/pt-BR/publish/tracking#parâmetros-de-url-campos-ocultos) e das tags UTM do quiz. E-mails e outros dados pessoais nunca são adicionados, os parâmetros que já estão no seu link são mantidos e `score` fica de fora quando as pontuações estão ocultas.
+- Defina um **Link de redirecionamento** em cada nível (ou em cada resultado), além de um **Link padrão** opcional para os resultados sem link.
+- **Adicionar o resultado ao link** acrescenta `score`, `level`, `outcome` e `outcome_name`, além dos [parâmetros de URL](/pt-BR/publish/tracking#parâmetros-de-url-campos-ocultos) e das tags UTM do quiz. E-mails e outros dados pessoais nunca são adicionados, os parâmetros que já estão no seu link são mantidos e `score` fica de fora quando as pontuações estão ocultas.
 - Se o relatório exige e-mail ou login, os respondentes são redirecionados **depois** dessa etapa.
 - Em um [quiz incorporado](/pt-BR/publish/embed), a página hospedeira inteira navega para o link.
 

@@ -13,15 +13,15 @@ Unterstützte Plattformen: **Meta** (Facebook / Instagram), **TikTok**, **Linked
 
 ## Team-Pixel einrichten
 
-Öffnen Sie **Einstellungen → Tracking pixels** (die Seite ist derzeit auf Englisch). Jedes Quiz verwendet diese Pixel, sofern Sie es im Quiz nicht ändern. Lassen Sie ein Feld leer, um die Plattform auszulassen.
+Öffnen Sie **Einstellungen → Tracking-Pixel**. Jedes Quiz verwendet diese Pixel, sofern Sie es im Quiz nicht ändern. Lassen Sie ein Feld leer, um die Plattform auszulassen.
 
 | Feld | Was eintragen | Wo zu finden |
 | --- | --- | --- |
 | **Meta Pixel ID** | 15–16 Ziffern | Meta Events Manager → Datenquellen |
-| **TikTok Pixel code** | Großbuchstaben und Ziffern, etwa 20 Zeichen | TikTok Ads Manager → Tools → Events |
+| **TikTok Pixel-Code** | Großbuchstaben und Ziffern, etwa 20 Zeichen | TikTok Ads Manager → Tools → Events |
 | **LinkedIn Partner ID** | Ziffern | Campaign Manager → Analyze → Insight Tag |
-| **LinkedIn conversion IDs** | Ziffern, eine pro Event (optional) | Campaign Manager → Analyze → Conversion tracking |
-| **Google Tag Manager container** | `GTM-` gefolgt von Buchstaben und Ziffern | Tag Manager, oben im Arbeitsbereich |
+| **LinkedIn Conversion-IDs** | Ziffern, eine pro Event (optional) | Campaign Manager → Analyze → Conversion tracking |
+| **Google Tag Manager-Container** | `GTM-` gefolgt von Buchstaben und Ziffern | Tag Manager, oben im Arbeitsbereich |
 
 LinkedIn zählt nur Conversions, die Sie im Campaign Manager angelegt haben. Legen Sie für jedes gewünschte Event eine Conversion an (z. B. „Quiz-Lead“) und tragen Sie deren ID beim passenden Event ein.
 
@@ -31,13 +31,13 @@ LinkedIn zählt nur Conversions, die Sie im Campaign Manager angelegt haben. Leg
 
 ## Einstellungen pro Quiz
 
-Öffnen Sie im Quiz **Einstellungen → Conversion-Tracking** und suchen Sie **Ad tracking pixels**:
+Öffnen Sie im Quiz **Einstellungen → Conversion-Tracking** und suchen Sie **Werbe-Tracking-Pixel**:
 
-- **Use team pixels** (Standard): Das Quiz verwendet die Team-Pixel. Die Seite zeigt, welche Plattformen eingerichtet sind.
-- **Use different pixels**: Das Quiz verwendet nur die hier eingetragenen IDs – etwa ein eigenes Werbekonto für eine Kampagne. Sie werden nicht mit den Team-Pixeln gemischt.
-- **Don't track this quiz**: Es werden keine Pixel geladen, und eine eingebettete Kopie gibt auch keine Events an Ihre Seite weiter.
+- **Team-Pixel verwenden** (Standard): Das Quiz verwendet die Team-Pixel. Die Seite zeigt, welche Plattformen eingerichtet sind.
+- **Andere Pixel verwenden**: Das Quiz verwendet nur die hier eingetragenen IDs – etwa ein eigenes Werbekonto für eine Kampagne. Sie werden nicht mit den Team-Pixeln gemischt.
+- **Dieses Quiz nicht tracken**: Es werden keine Pixel geladen, und eine eingebettete Kopie gibt auch keine Events an Ihre Seite weiter.
 
-**Include the result in events** (standardmäßig an) fügt jedem Event das Ergebnis, die Stufe und die Punktzahl hinzu – so bauen Sie Zielgruppen wie „alle mit dem Ergebnis *Einsteiger*“. Schalten Sie es bei sensiblen Themen wie Gesundheit oder Finanzen aus.
+**Ergebnis in Ereignisse aufnehmen** (standardmäßig an) fügt jedem Event das Ergebnis, die Stufe und die Punktzahl hinzu – so bauen Sie Zielgruppen wie „alle mit dem Ergebnis *Einsteiger*“. Schalten Sie es bei sensiblen Themen wie Gesundheit oder Finanzen aus.
 
 ## Gesendete Events
 
@@ -62,7 +62,7 @@ Jedes Event enthält diese Parameter:
 | `quiz_level` | Die Stufe (Punkte- und Wissensquizze) |
 | `quiz_score` | Die Gesamtpunktzahl |
 
-Die Ergebnis-Parameter sind nur enthalten, wenn **Include the result in events** aktiviert ist und das Ergebnis schon feststeht – „Quiz abgeschlossen“ wird ausgelöst, bevor das Ergebnis berechnet ist; für Zielgruppen nach Ergebnis nutzen Sie „Ergebnis angesehen“. Events enthalten **niemals Namen, E-Mail-Adressen oder andere personenbezogene Daten**.
+Die Ergebnis-Parameter sind nur enthalten, wenn **Ergebnis in Ereignisse aufnehmen** aktiviert ist und das Ergebnis schon feststeht – „Quiz abgeschlossen“ wird ausgelöst, bevor das Ergebnis berechnet ist; für Zielgruppen nach Ergebnis nutzen Sie „Ergebnis angesehen“. Events enthalten **niemals Namen, E-Mail-Adressen oder andere personenbezogene Daten**.
 
 Events, bei denen das sinnvoll ist, werden nur einmal gesendet: „Quiz gestartet“ einmal pro Quiz und Browser-Tab, „Quiz abgeschlossen“, „Ergebnis angesehen“, „Lead gewonnen“ und „Termin gebucht“ einmal pro Antwort. CTA-Klicks und Teilen werden jedes Mal gesendet.
 
@@ -99,7 +99,7 @@ Ein eingebettetes Quiz läuft in einem iframe. Dort werden Cookies der Werbeplat
 </script>
 ```
 
-- Ist auf Ihrer Seite bereits das Meta- oder TikTok-Pixel installiert, aktivieren Sie beim Kopieren des Codes **Also fire my page's Meta and TikTok pixels** (fügt `data-rooquiz-track="auto"` hinzu). Die Events gehen dann direkt an diese Pixel. LinkedIn-Conversions richten Sie im Tag Manager ein.
+- Ist auf Ihrer Seite bereits das Meta- oder TikTok-Pixel installiert, aktivieren Sie beim Kopieren des Codes **Auch die Meta- und TikTok-Pixel meiner Seite auslösen** (fügt `data-rooquiz-track="auto"` hinzu). Die Events gehen dann direkt an diese Pixel. LinkedIn-Conversions richten Sie im Tag Manager ein.
 
 Das funktioniert mit dem **Inline**- und dem **Popup**-Code. Ein **einfaches iframe** hat kein Einbettungsskript und kann keine Events weitergeben. Siehe [Einbetten](/de/publish/embed).
 

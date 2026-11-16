@@ -3,7 +3,7 @@ title: Pixels de suivi publicitaire
 description: "Envoyez les conversions de vos quiz vers Meta, TikTok, LinkedIn et Google Tag Manager : pixels d'équipe et par quiz, chaque événement envoyé et son nom sur chaque plateforme, intégrations, consentement aux cookies et tests."
 ---
 
-Les **pixels de suivi publicitaire** envoient les conversions de votre quiz — quiz commencé, lead obtenu, quiz terminé, etc. — vers vos plateformes publicitaires. Vous mesurez ce que rapportent vos campagnes, laissez les plateformes optimiser pour les leads et créez des audiences selon le résultat du quiz.
+Les **pixels de suivi publicitaire** envoient les conversions de votre quiz — quiz commencé, lead capturé, quiz terminé, etc. — vers vos plateformes publicitaires. Vous mesurez ce que rapportent vos campagnes, laissez les plateformes optimiser pour les leads et créez des audiences selon le résultat du quiz.
 
 Plateformes prises en charge : **Meta** (Facebook / Instagram), **TikTok**, **LinkedIn** et **Google Tag Manager**. Google Analytics se configure séparément dans les [paramètres Suivi des conversions](/fr/editor/settings#suivi-des-conversions) de chaque quiz.
 
@@ -13,15 +13,15 @@ Plateformes prises en charge : **Meta** (Facebook / Instagram), **TikTok**, **Li
 
 ## Configurer les pixels de l'équipe
 
-Allez dans **Paramètres → Tracking pixels** (cette page s'affiche pour l'instant en anglais). Tous les quiz utilisent ces pixels, sauf si vous le modifiez dans le quiz. Laissez un champ vide pour ignorer une plateforme.
+Allez dans **Paramètres → Pixels de suivi**. Tous les quiz utilisent ces pixels, sauf si vous le modifiez dans le quiz. Laissez un champ vide pour ignorer une plateforme.
 
 | Champ | Ce qu'il faut saisir | Où le trouver |
 | --- | --- | --- |
-| **Meta Pixel ID** | 15 à 16 chiffres | Gestionnaire d'événements Meta → Sources de données |
-| **TikTok Pixel code** | Majuscules et chiffres, environ 20 caractères | TikTok Ads Manager → Outils → Événements |
+| **ID du pixel Meta** | 15 à 16 chiffres | Gestionnaire d'événements Meta → Sources de données |
+| **Code du pixel TikTok** | Majuscules et chiffres, environ 20 caractères | TikTok Ads Manager → Outils → Événements |
 | **LinkedIn Partner ID** | Chiffres | Campaign Manager → Analyze → Insight Tag |
-| **LinkedIn conversion IDs** | Chiffres, un par événement (facultatif) | Campaign Manager → Analyze → Conversion tracking |
-| **Google Tag Manager container** | `GTM-` suivi de lettres et chiffres | Tag Manager, en haut de l'espace de travail |
+| **ID de conversion LinkedIn** | Chiffres, un par événement (facultatif) | Campaign Manager → Analyze → Conversion tracking |
+| **Conteneur Google Tag Manager** | `GTM-` suivi de lettres et chiffres | Tag Manager, en haut de l'espace de travail |
 
 LinkedIn ne compte que les conversions créées dans Campaign Manager. Créez une conversion par événement qui vous intéresse (par exemple « Lead quiz »), puis collez son ID en face de cet événement.
 
@@ -31,22 +31,22 @@ LinkedIn ne compte que les conversions créées dans Campaign Manager. Créez un
 
 ## Réglages par quiz
 
-Dans un quiz, ouvrez **Paramètres → Suivi des conversions** et repérez **Ad tracking pixels** :
+Dans un quiz, ouvrez **Paramètres → Suivi des conversions** et repérez **Pixels de suivi publicitaire** :
 
-- **Use team pixels** (par défaut) : le quiz utilise les pixels de l'équipe. La page indique quelles plateformes sont configurées.
-- **Use different pixels** : le quiz utilise uniquement les ID saisis ici — par exemple un compte publicitaire dédié à une campagne. Ils ne se mélangent pas aux pixels de l'équipe.
-- **Don't track this quiz** : aucun pixel ne se charge, et une copie intégrée ne transmet pas non plus d'événements à votre page.
+- **Utiliser les pixels de l'équipe** (par défaut) : le quiz utilise les pixels de l'équipe. La page indique quelles plateformes sont configurées.
+- **Utiliser d'autres pixels** : le quiz utilise uniquement les ID saisis ici — par exemple un compte publicitaire dédié à une campagne. Ils ne se mélangent pas aux pixels de l'équipe.
+- **Ne pas suivre ce quiz** : aucun pixel ne se charge, et une copie intégrée ne transmet pas non plus d'événements à votre page.
 
-**Include the result in events** (activé par défaut) ajoute à chaque événement le résultat, le niveau et le score du répondant, pour créer des audiences comme « tous ceux qui ont obtenu *Débutant* ». Désactivez-le pour les sujets sensibles comme la santé ou la finance.
+**Inclure le résultat dans les événements** (activé par défaut) ajoute à chaque événement le résultat, le niveau et le score du répondant, pour créer des audiences comme « tous ceux qui ont obtenu *Débutant* ». Désactivez-le pour les sujets sensibles comme la santé ou la finance.
 
 ## Événements envoyés
 
-| Événement | Déclenchement | Meta | TikTok | GA4 | GTM dataLayer |
+| Événement | Déclenchement | Meta | TikTok | GA4 | dataLayer GTM |
 | --- | --- | --- | --- | --- | --- |
 | Quiz commencé | À la première réponse | `QuizStart` (personnalisé) | `ClickButton` | `quiz_start` | `rooquiz_start` |
 | Quiz terminé | À l'envoi du quiz | `QuizComplete` (personnalisé) | `CompleteRegistration` | `quiz_complete` | `rooquiz_complete` |
 | Résultat consulté | Le répondant voit son propre résultat | `QuizResult` (personnalisé) | `ViewContent` | `quiz_result` | `rooquiz_result` |
-| Lead obtenu | Le répondant passe la vérification par e-mail avant le rapport | `Lead` | `SubmitForm` | `generate_lead` | `rooquiz_lead` |
+| Lead capturé | Le répondant passe la vérification par e-mail avant le rapport | `Lead` | `SubmitForm` | `generate_lead` | `rooquiz_lead` |
 | Clic sur le CTA du résultat | Clic sur l'appel à l'action de la page de résultats | `Contact` | `Contact` | `report_cta_click` | `rooquiz_cta_click` |
 | Rendez-vous réservé | Réservation via le bloc de rendez-vous de la page de résultats | `Schedule` | `Contact` | `booking_created` | `rooquiz_booking` |
 | Résultat partagé | Clic sur un bouton de partage | `QuizShare` (personnalisé) | — | `share_click` | `rooquiz_share` |
@@ -62,9 +62,9 @@ Chaque événement contient ces paramètres :
 | `quiz_level` | Le niveau (quiz notés et quiz de connaissances) |
 | `quiz_score` | Le score global |
 
-Les paramètres de résultat ne sont inclus que si **Include the result in events** est activé et que le résultat est déjà connu : « Quiz terminé » se déclenche avant le calcul du résultat, utilisez donc « Résultat consulté » pour les audiences par résultat. Les événements **n'incluent jamais de nom, d'adresse e-mail ni aucune autre donnée personnelle**.
+Les paramètres de résultat ne sont inclus que si **Inclure le résultat dans les événements** est activé et que le résultat est déjà connu : « Quiz terminé » se déclenche avant le calcul du résultat, utilisez donc « Résultat consulté » pour les audiences par résultat. Les événements **n'incluent jamais de nom, d'adresse e-mail ni aucune autre donnée personnelle**.
 
-Les événements concernés ne sont envoyés qu'une fois : « Quiz commencé » une fois par quiz et par onglet, et « Quiz terminé », « Résultat consulté », « Lead obtenu » et « Rendez-vous réservé » une fois par réponse. Les clics sur le CTA et les partages sont envoyés à chaque fois.
+Les événements concernés ne sont envoyés qu'une fois : « Quiz commencé » une fois par quiz et par onglet, et « Quiz terminé », « Résultat consulté », « Lead capturé » et « Rendez-vous réservé » une fois par réponse. Les clics sur le CTA et les partages sont envoyés à chaque fois.
 
 ## Configuration dans Google Tag Manager
 
@@ -99,7 +99,7 @@ Un quiz intégré s'exécute dans un iframe, où les cookies des plateformes pub
 </script>
 ```
 
-- Si le pixel Meta ou TikTok est déjà installé sur votre page, activez **Also fire my page's Meta and TikTok pixels** en copiant le code (cela ajoute `data-rooquiz-track="auto"`) : les événements partent directement vers ces pixels. Pour LinkedIn, configurez les conversions dans Tag Manager.
+- Si le pixel Meta ou TikTok est déjà installé sur votre page, activez **Déclencher aussi les pixels Meta et TikTok de ma page** en copiant le code (cela ajoute `data-rooquiz-track="auto"`) : les événements partent directement vers ces pixels. Pour LinkedIn, configurez les conversions dans Tag Manager.
 
 Cela fonctionne avec les codes d'intégration **en ligne** et **pop-up**. Un **iframe simple** n'a pas de script d'intégration et ne peut pas transmettre d'événements. Voir [Intégration](/fr/publish/embed).
 

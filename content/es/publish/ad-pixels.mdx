@@ -13,15 +13,15 @@ Plataformas compatibles: **Meta** (Facebook / Instagram), **TikTok**, **LinkedIn
 
 ## Configura los píxeles del equipo
 
-Ve a **Ajustes → Tracking pixels** (esta página se muestra por ahora en inglés). Todos los quizzes usan estos píxeles salvo que lo cambies en el quiz. Deja un campo vacío para no usar esa plataforma.
+Ve a **Ajustes → Píxeles de seguimiento**. Todos los quizzes usan estos píxeles salvo que lo cambies en el quiz. Deja un campo vacío para no usar esa plataforma.
 
 | Campo | Qué introducir | Dónde encontrarlo |
 | --- | --- | --- |
-| **Meta Pixel ID** | 15–16 dígitos | Administrador de eventos de Meta → Orígenes de datos |
-| **TikTok Pixel code** | Mayúsculas y dígitos, unos 20 caracteres | TikTok Ads Manager → Herramientas → Eventos |
-| **LinkedIn Partner ID** | Dígitos | Campaign Manager → Analyze → Insight Tag |
-| **LinkedIn conversion IDs** | Dígitos, uno por evento (opcional) | Campaign Manager → Analyze → Conversion tracking |
-| **Google Tag Manager container** | `GTM-` seguido de letras y dígitos | Tag Manager, arriba en el espacio de trabajo |
+| **ID del píxel de Meta** | 15–16 dígitos | Administrador de eventos de Meta → Orígenes de datos |
+| **Código del píxel de TikTok** | Mayúsculas y dígitos, unos 20 caracteres | TikTok Ads Manager → Herramientas → Eventos |
+| **ID de partner de LinkedIn** | Dígitos | Campaign Manager → Analyze → Insight Tag |
+| **IDs de conversión de LinkedIn** | Dígitos, uno por evento (opcional) | Campaign Manager → Analyze → Conversion tracking |
+| **Contenedor de Google Tag Manager** | `GTM-` seguido de letras y dígitos | Tag Manager, arriba en el espacio de trabajo |
 
 LinkedIn solo cuenta las conversiones que hayas creado en Campaign Manager. Crea una conversión por cada evento que te interese (por ejemplo, «Lead del quiz») y pega su ID junto a ese evento.
 
@@ -31,17 +31,17 @@ LinkedIn solo cuenta las conversiones que hayas creado en Campaign Manager. Crea
 
 ## Ajustes por quiz
 
-En un quiz, abre **Ajustes → Seguimiento de conversiones** y busca **Ad tracking pixels**:
+En un quiz, abre **Ajustes → Seguimiento de conversiones** y busca **Píxeles de seguimiento de anuncios**:
 
-- **Use team pixels** (predeterminado): el quiz usa los píxeles del equipo. La página muestra qué plataformas están configuradas.
-- **Use different pixels**: el quiz usa solo los ID que introduzcas aquí; por ejemplo, una cuenta publicitaria aparte para una campaña. No se mezclan con los píxeles del equipo.
-- **Don't track this quiz**: no se carga ningún píxel, y una copia insertada tampoco pasa eventos a tu página.
+- **Usar los píxeles del equipo** (predeterminado): el quiz usa los píxeles del equipo. La página muestra qué plataformas están configuradas.
+- **Usar otros píxeles**: el quiz usa solo los ID que introduzcas aquí; por ejemplo, una cuenta publicitaria aparte para una campaña. No se mezclan con los píxeles del equipo.
+- **No hacer seguimiento de este quiz**: no se carga ningún píxel, y una copia insertada tampoco pasa eventos a tu página.
 
-**Include the result in events** (activado por defecto) añade a cada evento el resultado, el nivel y la puntuación de la persona, para crear audiencias como «todos los que obtuvieron *Principiante*». Desactívalo en temas sensibles como salud o finanzas.
+**Incluir el resultado en los eventos** (activado por defecto) añade a cada evento el resultado, el nivel y la puntuación de la persona, para crear audiencias como «todos los que obtuvieron *Principiante*». Desactívalo en temas sensibles como salud o finanzas.
 
 ## Eventos que enviamos
 
-| Evento | Cuándo se dispara | Meta | TikTok | GA4 | GTM dataLayer |
+| Evento | Cuándo se dispara | Meta | TikTok | GA4 | dataLayer de GTM |
 | --- | --- | --- | --- | --- | --- |
 | Quiz iniciado | Con la primera respuesta | `QuizStart` (personalizado) | `ClickButton` | `quiz_start` | `rooquiz_start` |
 | Quiz completado | Al enviar el quiz | `QuizComplete` (personalizado) | `CompleteRegistration` | `quiz_complete` | `rooquiz_complete` |
@@ -62,7 +62,7 @@ Cada evento lleva estos parámetros:
 | `quiz_level` | El nivel (quizzes con puntuación y de conocimientos) |
 | `quiz_score` | La puntuación total |
 
-Los parámetros del resultado solo se incluyen si **Include the result in events** está activado y el resultado ya se conoce: «Quiz completado» se dispara antes de calcular el resultado, así que para audiencias por resultado usa «Resultado visto». Los eventos **nunca incluyen nombres, correos ni otros datos personales**.
+Los parámetros del resultado solo se incluyen si **Incluir el resultado en los eventos** está activado y el resultado ya se conoce: «Quiz completado» se dispara antes de calcular el resultado, así que para audiencias por resultado usa «Resultado visto». Los eventos **nunca incluyen nombres, correos ni otros datos personales**.
 
 Los eventos en los que tiene sentido se envían una sola vez: «Quiz iniciado» una vez por quiz y pestaña del navegador, y «Quiz completado», «Resultado visto», «Lead captado» y «Cita reservada» una vez por respuesta. Los clics en el CTA y al compartir se envían siempre.
 
@@ -99,7 +99,7 @@ Un quiz insertado se ejecuta dentro de un iframe, donde las cookies de las plata
 </script>
 ```
 
-- Si tu página ya tiene instalado el píxel de Meta o de TikTok, activa **Also fire my page's Meta and TikTok pixels** al copiar el código (añade `data-rooquiz-track="auto"`) y los eventos irán directamente a esos píxeles. Para LinkedIn, configura las conversiones en Tag Manager.
+- Si tu página ya tiene instalado el píxel de Meta o de TikTok, activa **Activar también los píxeles de Meta y TikTok de mi página** al copiar el código (añade `data-rooquiz-track="auto"`) y los eventos irán directamente a esos píxeles. Para LinkedIn, configura las conversiones en Tag Manager.
 
 Esto funciona con los códigos de inserción **en línea** y **emergente**. Un **iframe simple** no tiene script de inserción y no puede pasar eventos. Consulta [Insertar](/es/publish/embed).
 

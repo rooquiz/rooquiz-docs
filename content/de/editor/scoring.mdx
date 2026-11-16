@@ -45,23 +45,23 @@ Sie brauchen Gewichtungen, Dimensionspunkte oder Zahlantworten in der Gesamtpunk
 
 Teilen Sie die Gesamtpunktzahl unter **Punktestufen-Konfiguration** im Bereich **Bericht** des Editors in **Stufen** auf (0–60 ausbaufähig / 60–80 gut / ab 80 ausgezeichnet). Jede Stufe hat einen Namen, eine Farbe und eine Beschreibung und kann einen eigenen **CTA-Button** und **Weiterleitungslink** enthalten – die niedrige Stufe könnte etwa „Beratung buchen“ anbieten. Mit diesem Schritt verbinden Sie eine Auswertung mit der Conversion.
 
-- **Reihenfolge der Stufen** – listen Sie die Stufen **Low → High** oder **High → Low** auf. Das ändert nur die Darstellung, im Editor und auf der Punkteskala der Ergebnisseite; die Bewertung funktioniert in beiden Fällen gleich. Dimensionsstufen folgen derselben Reihenfolge wie die Gesamtstufen.
-- **Score style** – wie die Gesamtpunktzahl auf der Ergebnisseite dargestellt wird: **Scale** (Standard), **Ring**, **Gauge** oder **Steps**. **Steps** braucht mindestens 2 Stufen, **Ring** und **Gauge** brauchen Stufen oder eine Höchstpunktzahl; solange das Quiz diese Daten nicht hat, zeigt die Ergebnisseite die Skala.
+- **Reihenfolge der Stufen** – listen Sie die Stufen **Niedrig → Hoch** oder **Hoch → Niedrig** auf. Das ändert nur die Darstellung, im Editor und auf der Punkteskala der Ergebnisseite; die Bewertung funktioniert in beiden Fällen gleich. Dimensionsstufen folgen derselben Reihenfolge wie die Gesamtstufen.
+- **Punktzahl-Stil** – wie die Gesamtpunktzahl auf der Ergebnisseite dargestellt wird: **Skala** (Standard), **Ring**, **Tacho** oder **Treppe**. **Treppe** braucht mindestens 2 Stufen, **Ring** und **Tacho** brauchen Stufen oder eine Höchstpunktzahl; solange das Quiz diese Daten nicht hat, zeigt die Ergebnisseite die Skala.
 
 <Callout type="info">
-  Teilnehmer sollen keine Zahl sehen? Aktivieren Sie **Hide scores** unter **Einstellungen → Beantwortung**: Teilnehmer sehen nie eine Punktzahl – weder auf der Ergebnisseite (Gesamt- und Dimensionspunktzahlen) noch bei den einzelnen Fragen während der Beantwortung, im Sofort-Feedback oder in der Antwortübersicht –, während Stufen, Analyse und richtig / falsch erhalten bleiben. Fügt Ihre Zusammenfassungsvorlage noch die Punktzahl-Variable ein, entfernen Sie diese ebenfalls, sonst wird die Punktzahl dort weiterhin angezeigt.
+  Teilnehmer sollen keine Zahl sehen? Aktivieren Sie **Punktzahlen ausblenden** unter **Einstellungen → Beantwortung**: Teilnehmer sehen nie eine Punktzahl – weder auf der Ergebnisseite (Gesamt- und Dimensionspunktzahlen) noch bei den einzelnen Fragen während der Beantwortung, im Sofort-Feedback oder in der Antwortübersicht –, während Stufen, Analyse und richtig / falsch erhalten bleiben. Fügt Ihre Zusammenfassungsvorlage noch die Punktzahl-Variable ein, entfernen Sie diese ebenfalls, sonst wird die Punktzahl dort weiterhin angezeigt.
 </Callout>
 
 ### CTA-Buttons
 
-Aktivieren Sie unter **CTA-Button** den Button und legen Sie einen **Default button** fest (Text und Link). Jede Stufe – bzw. jedes Ergebnis in einem Ergebnisquiz – ohne eigenen Button verwendet den Standard-Button; lassen Sie ihn leer, zeigen nur Stufen mit eigenem Button einen an. Ist **CTA-Button** deaktiviert, zeigt kein Ergebnis einen Button. Siehe [CTA-Button auf der Ergebnisseite](/de/results/reports#cta-button-auf-der-ergebnisseite).
+Aktivieren Sie unter **CTA-Button** den Button und legen Sie einen **Standard-Button** fest (Text und Link). Jede Stufe – bzw. jedes Ergebnis in einem Ergebnisquiz – ohne eigenen Button verwendet den Standard-Button; lassen Sie ihn leer, zeigen nur Stufen mit eigenem Button einen an. Ist **CTA-Button** deaktiviert, zeigt kein Ergebnis einen Button. Siehe [CTA-Button auf der Ergebnisseite](/de/results/reports#cta-button-auf-der-ergebnisseite).
 
 ### Weiterleitung nach dem Absenden (Pro)
 
-Aktivieren Sie **Redirect after submission**, um Teilnehmer abhängig von ihrem Ergebnis direkt zu einem Link weiterzuleiten, statt die Ergebnisseite anzuzeigen – z. B. niedrige Punktzahlen zu einer Einsteigerkurs-Seite, hohe Punktzahlen zu einer Buchungsseite.
+Aktivieren Sie **Weiterleitung nach dem Einreichen**, um Teilnehmer abhängig von ihrem Ergebnis direkt zu einem Link weiterzuleiten, statt die Ergebnisseite anzuzeigen – z. B. niedrige Punktzahlen zu einer Einsteigerkurs-Seite, hohe Punktzahlen zu einer Buchungsseite.
 
-- Legen Sie für jede Stufe (oder jedes Ergebnis) einen **Redirect link** fest, dazu optional einen **Default link** für Ergebnisse ohne eigenen Link.
-- **Add the result to the link** hängt `score`, `level`, `outcome` und `outcome_name` an, außerdem die [URL-Parameter](/de/publish/tracking#url-parameter-versteckte-felder) und UTM-Tags des Quiz. E-Mail-Adressen und andere personenbezogene Daten werden nie angehängt, bereits vorhandene Parameter in Ihrem Link bleiben erhalten, und `score` entfällt, wenn Punktzahlen ausgeblendet sind.
+- Legen Sie für jede Stufe (oder jedes Ergebnis) einen **Weiterleitungslink** fest, dazu optional einen **Standardlink** für Ergebnisse ohne eigenen Link.
+- **Ergebnis an den Link anhängen** fügt `score`, `level`, `outcome` und `outcome_name` hinzu, außerdem die [URL-Parameter](/de/publish/tracking#url-parameter-versteckte-felder) und UTM-Tags des Quiz. E-Mail-Adressen und andere personenbezogene Daten werden nie angehängt, bereits vorhandene Parameter in Ihrem Link bleiben erhalten, und `score` entfällt, wenn Punktzahlen ausgeblendet sind.
 - Erfordert der Bericht eine E-Mail-Adresse oder Anmeldung, werden Teilnehmer **nach** diesem Schritt weitergeleitet.
 - In einem [eingebetteten Quiz](/de/publish/embed) navigiert die gesamte Host-Seite zu dem Link.
 

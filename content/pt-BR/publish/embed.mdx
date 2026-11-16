@@ -63,7 +63,7 @@ Se você não definir os atributos UTM, os parâmetros `utm_*` presentes na URL 
 
 ## Eventos de conversão
 
-No plano **Pro**, as incorporações inline e popup repassam à sua página os eventos de conversão do quiz — quiz iniciado, lead capturado, quiz concluído, clique no CTA e outros. Cada um é enviado ao `dataLayer` da sua página como `rooquiz_<evento>` (para o seu próprio Google Tag Manager) e emitido como evento do navegador `rooquiz:<evento>`. Adicione `data-rooquiz-track="auto"`, ou ative **Also fire my page's Meta and TikTok pixels** no painel de incorporação, para enviá-los direto aos pixels já instalados na sua página. Na API JS, passe `track: 'auto'`.
+No plano **Pro**, as incorporações inline e popup repassam à sua página os eventos de conversão do quiz — quiz iniciado, lead capturado, quiz concluído, clique no CTA e outros. Cada um é enviado ao `dataLayer` da sua página como `rooquiz_<evento>` (para o seu próprio Google Tag Manager) e emitido como evento do navegador `rooquiz:<evento>`. Adicione `data-rooquiz-track="auto"`, ou ative **Disparar também os pixels Meta e TikTok da minha página** no painel de incorporação, para enviá-los direto aos pixels já instalados na sua página. Na API JS, passe `track: 'auto'`.
 
 Um iframe simples não consegue repassar eventos. Veja a lista completa em [Pixels de rastreamento de anúncios](/pt-BR/publish/ad-pixels).
 

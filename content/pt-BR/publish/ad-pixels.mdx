@@ -13,15 +13,15 @@ Plataformas compatíveis: **Meta** (Facebook / Instagram), **TikTok**, **LinkedI
 
 ## Configure os pixels da equipe
 
-Acesse **Configurações → Tracking pixels** (por enquanto, esta página aparece em inglês). Todos os quizzes usam esses pixels, a menos que você altere no próprio quiz. Deixe um campo vazio para não usar a plataforma.
+Acesse **Configurações → Pixels de rastreamento**. Todos os quizzes usam esses pixels, a menos que você altere no próprio quiz. Deixe um campo vazio para não usar a plataforma.
 
 | Campo | O que informar | Onde encontrar |
 | --- | --- | --- |
-| **Meta Pixel ID** | 15–16 dígitos | Gerenciador de Eventos da Meta → Fontes de dados |
-| **TikTok Pixel code** | Letras maiúsculas e dígitos, cerca de 20 caracteres | TikTok Ads Manager → Ferramentas → Eventos |
+| **ID do Meta Pixel** | 15–16 dígitos | Gerenciador de Eventos da Meta → Fontes de dados |
+| **Código do TikTok Pixel** | Letras maiúsculas e dígitos, cerca de 20 caracteres | TikTok Ads Manager → Ferramentas → Eventos |
 | **LinkedIn Partner ID** | Dígitos | Campaign Manager → Analyze → Insight Tag |
-| **LinkedIn conversion IDs** | Dígitos, um por evento (opcional) | Campaign Manager → Analyze → Conversion tracking |
-| **Google Tag Manager container** | `GTM-` seguido de letras e dígitos | Tag Manager, no topo do espaço de trabalho |
+| **IDs de conversão do LinkedIn** | Dígitos, um por evento (opcional) | Campaign Manager → Analyze → Conversion tracking |
+| **Contêiner do Google Tag Manager** | `GTM-` seguido de letras e dígitos | Tag Manager, no topo do espaço de trabalho |
 
 O LinkedIn só conta as conversões criadas no Campaign Manager. Crie uma conversão para cada evento que interessa (por exemplo, "Lead do quiz") e cole o ID ao lado do evento correspondente.
 
@@ -31,13 +31,13 @@ O LinkedIn só conta as conversões criadas no Campaign Manager. Crie uma conver
 
 ## Configurações por quiz
 
-No quiz, abra **Configurações → Rastreamento de conversões** e procure **Ad tracking pixels**:
+No quiz, abra **Configurações → Rastreamento de conversões** e procure **Pixels de anúncios**:
 
-- **Use team pixels** (padrão): o quiz usa os pixels da equipe. A página mostra quais plataformas estão configuradas.
-- **Use different pixels**: o quiz usa apenas os IDs informados aqui — por exemplo, uma conta de anúncios separada para uma campanha. Eles não se misturam com os pixels da equipe.
-- **Don't track this quiz**: nenhum pixel é carregado, e uma cópia incorporada também não repassa eventos para a sua página.
+- **Usar os pixels da equipe** (padrão): o quiz usa os pixels da equipe. A página mostra quais plataformas estão configuradas.
+- **Usar outros pixels**: o quiz usa apenas os IDs informados aqui — por exemplo, uma conta de anúncios separada para uma campanha. Eles não se misturam com os pixels da equipe.
+- **Não rastrear este quiz**: nenhum pixel é carregado, e uma cópia incorporada também não repassa eventos para a sua página.
 
-**Include the result in events** (ativado por padrão) adiciona a cada evento o resultado, o nível e a pontuação do respondente, para criar públicos como "todos que tiveram *Iniciante*". Desative em temas sensíveis, como saúde ou finanças.
+**Incluir o resultado nos eventos** (ativado por padrão) adiciona a cada evento o resultado, o nível e a pontuação do respondente, para criar públicos como "todos que tiveram *Iniciante*". Desative em temas sensíveis, como saúde ou finanças.
 
 ## Eventos enviados
 
@@ -62,7 +62,7 @@ Cada evento traz estes parâmetros:
 | `quiz_level` | O nível (quizzes com pontuação e de conhecimento) |
 | `quiz_score` | A pontuação total |
 
-Os parâmetros de resultado só são incluídos quando **Include the result in events** está ativado e o resultado já é conhecido — "Quiz concluído" é disparado antes de o resultado ser calculado, então use "Resultado visualizado" para públicos por resultado. Os eventos **nunca incluem nomes, e-mails ou outros dados pessoais**.
+Os parâmetros de resultado só são incluídos quando **Incluir o resultado nos eventos** está ativado e o resultado já é conhecido — "Quiz concluído" é disparado antes de o resultado ser calculado, então use "Resultado visualizado" para públicos por resultado. Os eventos **nunca incluem nomes, e-mails ou outros dados pessoais**.
 
 Os eventos em que isso faz sentido são enviados só uma vez: "Quiz iniciado" uma vez por quiz e por aba do navegador, e "Quiz concluído", "Resultado visualizado", "Lead capturado" e "Reunião agendada" uma vez por resposta. Cliques no CTA e compartilhamentos são enviados sempre.
 
@@ -99,7 +99,7 @@ Um quiz incorporado roda dentro de um iframe, onde os cookies das plataformas de
 </script>
 ```
 
-- Se a sua página já tem o pixel da Meta ou do TikTok instalado, ative **Also fire my page's Meta and TikTok pixels** ao copiar o código (adiciona `data-rooquiz-track="auto"`) e os eventos vão direto para esses pixels. Para o LinkedIn, configure as conversões no Tag Manager.
+- Se a sua página já tem o pixel da Meta ou do TikTok instalado, ative **Disparar também os pixels Meta e TikTok da minha página** ao copiar o código (adiciona `data-rooquiz-track="auto"`) e os eventos vão direto para esses pixels. Para o LinkedIn, configure as conversões no Tag Manager.
 
 Isso funciona com os códigos de incorporação **inline** e **popup**. Um **iframe simples** não tem o script de incorporação e não consegue repassar eventos. Veja [Incorporar](/pt-BR/publish/embed).
 

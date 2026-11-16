@@ -47,11 +47,11 @@ Die **Beschreibung** des Quiz bearbeiten Sie im Editor auf der Startseite, nicht
 
 - **Nummerierungsmodus** – Keine / Arabische Zahlen (1, 2, 3) / Römische Ziffern (I, II, III).
 - **Zeitlimit** – ein Countdown startet, sobald ein Teilnehmer das Quiz betritt; läuft er ab, erscheint ein Dialog und die **bisherigen Antworten werden automatisch abgesendet**. Nur im **Wissensquiz** verfügbar – das Bewertete Quiz und das Ergebnisquiz bieten es nicht an.
-- **Instant feedback** – aktivieren Sie **Check answers page by page**, und Teilnehmer senden jede Seite einzeln ab und sehen, ob sie richtig lagen, die richtige Antwort und Ihre Erklärung, bevor es weitergeht. **Nur im Wissensquiz.**
+- **Sofortiges Feedback** – aktivieren Sie **Antworten seitenweise prüfen**, und Teilnehmer senden jede Seite einzeln ab und sehen, ob sie richtig lagen, die richtige Antwort und Ihre Erklärung, bevor es weitergeht. **Nur im Wissensquiz.**
   - Geprüfte Fragen lassen sich nicht mehr ändern. Auf der letzten Seite schließt ein Button **Ergebnis ansehen** das Quiz ab.
   - Auf einer Seite mit nur einer Ein-Klick-Frage (Einfachauswahl, Richtig/Falsch, Dropdown oder Bewertung) wird die Antwort geprüft, sobald sie gewählt ist.
   - Dabei werden die Antworten Frage für Frage offengelegt; lassen Sie die Funktion daher bei Quizzen aus, deren Punktzahl zur Einstufung dient.
-- **Hide scores** – aktivieren Sie **Hide scores from respondents**, und Teilnehmer sehen nie eine Punktzahl: weder auf der Ergebnisseite (Gesamt- und Dimensionspunktzahlen) noch die Punkte der einzelnen Fragen während der Beantwortung, im Sofort-Feedback oder in der Antwortübersicht. Stufen, Analyse und richtig / falsch werden weiterhin angezeigt, und Sie sehen die Punktzahlen im Dashboard weiterhin. Wird bei Ergebnisquizzen und KI-Quizzen nicht angezeigt, da sie keine Punktzahlen haben.
+- **Punktzahlen ausblenden** – aktivieren Sie **Punktzahlen vor Teilnehmenden ausblenden**, und Teilnehmer sehen nie eine Punktzahl: weder auf der Ergebnisseite (Gesamt- und Dimensionspunktzahlen) noch die Punkte der einzelnen Fragen während der Beantwortung, im Sofort-Feedback oder in der Antwortübersicht. Stufen, Analyse und richtig / falsch werden weiterhin angezeigt, und Sie sehen die Punktzahlen im Dashboard weiterhin. Wird bei Ergebnisquizzen und KI-Quizzen nicht angezeigt, da sie keine Punktzahlen haben.
 - **Antwortbogen** – zeigt in der Seitenleiste eine Fragennavigation, damit Teilnehmer ihren Fortschritt sehen und zu jeder Frage springen können. Bei neuen Quizzen standardmäßig an; bei kurzen Quizzen, die man in einem Zug beantwortet, können Sie ihn ausschalten.
 - **Gruppenvergleich** – aktivieren Sie **Auswahlanteile anzeigen**, und Teilnehmer sehen direkt nach ihrer Antwort, welcher Anteil der Personen dieselbe Option gewählt hat (z. B. „62 % der Personen haben dasselbe gewählt wie Sie“). Es werden nur Prozentwerte angezeigt, nie einzelne Antworten.
   - Standardmäßig deaktiviert und nur im Bewerteten Quiz und im Ergebnisquiz verfügbar – nicht in Wissensquizzen, wo die am häufigsten gewählte Option die Antwort verraten würde.
@@ -60,7 +60,7 @@ Die **Beschreibung** des Quiz bearbeiten Sie im Editor auf der Startseite, nicht
 
 ## Follow-up der Ergebnisseite
 
-**Emails by result** – senden Sie eine Follow-up-E-Mail, die zum Ergebnis jedes Teilnehmers passt, z. B. einen Einsteigerkurs für „Einsteiger“ empfehlen und „Fortgeschrittene“ zu einer Probestunde einladen. Jede Stufe bzw. jedes Ergebnis erhält eine Zeile, in der Sie eine eigene E-Mail hinzufügen können, und **All respondents** sendet allen dieselbe E-Mail. Technisch sind diese E-Mails E-Mail-Connectors, daher erscheinen sie auch unter den [Connectors](/de/connectors/channels#e-mail) Ihres Teams und benötigen einen [Versanddienst](/de/connectors/email-smtp). Nur Team-Inhaber und Administratoren können sie einrichten.
+**E-Mails nach Ergebnis** – senden Sie eine Follow-up-E-Mail, die zum Ergebnis jedes Teilnehmers passt, z. B. einen Einsteigerkurs für „Einsteiger“ empfehlen und „Fortgeschrittene“ zu einer Probestunde einladen. Jede Stufe bzw. jedes Ergebnis erhält eine Zeile, in der Sie eine eigene E-Mail hinzufügen können, und **Alle Teilnehmenden** sendet allen dieselbe E-Mail. Technisch sind diese E-Mails E-Mail-Connectors, daher erscheinen sie auch unter den [Connectors](/de/connectors/channels#e-mail) Ihres Teams und benötigen einen [Versanddienst](/de/connectors/email-smtp). Nur Team-Inhaber und Administratoren können sie einrichten.
 
 Darunter folgen zwei optionale Blöcke für die Ergebnisseite. Ihre Reihenfolge auf der Seite legen Sie im Editor fest – siehe [Reihenfolge der Abschnitte auf der Ergebnisseite](/de/editor/scoring#reihenfolge-der-abschnitte-auf-der-ergebnisseite).
 
@@ -87,9 +87,9 @@ Legen Sie die **Hauptsprache** fest und verwalten Sie die **Sprachversionen** di
   Google Analytics ist eine **Pro-Plan-Funktion**.
 </Callout>
 
-**Ad tracking pixels** – legen Sie fest, ob dieses Quiz die Meta-, TikTok-, LinkedIn- und GTM-Pixel des Teams, eigene Pixel oder gar keine verwendet und ob Events das Ergebnis enthalten. Siehe [Werbe-Tracking-Pixel](/de/publish/ad-pixels).
+**Werbe-Tracking-Pixel** – legen Sie fest, ob dieses Quiz die Meta-, TikTok-, LinkedIn- und GTM-Pixel des Teams, eigene Pixel oder gar keine verwendet und ob Events das Ergebnis enthalten. Siehe [Werbe-Tracking-Pixel](/de/publish/ad-pixels).
 
-**URL-Parameter** finden Sie nicht mehr hier, sondern unter **Teilen** → **URL parameters**. Siehe [URL-Parameter](/de/publish/tracking).
+**URL-Parameter** finden Sie nicht mehr hier, sondern unter **Teilen** → **URL-Parameter**. Siehe [URL-Parameter](/de/publish/tracking).
 
 ## Einstellungen an anderer Stelle
 
