@@ -1,0 +1,64 @@
+---
+title: Recipes by Goal
+description: 'Step-by-step setups for the most common goals: a lead-magnet assessment, a product or course finder, a level test, a shareable personality quiz and an AI-written diagnosis — which type to pick and which settings matter.'
+---
+
+Each recipe below names the quiz type to pick and the handful of settings that make it work. Start from a template on the dashboard's **What do you want to make?** cards whenever one is close — see [Create a Quiz](/en/getting-started/create-quiz).
+
+## Lead-magnet assessment
+
+*"How ready is your business for X?" — a score that earns a sales conversation.*
+
+1. Card: **Assessment** (Scored Quiz). Give each answer choice a score; the total is their sum. Add [dimensions](/en/editor/scoring#scored-quiz-dimensional-analysis) if you want a radar chart of several areas.
+2. Split the total into [levels](/en/editor/scoring#levels-and-result-page-actions) and give the low and middle bands a **CTA button** such as "Book a call".
+3. **Settings → Access & visibility → Email required to see the report**, so every finished quiz becomes a [lead](/en/leads).
+4. Add a [booking section](/en/bookings) to the result page, and an [email by result](/en/editor/settings#result-page-follow-up) for each level.
+5. Watch the funnel in [Insights](/en/results/insights) — where people drop off and how many click the CTA.
+
+## Product or course finder
+
+*"Which course is right for you?" — each person matched to one offer.*
+
+1. Card: **Product or course finder** (Outcome Quiz). Create one outcome per product or course.
+2. Make each answer choice vote for the outcomes it points to; the most-voted outcome wins. Use [conditional logic](/en/editor/logic) to skip questions that don't apply.
+3. Give each outcome a CTA to its product page — or, on Pro, [redirect](/en/editor/scoring#redirect-after-submission-pro) straight to it with the result added to the link.
+4. Tag subscribers by result in [Kit](/en/connectors/channels#kit), so each outcome starts its own email sequence.
+
+<Callout type="info">
+  Leave **Crowd compare** off for finders and placement quizzes: seeing what most people picked nudges later respondents toward the same option.
+</Callout>
+
+## Level test
+
+*A placement test for a language school or training course.*
+
+1. Card: **Level test**. Answer **Do the questions have right answers?** — **Yes** for graded questions (Knowledge Quiz), **No** for self-ratings (Scored Quiz).
+2. Set [levels](/en/editor/scoring#levels-and-result-page-actions) such as A1–C2 and give each a CTA to the matching class or a trial lesson. **Level order → High → Low** lists the top level first.
+3. Keep [Instant feedback](/en/editor/settings#answering-experience) off — it reveals answers page by page.
+4. Send a follow-up [email by result](/en/editor/settings#result-page-follow-up) recommending the right class.
+
+## Shareable personality quiz
+
+*"Which X are you?" — built to spread.*
+
+1. Card: **Personality quiz** (Outcome Quiz). Give each outcome a strong name, image and description.
+2. Keep **Result sharing** on, and check the [share card](/en/publish/og) — it's what people see when the result is posted.
+3. Turn on [Crowd compare](/en/editor/settings#answering-experience) so respondents see "62% of people chose the same as you".
+4. Pick a [design](/en/editor/design) with a strong start page; use **Open to everyone** access to keep friction low.
+
+## Trivia challenge
+
+*A fun knowledge quiz people compete on.*
+
+1. Card: **Trivia challenge** (Knowledge Quiz). Mark the correct answers and set points.
+2. Add a [time limit](/en/editor/settings#answering-experience) and turn on **Instant feedback** for a learn-as-you-go feel.
+3. Use levels to give each score band a fun title worth sharing.
+
+## AI-written diagnosis
+
+*A CV review, a speaking assessment, a business audit — a personal report per respondent.*
+
+1. Card: **AI personal report** (AI Quiz). Add the questions, plus a file upload question if the AI should review real work.
+2. Write the [generation instructions](/en/editor/ai-report#writing-the-generation-instructions) and pick a report length.
+3. Add [result tags](/en/editor/ai-report#result-tags) such as *Ready to buy* / *Nurture* / *Too early*, with a CTA for each, and route them to your connectors.
+4. Use **Email required to see the report**: reports are only generated — and AI points only spent — for people who leave their email.
