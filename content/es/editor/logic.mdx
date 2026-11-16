@@ -1,12 +1,12 @@
 ---
 title: Lógica condicional
-description: 'La lógica condicional muestra u oculta preguntas posteriores según las respuestas anteriores y convierte un cuestionario fijo en uno adaptativo. Cómo se lee una regla y por qué solo existe en el Cuestionario con puntuación.'
+description: 'La lógica condicional muestra u oculta preguntas posteriores según las respuestas anteriores y convierte un cuestionario fijo en uno adaptativo. Cómo se lee una regla en qué tipos de cuestionario está disponible y cómo las preguntas ocultas afectan a puntuaciones y resultados.'
 ---
 
 La lógica condicional **muestra u oculta preguntas posteriores** según cómo responda alguien, y convierte un cuestionario fijo en uno adaptativo.
 
-<Callout type="warning">
-  La lógica condicional solo está disponible en el **Cuestionario con puntuación**. El panel derecho del editor no tiene la pestaña **Reglas** en el Cuestionario de conocimiento ni en el Cuestionario de resultado: en un cuestionario de resultado, una pregunta oculta no emite votos, así que los recorridos con más preguntas de seguimiento acabarían ganando más a menudo sin que nadie lo notara. Si dos públicos necesitan preguntas distintas, crea dos quizzes.
+<Callout type="info">
+  La lógica condicional está disponible en el **Cuestionario con puntuación** y el **Cuestionario de resultado**. El panel derecho del editor no tiene la pestaña **Reglas** en el Cuestionario de conocimiento ni en el Quiz de IA: ocultar preguntas cambiaría la puntuación máxima y el porcentaje de aciertos de un cuestionario de conocimiento.
 </Callout>
 
 ## Cómo es una regla
@@ -60,5 +60,15 @@ Prueba cada camino de respuesta. En cuanto tienes más de un par de reglas, razo
 - Eliminar una regla pide confirmación; después, la pregunta objetivo vuelve a mostrarse de forma predeterminada.
 
 <Callout type="info">
-  Ocultar preguntas afecta a la puntuación: una pregunta que nunca apareció no tiene respuesta y no aporta puntos. Al diseñar un cuestionario adaptativo, asegúrate de que tus [reglas de puntuación](/es/editor/scoring) tengan en cuenta las preguntas que pueden quedar ocultas.
+  Ocultar preguntas afecta al resultado. En un **Cuestionario con puntuación**, una pregunta que nunca apareció no tiene respuesta y no aporta puntos: asegúrate de que tus [reglas de puntuación](/es/editor/scoring) tengan en cuenta las preguntas que pueden quedar ocultas. En un **Cuestionario de resultado**, una pregunta oculta no emite votos, así que un cuestionario con reglas elige al ganador por **proporción de votos** en lugar de votos brutos (ver abajo).
 </Callout>
+
+## Cuestionario de resultado: proporción de votos
+
+Sin reglas, un cuestionario de resultado elige el tipo con más votos. En cuanto tiene reglas, cada persona ve preguntas distintas, y un tipo respaldado por una rama larga de preguntas de seguimiento podría ganar solo por acumular más votos. Por eso un cuestionario con reglas compara, para cada tipo, la **proporción de los votos que podía recibir** en las preguntas que esa persona vio realmente:
+
+- Proporción = (votos recibidos + 0,5) ÷ (votos posibles + 1). Este pequeño suavizado evita que un tipo al que solo vota una pregunta gane con 1 de 1.
+- Un tipo al que no vota ninguna pregunta visible obtiene 0.
+- Los empates se resuelven por votos brutos y después por el orden de tu lista de resultados.
+
+Debajo de tus tipos de resultado, el editor ejecuta una **Comprobación de cobertura de resultados** sobre todos los recorridos de respuesta. Señala los tipos que nunca pueden ser el resultado y enumera los recorridos en los que un tipo no puede recibir votos. Solo avisa —puedes guardar igualmente—, pero un tipo señalado suele indicar que una rama necesita una pregunta que vote por él.

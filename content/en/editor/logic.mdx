@@ -1,12 +1,12 @@
 ---
 title: Conditional Logic
-description: 'Conditional logic shows or hides later questions based on earlier answers, turning a fixed questionnaire into an adaptive one. How a rule reads, and why it is Scored Quiz only.'
+description: 'Conditional logic shows or hides later questions based on earlier answers, turning a fixed questionnaire into an adaptive one. How a rule reads, which quiz types support it, and how hidden questions affect scores and outcomes.'
 ---
 
 Conditional logic **shows or hides later questions** based on how someone answers, turning a fixed questionnaire into an adaptive one.
 
-<Callout type="warning">
-  Conditional logic is only available in **Scored Quiz**. The editor's right panel has no **Rules** tab for Knowledge Quiz or Outcome Quiz — in an outcome quiz a hidden question casts no votes, so paths with more follow-up questions would quietly win more often. If two audiences need different questions, build two quizzes.
+<Callout type="info">
+  Conditional logic is available in **Scored Quiz** and **Outcome Quiz**. Knowledge Quiz and AI Quiz have no **Rules** tab in the editor's right panel — hiding questions would change a knowledge quiz's full marks and accuracy.
 </Callout>
 
 ## What a rule looks like
@@ -60,5 +60,15 @@ Try each answer path. Once you have more than a couple of rules, reasoning about
 - Deleting a rule asks for confirmation; afterwards the target question returns to being shown by default.
 
 <Callout type="info">
-  Hiding questions affects scoring: a question that never appeared has no answer and contributes no points. When designing an adaptive questionnaire, make sure your [scoring rules](/en/editor/scoring) line up with the questions that may be hidden.
+  Hiding questions affects results. In a **Scored Quiz**, a question that never appeared has no answer and contributes no points — make sure your [scoring rules](/en/editor/scoring) line up with the questions that may be hidden. In an **Outcome Quiz**, a hidden question casts no votes, so a quiz that uses rules picks the winner by **vote share** instead of raw votes — see below.
 </Callout>
+
+## Outcome quizzes: vote share
+
+Without rules, an outcome quiz picks the type with the most votes. Once a quiz has rules, different respondents see different questions, and a type backed by a long follow-up branch could win just by collecting more votes. So a quiz with rules compares each type's **share of the votes it could have received** from the questions that respondent actually saw:
+
+- Share = (votes received + 0.5) ÷ (votes it could have received + 1). The small smoothing stops a type that only one question votes for from winning on 1 out of 1.
+- A type no visible question votes for gets 0.
+- Ties fall back to raw votes, then to the order of your outcome list.
+
+Under your outcome types, the editor runs an **Outcome coverage check** across every answer path. It flags a type that can never be the result, and lists the paths on which a type can't get any votes. It only warns — saving still works — but a flagged type usually means a branch needs a question that votes for it.

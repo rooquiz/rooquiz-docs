@@ -1,12 +1,12 @@
 ---
 title: Logique conditionnelle
-description: "La logique conditionnelle affiche ou masque des questions selon les réponses précédentes pour un questionnaire adaptatif. Comment se lit une règle, et pourquoi elle est réservée au Quiz noté."
+description: "La logique conditionnelle affiche ou masque des questions selon les réponses précédentes pour un questionnaire adaptatif. Comment se lit une règle, dans quels types de quiz elle est disponible, et comment les questions masquées influent sur les scores et les résultats."
 ---
 
 La logique conditionnelle **affiche ou masque les questions suivantes** en fonction des réponses données, transformant un questionnaire figé en questionnaire adaptatif.
 
-<Callout type="warning">
-  La logique conditionnelle n'est disponible que dans le **Quiz noté**. Le volet de droite de l'éditeur ne comporte pas d'onglet **Règles** pour le Quiz de connaissances ni pour le Quiz de résultat : dans un quiz de résultat, une question masquée ne vote pas, si bien que les parcours comportant davantage de questions de suivi l'emporteraient plus souvent, sans que cela se voie. Si deux publics ont besoin de questions différentes, créez deux quiz.
+<Callout type="info">
+  La logique conditionnelle est disponible dans le **Quiz noté** et le **Quiz de résultat**. Le volet de droite de l'éditeur ne comporte pas d'onglet **Règles** pour le Quiz de connaissances ni pour le Quiz IA : masquer des questions modifierait la note maximale et le taux de bonnes réponses d'un quiz de connaissances.
 </Callout>
 
 ## À quoi ressemble une règle
@@ -60,5 +60,15 @@ Essayez chaque parcours de réponse. Dès que vous avez plus de deux ou trois r�
 - La suppression d'une règle demande une confirmation ; ensuite, la question cible redevient affichée par défaut.
 
 <Callout type="info">
-  Masquer des questions influe sur la notation : une question qui n'est jamais apparue n'a pas de réponse et ne rapporte aucun point. Lorsque vous concevez un questionnaire adaptatif, assurez-vous que vos [règles de notation](/fr/editor/scoring) tiennent compte des questions susceptibles d'être masquées.
+  Masquer des questions influe sur le résultat. Dans un **Quiz noté**, une question qui n'est jamais apparue n'a pas de réponse et ne rapporte aucun point : assurez-vous que vos [règles de notation](/fr/editor/scoring) tiennent compte des questions susceptibles d'être masquées. Dans un **Quiz de résultat**, une question masquée ne vote pas ; un quiz qui utilise des règles désigne donc le gagnant par **part des votes** plutôt que par nombre brut de votes (voir ci-dessous).
 </Callout>
+
+## Quiz de résultat : part des votes
+
+Sans règles, un quiz de résultat retient le type qui a le plus de votes. Dès qu'un quiz a des règles, les répondants ne voient pas les mêmes questions, et un type soutenu par une longue branche de questions de suivi pourrait l'emporter simplement parce qu'il recueille plus de votes. Un quiz avec règles compare donc, pour chaque type, la **part des votes qu'il aurait pu recevoir** sur les questions que ce répondant a réellement vues :
+
+- Part = (votes reçus + 0,5) ÷ (votes possibles + 1). Ce léger lissage empêche un type pour lequel une seule question vote de gagner avec 1 sur 1.
+- Un type pour lequel aucune question visible ne vote obtient 0.
+- En cas d'égalité, on compare les votes bruts, puis l'ordre de votre liste de résultats.
+
+Sous vos types de résultat, l'éditeur lance une **Vérification de la couverture des résultats** sur tous les parcours de réponse. Elle signale un type qui ne peut jamais être le résultat et liste les parcours sur lesquels un type ne peut obtenir aucun vote. Ce n'est qu'un avertissement — l'enregistrement reste possible —, mais un type signalé indique généralement qu'une branche a besoin d'une question qui vote pour lui.

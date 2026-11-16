@@ -1,12 +1,12 @@
 ---
 title: Bedingte Logik
-description: 'Bedingte Logik blendet spätere Fragen abhängig von früheren Antworten ein oder aus und macht einen starren Fragebogen adaptiv. So ist eine Regel aufgebaut – und warum sie nur im Bewerteten Quiz verfügbar ist.'
+description: 'Bedingte Logik blendet spätere Fragen abhängig von früheren Antworten ein oder aus und macht einen starren Fragebogen adaptiv. So ist eine Regel aufgebaut – in welchen Quiztypen sie verfügbar ist und wie ausgeblendete Fragen Punkte und Ergebnisse beeinflussen.'
 ---
 
 Bedingte Logik **blendet spätere Fragen ein oder aus**, je nachdem, wie jemand antwortet, und macht so aus einem starren Fragebogen einen adaptiven.
 
-<Callout type="warning">
-  Bedingte Logik ist nur im **Bewerteten Quiz** verfügbar. Für ein Wissensquiz oder ein Ergebnisquiz gibt es im rechten Bereich des Editors keinen Tab **Regeln** – in einem Ergebnisquiz gibt eine ausgeblendete Frage keine Stimmen ab, sodass Pfade mit mehr Folgefragen unbemerkt häufiger gewinnen würden. Wenn zwei Zielgruppen unterschiedliche Fragen brauchen, erstellen Sie zwei Quizze.
+<Callout type="info">
+  Bedingte Logik ist im **Bewerteten Quiz** und im **Ergebnisquiz** verfügbar. Für ein Wissensquiz oder ein KI-Quiz gibt es im rechten Bereich des Editors keinen Tab **Regeln** – ausgeblendete Fragen würden die Höchstpunktzahl und Trefferquote eines Wissensquiz verändern.
 </Callout>
 
 ## So sieht eine Regel aus
@@ -60,5 +60,15 @@ Probieren Sie jeden Antwortpfad aus. Sobald Sie mehr als ein paar Regeln haben, 
 - Das Löschen einer Regel erfordert eine Bestätigung; danach wird die Zielfrage wieder standardmäßig angezeigt.
 
 <Callout type="info">
-  Das Ausblenden von Fragen wirkt sich auf die Bewertung aus: Eine Frage, die nie angezeigt wurde, hat keine Antwort und trägt keine Punkte bei. Achten Sie beim Entwurf eines adaptiven Fragebogens darauf, dass Ihre [Bewertungsregeln](/de/editor/scoring) zu den möglicherweise ausgeblendeten Fragen passen.
+  Das Ausblenden von Fragen wirkt sich auf das Ergebnis aus. Im **Bewerteten Quiz** hat eine nie angezeigte Frage keine Antwort und trägt keine Punkte bei – achten Sie darauf, dass Ihre [Bewertungsregeln](/de/editor/scoring) zu den möglicherweise ausgeblendeten Fragen passen. Im **Ergebnisquiz** gibt eine ausgeblendete Frage keine Stimmen ab, daher ermittelt ein Quiz mit Regeln den Gewinner über den **Stimmenanteil** statt über die reine Stimmenzahl – siehe unten.
 </Callout>
+
+## Ergebnisquiz: Stimmenanteil
+
+Ohne Regeln gewinnt im Ergebnisquiz der Typ mit den meisten Stimmen. Sobald ein Quiz Regeln hat, sehen Teilnehmende unterschiedliche Fragen, und ein Typ mit einem langen Zweig an Folgefragen könnte allein dadurch gewinnen, dass er mehr Stimmen sammelt. Deshalb vergleicht ein Quiz mit Regeln für jeden Typ den **Anteil der Stimmen, die er bei den tatsächlich gesehenen Fragen hätte erhalten können**:
+
+- Anteil = (erhaltene Stimmen + 0,5) ÷ (mögliche Stimmen + 1). Die kleine Glättung verhindert, dass ein Typ, für den nur eine Frage stimmt, mit 1 von 1 gewinnt.
+- Ein Typ, für den keine sichtbare Frage stimmt, erhält 0.
+- Bei Gleichstand entscheiden die reinen Stimmen, danach die Reihenfolge Ihrer Ergebnisliste.
+
+Unter Ihren Ergebnistypen führt der Editor eine **Prüfung der Ergebnisabdeckung** über alle Antwortpfade durch. Sie markiert Typen, die nie das Ergebnis sein können, und listet die Pfade auf, auf denen ein Typ keine Stimmen bekommen kann. Sie warnt nur – Speichern funktioniert weiterhin –, aber ein markierter Typ bedeutet meist, dass ein Zweig eine Frage braucht, die für ihn stimmt.

@@ -1,12 +1,12 @@
 ---
 title: Lógica condicional
-description: 'A lógica condicional mostra ou oculta questões posteriores com base em respostas anteriores, tornando um questionário fixo adaptativo. Como uma regra funciona e por que só existe no Quiz com pontuação.'
+description: 'A lógica condicional mostra ou oculta questões posteriores com base em respostas anteriores, tornando um questionário fixo adaptativo. Como uma regra funciona em quais tipos de quiz ela está disponível e como questões ocultas afetam pontuações e resultados.'
 ---
 
 A lógica condicional **mostra ou oculta questões posteriores** com base no que a pessoa responde, transformando um questionário fixo em um questionário adaptativo.
 
-<Callout type="warning">
-  A lógica condicional só está disponível no **Quiz com pontuação**. O painel direito do editor não tem a aba **Regras** para Quiz de conhecimento nem Quiz de resultado — em um quiz de resultado, uma questão oculta não dá nenhum voto, então os caminhos com mais questões de acompanhamento acabariam vencendo com mais frequência sem ninguém perceber. Se dois públicos precisam de questões diferentes, crie dois quizzes.
+<Callout type="info">
+  A lógica condicional está disponível no **Quiz com pontuação** e no **Quiz de resultado**. O painel direito do editor não tem a aba **Regras** para Quiz de conhecimento nem Quiz com IA — ocultar questões mudaria a nota máxima e a taxa de acertos de um quiz de conhecimento.
 </Callout>
 
 ## Como é uma regra
@@ -60,5 +60,15 @@ Teste cada caminho de resposta. Quando você tiver mais do que algumas regras, r
 - Excluir uma regra pede confirmação; depois disso, a questão de destino volta a ser exibida por padrão.
 
 <Callout type="info">
-  Ocultar questões afeta a pontuação: uma questão que nunca apareceu não tem resposta e não contribui com pontos. Ao projetar um questionário adaptativo, garanta que suas [regras de pontuação](/pt-BR/editor/scoring) estejam alinhadas com as questões que podem ser ocultadas.
+  Ocultar questões afeta o resultado. Em um **Quiz com pontuação**, uma questão que nunca apareceu não tem resposta e não contribui com pontos — garanta que suas [regras de pontuação](/pt-BR/editor/scoring) estejam alinhadas com as questões que podem ser ocultadas. Em um **Quiz de resultado**, uma questão oculta não dá votos, então um quiz com regras escolhe o vencedor pela **proporção de votos** em vez dos votos brutos — veja abaixo.
 </Callout>
+
+## Quiz de resultado: proporção de votos
+
+Sem regras, um quiz de resultado escolhe o tipo com mais votos. Quando o quiz tem regras, cada respondente vê questões diferentes, e um tipo apoiado por um ramo longo de questões de acompanhamento poderia vencer só por acumular mais votos. Por isso, um quiz com regras compara, para cada tipo, a **proporção dos votos que ele poderia receber** nas questões que aquele respondente realmente viu:
+
+- Proporção = (votos recebidos + 0,5) ÷ (votos possíveis + 1). Essa pequena suavização impede que um tipo votado por uma única questão vença com 1 de 1.
+- Um tipo que nenhuma questão visível vota recebe 0.
+- Empates são decididos pelos votos brutos e, depois, pela ordem da sua lista de resultados.
+
+Abaixo dos seus tipos de resultado, o editor executa uma **Verificação de cobertura dos resultados** em todos os caminhos de resposta. Ela sinaliza um tipo que nunca pode ser o resultado e lista os caminhos em que um tipo não consegue nenhum voto. É só um aviso — salvar continua funcionando —, mas um tipo sinalizado geralmente indica que um ramo precisa de uma questão que vote nele.
