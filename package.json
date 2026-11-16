@@ -3,7 +3,7 @@
     "dev": "next",
     "prebuild": "node scripts/check-locales.mjs && node scripts/check-descriptions.mjs",
     "build": "next build",
-    "postbuild": "pagefind --site out --output-subdir _pagefind",
+    "postbuild": "node scripts/disable-email-obfuscation.mjs out && pagefind --site out --output-subdir _pagefind",
     "check:descriptions": "node scripts/check-descriptions.mjs",
     "check:locales": "node scripts/check-locales.mjs",
     "indexnow": "node scripts/indexnow.mjs out/sitemap.xml out",
