@@ -15,9 +15,12 @@ const docSchema = pageSchema.extend({
 // Expanded at build time by the `macro` plugin configured in `next.config.mjs`.
 // With `parser: 'dir'` the locale directory is stripped from the slug, so
 // `content/zh/editor/logic.mdx` becomes locale `zh` + slug `['editor', 'logic']`.
+// `includeProcessedMarkdown` keeps each page's processed Markdown alongside the
+// compiled MDX, read back with `page.data.getText('processed')` by the Markdown
+// routes (`/md/...`, `/llms-full.txt`) that serve the docs to AI assistants.
 const docs = defineDocs({
   dir: 'content',
-  docs: { schema: docSchema }
+  docs: { schema: docSchema, postprocess: { includeProcessedMarkdown: { headingIds: false } } }
 })
 
 // `baseUrl: '/'` + i18n yields `/zh` for a locale index and `/zh/editor/logic`

@@ -9,6 +9,8 @@ import {
 import { createRelativeLink } from 'fumadocs-ui/mdx'
 import { source } from '@/lib/source'
 import { languagesFor, pageUrl } from '@/lib/alternates'
+import { markdownPath } from '@/lib/llms'
+import { SITE_URL } from '@/lib/site-url'
 import { DOCS_REPOSITORY_BASE } from '@/lib/layout.shared'
 import { getMDXComponents } from '@/components/mdx'
 
@@ -69,7 +71,9 @@ export async function generateMetadata(props: {
     // duplicate of the other and drop it.
     alternates: {
       canonical: pageUrl(lang, segments),
-      languages: languagesFor(segments)
+      languages: languagesFor(segments),
+      // The page's Markdown version, for AI assistants (see app/md and /llms.txt)
+      types: { 'text/markdown': `${SITE_URL}${markdownPath(lang, segments)}` }
     }
   }
 }
