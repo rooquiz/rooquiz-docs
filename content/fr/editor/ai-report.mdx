@@ -1,6 +1,6 @@
 ---
 title: Rapports IA
-description: "Comment un Quiz IA rédige un rapport personnalisé pour chaque répondant : instructions de génération, longueur du rapport, style et règles, envoi de fichiers, étiquettes de résultat internes, points IA et ce qui se passe quand ils sont épuisés."
+description: "Comment un Quiz IA rédige un rapport personnalisé pour chaque répondant : instructions de génération, longueur du rapport, style et règles, envoi de fichiers, étiquettes de résultat internes, crédits IA et ce qui se passe quand ils sont épuisés."
 ---
 
 Dans un **Quiz IA**, rien n'est noté. Après l'envoi, l'IA lit les réponses du répondant (et les fichiers qu'il a envoyés) et lui rédige un **rapport personnalisé**, en suivant vos instructions. Choisissez ce type lorsque le rapport lui-même est la valeur que vous proposez : un diagnostic, un bilan, un plan de coaching. Consultez [Choisir un type de quiz](/fr/getting-started/quiz-types#quiz-ia).
@@ -47,7 +47,7 @@ Un Quiz IA peut comporter des **questions Pièce jointe** pour que l'IA examine 
 
 - Un Quiz IA peut comporter **jusqu'à 2** questions Pièce jointe, chacune acceptant **jusqu'à 3 fichiers** (réglez **Nombre max. de fichiers** pour en autoriser moins).
 - Les questions Pièce jointe ne font que recueillir des fichiers ; elles ne sont pas notées.
-- Les fichiers envoyés sont décomptés du quota mensuel d'**envois de fichiers** de votre équipe : consultez [Points IA et envois de fichiers](#points-ia-et-envois-de-fichiers).
+- Les fichiers envoyés sont décomptés du quota mensuel d'**envois de fichiers** de votre équipe : consultez [Crédits IA et envois de fichiers](#crédits-ia-et-envois-de-fichiers).
 
 ## Étiquettes de résultat
 
@@ -67,30 +67,30 @@ Sous **Bouton CTA**, définissez un **bouton par défaut** qui s'affiche sous ch
 ## Génération du rapport
 
 1. Le répondant envoie ses réponses ; la **génération** du rapport démarre aussitôt et il apparaît sur la page de résultats au fur et à mesure que l'IA l'écrit.
-2. Si le quiz utilise **E-mail requis pour voir le rapport**, le rapport d'un répondant anonyme est généré **après qu'il a franchi cette étape** : aucun point IA n'est dépensé pour les personnes qui ne laissent jamais leur e-mail. Dans le tableau de bord, ces réponses indiquent « Le rapport n'a pas encore été généré », avec un bouton pour le générer immédiatement.
+2. Si le quiz utilise **E-mail requis pour voir le rapport**, le rapport d'un répondant anonyme est généré **après qu'il a franchi cette étape** : aucun crédit IA n'est dépensé pour les personnes qui ne laissent jamais leur e-mail. Dans le tableau de bord, ces réponses indiquent « Le rapport n'a pas encore été généré », avec un bouton pour le générer immédiatement.
 3. En cas d'échec, la génération est relancée automatiquement ; vous pouvez aussi cliquer sur **Régénérer le rapport** depuis la réponse : consultez [Rapports](/fr/results/reports#régénérer-un-rapport).
 
 <Callout type="warning">
   La redirection des répondants vers un lien après l'envoi n'est pas disponible pour les Quiz IA, car le rapport est rédigé après l'envoi.
 </Callout>
 
-## Points IA et envois de fichiers
+## Crédits IA et envois de fichiers
 
-Chaque rapport de Quiz IA consomme **1 point IA**. Chaque équipe dispose d'un quota mensuel, réinitialisé le 1er de chaque mois (UTC) :
+Chaque rapport de Quiz IA consomme **1 crédit IA**. Chaque équipe dispose d'un quota mensuel, réinitialisé le 1er de chaque mois (UTC) :
 
 | | Free | Pro |
 | --- | --- | --- |
-| Points IA par mois | 5 | 100 |
+| Crédits IA par mois | 5 | 100 |
 | Envois de fichiers par mois | 100 Mo | 2 Go |
 
-Pendant un essai gratuit de Pro, les points IA restent au niveau du quota Free jusqu'au début de l'abonnement.
+Pendant un essai gratuit de Pro, les crédits IA restent au niveau du quota Free jusqu'au début de l'abonnement.
 
 Lorsque le quota est épuisé, les **recharges** prennent le relais : consultez [Options](/fr/account#options). Si les deux sont épuisés :
 
 - Les répondants peuvent toujours répondre et envoyer leurs réponses ; **aucune réponse n'est perdue**.
-- Leur rapport n'est pas généré et apparaît en échec, car l'équipe n'a plus de points IA. Rechargez, puis régénérez-le depuis la réponse.
-- Les propriétaires et administrateurs de l'équipe reçoivent un e-mail et une notification dans l'application lorsque les points IA ou les envois de fichiers sont presque épuisés, puis à nouveau lorsqu'ils le sont.
+- Leur rapport n'est pas généré et apparaît en échec, car l'équipe n'a plus de crédits IA. Rechargez, puis régénérez-le depuis la réponse.
+- Les propriétaires et administrateurs de l'équipe reçoivent un e-mail et une notification dans l'application lorsque les crédits IA ou les envois de fichiers sont presque épuisés, puis à nouveau lorsqu'ils le sont.
 
 <Callout type="info">
-  Les points IA ne sont utilisés que par les rapports de Quiz IA. La correction par **Correspondance IA** des Textes à trous dans un Quiz de connaissances est illimitée et ne consomme aucun point.
+  Les crédits IA ne sont utilisés que par les rapports de Quiz IA. La correction par **Correspondance IA** des Textes à trous dans un Quiz de connaissances est illimitée et ne consomme aucun crédit.
 </Callout>

@@ -1,6 +1,6 @@
 ---
 title: AI Reports
-description: 'How an AI Quiz writes each respondent a personal report: generation instructions, report length, style rules, file uploads, internal result tags, AI points and what happens when they run out.'
+description: 'How an AI Quiz writes each respondent a personal report: generation instructions, report length, style rules, file uploads, internal result tags, AI credits and what happens when they run out.'
 ---
 
 In an **AI Quiz**, nothing is scored. After a respondent submits, AI reads their answers (and any files they uploaded) and writes them a **personal report**, following the instructions you give it. Pick this type when the report itself is the value you offer — a diagnosis, a review, a coaching plan. See [The four quiz types](/en/getting-started/quiz-types#ai-quiz).
@@ -47,7 +47,7 @@ An AI Quiz can include **file upload questions** so the AI can review real work 
 
 - An AI Quiz can have **up to 2** upload questions, each accepting **up to 3 files** (set **Max files** to allow fewer).
 - Upload questions only collect files; they are not scored.
-- Uploads count against your team's monthly **file uploads** allowance — see [AI points and file uploads](#ai-points-and-file-uploads).
+- Uploads count against your team's monthly **file uploads** allowance — see [AI credits and file uploads](#ai-credits-and-file-uploads).
 
 ## Result tags
 
@@ -67,30 +67,30 @@ Under **CTA Button**, set a **default button** that shows below every AI report,
 ## How the report is generated
 
 1. The respondent submits; the report starts **generating** right away and appears on the result page as the AI writes it.
-2. If the quiz uses **Email required to see the report**, an anonymous respondent's report is generated **after they pass the gate** — no AI points are spent on people who never leave their email. In the dashboard these responses show "The report hasn't been generated yet", with a button to generate it now.
+2. If the quiz uses **Email required to see the report**, an anonymous respondent's report is generated **after they pass the gate** — no AI credits are spent on people who never leave their email. In the dashboard these responses show "The report hasn't been generated yet", with a button to generate it now.
 3. If generation fails, it is retried automatically; you can also **Regenerate report** from the response — see [Reports](/en/results/reports#regenerating-a-report).
 
 <Callout type="warning">
   Redirecting respondents to a link after submission is not available for AI Quizzes, because the report is written after they submit.
 </Callout>
 
-## AI points and file uploads
+## AI credits and file uploads
 
-Each AI Quiz report uses **1 AI point**. Every team gets a monthly allowance that resets on the 1st of each month (UTC):
+Each AI Quiz report uses **1 AI credit**. Every team gets a monthly allowance that resets on the 1st of each month (UTC):
 
 | | Free | Pro |
 | --- | --- | --- |
-| AI points per month | 5 | 100 |
+| AI credits per month | 5 | 100 |
 | File uploads per month | 100 MB | 2 GB |
 
-During a Pro free trial, AI points stay at the Free allowance until the subscription begins.
+During a Pro free trial, AI credits stay at the Free allowance until the subscription begins.
 
 When the allowance runs out, **top-ups** are used — see [Add-ons](/en/account#add-ons). If both are used up:
 
 - Respondents can still answer and submit; **no response is lost**.
-- Their report isn't generated and shows as failed because the team is out of AI points. Top up, then regenerate it from the response.
-- Team owners and admins get an email and an in-app notification when AI points or file uploads are running low, and again when they run out.
+- Their report isn't generated and shows as failed because the team is out of AI credits. Top up, then regenerate it from the response.
+- Team owners and admins get an email and an in-app notification when AI credits or file uploads are running low, and again when they run out.
 
 <Callout type="info">
-  AI points are only used by AI Quiz reports. **AI Match** grading of fill-in-the-blank answers in a Knowledge Quiz is unlimited and uses no points.
+  AI credits are only used by AI Quiz reports. **AI Match** grading of fill-in-the-blank answers in a Knowledge Quiz is unlimited and uses no credits.
 </Callout>
