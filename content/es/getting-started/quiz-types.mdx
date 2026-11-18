@@ -1,9 +1,20 @@
 ---
-title: Los cuatro tipos de quiz
-description: 'Los cuatro tipos de quiz de RooQuiz y para qué sirve cada uno: pruebas de conocimiento, evaluaciones multidimensionales, quizzes de resultado y quizzes de IA con informe personal, y por qué el tipo se fija al crearlo.'
+title: Elegir un tipo de quiz
+description: 'Qué tipo de quiz hay detrás de cada tarjeta del panel (Quiz de personalidad, Buscador de productos o cursos, Evaluación, Prueba de nivel, Reto de trivia, Informe personal con IA), qué permite cada uno de los cuatro tipos y por qué el tipo queda fijado al crearlo.'
 ---
 
-RooQuiz ofrece cuatro tipos de quiz (escenarios), cada uno orientado a un objetivo distinto.
+Las tarjetas **¿Qué quieres crear?** del panel te permiten elegir según tu objetivo. Detrás de cada tarjeta hay uno de los cuatro tipos de quiz (escenarios), y el tipo decide cómo se obtiene el resultado: respuestas correctas, puntos por opción, votos o un informe redactado por la IA.
+
+| Tarjeta | Tipo de quiz | Configuración paso a paso |
+| --- | --- | --- |
+| **Quiz de personalidad** | [Cuestionario de resultado](#cuestionario-de-resultado) | [Quiz de personalidad para compartir](/es/getting-started/use-cases#quiz-de-personalidad-para-compartir) |
+| **Buscador de productos o cursos** | [Cuestionario de resultado](#cuestionario-de-resultado) | [Buscador de productos o cursos](/es/getting-started/use-cases#buscador-de-productos-o-cursos) |
+| **Evaluación** | [Cuestionario con puntuación](#cuestionario-con-puntuación) | [Evaluación para captar leads](/es/getting-started/use-cases#evaluación-para-captar-leads) |
+| **Prueba de nivel** | [Cuestionario de conocimiento](#cuestionario-de-conocimiento) o [Cuestionario con puntuación](#cuestionario-con-puntuación) | [Prueba de nivel](/es/getting-started/use-cases#prueba-de-nivel) |
+| **Reto de trivia** | [Cuestionario de conocimiento](#cuestionario-de-conocimiento) | [Reto de trivia](/es/getting-started/use-cases#reto-de-trivia) |
+| **Informe personal con IA** | [Quiz de IA](#quiz-de-ia) | [Diagnóstico redactado por IA](/es/getting-started/use-cases#diagnóstico-redactado-por-ia) |
+
+**Prueba de nivel** hace una pregunta más: **¿Las preguntas tienen respuestas correctas?** Las preguntas de gramática, vocabulario o matemáticas que se marcan como correctas o incorrectas dan lugar a un Cuestionario de conocimiento; las autoevaluaciones como «Puedo mantener una conversación en inglés», en las que cada opción aporta puntos, dan lugar a un Cuestionario con puntuación.
 
 <Callout type="warning">
   **El tipo se elige al crear el quiz y no se puede cambiar después.** Es una restricción a nivel de datos, no un control que falte en la interfaz. Equivocarte implica volver a crearlo.
@@ -11,16 +22,16 @@ RooQuiz ofrece cuatro tipos de quiz (escenarios), cada uno orientado a un objeti
 
 ## Cuestionario de conocimiento
 
-Para pruebas de conocimiento, exámenes en línea y prácticas con puntuación: escenarios que necesitan **evaluar respuestas correctas/incorrectas y puntuar**.
+Para retos de trivia y pruebas de nivel con respuestas correctas: escenarios que necesitan **evaluar correcto/incorrecto y puntuar**.
 
-- **Orden fijo**: todos los participantes ven las preguntas en el mismo orden.
 - **Puntuación**: asigna puntos a las preguntas o a las opciones correctas; los totales se suman automáticamente.
 - **Evaluación y retroalimentación**: marca las respuestas correctas, muestra a los participantes su puntuación y la explicación de cada pregunta, y divide el total en **niveles** por tramos de puntuación (p. ej., 0–60 / 60–80 / 80+), cada uno con su propio texto de resultado.
 - **Coincidencia con AI en completar el espacio**: además de la coincidencia exacta y la parcial, una respuesta de completar el espacio puede corregirse con **Coincidencia con AI**, que juzga la similitud semántica con tu respuesta. La corrección con AI es ilimitada.
+- **Modo reto**: establece un **Límite de tiempo** y activa la **Respuesta inmediata** para que los participantes vean, página a página, qué han acertado. Ambas opciones solo existen en el Cuestionario de conocimiento (consulta [Ajustes del quiz](/es/editor/settings#experiencia-de-respuesta)).
 
 ## Cuestionario con puntuación
 
-Para evaluaciones de personalidad, evaluaciones de aptitudes y encuestas: escenarios que necesitan un **análisis multidimensional** en lugar de un simple correcto/incorrecto.
+Para evaluaciones (nivel de preparación, chequeo o índice de madurez) y pruebas de nivel de autoevaluación: escenarios en los que cada opción aporta puntos y se necesita un **análisis multidimensional** en lugar de un simple correcto/incorrecto.
 
 - **Puntuación multidimensional**: define varias dimensiones, cada una puntuada por **su propia fórmula** sobre las puntuaciones de las preguntas, y muestra los resultados, a menudo en un **gráfico de radar**.
 - **Lógica condicional**: muestra u oculta preguntas posteriores según las respuestas anteriores, lo que permite encuestas adaptativas.
@@ -29,7 +40,7 @@ Para evaluaciones de personalidad, evaluaciones de aptitudes y encuestas: escena
 
 ## Cuestionario de resultado
 
-Para quizzes de personalidad, quizzes divertidos del tipo "¿qué X eres?" y diagnósticos para captar leads: escenarios que producen un **tipo de resultado** en lugar de una puntuación.
+Para quizzes de personalidad («¿Qué X eres?») y buscadores de productos o cursos: escenarios que dan un **tipo de resultado** en lugar de una puntuación.
 
 - **Tipos de resultado**: define de antemano un conjunto de tipos de resultado (p. ej., León / Búho); cada tipo tiene su propio nombre, color de tema, imagen y contenido de resultado en texto enriquecido.
 - **Votación por opciones**: cada opción vota por uno o varios tipos; tras el envío, **gana el tipo con más votos** (los empates se resuelven por el orden de la lista).
@@ -47,15 +58,6 @@ Para evaluaciones, revisiones y coaching: escenarios en los que cada participant
 - **Puntos de IA**: cada informe consume 1 punto de IA de la cuota mensual de tu equipo (Free 5, Pro 100), con recargas disponibles.
 
 Los detalles de configuración están en [Informes de IA](/es/editor/ai-report).
-
-## Cómo elegir
-
-| Tu objetivo | Tipo recomendado |
-| --- | --- |
-| Puntuar a los participantes y evaluar respuestas correctas/incorrectas | **Cuestionario de conocimiento** |
-| Realizar una evaluación de personalidad/aptitudes o una encuesta con análisis multidimensional | **Cuestionario con puntuación** |
-| Dar a cada participante un resultado del tipo "¿qué tipo eres?" | **Cuestionario de resultado** |
-| Dar a cada participante un informe personal redactado por IA | **Quiz de IA** |
 
 <Callout type="warning">
   Los ajustes disponibles varían según el tipo (por ejemplo, la puntuación de aciertos/errores solo existe en el Cuestionario de conocimiento, las dimensiones basadas en fórmulas solo existen en el Cuestionario con puntuación, la lógica condicional solo en el Cuestionario con puntuación y el de resultado, y la votación por opciones solo existe en el Cuestionario de resultado). Confirma las funciones que necesitas antes de elegir.

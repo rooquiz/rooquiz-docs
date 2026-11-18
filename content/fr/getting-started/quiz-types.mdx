@@ -1,9 +1,20 @@
 ---
-title: Les quatre types de quiz
-description: "Les quatre types de quiz RooQuiz et leur usage (tests de connaissances, évaluations multidimensionnelles, quiz de résultat et quiz IA avec rapport personnalisé), et pourquoi le type est figé à la création."
+title: Choisir un type de quiz
+description: 'Quel type de quiz se cache derrière chaque carte du tableau de bord (Quiz de personnalité, Sélecteur de produit ou de cours, Évaluation, Test de niveau, Défi de culture générale, Rapport personnel IA), ce que permet chacun des quatre types, et pourquoi le type est fixé à la création.'
 ---
 
-RooQuiz propose quatre types de quiz (scénarios), chacun conçu pour un objectif différent.
+Les cartes **Que souhaitez-vous créer ?** du tableau de bord vous font choisir selon votre objectif. Derrière chaque carte se trouve l'un des quatre types de quiz (scénarios), et c'est le type qui détermine comment le résultat est obtenu : bonnes réponses, points par choix, votes ou rapport rédigé par l'IA.
+
+| Carte | Type de quiz | Mise en place pas à pas |
+| --- | --- | --- |
+| **Quiz de personnalité** | [Quiz de résultat](#quiz-de-résultat) | [Quiz de personnalité à partager](/fr/getting-started/use-cases#quiz-de-personnalité-à-partager) |
+| **Sélecteur de produit ou de cours** | [Quiz de résultat](#quiz-de-résultat) | [Sélecteur de produit ou de cours](/fr/getting-started/use-cases#sélecteur-de-produit-ou-de-cours) |
+| **Évaluation** | [Quiz noté](#quiz-noté) | [Évaluation pour générer des leads](/fr/getting-started/use-cases#évaluation-pour-générer-des-leads) |
+| **Test de niveau** | [Quiz de connaissances](#quiz-de-connaissances) ou [Quiz noté](#quiz-noté) | [Test de niveau](/fr/getting-started/use-cases#test-de-niveau) |
+| **Défi de culture générale** | [Quiz de connaissances](#quiz-de-connaissances) | [Défi de culture générale](/fr/getting-started/use-cases#défi-de-culture-générale) |
+| **Rapport personnel IA** | [Quiz IA](#quiz-ia) | [Diagnostic rédigé par l'IA](/fr/getting-started/use-cases#diagnostic-rédigé-par-lia) |
+
+**Test de niveau** pose une question supplémentaire : **Les questions ont-elles de bonnes réponses ?** Des questions de grammaire, de vocabulaire ou de maths notées justes ou fausses donnent un Quiz de connaissances ; des auto-évaluations comme « Je peux tenir une conversation en anglais », où chaque choix rapporte des points, donnent un Quiz noté.
 
 <Callout type="warning">
   **Le type est choisi à la création et ne peut plus être modifié ensuite.** Il s'agit d'une contrainte au niveau des données, et non d'une option absente de l'interface. Une erreur oblige à tout reconstruire.
@@ -11,16 +22,16 @@ RooQuiz propose quatre types de quiz (scénarios), chacun conçu pour un objecti
 
 ## Quiz de connaissances
 
-Pour les tests de connaissances, les examens en ligne et les entraînements notés : les situations qui exigent un **jugement juste/faux et une notation**.
+Pour les défis de culture générale et les tests de niveau avec bonnes réponses : des scénarios qui demandent un **jugement juste/faux et une notation**.
 
-- **Ordre fixe** : tous les répondants voient les questions dans le même ordre.
 - **Notation** : attribuez des points aux questions ou aux bonnes options ; les totaux sont calculés automatiquement.
 - **Correction et retour** : indiquez les bonnes réponses, montrez aux répondants leur score et l'explication de chaque question, et découpez le total en **niveaux** par tranche de score (par ex. 0–60 / 60–80 / 80+), chacun avec son propre texte de résultat.
 - **Correspondance IA pour le Texte à trous** : en plus de la correspondance exacte ou partielle, une réponse à une question Texte à trous peut être corrigée par **Correspondance IA**, qui évalue sa similarité sémantique avec votre réponse. La correction par IA est illimitée.
+- **Mode défi** : fixez une **Limite de temps** et activez le **Retour instantané** pour que les répondants voient, page par page, ce qu'ils ont juste. Ces deux options n'existent que dans le Quiz de connaissances (voir [Paramètres du quiz](/fr/editor/settings#expérience-de-réponse)).
 
 ## Quiz noté
 
-Pour les tests de personnalité, les évaluations de compétences et les enquêtes : les situations qui exigent une **analyse multidimensionnelle** plutôt qu'un simple juste/faux.
+Pour les évaluations (score de préparation, de bilan ou de maturité) et les tests de niveau en auto-évaluation : des scénarios où chaque choix rapporte des points et qui demandent une **analyse multidimensionnelle** plutôt qu'un simple juste/faux.
 
 - **Notation multidimensionnelle** : définissez plusieurs dimensions, chacune notée par **sa propre formule** portant sur les scores des questions, et affichez les résultats, souvent sous forme de **graphique radar**.
 - **Logique conditionnelle** : affichez ou masquez les questions suivantes selon les réponses précédentes, pour des enquêtes adaptatives.
@@ -29,7 +40,7 @@ Pour les tests de personnalité, les évaluations de compétences et les enquêt
 
 ## Quiz de résultat
 
-Pour les tests de personnalité, les quiz ludiques du type « quel X êtes-vous » et les aimants à leads de diagnostic : les situations qui produisent un **type de résultat** plutôt qu'un score.
+Pour les quiz de personnalité (« Quel X êtes-vous ? ») et les sélecteurs de produit ou de cours : des scénarios qui produisent un **type de résultat** plutôt qu'un score.
 
 - **Types de résultat** : définissez à l'avance un ensemble de types de résultat (par exemple Lion / Hibou) ; chaque type possède son propre nom, sa couleur de thème, son image et un contenu de résultat en texte enrichi.
 - **Vote par choix** : chaque choix vote pour un ou plusieurs types ; après la soumission, le type ayant obtenu **le plus de votes l'emporte** (en cas d'égalité, l'ordre de la liste départage).
@@ -47,15 +58,6 @@ Pour les évaluations, les bilans et le coaching : les situations où chaque ré
 - **Points IA** : chaque rapport consomme 1 point IA du quota mensuel de votre équipe (Free 5, Pro 100), avec des recharges disponibles.
 
 Les détails de configuration se trouvent dans [Rapports IA](/fr/editor/ai-report).
-
-## Comment choisir
-
-| Votre objectif | Type recommandé |
-| --- | --- |
-| Noter les répondants et juger juste/faux | **Quiz de connaissances** |
-| Mener un test de personnalité/de compétences ou une enquête avec analyse multidimensionnelle | **Quiz noté** |
-| Donner à chaque répondant un résultat du type « quel type êtes-vous » | **Quiz de résultat** |
-| Remettre à chaque répondant un rapport personnalisé rédigé par l'IA | **Quiz IA** |
 
 <Callout type="warning">
   Les paramètres disponibles diffèrent selon le type (par exemple, la notation juste/faux n'existe que dans le Quiz de connaissances, les dimensions calculées par formule n'existent que dans le Quiz noté, la logique conditionnelle que dans le Quiz noté et le Quiz de résultat, et le vote par choix n'existe que dans le Quiz de résultat). Vérifiez les fonctionnalités dont vous avez besoin avant de choisir.

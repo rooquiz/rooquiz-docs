@@ -1,9 +1,20 @@
 ---
-title: Os quatro tipos de quiz
-description: 'Os quatro tipos de quiz do RooQuiz e para que serve cada um — testes de conhecimento, avaliações com várias dimensões, quizzes de resultado e quizzes com IA com relatório personalizado — e por que o tipo é fixado na criação.'
+title: Escolher um tipo de quiz
+description: 'Qual tipo de quiz está por trás de cada card do painel (Quiz de personalidade, Buscador de produto ou curso, Avaliação, Teste de nível, Desafio de conhecimentos, Relatório pessoal com IA), o que cada um dos quatro tipos permite fazer e por que o tipo é definido na criação.'
 ---
 
-O RooQuiz oferece quatro tipos de quiz (cenários), cada um voltado para um objetivo diferente.
+Os cards **O que você quer criar?** do painel deixam você escolher pelo objetivo. Por trás de cada card há um dos quatro tipos de quiz (cenários), e o tipo define como o resultado é calculado: respostas certas, pontos por opção, votos ou um relatório escrito pela IA.
+
+| Card | Tipo de quiz | Passo a passo |
+| --- | --- | --- |
+| **Quiz de personalidade** | [Quiz de resultado](#quiz-de-resultado) | [Quiz de personalidade compartilhável](/pt-BR/getting-started/use-cases#quiz-de-personalidade-compartilhável) |
+| **Buscador de produto ou curso** | [Quiz de resultado](#quiz-de-resultado) | [Buscador de produto ou curso](/pt-BR/getting-started/use-cases#buscador-de-produto-ou-curso) |
+| **Avaliação** | [Quiz com pontuação](#quiz-com-pontuação) | [Avaliação para captar leads](/pt-BR/getting-started/use-cases#avaliação-para-captar-leads) |
+| **Teste de nível** | [Quiz de conhecimento](#quiz-de-conhecimento) ou [Quiz com pontuação](#quiz-com-pontuação) | [Teste de nível](/pt-BR/getting-started/use-cases#teste-de-nível) |
+| **Desafio de conhecimentos** | [Quiz de conhecimento](#quiz-de-conhecimento) | [Desafio de conhecimentos](/pt-BR/getting-started/use-cases#desafio-de-conhecimentos) |
+| **Relatório pessoal com IA** | [Quiz com IA](#quiz-com-ia) | [Diagnóstico escrito por IA](/pt-BR/getting-started/use-cases#diagnóstico-escrito-por-ia) |
+
+O **Teste de nível** faz mais uma pergunta — **As questões têm respostas certas?** Questões de gramática, vocabulário ou matemática marcadas como certas ou erradas resultam em um Quiz de conhecimento; autoavaliações como "Consigo manter uma conversa em inglês", em que cada opção vale pontos, resultam em um Quiz com pontuação.
 
 <Callout type="warning">
   **O tipo é escolhido na criação e não pode ser alterado depois.** Essa é uma restrição da camada de dados, não um controle ausente na interface. Escolher errado significa refazer tudo.
@@ -11,16 +22,16 @@ O RooQuiz oferece quatro tipos de quiz (cenários), cada um voltado para um obje
 
 ## Quiz de conhecimento
 
-Para testes de conhecimento, provas online e exercícios com pontuação — cenários que exigem **julgamento de certo/errado e pontuação**.
+Para desafios de conhecimentos e testes de nível com respostas certas — cenários que precisam de **julgamento certo/errado e pontuação**.
 
-- **Ordem fixa**: todos os respondentes veem as questões na mesma ordem.
 - **Pontuação**: atribua pontos às questões ou às opções corretas; os totais são somados automaticamente.
 - **Julgamento e feedback**: marque as respostas corretas, mostre aos respondentes a pontuação e a explicação de cada questão e divida o total em **níveis** por faixa de pontuação (por exemplo, 0–60 / 60–80 / 80+), cada um com seu próprio texto de resultado.
 - **Correspondência por IA em preencher a lacuna**: além da correspondência exata e por "contém", uma resposta de preencher a lacuna pode ser corrigida pela **Correspondência por IA**, que avalia a similaridade semântica com a sua resposta. A correção por IA é ilimitada.
+- **Modo desafio**: defina um **Tempo limite** e ative o **Feedback instantâneo** para que os respondentes vejam, página por página, o que acertaram. Os dois recursos existem só no Quiz de conhecimento — veja [Configurações do quiz](/pt-BR/editor/settings#experiência-de-resposta).
 
 ## Quiz com pontuação
 
-Para avaliações de personalidade, avaliações de competências e pesquisas — cenários que exigem **análise multidimensional** em vez de um simples certo/errado.
+Para avaliações (prontidão, check-up ou índice de maturidade) e testes de nível por autoavaliação — cenários em que cada opção vale pontos e é preciso uma **análise multidimensional** em vez de um simples certo/errado.
 
 - **Pontuação multidimensional**: defina várias dimensões, cada uma pontuada pela **própria fórmula** sobre as pontuações das questões, e exiba os resultados — geralmente em um **gráfico de radar**.
 - **Lógica condicional**: mostre ou oculte questões seguintes com base nas respostas anteriores, criando pesquisas adaptativas.
@@ -29,7 +40,7 @@ Para avaliações de personalidade, avaliações de competências e pesquisas �
 
 ## Quiz de resultado
 
-Para quizzes de personalidade, quizzes divertidos do tipo "qual X você é" e iscas digitais de diagnóstico — cenários que produzem um **tipo de resultado** em vez de uma pontuação.
+Para quizzes de personalidade ("Qual X é você?") e buscadores de produto ou curso — cenários que geram um **tipo de resultado** em vez de uma pontuação.
 
 - **Tipos de resultado**: defina antecipadamente um conjunto de tipos de resultado (por exemplo, Leão / Coruja); cada tipo tem seu próprio nome, cor do tema, imagem e conteúdo de resultado em texto formatado.
 - **Votação por opção**: cada opção vota em um ou mais tipos; após o envio, o tipo com **mais votos vence** (empates são resolvidos pela ordem da lista).
@@ -47,15 +58,6 @@ Para avaliações, análises e mentorias — cenários em que cada respondente d
 - **Pontos de IA**: cada relatório usa 1 ponto de IA da cota mensal da sua equipe (Free 5, Pro 100), com recargas disponíveis.
 
 Os detalhes de configuração estão em [Relatórios com IA](/pt-BR/editor/ai-report).
-
-## Como escolher
-
-| Seu objetivo | Tipo recomendado |
-| --- | --- |
-| Pontuar respondentes e julgar certo/errado | **Quiz de conhecimento** |
-| Aplicar uma avaliação de personalidade/competências ou uma pesquisa com análise multidimensional | **Quiz com pontuação** |
-| Dar a cada respondente um resultado do tipo "que tipo você é" | **Quiz de resultado** |
-| Dar a cada respondente um relatório personalizado escrito pela IA | **Quiz com IA** |
 
 <Callout type="warning">
   As configurações disponíveis variam conforme o tipo (por exemplo, a pontuação de certo/errado existe apenas no Quiz de conhecimento, as dimensões baseadas em fórmulas existem apenas no Quiz com pontuação, a lógica condicional apenas no Quiz com pontuação e no Quiz de resultado, e a votação por opção existe apenas no Quiz de resultado). Confirme os recursos de que você precisa antes de escolher.

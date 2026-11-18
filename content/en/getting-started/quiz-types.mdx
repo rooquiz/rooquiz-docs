@@ -1,9 +1,20 @@
 ---
-title: The Four Quiz Types
-description: 'The four RooQuiz quiz types and what each is for — knowledge tests, multi-dimension assessments, outcome quizzes and AI-written report quizzes — and why the type is fixed at creation.'
+title: Choosing a Quiz Type
+description: 'Which quiz type sits behind each dashboard card — Personality quiz, Product or course finder, Assessment, Level test, Trivia challenge, AI personal report — what each of the four types can do, and why the type is fixed at creation.'
 ---
 
-RooQuiz offers four quiz types (scenes), each aimed at a different goal.
+The dashboard's **What do you want to make?** cards let you choose by goal. Behind each card is one of four quiz types (scenes), and the type decides how the result is worked out: right answers, option points, votes, or a report written by AI.
+
+| Card | Quiz type | Step-by-step setup |
+| --- | --- | --- |
+| **Personality quiz** | [Outcome Quiz](#outcome-quiz) | [Shareable personality quiz](/en/getting-started/use-cases#shareable-personality-quiz) |
+| **Product or course finder** | [Outcome Quiz](#outcome-quiz) | [Product or course finder](/en/getting-started/use-cases#product-or-course-finder) |
+| **Assessment** | [Scored Quiz](#scored-quiz) | [Lead-magnet assessment](/en/getting-started/use-cases#lead-magnet-assessment) |
+| **Level test** | [Knowledge Quiz](#knowledge-quiz) or [Scored Quiz](#scored-quiz) | [Level test](/en/getting-started/use-cases#level-test) |
+| **Trivia challenge** | [Knowledge Quiz](#knowledge-quiz) | [Trivia challenge](/en/getting-started/use-cases#trivia-challenge) |
+| **AI personal report** | [AI Quiz](#ai-quiz) | [AI-written diagnosis](/en/getting-started/use-cases#ai-written-diagnosis) |
+
+**Level test** asks one more question — **Do the questions have right answers?** Grammar, vocabulary or maths questions marked right or wrong make a Knowledge Quiz; self-ratings like "I can hold a conversation in English", where each choice carries points, make a Scored Quiz.
 
 <Callout type="warning">
   **The type is chosen at creation and cannot be changed afterward.** That's a data-layer constraint, not a missing UI control. Getting it wrong means rebuilding.
@@ -11,16 +22,16 @@ RooQuiz offers four quiz types (scenes), each aimed at a different goal.
 
 ## Knowledge Quiz
 
-For knowledge tests, online exams, and scored practice — scenarios that need **right/wrong judgment and scoring**.
+For trivia challenges and level tests with right answers — scenarios that need **right/wrong judgment and scoring**.
 
-- **Fixed order**: All respondents see the same question order.
 - **Scoring**: Assign points to questions or correct options; totals are summed automatically.
 - **Judgment & feedback**: Mark correct answers, show respondents their score and per-question explanations, and split the total into **levels** by score band (e.g. 0–60 / 60–80 / 80+), each with its own result text.
 - **AI Match for fill-in-the-blank**: Besides exact and contains matching, a fill-in-the-blank answer can be graded by **AI Match**, which judges semantic similarity against your answer. AI grading is unlimited.
+- **Challenge features**: Add a **Time limit**, and turn on **Instant feedback** so respondents see what they got right page by page. Both exist only in Knowledge Quiz — see [Quiz Settings](/en/editor/settings#answering-experience).
 
 ## Scored Quiz
 
-For personality assessments, ability evaluations, and surveys — scenarios that need **multi-dimensional analysis** rather than simple right/wrong.
+For assessments (readiness, health check or maturity scores) and self-rated level tests — scenarios where each choice carries points and you want **multi-dimensional analysis** rather than simple right/wrong.
 
 - **Multi-dimensional scoring**: Define several dimensions, each scored by **its own formula** over the question scores, and show the results — often as a **radar chart**.
 - **Conditional logic**: Show or hide later questions based on previous answers, enabling adaptive surveys.
@@ -29,7 +40,7 @@ For personality assessments, ability evaluations, and surveys — scenarios that
 
 ## Outcome Quiz
 
-For personality quizzes, "which X are you" fun quizzes, and diagnostic lead magnets — scenarios that produce a **result type** instead of a score.
+For personality quizzes ("which X are you") and product or course finders — scenarios that produce a **result type** instead of a score.
 
 - **Result types**: Define a set of outcome types up front (e.g. Lion / Owl); each type has its own name, theme color, image, and rich-text result content.
 - **Choice voting**: Every choice votes for one or more types; after submission the type with the **most votes wins** (ties resolved by list order).
@@ -47,15 +58,6 @@ For assessments, reviews and coaching — scenarios where each respondent should
 - **AI points**: Each report uses 1 AI point from your team's monthly allowance (Free 5, Pro 100), with top-ups available.
 
 Setup details are in [AI Reports](/en/editor/ai-report).
-
-## How to choose
-
-| Your goal | Recommended type |
-| --- | --- |
-| Score respondents and judge right/wrong | **Knowledge Quiz** |
-| Run a personality/ability assessment or survey with multi-dimensional analysis | **Scored Quiz** |
-| Give each respondent a "which type are you" result | **Outcome Quiz** |
-| Give each respondent a personal report written by AI | **AI Quiz** |
 
 <Callout type="warning">
   Available settings differ by type (for example, right/wrong scoring exists only in Knowledge Quiz, formula-based dimensions exist only in Scored Quiz, conditional logic only in Scored Quiz and Outcome Quiz, and choice voting exists only in Outcome Quiz). Confirm the capabilities you need before choosing.
