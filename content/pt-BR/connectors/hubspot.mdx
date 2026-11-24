@@ -1,0 +1,97 @@
+---
+title: Conectar o HubSpot
+description: 'Conecte o HubSpot para que cada lead vire um contato no HubSpot com a última pontuação, nível ou tipo de resultado do quiz e uma nota de resultado na linha do tempo. Passos de configuração, campos gravados, permissões e como desconectar.'
+---
+
+O **conector do HubSpot** cria ou atualiza um contato no HubSpot para cada lead capturado pelos seus quizzes, grava o resultado mais recente do quiz em propriedades do contato e pode adicionar uma nota de resultado à linha do tempo do contato. Use essas propriedades em listas, workflows e lead scoring do HubSpot para fazer o acompanhamento de acordo com as respostas de cada pessoa.
+
+<Callout type="info">
+  O HubSpot é **exclusivo do Pro**, e somente o **proprietário da equipe ou um administrador** pode configurá-lo. Cada equipe pode conectar **uma** conta do HubSpot. Funciona com todas as edições do HubSpot, inclusive o CRM gratuito.
+</Callout>
+
+## Como conectar
+
+<Steps>
+### Abra o cartão do HubSpot
+
+Vá até **Conectores**, encontre o **HubSpot** em **Sincronizar públicos** e clique em **Conectar HubSpot**.
+
+### Entre e escolha uma conta
+
+Entre no HubSpot, se for solicitado. Se o seu login tiver acesso a várias contas do HubSpot, escolha a conta que deve receber os contatos.
+
+### Aprove o acesso
+
+O HubSpot lista o que o RooQuiz pode acessar (veja [Permissões](#permissões)). Clique em **Connect app**.
+
+Enquanto o RooQuiz ainda não estiver listado no HubSpot App Marketplace, o HubSpot exibe um aviso de **app não verificado** e pede que você digite `I accept the risk` para continuar. Isso é esperado: digite o texto e clique em **Connect**.
+
+### Conclua a configuração no RooQuiz
+
+Você volta para a página de conectores do RooQuiz e a janela **Configurações da integração com o HubSpot** se abre. Escolha as opções abaixo e clique em **Salvar** — o conector começa a enviar assim que você salva.
+</Steps>
+
+<Callout type="warning">
+  Conclua os passos no HubSpot em até **10 minutos** depois de clicar em **Conectar HubSpot**. Depois disso, o link de autorização expira e o RooQuiz mostra "O link de autorização expirou" — basta clicar em **Conectar HubSpot** de novo.
+</Callout>
+
+## Configurações
+
+- **Nome** — como o conector aparece na sua lista; por padrão, `HubSpot • <sua conta>`.
+- **Eventos de gatilho** — **Nova resposta** (cada quiz concluído) e/ou **Novo lead** (a primeira vez que alguém deixa dados de contato). Os dois vêm ativados por padrão. Veja [Eventos de gatilho e escopo](/pt-BR/connectors/events).
+- **Escopo de acionamento** — todos os quizzes ou só os que você escolher.
+- **Adicionar uma nota de resultado à linha do tempo do contato** — ativado por padrão. Cada nova resposta adiciona uma nota com o nome do quiz, a pontuação, o nível ou tipo de resultado e links para o relatório e para o lead no RooQuiz.
+
+Use a ação **Editar** no cartão do conector para alterar essas opções depois.
+
+## O que o RooQuiz grava no HubSpot
+
+Os contatos são **identificados pelo e-mail**: um contato existente com o mesmo e-mail é atualizado; caso contrário, um novo é criado. Respostas sem endereço de e-mail são ignoradas.
+
+No primeiro envio, o RooQuiz cria na sua conta do HubSpot um grupo de propriedades **RooQuiz** com estas propriedades de contato:
+
+| Propriedade | Conteúdo |
+| --- | --- |
+| `rooquiz_last_quiz` | Nome do quiz mais recente |
+| `rooquiz_last_score` / `rooquiz_last_max_score` | Pontuação e pontuação máxima |
+| `rooquiz_last_level` | Nível do resultado (quizzes com pontuação e de conhecimento) |
+| `rooquiz_last_outcome` | Tipo de resultado (quizzes de resultado) |
+| `rooquiz_last_report_url` | Link para o relatório do respondente |
+| `rooquiz_last_submitted_at` | Quando a resposta foi enviada |
+| `rooquiz_lead_url` | Link para o lead no RooQuiz |
+| `rooquiz_utm_source`, `_medium`, `_campaign`, `_term`, `_content` | Parâmetros UTM do link do quiz |
+
+Ele também preenche as propriedades padrão **e-mail**, **nome**, **sobrenome** e **telefone**. Um nome completo é dividido em nome e sobrenome no primeiro espaço.
+
+- Cada resposta **sobrescreve** esses valores, então eles descrevem o quiz mais recente da pessoa.
+- Valores vazios nunca são gravados, então o RooQuiz não apaga dados que você já tem — por exemplo, refazer um quiz sem pontuação mantém a pontuação de um quiz com pontuação anterior.
+- O RooQuiz **nunca altera** a fase do ciclo de vida, o status do lead ou as configurações de inscrição de e-mail — eles continuam seguindo as regras do seu CRM.
+
+<Callout type="info">
+  Para direcionar leads pelo resultado, crie uma lista ou um workflow no HubSpot filtrado por uma propriedade do RooQuiz — por exemplo, `rooquiz_last_level` é `Advanced` — e inscreva esses contatos na sequência correspondente.
+</Callout>
+
+## Permissões
+
+O RooQuiz solicita estes escopos ao HubSpot:
+
+| Escopo | Para quê |
+| --- | --- |
+| `crm.objects.contacts.read` / `.write` | Encontrar contatos pelo e-mail, criá-los ou atualizá-los e adicionar notas de resultado |
+| `crm.schemas.contacts.read` / `.write` | Verificar e criar o grupo de propriedades e as propriedades do RooQuiz |
+| `oauth` | Login padrão do HubSpot |
+
+O RooQuiz não exclui contatos e não lê nem exporta outros dados da sua conta do HubSpot.
+
+## Como desconectar
+
+Exclua o conector do HubSpot pelo cartão dele no RooQuiz para parar a sincronização. Para remover também o acesso do RooQuiz no lado do HubSpot, vá em **Settings → Integrations → Connected apps** no HubSpot e desinstale o RooQuiz. Contatos, propriedades e notas já gravados permanecem no HubSpot.
+
+Se a sua equipe voltar para o plano gratuito, o conector é pausado e mantém as configurações; ele volta a funcionar quando você fizer upgrade novamente.
+
+## Solução de problemas
+
+- **"O link de autorização expirou, tente novamente."** — os passos no HubSpot levaram mais de 10 minutos. Clique em **Conectar HubSpot** de novo.
+- **"A autorização do HubSpot foi cancelada."** — você clicou em **Cancel** na tela do HubSpot. Comece de novo quando estiver pronto.
+- **"Sua equipe já está conectada ao HubSpot."** — exclua primeiro o conector do HubSpot existente.
+- **Um lead não apareceu no HubSpot** — verifique se a resposta tinha um endereço de e-mail e se o quiz está dentro do escopo de acionamento do conector. O cartão do conector mostra o último erro de envio, se houver.

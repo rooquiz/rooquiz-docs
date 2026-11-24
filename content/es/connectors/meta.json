@@ -4,6 +4,7 @@
     "index",
     "channels",
     "email-smtp",
-    "events"
+    "events",
+    "hubspot"
   ]
 }

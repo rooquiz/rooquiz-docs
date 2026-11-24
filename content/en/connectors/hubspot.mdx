@@ -1,0 +1,97 @@
+---
+title: Connect HubSpot
+description: 'Connect HubSpot so every lead becomes a HubSpot contact with their latest quiz score, level or result type and a result note on the timeline. Setup steps, the fields RooQuiz writes, permissions and how to disconnect.'
+---
+
+The **HubSpot connector** creates or updates a HubSpot contact for every lead your quizzes capture, writes their latest quiz result into contact properties, and can add a result note to the contact's timeline. Use those properties in HubSpot lists, workflows and lead scoring to follow up based on how people answered.
+
+<Callout type="info">
+  HubSpot is **Pro plan only**, and only the **team owner or an admin** can set it up. Each team can connect **one** HubSpot account. It works with every HubSpot edition, including the free CRM.
+</Callout>
+
+## Connecting
+
+<Steps>
+### Open the HubSpot card
+
+Go to **Connectors**, find **HubSpot** under **Sync audiences**, and click **Connect HubSpot**.
+
+### Sign in and pick an account
+
+Sign in to HubSpot if asked. If your login has access to several HubSpot accounts, choose the one the contacts should go to.
+
+### Approve access
+
+HubSpot lists what RooQuiz can access (see [Permissions](#permissions)). Click **Connect app**.
+
+While RooQuiz is not yet listed on the HubSpot App Marketplace, HubSpot shows an **unverified app** warning and asks you to type `I accept the risk` before you can continue. This is expected — type it and click **Connect**.
+
+### Finish setup in RooQuiz
+
+You land back on the RooQuiz connectors page and the **HubSpot settings** dialog opens. Choose the options below and click **Save** — the connector starts delivering once saved.
+</Steps>
+
+<Callout type="warning">
+  Finish the HubSpot steps within **10 minutes** of clicking **Connect HubSpot**. After that the authorization link expires and RooQuiz shows "Authorization link expired" — just click **Connect HubSpot** again.
+</Callout>
+
+## Settings
+
+- **Name** — how the connector appears in your list, `HubSpot • <your account>` by default.
+- **Trigger events** — **New response** (every completed quiz) and/or **New lead** (the first time someone leaves contact details). Both are on by default. See [Trigger events & scope](/en/connectors/events).
+- **Trigger scope** — all quizzes, or only the quizzes you pick.
+- **Add a result note to the contact timeline** — on by default. Each new response adds a note with the quiz name, score, level or result type, and links to the report and the lead in RooQuiz.
+
+Open the connector card's **Edit** action to change these later.
+
+## What RooQuiz writes to HubSpot
+
+Contacts are **matched by email**: an existing contact with the same email is updated, otherwise a new one is created. A response without an email address is skipped.
+
+On first delivery RooQuiz creates a **RooQuiz** property group in your HubSpot account with these contact properties:
+
+| Property | Contains |
+| --- | --- |
+| `rooquiz_last_quiz` | Name of the most recent quiz |
+| `rooquiz_last_score` / `rooquiz_last_max_score` | Score and maximum score |
+| `rooquiz_last_level` | Result level (scored and knowledge quizzes) |
+| `rooquiz_last_outcome` | Result type (outcome quizzes) |
+| `rooquiz_last_report_url` | Link to the respondent's report |
+| `rooquiz_last_submitted_at` | When the response was submitted |
+| `rooquiz_lead_url` | Link to the lead in RooQuiz |
+| `rooquiz_utm_source`, `_medium`, `_campaign`, `_term`, `_content` | UTM parameters from the quiz link |
+
+It also fills the standard **email**, **first name**, **last name** and **phone** properties. A full name is split at the first space into first and last name.
+
+- Each response **overwrites** these values, so they describe the person's most recent quiz.
+- Empty values are never written, so RooQuiz doesn't clear data you already have — for example, retaking a quiz that has no score keeps the score from an earlier scored quiz.
+- RooQuiz **never changes** lifecycle stage, lead status or email subscription settings — those stay under your CRM's own rules.
+
+<Callout type="info">
+  To route leads by result, create a HubSpot list or workflow filtered on a RooQuiz property — for example `rooquiz_last_level` is `Advanced` — and enroll those contacts in the matching sequence.
+</Callout>
+
+## Permissions
+
+RooQuiz asks HubSpot for these scopes:
+
+| Scope | Why |
+| --- | --- |
+| `crm.objects.contacts.read` / `.write` | Find contacts by email, create or update them, and add result notes |
+| `crm.schemas.contacts.read` / `.write` | Check for and create the RooQuiz property group and properties |
+| `oauth` | Standard HubSpot sign-in |
+
+RooQuiz does not delete contacts and does not read or export other data from your HubSpot account.
+
+## Disconnecting
+
+Delete the HubSpot connector from its card in RooQuiz to stop syncing. To also remove RooQuiz's access on the HubSpot side, go to **Settings → Integrations → Connected apps** in HubSpot and uninstall RooQuiz. Contacts, properties and notes already written stay in HubSpot.
+
+If your team drops to the free plan, the connector is paused and keeps its settings; it resumes when you upgrade again.
+
+## Troubleshooting
+
+- **"Authorization link expired"** — the HubSpot steps took more than 10 minutes. Click **Connect HubSpot** again.
+- **"HubSpot authorization was canceled"** — you clicked **Cancel** on the HubSpot screen. Start again when ready.
+- **"Your team is already connected to HubSpot"** — delete the existing HubSpot connector first.
+- **A lead didn't appear in HubSpot** — check that the response had an email address and that the quiz is inside the connector's trigger scope. The connector card shows the last delivery error, if any.

@@ -1,0 +1,97 @@
+---
+title: 连接 HubSpot
+description: '连接 HubSpot 后，测评收集到的每条线索都会自动成为 HubSpot 联系人，写入最近一次测评的分数、等级或结果类型，并可在联系人时间线添加结果备注。这一页讲连接步骤与「未验证应用」提示、可选设置、RooQuiz 写入的全部字段、申请的权限范围、如何在 HubSpot 里按结果分组跟进，以及断开连接和常见报错的处理办法。'
+---
+
+**HubSpot 连接**会为测评收集到的每条线索在 HubSpot 新建或更新联系人，把最近一次测评结果写进联系人属性，还可以在联系人时间线上添加一条结果备注。之后就能在 HubSpot 的列表、工作流和线索评分里，按答题者的结果做后续跟进。
+
+<Callout type="info">
+  HubSpot 是 **Pro 套餐专属**，且只有**团队所有者或管理员**可以配置。每个团队可以连接**一个** HubSpot 账户。所有 HubSpot 版本都可以用，包括免费 CRM。
+</Callout>
+
+## 连接步骤
+
+<Steps>
+### 打开 HubSpot 卡片
+
+进入**连接**，在**同步名单**分组里找到 **HubSpot**，点击**连接 HubSpot**。
+
+### 登录并选择账户
+
+按提示登录 HubSpot。如果你的登录身份能访问多个 HubSpot 账户，选择联系人要写入的那一个。
+
+### 同意授权
+
+HubSpot 会列出 RooQuiz 能访问的内容（见[权限](#权限)），点击 **Connect app**。
+
+在 RooQuiz 上架 HubSpot 应用市场之前，HubSpot 会提示这是**未经验证的应用**，并要求输入 `I accept the risk` 才能继续。这是正常现象，输入后点击 **Connect** 即可。
+
+### 在 RooQuiz 完成设置
+
+授权后会回到 RooQuiz 的连接页，并自动打开 **HubSpot 设置**弹窗。按下文选好选项后点击**保存**，保存后连接开始推送。
+</Steps>
+
+<Callout type="warning">
+  点击**连接 HubSpot**后，请在 **10 分钟**内完成 HubSpot 那边的步骤。超时后授权链接会失效，RooQuiz 提示「授权链接已过期」，重新点击**连接 HubSpot** 即可。
+</Callout>
+
+## 设置项
+
+- **名称**：连接在列表中显示的名字，默认是 `HubSpot • <你的账户>`。
+- **触发事件**：**新答卷**（每次完成测评）和/或**新增线索**（某人第一次留下联系方式），默认两个都开。详见[触发事件与范围](/zh/connectors/events)。
+- **触发范围**：全部测评，或只选部分测评。
+- **在联系人时间线添加结果备注**：默认开启。每份新答卷都会添加一条备注，包含测评名称、分数、等级或结果类型，以及报告和 RooQuiz 线索页的链接。
+
+之后可以在连接卡片上点**编辑**修改这些设置。
+
+## RooQuiz 写入 HubSpot 的内容
+
+联系人**按邮箱匹配**：已有同邮箱的联系人就更新，没有就新建。没有邮箱的答卷会被跳过。
+
+第一次推送时，RooQuiz 会在你的 HubSpot 账户里建一个 **RooQuiz** 属性组，包含以下联系人属性：
+
+| 属性 | 内容 |
+| --- | --- |
+| `rooquiz_last_quiz` | 最近一次测评的名称 |
+| `rooquiz_last_score` / `rooquiz_last_max_score` | 得分与满分 |
+| `rooquiz_last_level` | 结果等级（评分测评、知识测验） |
+| `rooquiz_last_outcome` | 结果类型（分型测评） |
+| `rooquiz_last_report_url` | 答题者报告链接 |
+| `rooquiz_last_submitted_at` | 提交时间 |
+| `rooquiz_lead_url` | RooQuiz 线索页链接 |
+| `rooquiz_utm_source`、`_medium`、`_campaign`、`_term`、`_content` | 测评链接上的 UTM 参数 |
+
+同时会填写标准的**邮箱**、**名**、**姓**和**电话**属性。全名按第一个空格拆成名和姓。
+
+- 每份新答卷都会**覆盖**这些值，所以它们反映的是这个人最近一次测评的情况。
+- 空值永远不会写入，RooQuiz 不会清掉你已有的数据。例如重新做了一份没有分数的测评，之前评分测评的分数会保留。
+- RooQuiz **不会修改**生命周期阶段、线索状态或邮件订阅设置，这些仍按你 CRM 自己的规则来。
+
+<Callout type="info">
+  想按结果分流线索，可以在 HubSpot 里建一个按 RooQuiz 属性筛选的列表或工作流，例如 `rooquiz_last_level` 等于 `Advanced`，再把这些联系人加入对应的序列。
+</Callout>
+
+## 权限
+
+RooQuiz 向 HubSpot 申请以下权限范围：
+
+| 权限范围 | 用途 |
+| --- | --- |
+| `crm.objects.contacts.read` / `.write` | 按邮箱查找联系人、新建或更新联系人、添加结果备注 |
+| `crm.schemas.contacts.read` / `.write` | 检查并创建 RooQuiz 属性组和属性 |
+| `oauth` | HubSpot 标准登录授权 |
+
+RooQuiz 不会删除联系人，也不会读取或导出你 HubSpot 账户里的其他数据。
+
+## 断开连接
+
+在 RooQuiz 里删除 HubSpot 连接卡片即可停止同步。如果还想在 HubSpot 那边撤销 RooQuiz 的访问权限，到 HubSpot 的 **Settings → Integrations → Connected apps** 卸载 RooQuiz。已经写入的联系人、属性和备注会保留在 HubSpot 里。
+
+团队降回免费套餐时，连接会暂停推送，设置保留，重新升级后恢复。
+
+## 常见问题
+
+- **「授权链接已过期」**：HubSpot 那边的步骤超过了 10 分钟，重新点击**连接 HubSpot**。
+- **「已取消 HubSpot 授权」**：你在 HubSpot 页面点了 **Cancel**，准备好后重新发起即可。
+- **「团队已连接 HubSpot」**：先删除已有的 HubSpot 连接。
+- **线索没有出现在 HubSpot**：检查答卷有没有邮箱，以及该测评是否在连接的触发范围内。如果有投递错误，连接卡片上会显示最近一次的错误信息。

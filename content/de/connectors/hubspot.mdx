@@ -1,0 +1,97 @@
+---
+title: HubSpot verbinden
+description: 'Verbinden Sie HubSpot, damit jeder Lead zu einem HubSpot-Kontakt mit seiner letzten Quiz-Punktzahl, Stufe oder seinem Ergebnistyp wird, plus Ergebnisnotiz in der Chronik. Einrichtung, geschriebene Felder, Berechtigungen und Trennen.'
+---
+
+Der **HubSpot-Connector** erstellt oder aktualisiert für jeden Lead, den Ihre Quizze erfassen, einen HubSpot-Kontakt, schreibt das letzte Quizergebnis in Kontakteigenschaften und kann der Chronik des Kontakts eine Ergebnisnotiz hinzufügen. Nutzen Sie diese Eigenschaften in HubSpot-Listen, Workflows und Lead-Scoring, um je nach Antworten gezielt nachzufassen.
+
+<Callout type="info">
+  HubSpot ist **nur im Pro-Tarif** verfügbar, und nur der **Team-Inhaber oder ein Administrator** kann es einrichten. Jedes Team kann **ein** HubSpot-Konto verbinden. Es funktioniert mit jeder HubSpot-Edition, auch mit dem kostenlosen CRM.
+</Callout>
+
+## Verbinden
+
+<Steps>
+### Die HubSpot-Karte öffnen
+
+Gehen Sie zu **Connectors**, suchen Sie **HubSpot** unter **Zielgruppen synchronisieren** und klicken Sie auf **HubSpot verbinden**.
+
+### Anmelden und ein Konto wählen
+
+Melden Sie sich bei HubSpot an, falls Sie dazu aufgefordert werden. Hat Ihr Login Zugriff auf mehrere HubSpot-Konten, wählen Sie das Konto, in das die Kontakte geschrieben werden sollen.
+
+### Zugriff genehmigen
+
+HubSpot listet auf, worauf RooQuiz zugreifen darf (siehe [Berechtigungen](#berechtigungen)). Klicken Sie auf **Connect app**.
+
+Solange RooQuiz noch nicht im HubSpot App Marketplace gelistet ist, zeigt HubSpot eine Warnung zu einer **nicht verifizierten App** und verlangt, dass Sie `I accept the risk` eingeben, bevor Sie fortfahren können. Das ist so vorgesehen – geben Sie den Text ein und klicken Sie auf **Connect**.
+
+### Einrichtung in RooQuiz abschließen
+
+Sie landen wieder auf der Connectors-Seite von RooQuiz, und der Dialog **HubSpot-Integrationseinstellungen** öffnet sich. Wählen Sie die unten beschriebenen Optionen und klicken Sie auf **Speichern** – ab dem Speichern beginnt der Connector mit der Zustellung.
+</Steps>
+
+<Callout type="warning">
+  Schließen Sie die Schritte bei HubSpot innerhalb von **10 Minuten** nach dem Klick auf **HubSpot verbinden** ab. Danach läuft der Autorisierungslink ab und RooQuiz meldet „Der Autorisierungslink ist abgelaufen“ – klicken Sie dann einfach erneut auf **HubSpot verbinden**.
+</Callout>
+
+## Einstellungen
+
+- **Name** – so erscheint der Connector in Ihrer Liste, standardmäßig `HubSpot • <Ihr Konto>`.
+- **Auslösende Ereignisse** – **Neue Einreichung** (jedes abgeschlossene Quiz) und/oder **Neuer Lead** (wenn jemand zum ersten Mal Kontaktdaten hinterlässt). Beide sind standardmäßig aktiviert. Siehe [Auslöseereignisse & Bereich](/de/connectors/events).
+- **Auslöser-Bereich** – alle Quizze oder nur die ausgewählten.
+- **Ergebnisnotiz zur Kontakt-Chronik hinzufügen** – standardmäßig aktiviert. Jede neue Einreichung fügt eine Notiz mit Quizname, Punktzahl, Stufe oder Ergebnistyp sowie Links zum Bericht und zum Lead in RooQuiz hinzu.
+
+Über die Aktion **Bearbeiten** auf der Connector-Karte können Sie diese Einstellungen später ändern.
+
+## Was RooQuiz in HubSpot schreibt
+
+Kontakte werden **per E-Mail-Adresse abgeglichen**: Ein vorhandener Kontakt mit derselben E-Mail-Adresse wird aktualisiert, andernfalls wird ein neuer angelegt. Einreichungen ohne E-Mail-Adresse werden übersprungen.
+
+Bei der ersten Zustellung legt RooQuiz in Ihrem HubSpot-Konto eine Eigenschaftsgruppe **RooQuiz** mit diesen Kontakteigenschaften an:
+
+| Eigenschaft | Inhalt |
+| --- | --- |
+| `rooquiz_last_quiz` | Name des zuletzt absolvierten Quiz |
+| `rooquiz_last_score` / `rooquiz_last_max_score` | Punktzahl und maximale Punktzahl |
+| `rooquiz_last_level` | Ergebnisstufe (bewertete Quizze und Wissensquizze) |
+| `rooquiz_last_outcome` | Ergebnistyp (Ergebnisquizze) |
+| `rooquiz_last_report_url` | Link zum Bericht des Teilnehmers |
+| `rooquiz_last_submitted_at` | Zeitpunkt der Einreichung |
+| `rooquiz_lead_url` | Link zum Lead in RooQuiz |
+| `rooquiz_utm_source`, `_medium`, `_campaign`, `_term`, `_content` | UTM-Parameter aus dem Quiz-Link |
+
+Außerdem werden die Standardeigenschaften **E-Mail**, **Vorname**, **Nachname** und **Telefonnummer** befüllt. Ein vollständiger Name wird am ersten Leerzeichen in Vor- und Nachname getrennt.
+
+- Jede Einreichung **überschreibt** diese Werte, sodass sie immer das letzte Quiz der Person beschreiben.
+- Leere Werte werden nie geschrieben, RooQuiz löscht also keine vorhandenen Daten – wiederholt jemand zum Beispiel ein Quiz ohne Punktzahl, bleibt die Punktzahl aus einem früheren bewerteten Quiz erhalten.
+- RooQuiz **ändert niemals** Lifecycle-Phase, Lead-Status oder E-Mail-Abonnementeinstellungen – diese folgen weiterhin den Regeln Ihres CRM.
+
+<Callout type="info">
+  Um Leads nach Ergebnis zu verteilen, erstellen Sie in HubSpot eine Liste oder einen Workflow mit einem Filter auf eine RooQuiz-Eigenschaft – zum Beispiel `rooquiz_last_level` ist `Advanced` – und nehmen diese Kontakte in die passende Sequenz auf.
+</Callout>
+
+## Berechtigungen
+
+RooQuiz fordert bei HubSpot diese Scopes an:
+
+| Scope | Wozu |
+| --- | --- |
+| `crm.objects.contacts.read` / `.write` | Kontakte per E-Mail-Adresse finden, anlegen oder aktualisieren und Ergebnisnotizen hinzufügen |
+| `crm.schemas.contacts.read` / `.write` | Die RooQuiz-Eigenschaftsgruppe und -Eigenschaften prüfen und anlegen |
+| `oauth` | Standardanmeldung bei HubSpot |
+
+RooQuiz löscht keine Kontakte und liest oder exportiert keine anderen Daten aus Ihrem HubSpot-Konto.
+
+## Trennen
+
+Löschen Sie den HubSpot-Connector über seine Karte in RooQuiz, um die Synchronisierung zu beenden. Um den Zugriff von RooQuiz auch auf HubSpot-Seite zu entfernen, öffnen Sie in HubSpot **Settings → Integrations → Connected apps** und deinstallieren RooQuiz. Bereits geschriebene Kontakte, Eigenschaften und Notizen bleiben in HubSpot erhalten.
+
+Wechselt Ihr Team in den kostenlosen Tarif, wird der Connector pausiert und behält seine Einstellungen; nach einem erneuten Upgrade läuft er weiter.
+
+## Fehlerbehebung
+
+- **„Der Autorisierungslink ist abgelaufen, bitte versuchen Sie es erneut.“** – die Schritte bei HubSpot haben länger als 10 Minuten gedauert. Klicken Sie erneut auf **HubSpot verbinden**.
+- **„Die HubSpot-Autorisierung wurde abgebrochen.“** – Sie haben im HubSpot-Fenster auf **Cancel** geklickt. Starten Sie neu, wenn Sie bereit sind.
+- **„Ihr Team ist bereits mit HubSpot verbunden.“** – löschen Sie zuerst den vorhandenen HubSpot-Connector.
+- **Ein Lead ist nicht in HubSpot angekommen** – prüfen Sie, ob die Einreichung eine E-Mail-Adresse enthielt und ob das Quiz im Auslöser-Bereich des Connectors liegt. Die Connector-Karte zeigt gegebenenfalls den letzten Zustellfehler an.

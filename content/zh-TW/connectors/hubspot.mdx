@@ -1,0 +1,97 @@
+---
+title: 連接 HubSpot
+description: '連接 HubSpot 後，測評收集到的每條線索都會自動成為 HubSpot 聯絡人，寫入最近一次測評的分數、等級或結果類型，並可在聯絡人時間軸新增結果備註。這一頁說明連接步驟與「未經驗證的應用程式」提示、可選設定、RooQuiz 寫入的全部欄位、申請的權限範圍、如何在 HubSpot 裡依結果分組跟進，以及中斷連接和常見錯誤的處理方式。'
+---
+
+**HubSpot 連接**會為測評收集到的每條線索在 HubSpot 新建或更新聯絡人，把最近一次測評結果寫進聯絡人屬性，還可以在聯絡人時間軸上新增一則結果備註。之後就能在 HubSpot 的清單、工作流程和潛在客戶評分裡，依答題者的結果做後續跟進。
+
+<Callout type="info">
+  HubSpot 是 **Pro 方案專屬**，且只有**團隊所有者或管理員**可以設定。每個團隊可以連接**一個** HubSpot 帳戶。所有 HubSpot 版本都能使用，包括免費 CRM。
+</Callout>
+
+## 連接步驟
+
+<Steps>
+### 開啟 HubSpot 卡片
+
+進入 **連接**，在 **同步名單** 下找到 **HubSpot**，點 **連接 HubSpot**。
+
+### 登入並選擇帳戶
+
+依提示登入 HubSpot。如果你的登入身分能存取多個 HubSpot 帳戶，選擇聯絡人要寫入的那一個。
+
+### 同意授權
+
+HubSpot 會列出 RooQuiz 能存取的內容（見[權限](#權限)），點 **Connect app**。
+
+在 RooQuiz 上架 HubSpot 應用程式市集之前，HubSpot 會提示這是**未經驗證的應用程式**，並要求輸入 `I accept the risk` 才能繼續。這是正常現象，輸入後點 **Connect** 即可。
+
+### 在 RooQuiz 完成設定
+
+授權後會回到 RooQuiz 的連接頁，並自動開啟 **HubSpot 整合設定** 視窗。依下文選好選項後點 **儲存**，儲存後連接就開始推送。
+</Steps>
+
+<Callout type="warning">
+  點 **連接 HubSpot** 後，請在 **10 分鐘**內完成 HubSpot 那邊的步驟。逾時後授權連結會失效，RooQuiz 提示「授權連結已過期」，重新點 **連接 HubSpot** 即可。
+</Callout>
+
+## 設定項目
+
+- **名稱**：連接在清單中顯示的名字，預設是 `HubSpot • <你的帳戶>`。
+- **觸發事件**：**新增測評紀錄**（每次完成測評）和/或 **新增線索**（某人第一次留下聯絡方式），預設兩個都開啟。詳見 [觸發事件與範圍](/zh-TW/connectors/events)。
+- **觸發範圍**：全部測評，或只選部分測評。
+- **在聯絡人時間軸新增結果備註**：預設開啟。每份新答卷都會新增一則備註，包含測評名稱、分數、等級或結果類型，以及報告和 RooQuiz 線索頁的連結。
+
+之後可以在連接卡片上點 **編輯** 修改這些設定。
+
+## RooQuiz 寫入 HubSpot 的內容
+
+聯絡人**依電子郵件比對**：已有相同電子郵件的聯絡人就更新，沒有就新建。沒有電子郵件的答卷會被略過。
+
+第一次推送時，RooQuiz 會在你的 HubSpot 帳戶裡建立一個 **RooQuiz** 屬性群組，包含以下聯絡人屬性：
+
+| 屬性 | 內容 |
+| --- | --- |
+| `rooquiz_last_quiz` | 最近一次測評的名稱 |
+| `rooquiz_last_score` / `rooquiz_last_max_score` | 得分與滿分 |
+| `rooquiz_last_level` | 結果等級（評分測驗、知識測驗） |
+| `rooquiz_last_outcome` | 結果類型（分型測驗） |
+| `rooquiz_last_report_url` | 答題者報告連結 |
+| `rooquiz_last_submitted_at` | 提交時間 |
+| `rooquiz_lead_url` | RooQuiz 線索頁連結 |
+| `rooquiz_utm_source`、`_medium`、`_campaign`、`_term`、`_content` | 測評連結上的 UTM 參數 |
+
+同時會填寫標準的**電子郵件**、**名字**、**姓氏**和**電話**屬性。全名依第一個空格拆成名字和姓氏。
+
+- 每份新答卷都會**覆寫**這些值，所以它們反映的是這個人最近一次測評的情況。
+- 空值永遠不會寫入，RooQuiz 不會清掉你已有的資料。例如重新做了一份沒有分數的測評，之前評分測驗的分數會保留。
+- RooQuiz **不會修改**生命週期階段、潛在客戶狀態或電子郵件訂閱設定，這些仍依你 CRM 自己的規則處理。
+
+<Callout type="info">
+  想依結果分流線索，可以在 HubSpot 裡建立一個依 RooQuiz 屬性篩選的清單或工作流程，例如 `rooquiz_last_level` 等於 `Advanced`，再把這些聯絡人加入對應的序列。
+</Callout>
+
+## 權限
+
+RooQuiz 向 HubSpot 申請以下權限範圍：
+
+| 權限範圍 | 用途 |
+| --- | --- |
+| `crm.objects.contacts.read` / `.write` | 依電子郵件查找聯絡人、新建或更新聯絡人、新增結果備註 |
+| `crm.schemas.contacts.read` / `.write` | 檢查並建立 RooQuiz 屬性群組和屬性 |
+| `oauth` | HubSpot 標準登入授權 |
+
+RooQuiz 不會刪除聯絡人，也不會讀取或匯出你 HubSpot 帳戶裡的其他資料。
+
+## 中斷連接
+
+在 RooQuiz 裡刪除 HubSpot 連接卡片即可停止同步。如果還想在 HubSpot 那邊撤銷 RooQuiz 的存取權限，到 HubSpot 的 **Settings → Integrations → Connected apps** 解除安裝 RooQuiz。已經寫入的聯絡人、屬性和備註會保留在 HubSpot 裡。
+
+團隊降回免費方案時，連接會暫停推送，設定保留，重新升級後恢復。
+
+## 常見問題
+
+- **「授權連結已過期」**：HubSpot 那邊的步驟超過了 10 分鐘，重新點 **連接 HubSpot**。
+- **「HubSpot 授權已取消」**：你在 HubSpot 頁面點了 **Cancel**，準備好後重新發起即可。
+- **「此團隊已連接 HubSpot」**：先刪除既有的 HubSpot 連接。
+- **線索沒有出現在 HubSpot**：檢查答卷有沒有電子郵件，以及該測評是否在連接的觸發範圍內。如果有投遞錯誤，連接卡片上會顯示最近一次的錯誤訊息。
